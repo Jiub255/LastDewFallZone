@@ -1,0 +1,189 @@
+{
+	"categories": [
+		{
+			"uuid": "1e854966-40de-4eee-9a67-2517f965b229",
+			"title": "Task",
+			"color": "5a8838"
+		},
+		{
+			"uuid": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"title": "Bug",
+			"color": "b30e0d"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "22b5bdc8-f0fd-4898-a5a2-6a3fa87d04dd",
+			"title": "NOTES",
+			"tasks": [
+				"2bd36ec9-5475-4659-af28-96e9244edbfa",
+				"11c04f64-a69a-4abf-8dc1-59793f2e7be0"
+			]
+		},
+		{
+			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
+			"title": "TODO",
+			"tasks": [
+				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1",
+				"eaff06f8-c4f7-413c-900c-a3f123827109"
+			]
+		},
+		{
+			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
+			"title": "DOING",
+			"tasks": [
+				"d4198d16-16c6-4401-9e26-18b9b446b0e4",
+				"1f55e91c-ea36-430c-88de-a42d0d1102b2"
+			]
+		},
+		{
+			"uuid": "4aeb1722-9a02-459d-81af-f17bb7d9e014",
+			"title": "DONE",
+			"tasks": [
+				"bbc1a6fa-3e7f-49d3-80b7-61a880d2dab5",
+				"21d02665-3aa9-4b06-ab89-13b53df55b30",
+				"c6aeebeb-13d0-45ec-ad97-611b640da787",
+				"5d079d7b-9f50-4767-95e7-e79d26d6106a"
+			]
+		},
+		{
+			"uuid": "a3e911b2-ee4c-42db-84bc-2ce8e4e7017a",
+			"title": "BUGS",
+			"tasks": []
+		},
+		{
+			"uuid": "58e832d9-b0c0-48ff-970d-0b94fc413b14",
+			"title": "FIXED BUGS",
+			"tasks": [
+				"bd9a1b36-f709-4984-be8e-1a4caac1c8f0",
+				"9a00e51e-1668-4781-b4a8-bd3723ea6fd5",
+				"78d7226e-ba3e-4a00-8101-5f7398c1be57"
+			]
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "c6aeebeb-13d0-45ec-ad97-611b640da787",
+			"title": "PC State Machine",
+			"description": "How to handle selected PC? \n\tHave PC Manager hold a List<PC> unselectedPcs and a PC selectedPc?\n\tThen have each state have selected process/enter/exit methods and whatever other methods it needs?\n\tThen have the manager run the unselected Pcs through the unselected methods and same with selected?\nYes, that is what I have done. So far at least.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": [
+				{
+					"details": "States\n\nMovement (includes idle)\nLooting\nCombat (will have substates: get hit, attack, etc.)",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "21d02665-3aa9-4b06-ab89-13b53df55b30",
+			"title": "PC Selector/Manager",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": [
+				{
+					"details": "Click Handler\n\nAttach to camera3d. Have it handle mouse clicks.\nClick PC to select it, loot to go loot, enemy to start combat, ground to walk there.",
+					"done": false
+				},
+				{
+					"details": "PC Manager\n\nHave PC Manager hold a list of unselected PCs (your mission team), and a selected PC (could be null).\nThen run the selected or not-selected processes and whatever other methods for each.",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "2bd36ec9-5475-4659-af28-96e9244edbfa",
+			"title": "Resource types",
+			"description": "-Characters\n\t-Player Characters\n\t-Enemies\n-Recipes (Things you can craft, maybe call them craftables or something better than recipe)\n\t-Items\n\t\t-Crafting Materials\n\t\t-Equipment\n\t\t-Usable Items\n\t-Buildings\n\t\t-Production\n\t\t-Defense\n\t\t-Medical\n\t\t-Etc.\n",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "bd9a1b36-f709-4984-be8e-1a4caac1c8f0",
+			"title": "Camera movement broken",
+			"description": "FIXED by adding current position to the input movement vector, was just setting TargetPosition relative to the origin.\n\nIt's only temporarily shifting the camera in the direction you try to move in, then moving back when you let go.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "bbc1a6fa-3e7f-49d3-80b7-61a880d2dab5",
+			"title": "Camera",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "9a00e51e-1668-4781-b4a8-bd3723ea6fd5",
+			"title": "Click handler raycast not working right",
+			"description": "FIXED by changing:\n\tToLocal(Camera.ProjectRayNormal(mousePosition)) * rayLength\nto:\n\tToLocal(Camera.ProjectRayNormal(mousePosition) * rayLength)\nJust needed rayLength inside the parenthesis.\n\nDetects clicking a pc even when mouse is way above their head. Also detecting ground when it should be detecting nothing. \nProbably have the raycast math set up wrong. Yup.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "78d7226e-ba3e-4a00-8101-5f7398c1be57",
+			"title": "PC Rotation working strangely",
+			"description": "FIXED my dumbass was reflecting the lookTarget across the origin for some reason, stopped with that nonsense and it works great.\nVery slowly rotating to face the direction of movement. Doesn't seem affected by turn speed at all. Not sure what's happening. ",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "6f1791ba-c7a0-48fd-acce-e5fadedcbfc1",
+			"title": "Setup Looting Containers and State",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "d4198d16-16c6-4401-9e26-18b9b446b0e4",
+			"title": "Setup Craftables (Resources)",
+			"description": "Resource\n\t-> Craftable\n\t\t-> Item\n\t\t\t-> Equipment\n\t\t\t-> Usable\n\t\t\t-> Crafting Material\n\t\t-> Building\n\t\t\t-> Building types etc.\n\nNeed to setup stats first.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "5d079d7b-9f50-4767-95e7-e79d26d6106a",
+			"title": "Setup Stats",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "eaff06f8-c4f7-413c-900c-a3f123827109",
+			"title": "Pain/Injury system",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "11c04f64-a69a-4abf-8dc1-59793f2e7be0",
+			"title": "Stats",
+			"description": "-Physical?\n\t-Attack\n\t-Defense\n-Engineering\n-Farming\n-Medical\n-Scavenging\n\nShould Attack/Defense be separate? Or derived from equipment only? Unlike the rest, which can be increased  naturally.\nOr could have a physical strength/endurance stat that determines a bonus to attack and defense.\n",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "1f55e91c-ea36-430c-88de-a42d0d1102b2",
+			"title": "Setup git",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"22b5bdc8-f0fd-4898-a5a2-6a3fa87d04dd"
+			],
+			[
+				"35398ea1-69e0-486b-bafd-d8ad72565c5f",
+				"a3e911b2-ee4c-42db-84bc-2ce8e4e7017a"
+			],
+			[
+				"07e4bee6-492d-441d-a2c0-7a8198384f07"
+			],
+			[
+				"4aeb1722-9a02-459d-81af-f17bb7d9e014",
+				"58e832d9-b0c0-48ff-970d-0b94fc413b14"
+			]
+		]
+	}
+}

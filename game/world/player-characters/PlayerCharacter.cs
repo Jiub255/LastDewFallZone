@@ -3,6 +3,7 @@ using Godot;
 public partial class PlayerCharacter : CharacterBody3D
 {
 	private PcStateMachine StateMachine { get; set; }
+	public PcHealth Health { get; private set; }
 
 	public override void _Ready()
 	{
@@ -10,6 +11,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
 		PcStateContext context = new(this);
 		StateMachine = new PcStateMachine(context);
+		Health = new PcHealth();
 	}
 
 	public override void _ExitTree()
@@ -26,6 +28,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	public void ProcessUnselected(double delta)
 	{
 		StateMachine?.ProcessStateUnselected((float)delta);
+		Health.ProcessRelief((float)delta);
 	}
 
 	public void PhysicsProcessUnselected(double delta)
@@ -36,6 +39,7 @@ public partial class PlayerCharacter : CharacterBody3D
 	public void ProcessSelected(double delta)
 	{
 		StateMachine?.ProcessStateUnselected((float)delta);
+		Health.ProcessRelief((float)delta);
 	}
 
 	public void PhysicsProcessSelected(double delta)

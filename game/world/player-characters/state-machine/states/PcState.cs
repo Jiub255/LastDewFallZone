@@ -23,6 +23,7 @@ public abstract class PcState
 	
 	protected virtual void ChangeState(PcStateNames state, Node3D target)
 	{
+		this.PrintDebug($"Changing state to {state}, target: {target}");
 		OnChangeState?.Invoke(state, target);
 	}
 }

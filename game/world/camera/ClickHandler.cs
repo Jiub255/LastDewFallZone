@@ -53,7 +53,7 @@ public partial class ClickHandler : RayCast3D
 			// Player Character
 			case 2:
 				OnClickedPc?.Invoke((PlayerCharacter)collider);
-				GD.Print($"Clicked pc");
+				this.PrintDebug($"Clicked pc");
 				break;
 			// Enemy
 			case 4:
@@ -62,12 +62,12 @@ public partial class ClickHandler : RayCast3D
 			// Loot
 			case 8:
 				OnClickedLoot?.Invoke((LootContainer)collider);
-				GD.Print($"Clicked loot");
+				this.PrintDebug($"Clicked loot");
 				break;
 			// Ground
 			case 16:
 				OnClickedGround?.Invoke(collisionPoint);
-				GD.Print($"Clicked ground");
+				this.PrintDebug($"Clicked ground");
 				break;
 		}
 	}

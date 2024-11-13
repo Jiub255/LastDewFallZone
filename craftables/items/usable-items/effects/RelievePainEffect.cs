@@ -1,6 +1,6 @@
 using Godot;
-using System;
 
+[GlobalClass]
 public partial class RelievePainEffect : Effect
 {
 	[Export]
@@ -10,7 +10,6 @@ public partial class RelievePainEffect : Effect
 	
 	public override void ApplyEffect(PlayerCharacter pc)
 	{
-		//pc.PainInjury.RelievePain(ReliefAmount, Duration);
-		throw new NotImplementedException();
+		pc.Health.RelievePain(ReliefAmount, Duration);
 	}
 }

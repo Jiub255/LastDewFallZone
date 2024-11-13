@@ -1,12 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://n4s23mnl518e"]
+[gd_scene load_steps=15 format=3 uid="uid://n4s23mnl518e"]
 
 [ext_resource type="Script" path="res://game/world/World.cs" id="1_l0n7t"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://game/world/camera/camera.tscn" id="2_bcky2"]
+[ext_resource type="Script" path="res://game/world/looting/LootContainer.cs" id="3_wyfp0"]
 [ext_resource type="Script" path="res://game/world/player-characters/PcManager.cs" id="4_lkcuo"]
+[ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://game/UI/hud.tscn" id="4_vau40"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ekc5e"]
-vertices = PackedVector3Array(-24.5, 0.5, -5.5, -6.75, 0.5, -5.5, -6.5, 0.5, -6.25, -5.25, 0.5, -24.5, -24.5, 0.5, -24.5, -5, 0.5, -6.25, 2.75, 0.5, -6.25, 3, 0.5, -24.5, 4.25, 0.5, -6.25, 4.5, 0.5, -5.5, 24.5, 0.5, -5.5, 24.5, 0.5, -24.5, -6.5, 0.5, -5, -24.5, 0.5, 24.5, -4.5, 0.5, 24.5, -4.5, 0.5, -5, 4.25, 0.5, -5, 2.25, 0.5, 24.5, 24.5, 0.5, 24.5, 2.25, 0.5, -5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 7), PackedInt32Array(8, 6, 7), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(10, 7, 11), PackedInt32Array(1, 12, 0), PackedInt32Array(0, 12, 13), PackedInt32Array(13, 12, 14), PackedInt32Array(12, 15, 14), PackedInt32Array(9, 10, 16), PackedInt32Array(16, 10, 18), PackedInt32Array(16, 18, 17), PackedInt32Array(17, 19, 16), PackedInt32Array(15, 19, 14), PackedInt32Array(14, 19, 17)]
+vertices = PackedVector3Array(-24.5, 0.5, -5.5, -6.75, 0.5, -5.5, -6.5, 0.5, -6.25, -5.25, 0.5, -24.5, -24.5, 0.5, -24.5, -5, 0.5, -6.25, 2.75, 0.5, -6.25, 3, 0.5, -24.5, 4.25, 0.5, -6.25, 4.5, 0.5, -5.5, 24.5, 0.5, -5.5, 24.5, 0.5, -24.5, -5.25, 0.5, -3, -5, 0.5, -5, -6.5, 0.5, -5, -4.25, 0.5, -2.75, -24.5, 0.5, 24.5, -4.25, 0.5, 24.5, 4.25, 0.5, -5, 2.25, 0.5, 24.5, 24.5, 0.5, 24.5, 2.25, 0.5, -5, -3.25, 0.5, -5, -3, 0.5, -3)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 7), PackedInt32Array(8, 6, 7), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(10, 7, 11), PackedInt32Array(14, 13, 12), PackedInt32Array(0, 1, 14), PackedInt32Array(0, 14, 12), PackedInt32Array(12, 15, 0), PackedInt32Array(0, 15, 17), PackedInt32Array(0, 17, 16), PackedInt32Array(9, 10, 18), PackedInt32Array(18, 10, 20), PackedInt32Array(18, 20, 19), PackedInt32Array(19, 21, 18), PackedInt32Array(23, 22, 21), PackedInt32Array(17, 15, 23), PackedInt32Array(17, 23, 19), PackedInt32Array(19, 23, 21)]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gbkjp"]
 size = Vector3(50, 1, 50)
@@ -23,33 +25,18 @@ size = Vector3(10, 2, 0.2)
 [sub_resource type="BoxMesh" id="BoxMesh_8f4jt"]
 size = Vector3(10, 2, 0.2)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_pxwl8"]
-top_radius = 0.05
-bottom_radius = 0.05
-height = 4.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_qb4yi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycqx1"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_x6dq3"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_t764v"]
-top_radius = 0.2
-bottom_radius = 0.0
-height = 0.6
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n3rob"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wg6c4"]
-albedo_color = Color(0, 1, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv3yy"]
-albedo_color = Color(0, 1, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vw2t8"]
-albedo_color = Color(0, 0, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tksbp"]
+albedo_color = Color(0.359416, 0.220464, 0.150835, 1)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_l0n7t")
+
+[node name="HUD" parent="." instance=ExtResource("4_vau40")]
+unique_name_in_owner = true
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -85,6 +72,25 @@ mesh = SubResource("BoxMesh_8f4jt")
 
 [node name="LootContainers" type="Node3D" parent="Environment/NavigationRegion3D"]
 
+[node name="LootContainerTest" type="StaticBody3D" parent="Environment/NavigationRegion3D/LootContainers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02312, 0.5, -3.97649)
+collision_layer = 8
+collision_mask = 22
+script = ExtResource("3_wyfp0")
+ItemsWithAmounts = Array[Object]([])
+LootDuration = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]
+shape = SubResource("BoxShape3D_qb4yi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]
+mesh = SubResource("BoxMesh_x6dq3")
+surface_material_override/0 = SubResource("StandardMaterial3D_tksbp")
+
+[node name="LootingSpot" type="Node3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
+
 [node name="Buildings" type="Node3D" parent="Environment/NavigationRegion3D"]
 
 [node name="CameraRig" parent="." instance=ExtResource("2_bcky2")]
@@ -94,35 +100,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 1.98784, 13.963)
 [node name="PcManager" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_lkcuo")
-
-[node name="DEBUG" type="Node" parent="."]
-
-[node name="X-Axis" type="MeshInstance3D" parent="DEBUG"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2, 0, 0)
-mesh = SubResource("CylinderMesh_pxwl8")
-surface_material_override/0 = SubResource("StandardMaterial3D_ycqx1")
-
-[node name="Tip" type="MeshInstance3D" parent="DEBUG/X-Axis"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-mesh = SubResource("CylinderMesh_t764v")
-surface_material_override/0 = SubResource("StandardMaterial3D_n3rob")
-
-[node name="Y-Axis" type="MeshInstance3D" parent="DEBUG"]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2, 0)
-mesh = SubResource("CylinderMesh_pxwl8")
-surface_material_override/0 = SubResource("StandardMaterial3D_wg6c4")
-
-[node name="Tip" type="MeshInstance3D" parent="DEBUG/Y-Axis"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-mesh = SubResource("CylinderMesh_t764v")
-surface_material_override/0 = SubResource("StandardMaterial3D_nv3yy")
-
-[node name="Z-Axis" type="MeshInstance3D" parent="DEBUG"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 2)
-mesh = SubResource("CylinderMesh_pxwl8")
-surface_material_override/0 = SubResource("StandardMaterial3D_vw2t8")
-
-[node name="Tip" type="MeshInstance3D" parent="DEBUG/Z-Axis"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-mesh = SubResource("CylinderMesh_t764v")
-surface_material_override/0 = SubResource("StandardMaterial3D_vw2t8")

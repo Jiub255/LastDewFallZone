@@ -23,7 +23,7 @@ public abstract partial class Craftable : Resource
 	public (Stat, int)[] StatRequirements { get; private set; } */
 
 	/// <summary>
-	/// For when you click on the item in the crafting menu.
+	/// For when you click on the item in the crafting/building menu.
 	/// </summary>
 	public abstract void OnClickCraftable();
 }

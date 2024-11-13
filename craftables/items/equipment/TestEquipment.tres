@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=7 format=3 uid="uid://bs3r4jknvdnhm"]
+
+[ext_resource type="Script" path="res://game/world/player-characters/stats/StatAmount.cs" id="1_fhlk2"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_irmj3"]
+[ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="3_6ca8s"]
+
+[sub_resource type="Resource" id="Resource_bagsq"]
+script = ExtResource("1_fhlk2")
+Type = 0
+Amount = 1
+
+[sub_resource type="Resource" id="Resource_ax2mh"]
+script = ExtResource("1_fhlk2")
+Type = 2
+Amount = 2
+
+[sub_resource type="Resource" id="Resource_xi5w5"]
+script = ExtResource("1_fhlk2")
+Type = 3
+Amount = 3
+
+[resource]
+script = ExtResource("3_6ca8s")
+Type = 2
+EquipmentBonuses = Array[Object]([SubResource("Resource_bagsq"), SubResource("Resource_ax2mh")])
+StatRequirements = Array[Object]([SubResource("Resource_xi5w5")])
+ItemRarity = 100
+Tags = Array[int]([0, 2])
+Name = "arfe"
+Description = "sdva"
+Icon = ExtResource("2_irmj3")

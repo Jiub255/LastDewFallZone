@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public enum PcStateNames
 {
+	IDLE,
 	MOVEMENT,
 	LOOTING,
 	//COMBAT,
@@ -50,8 +51,14 @@ public class PcStateMachine
 	
 	public void MoveTo(Node3D target, Vector3 targetPosition = new())
 	{
+		this.PrintDebug($"Target type: {target?.GetType()}");
+		if (target is LootContainer lootContainer)
+		{
+			targetPosition = lootContainer.LootingPosition;
+		}
 		if (CurrentState is PcStateMovement movementState)
 		{
+			movementState.Target = target;
 			movementState.SetTargetPosition(targetPosition);
 			return;
 		}
@@ -73,6 +80,7 @@ public class PcStateMachine
 
 	private void SetupStates(PcStateContext context)
 	{
+		PcStateIdle idle = new(context);
 		PcStateMovement movement = new(context);
 		PcStateLooting looting = new(context);
 
@@ -82,6 +90,7 @@ public class PcStateMachine
 			Callable.From((Node3D body) => movement.OnBodyEntered(body)));
 
 		// Populate states dictionary
+		StatesByEnum.Add(PcStateNames.IDLE, idle);
 		StatesByEnum.Add(PcStateNames.MOVEMENT, movement);
 		StatesByEnum.Add(PcStateNames.LOOTING, looting);
 		foreach (PcState state in StatesByEnum.Values)

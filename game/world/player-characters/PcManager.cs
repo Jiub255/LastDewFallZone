@@ -5,13 +5,6 @@ public partial class PcManager : Node3D
 	// TODO: Setup way to load this data. Eventually from save file, but maybe a resource for now?
 	private MissionTeamData MissionTeamData { get; set; }
 	
-	public override void _Ready()
-	{
-		base._Ready();
-
-		SpawnPcs();
-	}
-
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
@@ -36,17 +29,20 @@ public partial class PcManager : Node3D
 		MissionTeamData.SelectedPc?.PhysicsProcessSelected(delta);
 	}
 	
-	public void SpawnPcs()
+	public void Setup(MissionTeamData missionTeamData)
 	{
-		// JUST FOR TESTING, pass this list/array from team selection screen eventually.
-		MissionTeamData = new MissionTeamData(new int[] { 0, 1, });
-		
+		MissionTeamData = missionTeamData;
+		SpawnPcs();
+	}
+	
+	public void SpawnPcs()
+	{		
 		foreach (int index in MissionTeamData.TeamIndexes)
 		{
-			PlayerCharacter pc = (PlayerCharacter)MissionTeamData.AllPcs[index].Instantiate();
+			PlayerCharacter pc = (PlayerCharacter)MissionTeamData.Pcs.PcDatas[index].PcScene.Instantiate();
 			CallDeferred(MethodName.AddChild, pc);
 			pc.Position += Vector3.Right * index * 3;
-			GD.Print($"PC Position: {pc.Position}");
+			this.PrintDebug($"PC Position: {pc.Position}");
 			MissionTeamData.UnselectedPcs.Add(pc);
 		}
 	}
@@ -63,7 +59,7 @@ public partial class PcManager : Node3D
 		}
 		MissionTeamData.UnselectedPcs.Remove(pc);
 		MissionTeamData.SelectedPc = pc;
-		GD.Print($"Selected PC: {MissionTeamData.SelectedPc.Name}");
+		this.PrintDebug($"Selected PC: {MissionTeamData.SelectedPc.Name}");
 	}
 	
 	public void DeselectPc()
@@ -77,13 +73,13 @@ public partial class PcManager : Node3D
 	
 	public void MoveTo(Vector3 location)
 	{
-		GD.Print($"Move to location: {location}");
+		this.PrintDebug($"Move to location: {location}");
 		MissionTeamData.SelectedPc?.MoveTo(location);
 	}
 	
 	public void MoveTo(Node3D target)
 	{
-		GD.Print($"Move to target: {target}");
+		this.PrintDebug($"Move to target: {target}");
 		MissionTeamData.SelectedPc?.MoveTo(target);
 	}
 }

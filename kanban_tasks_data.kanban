@@ -24,16 +24,22 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "TODO",
 			"tasks": [
-				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1",
-				"eaff06f8-c4f7-413c-900c-a3f123827109"
+				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
+				"596164a1-dfa2-4bac-acbb-4667169071ec",
+				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
+				"da6960b9-4241-48f4-8e32-984ebd5dba84",
+				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
+				"2db7c62a-055e-4fab-9fba-8db877a31df4",
+				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
+				"d1adddcc-8d19-4763-94e7-4180fac8440c"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"d4198d16-16c6-4401-9e26-18b9b446b0e4",
-				"1f55e91c-ea36-430c-88de-a42d0d1102b2"
+				"99a74741-f3a9-450e-a0a4-444bacae30fc",
+				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1"
 			]
 		},
 		{
@@ -43,7 +49,11 @@
 				"bbc1a6fa-3e7f-49d3-80b7-61a880d2dab5",
 				"21d02665-3aa9-4b06-ab89-13b53df55b30",
 				"c6aeebeb-13d0-45ec-ad97-611b640da787",
-				"5d079d7b-9f50-4767-95e7-e79d26d6106a"
+				"5d079d7b-9f50-4767-95e7-e79d26d6106a",
+				"1f55e91c-ea36-430c-88de-a42d0d1102b2",
+				"d4198d16-16c6-4401-9e26-18b9b446b0e4",
+				"eaff06f8-c4f7-413c-900c-a3f123827109",
+				"3af156aa-638b-4f09-8350-b29b7b01dc94"
 			]
 		},
 		{
@@ -164,6 +174,89 @@
 			"uuid": "1f55e91c-ea36-430c-88de-a42d0d1102b2",
 			"title": "Setup git",
 			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
+			"title": "Combat State and Substates",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "66ed35a6-82b7-4c74-8b08-8995b1900c04",
+			"title": "Building Manager",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "da6960b9-4241-48f4-8e32-984ebd5dba84",
+			"title": "Crafting Menu/Manager",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "3af156aa-638b-4f09-8350-b29b7b01dc94",
+			"title": "Inventory System",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
+			"title": "Save/Load System",
+			"description": "What to save?\n\tList of PCs.\n\tFor each PC:\n\t\tEquipment\n\t\tStats\n\t\tPain/Injury\n\tBuildings at base\n\t\tAny state variables of the buildings. Construction progress, progress toward making some resource, etc.\n\tInventory\n\nSave whenever, even in middle of scavenging/defending home base.\n\tPick up where you left off? Or just auto-finish?\n\tProbably just pick up where you left off, \n\tSo for combat saves, also save every pc and enemy's position, health, etc.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "99a74741-f3a9-450e-a0a4-444bacae30fc",
+			"title": "UI",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": [
+				{
+					"details": "Main Menu\n\tContinue\n\tLoad Game\n\tNew Game\n\tOptions\n\tCredits\n\tExit",
+					"done": false
+				},
+				{
+					"details": "HUD\n\nCharacter face icons on side? or top? bottom? \n\tClick face to select character\n\tIcon shows pain/injury levels, maybe turns red as you take damage or something?",
+					"done": false
+				},
+				{
+					"details": "In-game Menus\n\tCharacter/Inventory/Equipment\n\tCrafting\n\tBuilding\nHow to setup usable items, equipment, and character data? Maybe all in one menu?\n\nKeep \"application\" menu and game menu separate? Like how you push escape to get things like settings or save or quit,\nbut you push tab to get to things like inventory and character menus.\n\tSave\n\tLoad\n\tSettings\n\tQuit\n",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "2db7c62a-055e-4fab-9fba-8db877a31df4",
+			"title": "Scavenging location selection",
+			"description": "How to handle this? Like LSDZ? Just show a city map and click whatever location?\n\nPossibly do procedurally generated scavenging locations and then have an infinite supply of them.\n\nOr, could have a little driving/walking mini game through a city to get to your location.\n\tMight be too much work. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
+			"title": "Setup Home Base Scene",
+			"description": "Build a physical home base base.\nDisable player controls while at base? Just have them do stuff randomly while you build or whatever?\n\tMaybe could have them train stats using certain buildings?\nBut obviously bring controls back during raids.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "596164a1-dfa2-4bac-acbb-4667169071ec",
+			"title": "How to handle movement and states?",
+			"description": "Instead of having Movement State as is, could have just three states: Movement/Blank, Looting, Combat.\nThen each state can have an \"Approaching\" bool, and handle the navigation there. But then what about animation? Have to use the same code three times.\nNot sure how to handle this.\nKeep going as is for now, until combat gets implemented.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "d1adddcc-8d19-4763-94e7-4180fac8440c",
+			"title": "Morale",
+			"description": "How exactly to set it up?\nHave individual morales, or just a team one?\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\nAffects:\n\tAll stats of all pcs.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

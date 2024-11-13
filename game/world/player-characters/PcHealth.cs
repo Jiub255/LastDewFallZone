@@ -2,8 +2,12 @@ using System.Collections.Generic;
 
 public class PcHealth
 {
+	private const int MAX_INJURY = 100;
+	
 	private int Injury { get; set; }
 	
+	// TODO: Have high pain affect your stats negatively.
+	// Do it a way that makes sense.
 	public int Pain
 	{
 		get
@@ -32,7 +36,7 @@ public class PcHealth
 			Duration = duration;
 		}
 	}
-	private List<Relief> Reliefs { get; set; }
+	private List<Relief> Reliefs { get; set; } = new List<Relief>();
 	
 	public PcHealth() {}
 	
@@ -51,9 +55,9 @@ public class PcHealth
 	public void TakeDamage(int damage)
 	{
 		Injury += damage;
-		if (Injury > 100)
+		if (Injury > MAX_INJURY)
 		{
-			Injury = 100;
+			Injury = MAX_INJURY;
 			// TODO: Become incapacitated until healing at home base. Or die?
 		}
 	}

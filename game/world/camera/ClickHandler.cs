@@ -4,9 +4,8 @@ using System;
 public partial class ClickHandler : RayCast3D
 {
 	public event Action<PlayerCharacter> OnClickedPc;
-	public event Action<LootContainer> OnClickedLoot;
-	public event Action<Vector3> OnClickedGround;
-
+	public event Action<MovementTarget> OnClickedMoveTarget;
+	
 	// TODO: Base this off of zoom distance?
 	private float RayLength { get; } = 2000;
 	private Viewport Viewport { get; set; }
@@ -61,13 +60,16 @@ public partial class ClickHandler : RayCast3D
 				break;
 			// Loot
 			case 8:
-				OnClickedLoot?.Invoke((LootContainer)collider);
+				LootContainer lootContainer = (LootContainer)collider;
+				MovementTarget movementTarget = new MovementTarget(TargetTypes.LOOT, lootContainer.LootingPosition, lootContainer);
+				OnClickedMoveTarget?.Invoke(movementTarget);
 				this.PrintDebug($"Clicked loot");
 				break;
 			// Ground
 			case 16:
-				OnClickedGround?.Invoke(collisionPoint);
-				this.PrintDebug($"Clicked ground");
+				MovementTarget movementTarget2 = new MovementTarget(TargetTypes.GROUND, collisionPoint);
+				OnClickedMoveTarget?.Invoke(movementTarget2);
+				this.PrintDebug($"Clicked ground at {collisionPoint}");
 				break;
 		}
 	}

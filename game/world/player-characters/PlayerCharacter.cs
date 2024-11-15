@@ -9,16 +9,13 @@ public partial class PlayerCharacter : CharacterBody3D
 	{
 		base._Ready();
 
-		PcStateContext context = new(this);
+	}
+	
+	public void Initialize(InventoryManager inventoryManager)
+	{
+		PcStateContext context = new(this, inventoryManager);
 		StateMachine = new PcStateMachine(context);
 		Health = new PcHealth();
-	}
-
-	public override void _ExitTree()
-	{
-		base._ExitTree();
-
-		StateMachine.ExitTree();
 	}
 
 	// TODO: Run state stuff that should happen to non selected characters here, 
@@ -47,13 +44,13 @@ public partial class PlayerCharacter : CharacterBody3D
 		StateMachine?.PhysicsProcessStateUnselected((float)delta);
 	}
 	
-	public void MoveTo(Vector3 location)
+	public void MoveTo(MovementTarget movementTarget)
 	{
-		StateMachine.MoveTo(null, location);
+		StateMachine.ChangeState(PcStateNames.MOVEMENT, movementTarget);
 	}
 	
-	public void MoveTo(Node3D target)
+	public void ExitTree()
 	{
-		StateMachine.MoveTo(target);
+		StateMachine.ExitTree();
 	}
 }

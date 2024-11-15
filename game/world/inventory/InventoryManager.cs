@@ -11,6 +11,11 @@ public class InventoryManager
 		UsableItems = new InventoryController<UsableItem>();
 	}
 	
+	public void AddItemAmount(ItemAmount itemAmount)
+	{
+		AddItems(itemAmount.Item, itemAmount.Amount);
+	}
+	
 	public void AddItems(Item item, int amount)
 	{
 		if (item is CraftingMaterial craftingMaterial)
@@ -40,6 +45,24 @@ public class InventoryManager
 		else if (item is UsableItem usableItem)
 		{
 			return UsableItems.RemoveItems(usableItem, amount);
+		}
+		
+		return false;
+	}
+	
+	public bool HasItems(Item item, int amount)
+	{
+		if (item is CraftingMaterial craftingMaterial)
+		{
+			return CraftingMaterials.HasItems(craftingMaterial, amount);
+		}
+		else if (item is Equipment equipment)
+		{
+			return Equipment.HasItems(equipment, amount);
+		}
+		else if (item is UsableItem usableItem)
+		{
+			return UsableItems.HasItems(usableItem, amount);
 		}
 		
 		return false;

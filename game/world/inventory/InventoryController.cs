@@ -51,4 +51,9 @@ public class InventoryController<T> where T : Item
 		GD.PushWarning($"{item.Name} not in inventory.");
 		return false;
 	}
+	
+	public bool HasItems(T item, int amount)
+	{
+		return Inventory.ContainsKey(item) && Inventory[item] >= amount;
+	}
 }

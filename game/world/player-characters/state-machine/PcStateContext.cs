@@ -17,12 +17,15 @@ public class PcStateContext
 	{
 		get => PC.Velocity.Length();
 	}
+	public InventoryManager InventoryManager { get; }
 	
 	private PlayerCharacter PC { get; }
 	
-	public PcStateContext(PlayerCharacter pc)
+	public PcStateContext(PlayerCharacter pc, InventoryManager inventoryManager)
 	{
 		PC = pc;
+		InventoryManager = inventoryManager;
+		
 		TargetDetector = pc.GetNode<Area3D>("%TargetDetector");
 		NavigationAgent = pc.GetNode<NavigationAgent3D>("%NavigationAgent3D");
 		PcAnimationTree = pc.GetNode<PcAnimationTree>("%AnimationTree");

@@ -38,8 +38,11 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
+				"c5f14db2-ba1d-4c88-a12d-c1187b77e7e4",
+				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1",
 				"99a74741-f3a9-450e-a0a4-444bacae30fc",
-				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1"
+				"489d060a-da4b-42e5-a578-3d40940c7958",
+				"dffc8eab-7892-4f42-a5c9-64fee165246f"
 			]
 		},
 		{
@@ -258,6 +261,27 @@
 			"title": "Morale",
 			"description": "How exactly to set it up?\nHave individual morales, or just a team one?\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\nAffects:\n\tAll stats of all pcs.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "c5f14db2-ba1d-4c88-a12d-c1187b77e7e4",
+			"title": "Refactoring Movement/States with MovementTarget instead of Target.",
+			"description": "Still figuring it out.\nHow to change states? Use 3 or 4 different events and methods in State?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "489d060a-da4b-42e5-a578-3d40940c7958",
+			"title": "Not stopping run animation when changing to idle state.",
+			"description": "",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "dffc8eab-7892-4f42-a5c9-64fee165246f",
+			"title": "Loot timer not working, not changing back to idle.",
+			"description": "",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

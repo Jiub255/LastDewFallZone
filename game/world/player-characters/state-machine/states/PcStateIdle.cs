@@ -2,7 +2,10 @@ public class PcStateIdle : PcState
 {
 	public PcStateIdle(PcStateContext context) : base(context) {}
 
-	public override void EnterState() {}
+	public override void EnterState(object target)
+	{
+		Context.PcAnimationTree.Set(BlendAmountPath, 0); 
+	}
 	public override void ExitState() {}
 	public override void PhysicsProcessSelected(float delta) {}
 	public override void PhysicsProcessUnselected(float delta) {}

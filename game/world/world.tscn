@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://n4s23mnl518e"]
+[gd_scene load_steps=17 format=3 uid="uid://n4s23mnl518e"]
 
 [ext_resource type="Script" path="res://game/world/World.cs" id="1_l0n7t"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://game/world/camera/camera.tscn" id="2_bcky2"]
+[ext_resource type="PackedScene" uid="uid://bdhbrta7xgaqg" path="res://game/UI/game_menu.tscn" id="3_wubj2"]
 [ext_resource type="Script" path="res://game/world/looting/LootContainer.cs" id="3_wyfp0"]
+[ext_resource type="PackedScene" uid="uid://cbn0wxs4cak6x" path="res://game/UI/pause_menu.tscn" id="4_egbu1"]
 [ext_resource type="Script" path="res://game/world/player-characters/PcManager.cs" id="4_lkcuo"]
 [ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://game/UI/hud.tscn" id="4_vau40"]
 
@@ -37,6 +39,14 @@ script = ExtResource("1_l0n7t")
 
 [node name="HUD" parent="." instance=ExtResource("4_vau40")]
 unique_name_in_owner = true
+
+[node name="GameMenu" parent="." instance=ExtResource("3_wubj2")]
+unique_name_in_owner = true
+visible = false
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_egbu1")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -77,7 +87,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02312, 0.5, -3.97649)
 collision_layer = 8
 collision_mask = 22
 script = ExtResource("3_wyfp0")
-ItemsWithAmounts = Array[Object]([])
 LootDuration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]

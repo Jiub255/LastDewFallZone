@@ -2,42 +2,61 @@ public class PcStateLooting : PcState
 {
 	public PcStateLooting(PcStateContext context) : base(context) {}
 	
-	private LootContainer LootContainer { get; set; }
+	public LootContainer LootContainer { get; private set; }
 	private float Timer { get; set; }
 
-	public override void EnterState()
+	public override void EnterState(object target)
 	{
-		Context.PcAnimationTree.Looting = true;
-		LootContainer = (LootContainer)Target;
-		Timer = LootContainer.LootDuration;
+		if (target is LootContainer lootContainer)
+		{
+			if (lootContainer.Empty || lootContainer.BeingLooted)
+			{
+				ChangeState(PcStateNames.IDLE);
+				return;
+			}
+			lootContainer.BeingLooted = true;
+			LootContainer = lootContainer;
+			Context.PcAnimationTree.Looting = true;
+			Timer = lootContainer.LootDuration;
+		}
 	}
 
 	public override void ExitState()
 	{
 		Context.PcAnimationTree.Looting = false;
+		LootContainer.BeingLooted = false;
 	}
 
 	public override void ProcessUnselected(float delta)
-    {
-        TickLootTimer(delta);
-    }
+	{
+		TickTimer(delta);
+	}
 
 	public override void ProcessSelected(float delta)
 	{
-		TickLootTimer(delta);
+		TickTimer(delta);
 	}
 
-    public override void PhysicsProcessUnselected(float delta) {}
+	public override void PhysicsProcessUnselected(float delta) {}
 	public override void PhysicsProcessSelected(float delta) {}
 
-    private void TickLootTimer(float delta)
-    {
-        Timer -= delta;
-        if (Timer < 0)
-        {
-            Timer = 0;
-            // TODO: Add loot to inventory.
-            // TODO: Change back to movement (idle) state.
-        }
-    }
+	private void TickTimer(float delta)
+	{
+		Timer -= delta;
+		if (Timer < 0)
+		{
+			Timer = 0;
+			GimmeTheLoot();
+			ChangeState(PcStateNames.IDLE);
+		}
+	}
+
+	private void GimmeTheLoot()
+	{
+		LootContainer.Empty = true;
+		foreach (ItemAmount itemAmount in LootContainer.Loot)
+		{
+			Context.InventoryManager.AddItemAmount(itemAmount);
+		}
+	}
 }

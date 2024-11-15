@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Godot;
 
 public partial class LootContainer : StaticBody3D
@@ -7,11 +6,11 @@ public partial class LootContainer : StaticBody3D
 //	[Export]
 //	public Godot.Collections.Array<ItemTags> Tags { get; private set; }
 	[Export]
-	public ItemAmount[] ItemsWithAmounts { get; private set; }
+	public ItemAmount[] Loot { get; private set; }
 	[Export]
 	public float LootDuration { get; private set; }
-	public bool Empty { get; private set; }
-	public bool BeingLooted { get; private set; }
+	public bool Empty { get; set; }
+	public bool BeingLooted { get; set; }
 	public Vector3 LootingPosition
 	{
 		get => LootingSpot.GlobalPosition;

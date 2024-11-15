@@ -1,4 +1,3 @@
-using Godot;
 using System.Collections.Generic;
 
 public enum PcStateNames
@@ -40,34 +39,13 @@ public class PcStateMachine
 	{
 		CurrentState?.PhysicsProcessSelected(delta);
 	}
-
-	public void ChangeState(PcStateNames newStateName, Node3D target)
-	{
-		CurrentState?.ExitState();
-		CurrentState = StatesByEnum[newStateName];
-		CurrentState.Target = target;
-		CurrentState?.EnterState();
-	}
 	
-	public void MoveTo(Node3D target, Vector3 targetPosition = new())
+	public void ChangeState(PcStateNames stateName, object target = null)
 	{
-		this.PrintDebug($"Target type: {target?.GetType()}");
-		if (target is LootContainer lootContainer)
-		{
-			targetPosition = lootContainer.LootingPosition;
-		}
-		if (CurrentState is PcStateMovement movementState)
-		{
-			movementState.Target = target;
-			movementState.SetTargetPosition(targetPosition);
-			return;
-		}
+		this.PrintDebug($"Changing to {stateName}");
 		CurrentState?.ExitState();
-		PcStateMovement movement = (PcStateMovement)StatesByEnum[PcStateNames.MOVEMENT];
-		movement.Target = target;
-		movement.SetTargetPosition(targetPosition);
-		CurrentState = movement;
-		CurrentState?.EnterState();		
+		CurrentState = StatesByEnum[stateName];
+		CurrentState?.EnterState(target);
 	}
 	
 	public void ExitTree()
@@ -84,15 +62,11 @@ public class PcStateMachine
 		PcStateMovement movement = new(context);
 		PcStateLooting looting = new(context);
 
-		// Connect godot signal so no need to disconnect/unsubscribe later, so don't need to keep references to PC and movement state
-		context.TargetDetector.Connect(
-			Area3D.SignalName.BodyEntered,
-			Callable.From((Node3D body) => movement.OnBodyEntered(body)));
-
 		// Populate states dictionary
 		StatesByEnum.Add(PcStateNames.IDLE, idle);
 		StatesByEnum.Add(PcStateNames.MOVEMENT, movement);
 		StatesByEnum.Add(PcStateNames.LOOTING, looting);
+		
 		foreach (PcState state in StatesByEnum.Values)
 		{
 			state.OnChangeState += ChangeState;

@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdhbrta7xgaqg"]
+[gd_scene load_steps=3 format=3 uid="uid://bdhbrta7xgaqg"]
 
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_w4if1"]
+[ext_resource type="Script" path="res://game/UI/GameMenu.cs" id="1_wwb6i"]
 
 [node name="GameMenu" type="CanvasLayer"]
+script = ExtResource("1_wwb6i")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

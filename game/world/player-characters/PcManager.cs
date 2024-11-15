@@ -1,5 +1,6 @@
 using Godot;
 
+// TODO: Does this need to be a Node? Can it just be a plain class?
 public partial class PcManager : Node3D
 {
 	// TODO: Setup way to load this data. Eventually from save file, but maybe a resource for now?
@@ -28,20 +29,31 @@ public partial class PcManager : Node3D
 		
 		MissionTeamData.SelectedPc?.PhysicsProcessSelected(delta);
 	}
-	
-	public void Setup(MissionTeamData missionTeamData)
+
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		
+		foreach (PlayerCharacter pc in MissionTeamData.UnselectedPcs)
+		{
+			pc.ExitTree();
+		}
+	}
+
+	public void Initialize(MissionTeamData missionTeamData, InventoryManager inventoryManager)
 	{
 		MissionTeamData = missionTeamData;
-		SpawnPcs();
+		SpawnPcs(inventoryManager);
 	}
 	
-	public void SpawnPcs()
+	public void SpawnPcs(InventoryManager inventoryManager)
 	{		
 		foreach (int index in MissionTeamData.TeamIndexes)
 		{
 			PlayerCharacter pc = (PlayerCharacter)MissionTeamData.Pcs.PcDatas[index].PcScene.Instantiate();
 			CallDeferred(MethodName.AddChild, pc);
 			pc.Position += Vector3.Right * index * 3;
+			pc.Initialize(inventoryManager);
 			this.PrintDebug($"PC Position: {pc.Position}");
 			MissionTeamData.UnselectedPcs.Add(pc);
 		}
@@ -71,15 +83,8 @@ public partial class PcManager : Node3D
 		}
 	}
 	
-	public void MoveTo(Vector3 location)
+	public void MoveTo(MovementTarget movementTarget)
 	{
-		this.PrintDebug($"Move to location: {location}");
-		MissionTeamData.SelectedPc?.MoveTo(location);
-	}
-	
-	public void MoveTo(Node3D target)
-	{
-		this.PrintDebug($"Move to target: {target}");
-		MissionTeamData.SelectedPc?.MoveTo(target);
+		MissionTeamData.SelectedPc?.MoveTo(movementTarget);
 	}
 }

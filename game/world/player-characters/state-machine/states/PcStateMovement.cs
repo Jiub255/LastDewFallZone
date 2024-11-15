@@ -1,7 +1,33 @@
+using System;
 using Godot;
+
+public enum TargetTypes
+{
+	GROUND,
+	LOOT,
+	//ENEMY,
+}
+
+public struct MovementTarget
+{
+	public TargetTypes TargetType { get; private set; }
+	public Vector3 TargetPosition { get; private set; }
+	public Node3D Target { get; private set; }
+	
+	public MovementTarget(TargetTypes targetType, Vector3 targetPosition, Node3D target = null)
+	{
+		TargetType = targetType;
+		TargetPosition = targetPosition;
+		Target = target;
+	}
+}
 
 public class PcStateMovement : PcState
 {
+	public Action<float> Move;
+	
+	public MovementTarget MovementTarget { get; private set; }
+	
 	// TODO: Get this info from pc stats eventually? Or just have everyone move the same?
 	private float MaxSpeed { get; set; } = 7f;
 	private float Acceleration { get; set; } = 10f;
@@ -9,29 +35,6 @@ public class PcStateMovement : PcState
 	/// Degrees per second
 	/// </summary>
 	private float TurnSpeed { get; set; } = 360f;
-	private string BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
-
-	// TODO: Implement this instead of using Target in PcState. Use this in this state,
-	// then have LootContainer in Loot and Enemy in Combat. Only pass the necessary data.
-	private enum TargetTypes
-	{
-		GROUND,
-		LOOT,
-		ENEMY,
-	}
-	private struct MovementTarget
-	{
-		public TargetTypes TargetType { get; private set; }
-		public Vector3 TargetPosition { get; private set; }
-		public Node3D Target { get; private set; }
-		
-		public MovementTarget(TargetTypes targetType, Vector3 targetPosition, Node3D target = null)
-		{
-			TargetType = targetType;
-			TargetPosition = targetPosition;
-			Target = target;
-		}
-	}
 
 	public PcStateMovement(PcStateContext context) : base(context)
 	{
@@ -42,36 +45,36 @@ public class PcStateMovement : PcState
 
 	public override void PhysicsProcessUnselected(float delta)
 	{
-		HandleMovement(delta);
+		Move?.Invoke(delta);
 	}
 
 	public override void PhysicsProcessSelected(float delta)
 	{
-		HandleMovement(delta);
+		Move?.Invoke(delta);
 	}
 
-	public void SetTargetPosition(Vector3 targetPosition)
+	public override void EnterState(object target)
 	{
-		if (Target == null)
+		if (target is MovementTarget movementTarget)
 		{
-			Context.NavigationAgent.TargetPosition = targetPosition;
+			MovementTarget = movementTarget;
+			Context.NavigationAgent.TargetPosition = movementTarget.TargetPosition;
+			this.PrintDebug($"Move target position: {Context.NavigationAgent.TargetPosition}");
+			switch (movementTarget.TargetType)
+			{
+				case TargetTypes.GROUND:
+					Move = MoveTowardPoint;
+					break;
+				case TargetTypes.LOOT:
+					Move = MoveTowardLoot;
+					break;
+				/* case TargetTypes.ENEMY:
+					OnMove = MoveTowardEnemy;
+					break; */
+			}
 		}
-		else if (Target is LootContainer lootContainer)
-		{
-			Context.NavigationAgent.TargetPosition = lootContainer.LootingPosition;
-		}
-		this.PrintDebug($"Nav Agent Target position: {Context.NavigationAgent.TargetPosition}");
 	}
-
-	public void OnBodyEntered(Node3D body)
-	{
-		if (body == Target && body is LootContainer lootContainer)
-		{
-			ChangeState(PcStateNames.LOOTING, lootContainer);
-		}
-	}
-
-	public override void EnterState() {}
+	
 	public override void ExitState() {}
 	public override void ProcessUnselected(float delta) {}
 	public override void ProcessSelected(float delta) {}
@@ -79,43 +82,44 @@ public class PcStateMovement : PcState
 	private void Animate()
 	{
 		float blendAmount = Mathf.Clamp(Context.Speed / MaxSpeed, 0, 1);
-		Context.PcAnimationTree.Set(BlendAmountPath, blendAmount); 
+		Context.PcAnimationTree.Set(BlendAmountPath, blendAmount);
 	}
-
-	private void HandleMovement(float delta)
+	
+	private void MoveTowardPoint(float delta)
 	{
+		if (DestinationReached())
+		{
+			ChangeState(PcStateNames.IDLE);
+		}
 		Animate();
-		//this.PrintDebug($"Nav finished: {Context.NavigationAgent.IsNavigationFinished()}");
-		if (!Context.NavigationAgent.IsNavigationFinished())
-		{
-			// TODO: Should this really be set each frame? Only for enemies, who can move.
- 			/*if (Target is Enemy)
-			{
-				SetTargetPosition();
-			}*/
-			MoveAndRotate(delta);
-		}
-		else
-		{
-			//this.PrintDebug($"Target is loot: {Target is LootContainer}");
-			this.PrintDebug($"Target type: {Target?.GetType()}");
-			if (Target is LootContainer lootContainer)
-			{
-				// TODO: Change to loot state. How to pass LootContainer to Loot state?
-				ChangeState(PcStateNames.LOOTING, lootContainer);
-			}
-		}
-		// TODO: Change to Combat state here.
+		MoveAndRotate(delta);
 	}
-
-/* 	private void SetTargetPosition()
+	
+	private void MoveTowardLoot(float delta)
 	{
-		Vector3 projection = new Vector3(
-			Target.Position.X,
-			0,
-			Target.Position.Z);
-		Context.NavigationAgent.TargetPosition = projection;
+		if (DestinationReached())
+		{
+			ChangeState(PcStateNames.LOOTING, MovementTarget.Target);
+		}
+		Animate();
+		MoveAndRotate(delta);
+	}
+	
+	/* private void MoveTowardEnemy(float delta)
+	{
+		if (DestinationReached())
+		{
+			// TODO: Change to Combat.
+		}
+		throw new NotImplementedException();
 	} */
+	
+	private bool DestinationReached()
+	{
+		bool navFinished = Context.NavigationAgent.IsNavigationFinished();
+		//this.PrintDebug($"Navigation finished: {navFinished}");
+		return navFinished;
+	}
 
 	private void MoveAndRotate(float delta)
 	{

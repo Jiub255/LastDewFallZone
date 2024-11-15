@@ -1,8 +1,10 @@
 using Godot;
 
-// Only using this class to fill Loot containers in the inspector. 
-// Can probably switch to using Dictionary<Item, int> once item database is implemented,
-// along with auto filling loot containers based on item tags and rarity.
+/// <summary>
+/// Only using this class to fill Loot containers in the inspector.
+/// Can probably switch to using Item/int Dictionary once item database is implemented,
+/// along with auto filling loot containers based on item tags and rarity.
+/// </summary>
 [GlobalClass]
 public partial class ItemAmount : Resource
 {

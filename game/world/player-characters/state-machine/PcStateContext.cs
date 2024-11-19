@@ -51,7 +51,7 @@ public class PcStateContext
 		// Check to make sure not rotating the long way around.
 		// Cross product is perpendicular to forward and directionToTarget, so it points up or down.
 		Vector3 cross = forward.Cross(directionToTarget);
-		// If it points down (so dot product < 0), then the angle's sign needs to flip. 
+		// If it points down (dot product < 0), then the angle's sign needs to flip. 
 		if (cross.Dot(Vector3.Up) < 0)
 		{
 			angleToTarget = -angleToTarget;

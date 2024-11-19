@@ -90,6 +90,7 @@ public class PcStateMovement : PcState
 		if (DestinationReached())
 		{
 			ChangeState(PcStateNames.IDLE);
+			return;
 		}
 		Animate();
 		MoveAndRotate(delta);
@@ -100,6 +101,7 @@ public class PcStateMovement : PcState
 		if (DestinationReached())
 		{
 			ChangeState(PcStateNames.LOOTING, MovementTarget.Target);
+			return;
 		}
 		Animate();
 		MoveAndRotate(delta);
@@ -110,6 +112,7 @@ public class PcStateMovement : PcState
 		if (DestinationReached())
 		{
 			// TODO: Change to Combat.
+			return;
 		}
 		throw new NotImplementedException();
 	} */
@@ -117,7 +120,6 @@ public class PcStateMovement : PcState
 	private bool DestinationReached()
 	{
 		bool navFinished = Context.NavigationAgent.IsNavigationFinished();
-		//this.PrintDebug($"Navigation finished: {navFinished}");
 		return navFinished;
 	}
 

@@ -21,6 +21,7 @@ public partial class LootContainer : StaticBody3D
 	{
 		base._Ready();
 		
+		Loot = new ItemAmount[0];
 		LootingSpot = GetNode<Node3D>("%LootingSpot");
 	}
 }

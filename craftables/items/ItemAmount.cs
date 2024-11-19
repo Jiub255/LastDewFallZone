@@ -13,6 +13,8 @@ public partial class ItemAmount : Resource
 	[Export]
 	public int Amount { get; set;}
 	
+	public ItemAmount() {}
+	
 	public ItemAmount(Item item, int amount)
 	{
 		Item = item;

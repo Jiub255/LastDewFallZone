@@ -9,13 +9,13 @@ public class PcStateLooting : PcState
 	{
 		if (target is LootContainer lootContainer)
 		{
+			LootContainer = lootContainer;
 			if (lootContainer.Empty || lootContainer.BeingLooted)
 			{
 				ChangeState(PcStateNames.IDLE);
 				return;
 			}
 			lootContainer.BeingLooted = true;
-			LootContainer = lootContainer;
 			Context.PcAnimationTree.Looting = true;
 			Timer = lootContainer.LootDuration;
 		}
@@ -43,6 +43,7 @@ public class PcStateLooting : PcState
 	private void TickTimer(float delta)
 	{
 		Timer -= delta;
+		this.PrintDebug($"Loot timer: {Timer}");
 		if (Timer < 0)
 		{
 			Timer = 0;
@@ -53,10 +54,10 @@ public class PcStateLooting : PcState
 
 	private void GimmeTheLoot()
 	{
-		LootContainer.Empty = true;
 		foreach (ItemAmount itemAmount in LootContainer.Loot)
 		{
 			Context.InventoryManager.AddItemAmount(itemAmount);
 		}
+		LootContainer.Empty = true;
 	}
 }

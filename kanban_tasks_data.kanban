@@ -38,11 +38,7 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"c5f14db2-ba1d-4c88-a12d-c1187b77e7e4",
-				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1",
-				"99a74741-f3a9-450e-a0a4-444bacae30fc",
-				"489d060a-da4b-42e5-a578-3d40940c7958",
-				"dffc8eab-7892-4f42-a5c9-64fee165246f"
+				"99a74741-f3a9-450e-a0a4-444bacae30fc"
 			]
 		},
 		{
@@ -56,7 +52,9 @@
 				"1f55e91c-ea36-430c-88de-a42d0d1102b2",
 				"d4198d16-16c6-4401-9e26-18b9b446b0e4",
 				"eaff06f8-c4f7-413c-900c-a3f123827109",
-				"3af156aa-638b-4f09-8350-b29b7b01dc94"
+				"3af156aa-638b-4f09-8350-b29b7b01dc94",
+				"c5f14db2-ba1d-4c88-a12d-c1187b77e7e4",
+				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1"
 			]
 		},
 		{
@@ -70,7 +68,9 @@
 			"tasks": [
 				"bd9a1b36-f709-4984-be8e-1a4caac1c8f0",
 				"9a00e51e-1668-4781-b4a8-bd3723ea6fd5",
-				"78d7226e-ba3e-4a00-8101-5f7398c1be57"
+				"78d7226e-ba3e-4a00-8101-5f7398c1be57",
+				"489d060a-da4b-42e5-a578-3d40940c7958",
+				"dffc8eab-7892-4f42-a5c9-64fee165246f"
 			]
 		}
 	],
@@ -273,14 +273,14 @@
 		{
 			"uuid": "489d060a-da4b-42e5-a578-3d40940c7958",
 			"title": "Not stopping run animation when changing to idle state.",
-			"description": "",
+			"description": "FIXED by returning out of the move method if destination reached, before calling animate (which set the idle/run blend amount back up near 1).",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
 		{
 			"uuid": "dffc8eab-7892-4f42-a5c9-64fee165246f",
 			"title": "Loot timer not working, not changing back to idle.",
-			"description": "",
+			"description": "FIXED by adding a parameterless constructor to ItemAmount, and initializing LootContainer's ItemAmount[] in _Ready. Was getting null references even though loot seemed set in the inspector.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

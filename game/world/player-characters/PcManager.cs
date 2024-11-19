@@ -72,6 +72,10 @@ public partial class PcManager : Node3D
 		MissionTeamData.UnselectedPcs.Remove(pc);
 		MissionTeamData.SelectedPc = pc;
 		this.PrintDebug($"Selected PC: {MissionTeamData.SelectedPc.Name}");
+		foreach (PlayerCharacter unselected in MissionTeamData.UnselectedPcs)
+		{
+			this.PrintDebug($"Unselected PC: {unselected.Name}");
+		}
 	}
 	
 	public void DeselectPc()

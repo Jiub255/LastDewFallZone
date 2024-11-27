@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckdovcojyp62n"]
+
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_5aaay"]
+[ext_resource type="Script" path="res://game/UI/ItemButton.cs" id="2_yotii"]
+
+[node name="ItemButton" type="Button"]
+icon = ExtResource("1_5aaay")
+script = ExtResource("2_yotii")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -23.0
+offset_right = 23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "12345"

@@ -61,13 +61,13 @@ public partial class ClickHandler : RayCast3D
 			// Loot
 			case 8:
 				LootContainer lootContainer = (LootContainer)collider;
-				MovementTarget movementTarget = new MovementTarget(TargetTypes.LOOT, lootContainer.LootingPosition, lootContainer);
+				MovementTarget movementTarget = new MovementTarget(lootContainer.LootingPosition, lootContainer);
 				OnClickedMoveTarget?.Invoke(movementTarget);
 				this.PrintDebug($"Clicked loot");
 				break;
 			// Ground
 			case 16:
-				MovementTarget movementTarget2 = new MovementTarget(TargetTypes.GROUND, collisionPoint);
+				MovementTarget movementTarget2 = new MovementTarget(collisionPoint);
 				OnClickedMoveTarget?.Invoke(movementTarget2);
 				this.PrintDebug($"Clicked ground at {collisionPoint}");
 				break;

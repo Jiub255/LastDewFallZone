@@ -1,22 +1,13 @@
 using System;
 using Godot;
 
-public enum TargetTypes
-{
-	GROUND,
-	LOOT,
-	//ENEMY,
-}
-
 public struct MovementTarget
 {
-	public TargetTypes TargetType { get; private set; }
 	public Vector3 TargetPosition { get; private set; }
 	public Node3D Target { get; private set; }
 	
-	public MovementTarget(TargetTypes targetType, Vector3 targetPosition, Node3D target = null)
+	public MovementTarget(Vector3 targetPosition, Node3D target = null)
 	{
-		TargetType = targetType;
 		TargetPosition = targetPosition;
 		Target = target;
 	}
@@ -60,17 +51,20 @@ public class PcStateMovement : PcState
 			MovementTarget = movementTarget;
 			Context.NavigationAgent.TargetPosition = movementTarget.TargetPosition;
 			this.PrintDebug($"Move target position: {Context.NavigationAgent.TargetPosition}");
-			switch (movementTarget.TargetType)
+			switch (movementTarget.Target)
 			{
-				case TargetTypes.GROUND:
+				case null:
 					Move = MoveTowardPoint;
 					break;
-				case TargetTypes.LOOT:
+				case LootContainer:
 					Move = MoveTowardLoot;
 					break;
-				/* case TargetTypes.ENEMY:
-					OnMove = MoveTowardEnemy;
+				/* case Enemy:
+					Move = MoveTowardEnemy;
 					break; */
+				default:
+					GD.PushWarning($"MovementTarget.Target's type isn't null, LootContainer, or Enemy");
+					break;
 			}
 		}
 	}

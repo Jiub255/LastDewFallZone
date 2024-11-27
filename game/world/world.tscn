@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://n4s23mnl518e"]
+[gd_scene load_steps=22 format=3 uid="uid://n4s23mnl518e"]
 
 [ext_resource type="Script" path="res://game/world/World.cs" id="1_l0n7t"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://game/world/camera/camera.tscn" id="2_bcky2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://game/UI/hud.tscn" id="4_vau40"]
 [ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/TestCraftingMaterial.tres" id="6_n3ykd"]
 [ext_resource type="Script" path="res://craftables/items/ItemAmount.cs" id="7_a57cs"]
+[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/TestUsableItem.tres" id="8_hoib1"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ekc5e"]
 vertices = PackedVector3Array(-24.5, 0.5, -5.5, -6.75, 0.5, -5.5, -6.5, 0.5, -6.25, -5.25, 0.5, -24.5, -24.5, 0.5, -24.5, -5, 0.5, -6.25, 2.75, 0.5, -6.25, 3, 0.5, -24.5, 4.25, 0.5, -6.25, 4.5, 0.5, -5.5, 24.5, 0.5, -5.5, 24.5, 0.5, -24.5, -5.25, 0.5, -3, -5, 0.5, -5, -6.5, 0.5, -5, -4.25, 0.5, -2.75, -24.5, 0.5, 24.5, -4.25, 0.5, 24.5, 4.25, 0.5, -5, 2.25, 0.5, 24.5, 24.5, 0.5, 24.5, 2.25, 0.5, -5, -3.25, 0.5, -5, -3, 0.5, -3)
@@ -32,6 +33,11 @@ size = Vector3(10, 2, 0.2)
 [sub_resource type="Resource" id="Resource_0ebt0"]
 script = ExtResource("7_a57cs")
 Item = ExtResource("6_n3ykd")
+Amount = 1
+
+[sub_resource type="Resource" id="Resource_ar82l"]
+script = ExtResource("7_a57cs")
+Item = ExtResource("8_hoib1")
 Amount = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qb4yi"]
@@ -94,7 +100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02312, 0.5, -3.97649)
 collision_layer = 8
 collision_mask = 22
 script = ExtResource("3_wyfp0")
-Loot = Array[Object]([SubResource("Resource_0ebt0")])
+Loot = Array[Object]([SubResource("Resource_0ebt0"), SubResource("Resource_ar82l")])
 LootDuration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]

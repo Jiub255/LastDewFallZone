@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 public class InventoryManager
 {
-	private InventoryController<CraftingMaterial> CraftingMaterials { get; }
-	private InventoryController<Equipment> Equipment { get; }
-	private InventoryController<UsableItem> UsableItems { get; }
+	public InventoryController<CraftingMaterial> CraftingMaterials { get; }
+	public InventoryController<Equipment> Equipment { get; }
+	public InventoryController<UsableItem> UsableItems { get; }
 	
 	public InventoryManager()
 	{
@@ -14,6 +16,23 @@ public class InventoryManager
 	public void AddItemAmount(ItemAmount itemAmount)
 	{
 		AddItems(itemAmount.Item, itemAmount.Amount);
+		PRINTINVENTORY();
+	}
+	
+	private void PRINTINVENTORY()
+	{
+		foreach (KeyValuePair<UsableItem, int> kvp in UsableItems.Inventory)
+		{
+			this.PrintDebug($"{kvp.Value} {kvp.Key.Name}");
+		}
+		foreach (KeyValuePair<CraftingMaterial, int> kvp in CraftingMaterials.Inventory)
+		{
+			this.PrintDebug($"{kvp.Value} {kvp.Key.Name}");
+		}
+		foreach (KeyValuePair<Equipment, int> kvp in Equipment.Inventory)
+		{
+			this.PrintDebug($"{kvp.Value} {kvp.Key.Name}");
+		}
 	}
 	
 	public void AddItems(Item item, int amount)

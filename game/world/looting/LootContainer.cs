@@ -6,7 +6,7 @@ public partial class LootContainer : StaticBody3D
 //	[Export]
 //	public Godot.Collections.Array<ItemTags> Tags { get; private set; }
 	[Export]
-	public ItemAmount[] Loot { get; private set; }
+	public ItemAmount[] Loot { get; private set; } = new ItemAmount[0];
 	[Export]
 	public float LootDuration { get; private set; }
 	public bool Empty { get; set; }
@@ -21,7 +21,6 @@ public partial class LootContainer : StaticBody3D
 	{
 		base._Ready();
 		
-		Loot = new ItemAmount[0];
 		LootingSpot = GetNode<Node3D>("%LootingSpot");
 	}
 }

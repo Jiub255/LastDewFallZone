@@ -43,7 +43,6 @@ public class PcStateLooting : PcState
 	private void TickTimer(float delta)
 	{
 		Timer -= delta;
-		this.PrintDebug($"Loot timer: {Timer}");
 		if (Timer < 0)
 		{
 			Timer = 0;
@@ -54,8 +53,10 @@ public class PcStateLooting : PcState
 
 	private void GimmeTheLoot()
 	{
+		this.PrintDebug($"Gimme the loot, number of loot items: {LootContainer.Loot.Length}");
 		foreach (ItemAmount itemAmount in LootContainer.Loot)
 		{
+			this.PrintDebug($"Looting {itemAmount.Item.Name}");
 			Context.InventoryManager.AddItemAmount(itemAmount);
 		}
 		LootContainer.Empty = true;

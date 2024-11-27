@@ -25,20 +25,21 @@
 			"title": "TODO",
 			"tasks": [
 				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
-				"596164a1-dfa2-4bac-acbb-4667169071ec",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"da6960b9-4241-48f4-8e32-984ebd5dba84",
 				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
 				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
-				"d1adddcc-8d19-4763-94e7-4180fac8440c"
+				"d1adddcc-8d19-4763-94e7-4180fac8440c",
+				"1fb13589-f26e-40cc-9e59-7d8f18a46b7d"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"99a74741-f3a9-450e-a0a4-444bacae30fc"
+				"99a74741-f3a9-450e-a0a4-444bacae30fc",
+				"d6d755c0-14e1-48eb-aff5-1db427c292a6"
 			]
 		},
 		{
@@ -54,6 +55,7 @@
 				"eaff06f8-c4f7-413c-900c-a3f123827109",
 				"3af156aa-638b-4f09-8350-b29b7b01dc94",
 				"c5f14db2-ba1d-4c88-a12d-c1187b77e7e4",
+				"596164a1-dfa2-4bac-acbb-4667169071ec",
 				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1"
 			]
 		},
@@ -226,7 +228,7 @@
 					"done": false
 				},
 				{
-					"details": "HUD\n\nCharacter face icons on side? or top? bottom? \n\tClick face to select character\n\tIcon shows pain/injury levels, maybe turns red as you take damage or something?",
+					"details": "HUD\n\nCharacter face icons on side? or top? bottom? \n\tClick face to select character\n\tIcon shows pain/injury levels, maybe turns red as you take damage or something?\nA \"Go Scavenging\" button? Or have that in the in-game menu?",
 					"done": false
 				},
 				{
@@ -252,14 +254,14 @@
 		{
 			"uuid": "596164a1-dfa2-4bac-acbb-4667169071ec",
 			"title": "How to handle movement and states?",
-			"description": "Instead of having Movement State as is, could have just three states: Movement/Blank, Looting, Combat.\nThen each state can have an \"Approaching\" bool, and handle the navigation there. But then what about animation? Have to use the same code three times.\nNot sure how to handle this.\nKeep going as is for now, until combat gets implemented.",
+			"description": "Instead of having Movement State as is, could have just three states: Movement/Blank, Looting, Combat.\nThen each state can have an \"Approaching\" bool, and handle the navigation there. But then what about animation? Have to use the same code three times.\nNot sure how to handle this.\nKeep going as is for now, until combat gets implemented.\n\nWent with:\n4 states: Idle, movement, looting, combat.\nmovement state gets MovementTarget custom class with target, target position, and target type enum (ground, loot, enemy)\n\tmovement state uses this to know which state to transition true once navigation is finished.\nEnterState now takes an object target. Either null for ground clicks, LootContainer for loot, or Enemy for enemies. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
 		{
 			"uuid": "d1adddcc-8d19-4763-94e7-4180fac8440c",
 			"title": "Morale",
-			"description": "How exactly to set it up?\nHave individual morales, or just a team one?\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\nAffects:\n\tAll stats of all pcs.",
+			"description": "How exactly to set it up?\nHave individual morales, or just a team one?\n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -282,6 +284,20 @@
 			"title": "Loot timer not working, not changing back to idle.",
 			"description": "FIXED by adding a parameterless constructor to ItemAmount, and initializing LootContainer's ItemAmount[] in _Ready. Was getting null references even though loot seemed set in the inspector.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "1fb13589-f26e-40cc-9e59-7d8f18a46b7d",
+			"title": "3D char model in menu",
+			"description": "Replace the character icon in the Character/Item/Equip menu with a separate viewport showing the 3d model in it's own scene. Then you can update equipment look realtime easily. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "d6d755c0-14e1-48eb-aff5-1db427c292a6",
+			"title": "Put int amount in Item class?",
+			"description": "Instead of using the ItemAmount class, or a tuple, or a dictionary, maybe just store int amount in item class?\nCould still have different instances for loot containers and your own inventory, just change add items method to work with it.\n",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

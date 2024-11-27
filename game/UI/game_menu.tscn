@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdhbrta7xgaqg"]
+[gd_scene load_steps=5 format=3 uid="uid://bdhbrta7xgaqg"]
 
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_w4if1"]
 [ext_resource type="Script" path="res://game/UI/GameMenu.cs" id="1_wwb6i"]
+[ext_resource type="Script" path="res://game/UI/CharacterTab.cs" id="2_vlrjn"]
+[ext_resource type="Script" path="res://game/UI/SelectedItemPanel.cs" id="5_fxjof"]
 
 [node name="GameMenu" type="CanvasLayer"]
 script = ExtResource("1_wwb6i")
@@ -22,7 +24,9 @@ layout_mode = 2
 current_tab = 0
 
 [node name="Character" type="PanelContainer" parent="MarginContainer/TabContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("2_vlrjn")
 metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Character"]
@@ -34,94 +38,80 @@ theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
+[node name="CharacterVBox" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="NameLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterVBox"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[center]James[/center]"
 fit_content = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="CharacterIcon" type="TextureRect" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterVBox"]
 layout_mode = 2
 texture = ExtResource("1_w4if1")
 expand_mode = 5
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
+[node name="StatsLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Level: 2
+Attack: 5
+Defense: 3
+Speed: 5
+Looting: 7
+Injury: 32
+Pain: 14"
+
+[node name="ItemsVBox" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="ItemsPanel" type="PanelContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/ItemsPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/ItemsPanel/MarginContainer"]
+custom_minimum_size = Vector2(696, 0)
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="ItemsGrid" type="GridContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/ItemsPanel/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(696, 276)
 layout_mode = 2
 columns = 5
 
-[node name="Button" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="Button2" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="Button3" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="Button4" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="Button5" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="Button6" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="Button7" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="Button8" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="Button9" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/GridContainer"]
-layout_mode = 2
-icon = ExtResource("1_w4if1")
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="SelectedItemPanel" type="PanelContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("5_fxjof")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer"]
+[node name="ItemIcon" type="TextureRect" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("1_w4if1")
 expand_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -129,26 +119,30 @@ text = "Description of the item. Blakasjd advasjdvoaijsen asdlkva ns;dlvsaidjva 
 Relieve pain 50 for 60 seconds. or
 Attack: 30 blah blah"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="UseEquipButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Use/Equip"
 
-[node name="Button2" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="DropButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Drop"
 
 [node name="Crafting" type="PanelContainer" parent="MarginContainer/TabContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="Building" type="PanelContainer" parent="MarginContainer/TabContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2

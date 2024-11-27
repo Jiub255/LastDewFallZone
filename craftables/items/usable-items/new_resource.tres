@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UsableItem" load_steps=2 format=3 uid="uid://cx2nxhguhd7t3"]
+
+[ext_resource type="Script" path="res://craftables/items/usable-items/UsableItem.cs" id="1_7jg1r"]
+
+[resource]
+script = ExtResource("1_7jg1r")
+Reusable = false
+Effects = []
+ItemRarity = 100
+Tags = []
+Name = "Enter Unique Name"
+Description = "Enter Description"

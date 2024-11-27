@@ -3,6 +3,7 @@ using Godot;
 
 public partial class CharacterTab : PanelContainer
 {
+	// TODO: How to handle selected character? Need to figure out how to organize all the data.
 	private InventoryManager InventoryManager { get; set; }
 	private GridContainer ItemsGrid { get; set; }
 	private SelectedItemPanel SelectedItemPanel { get; set; }
@@ -33,9 +34,12 @@ public partial class CharacterTab : PanelContainer
 
 	public void PopulateInventoryUI()
 	{
-		foreach (ItemButton child in ItemsGrid.GetChildren())
+		foreach (Node child in ItemsGrid.GetChildren())
 		{
-			child.QueueFree();
+			if (child is ItemButton itemButton)
+			{
+				itemButton.QueueFree();
+			}
 		}
 		
 		foreach (KeyValuePair<UsableItem, int> item in InventoryManager.UsableItems.Inventory)
@@ -61,7 +65,7 @@ public partial class CharacterTab : PanelContainer
 			ItemButton.SignalName.Pressed,
 			Callable.From((ItemButton button) => SetupItemDisplay(button))); */
 	}
-	
+
 	private void RemoveButton(ItemButton button)
 	{
 		button.OnPressed -= SetupItemDisplay;

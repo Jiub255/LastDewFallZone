@@ -39,7 +39,9 @@
 			"title": "DOING",
 			"tasks": [
 				"99a74741-f3a9-450e-a0a4-444bacae30fc",
-				"d6d755c0-14e1-48eb-aff5-1db427c292a6"
+				"d6d755c0-14e1-48eb-aff5-1db427c292a6",
+				"8ae028d1-de45-45bc-942e-d997730d3b69",
+				"bf15db14-19e6-4fa8-a2db-08c9d7486a3f"
 			]
 		},
 		{
@@ -297,6 +299,20 @@
 			"uuid": "d6d755c0-14e1-48eb-aff5-1db427c292a6",
 			"title": "Put int amount in Item class?",
 			"description": "Instead of using the ItemAmount class, or a tuple, or a dictionary, maybe just store int amount in item class?\nCould still have different instances for loot containers and your own inventory, just change add items method to work with it.\n",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "8ae028d1-de45-45bc-942e-d997730d3b69",
+			"title": "How to organize data?",
+			"description": "PCs, in menu and in game.\n\tNeed selected PC to be selected when menu opens.\n\tBut if you change PCs in menu, still have original PC selected in game.\n\tSo selecting PC in game changes the selected menu PC, but not the other way around.\n\tBut how to hold the data? Kinda like MissionTeamData?\n\t\tHave a separate resource containing paths to every pc. Maybe use a string/path dict.\n\t\tHave a game data class that holds references to all your current PCs.\n\t\t\tHas WorldSelected and MenuSelected PCs.\n\t\t\tSave/load just an array of int IDs, then instantiate and keep a list of references to the actual PCs.\n\t\t\tCould maybe put mission team data here?\n\t\t\nCraftables -> Items/Buildings\n\tProbably just doing resources, and using the resource tables addon.\n\tWas gonna try to use a database. Might do it later, not sure yet.\n",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "bf15db14-19e6-4fa8-a2db-08c9d7486a3f",
+			"title": "Make resource editor tool",
+			"description": "Similar to the resource tables addon, but make it so you can add bools, enums, and other custom types.\n\tWant to be able to add recipe costs from a table of crafting materials. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

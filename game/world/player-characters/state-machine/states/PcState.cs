@@ -12,6 +12,7 @@ public abstract class PcState
 		Context = context;
 	}
 
+	// TODO: Pass MovementTarget in instead? Then just check MovementTarget.Target instead of target?
 	public abstract void EnterState(object target = null);
 	public abstract void ExitState();
 	public abstract void ProcessUnselected(float delta);

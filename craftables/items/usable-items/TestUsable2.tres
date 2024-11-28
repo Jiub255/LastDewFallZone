@@ -6,6 +6,7 @@
 script = ExtResource("1_jp7sh")
 Reusable = false
 Effects = null
+Amount = 1
 ItemRarity = 100
 Tags = null
 Name = "Enter Unique Name"

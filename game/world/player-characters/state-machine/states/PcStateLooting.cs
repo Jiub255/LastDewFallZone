@@ -57,7 +57,7 @@ public class PcStateLooting : PcState
 		foreach (ItemAmount itemAmount in LootContainer.Loot)
 		{
 			this.PrintDebug($"Looting {itemAmount.Item.Name}");
-			Context.InventoryManager.AddItemAmount(itemAmount);
+			Context.InventoryManager.AddItems(itemAmount.Item, itemAmount.Amount);
 		}
 		LootContainer.Empty = true;
 	}

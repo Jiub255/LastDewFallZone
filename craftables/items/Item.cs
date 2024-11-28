@@ -1,28 +1,7 @@
 using Godot;
 
-// TODO: Might not do this.
-// Used by loot system, pull randomly from pool of items containing any of a set of tags?
-public enum ItemTags
-{
-	COMBAT,
-	MEDICAL,
-	WEAPON,
-	ARMOR,
-	CRAFTING_MATERIAL,
-}
-
-public enum Rarity
-{
-	COMMON = 100,
-	UNCOMMON = 50,
-	RARE = 10,
-	UNIQUE = 1,
-}
-
 public abstract partial class Item : Craftable
 {
-	[Export]
-	public int Amount { get; set; } = 1;
 	[Export]
 	public Rarity ItemRarity { get; private set; } = Rarity.COMMON;
 	// Only using Godot array so it'll work in editor.

@@ -1,18 +1,6 @@
 using System;
 using Godot;
 
-public struct MovementTarget
-{
-	public Vector3 TargetPosition { get; private set; }
-	public Node3D Target { get; private set; }
-	
-	public MovementTarget(Vector3 targetPosition, Node3D target = null)
-	{
-		TargetPosition = targetPosition;
-		Target = target;
-	}
-}
-
 public class PcStateMovement : PcState
 {
 	public Action<float> Move;
@@ -21,7 +9,7 @@ public class PcStateMovement : PcState
 	
 	// TODO: Get this info from pc stats eventually? Or just have everyone move the same?
 	private float MaxSpeed { get; set; } = 7f;
-	private float Acceleration { get; set; } = 10f;
+	private float Acceleration { get; set; } = 50f;
 	/// <summary>
 	/// Degrees per second
 	/// </summary>

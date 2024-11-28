@@ -40,6 +40,7 @@ public class PcStateMachine
 		CurrentState?.PhysicsProcessSelected(delta);
 	}
 	
+	// TODO: Pass MovementTarget in instead? Then just check MovementTarget.Target instead of target?
 	public void ChangeState(PcStateNames stateName, object target = null)
 	{
 		this.PrintDebug($"Changing to {stateName}");

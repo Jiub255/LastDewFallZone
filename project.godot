@@ -34,6 +34,19 @@ project/assembly_name="LastDew-FallZone"
 
 enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "pink",
+"res://craftables/": "orange",
+"res://game/": "yellow",
+"res://game/UI/": "blue",
+"res://game/world/": "purple",
+"res://game/world/player-characters/": "green",
+"res://unused-assets/": "gray",
+"res://useful-extra-stuff/": "red"
+}
+
 [input]
 
 camera_drag={

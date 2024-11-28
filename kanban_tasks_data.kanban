@@ -9,6 +9,16 @@
 			"uuid": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"title": "Bug",
 			"color": "b30e0d"
+		},
+		{
+			"uuid": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"title": "Improvement",
+			"color": "dbe112"
+		},
+		{
+			"uuid": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"title": "Idea",
+			"color": "1be8de"
 		}
 	],
 	"stages": [
@@ -16,8 +26,8 @@
 			"uuid": "22b5bdc8-f0fd-4898-a5a2-6a3fa87d04dd",
 			"title": "NOTES",
 			"tasks": [
-				"2bd36ec9-5475-4659-af28-96e9244edbfa",
-				"11c04f64-a69a-4abf-8dc1-59793f2e7be0"
+				"df44855f-0478-45ba-8998-406d91aa1eb7",
+				"83757feb-77db-46c7-a1ac-e076ea02903b"
 			]
 		},
 		{
@@ -31,7 +41,7 @@
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
 				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
-				"1fb13589-f26e-40cc-9e59-7d8f18a46b7d"
+				"228e8416-52d5-45df-b6cd-4f75e4f02bc9"
 			]
 		},
 		{
@@ -39,9 +49,10 @@
 			"title": "DOING",
 			"tasks": [
 				"99a74741-f3a9-450e-a0a4-444bacae30fc",
-				"d6d755c0-14e1-48eb-aff5-1db427c292a6",
-				"8ae028d1-de45-45bc-942e-d997730d3b69",
-				"bf15db14-19e6-4fa8-a2db-08c9d7486a3f"
+				"32eafed9-d72c-419c-b15f-690c3e0b0518",
+				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
+				"bf15db14-19e6-4fa8-a2db-08c9d7486a3f",
+				"9daea93f-3636-4d98-85de-f920c2f61f3c"
 			]
 		},
 		{
@@ -56,9 +67,10 @@
 				"d4198d16-16c6-4401-9e26-18b9b446b0e4",
 				"eaff06f8-c4f7-413c-900c-a3f123827109",
 				"3af156aa-638b-4f09-8350-b29b7b01dc94",
-				"c5f14db2-ba1d-4c88-a12d-c1187b77e7e4",
-				"596164a1-dfa2-4bac-acbb-4667169071ec",
-				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1"
+				"d7a31fbe-729d-4f2a-8ce7-f2171670c81e",
+				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
+				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1",
+				"0afa5a6c-d5e9-4dfe-ac09-ecdc7e7709d3"
 			]
 		},
 		{
@@ -106,13 +118,6 @@
 					"done": false
 				}
 			]
-		},
-		{
-			"uuid": "2bd36ec9-5475-4659-af28-96e9244edbfa",
-			"title": "Resource types",
-			"description": "-Characters\n\t-Player Characters\n\t-Enemies\n-Recipes (Things you can craft, maybe call them craftables or something better than recipe)\n\t-Items\n\t\t-Crafting Materials\n\t\t-Equipment\n\t\t-Usable Items\n\t-Buildings\n\t\t-Production\n\t\t-Defense\n\t\t-Medical\n\t\t-Etc.\n",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
 		},
 		{
 			"uuid": "bd9a1b36-f709-4984-be8e-1a4caac1c8f0",
@@ -167,13 +172,6 @@
 			"uuid": "eaff06f8-c4f7-413c-900c-a3f123827109",
 			"title": "Pain/Injury system",
 			"description": "",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
-		},
-		{
-			"uuid": "11c04f64-a69a-4abf-8dc1-59793f2e7be0",
-			"title": "Stats",
-			"description": "-Physical?\n\t-Attack\n\t-Defense\n-Engineering\n-Farming\n-Medical\n-Scavenging\n\nShould Attack/Defense be separate? Or derived from equipment only? Unlike the rest, which can be increased  naturally.\nOr could have a physical strength/endurance stat that determines a bonus to attack and defense.\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -254,23 +252,9 @@
 			"steps": []
 		},
 		{
-			"uuid": "596164a1-dfa2-4bac-acbb-4667169071ec",
-			"title": "How to handle movement and states?",
-			"description": "Instead of having Movement State as is, could have just three states: Movement/Blank, Looting, Combat.\nThen each state can have an \"Approaching\" bool, and handle the navigation there. But then what about animation? Have to use the same code three times.\nNot sure how to handle this.\nKeep going as is for now, until combat gets implemented.\n\nWent with:\n4 states: Idle, movement, looting, combat.\nmovement state gets MovementTarget custom class with target, target position, and target type enum (ground, loot, enemy)\n\tmovement state uses this to know which state to transition true once navigation is finished.\nEnterState now takes an object target. Either null for ground clicks, LootContainer for loot, or Enemy for enemies. ",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
-		},
-		{
 			"uuid": "d1adddcc-8d19-4763-94e7-4180fac8440c",
 			"title": "Morale",
 			"description": "How exactly to set it up?\nHave individual morales, or just a team one?\n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs.",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
-		},
-		{
-			"uuid": "c5f14db2-ba1d-4c88-a12d-c1187b77e7e4",
-			"title": "Refactoring Movement/States with MovementTarget instead of Target.",
-			"description": "Still figuring it out.\nHow to change states? Use 3 or 4 different events and methods in State?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -289,31 +273,86 @@
 			"steps": []
 		},
 		{
-			"uuid": "1fb13589-f26e-40cc-9e59-7d8f18a46b7d",
-			"title": "3D char model in menu",
-			"description": "Replace the character icon in the Character/Item/Equip menu with a separate viewport showing the 3d model in it's own scene. Then you can update equipment look realtime easily. ",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
-		},
-		{
-			"uuid": "d6d755c0-14e1-48eb-aff5-1db427c292a6",
-			"title": "Put int amount in Item class?",
-			"description": "Instead of using the ItemAmount class, or a tuple, or a dictionary, maybe just store int amount in item class?\nCould still have different instances for loot containers and your own inventory, just change add items method to work with it.\n",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
-		},
-		{
-			"uuid": "8ae028d1-de45-45bc-942e-d997730d3b69",
-			"title": "How to organize data?",
-			"description": "PCs, in menu and in game.\n\tNeed selected PC to be selected when menu opens.\n\tBut if you change PCs in menu, still have original PC selected in game.\n\tSo selecting PC in game changes the selected menu PC, but not the other way around.\n\tBut how to hold the data? Kinda like MissionTeamData?\n\t\tHave a separate resource containing paths to every pc. Maybe use a string/path dict.\n\t\tHave a game data class that holds references to all your current PCs.\n\t\t\tHas WorldSelected and MenuSelected PCs.\n\t\t\tSave/load just an array of int IDs, then instantiate and keep a list of references to the actual PCs.\n\t\t\tCould maybe put mission team data here?\n\t\t\nCraftables -> Items/Buildings\n\tProbably just doing resources, and using the resource tables addon.\n\tWas gonna try to use a database. Might do it later, not sure yet.\n",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
-		},
-		{
 			"uuid": "bf15db14-19e6-4fa8-a2db-08c9d7486a3f",
 			"title": "Make resource editor tool",
 			"description": "Similar to the resource tables addon, but make it so you can add bools, enums, and other custom types.\n\tWant to be able to add recipe costs from a table of crafting materials. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
+			"title": "How to handle movement and states?",
+			"description": "Instead of having Movement State as is, could have just three states: Movement/Blank, Looting, Combat.\nThen each state can have an \"Approaching\" bool, and handle the navigation there. But then what about animation? Have to use the same code three times.\nNot sure how to handle this.\nKeep going as is for now, until combat gets implemented.\n\nWent with:\n4 states: Idle, movement, looting, combat.\nmovement state gets MovementTarget custom class with target, target position, and target type enum (ground, loot, enemy)\n\tmovement state uses this to know which state to transition true once navigation is finished.\nEnterState now takes an object target. Either null for ground clicks, LootContainer for loot, or Enemy for enemies. ",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "0afa5a6c-d5e9-4dfe-ac09-ecdc7e7709d3",
+			"title": "Put int amount in Item class?",
+			"description": "NO, because first off it's mutable data so shouldn't be in the resource, and second, you'd need a new resource of each item type for each container or enemy you wanted to use it in. Plus another for the player inventory.\n\nInstead of using the ItemAmount class, or a tuple, or a dictionary, maybe just store int amount in item class?\nCould still have different instances for loot containers and your own inventory, just change add items method to work with it.\n",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "d7a31fbe-729d-4f2a-8ce7-f2171670c81e",
+			"title": "Refactor Movement/States with MovementTarget instead of Target.",
+			"description": "",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "4057ff66-af0f-496c-983d-8abfe7ddf0b3",
+			"title": "How to organize data?",
+			"description": "PCs, in menu and in game.\n\tNeed selected PC to be selected when menu opens.\n\tBut if you change PCs in menu, still have original PC selected in game.\n\tSo selecting PC in game changes the selected menu PC, but not the other way around.\n\tBut how to hold the data? Kinda like MissionTeamData?\n\t\tHave a separate resource containing paths to every pc. Maybe use a string/path dict.\n\t\tHave a game data class that holds references to all your current PCs.\n\t\t\tHas WorldSelected and MenuSelected PCs.\n\t\t\tSave/load just an array of int IDs, then instantiate and keep a list of references to the actual PCs.\n\t\t\tCould maybe put mission team data here?\n\nCraftables -> Items/Buildings\n\tProbably just doing resources, and using the resource tables addon.\n\tWas gonna try to use a database. Might do it later, not sure yet.\n\t\tMight try a relational database custom addon (or if someone else already made one)\n\t\tHave tables for base weapon and effects, each one with a enum id column and the weapon or effect in the other column.\n\t\tThen just store an enum/int for base weapon, and an array of enums/ints for the effects.\n\t\tSame idea for usable items.\n\t\tAlso, maybe crafting materials can just inherit craftable since they don't have an \"item\" function.\n",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "228e8416-52d5-45df-b6cd-4f75e4f02bc9",
+			"title": "3D char model in menu",
+			"description": "Replace the character icon in the Character/Item/Equip menu with a separate viewport showing the 3d model in it's own scene. Then you can update equipment look realtime easily. ",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "df44855f-0478-45ba-8998-406d91aa1eb7",
+			"title": "Resource types",
+			"description": "-Characters\n\t-Player Characters\n\t-Enemies\n-Recipes (Things you can craft, maybe call them craftables or something better than recipe)\n\t-Items\n\t\t-Crafting Materials\n\t\t-Equipment\n\t\t-Usable Items\n\t-Buildings\n\t\t-Production\n\t\t-Defense\n\t\t-Medical\n\t\t-Etc.\n",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "83757feb-77db-46c7-a1ac-e076ea02903b",
+			"title": "Stats",
+			"description": "-Physical?\n\t-Attack\n\t-Defense\n-Engineering\n-Farming\n-Medical\n-Scavenging\n\nShould Attack/Defense be separate? Or derived from equipment only? Unlike the rest, which can be increased  naturally.\nOr could have a physical strength/endurance stat that determines a bonus to attack and defense.\n",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "32eafed9-d72c-419c-b15f-690c3e0b0518",
+			"title": "Game Menu",
+			"description": "Might redesign ui to not have the item display, and use a pop up instead.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": [
+				{
+					"details": "Character panel\n\tCharacter with equipped armor/weapons\n\tStats\n\tOther char info? Name obviously",
+					"done": false
+				},
+				{
+					"details": "Item grid\n\tGrid of buttons showing each item/amount\n\tCan filter by equipment/usable items\n\tAlso filter by rarity?\n\tClicking button shows item on Item display.",
+					"done": false
+				},
+				{
+					"details": "Item display\n\tShows currently selected item\n\t\tIcon\n\t\tName\n\t\tDescription\n\t\tUse/Equip button\n\t\tDrop button?",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "9daea93f-3636-4d98-85de-f920c2f61f3c",
+			"title": "Pass MovementTarget into ChangeState instead of object.",
+			"description": "Then just check movementTarget.Target where you would check object target.\nSeems cleaner, doesn't really matter probably. But might be able to consolidate the move methods in movement state.",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		}
 	],

@@ -4,7 +4,7 @@ public partial class LootContainer : StaticBody3D
 {
 	// TODO: Do random loot based off rarity and tags eventually. Just hand filling item arrays for now.
 //	[Export]
-//	public Godot.Collections.Array<ItemTags> Tags { get; private set; }
+	public Godot.Collections.Array<ItemTags> Tags { get; private set; }
 	[Export]
 	public ItemAmount[] Loot { get; private set; } = new ItemAmount[0];
 	[Export]

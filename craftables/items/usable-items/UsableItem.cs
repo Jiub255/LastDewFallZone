@@ -8,7 +8,7 @@ public partial class UsableItem : Item
 	public bool Reusable { get; set; }
 	[Export]
 	public Effect[] Effects { get; set; } = new Effect[0];
-	
+
 	public override void OnClickCraftable()
 	{
 		throw new NotImplementedException();

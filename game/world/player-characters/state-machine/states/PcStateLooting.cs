@@ -5,14 +5,14 @@ public class PcStateLooting : PcState
 	public LootContainer LootContainer { get; private set; }
 	private float Timer { get; set; }
 
-	public override void EnterState(object target)
+	public override void EnterState(MovementTarget target)
 	{
-		if (target is LootContainer lootContainer)
+		if (target.Target is LootContainer lootContainer)
 		{
 			LootContainer = lootContainer;
 			if (lootContainer.Empty || lootContainer.BeingLooted)
 			{
-				ChangeState(PcStateNames.IDLE);
+				ChangeState(PcStateNames.IDLE, new MovementTarget(Context.Position));
 				return;
 			}
 			lootContainer.BeingLooted = true;
@@ -47,7 +47,7 @@ public class PcStateLooting : PcState
 		{
 			Timer = 0;
 			GimmeTheLoot();
-			ChangeState(PcStateNames.IDLE);
+			ChangeState(PcStateNames.IDLE, new MovementTarget(Context.Position));
 		}
 	}
 

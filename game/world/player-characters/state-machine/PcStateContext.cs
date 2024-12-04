@@ -2,7 +2,6 @@ using Godot;
 
 public class PcStateContext
 {
-	public Area3D TargetDetector { get; }
 	public NavigationAgent3D NavigationAgent { get; }
 	public PcAnimationTree PcAnimationTree { get; }
 	public Vector3 Position
@@ -26,7 +25,6 @@ public class PcStateContext
 		PC = pc;
 		InventoryManager = inventoryManager;
 		
-		TargetDetector = pc.GetNode<Area3D>("%TargetDetector");
 		NavigationAgent = pc.GetNode<NavigationAgent3D>("%NavigationAgent3D");
 		PcAnimationTree = pc.GetNode<PcAnimationTree>("%AnimationTree");
 	}

@@ -13,7 +13,6 @@ Duration = 30.0
 script = ExtResource("1_kewsa")
 Reusable = false
 Effects = [SubResource("Resource_dit1a")]
-Amount = 1
 ItemRarity = 100
 Tags = [1]
 Name = "Painkiller"

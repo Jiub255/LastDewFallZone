@@ -1,12 +1,9 @@
-using System;
 using Godot;
 
 public class PcStateMovement : PcState
 {
-	public Action<float> Move;
-	
 	public MovementTarget MovementTarget { get; private set; }
-	
+
 	// TODO: Get this info from pc stats eventually? Or just have everyone move the same?
 	private float MaxSpeed { get; set; } = 7f;
 	private float Acceleration { get; set; } = 50f;
@@ -24,39 +21,21 @@ public class PcStateMovement : PcState
 
 	public override void PhysicsProcessUnselected(float delta)
 	{
-		Move?.Invoke(delta);
+		Move(delta);
 	}
 
 	public override void PhysicsProcessSelected(float delta)
 	{
-		Move?.Invoke(delta);
+		Move(delta);
 	}
 
-	public override void EnterState(object target)
+	public override void EnterState(MovementTarget target)
 	{
-		if (target is MovementTarget movementTarget)
-		{
-			MovementTarget = movementTarget;
-			Context.NavigationAgent.TargetPosition = movementTarget.TargetPosition;
-			this.PrintDebug($"Move target position: {Context.NavigationAgent.TargetPosition}");
-			switch (movementTarget.Target)
-			{
-				case null:
-					Move = MoveTowardPoint;
-					break;
-				case LootContainer:
-					Move = MoveTowardLoot;
-					break;
-				/* case Enemy:
-					Move = MoveTowardEnemy;
-					break; */
-				default:
-					GD.PushWarning($"MovementTarget.Target's type isn't null, LootContainer, or Enemy");
-					break;
-			}
-		}
+		MovementTarget = target;
+		Context.NavigationAgent.TargetPosition = target.TargetPosition;
+		this.PrintDebug($"Move target position: {Context.NavigationAgent.TargetPosition}");
 	}
-	
+
 	public override void ExitState() {}
 	public override void ProcessUnselected(float delta) {}
 	public override void ProcessSelected(float delta) {}
@@ -66,39 +45,35 @@ public class PcStateMovement : PcState
 		float blendAmount = Mathf.Clamp(Context.Speed / MaxSpeed, 0, 1);
 		Context.PcAnimationTree.Set(BlendAmountPath, blendAmount);
 	}
-	
-	private void MoveTowardPoint(float delta)
+
+	private void Move(float delta)
 	{
 		if (DestinationReached())
 		{
-			ChangeState(PcStateNames.IDLE);
+			PcStateNames stateName;
+			switch (MovementTarget.Target)
+			{
+				case null:
+					stateName = PcStateNames.IDLE;
+					break;
+				case LootContainer:
+					stateName = PcStateNames.LOOTING;
+					break;
+				case Enemy:
+					stateName = PcStateNames.COMBAT;
+					break;
+				default:
+					GD.PushWarning("MovementTarget.Target's type isn't null, LootContainer, or Enemy");
+					stateName = PcStateNames.IDLE;
+					break;
+			}
+			ChangeState(stateName, MovementTarget);
 			return;
 		}
 		Animate();
 		MoveAndRotate(delta);
 	}
-	
-	private void MoveTowardLoot(float delta)
-	{
-		if (DestinationReached())
-		{
-			ChangeState(PcStateNames.LOOTING, MovementTarget.Target);
-			return;
-		}
-		Animate();
-		MoveAndRotate(delta);
-	}
-	
-	/* private void MoveTowardEnemy(float delta)
-	{
-		if (DestinationReached())
-		{
-			// TODO: Change to Combat.
-			return;
-		}
-		throw new NotImplementedException();
-	} */
-	
+
 	private bool DestinationReached()
 	{
 		bool navFinished = Context.NavigationAgent.IsNavigationFinished();

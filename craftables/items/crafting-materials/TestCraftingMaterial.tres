@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("1_a5u7i")
 Reusable = true
-Amount = 1
 ItemRarity = 100
 Tags = [4]
 Name = "ergba"

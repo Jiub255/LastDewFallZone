@@ -56,19 +56,22 @@ public partial class ClickHandler : RayCast3D
 				break;
 			// Enemy
 			case 4:
-				// TODO: How to handle enemy click?
+				Enemy enemy = (Enemy)collider;
+				MovementTarget movementTargetEnemy = new(enemy.Position, enemy);
+				OnClickedMoveTarget?.Invoke(movementTargetEnemy);
+				this.PrintDebug($"Clicked enemy");
 				break;
 			// Loot
 			case 8:
 				LootContainer lootContainer = (LootContainer)collider;
-				MovementTarget movementTarget = new MovementTarget(lootContainer.LootingPosition, lootContainer);
-				OnClickedMoveTarget?.Invoke(movementTarget);
+				MovementTarget movementTargetLoot = new MovementTarget(lootContainer.LootingPosition, lootContainer);
+				OnClickedMoveTarget?.Invoke(movementTargetLoot);
 				this.PrintDebug($"Clicked loot");
 				break;
 			// Ground
 			case 16:
-				MovementTarget movementTarget2 = new MovementTarget(collisionPoint);
-				OnClickedMoveTarget?.Invoke(movementTarget2);
+				MovementTarget movementTargetGround = new MovementTarget(collisionPoint);
+				OnClickedMoveTarget?.Invoke(movementTargetGround);
 				this.PrintDebug($"Clicked ground at {collisionPoint}");
 				break;
 		}

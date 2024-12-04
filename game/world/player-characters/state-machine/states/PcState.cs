@@ -2,7 +2,7 @@ using System;
 
 public abstract class PcState
 {
-	public event Action<PcStateNames, object> OnChangeState;
+	public event Action<PcStateNames, MovementTarget> OnChangeState;
 	
 	protected PcStateContext Context { get; private set; }
 	protected string BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
@@ -12,15 +12,14 @@ public abstract class PcState
 		Context = context;
 	}
 
-	// TODO: Pass MovementTarget in instead? Then just check MovementTarget.Target instead of target?
-	public abstract void EnterState(object target = null);
+	public abstract void EnterState(MovementTarget target);
 	public abstract void ExitState();
 	public abstract void ProcessUnselected(float delta);
 	public abstract void PhysicsProcessUnselected(float delta);
 	public abstract void ProcessSelected(float delta);
 	public abstract void PhysicsProcessSelected(float delta);
 	
-	protected void ChangeState(PcStateNames stateName, object target = null)
+	protected void ChangeState(PcStateNames stateName, MovementTarget target)
 	{
 		OnChangeState?.Invoke(stateName, target);
 	}

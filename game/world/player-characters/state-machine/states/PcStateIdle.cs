@@ -2,7 +2,7 @@ public class PcStateIdle : PcState
 {
 	public PcStateIdle(PcStateContext context) : base(context) {}
 
-	public override void EnterState(object target)
+	public override void EnterState(MovementTarget target)
 	{
 		Context.PcAnimationTree.Set(BlendAmountPath, 0);
 	}

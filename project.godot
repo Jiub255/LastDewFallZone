@@ -42,6 +42,7 @@ folder_colors={
 "res://game/": "yellow",
 "res://game/UI/": "blue",
 "res://game/world/": "purple",
+"res://game/world/enemies/": "teal",
 "res://game/world/player-characters/": "green",
 "res://unused-assets/": "gray",
 "res://useful-extra-stuff/": "red"

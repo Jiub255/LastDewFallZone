@@ -1,18 +1,31 @@
+using System;
 using System.Collections.Generic;
 
 public class PcHealth
 {
-	private const int MAX_INJURY = 100;
+	public event Action OnPainChanged;
 	
-	private int Injury { get; set; }
+	private const int MAX_INJURY = 100;
+
+	private int _injury;
+	
+	private int Injury
+	{
+		get => _injury;
+		set
+		{
+			_injury = value;
+			OnPainChanged?.Invoke();
+		}
+	}
 	
 	// TODO: Have high pain affect your stats negatively.
-	// Do it a way that makes sense.
+	// Do it in a way that makes sense.
 	public int Pain
 	{
 		get
 		{
-			int pain = Injury;
+			int pain = _injury;
 			foreach (Relief relief in Reliefs)
 			{
 				pain -= relief.Amount;
@@ -36,6 +49,7 @@ public class PcHealth
 			Duration = duration;
 		}
 	}
+	
 	private List<Relief> Reliefs { get; set; } = new List<Relief>();
 	
 	public PcHealth() {}
@@ -48,6 +62,7 @@ public class PcHealth
 			if (relief.Duration < 0)
 			{
 				Reliefs.Remove(relief);
+				OnPainChanged?.Invoke();
 			}
 		}
 	}
@@ -65,5 +80,6 @@ public class PcHealth
 	public void RelievePain(int amount, float duration)
 	{
 		Reliefs.Add(new Relief(amount, duration));
+		OnPainChanged?.Invoke();
 	}
 }

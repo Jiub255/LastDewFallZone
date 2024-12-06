@@ -1,66 +1,50 @@
 using Godot;
 
-public class PcStateContext
+namespace Lastdew
 {
-	public NavigationAgent3D NavigationAgent { get; }
-	public PcAnimationTree PcAnimationTree { get; }
-	public Vector3 Position
+	public class PcStateContext
 	{
-		get => PC.Position;
-	}
-	public Vector3 GlobalPosition
-	{
-		get => PC.GlobalPosition;
-	}
-	public float Speed
-	{
-		get => PC.Velocity.Length();
-	}
-	public InventoryManager InventoryManager { get; }
-	
-	private PlayerCharacter PC { get; }
-	
-	public PcStateContext(PlayerCharacter pc, InventoryManager inventoryManager)
-	{
-		PC = pc;
-		InventoryManager = inventoryManager;
-		
-		NavigationAgent = pc.GetNode<NavigationAgent3D>("%NavigationAgent3D");
-		PcAnimationTree = pc.GetNode<PcAnimationTree>("%AnimationTree");
-	}
-	
-	public void Move(Vector3 velocity)
-	{
-		PC.Velocity = velocity;
-		PC.MoveAndSlide();
-	}
-	
-	public void RotateToward(Vector3 nextPosition, float turnAmount)
-	{
-		Vector3 lookTarget = new(
-			nextPosition.X,
-			PC.GlobalPosition.Y,
-			nextPosition.Z);
-		Vector3 directionToTarget = (lookTarget - PC.GlobalPosition).Normalized();
-		Vector3 forward = PC.GlobalTransform.Basis.Z.Normalized();
-		
-		float angleToTarget = Mathf.RadToDeg(forward.AngleTo(directionToTarget));
-		
-		// Check to make sure not rotating the long way around.
-		// Cross product is perpendicular to forward and directionToTarget, so it points up or down.
-		Vector3 cross = forward.Cross(directionToTarget);
-		// If it points down (dot product < 0), then the angle's sign needs to flip. 
-		if (cross.Dot(Vector3.Up) < 0)
+		public NavigationAgent3D NavigationAgent { get; }
+		public PcAnimationTree PcAnimationTree { get; }
+		public Vector3 Position
 		{
-			angleToTarget = -angleToTarget;
+			get => PC.Position;
 		}
-
-		float rotationAmount = Mathf.Min(Mathf.Abs(angleToTarget), turnAmount);
-		PC.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(rotationAmount * Mathf.Sign(angleToTarget)));
-	}
-	
-	public void Accelerate(Vector3 targetVelocity, float accelerationAmount)
-	{
-		NavigationAgent.Velocity = PC.Velocity.MoveToward(targetVelocity, accelerationAmount);
+		public Vector3 GlobalPosition
+		{
+			get => PC.GlobalPosition;
+		}
+		public float Speed
+		{
+			get => PC.Velocity.Length();
+		}
+		public InventoryManager InventoryManager { get; }
+		
+		private PlayerCharacter PC { get; }
+		
+		public PcStateContext(PlayerCharacter pc, InventoryManager inventoryManager)
+		{
+			PC = pc;
+			InventoryManager = inventoryManager;
+			
+			NavigationAgent = pc.GetNode<NavigationAgent3D>("%NavigationAgent3D");
+			PcAnimationTree = pc.GetNode<PcAnimationTree>("%AnimationTree");
+		}
+		
+		public void Move(Vector3 velocity)
+		{
+			PC.Velocity = velocity;
+			PC.MoveAndSlide();
+		}
+		
+		public void RotateToward(Vector3 nextPosition, float turnAmount)
+		{
+			PC.RotateToward(nextPosition, turnAmount);
+		}
+		
+		public void Accelerate(Vector3 targetVelocity, float accelerationAmount)
+		{
+			NavigationAgent.Velocity = PC.Velocity.MoveToward(targetVelocity, accelerationAmount);
+		}
 	}
 }

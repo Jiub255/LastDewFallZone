@@ -1,45 +1,42 @@
 using System;
 
-public class Timer
+namespace Lastdew
 {
-	public Action Action { get; set; }
-	public float Duration { get; set; }
-	
-	public Timer(Action action, float duration)
+	public class Timer
 	{
-		Action = action;
-		Duration = duration;
-	}
-	
-	public void Tick(float delta)
-	{
-		Duration -= delta;
-		if (Duration <= 0)
+		private double _timer;
+		private float _duration;
+		private Action _action;
+		private bool _repeating;
+		private bool _done;
+		
+		public Timer(Action action, float duration, bool repeating)
 		{
-			Action?.Invoke();
+			_timer = duration;
+			_duration = duration;
+			_action = action;
+			_repeating = repeating;
 		}
-	}
-}
-
-public class Timer<T>
-{
-	public Action<T> Action { get; set; }
-	public T Argument { get; set; }
-	public float Duration { get; set; }
-	
-	public Timer(Action<T> action, T argument, float duration)
-	{
-		Action = action;
-		Argument = argument;
-		Duration = duration;
-	}
-	
-	public void Tick(float delta)
-	{
-		Duration -= delta;
-		if (Duration <= 0)
+		
+		public void Tick(double delta)
 		{
-			Action?.Invoke(Argument);
+			if (_done)
+			{
+				return;
+			}
+			_timer -= delta;
+			if (_timer < 0)
+			{
+				_action?.Invoke();
+				if (_repeating)
+				{
+					_timer = _duration;
+				}
+				else
+				{
+					_done = true;
+				}
+			}
 		}
 	}
 }

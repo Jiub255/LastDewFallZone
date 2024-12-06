@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
-public class PcStateFactory
-{
+namespace Lastdew
+{	
+	public class PcStateFactory
+	{
+	}
 }

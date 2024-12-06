@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
-public partial class PauseMenu : CanvasLayer
-{
+namespace Lastdew
+{	
+	public partial class PauseMenu : CanvasLayer
+	{
+	}
 }

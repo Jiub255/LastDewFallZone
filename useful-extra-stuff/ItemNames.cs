@@ -1,4 +1,7 @@
-public static class ItemNames
-{
-	public const string HAMMER = "Hammer";
+
+namespace Lastdew
+{	public static class ItemNames
+	{
+		public const string HAMMER = "Hammer";
+	}
 }

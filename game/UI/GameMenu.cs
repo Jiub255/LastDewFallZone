@@ -1,41 +1,44 @@
 using Godot;
 
-public partial class GameMenu : CanvasLayer
-{
-	private CharacterTab Character { get; set; }
-
-	public override void _Ready()
+namespace Lastdew
+{	
+	public partial class GameMenu : CanvasLayer
 	{
-		base._Ready();
-		
-		Character = GetNode<CharacterTab>("%Character");
-	}
+		private CharacterTab Character { get; set; }
 	
-	public void Initialize(InventoryManager inventoryManager)
-	{
-		Character.Initialize(inventoryManager);
-	}
-
-	public override void _Input(InputEvent @event)
-	{
-		base._Input(@event);
-		
-		if (@event.IsActionPressed(InputNames.GAME_MENU))
+		public override void _Ready()
 		{
-			if (!Visible)
+			base._Ready();
+			
+			Character = GetNode<CharacterTab>("%Character");
+		}
+		
+		public void Initialize(InventoryManager inventoryManager)
+		{
+			Character.Initialize(inventoryManager);
+		}
+	
+		public override void _Input(InputEvent @event)
+		{
+			base._Input(@event);
+			
+			if (@event.IsActionPressed(InputNames.GAME_MENU))
 			{
-				Character.PopulateInventoryUI();
-				Show();
+				if (!Visible)
+				{
+					Character.PopulateInventoryUI();
+					Show();
+				}
+				else
+				{
+					Hide();
+				}
+				//Visible = !Visible;
 			}
-			else
+			if (@event.IsActionPressed(InputNames.EXIT_MENU))
 			{
 				Hide();
 			}
-			//Visible = !Visible;
-		}
-		if (@event.IsActionPressed(InputNames.EXIT_MENU))
-		{
-			Hide();
 		}
 	}
 }

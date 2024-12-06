@@ -1,7 +1,10 @@
-public enum PcStateNames
-{
-	IDLE,
-	MOVEMENT,
-	LOOTING,
-	COMBAT,
+
+namespace Lastdew
+{	public enum PcStateNames
+	{
+		IDLE,
+		MOVEMENT,
+		LOOTING,
+		COMBAT,
+	}
 }

@@ -6,6 +6,8 @@ namespace Lastdew
 	{
 		private ClickHandler ClickHandler { get; set; }
 		private PcManager PcManager { get; set; }
+		// TODO: Just for testing for now, probably have a different setup eventually.
+		private EnemySpawner EnemySpawner { get; set; }
 		private Hud Hud { get; set; }
 		private GameMenu GameMenu { get; set; }
 		private PauseMenu PauseMenu { get; set; }
@@ -17,6 +19,7 @@ namespace Lastdew
 			Camera camera = GetNode<Camera>("%CameraRig");
 			ClickHandler = camera.ClickHandler;
 			PcManager = GetNode<PcManager>("%PcManager");
+			EnemySpawner = GetNode<EnemySpawner>("%EnemySpawner");
 			Hud = GetNode<Hud>("%HUD");
 			GameMenu = GetNode<GameMenu>("%GameMenu");
 			PauseMenu = GetNode<PauseMenu>("%PauseMenu");
@@ -24,6 +27,7 @@ namespace Lastdew
 			InventoryManager inventoryManager = new();
 			MissionTeamData missionTeamData = new MissionTeamData(new int[] { 0, 1, });
 			PcManager.Initialize(missionTeamData, inventoryManager);
+			EnemySpawner.Initialize(missionTeamData);
 			Hud.Setup(missionTeamData);
 			GameMenu.Initialize(inventoryManager);
 			

@@ -7,12 +7,6 @@ namespace Lastdew
 		private PcStateMachine StateMachine { get; set; }
 		public PcHealth Health { get; private set; }
 	
-		public override void _Ready()
-		{
-			base._Ready();
-	
-		}
-		
 		public void Initialize(InventoryManager inventoryManager)
 		{
 			PcStateContext context = new(this, inventoryManager);
@@ -49,6 +43,19 @@ namespace Lastdew
 		public void MoveTo(MovementTarget movementTarget)
 		{
 			StateMachine.ChangeState(PcStateNames.MOVEMENT, movementTarget);
+		}
+		
+		public void GetHit(Enemy attackingEnemy, int damage)
+		{
+			//StateMachine.ChangeState(PcStateNames.COMBAT, new MovementTarget(Vector3.Zero, attackingEnemy));
+			// TODO: Take damage, animation, other stuff?
+			StateMachine.GetHit(attackingEnemy);
+			Health.TakeDamage(damage);
+		}
+		
+		public void HitEnemy()
+		{
+			StateMachine.HitEnemy();
 		}
 		
 		public void ExitTree()

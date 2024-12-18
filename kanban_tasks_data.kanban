@@ -41,7 +41,8 @@
 				"bf15db14-19e6-4fa8-a2db-08c9d7486a3f",
 				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
-				"228e8416-52d5-45df-b6cd-4f75e4f02bc9"
+				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
+				"30d813ed-f012-4fd7-b422-8ed68af1b530"
 			]
 		},
 		{
@@ -185,7 +186,7 @@
 		{
 			"uuid": "5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
 			"title": "Combat State and Substates",
-			"description": "How to set up combat?\nFor melee, have the two characters that are fighting stop at roughly arms length from each other, then just trade hit/get hit animations on a timer.\nFor ranged weapons, just have the attacker shoot on a timer while the enemy walks toward them. Move away automatically when enemy gets close? Or switch to melee?\n",
+			"description": "How to set up combat?\nJust have each enemy/pc have an attack timer and have the actual animation tied to the hit, so whoever gets hit reacts. Might be easier to set up. Also easier to handle multiple enemies at once. The other way wouldn't work.\nFor ranged weapons, just have the attacker shoot on a timer while the enemy walks toward them. Move away automatically when enemy gets close? Or switch to melee? Or just keep shooting at close range until you move them?\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -353,6 +354,13 @@
 			"title": "Pass MovementTarget into ChangeState instead of object.",
 			"description": "Then just check movementTarget.Target where you would check object target.\nSeems cleaner, doesn't really matter probably. But might be able to consolidate the move methods in movement state.",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "30d813ed-f012-4fd7-b422-8ed68af1b530",
+			"title": "Game state machine?",
+			"description": "States:\n\tHome\n\tHome-defense\n\tScavenging\n\tMenus?\n\nCould pipe input in specific ways depending on which state. Might be a clean way to deal with different inputs for different scenarios.\n\nOr, maybe just put inputs on the objects they affect, like in the pc states, and have whichever scene is active dictate the \"game state\". For menus, just disable player input while they're open? ",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

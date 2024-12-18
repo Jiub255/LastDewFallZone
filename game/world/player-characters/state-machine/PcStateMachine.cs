@@ -1,3 +1,4 @@
+using Godot;
 using System.Collections.Generic;
 
 namespace Lastdew
@@ -40,6 +41,24 @@ namespace Lastdew
 			CurrentState?.ExitState();
 			CurrentState = StatesByEnum[stateName];
 			CurrentState?.EnterState(target);
+		}
+		
+		public void HitEnemy()
+		{
+			if (CurrentState is PcStateCombat combat)
+			{
+				combat.HitEnemy();
+			}
+		}
+		
+		public void GetHit(Enemy enemy)
+		{
+			if (CurrentState is not PcStateCombat)
+			{
+				ChangeState(PcStateNames.COMBAT, new MovementTarget(Vector3.Zero, enemy));
+			}
+			PcStateCombat combat = (PcStateCombat)CurrentState;
+			combat.GetHit();
 		}
 	
 		public void ExitTree()

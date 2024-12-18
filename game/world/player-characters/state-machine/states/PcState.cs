@@ -8,6 +8,10 @@ namespace Lastdew
 		
 		protected PcStateContext Context { get; private set; }
 		protected string BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
+		/// <summary>
+		/// TODO: Get this from PC weapon/stats eventually.
+		/// </summary>
+		protected float AttackRadius { get; } = 1f;
 		
 		public PcState(PcStateContext context)
 		{

@@ -13,7 +13,6 @@ namespace Lastdew
 		private Viewport Viewport { get; set; }
 		private Camera3D Camera { get; set; }
 	
-	
 		public override void _Ready()
 		{
 			base._Ready();
@@ -66,13 +65,13 @@ namespace Lastdew
 				// Loot
 				case 8:
 					LootContainer lootContainer = (LootContainer)collider;
-					MovementTarget movementTargetLoot = new MovementTarget(lootContainer.LootingPosition, lootContainer);
+					MovementTarget movementTargetLoot = new(lootContainer.LootingPosition, lootContainer);
 					OnClickedMoveTarget?.Invoke(movementTargetLoot);
 					this.PrintDebug($"Clicked loot");
 					break;
 				// Ground
 				case 16:
-					MovementTarget movementTargetGround = new MovementTarget(collisionPoint);
+					MovementTarget movementTargetGround = new(collisionPoint);
 					OnClickedMoveTarget?.Invoke(movementTargetGround);
 					this.PrintDebug($"Clicked ground at {collisionPoint}");
 					break;

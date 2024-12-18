@@ -1,6 +1,7 @@
 
 namespace Lastdew
-{	public class PcStateLooting : PcState
+{	
+	public class PcStateLooting : PcState
 	{
 		public PcStateLooting(PcStateContext context) : base(context) {}
 		

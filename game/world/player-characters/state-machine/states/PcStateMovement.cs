@@ -4,7 +4,7 @@ namespace Lastdew
 {
 	public class PcStateMovement : PcState
 	{
-		private const float RECALCULATION_DISTANCE_SQUARED = 4.0f;
+		private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
 		
 		public MovementTarget MovementTarget { get; private set; }
 	
@@ -47,10 +47,13 @@ namespace Lastdew
 			{
 				Context.NavigationAgent.TargetPosition = target.TargetPosition;
 			}
-			this.PrintDebug($"Move target position: {Context.NavigationAgent.TargetPosition}");
+			//this.PrintDebug($"Move target position: {Context.NavigationAgent.TargetPosition}");
 		}
 	
-		public override void ExitState() {}
+		public override void ExitState()
+		{
+			Context.PcAnimationTree.Set(BlendAmountPath, 0);
+		}
 		public override void ProcessUnselected(float delta) {}
 		public override void ProcessSelected(float delta) {}
 	
@@ -76,6 +79,10 @@ namespace Lastdew
 						break;
 				}
 				ChangeState(stateName, MovementTarget);
+				if (stateName != PcStateNames.IDLE)
+				{
+					// TODO: Face PC toward target. Just instantaneously for now, can do a tween/lerp later.
+				}
 				return;
 			}
 			Animate();

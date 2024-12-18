@@ -35,6 +35,7 @@ namespace Lastdew
 		
 		public void HitEnemy()
 		{
+			this.PrintDebug("HitEnemy called");
 			// Play enemy get hit animation
 			// Take enemy health
 			Target.GetHit(AttackPower);
@@ -45,6 +46,7 @@ namespace Lastdew
 			// Play PC get hit animation
 			Context.PcAnimationTree.Set("parameters/conditions/GettingHit", true);
 			Context.PcAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/GettingHit", false);
+			this.PrintDebug("Combat state GetHit called");
 		}
 
 		private void Fight(float delta)
@@ -59,10 +61,10 @@ namespace Lastdew
 	
 		private void Attack()
 		{
+			this.PrintDebug($"Pc attack called");
 			// Play PC attack animation
 			Context.PcAnimationTree.Set("parameters/conditions/Attacking", true);
 			Context.PcAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/Attacking", false);
-			this.PrintDebug($"Pc attack called");
 		}
 	}
 }

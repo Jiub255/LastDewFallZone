@@ -47,12 +47,12 @@ namespace Lastdew
 		
 		public void GetHit(Enemy attackingEnemy, int damage)
 		{
-			//StateMachine.ChangeState(PcStateNames.COMBAT, new MovementTarget(Vector3.Zero, attackingEnemy));
-			// TODO: Take damage, animation, other stuff?
+			this.PrintDebug($"PC GetHit called");
 			StateMachine.GetHit(attackingEnemy);
 			Health.TakeDamage(damage);
 		}
 		
+		// Called from animation method track
 		public void HitEnemy()
 		{
 			StateMachine.HitEnemy();

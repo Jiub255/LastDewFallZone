@@ -27,13 +27,16 @@
 			"title": "NOTES",
 			"tasks": [
 				"df44855f-0478-45ba-8998-406d91aa1eb7",
-				"83757feb-77db-46c7-a1ac-e076ea02903b"
+				"83757feb-77db-46c7-a1ac-e076ea02903b",
+				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25"
 			]
 		},
 		{
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "TODO",
 			"tasks": [
+				"32eafed9-d72c-419c-b15f-690c3e0b0518",
+				"99a74741-f3a9-450e-a0a4-444bacae30fc",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"da6960b9-4241-48f4-8e32-984ebd5dba84",
 				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
@@ -49,8 +52,6 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"99a74741-f3a9-450e-a0a4-444bacae30fc",
-				"32eafed9-d72c-419c-b15f-690c3e0b0518",
 				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
 				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a"
 			]
@@ -68,16 +69,10 @@
 				"eaff06f8-c4f7-413c-900c-a3f123827109",
 				"3af156aa-638b-4f09-8350-b29b7b01dc94",
 				"d7a31fbe-729d-4f2a-8ce7-f2171670c81e",
-				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
 				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1",
 				"0afa5a6c-d5e9-4dfe-ac09-ecdc7e7709d3",
 				"9daea93f-3636-4d98-85de-f920c2f61f3c"
 			]
-		},
-		{
-			"uuid": "a3e911b2-ee4c-42db-84bc-2ce8e4e7017a",
-			"title": "BUGS",
-			"tasks": []
 		},
 		{
 			"uuid": "58e832d9-b0c0-48ff-970d-0b94fc413b14",
@@ -89,6 +84,11 @@
 				"489d060a-da4b-42e5-a578-3d40940c7958",
 				"dffc8eab-7892-4f42-a5c9-64fee165246f"
 			]
+		},
+		{
+			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
+			"title": "BUGS",
+			"tasks": []
 		}
 	],
 	"tasks": [
@@ -370,11 +370,11 @@
 				"22b5bdc8-f0fd-4898-a5a2-6a3fa87d04dd"
 			],
 			[
-				"35398ea1-69e0-486b-bafd-d8ad72565c5f",
-				"a3e911b2-ee4c-42db-84bc-2ce8e4e7017a"
+				"35398ea1-69e0-486b-bafd-d8ad72565c5f"
 			],
 			[
-				"07e4bee6-492d-441d-a2c0-7a8198384f07"
+				"07e4bee6-492d-441d-a2c0-7a8198384f07",
+				"3071f079-a9b4-4847-aa51-c2e1412b8bcb"
 			],
 			[
 				"4aeb1722-9a02-459d-81af-f17bb7d9e014",

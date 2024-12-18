@@ -42,7 +42,7 @@ namespace Lastdew
 			CurrentState = StatesByEnum[stateName];
 			CurrentState?.EnterState(target);
 		}
-		
+	
 		public void HitEnemy()
 		{
 			if (CurrentState is PcStateCombat combat)
@@ -51,12 +51,13 @@ namespace Lastdew
 			}
 			else
 			{
-				GD.PushWarning("PC not in combat state.");
+				GD.PushWarning($"PC not in combat state. Current state is {CurrentState.GetType()}");
 			}
 		}
-		
+	
 		public void GetHit(Enemy enemy)
 		{
+			this.PrintDebug($"State machine GetHit called");
 			if (CurrentState is not PcStateCombat)
 			{
 				ChangeState(PcStateNames.COMBAT, new MovementTarget(Vector3.Zero, enemy));

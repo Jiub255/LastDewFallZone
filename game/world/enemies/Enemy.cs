@@ -5,8 +5,8 @@ namespace Lastdew
 	public partial class Enemy : CharacterBody3D
 	{
 		// TODO: Start with simple test class. Don't bother with state machine and health component and stuff yet.
-		private const float RECALCULATION_DISTANCE_SQUARED = 4.0f;
-		private const float A_LITTLE_BIT = 0.1f;
+		private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
+		private const float A_LITTLE_BIT = 1.25f;
 		
 		private enum EnemyState 
 		{
@@ -17,8 +17,8 @@ namespace Lastdew
 
 		private int Health { get; set; } = 3;
 		private int Attack { get; } = 1;
-		private float MaxSpeed { get; } = 7f;
-		private float Acceleration { get; } = 50f;
+		private float MaxSpeed { get; } = 4f;
+		private float Acceleration { get; } = 35f;
 		private float TurnSpeed { get; } = 360f;
 		private float AttackRadius { get; } = 1f;
 		private PlayerCharacter Target { get; set; }
@@ -77,11 +77,12 @@ namespace Lastdew
 				EnemyAnimationTree.Set("parameters/conditions/GettingHit", true);
 				EnemyAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/GettingHit", false);
 			}
+			this.PrintDebug($"Enemy GetHit called");
 		}
 		
+		// Called from animation method track
 		public void HitTarget()
 		{
-			// Called from animation method track
 			Target.GetHit(this, Attack);
 		}
 		
@@ -99,10 +100,17 @@ namespace Lastdew
 			{
 				this.PrintDebug($"Enemy moving to combat state.");
 				State = EnemyState.COMBAT;
+				EnemyAnimationTree.Set(BlendAmountPath, 0);
 				return;
 			}
 			Animate();
 			MoveAndRotate(delta);
+		}
+
+		private void Animate()
+		{
+			float blendAmount = Mathf.Clamp(Velocity.Length() / MaxSpeed, 0, 1);
+			EnemyAnimationTree.Set(BlendAmountPath, blendAmount);
 		}
 
 		private void MoveAndRotate(float delta)
@@ -117,12 +125,6 @@ namespace Lastdew
 		private void Accelerate(Vector3 targetVelocity, float accelerationAmount)
 		{
 			NavigationAgent.Velocity = Velocity.MoveToward(targetVelocity, accelerationAmount);
-		}
-
-		private void Animate()
-		{
-			float blendAmount = Mathf.Clamp(Velocity.Length() / MaxSpeed, 0, 1);
-			EnemyAnimationTree.Set(BlendAmountPath, blendAmount);
 		}
 		
 		private void ActuallyMove(Vector3 safeVelocity)
@@ -143,7 +145,6 @@ namespace Lastdew
 			AttackTimer -= delta;
 			if (AttackTimer < 0)
 			{
-				// Reset timer.
 				AttackTimer = TimeBetweenAttacks;
 				
 				// Attack animation (Calls HitTarget from animation)
@@ -156,14 +157,15 @@ namespace Lastdew
 		
 		private bool WithinRangeOfEnemy()
 		{
-			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
-			return distanceSquared <= AttackRadius * AttackRadius - A_LITTLE_BIT;
+			return NavigationAgent.IsNavigationFinished();
+			/*float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
+			return distanceSquared <= AttackRadius * AttackRadius  - A_LITTLE_BIT */;
 		}
 		
 		private bool OutOfRangeOfEnemy()
 		{
 			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
-			return distanceSquared > AttackRadius * AttackRadius + A_LITTLE_BIT;
+			return distanceSquared > AttackRadius * AttackRadius  + A_LITTLE_BIT ;
 		}
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()

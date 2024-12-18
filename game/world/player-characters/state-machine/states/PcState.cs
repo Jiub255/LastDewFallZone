@@ -17,7 +17,7 @@ namespace Lastdew
 		{
 			Context = context;
 		}
-	
+		
 		public abstract void EnterState(MovementTarget target);
 		public abstract void ExitState();
 		public abstract void ProcessUnselected(float delta);

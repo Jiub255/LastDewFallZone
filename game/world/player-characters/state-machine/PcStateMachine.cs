@@ -49,6 +49,10 @@ namespace Lastdew
 			{
 				combat.HitEnemy();
 			}
+			else
+			{
+				GD.PushWarning("PC not in combat state.");
+			}
 		}
 		
 		public void GetHit(Enemy enemy)

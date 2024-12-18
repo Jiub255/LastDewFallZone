@@ -6,6 +6,7 @@ namespace Lastdew
 	{
 		// TODO: Start with simple test class. Don't bother with state machine and health component and stuff yet.
 		private const float RECALCULATION_DISTANCE_SQUARED = 4.0f;
+		private const float A_LITTLE_BIT = 0.1f;
 		
 		private enum EnemyState 
 		{
@@ -26,7 +27,7 @@ namespace Lastdew
 		private Vector3 LastTargetPosition { get; set; }
 		private StringName BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
 		private float AttackTimer { get; set; }
-		private float TimeBetweenAttacks { get; } = 1f;
+		private float TimeBetweenAttacks { get; } = 3.5f;
 
 		public override void _Ready()
 		{
@@ -69,16 +70,18 @@ namespace Lastdew
 				Health = 0;
 				// TODO: Drop loot? Timer to disappear body?
 				EnemyAnimationTree.Set("parameters/conditions/Dead", true);
+				EnemyAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/Dead", false);
 			}
 			else
 			{
 				EnemyAnimationTree.Set("parameters/conditions/GettingHit", true);
+				EnemyAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/GettingHit", false);
 			}
 		}
 		
 		public void HitTarget()
 		{
-			// Hit target (Handled from animation method track)
+			// Called from animation method track
 			Target.GetHit(this, Attack);
 		}
 		
@@ -94,6 +97,7 @@ namespace Lastdew
 		{
 			if (WithinRangeOfEnemy())
 			{
+				this.PrintDebug($"Enemy moving to combat state.");
 				State = EnemyState.COMBAT;
 				return;
 			}
@@ -129,31 +133,37 @@ namespace Lastdew
 		
 		private void Fight(float delta)
 		{
-			// Count down attack timer.
+			if (OutOfRangeOfEnemy())
+			{
+				this.PrintDebug($"Enemy moving to movement state.");
+				State = EnemyState.MOVEMENT;
+				return;
+			}
+			
 			AttackTimer -= delta;
 			if (AttackTimer < 0)
 			{
-				// TODO: How to handle actual combat? Just have them trade hit/get hit animations?
-				// Then just take damage after each hit?
-				// Do this for now at least. 
 				// Reset timer.
 				AttackTimer = TimeBetweenAttacks;
-				// If target out of range, move back to movement state.
-				if (!WithinRangeOfEnemy())
-				{
-					State = EnemyState.MOVEMENT;
-				}
 				
-				// Attack animation
+				// Attack animation (Calls HitTarget from animation)
 				EnemyAnimationTree.Set("parameters/conditions/Attacking", true);
-				// If target dies, choose new target (nearest?) and move toward/attack them.
+				EnemyAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/Attacking", false);
 				
+				// TODO: If target dies, choose new target (nearest?) and move toward/attack them.
 			}
 		}
 		
 		private bool WithinRangeOfEnemy()
 		{
-			return GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition)) < AttackRadius * AttackRadius;
+			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
+			return distanceSquared <= AttackRadius * AttackRadius - A_LITTLE_BIT;
+		}
+		
+		private bool OutOfRangeOfEnemy()
+		{
+			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
+			return distanceSquared > AttackRadius * AttackRadius + A_LITTLE_BIT;
 		}
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()

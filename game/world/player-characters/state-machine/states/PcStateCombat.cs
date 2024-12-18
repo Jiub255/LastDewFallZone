@@ -1,10 +1,12 @@
+using Godot;
+
 namespace Lastdew
 {	
 	public partial class PcStateCombat : PcState
 	{
 		private Enemy Target { get; set; }
 		private int AttackPower { get; } = 1;
-		private float AttackDuration { get; } = 1f;
+		private float TimeBetweenAttacks { get; } = 2.3f;
 		private float Timer { get; set; }
 		
 		public PcStateCombat(PcStateContext context) : base(context) {}
@@ -42,6 +44,7 @@ namespace Lastdew
 		{
 			// Play PC get hit animation
 			Context.PcAnimationTree.Set("parameters/conditions/GettingHit", true);
+			Context.PcAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/GettingHit", false);
 		}
 
 		private void Fight(float delta)
@@ -49,7 +52,7 @@ namespace Lastdew
 			Timer -= delta;
 			if (Timer < 0)
 			{
-				Timer = AttackDuration;
+				Timer = TimeBetweenAttacks;
 				Attack();
 			}
 		}
@@ -58,6 +61,8 @@ namespace Lastdew
 		{
 			// Play PC attack animation
 			Context.PcAnimationTree.Set("parameters/conditions/Attacking", true);
+			Context.PcAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/Attacking", false);
+			this.PrintDebug($"Pc attack called");
 		}
 	}
 }

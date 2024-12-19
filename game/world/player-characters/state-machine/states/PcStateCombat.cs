@@ -8,14 +8,14 @@ namespace Lastdew
 	// Might make controls easier, ie no attack input while attacking or getting hit.
 	// Could just use PcState for the substates, then hold CurrentSubstate in this state, and run the processes through it. 
 	// Have change state stuff too obviously. 
-	public partial class PcStateCombat : PcState
+	public partial class PcStateCombat : PcState<PcStateNames>
 	{
 		private Enemy Target { get; set; }
 		private int AttackPower { get; } = 1;
 		private float TimeBetweenAttacks { get; } = 2.3f;
 		private float Timer { get; set; }
-		private PcState Substate { get; set; }
-		private Dictionary<PcCombatSubstateNames, PcState> StatesByEnum { get; } = new();
+		private PcState<PcCombatSubstateNames> Substate { get; set; }
+		private Dictionary<PcCombatSubstateNames, PcState<PcCombatSubstateNames>> StatesByEnum { get; } = new();
 		
 		public PcStateCombat(PcStateContext context) : base(context)
 		{
@@ -33,16 +33,34 @@ namespace Lastdew
 		public override void ProcessSelected(float delta)
 		{
 			Fight(delta);
+			Substate.ProcessSelected(delta);
 		}
 	
 		public override void ProcessUnselected(float delta)
 		{
 			Fight(delta);
+			Substate.ProcessUnselected(delta);
 		}
 
-		public override void PhysicsProcessSelected(float delta) {}
-		public override void PhysicsProcessUnselected(float delta) {}
+		public override void PhysicsProcessSelected(float delta)
+		{
+			Substate.PhysicsProcessSelected(delta);
+		}
+		
+		public override void PhysicsProcessUnselected(float delta)
+		{
+			Substate.PhysicsProcessUnselected(delta);
+		}
+		
 		public override void ExitState() {}
+		
+		public void ExitTree()
+		{			
+			foreach (PcState<PcCombatSubstateNames> state in StatesByEnum.Values)
+			{
+				state.OnChangeState -= ChangeSubstate;
+			}
+		}
 		
 		public void HitEnemy()
 		{
@@ -95,18 +113,18 @@ namespace Lastdew
 			StatesByEnum.Add(PcCombatSubstateNames.ATTACKING, attacking);
 			StatesByEnum.Add(PcCombatSubstateNames.GETTING_HIT, gettingHit);
 			
-			foreach (PcState state in StatesByEnum.Values)
+			foreach (PcState<PcCombatSubstateNames> state in StatesByEnum.Values)
 			{
 				state.OnChangeState += ChangeSubstate;
 			}
 		}
-
-		// TODO: How to handle different enum here? Add names to old enum? No.
-		// Make new combatsubstate class? Probably.
-		// OR, make PcState generic and take an enum? Might work?
-		private void ChangeSubstate(PcStateNames names, MovementTarget target)
+		
+		private void ChangeSubstate(PcCombatSubstateNames substateName, MovementTarget target)
 		{
-			throw new NotImplementedException();
+			this.PrintDebug($"Changing to {substateName}");
+			Substate?.ExitState();
+			Substate = StatesByEnum[substateName];
+			Substate?.EnterState(target);
 		}
 	}
 }

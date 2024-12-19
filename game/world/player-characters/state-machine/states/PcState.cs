@@ -2,9 +2,9 @@ using System;
 
 namespace Lastdew
 {	
-	public abstract class PcState
+	public abstract class PcState<T> where T : Enum
 	{
-		public event Action<PcStateNames, MovementTarget> OnChangeState;
+		public event Action<T, MovementTarget> OnChangeState;
 		
 		protected PcStateContext Context { get; private set; }
 		protected string BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
@@ -25,7 +25,7 @@ namespace Lastdew
 		public abstract void ProcessSelected(float delta);
 		public abstract void PhysicsProcessSelected(float delta);
 		
-		protected void ChangeState(PcStateNames stateName, MovementTarget target)
+		protected void ChangeState(T stateName, MovementTarget target)
 		{
 			OnChangeState?.Invoke(stateName, target);
 		}

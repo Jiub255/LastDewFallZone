@@ -1,6 +1,6 @@
 
 namespace Lastdew
-{	public class PcStateIdle : PcState
+{	public class PcStateIdle : PcState<PcStateNames>
 	{
 		public PcStateIdle(PcStateContext context) : base(context) {}
 	

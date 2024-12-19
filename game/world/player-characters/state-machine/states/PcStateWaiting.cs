@@ -3,7 +3,7 @@ using System;
 
 namespace Lastdew
 {
-	public partial class PcStateWaiting : PcState
+	public partial class PcStateWaiting : PcState<PcCombatSubstateNames>
 	{
 		public PcStateWaiting(PcStateContext context) : base(context)
 		{

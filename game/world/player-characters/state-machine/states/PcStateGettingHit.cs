@@ -2,7 +2,7 @@ using System;
 
 namespace Lastdew
 {
-	public partial class PcStateGettingHit : PcState
+	public partial class PcStateGettingHit : PcState<PcCombatSubstateNames>
 	{
 		public PcStateGettingHit(PcStateContext context) : base(context)
 		{

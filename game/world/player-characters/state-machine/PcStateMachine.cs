@@ -5,8 +5,8 @@ namespace Lastdew
 {	
 	public class PcStateMachine
 	{
-		private PcState CurrentState { get; set; }
-		private Dictionary<PcStateNames, PcState> StatesByEnum { get; } = new();
+		private PcState<PcStateNames> CurrentState { get; set; }
+		private Dictionary<PcStateNames, PcState<PcStateNames>> StatesByEnum { get; } = new();
 	
 		public PcStateMachine(PcStateContext context)
 		{
@@ -68,10 +68,12 @@ namespace Lastdew
 	
 		public void ExitTree()
 		{
-			foreach (PcState state in StatesByEnum.Values)
+			foreach (PcState<PcStateNames> state in StatesByEnum.Values)
 			{
 				state.OnChangeState -= ChangeState;
 			}
+			PcStateCombat combat = (PcStateCombat)StatesByEnum[PcStateNames.COMBAT];
+			combat.ExitTree();
 		}
 	
 		private void SetupStates(PcStateContext context)
@@ -87,7 +89,7 @@ namespace Lastdew
 			StatesByEnum.Add(PcStateNames.LOOTING, looting);
 			StatesByEnum.Add(PcStateNames.COMBAT, combat);
 			
-			foreach (PcState state in StatesByEnum.Values)
+			foreach (PcState<PcStateNames> state in StatesByEnum.Values)
 			{
 				state.OnChangeState += ChangeState;
 			}

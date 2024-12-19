@@ -2,7 +2,7 @@ using System;
 
 namespace Lastdew
 {
-	public partial class PcStateAttacking : PcState
+	public partial class PcStateAttacking : PcState<PcCombatSubstateNames>
 	{
 		public PcStateAttacking(PcStateContext context) : base(context)
 		{

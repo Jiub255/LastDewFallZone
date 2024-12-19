@@ -186,7 +186,7 @@
 		{
 			"uuid": "5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
 			"title": "Combat State and Substates",
-			"description": "How to set up combat?\nJust have each enemy/pc have an attack timer and have the actual animation tied to the hit, so whoever gets hit reacts. Might be easier to set up. Also easier to handle multiple enemies at once. The other way wouldn't work.\nFor ranged weapons, just have the attacker shoot on a timer while the enemy walks toward them. Move away automatically when enemy gets close? Or switch to melee? Or just keep shooting at close range until you move them?\n",
+			"description": "How to set up combat?\nJust have each enemy/pc have an attack timer and have the actual animation tied to the hit, so whoever gets hit reacts. Might be easier to set up. Also easier to handle multiple enemies at once. The other way wouldn't work.\nFor ranged weapons, just have the attacker shoot on a timer while the enemy walks toward them. Move away automatically when enemy gets close? Or switch to melee? Or just keep shooting at close range until you move them?\n\nSetting up combat substates:\n\tWaiting\n\tAttacking\n\tGettingHit\nSet the appropriate parameters in AnimationTree script on enter/exit each state. Combat state acts like a substate machine.\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},

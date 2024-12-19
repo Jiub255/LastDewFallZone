@@ -1,4 +1,3 @@
-
 namespace Lastdew
 {	public enum PcStateNames
 	{

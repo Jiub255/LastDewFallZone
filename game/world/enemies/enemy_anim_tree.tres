@@ -77,4 +77,4 @@ states/End/position = Vector2(1260, 100)
 states/movement_blend_tree/node = SubResource("AnimationNodeBlendTree_dtgwf")
 states/movement_blend_tree/position = Vector2(482, 100)
 transitions = ["Start", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_2bfu7"), "movement_blend_tree", "CharacterArmature|HitRecieve_2", SubResource("AnimationNodeStateMachineTransition_tc05m"), "movement_blend_tree", "CharacterArmature|Punch_Right", SubResource("AnimationNodeStateMachineTransition_xx5ty"), "CharacterArmature|Punch_Right", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_xn0mi"), "CharacterArmature|HitRecieve_2", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_rd2sc"), "movement_blend_tree", "CharacterArmature|Death", SubResource("AnimationNodeStateMachineTransition_n6mfe"), "CharacterArmature|Punch_Right", "CharacterArmature|HitRecieve_2", SubResource("AnimationNodeStateMachineTransition_ij08v"), "CharacterArmature|Punch_Right", "CharacterArmature|Death", SubResource("AnimationNodeStateMachineTransition_lui3a")]
-graph_offset = Vector2(147, -43)
+graph_offset = Vector2(57, -76)

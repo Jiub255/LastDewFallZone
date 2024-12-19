@@ -39,6 +39,10 @@ namespace Lastdew
 			NavigationAgent.Connect(
 				NavigationAgent3D.SignalName.VelocityComputed,
 				Callable.From((Vector3 safeVelocity) => ActuallyMove(safeVelocity)));
+				
+			EnemyAnimationTree.Connect(
+				AnimationTree.SignalName.AnimationFinished,
+				Callable.From((string animationName) => ResetAnimationParameter(animationName)));
 		}
 		
 		public override void _Process(double delta)
@@ -70,12 +74,18 @@ namespace Lastdew
 				Health = 0;
 				// TODO: Drop loot? Timer to disappear body?
 				EnemyAnimationTree.Set("parameters/conditions/Dead", true);
-				EnemyAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/Dead", false);
+				/* EnemyAnimationTree.CallDeferred(
+					AnimationTree.MethodName.Set,
+					"parameters/conditions/Dead",
+					false); */
 			}
 			else
 			{
 				EnemyAnimationTree.Set("parameters/conditions/GettingHit", true);
-				EnemyAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/GettingHit", false);
+				/* EnemyAnimationTree.CallDeferred(
+					AnimationTree.MethodName.Set,
+					"parameters/conditions/GettingHit",
+					false); */
 			}
 			this.PrintDebug($"Enemy GetHit called");
 		}
@@ -149,7 +159,10 @@ namespace Lastdew
 				
 				// Attack animation (Calls HitTarget from animation)
 				EnemyAnimationTree.Set("parameters/conditions/Attacking", true);
-				EnemyAnimationTree.CallDeferred(AnimationTree.MethodName.Set, "parameters/conditions/Attacking", false);
+				/* EnemyAnimationTree.CallDeferred(
+					AnimationTree.MethodName.Set,
+					"parameters/conditions/Attacking",
+					false); */
 				
 				// TODO: If target dies, choose new target (nearest?) and move toward/attack them.
 			}
@@ -182,6 +195,18 @@ namespace Lastdew
 		{
 			Vector3 direction = (GlobalPosition - targetPosition).Normalized();
 			return targetPosition + direction * AttackRadius;
+		}
+		
+		private void ResetAnimationParameter(string animationName)
+		{
+			if (animationName == "HitRecieve") // Match the "GetHit" animation's name.
+			{
+				EnemyAnimationTree.Set("parameters/conditions/GettingHit", false);
+			}
+			else if (animationName == "Punch_Right")
+			{
+				EnemyAnimationTree.Set("parameters/conditions/Attacking", false);
+			}
 		}
 	}
 }

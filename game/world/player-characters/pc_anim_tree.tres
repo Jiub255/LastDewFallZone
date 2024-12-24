@@ -56,11 +56,11 @@ advance_expression = "!Looting"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qtej1"]
 advance_mode = 2
-advance_condition = &"GettingHit"
+advance_expression = "GettingHit"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_snpex"]
 advance_mode = 2
-advance_condition = &"Attacking"
+advance_expression = "Attacking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_41fle"]
 switch_mode = 2
@@ -72,7 +72,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0poms"]
 advance_mode = 2
-advance_condition = &"GettingHit"
+advance_expression = "GettingHit"
 
 [resource]
 states/CharacterArmature|HitRecieve/node = SubResource("AnimationNodeAnimation_r5poh")

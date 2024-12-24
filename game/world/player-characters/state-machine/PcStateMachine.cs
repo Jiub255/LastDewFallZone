@@ -5,8 +5,8 @@ namespace Lastdew
 {	
 	public class PcStateMachine
 	{
-		private PcState<PcStateNames> CurrentState { get; set; }
-		private Dictionary<PcStateNames, PcState<PcStateNames>> StatesByEnum { get; } = new();
+		private PcState CurrentState { get; set; }
+		private Dictionary<PcStateNames, PcState> StatesByEnum { get; } = new();
 	
 		public PcStateMachine(PcStateContext context)
 		{
@@ -55,20 +55,20 @@ namespace Lastdew
 			}
 		}
 	
-		public void GetHit(Enemy enemy)
+		public void GetHit(Enemy attacker)
 		{
 			this.PrintDebug($"State machine GetHit called");
 			if (CurrentState is not PcStateCombat)
 			{
-				ChangeState(PcStateNames.COMBAT, new MovementTarget(Vector3.Zero, enemy));
+				ChangeState(PcStateNames.COMBAT, new MovementTarget(Vector3.Zero, attacker));
 			}
 			PcStateCombat combat = (PcStateCombat)CurrentState;
-			combat.GetHit();
+			combat.GetHit(attacker);
 		}
 	
 		public void ExitTree()
 		{
-			foreach (PcState<PcStateNames> state in StatesByEnum.Values)
+			foreach (PcState state in StatesByEnum.Values)
 			{
 				state.OnChangeState -= ChangeState;
 			}
@@ -89,7 +89,7 @@ namespace Lastdew
 			StatesByEnum.Add(PcStateNames.LOOTING, looting);
 			StatesByEnum.Add(PcStateNames.COMBAT, combat);
 			
-			foreach (PcState<PcStateNames> state in StatesByEnum.Values)
+			foreach (PcState state in StatesByEnum.Values)
 			{
 				state.OnChangeState += ChangeState;
 			}

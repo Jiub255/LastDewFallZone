@@ -2,7 +2,7 @@ using Godot;
 
 namespace Lastdew
 {
-	public class PcStateMovement : PcState<PcStateNames>
+	public class PcStateMovement : PcState
 	{
 		private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
 		

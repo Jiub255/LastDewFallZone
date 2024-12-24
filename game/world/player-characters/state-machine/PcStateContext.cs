@@ -29,10 +29,6 @@ namespace Lastdew
 			
 			NavigationAgent = pc.GetNode<NavigationAgent3D>("%NavigationAgent3D");
 			PcAnimationTree = pc.GetNode<PcAnimationTree>("%AnimationTree");
-			
-			PcAnimationTree.Connect(
-				AnimationTree.SignalName.AnimationFinished,
-				Callable.From((string animationName) => ResetAnimationParameter(animationName)));
 		}
 		
 		public void Move(Vector3 velocity)
@@ -49,18 +45,6 @@ namespace Lastdew
 		public void Accelerate(Vector3 targetVelocity, float accelerationAmount)
 		{
 			NavigationAgent.Velocity = PC.Velocity.MoveToward(targetVelocity, accelerationAmount);
-		}
-		
-		private void ResetAnimationParameter(string animationName)
-		{
-			if (animationName == "HitRecieve") // Match the "GetHit" animation's name.
-			{
-				PcAnimationTree.Set("parameters/conditions/GettingHit", false);
-			}
-			else if (animationName == "Punch_Right")
-			{
-				PcAnimationTree.Set("parameters/conditions/Attacking", false);
-			}
 		}
 	}
 }

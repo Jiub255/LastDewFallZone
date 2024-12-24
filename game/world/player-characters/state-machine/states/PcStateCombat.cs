@@ -1,130 +1,90 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 namespace Lastdew
 {
-	// TODO: Split this state into substates? Like attacking, (combat) idle, getting hit, dying?
-	// Might make controls easier, ie no attack input while attacking or getting hit.
-	// Could just use PcState for the substates, then hold CurrentSubstate in this state, and run the processes through it. 
-	// Have change state stuff too obviously. 
-	public partial class PcStateCombat : PcState<PcStateNames>
+	public partial class PcStateCombat : PcState
 	{
-		private Enemy Target { get; set; }
-		private int AttackPower { get; } = 1;
-		private float TimeBetweenAttacks { get; } = 2.3f;
-		private float Timer { get; set; }
-		private PcState<PcCombatSubstateNames> Substate { get; set; }
-		private Dictionary<PcCombatSubstateNames, PcState<PcCombatSubstateNames>> StatesByEnum { get; } = new();
+		private PcCombatSubstate CurrentSubstate { get; set; }
+		private Dictionary<PcCombatSubstateNames, PcCombatSubstate> StatesByEnum { get; } = new();
 		
 		public PcStateCombat(PcStateContext context) : base(context)
 		{
-			SetupStates(context);
+			SetupStates(context.PcAnimationTree);
 		}
 	
 		public override void EnterState(MovementTarget target)
 		{
 			if (target.Target is Enemy enemy)
 			{
-				Target = enemy;
+				ChangeSubstate(PcCombatSubstateNames.WAITING, enemy);
 			}
 		}
 
 		public override void ProcessSelected(float delta)
 		{
-			Fight(delta);
-			Substate.ProcessSelected(delta);
+			CurrentSubstate.ProcessSelected(delta);
 		}
 	
 		public override void ProcessUnselected(float delta)
 		{
-			Fight(delta);
-			Substate.ProcessUnselected(delta);
+			CurrentSubstate.ProcessUnselected(delta);
 		}
 
-		public override void PhysicsProcessSelected(float delta)
-		{
-			Substate.PhysicsProcessSelected(delta);
-		}
+		public override void PhysicsProcessSelected(float delta) {}
 		
-		public override void PhysicsProcessUnselected(float delta)
-		{
-			Substate.PhysicsProcessUnselected(delta);
-		}
+		public override void PhysicsProcessUnselected(float delta) {}
 		
 		public override void ExitState() {}
 		
 		public void ExitTree()
 		{			
-			foreach (PcState<PcCombatSubstateNames> state in StatesByEnum.Values)
+			foreach (PcCombatSubstate state in StatesByEnum.Values)
 			{
-				state.OnChangeState -= ChangeSubstate;
+				state.OnChangeSubstate -= ChangeSubstate;
 			}
 		}
 		
 		public void HitEnemy()
 		{
-			this.PrintDebug("HitEnemy called");
-			// Play enemy get hit animation
-			// Take enemy health
-			Target.GetHit(AttackPower);
-		}
-		
-		public void GetHit()
-		{
-			// Play PC get hit animation
-			Context.PcAnimationTree.Set("parameters/conditions/GettingHit", true);
-			/* Context.PcAnimationTree.CallDeferred(
-				AnimationTree.MethodName.Set,
-				"parameters/conditions/GettingHit",
-				false); */
-			this.PrintDebug("Combat state GetHit called");
-		}
-
-		private void Fight(float delta)
-		{
-			Timer -= delta;
-			if (Timer < 0)
+			if (CurrentSubstate is PcStateAttacking attack)
 			{
-				Timer = TimeBetweenAttacks;
-				Attack();
+				attack.HitEnemy();
+			}
+			else
+			{
+				GD.PushWarning($"Not in attacking substate. Current substate: {CurrentSubstate.GetType()}");
 			}
 		}
-	
-		private void Attack()
+		
+		public void GetHit(Enemy attacker)
 		{
-			this.PrintDebug($"Pc attack called");
-			// Play PC attack animation
-			Context.PcAnimationTree.Set("parameters/conditions/Attacking", true);
-			/* Context.PcAnimationTree.CallDeferred(
-				AnimationTree.MethodName.Set,
-				"parameters/conditions/Attacking",
-				false); */
+			CurrentSubstate.GetHit(attacker);
 		}
 	
-		private void SetupStates(PcStateContext context)
+		private void SetupStates(PcAnimationTree pcAnimationTree)
 		{
-			PcStateWaiting waiting = new(context);
-			PcStateAttacking attacking = new(context);
-			PcStateGettingHit gettingHit = new(context);
+			PcStateWaiting waiting = new(pcAnimationTree);
+			PcStateAttacking attacking = new(pcAnimationTree);
+			PcStateGettingHit gettingHit = new(pcAnimationTree);
 			
 			// Populate states dictionary
 			StatesByEnum.Add(PcCombatSubstateNames.WAITING, waiting);
 			StatesByEnum.Add(PcCombatSubstateNames.ATTACKING, attacking);
 			StatesByEnum.Add(PcCombatSubstateNames.GETTING_HIT, gettingHit);
 			
-			foreach (PcState<PcCombatSubstateNames> state in StatesByEnum.Values)
+			foreach (PcCombatSubstate state in StatesByEnum.Values)
 			{
-				state.OnChangeState += ChangeSubstate;
+				state.OnChangeSubstate += ChangeSubstate;
 			}
 		}
 		
-		private void ChangeSubstate(PcCombatSubstateNames substateName, MovementTarget target)
+		private void ChangeSubstate(PcCombatSubstateNames substateName, Enemy target)
 		{
 			this.PrintDebug($"Changing to {substateName}");
-			Substate?.ExitState();
-			Substate = StatesByEnum[substateName];
-			Substate?.EnterState(target);
+			CurrentSubstate?.ExitState();
+			CurrentSubstate = StatesByEnum[substateName];
+			CurrentSubstate?.EnterState(target);
 		}
 	}
 }

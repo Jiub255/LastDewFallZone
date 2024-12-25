@@ -69,14 +69,17 @@ namespace Lastdew
 			}
 		}
 		
-		public void TakeDamage(int damage)
+		/// <returns>true if Injury at max.</returns>
+		public bool TakeDamage(int damage)
 		{
 			Injury += damage;
 			if (Injury > MAX_INJURY)
 			{
 				Injury = MAX_INJURY;
 				// TODO: Become incapacitated until healing at home base. Or die?
+				return true;
 			}
+			return false;
 		}
 		
 		public void RelievePain(int amount, float duration)

@@ -4,6 +4,7 @@ namespace Lastdew
 	{
 		WAITING,
 		ATTACKING,
-		GETTING_HIT
+		GETTING_HIT,
+		INCAPACITATED
 	}
 }

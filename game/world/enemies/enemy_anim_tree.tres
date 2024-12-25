@@ -41,12 +41,8 @@ node_connections = [&"idle_move", 0, &"idle", &"idle_move", 1, &"walk_run", &"ou
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tc05m"]
-advance_mode = 2
-advance_condition = &"GettingHit"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xx5ty"]
-advance_mode = 2
-advance_condition = &"Attacking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xn0mi"]
 switch_mode = 2
@@ -55,16 +51,10 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n6mfe"]
-advance_mode = 2
-advance_condition = &"Dead"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ij08v"]
-advance_mode = 2
-advance_condition = &"GettingHit"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lui3a"]
-advance_mode = 2
-advance_condition = &"GettingHit"
 
 [resource]
 states/CharacterArmature|Death/node = SubResource("AnimationNodeAnimation_ya5jp")

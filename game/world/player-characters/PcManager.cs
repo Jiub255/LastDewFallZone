@@ -56,7 +56,6 @@ namespace Lastdew
 				CallDeferred(MethodName.AddChild, pc);
 				pc.Position += Vector3.Right * index * 3;
 				pc.Initialize(inventoryManager);
-				this.PrintDebug($"PC Position: {pc.Position}");
 				MissionTeamData.UnselectedPcs.Add(pc);
 			}
 		}
@@ -73,11 +72,11 @@ namespace Lastdew
 			}
 			MissionTeamData.UnselectedPcs.Remove(pc);
 			MissionTeamData.SelectedPc = pc;
-			this.PrintDebug($"Selected PC: {MissionTeamData.SelectedPc.Name}");
+			/* this.PrintDebug($"Selected PC: {MissionTeamData.SelectedPc.Name}");
 			foreach (PlayerCharacter unselected in MissionTeamData.UnselectedPcs)
 			{
 				this.PrintDebug($"Unselected PC: {unselected.Name}");
-			}
+			} */
 		}
 		
 		public void DeselectPc()

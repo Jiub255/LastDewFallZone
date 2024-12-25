@@ -2,12 +2,22 @@ namespace Lastdew
 {
 	public partial class PcStateWaiting : PcCombatSubstate
 	{
-		public PcStateWaiting(PcAnimationTree pcAnimationTree) : base(pcAnimationTree) {}
+		public PcStateWaiting(PcStateContext context) : base(context) {}
 
-		public override void EnterState(Enemy target) {}
+		public override void ProcessSelected(float delta)
+		{
+			base.ProcessSelected(delta);
+			
+			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+		}
 
-		public override void ExitState() {}
-
+		public override void ProcessUnselected(float delta)
+		{
+			base.ProcessUnselected(delta);
+			
+			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+		}
+		
 		public override void GetHit(Enemy attacker)
 		{
 			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT, attacker);

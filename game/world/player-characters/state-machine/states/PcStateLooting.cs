@@ -21,6 +21,7 @@ namespace Lastdew
 				lootContainer.BeingLooted = true;
 				Context.PcAnimationTree.Looting = true;
 				Timer = lootContainer.LootDuration;
+				// TODO: Face container.
 			}
 		}
 	

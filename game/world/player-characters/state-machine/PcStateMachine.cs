@@ -37,7 +37,7 @@ namespace Lastdew
 	
 		public void ChangeState(PcStateNames stateName, MovementTarget target)
 		{
-			this.PrintDebug($"Changing to {stateName}");
+			//this.PrintDebug($"Changing to {stateName}");
 			CurrentState?.ExitState();
 			CurrentState = StatesByEnum[stateName];
 			CurrentState?.EnterState(target);
@@ -55,15 +55,14 @@ namespace Lastdew
 			}
 		}
 	
-		public void GetHit(Enemy attacker)
+		public void GetHit(Enemy attacker, bool incapacitated)
 		{
-			this.PrintDebug($"State machine GetHit called");
 			if (CurrentState is not PcStateCombat)
 			{
 				ChangeState(PcStateNames.COMBAT, new MovementTarget(Vector3.Zero, attacker));
 			}
 			PcStateCombat combat = (PcStateCombat)CurrentState;
-			combat.GetHit(attacker);
+			combat.GetHit(attacker, incapacitated);
 		}
 	
 		public void ExitTree()

@@ -6,15 +6,21 @@ namespace Lastdew
 	{
 		public event Action<PcCombatSubstateNames, Enemy> OnChangeSubstate;
 		
+		protected PcStateContext Context { get; set; }
 		protected PcAnimationTree PcAnimationTree { get; set; }
 		protected Enemy Target { get; set; }
 		protected float TimeBetweenAttacks { get; } = 2.3f;
 		protected float Timer { get; set; }
+		/// <summary>
+		/// Degrees per second
+		/// </summary>
+		protected float TurnSpeed { get; set; } = 360f;
 		
 		
-		protected PcCombatSubstate(PcAnimationTree pcAnimationTree)
+		protected PcCombatSubstate(PcStateContext context)
 		{
-			PcAnimationTree = pcAnimationTree;
+			Context = context;
+			PcAnimationTree = context.PcAnimationTree;
 		}
 
 		public virtual void EnterState(Enemy target)
@@ -31,8 +37,6 @@ namespace Lastdew
 		{
 			Tick(delta);
 		}
-
-		public abstract void ExitState();
 		
 		public abstract void GetHit(Enemy attacker);
 		

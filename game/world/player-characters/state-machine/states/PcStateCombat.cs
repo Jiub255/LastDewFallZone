@@ -10,13 +10,14 @@ namespace Lastdew
 		
 		public PcStateCombat(PcStateContext context) : base(context)
 		{
-			SetupStates(context.PcAnimationTree);
+			SetupStates(context);
 		}
 	
 		public override void EnterState(MovementTarget target)
 		{
 			if (target.Target is Enemy enemy)
 			{
+				//this.PrintDebug($"Entering combat state, target: {enemy.Name}");
 				ChangeSubstate(PcCombatSubstateNames.WAITING, enemy);
 			}
 		}
@@ -57,21 +58,30 @@ namespace Lastdew
 			}
 		}
 		
-		public void GetHit(Enemy attacker)
+		public void GetHit(Enemy attacker, bool incapacitated)
 		{
-			CurrentSubstate.GetHit(attacker);
+			if (incapacitated)
+			{
+				ChangeSubstate(PcCombatSubstateNames.INCAPACITATED, attacker);
+			}
+			else
+			{
+				CurrentSubstate.GetHit(attacker);
+			}
 		}
 	
-		private void SetupStates(PcAnimationTree pcAnimationTree)
+		private void SetupStates(PcStateContext context)
 		{
-			PcStateWaiting waiting = new(pcAnimationTree);
-			PcStateAttacking attacking = new(pcAnimationTree);
-			PcStateGettingHit gettingHit = new(pcAnimationTree);
+			PcStateWaiting waiting = new(context);
+			PcStateAttacking attacking = new(context);
+			PcStateGettingHit gettingHit = new(context);
+			PcStateIncapacitated incapacitated = new(context);
 			
 			// Populate states dictionary
 			StatesByEnum.Add(PcCombatSubstateNames.WAITING, waiting);
 			StatesByEnum.Add(PcCombatSubstateNames.ATTACKING, attacking);
 			StatesByEnum.Add(PcCombatSubstateNames.GETTING_HIT, gettingHit);
+			StatesByEnum.Add(PcCombatSubstateNames.INCAPACITATED, incapacitated);
 			
 			foreach (PcCombatSubstate state in StatesByEnum.Values)
 			{
@@ -81,8 +91,7 @@ namespace Lastdew
 		
 		private void ChangeSubstate(PcCombatSubstateNames substateName, Enemy target)
 		{
-			this.PrintDebug($"Changing to {substateName}");
-			CurrentSubstate?.ExitState();
+			//this.PrintDebug($"Changing to {substateName}, target: {target.Name}");
 			CurrentSubstate = StatesByEnum[substateName];
 			CurrentSubstate?.EnterState(target);
 		}

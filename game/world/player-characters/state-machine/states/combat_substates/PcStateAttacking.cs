@@ -4,31 +4,39 @@ namespace Lastdew
 {
 	public partial class PcStateAttacking : PcCombatSubstate
 	{
+		private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		private int AttackPower { get; } = 1;
+		private AnimationNodeStateMachinePlayback StateMachine { get; set; }
 		
-		public PcStateAttacking(PcAnimationTree pcAnimationTree) : base(pcAnimationTree)
+		public PcStateAttacking(PcStateContext context) : base(context)
 		{
-			pcAnimationTree.Connect(
+			context.PcAnimationTree.Connect(
 				AnimationTree.SignalName.AnimationFinished,
 				Callable.From((string animationName) => OnAnimationFinished(animationName)));
+			StateMachine = (AnimationNodeStateMachinePlayback)PcAnimationTree.Get("parameters/playback");
+		}
+
+		public override void ProcessSelected(float delta)
+		{
+			base.ProcessSelected(delta);
+			
+			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+		}
+
+		public override void ProcessUnselected(float delta)
+		{
+			base.ProcessUnselected(delta);
+			
+			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
 		}
 
 		public override void EnterState(Enemy target)
 		{
 			base.EnterState(target);
 
-			// TODO: Use advance expressions instead of conditions, and put Attacking and GettingHit bools in
-			// PcAnimationTree? These don't seem to be working, probably misunderstanding somehting
-			PcAnimationTree.Attacking = true;
-			//PcAnimationTree.Set("parameters/conditions/Attacking", true);
+			StateMachine.Travel(ATTACK_ANIM_NAME);
 		}
-
-		public override void ExitState()
-		{
-			PcAnimationTree.Attacking = false;
-			//PcAnimationTree.Set("parameters/conditions/Attacking", false);
-		}
-
+ 
 		public override void GetHit(Enemy attacker)
 		{
 			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT, attacker);
@@ -41,8 +49,7 @@ namespace Lastdew
 		
 		private void OnAnimationFinished(string animationName)
 		{
-			this.PrintDebug($"{animationName} finished.");
-			if (animationName == "Punch_Right")
+			if (animationName == ATTACK_ANIM_NAME)
 			{
 				ChangeSubstate(PcCombatSubstateNames.WAITING, Target);
 			}

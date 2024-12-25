@@ -47,9 +47,8 @@ namespace Lastdew
 		
 		public void GetHit(Enemy attackingEnemy, int damage)
 		{
-			this.PrintDebug($"PC GetHit called");
-			StateMachine.GetHit(attackingEnemy);
-			Health.TakeDamage(damage);
+			bool incapacitated = Health.TakeDamage(damage);
+			StateMachine.GetHit(attackingEnemy, incapacitated);
 		}
 		
 		// Called from animation method track

@@ -14,7 +14,7 @@ namespace Lastdew
 		/// <summary>
 		/// Degrees per second
 		/// </summary>
-		private float TurnSpeed { get; set; } = 360f;
+		protected float TurnSpeed { get; set; } = 360f;
 		private Vector3 LastTargetPosition { get; set; }
 	
 		public PcStateMovement(PcStateContext context) : base(context)

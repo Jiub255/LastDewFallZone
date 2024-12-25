@@ -7,11 +7,15 @@ namespace Lastdew
 		// TODO: Start with simple test class. Don't bother with state machine and health component and stuff yet.
 		private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
 		private const float A_LITTLE_BIT = 1.25f;
+		private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
+		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve_2";
+		private const string DEATH_ANIM_NAME = "CharacterArmature|Death";
 		
 		private enum EnemyState 
 		{
 			MOVEMENT,
-			COMBAT
+			COMBAT,
+			DEAD
 		}
 		private EnemyState State { get; set; } = EnemyState.MOVEMENT;
 
@@ -23,7 +27,8 @@ namespace Lastdew
 		private float AttackRadius { get; } = 1f;
 		private PlayerCharacter Target { get; set; }
 		private NavigationAgent3D NavigationAgent { get; set; }
-		private EnemyAnimationTree EnemyAnimationTree { get; set; }
+		private AnimationTree EnemyAnimationTree { get; set; }
+		private AnimationNodeStateMachinePlayback AnimStateMachine { get; set; }
 		private Vector3 LastTargetPosition { get; set; }
 		private StringName BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
 		private float AttackTimer { get; set; }
@@ -32,17 +37,15 @@ namespace Lastdew
 		public override void _Ready()
 		{
 			base._Ready();
-			
+
 			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
-			EnemyAnimationTree = GetNode<EnemyAnimationTree>("%AnimationTree");
-			
+			EnemyAnimationTree = GetNode<AnimationTree>("%AnimationTree");
+
 			NavigationAgent.Connect(
 				NavigationAgent3D.SignalName.VelocityComputed,
 				Callable.From((Vector3 safeVelocity) => ActuallyMove(safeVelocity)));
-				
-			EnemyAnimationTree.Connect(
-				AnimationTree.SignalName.AnimationFinished,
-				Callable.From((string animationName) => ResetAnimationParameter(animationName)));
+
+			AnimStateMachine = (AnimationNodeStateMachinePlayback)EnemyAnimationTree.Get("parameters/playback");
 		}
 		
 		public override void _Process(double delta)
@@ -51,7 +54,7 @@ namespace Lastdew
 			
 			if (State == EnemyState.MOVEMENT)
 			{
-				Move((float)delta);
+				MovementProcess((float)delta);
 			}
 			else if (State == EnemyState.COMBAT)
 			{
@@ -72,22 +75,14 @@ namespace Lastdew
 			if (Health <= 0)
 			{
 				Health = 0;
+				AnimStateMachine.Travel(DEATH_ANIM_NAME);
 				// TODO: Drop loot? Timer to disappear body?
-				EnemyAnimationTree.Set("parameters/conditions/Dead", true);
-				/* EnemyAnimationTree.CallDeferred(
-					AnimationTree.MethodName.Set,
-					"parameters/conditions/Dead",
-					false); */
+				State = EnemyState.DEAD;
 			}
 			else
 			{
-				EnemyAnimationTree.Set("parameters/conditions/GettingHit", true);
-				/* EnemyAnimationTree.CallDeferred(
-					AnimationTree.MethodName.Set,
-					"parameters/conditions/GettingHit",
-					false); */
+				AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 			}
-			this.PrintDebug($"Enemy GetHit called");
 		}
 		
 		// Called from animation method track
@@ -104,17 +99,18 @@ namespace Lastdew
 			LastTargetPosition = attackPosition;
 		}
 
-		private void Move(float delta)
+		private void MovementProcess(float delta)
 		{
 			if (WithinRangeOfEnemy())
 			{
-				this.PrintDebug($"Enemy moving to combat state.");
 				State = EnemyState.COMBAT;
 				EnemyAnimationTree.Set(BlendAmountPath, 0);
 				return;
 			}
 			Animate();
-			MoveAndRotate(delta);
+			Vector3 nextPosition = NavigationAgent.GetNextPathPosition();
+			Move(delta, nextPosition);
+			Rotate(delta, nextPosition);
 		}
 
 		private void Animate()
@@ -123,13 +119,15 @@ namespace Lastdew
 			EnemyAnimationTree.Set(BlendAmountPath, blendAmount);
 		}
 
-		private void MoveAndRotate(float delta)
+		private void Move(float delta, Vector3 nextPosition)
 		{
-			Vector3 nextPosition = NavigationAgent.GetNextPathPosition();
-			this.RotateToward(nextPosition, TurnSpeed * delta);
-			
 			Vector3 direction = (nextPosition - GlobalPosition).Normalized();
 			Accelerate(direction * MaxSpeed, Acceleration * delta);
+		}
+		
+		private void Rotate(float delta, Vector3 targetToFace)
+		{
+			this.RotateToward(targetToFace, TurnSpeed * delta);
 		}
 
 		private void Accelerate(Vector3 targetVelocity, float accelerationAmount)
@@ -147,10 +145,11 @@ namespace Lastdew
 		{
 			if (OutOfRangeOfEnemy())
 			{
-				this.PrintDebug($"Enemy moving to movement state.");
 				State = EnemyState.MOVEMENT;
 				return;
 			}
+
+			Rotate(delta, Target.GlobalPosition);
 			
 			AttackTimer -= delta;
 			if (AttackTimer < 0)
@@ -158,11 +157,7 @@ namespace Lastdew
 				AttackTimer = TimeBetweenAttacks;
 				
 				// Attack animation (Calls HitTarget from animation)
-				EnemyAnimationTree.Set("parameters/conditions/Attacking", true);
-				/* EnemyAnimationTree.CallDeferred(
-					AnimationTree.MethodName.Set,
-					"parameters/conditions/Attacking",
-					false); */
+				AnimStateMachine.Travel(ATTACK_ANIM_NAME);
 				
 				// TODO: If target dies, choose new target (nearest?) and move toward/attack them.
 			}
@@ -171,8 +166,6 @@ namespace Lastdew
 		private bool WithinRangeOfEnemy()
 		{
 			return NavigationAgent.IsNavigationFinished();
-			/*float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
-			return distanceSquared <= AttackRadius * AttackRadius  - A_LITTLE_BIT */;
 		}
 		
 		private bool OutOfRangeOfEnemy()
@@ -195,18 +188,6 @@ namespace Lastdew
 		{
 			Vector3 direction = (GlobalPosition - targetPosition).Normalized();
 			return targetPosition + direction * AttackRadius;
-		}
-		
-		private void ResetAnimationParameter(string animationName)
-		{
-			if (animationName == "HitRecieve") // Match the "GetHit" animation's name.
-			{
-				EnemyAnimationTree.Set("parameters/conditions/GettingHit", false);
-			}
-			else if (animationName == "Punch_Right")
-			{
-				EnemyAnimationTree.Set("parameters/conditions/Attacking", false);
-			}
 		}
 	}
 }

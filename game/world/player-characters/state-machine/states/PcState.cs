@@ -12,6 +12,10 @@ namespace Lastdew
 		/// TODO: Get this from PC weapon/stats eventually.
 		/// </summary>
 		protected float AttackRadius { get; } = 1f;
+		/// <summary>
+		/// Degrees per second
+		/// </summary>
+		protected float TurnSpeed { get; set; } = 360f;
 		
 		public PcState(PcStateContext context)
 		{

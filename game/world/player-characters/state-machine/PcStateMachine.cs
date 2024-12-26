@@ -43,11 +43,11 @@ namespace Lastdew
 			CurrentState?.EnterState(target);
 		}
 	
-		public void HitEnemy()
+		public void HitEnemy(PlayerCharacter attackingPC)
 		{
 			if (CurrentState is PcStateCombat combat)
 			{
-				combat.HitEnemy();
+				combat.HitEnemy(attackingPC);
 			}
 			else
 			{

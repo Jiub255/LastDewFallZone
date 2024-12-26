@@ -3,6 +3,9 @@ namespace Lastdew
 {	
 	public class PcStateLooting : PcState
 	{
+		private const string LOOTING_ANIM_NAME = "CharacterArmature|Loot";
+		private const string MOVEMENT_BLEND_TREE_NAME = "movement_blend_tree";
+		
 		public PcStateLooting(PcStateContext context) : base(context) {}
 		
 		public LootContainer LootContainer { get; private set; }
@@ -19,25 +22,26 @@ namespace Lastdew
 					return;
 				}
 				lootContainer.BeingLooted = true;
-				Context.PcAnimationTree.Looting = true;
+				Context.AnimStateMachine.Travel(LOOTING_ANIM_NAME);
 				Timer = lootContainer.LootDuration;
-				// TODO: Face container.
 			}
 		}
 	
 		public override void ExitState()
 		{
-			Context.PcAnimationTree.Looting = false;
 			LootContainer.BeingLooted = false;
+			Context.AnimStateMachine.Travel(MOVEMENT_BLEND_TREE_NAME);
 		}
 	
 		public override void ProcessUnselected(float delta)
 		{
+			Context.RotateToward(LootContainer.GlobalPosition, TurnSpeed * delta);
 			TickTimer(delta);
 		}
 	
 		public override void ProcessSelected(float delta)
 		{
+			Context.RotateToward(LootContainer.GlobalPosition, TurnSpeed * delta);
 			TickTimer(delta);
 		}
 	

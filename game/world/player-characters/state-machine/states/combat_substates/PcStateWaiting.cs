@@ -18,9 +18,9 @@ namespace Lastdew
 			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
 		}
 		
-		public override void GetHit(Enemy attacker)
+		public override void GetHit()
 		{
-			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT, attacker);
+			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT);
 		}
 
 		protected override void Tick(float delta)
@@ -36,7 +36,7 @@ namespace Lastdew
 	
 		private void Attack()
 		{
-			ChangeSubstate(PcCombatSubstateNames.ATTACKING, Target);
+			ChangeSubstate(PcCombatSubstateNames.ATTACKING);
 		}
 	}
 }

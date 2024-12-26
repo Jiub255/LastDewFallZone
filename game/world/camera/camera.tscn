@@ -11,7 +11,7 @@ script = ExtResource("1_1njid")
 ZoomSpeed = 20.0
 ZoomMinDistance = 5.0
 ZoomMaxDistance = 25.0
-ZoomDefaultDistance = 10.0
+ZoomDefaultDistance = 7.0
 
 [node name="OuterGimbal" type="Node3D" parent="."]
 unique_name_in_owner = true

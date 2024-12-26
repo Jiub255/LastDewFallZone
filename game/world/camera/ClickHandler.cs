@@ -27,24 +27,23 @@ namespace Lastdew
 			
 			if (Input.IsActionJustPressed(InputNames.SELECT))
 			{
-				(GodotObject, Vector3) collisionData = RaycastFromMouse(Viewport.GetMousePosition());
-				if (collisionData.Item1 != null)
+				GodotObject collisionObject = RaycastFromMouse(Viewport.GetMousePosition());
+				if (collisionObject != null)
 				{
-					HandleClick((CollisionObject3D)collisionData.Item1, collisionData.Item2);
+					HandleClick((CollisionObject3D)collisionObject);
 				}
 			}
 		}
 	
-		private (GodotObject, Vector3) RaycastFromMouse(Vector2 mousePosition)
+		private GodotObject RaycastFromMouse(Vector2 mousePosition)
 		{
 			Vector3 rayEnd = ToLocal(Camera.ProjectRayNormal(mousePosition) * RayLength);
 			TargetPosition = rayEnd;
 			ForceRaycastUpdate();
-			Vector3 collisionPoint = IsColliding() ? GetCollisionPoint() : Vector3.Zero;
-			return (GetCollider(), collisionPoint);
+			return GetCollider();
 		}
 	
-		private void HandleClick(CollisionObject3D collider, Vector3 collisionPoint)
+		private void HandleClick(CollisionObject3D collider)
 		{
 			uint layerIndex = collider.CollisionLayer;
 			
@@ -71,6 +70,7 @@ namespace Lastdew
 					break;
 				// Ground
 				case 16:
+					Vector3 collisionPoint = IsColliding() ? GetCollisionPoint() : Vector3.Zero;
 					MovementTarget movementTargetGround = new(collisionPoint);
 					OnClickedMoveTarget?.Invoke(movementTargetGround);
 					//this.PrintDebug($"Clicked ground at {collisionPoint}");

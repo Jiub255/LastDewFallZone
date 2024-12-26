@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://n4s23mnl518e"]
+[gd_scene load_steps=24 format=3 uid="uid://n4s23mnl518e"]
 
 [ext_resource type="Script" path="res://game/world/World.cs" id="1_l0n7t"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://game/world/camera/camera.tscn" id="2_bcky2"]
@@ -13,8 +13,8 @@
 [ext_resource type="Script" path="res://game/world/enemies/EnemySpawner.cs" id="11_d3w3s"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ekc5e"]
-vertices = PackedVector3Array(-24.5, 0.5, -5.5, -6.75, 0.5, -5.5, -6.5, 0.5, -6.25, -5.25, 0.5, -24.5, -24.5, 0.5, -24.5, -5, 0.5, -6.25, 2.75, 0.5, -6.25, 3, 0.5, -24.5, 4.25, 0.5, -6.25, 4.5, 0.5, -5.5, 24.5, 0.5, -5.5, 24.5, 0.5, -24.5, -5.25, 0.5, -3, -5, 0.5, -5, -6.5, 0.5, -5, -4.25, 0.5, -2.75, -24.5, 0.5, 24.5, -4.25, 0.5, 24.5, 4.25, 0.5, -5, 2.25, 0.5, 24.5, 24.5, 0.5, 24.5, 2.25, 0.5, -5, -3.25, 0.5, -5, -3, 0.5, -3)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 7), PackedInt32Array(8, 6, 7), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(10, 7, 11), PackedInt32Array(14, 13, 12), PackedInt32Array(0, 1, 14), PackedInt32Array(0, 14, 12), PackedInt32Array(12, 15, 0), PackedInt32Array(0, 15, 17), PackedInt32Array(0, 17, 16), PackedInt32Array(9, 10, 18), PackedInt32Array(18, 10, 20), PackedInt32Array(18, 20, 19), PackedInt32Array(19, 21, 18), PackedInt32Array(23, 22, 21), PackedInt32Array(17, 15, 23), PackedInt32Array(17, 23, 19), PackedInt32Array(19, 23, 21)]
+vertices = PackedVector3Array(-5.25, 0.5, -3, -5, 0.5, -5, -6.75, 0.5, -5.25, -12.5, 0.5, -2.5, -11.5, 0.5, -1.25, -4.75, 0.5, -2.75, -24.5, 0.5, -1, -14.25, 0.5, -1, -13.5, 0.5, -2.5, -6.5, 0.5, -6.25, -5, 0.5, -6.25, -5.25, 0.5, -24.5, -24.5, 0.5, -24.5, 2.75, 0.5, -6.25, 3, 0.5, -24.5, 4.25, 0.5, -6.25, 4.5, 0.5, -5.5, 24.5, 0.5, -5.5, 24.5, 0.5, -24.5, 4.25, 0.5, -5, 2.25, 0.5, 24.5, 24.5, 0.5, 24.5, 2.25, 0.5, -5, -3.25, 0.5, -5, -3, 0.5, -3.25, -2.75, 0.5, 24.5, -12.5, 0.5, 0.25, -3.25, 0.5, -2.75, -13.75, 0.5, 0, -24.5, 0.5, 24.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(0, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(2, 3, 9), PackedInt32Array(9, 3, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 11), PackedInt32Array(11, 6, 12), PackedInt32Array(10, 11, 13), PackedInt32Array(13, 11, 14), PackedInt32Array(15, 13, 14), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(17, 14, 18), PackedInt32Array(16, 17, 19), PackedInt32Array(19, 17, 21), PackedInt32Array(19, 21, 20), PackedInt32Array(20, 22, 19), PackedInt32Array(24, 23, 22), PackedInt32Array(25, 24, 20), PackedInt32Array(20, 24, 22), PackedInt32Array(5, 27, 4), PackedInt32Array(4, 27, 26), PackedInt32Array(26, 27, 25), PackedInt32Array(27, 24, 25), PackedInt32Array(6, 7, 28), PackedInt32Array(28, 26, 6), PackedInt32Array(6, 26, 29), PackedInt32Array(29, 26, 25)]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gbkjp"]
 size = Vector3(50, 1, 50)
@@ -47,6 +47,8 @@ Amount = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tksbp"]
 albedo_color = Color(0.359416, 0.220464, 0.150835, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_04881"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_l0n7t")
@@ -112,14 +114,31 @@ mesh = SubResource("BoxMesh_x6dq3")
 surface_material_override/0 = SubResource("StandardMaterial3D_tksbp")
 
 [node name="LootingSpot" type="Node3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]
-unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
+
+[node name="LootContainerTest2" type="StaticBody3D" parent="Environment/NavigationRegion3D/LootContainers"]
+transform = Transform3D(0.666819, 0, 0.74522, 0, 1, 0, -0.74522, 0, 0.666819, -12.9135, 0.5, -1.10959)
+collision_layer = 8
+collision_mask = 22
+script = ExtResource("3_wyfp0")
+Loot = [SubResource("Resource_0ebt0")]
+LootDuration = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest2"]
+shape = SubResource("BoxShape3D_04881")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest2"]
+mesh = SubResource("BoxMesh_x6dq3")
+surface_material_override/0 = SubResource("StandardMaterial3D_tksbp")
+
+[node name="LootingSpot" type="Node3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
 
 [node name="Buildings" type="Node3D" parent="Environment/NavigationRegion3D"]
 
 [node name="CameraRig" parent="." instance=ExtResource("2_bcky2")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-07, 1.98784, 13.963)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 7)
 
 [node name="PcManager" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -129,3 +148,4 @@ script = ExtResource("4_lkcuo")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.945521, 0, -14.6611)
 script = ExtResource("11_d3w3s")
+EnemiesToSpawn = 3

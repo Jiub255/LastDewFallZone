@@ -7,6 +7,7 @@ namespace Lastdew
 	{
 		private PcCombatSubstate CurrentSubstate { get; set; }
 		private Dictionary<PcCombatSubstateNames, PcCombatSubstate> StatesByEnum { get; } = new();
+		private Enemy Target { get; set; }
 		
 		public PcStateCombat(PcStateContext context) : base(context)
 		{
@@ -17,8 +18,8 @@ namespace Lastdew
 		{
 			if (target.Target is Enemy enemy)
 			{
-				//this.PrintDebug($"Entering combat state, target: {enemy.Name}");
-				ChangeSubstate(PcCombatSubstateNames.WAITING, enemy);
+				Target = enemy;
+				ChangeSubstate(PcCombatSubstateNames.WAITING);
 			}
 		}
 
@@ -46,11 +47,23 @@ namespace Lastdew
 			}
 		}
 		
-		public void HitEnemy()
+		public void HitEnemy(PlayerCharacter attackingPC)
 		{
-			if (CurrentSubstate is PcStateAttacking attack)
+			if (CurrentSubstate is PcStateAttacking attackState)
 			{
-				attack.HitEnemy();
+				bool targetKilled = attackState.HitEnemy(attackingPC);
+				if (targetKilled)
+				{
+					Enemy nearest = Context.FindNearestEnemy(Target);
+					if (nearest != null)
+					{
+						ChangeState(PcStateNames.MOVEMENT, new MovementTarget(nearest.GlobalPosition, nearest));
+					}
+					else
+					{
+						ChangeState(PcStateNames.IDLE, new MovementTarget());
+					}
+				}
 			}
 			else
 			{
@@ -62,11 +75,12 @@ namespace Lastdew
 		{
 			if (incapacitated)
 			{
-				ChangeSubstate(PcCombatSubstateNames.INCAPACITATED, attacker);
+				ChangeSubstate(PcCombatSubstateNames.INCAPACITATED);
 			}
 			else
 			{
-				CurrentSubstate.GetHit(attacker);
+				Target ??= attacker;
+				CurrentSubstate.GetHit();
 			}
 		}
 	
@@ -89,11 +103,10 @@ namespace Lastdew
 			}
 		}
 		
-		private void ChangeSubstate(PcCombatSubstateNames substateName, Enemy target)
+		private void ChangeSubstate(PcCombatSubstateNames substateName)
 		{
-			//this.PrintDebug($"Changing to {substateName}, target: {target.Name}");
 			CurrentSubstate = StatesByEnum[substateName];
-			CurrentSubstate?.EnterState(target);
+			CurrentSubstate?.EnterState(Target);
 		}
 	}
 }

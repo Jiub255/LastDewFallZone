@@ -69,22 +69,25 @@ namespace Lastdew
 			RecalculateTargetPositionIfTargetMovedEnough();
 		}
 		
-		public void GetHit(int damage)
+		/// <returns>true if hit killed enemy</returns>
+		public bool GetHit(int damage, PlayerCharacter attackingPC)
 		{
 			Health -= damage;
 			if (Health <= 0)
 			{
 				Health = 0;
-				AnimStateMachine.Travel(DEATH_ANIM_NAME);
-				// TODO: Drop loot? Timer to disappear body?
-				State = EnemyState.DEAD;
+				Die();
+				return true;
 			}
-			else
+			// TODO: Not sure if this does anything at the moment. When is Target null?
+			if (Target == null)
 			{
-				AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
+				Target = attackingPC;
 			}
+			AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
+			return false;
 		}
-		
+
 		// Called from animation method track
 		public void HitTarget()
 		{
@@ -97,6 +100,15 @@ namespace Lastdew
 			Vector3 attackPosition = AttackPosition(Target.GlobalPosition);
 			NavigationAgent.TargetPosition = attackPosition;
 			LastTargetPosition = attackPosition;
+		}
+
+		private void Die()
+		{
+			AnimStateMachine.Travel(DEATH_ANIM_NAME);
+			// TODO: Drop loot? Timer to disappear body?
+			State = EnemyState.DEAD;
+			CollisionLayer = 0;
+			NavigationAgent.AvoidanceEnabled = false;
 		}
 
 		private void MovementProcess(float delta)

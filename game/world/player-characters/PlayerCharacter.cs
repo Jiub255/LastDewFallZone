@@ -31,13 +31,13 @@ namespace Lastdew
 		
 		public void ProcessSelected(double delta)
 		{
-			StateMachine?.ProcessStateUnselected((float)delta);
+			StateMachine?.ProcessStateSelected((float)delta);
 			Health.ProcessRelief((float)delta);
 		}
 	
 		public void PhysicsProcessSelected(double delta)
 		{
-			StateMachine?.PhysicsProcessStateUnselected((float)delta);
+			StateMachine?.PhysicsProcessStateSelected((float)delta);
 		}
 		
 		public void MoveTo(MovementTarget movementTarget)
@@ -54,7 +54,7 @@ namespace Lastdew
 		// Called from animation method track
 		public void HitEnemy()
 		{
-			StateMachine.HitEnemy();
+			StateMachine.HitEnemy(this);
 		}
 		
 		public void ExitTree()

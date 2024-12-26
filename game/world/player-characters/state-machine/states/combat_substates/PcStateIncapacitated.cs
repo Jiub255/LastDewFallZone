@@ -1,25 +1,19 @@
-using Godot;
-using System;
-
 namespace Lastdew
 {
 	public class PcStateIncapacitated : PcCombatSubstate
 	{
-		private const string ATTACK_ANIM_NAME = "CharacterArmature|Death";
-		private AnimationNodeStateMachinePlayback StateMachine { get; set; }
+		private const string DEATH_ANIM_NAME = "CharacterArmature|Death";
 		
-		public PcStateIncapacitated(PcStateContext context) : base(context)
-		{
-			StateMachine = (AnimationNodeStateMachinePlayback)PcAnimationTree.Get("parameters/playback");
-		}
+		public PcStateIncapacitated(PcStateContext context) : base(context) {}
 		
 		public override void EnterState(Enemy target)
 		{
 			base.EnterState(target);
 
-			StateMachine.Travel(ATTACK_ANIM_NAME);
+			Context.AnimStateMachine.Travel(DEATH_ANIM_NAME);
+			Context.DisablePC();
 		}
 
-		public override void GetHit(Enemy attacker){}
+		public override void GetHit(){}
 	}
 }

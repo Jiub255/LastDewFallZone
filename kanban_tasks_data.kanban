@@ -53,7 +53,8 @@
 			"title": "DOING",
 			"tasks": [
 				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
-				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a"
+				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
+				"da048501-b90d-4b8b-997d-87a79f921cdb"
 			]
 		},
 		{
@@ -186,7 +187,7 @@
 		{
 			"uuid": "5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
 			"title": "Combat State and Substates",
-			"description": "How to set up combat?\nJust have each enemy/pc have an attack timer and have the actual animation tied to the hit, so whoever gets hit reacts. Might be easier to set up. Also easier to handle multiple enemies at once. The other way wouldn't work.\nFor ranged weapons, just have the attacker shoot on a timer while the enemy walks toward them. Move away automatically when enemy gets close? Or switch to melee? Or just keep shooting at close range until you move them?\n\nSetting up combat substates:\n\tWaiting\n\tAttacking\n\tGettingHit\nSet the appropriate parameters in AnimationTree script on enter/exit each state. Combat state acts like a substate machine.\n",
+			"description": "How to set up combat?\nJust have each enemy/pc have an attack timer and have the actual animation tied to the hit, so whoever gets hit reacts. Might be easier to set up. Also easier to handle multiple enemies at once. The other way wouldn't work.\nFor ranged weapons, just have the attacker shoot on a timer while the enemy walks toward them. Move away automatically when enemy gets close? Or switch to melee? Or just keep shooting at close range until you move them?\n\nSetting up combat substates:\n\tWaiting\n\tAttacking\n\tGettingHit\nCombat state acts like a substate machine.\n\nNeed to finish death scenario. Make enemy unclickable/disappear? Lootable? Auto-loot? \nSame with PC incapacitation. Have them just lie there unclickable like a static object until scavenging run/base defense ends? And make sure enemies don't try to target them once they're dead.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -361,6 +362,13 @@
 			"title": "Game state machine?",
 			"description": "States:\n\tHome\n\tHome-defense\n\tScavenging\n\tMenus?\n\nCould pipe input in specific ways depending on which state. Might be a clean way to deal with different inputs for different scenarios.\n\nOr, maybe just put inputs on the objects they affect, like in the pc states, and have whichever scene is active dictate the \"game state\". For menus, just disable player input while they're open? ",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "da048501-b90d-4b8b-997d-87a79f921cdb",
+			"title": "Figure out FindNearestEnemy stuff",
+			"description": "Where to put the checks, etc. PcStateAttacking? PcStateCombat? PcStateContext? Figure it out.\nMaybe put Target back into Combat state? For checking for next nearest? Or just make sure to disable the newly dead enemy before checking for nearest. Does spherecast pick up even with enemy collider disabled? ",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		}
 	],

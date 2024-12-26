@@ -23,7 +23,7 @@ namespace Lastdew
 		{
 			base._Ready();
 			
-			LootingSpot = GetNode<Node3D>("%LootingSpot");
+			LootingSpot = GetNode<Node3D>("LootingSpot");
 		}
 	}
 }

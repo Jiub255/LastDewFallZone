@@ -6,14 +6,12 @@ namespace Lastdew
 	{
 		private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		private int AttackPower { get; } = 1;
-		private AnimationNodeStateMachinePlayback StateMachine { get; set; }
 		
 		public PcStateAttacking(PcStateContext context) : base(context)
 		{
 			context.PcAnimationTree.Connect(
 				AnimationTree.SignalName.AnimationFinished,
 				Callable.From((string animationName) => OnAnimationFinished(animationName)));
-			StateMachine = (AnimationNodeStateMachinePlayback)PcAnimationTree.Get("parameters/playback");
 		}
 
 		public override void ProcessSelected(float delta)
@@ -34,24 +32,25 @@ namespace Lastdew
 		{
 			base.EnterState(target);
 
-			StateMachine.Travel(ATTACK_ANIM_NAME);
+			Context.AnimStateMachine.Travel(ATTACK_ANIM_NAME);
 		}
  
-		public override void GetHit(Enemy attacker)
+		public override void GetHit()
 		{
-			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT, attacker);
+			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT);
 		}
 		
-		public void HitEnemy()
+		/// <returns>true if hit killed enemy</returns>
+		public bool HitEnemy(PlayerCharacter attackingPC)
 		{
-			Target.GetHit(AttackPower);
+			return Target.GetHit(AttackPower, attackingPC);
 		}
 		
 		private void OnAnimationFinished(string animationName)
 		{
 			if (animationName == ATTACK_ANIM_NAME)
 			{
-				ChangeSubstate(PcCombatSubstateNames.WAITING, Target);
+				ChangeSubstate(PcCombatSubstateNames.WAITING);
 			}
 		}
 	}

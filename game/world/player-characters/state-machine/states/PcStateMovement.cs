@@ -11,10 +11,6 @@ namespace Lastdew
 		// TODO: Get this info from pc stats eventually? Or just have everyone move the same?
 		private float MaxSpeed { get; set; } = 7f;
 		private float Acceleration { get; set; } = 50f;
-		/// <summary>
-		/// Degrees per second
-		/// </summary>
-		protected float TurnSpeed { get; set; } = 360f;
 		private Vector3 LastTargetPosition { get; set; }
 	
 		public PcStateMovement(PcStateContext context) : base(context)
@@ -26,12 +22,12 @@ namespace Lastdew
 	
 		public override void PhysicsProcessUnselected(float delta)
 		{
-			Move(delta);
+			MovementProcess(delta);
 		}
 	
 		public override void PhysicsProcessSelected(float delta)
 		{
-			Move(delta);
+			MovementProcess(delta);
 		}
 	
 		public override void EnterState(MovementTarget target)
@@ -57,7 +53,7 @@ namespace Lastdew
 		public override void ProcessUnselected(float delta) {}
 		public override void ProcessSelected(float delta) {}
 	
-		private void Move(float delta)
+		private void MovementProcess(float delta)
 		{
 			if (DestinationReached())
 			{

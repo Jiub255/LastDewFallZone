@@ -48,14 +48,10 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_od3xi"]
 xfade_time = 0.25
 xfade_curve = ExtResource("1_jbxk4")
-advance_mode = 2
-advance_expression = "Looting"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l8clj"]
 xfade_time = 0.25
 xfade_curve = ExtResource("1_jbxk4")
-advance_mode = 2
-advance_expression = "!Looting"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qtej1"]
 

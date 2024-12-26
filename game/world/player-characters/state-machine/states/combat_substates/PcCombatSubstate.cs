@@ -4,7 +4,7 @@ namespace Lastdew
 {
 	public abstract class PcCombatSubstate
 	{
-		public event Action<PcCombatSubstateNames, Enemy> OnChangeSubstate;
+		public event Action<PcCombatSubstateNames> OnChangeSubstate;
 		
 		protected PcStateContext Context { get; set; }
 		protected PcAnimationTree PcAnimationTree { get; set; }
@@ -38,16 +38,16 @@ namespace Lastdew
 			Tick(delta);
 		}
 		
-		public abstract void GetHit(Enemy attacker);
+		public abstract void GetHit();
 		
 		protected virtual void Tick(float delta)
 		{
 			Timer -= delta;
 		}
 
-		protected void ChangeSubstate(PcCombatSubstateNames substateName, Enemy target)
+		protected void ChangeSubstate(PcCombatSubstateNames substateName)
 		{
-			OnChangeSubstate?.Invoke(substateName, target);
+			OnChangeSubstate?.Invoke(substateName);
 		}
 	}
 }

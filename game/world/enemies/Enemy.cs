@@ -80,10 +80,7 @@ namespace Lastdew
 				return true;
 			}
 			// TODO: Not sure if this does anything at the moment. When is Target null?
-			if (Target == null)
-			{
-				Target = attackingPC;
-			}
+			Target ??= attackingPC;
 			AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 			return false;
 		}
@@ -91,7 +88,11 @@ namespace Lastdew
 		// Called from animation method track
 		public void HitTarget()
 		{
-			Target.GetHit(this, Attack);
+			bool pcIncapacitated = Target.GetHit(this, Attack);
+			if (pcIncapacitated)
+			{
+				// TODO: Find new target.
+			}
 		}
 		
 		public void SetTarget(PlayerCharacter target)
@@ -109,6 +110,8 @@ namespace Lastdew
 			State = EnemyState.DEAD;
 			CollisionLayer = 0;
 			NavigationAgent.AvoidanceEnabled = false;
+			// TODO: Force physics update so that FindNearestEnemy doesn't see this?
+			// Or is that stupid?
 		}
 
 		private void MovementProcess(float delta)

@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 namespace Lastdew
 {	
@@ -24,8 +25,10 @@ namespace Lastdew
 			GameMenu = GetNode<GameMenu>("%GameMenu");
 			PauseMenu = GetNode<PauseMenu>("%PauseMenu");
 	
-			InventoryManager inventoryManager = new();
+			AllPcScenes AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/AllPcScenes.cs");
 			MissionTeamData missionTeamData = new MissionTeamData(new int[] { 0, 1, });
+			TeamData teamData = new TeamData(AllPcs, new List<int>(){ 0, 1, });
+			InventoryManager inventoryManager = new();
 			PcManager.Initialize(missionTeamData, inventoryManager);
 			EnemySpawner.Initialize(missionTeamData);
 			Hud.Setup(missionTeamData);

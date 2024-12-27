@@ -18,6 +18,8 @@ namespace Lastdew
 		// TODO: Eventually populate TeamIndexes from a team selection UI. 
 		// Might not need this here in that case? Figure it out when it happens.
 		public int[] TeamIndexes { get; init; }
+		// TODO: There has to be a better way to store this data. Maybe just keep a list of all PCs,
+		// then just store a nullable int index for which is selected.
 		public List<PlayerCharacter> UnselectedPcs { get; } = new();
 		public PlayerCharacter SelectedPc { get; set; }
 		

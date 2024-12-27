@@ -45,10 +45,12 @@ namespace Lastdew
 			StateMachine.ChangeState(PcStateNames.MOVEMENT, movementTarget);
 		}
 		
-		public void GetHit(Enemy attackingEnemy, int damage)
+		/// <returns>true if pc incapacitated</returns>
+		public bool GetHit(Enemy attackingEnemy, int damage)
 		{
 			bool incapacitated = Health.TakeDamage(damage);
 			StateMachine.GetHit(attackingEnemy, incapacitated);
+			return incapacitated;
 		}
 		
 		// Called from animation method track

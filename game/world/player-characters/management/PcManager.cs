@@ -1,12 +1,19 @@
 using Godot;
 
 namespace Lastdew
-{	
-	// TODO: Does this need to be a Node? Can it just be a plain class?
+{
+	// TODO: Have a different PcManager for home base? What about base defense?
+	// Or just have different "modes" on this class? 
 	public partial class PcManager : Node3D
 	{
 		// TODO: Setup way to load this data. Eventually from save file, but maybe a resource for now?
 		private MissionTeamData MissionTeamData { get; set; }
+	
+		public void Initialize(MissionTeamData missionTeamData, InventoryManager inventoryManager)
+		{
+			MissionTeamData = missionTeamData;
+			SpawnPcs(inventoryManager);
+		}
 		
 		public override void _Process(double delta)
 		{
@@ -41,24 +48,6 @@ namespace Lastdew
 				pc.ExitTree();
 			}
 		}
-	
-		public void Initialize(MissionTeamData missionTeamData, InventoryManager inventoryManager)
-		{
-			MissionTeamData = missionTeamData;
-			SpawnPcs(inventoryManager);
-		}
-		
-		public void SpawnPcs(InventoryManager inventoryManager)
-		{		
-			foreach (int index in MissionTeamData.TeamIndexes)
-			{
-				PlayerCharacter pc = (PlayerCharacter)MissionTeamData.Pcs.PcDatas[index].PcScene.Instantiate();
-				CallDeferred(MethodName.AddChild, pc);
-				pc.Position += Vector3.Right * index * 3;
-				pc.Initialize(inventoryManager);
-				MissionTeamData.UnselectedPcs.Add(pc);
-			}
-		}
 		
 		public void SelectPc(PlayerCharacter pc)
 		{
@@ -91,6 +80,18 @@ namespace Lastdew
 		public void MoveTo(MovementTarget movementTarget)
 		{
 			MissionTeamData.SelectedPc?.MoveTo(movementTarget);
+		}
+		
+		private void SpawnPcs(InventoryManager inventoryManager)
+		{		
+			foreach (int index in MissionTeamData.TeamIndexes)
+			{
+				PlayerCharacter pc = (PlayerCharacter)MissionTeamData.Pcs.PcDatas[index].PcScene.Instantiate();
+				CallDeferred(MethodName.AddChild, pc);
+				pc.Position += Vector3.Right * index * 3;
+				pc.Initialize(inventoryManager);
+				MissionTeamData.UnselectedPcs.Add(pc);
+			}
 		}
 	}
 }

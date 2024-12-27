@@ -28,7 +28,8 @@
 			"tasks": [
 				"df44855f-0478-45ba-8998-406d91aa1eb7",
 				"83757feb-77db-46c7-a1ac-e076ea02903b",
-				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25"
+				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
+				"16b4dbab-1c67-4a4b-af3a-be1d31a17467"
 			]
 		},
 		{
@@ -89,7 +90,9 @@
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
-			"tasks": []
+			"tasks": [
+				"4d19ea6a-8b11-47ad-9cc5-caffcad0c4cd"
+			]
 		}
 	],
 	"tasks": [
@@ -312,7 +315,7 @@
 		{
 			"uuid": "228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 			"title": "3D char model in menu",
-			"description": "Replace the character icon in the Character/Item/Equip menu with a separate viewport showing the 3d model in it's own scene. Then you can update equipment look realtime easily. ",
+			"description": "Replace the character icon in the Character/Item/Equip menu with a separate viewport showing the 3d model in it's own scene. Then you can update equipment look realtime easily. \nDo the same for char faces in the HUD. Or use a stillshot?",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		},
@@ -367,8 +370,22 @@
 		{
 			"uuid": "da048501-b90d-4b8b-997d-87a79f921cdb",
 			"title": "Figure out FindNearestEnemy stuff",
-			"description": "Where to put the checks, etc. PcStateAttacking? PcStateCombat? PcStateContext? Figure it out.\nMaybe put Target back into Combat state? For checking for next nearest? Or just make sure to disable the newly dead enemy before checking for nearest. Does spherecast pick up even with enemy collider disabled? ",
+			"description": "Where to put the checks, etc. PcStateAttacking? PcStateCombat? PcStateContext? Figure it out.\nMaybe put Target back into Combat state? For checking for next nearest? Or just make sure to disable the newly dead enemy before checking for nearest. Does spherecast pick up even with enemy collider disabled? \n\nMaybe just give each enemy a reference to the list of active pcs, and vice versa. Then checking is easy. ",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "16b4dbab-1c67-4a4b-af3a-be1d31a17467",
+			"title": "PC Home Base Activities",
+			"description": "Instead of having the PCs wander around at home (while not under attack), use them to build/repair/decorate/grow food/whatever.\nAdds a whole new layer to the game, and makes home base less boring. Plus it gives a reason to make buildings take some time to build other than fuckery. Like you need x person-hours to build a building. Or repair a structure, or plant/harvest a crop. Plenty to do, adds to the stardew side more. \nSo in building mode, you basically just place the idea of where you want the building, then assign workers and they build it in however long it takes. ",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "4d19ea6a-8b11-47ad-9cc5-caffcad0c4cd",
+			"title": "Everyone's flying up now, probably from messing with PcManager.",
+			"description": "",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

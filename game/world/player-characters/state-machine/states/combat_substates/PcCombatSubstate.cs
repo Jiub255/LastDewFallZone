@@ -7,7 +7,6 @@ namespace Lastdew
 		public event Action<PcCombatSubstateNames> OnChangeSubstate;
 		
 		protected PcStateContext Context { get; set; }
-		protected PcAnimationTree PcAnimationTree { get; set; }
 		protected Enemy Target { get; set; }
 		protected float TimeBetweenAttacks { get; } = 2.3f;
 		protected float Timer { get; set; }
@@ -20,7 +19,6 @@ namespace Lastdew
 		protected PcCombatSubstate(PcStateContext context)
 		{
 			Context = context;
-			PcAnimationTree = context.PcAnimationTree;
 		}
 
 		public virtual void EnterState(Enemy target)

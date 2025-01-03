@@ -7,7 +7,7 @@ namespace Lastdew
 	public partial class PcManagerBase : Node3D
 	{
 		private TeamData TeamData { get; set; }
-		private int? selectedIndex { get; set; }
+		private int? SelectedIndex { get; set; }
 	
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
@@ -21,7 +21,7 @@ namespace Lastdew
 
 			for (int i = 0; i < TeamData.Pcs.Count; i++)
 			{
-				if (i == selectedIndex)
+				if (i == SelectedIndex)
 				{
 					TeamData.Pcs[i].ProcessSelected(delta);
 				}
@@ -38,7 +38,7 @@ namespace Lastdew
 
 			for (int i = 0; i < TeamData.Pcs.Count; i++)
 			{
-				if (i == selectedIndex)
+				if (i == SelectedIndex)
 				{
 					TeamData.Pcs[i].PhysicsProcessSelected(delta);
 				}
@@ -64,37 +64,37 @@ namespace Lastdew
 			int pcIndex = TeamData.Pcs.IndexOf(pc);
 			if (pcIndex == -1)
 			{
-				selectedIndex = null;
+				SelectedIndex = null;
 				GD.PushWarning($"{pc.Name} not found in TeamData.Pcs.");
 			}
 			else
 			{
-				selectedIndex = pcIndex;
+				SelectedIndex = pcIndex;
 			}
 		}
 		
 		public void DeselectPc()
 		{
-			selectedIndex = null;
+			SelectedIndex = null;
 		}
 		
 		public void MoveTo(MovementTarget movementTarget)
 		{
-			if (selectedIndex == null)
+			if (SelectedIndex == null)
 			{
 				GD.PushWarning($"No selected PC for MoveTo()");
 			}
 			else
 			{
-				TeamData.Pcs[(int)selectedIndex].MoveTo(movementTarget);
+				TeamData.Pcs[(int)SelectedIndex].MoveTo(movementTarget);
 			}
 		}
 		
 		private void SpawnPcs(InventoryManager inventoryManager)
 		{		
-			for (int i = 0; i < TeamData.PcScenes.Count; i++)
+			for (int i = 0; i < TeamData.PcDatas.Count; i++)
 			{
-				PlayerCharacter pc = (PlayerCharacter)TeamData.PcScenes[i].Instantiate();
+				PlayerCharacter pc = (PlayerCharacter)TeamData.PcDatas[i].PcScene.Instantiate();
 				CallDeferred(MethodName.AddChild, pc);
 				pc.Position += Vector3.Right * i * 3;
 				pc.Initialize(inventoryManager);

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="PcsData" load_steps=4 format=3 uid="uid://dckb2dlhbg7ny"]
-
-[ext_resource type="Resource" uid="uid://cvscwbigsi3w3" path="res://game/world/player-characters/management/TestPcData.tres" id="1_ky6xq"]
-[ext_resource type="Script" path="res://game/world/player-characters/management/PcsData.cs" id="1_te0qt"]
-[ext_resource type="Resource" uid="uid://bqd6uonxmwcas" path="res://game/world/player-characters/management/TestPcData2.tres" id="2_s2p4h"]
-
-[resource]
-script = ExtResource("1_te0qt")
-PcDatas = Array[Object]([ExtResource("1_ky6xq"), ExtResource("2_s2p4h")])

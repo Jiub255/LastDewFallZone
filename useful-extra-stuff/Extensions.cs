@@ -50,12 +50,12 @@ namespace Lastdew
 		}
 		
 		// TODO: Probably need to fix this, haven't tested it yet.
-		public static void RotateToward(this Node3D node3D, Vector3 nextPosition, float turnAmount)
+		public static void RotateToward(this Node3D node3D, Vector3 lookTarget, float turnAmount)
 		{
-			Vector3 lookTarget = new(
-				nextPosition.X,
+			lookTarget = new(
+				lookTarget.X,
 				node3D.GlobalPosition.Y,
-				nextPosition.Z);
+				lookTarget.Z);
 			Vector3 directionToTarget = (lookTarget - node3D.GlobalPosition).Normalized();
 			Vector3 forward = node3D.GlobalTransform.Basis.Z.Normalized();
 			

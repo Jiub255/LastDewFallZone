@@ -12,22 +12,22 @@ namespace Lastdew
 		// --------------------------------------------------------------
 
 		public List<PlayerCharacter> Pcs { get; } = new List<PlayerCharacter>();
-		public List<PackedScene> PcScenes
+		public List<PcData> PcDatas
 		{
 			get
 			{
-				List<PackedScene> pcScenes = new();
+				List<PcData> pcDatas = new();
 				foreach (int index in PcIndexes)
 				{
-					pcScenes.Add(AllPcs.PcScenes[index]);
+					pcDatas.Add(AllPcs.PcDatas[index]);
 				}
-				return pcScenes;
+				return pcDatas;
 			}
 		}
 		
-		private AllPcScenes AllPcs { get; }
+		private AllPcsData AllPcs { get; }
 		
-		public TeamData(AllPcScenes allPcs, List<int> pcIndexes)
+		public TeamData(AllPcsData allPcs, List<int> pcIndexes)
 		{
 			AllPcs = allPcs;
 			PcIndexes = pcIndexes;

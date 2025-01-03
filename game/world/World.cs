@@ -6,7 +6,7 @@ namespace Lastdew
 	public partial class World : Node3D
 	{
 		private ClickHandler ClickHandler { get; set; }
-		private PcManager PcManager { get; set; }
+		private PcManagerBase PcManager { get; set; }
 		// TODO: Just for testing for now, probably have a different setup eventually.
 		private EnemySpawner EnemySpawner { get; set; }
 		private Hud Hud { get; set; }
@@ -19,19 +19,20 @@ namespace Lastdew
 	
 			Camera camera = GetNode<Camera>("%CameraRig");
 			ClickHandler = camera.ClickHandler;
-			PcManager = GetNode<PcManager>("%PcManager");
+			PcManager = GetNode<PcManagerBase>("%PcManager");
 			EnemySpawner = GetNode<EnemySpawner>("%EnemySpawner");
 			Hud = GetNode<Hud>("%HUD");
 			GameMenu = GetNode<GameMenu>("%GameMenu");
 			PauseMenu = GetNode<PauseMenu>("%PauseMenu");
 	
-			AllPcScenes AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/AllPcScenes.cs");
-			MissionTeamData missionTeamData = new MissionTeamData(new int[] { 0, 1, });
+			//AllPcScenes AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/AllPcScenes.cs");
+			//MissionTeamData missionTeamData = new MissionTeamData(new int[] { 0, 1, });
+			AllPcsData AllPcs = GD.Load<AllPcsData>("res://game/world/player-characters/management/AllPcsData.tres");
 			TeamData teamData = new TeamData(AllPcs, new List<int>(){ 0, 1, });
 			InventoryManager inventoryManager = new();
-			PcManager.Initialize(missionTeamData, inventoryManager);
-			EnemySpawner.Initialize(missionTeamData);
-			Hud.Setup(missionTeamData);
+			PcManager.Initialize(teamData, inventoryManager);
+			EnemySpawner.Initialize(teamData);
+			Hud.Setup(teamData);
 			GameMenu.Initialize(inventoryManager);
 			
 			ClickHandler.OnClickedPc += PcManager.SelectPc;

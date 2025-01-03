@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_jp7sh")
 Reusable = false
-Effects = null
+Effects = []
 ItemRarity = 100
-Tags = null
+Tags = []
 Name = "Enter Unique Name"
 Description = "Enter Description"

@@ -2,6 +2,7 @@ using Godot;
 
 namespace Lastdew
 {
+	// TODO: Redo using PcData instead of just PackedScenes? Can hold other data, like name and icon.
 	public partial class AllPcScenes : Resource
 	{
 		public PackedScene[] PcScenes { get; set; } = new PackedScene[]

@@ -4,7 +4,7 @@ namespace Lastdew
 {	
 	public partial class Hud : CanvasLayer
 	{
-		private MissionTeamData MissionTeamData { get; set; }
+		private TeamData TeamData { get; set; }
 		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load("res://game/UI/pc_button.tscn");
 		private HBoxContainer Hbox { get; set; }
 	
@@ -15,19 +15,28 @@ namespace Lastdew
 			Hbox = GetNode<HBoxContainer>("%HBoxContainer");
 		}
 		
-		public void Setup(MissionTeamData missionTeamData)
+		public void Setup(TeamData teamData)
 		{
 			// TODO: For testing only, gonna pass this data from team selection screen eventually.
-			MissionTeamData = missionTeamData;
+			TeamData = teamData;
 			
-			foreach (int index in MissionTeamData.TeamIndexes)
+			foreach (PcData pcData in TeamData.PcDatas)
 			{
 				PcButton buttonInstance = PcButtonScene.Instantiate() as PcButton;
-				Texture2D icon = MissionTeamData.Pcs.PcDatas[index].Icon;
-				string name = MissionTeamData.Pcs.PcDatas[index].Name;
+				Texture2D icon = pcData.Icon;
+				string name = pcData.Name;
 				Hbox.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
 				buttonInstance.CallDeferred(PcButton.MethodName.Setup, icon, name);
 			}
+			
+			/* foreach (int index in TeamData.TeamIndexes)
+			{
+				PcButton buttonInstance = PcButtonScene.Instantiate() as PcButton;
+				Texture2D icon = TeamData.Pcs.PcDatas[index].Icon;
+				string name = TeamData.Pcs.PcDatas[index].Name;
+				Hbox.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
+				buttonInstance.CallDeferred(PcButton.MethodName.Setup, icon, name);
+			} */
 		}
 	}
 }

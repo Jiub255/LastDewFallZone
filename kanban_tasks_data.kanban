@@ -29,7 +29,8 @@
 				"df44855f-0478-45ba-8998-406d91aa1eb7",
 				"83757feb-77db-46c7-a1ac-e076ea02903b",
 				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
-				"16b4dbab-1c67-4a4b-af3a-be1d31a17467"
+				"16b4dbab-1c67-4a4b-af3a-be1d31a17467",
+				"4057ff66-af0f-496c-983d-8abfe7ddf0b3"
 			]
 		},
 		{
@@ -53,9 +54,7 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
-				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
-				"da048501-b90d-4b8b-997d-87a79f921cdb"
+				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7"
 			]
 		},
 		{
@@ -73,7 +72,9 @@
 				"d7a31fbe-729d-4f2a-8ce7-f2171670c81e",
 				"6f1791ba-c7a0-48fd-acce-e5fadedcbfc1",
 				"0afa5a6c-d5e9-4dfe-ac09-ecdc7e7709d3",
-				"9daea93f-3636-4d98-85de-f920c2f61f3c"
+				"9daea93f-3636-4d98-85de-f920c2f61f3c",
+				"da048501-b90d-4b8b-997d-87a79f921cdb",
+				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a"
 			]
 		},
 		{
@@ -90,9 +91,7 @@
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
-			"tasks": [
-				"4d19ea6a-8b11-47ad-9cc5-caffcad0c4cd"
-			]
+			"tasks": []
 		}
 	],
 	"tasks": [
@@ -190,7 +189,7 @@
 		{
 			"uuid": "5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
 			"title": "Combat State and Substates",
-			"description": "How to set up combat?\nJust have each enemy/pc have an attack timer and have the actual animation tied to the hit, so whoever gets hit reacts. Might be easier to set up. Also easier to handle multiple enemies at once. The other way wouldn't work.\nFor ranged weapons, just have the attacker shoot on a timer while the enemy walks toward them. Move away automatically when enemy gets close? Or switch to melee? Or just keep shooting at close range until you move them?\n\nSetting up combat substates:\n\tWaiting\n\tAttacking\n\tGettingHit\nCombat state acts like a substate machine.\n\nNeed to finish death scenario. Make enemy unclickable/disappear? Lootable? Auto-loot? \nSame with PC incapacitation. Have them just lie there unclickable like a static object until scavenging run/base defense ends? And make sure enemies don't try to target them once they're dead.",
+			"description": "How to set up combat?\nJust have each enemy/pc have an attack timer and have the actual animation tied to the hit, so whoever gets hit reacts. Might be easier to set up. Also easier to handle multiple enemies at once. The other way wouldn't work.\nFor ranged weapons, just have the attacker shoot on a timer while the enemy walks toward them. Move away automatically when enemy gets close? Or switch to melee? Or just keep shooting at close range until you move them?\n\nSetting up combat substates:\n\tWaiting\n\tAttacking\n\tGettingHit\n\tIncapacitated\nCombat state acts like a substate machine.\n\nNeed to finish death scenario. Make enemy unclickable/disappear? Lootable? Auto-loot? \nSame with PC incapacitation. Have them just lie there unclickable like a static object until scavenging run/base defense ends? And make sure enemies don't try to target them once they're dead.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -308,7 +307,7 @@
 		{
 			"uuid": "4057ff66-af0f-496c-983d-8abfe7ddf0b3",
 			"title": "How to organize data?",
-			"description": "PCs, in menu and in game.\n\tNeed selected PC to be selected when menu opens.\n\tBut if you change PCs in menu, still have original PC selected in game.\n\tSo selecting PC in game changes the selected menu PC, but not the other way around.\n\tBut how to hold the data? Kinda like MissionTeamData?\n\t\tHave a separate resource containing paths to every pc. Maybe use a string/path dict.\n\t\tHave a game data class that holds references to all your current PCs.\n\t\t\tHas WorldSelected and MenuSelected PCs.\n\t\t\tSave/load just an array of int IDs, then instantiate and keep a list of references to the actual PCs.\n\t\t\tCould maybe put mission team data here?\n\nCraftables -> Items/Buildings\n\tProbably just doing resources, and using the resource tables addon.\n\tWas gonna try to use a database. Might do it later, not sure yet.\n\t\tMight try a relational database custom addon (or if someone else already made one)\n\t\tHave tables for base weapon and effects, each one with a enum id column and the weapon or effect in the other column.\n\t\tThen just store an enum/int for base weapon, and an array of enums/ints for the effects.\n\t\tSame idea for usable items.\n\t\tAlso, maybe crafting materials can just inherit craftable since they don't have an \"item\" function.\n",
+			"description": "PCs, in menu and in game.\n\tNeed selected PC to be selected when menu opens.\n\tBut if you change PCs in menu, still have original PC selected in game.\n\tSo selecting PC in game changes the selected menu PC, but not the other way around.\n\tBut how to hold the data? Kinda like MissionTeamData?\n\t\tHave a separate resource containing paths to every pc. Maybe use a string/path dict.\n\t\tHave a game data class that holds references to all your current PCs.\n\t\t\tHas WorldSelected and MenuSelected PCs.\n\t\t\tSave/load just an array of int IDs, then instantiate and keep a list of references to the actual PCs.\n\t\t\tCould maybe put mission team data here?\n\tHave a resource that holds all possible pcs? Have each PcData have the packed scene, name, icon, etc. \n\nCraftables -> Items/Buildings\n\tProbably just doing resources, and using the resource tables addon.\n\tWas gonna try to use a database. Might do it later, not sure yet.\n\tAlso, maybe crafting materials can just inherit craftable since they don't have an \"item\" function.\n",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -382,10 +381,10 @@
 			"steps": []
 		},
 		{
-			"uuid": "4d19ea6a-8b11-47ad-9cc5-caffcad0c4cd",
-			"title": "Everyone's flying up now, probably from messing with PcManager.",
+			"uuid": "0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
+			"title": "Integrate stats/equipment into combat/health",
 			"description": "",
-			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

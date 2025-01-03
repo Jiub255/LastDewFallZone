@@ -10,6 +10,7 @@ namespace Lastdew
 		private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve_2";
 		private const string DEATH_ANIM_NAME = "CharacterArmature|Death";
+		private const float SIGHT_DISTANCE = 20f;
 		
 		private enum EnemyState 
 		{
@@ -91,7 +92,7 @@ namespace Lastdew
 			bool pcIncapacitated = Target.GetHit(this, Attack);
 			if (pcIncapacitated)
 			{
-				// TODO: Find new target.
+				Target = FindNearestPC(Target);
 			}
 		}
 		
@@ -110,8 +111,6 @@ namespace Lastdew
 			State = EnemyState.DEAD;
 			CollisionLayer = 0;
 			NavigationAgent.AvoidanceEnabled = false;
-			// TODO: Force physics update so that FindNearestEnemy doesn't see this?
-			// Or is that stupid?
 		}
 
 		private void MovementProcess(float delta)
@@ -173,8 +172,6 @@ namespace Lastdew
 				
 				// Attack animation (Calls HitTarget from animation)
 				AnimStateMachine.Travel(ATTACK_ANIM_NAME);
-				
-				// TODO: If target dies, choose new target (nearest?) and move toward/attack them.
 			}
 		}
 		
@@ -203,6 +200,45 @@ namespace Lastdew
 		{
 			Vector3 direction = (GlobalPosition - targetPosition).Normalized();
 			return targetPosition + direction * AttackRadius;
+		}
+		
+		private PlayerCharacter FindNearestPC(PlayerCharacter currentTarget)
+		{
+			PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+			SphereShape3D sphereShape = new(){ Radius = SIGHT_DISTANCE };
+			PhysicsShapeQueryParameters3D query = new()
+			{
+				ShapeRid = sphereShape.GetRid(),
+				CollideWithBodies = true,
+				Transform = new Transform3D(Basis.Identity, GlobalPosition),
+				Exclude = new Godot.Collections.Array<Rid>(new Rid[1]{ GetRid() }),
+				CollisionMask = 0b10
+			};
+			
+			Godot.Collections.Array<Godot.Collections.Dictionary> result = spaceState.IntersectShape(query);
+
+			PlayerCharacter closest = null;
+			foreach (Godot.Collections.Dictionary dict in result)
+			{
+				CollisionObject3D collider = (CollisionObject3D)dict["collider"];
+				//this.PrintDebug($"Collider: {collider?.Name}"); 
+				if (collider is PlayerCharacter pc)
+				{
+					if (pc != currentTarget)
+					{
+						if (closest == null)
+						{
+							closest = pc;
+						}
+						else if (GlobalPosition.DistanceSquaredTo(pc.GlobalPosition) < 
+							GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+						{
+							closest = pc;
+						}
+					}
+				}
+			}
+			return closest;
 		}
 	}
 }

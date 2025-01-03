@@ -70,7 +70,7 @@ namespace Lastdew
 			foreach (Godot.Collections.Dictionary dict in result)
 			{
 				CollisionObject3D collider = (CollisionObject3D)dict["collider"];
-				this.PrintDebug($"Collider: {collider?.Name}"); 
+				//this.PrintDebug($"Collider: {collider?.Name}"); 
 				if (collider is Enemy enemy)
 				{
 					if (enemy != currentTarget)

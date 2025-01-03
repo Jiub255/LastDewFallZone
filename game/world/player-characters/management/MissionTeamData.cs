@@ -12,7 +12,7 @@ namespace Lastdew
 			(PackedScene)GD.Load("res://game/world/player-characters/humans_master2.tscn"),
 		}; */
 		// TODO: Keep this array in a separate resource, then keep a reference to that resource here?
-		public PcsData Pcs { get; private set; } = GD.Load<PcsData>("res://game/world/player-characters/PcsData.tres");
+		public AllPcsData Pcs { get; private set; } = GD.Load<AllPcsData>("res://game/world/player-characters/PcsData.tres");
 		
 		// TeamIndexes is only used to instantiate from the AllPcs array. 
 		// TODO: Eventually populate TeamIndexes from a team selection UI. 

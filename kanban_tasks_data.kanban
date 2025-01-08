@@ -37,13 +37,11 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "TODO",
 			"tasks": [
-				"32eafed9-d72c-419c-b15f-690c3e0b0518",
+				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
 				"99a74741-f3a9-450e-a0a4-444bacae30fc",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"da6960b9-4241-48f4-8e32-984ebd5dba84",
-				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
-				"bf15db14-19e6-4fa8-a2db-08c9d7486a3f",
 				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
@@ -56,18 +54,19 @@
 			"tasks": [
 				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
 				"11bf4796-3286-4c96-8087-f5db675bf9ba",
-				"43e7a2a8-de3c-4c98-b01a-927022b66792"
+				"43e7a2a8-de3c-4c98-b01a-927022b66792",
+				"3bc586d1-36f7-43e3-83f5-94273c8a79c4"
 			]
 		},
 		{
 			"uuid": "4aeb1722-9a02-459d-81af-f17bb7d9e014",
 			"title": "DONE",
 			"tasks": [
+				"1f55e91c-ea36-430c-88de-a42d0d1102b2",
 				"bbc1a6fa-3e7f-49d3-80b7-61a880d2dab5",
 				"21d02665-3aa9-4b06-ab89-13b53df55b30",
 				"c6aeebeb-13d0-45ec-ad97-611b640da787",
 				"5d079d7b-9f50-4767-95e7-e79d26d6106a",
-				"1f55e91c-ea36-430c-88de-a42d0d1102b2",
 				"d4198d16-16c6-4401-9e26-18b9b446b0e4",
 				"eaff06f8-c4f7-413c-900c-a3f123827109",
 				"3af156aa-638b-4f09-8350-b29b7b01dc94",
@@ -76,7 +75,8 @@
 				"0afa5a6c-d5e9-4dfe-ac09-ecdc7e7709d3",
 				"9daea93f-3636-4d98-85de-f920c2f61f3c",
 				"da048501-b90d-4b8b-997d-87a79f921cdb",
-				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a"
+				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
+				"32eafed9-d72c-419c-b15f-690c3e0b0518"
 			]
 		},
 		{
@@ -279,13 +279,6 @@
 			"steps": []
 		},
 		{
-			"uuid": "bf15db14-19e6-4fa8-a2db-08c9d7486a3f",
-			"title": "Make resource editor tool",
-			"description": "Similar to the resource tables addon, but make it so you can add bools, enums, and other custom types.\n\tWant to be able to add recipe costs from a table of crafting materials. ",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
-		},
-		{
 			"uuid": "ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
 			"title": "How to handle movement and states?",
 			"description": "Instead of having Movement State as is, could have just three states: Movement/Blank, Looting, Combat.\nThen each state can have an \"Approaching\" bool, and handle the navigation there. But then what about animation? Have to use the same code three times.\nNot sure how to handle this.\nKeep going as is for now, until combat gets implemented.\n\nWent with:\n4 states: Idle, movement, looting, combat.\nmovement state gets MovementTarget custom class with target, target position, and target type enum (ground, loot, enemy)\n\tmovement state uses this to know which state to transition true once navigation is finished.\nEnterState now takes an object target. Either null for ground clicks, LootContainer for loot, or Enemy for enemies. ",
@@ -399,8 +392,15 @@
 		{
 			"uuid": "43e7a2a8-de3c-4c98-b01a-927022b66792",
 			"title": "How to set up game menu?",
-			"description": "In-game menus:\n\tEquip\n\tInventory (Usable items)\n\tCrafting\n\tBuilding\n\tGo Scavenging\n\nHave equip and inventory as tabs? Crafting? Building?\nOr just have separate menus for each? How to structure?\nButtons on in-game screen for each menu?\nMaybe have all separate except for equip and inv (and maybe crafting?), since they all involve items?",
+			"description": "In-game menus:\n\tEquip\n\tInventory (Usable items)\n\tCrafting\n\tBuilding\n\tGo Scavenging\n\nHave equip and inventory as tabs? Crafting? Building?\nOr just have separate menus for each? How to structure?\nButtons on in-game screen for each menu?\nMaybe have all separate except for equip and inv (and maybe crafting?), since they all involve items?\n\nAlso, how to display equipment menu? Start with standard draggable icons?",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "3bc586d1-36f7-43e3-83f5-94273c8a79c4",
+			"title": "Make/Modify resource editor tool",
+			"description": "ResourceTables plugin is close, but need to be able to add enums, bools, textures, etc.\nAlso be able to quickly copy or make new resources.\nWould it be possible to use enums as ids? Like have a big ol enum with all the craftables' names, and\n\twhen you create a new craftable using the tool, it automatically adds the craftable's name to the enum.\n\tIt would make selecting the recipe costs, required buildings, and scrap results a lot easier (autofill in vscode, no int ids)  and safer (no strings). Would only have to do it for CraftingMaterials and Buildings, so it might not end up being too many enums.\n\tMaybe could have the Export string Name, then use the tool script to grab that and put it in the enum?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

@@ -25,7 +25,7 @@ namespace Lastdew
 			GameMenu = GetNode<GameMenu>("%GameMenu");
 			PauseMenu = GetNode<PauseMenu>("%PauseMenu");
 	
-			AllPcScenes AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/AllPcScenes.cs");
+			AllPcScenes AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/all_pc_scenes.tres");
 			//MissionTeamData missionTeamData = new MissionTeamData(new int[] { 0, 1, });
 			//AllPcsData AllPcs = GD.Load<AllPcsData>("res://game/world/player-characters/management/AllPcsData.tres");
 			TeamData teamData = new(AllPcs, new List<int>(){ 0, 1, });

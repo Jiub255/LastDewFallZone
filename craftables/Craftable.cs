@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 namespace Lastdew
 {	
@@ -16,13 +15,13 @@ namespace Lastdew
 		// Want to eventually have a separate database, then just store arrays of ids here,
 		// so no circular references and extra data being stored.
 	/* 	[Export]
-		public (Craftable, int)[] RecipeCosts { get; private set; }
-		[Export]
-		public Tool[] RequiredTools { get; private set; }
+		public (CraftingMaterial, int)[] RecipeCosts { get; private set; }
 		[Export]
 		public Building[] RequiredBuildings { get; private set; }
 		[Export]
-		public (Stat, int)[] StatRequirements { get; private set; } */
+		public (StatType, int)[] StatRequirements { get; private set; }
+		[Export]
+		public (CraftingMaterial, int)[] ScrapResults { get; private set; } */
 	
 		/// <summary>
 		/// For when you click on the item in the crafting/building menu.

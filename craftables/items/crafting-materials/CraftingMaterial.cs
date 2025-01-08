@@ -17,6 +17,8 @@ namespace Lastdew
 			throw new NotImplementedException();
 		}
 	
+		// TODO: Is this method going to be used? Should this just inherit Craftable?
+		// What would clicking on the "item" do? Show all things it could build?
 		public override void OnClickItem(PlayerCharacter pc)
 		{
 			throw new NotImplementedException();

@@ -4,9 +4,9 @@ namespace Lastdew
 {
 	public partial class CharacterDisplay : VBoxContainer
 	{
-		private Label NameLabel { get; set; }
+		private RichTextLabel NameLabel { get; set; }
 		private TextureRect CharacterIcon { get; set; }
-		private Label StatsLabel { get; set; }
+		private RichTextLabel StatsLabel { get; set; }
 		private TeamData TeamData { get; set; }
 		private Button Previous { get; set; }
 		private Button Next { get; set; }
@@ -15,9 +15,9 @@ namespace Lastdew
 		{
 			base._Ready();
 			
-			NameLabel = GetNode<Label>("%NameLabel");
+			NameLabel = GetNode<RichTextLabel>("%NameLabel");
 			CharacterIcon = GetNode<TextureRect>("%CharacterIcon");
-			StatsLabel = GetNode<Label>("%StatsLabel");
+			StatsLabel = GetNode<RichTextLabel>("%StatsLabel");
 			Previous = GetNode<Button>("%PreviousButton");
 			Next = GetNode<Button>("%NextButton");
 

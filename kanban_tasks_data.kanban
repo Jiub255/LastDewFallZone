@@ -54,7 +54,8 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7"
+				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
+				"11bf4796-3286-4c96-8087-f5db675bf9ba"
 			]
 		},
 		{
@@ -251,7 +252,7 @@
 		{
 			"uuid": "1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
 			"title": "Setup Home Base Scene",
-			"description": "Build a physical home base base.\nDisable player controls while at base? Just have them do stuff randomly while you build or whatever?\n\tMaybe could have them train stats using certain buildings?\nBut obviously bring controls back during raids.",
+			"description": "Build a physical home base scene.\nDisable player controls while at base? No.  Just have them do stuff randomly while you build or whatever? Maybe?\n\tMaybe could have them train stats using certain buildings?\n\tAnd other things require pcs to do them:\n\t\tBuilding/repairing\n\t\tFarming\n\t\tMedical\n\t\tDefense during raids",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -383,6 +384,13 @@
 		{
 			"uuid": "0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
 			"title": "Integrate stats/equipment into combat/health",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "11bf4796-3286-4c96-8087-f5db675bf9ba",
+			"title": "Setup Equipment System",
 			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []

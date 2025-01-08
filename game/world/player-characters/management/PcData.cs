@@ -2,6 +2,9 @@ using Godot;
 
 namespace Lastdew
 {	
+	/// <summary>
+	/// TODO: Put this data in PlayerCharacter instead? 
+	/// </summary>
 	[GlobalClass]
 	public partial class PcData : Resource
 	{

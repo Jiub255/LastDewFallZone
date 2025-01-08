@@ -1,4 +1,6 @@
 
+using System.Diagnostics;
+
 namespace Lastdew
 {	public class InventoryManager
 	{
@@ -29,22 +31,30 @@ namespace Lastdew
 			}
 		}
 		
-		public bool RemoveItems(Item item, int amount)
+		public void AddItem(Item item)
+		{
+			AddItems(item, 1);
+		}
+		
+		public void RemoveItems(Item item, int amount)
 		{
 			if (item is CraftingMaterial craftingMaterial)
 			{
-				return CraftingMaterials.RemoveItems(craftingMaterial, amount);
+				CraftingMaterials.RemoveItems(craftingMaterial, amount);
 			}
 			else if (item is Equipment equipment)
 			{
-				return Equipment.RemoveItems(equipment, amount);
+				Equipment.RemoveItems(equipment, amount);
 			}
 			else if (item is UsableItem usableItem)
 			{
-				return UsableItems.RemoveItems(usableItem, amount);
+				UsableItems.RemoveItems(usableItem, amount);
 			}
-			
-			return false;
+		}
+		
+		public void RemoveItem(Item item)
+		{
+			RemoveItems(item, 1);
 		}
 		
 		public bool HasItems(Item item, int amount)
@@ -63,6 +73,11 @@ namespace Lastdew
 			}
 			
 			return false;
+		}
+		
+		public bool HasItem(Item item)
+		{
+			return HasItems(item, 1);
 		}
 	}
 }

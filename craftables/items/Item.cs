@@ -13,6 +13,6 @@ namespace Lastdew
 		/// <summary>
 		/// For when you click on the item in the inventory menu.
 		/// </summary>
-		public abstract void OnClickItem();
+		public abstract void OnClickItem(PlayerCharacter pc);
 	}
 }

@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Lastdew
-{	
+{
 	public class PcStatsData : IEnumerable<Stat>
 	{
-		public Stat Attack;
-		public Stat Defense;
-		public Stat Engineering;
-		public Stat Farming;
-		public Stat Medical;
-		public Stat Scavenging;
+		public Stat Attack { get; set; }
+		public Stat Defense { get; set; }
+		public Stat Engineering { get; set; }
+		public Stat Farming { get; set; }
+		public Stat Medical { get; set; }
+		public Stat Scavenging { get; set; }
 	
 		// TODO: How to initialize?
 		public PcStatsData()

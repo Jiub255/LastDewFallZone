@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 
 namespace Lastdew
-{	
+{
 	public partial class World : Node3D
 	{
 		private ClickHandler ClickHandler { get; set; }
@@ -25,15 +25,16 @@ namespace Lastdew
 			GameMenu = GetNode<GameMenu>("%GameMenu");
 			PauseMenu = GetNode<PauseMenu>("%PauseMenu");
 	
-			//AllPcScenes AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/AllPcScenes.cs");
+			AllPcScenes AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/AllPcScenes.cs");
 			//MissionTeamData missionTeamData = new MissionTeamData(new int[] { 0, 1, });
-			AllPcsData AllPcs = GD.Load<AllPcsData>("res://game/world/player-characters/management/AllPcsData.tres");
-			TeamData teamData = new TeamData(AllPcs, new List<int>(){ 0, 1, });
+			//AllPcsData AllPcs = GD.Load<AllPcsData>("res://game/world/player-characters/management/AllPcsData.tres");
+			TeamData teamData = new(AllPcs, new List<int>(){ 0, 1, });
 			InventoryManager inventoryManager = new();
+			
 			PcManager.Initialize(teamData, inventoryManager);
 			EnemySpawner.Initialize(teamData);
-			Hud.Setup(teamData);
-			GameMenu.Initialize(inventoryManager);
+			Hud.Initialize(teamData);
+			GameMenu.Initialize(teamData, inventoryManager);
 			
 			ClickHandler.OnClickedPc += PcManager.SelectPc;
 			ClickHandler.OnClickedMoveTarget += PcManager.MoveTo;

@@ -5,11 +5,12 @@ namespace Lastdew
 {	
 	public partial class CharacterTab : PanelContainer
 	{
-		// TODO: How to handle selected character? Need to figure out how to organize all the data.
+		private TeamData TeamData { get; set; }
 		private InventoryManager InventoryManager { get; set; }
 		private GridContainer ItemsGrid { get; set; }
 		private SelectedItemPanel SelectedItemPanel { get; set; }
 		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>("res://game/UI/item_button.tscn");
+		private CharacterDisplay CharacterDisplay { get; set; }
 	
 		public override void _Ready()
 		{
@@ -17,20 +18,26 @@ namespace Lastdew
 			
 			ItemsGrid = GetNode<GridContainer>("%ItemsGrid");
 			SelectedItemPanel = GetNode<SelectedItemPanel>("%SelectedItemPanel");
+			CharacterDisplay = GetNode<CharacterDisplay>("%CharacterDisplay");
 		}
 	
-		public void Initialize(InventoryManager inventoryManager)
+		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
+			TeamData = teamData;
 			InventoryManager = inventoryManager;
+			CharacterDisplay.Initialize(teamData);
 		}
 	
 		public override void _ExitTree()
 		{
 			base._ExitTree();
 			
-			foreach (ItemButton button in ItemsGrid.GetChildren())
+			foreach (Node child in ItemsGrid.GetChildren())
 			{
-				button.OnPressed -= SetupItemDisplay;
+				if (child is ItemButton button)
+				{
+					button.OnPressed -= SetupItemDisplay;
+				}
 			}
 		}
 	
@@ -40,6 +47,7 @@ namespace Lastdew
 			{
 				if (child is ItemButton itemButton)
 				{
+					itemButton.OnPressed -= SetupItemDisplay;
 					itemButton.QueueFree();
 				}
 			}
@@ -62,10 +70,6 @@ namespace Lastdew
 			ItemsGrid.CallDeferred(GridContainer.MethodName.AddChild, button);
 			button.CallDeferred(ItemButton.MethodName.Initialize, item, amount);
 			button.OnPressed += SetupItemDisplay;
-			//button.Pressed += () => SetupItemDisplay(button);
-			/* button.Connect(
-				ItemButton.SignalName.Pressed,
-				Callable.From((ItemButton button) => SetupItemDisplay(button))); */
 		}
 	
 		private void RemoveButton(ItemButton button)

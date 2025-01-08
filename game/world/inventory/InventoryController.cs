@@ -29,7 +29,7 @@ namespace Lastdew
 			OnInventoryChanged?.Invoke();
 		}
 		
-		public bool RemoveItems(T item, int amount)
+		public void RemoveItems(T item, int amount)
 		{
 			if (Inventory.ContainsKey(item))
 			{
@@ -37,21 +37,17 @@ namespace Lastdew
 				{
 					Inventory[item] -= amount;
 					OnInventoryChanged?.Invoke();
-					return true;
 				}
 				else if (Inventory[item] == amount)
 				{
 					Inventory.Remove(item);
 					OnInventoryChanged?.Invoke();
-					return true;
 				}
 				
 				GD.PushWarning($"Not enough of {item.Name} to remove {amount} of them.");
-				return false;
 			}
 			
 			GD.PushWarning($"{item.Name} not in inventory.");
-			return false;
 		}
 		
 		public bool HasItems(T item, int amount)

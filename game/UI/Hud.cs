@@ -15,19 +15,11 @@ namespace Lastdew
 			Hbox = GetNode<HBoxContainer>("%HBoxContainer");
 		}
 		
-		public void Setup(TeamData teamData)
+		public void Initialize(TeamData teamData)
 		{
 			// TODO: For testing only, gonna pass this data from team selection screen eventually.
 			TeamData = teamData;
-			
-			foreach (PcData pcData in TeamData.PcDatas)
-			{
-				PcButton buttonInstance = PcButtonScene.Instantiate() as PcButton;
-				Texture2D icon = pcData.Icon;
-				string name = pcData.Name;
-				Hbox.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
-				buttonInstance.CallDeferred(PcButton.MethodName.Setup, icon, name);
-			}
+			TeamData.OnPcsInstantiated += Setup;
 			
 			/* foreach (int index in TeamData.TeamIndexes)
 			{
@@ -37,6 +29,25 @@ namespace Lastdew
 				Hbox.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
 				buttonInstance.CallDeferred(PcButton.MethodName.Setup, icon, name);
 			} */
+		}
+
+		public override void _ExitTree()
+		{
+			base._ExitTree();
+			
+			TeamData.OnPcsInstantiated -= Setup;
+		}
+
+		private void Setup()
+		{
+			foreach (PlayerCharacter pc in TeamData.Pcs)
+			{
+				PcButton buttonInstance = PcButtonScene.Instantiate() as PcButton;
+				Texture2D icon = pc.Icon;
+				string name = pc.Name;
+				Hbox.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
+				buttonInstance.CallDeferred(PcButton.MethodName.Setup, icon, name);
+			}
 		}
 	}
 }

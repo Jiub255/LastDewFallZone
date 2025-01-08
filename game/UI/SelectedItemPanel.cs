@@ -10,6 +10,7 @@ namespace Lastdew
 		public RichTextLabel Description { get; private set; }
 		private Button UseEquip { get; set; }
 		private Button Drop { get; set; }
+		private TeamData TeamData { get; set; }
 	
 		public override void _Ready()
 		{
@@ -22,6 +23,11 @@ namespace Lastdew
 	
 			UseEquip.Pressed += UseOrEquipItem;
 			Drop.Pressed += DropItem;
+		}
+		
+		public void Initialize(TeamData teamData)
+		{
+			TeamData = teamData;
 		}
 	
 		// TODO: Add amount to display ui.
@@ -42,7 +48,7 @@ namespace Lastdew
 	
 		private void UseOrEquipItem()
 		{
-			Item.OnClickItem();
+			Item.OnClickItem(TeamData.Pcs[TeamData.MenuSelectedIndex]);
 		}
 	
 		private void DropItem()

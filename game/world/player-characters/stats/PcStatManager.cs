@@ -9,13 +9,12 @@ namespace Lastdew
 			Stats = stats;
 		}
 		
-		// Connect with event from equipment manager?
-		private void CalculateStatModifiers(StatAmount[] EquipmentBonuses)
+		public void CalculateStatModifiers(StatAmount[] equipmentBonuses)
 		{
 			foreach (Stat stat in Stats)
 			{
 				stat.ClearModifiers();
-				foreach (StatAmount bonus in EquipmentBonuses)
+				foreach (StatAmount bonus in equipmentBonuses)
 				{
 					if (bonus.Type == stat.Type)
 					{
@@ -24,7 +23,7 @@ namespace Lastdew
 				}
 			}
 			
-			// TODO: Invoke event?
+			// TODO: Invoke event? Have Stat invoke events?
 		}
 	}
 }

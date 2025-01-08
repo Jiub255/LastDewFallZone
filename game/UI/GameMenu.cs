@@ -5,6 +5,7 @@ namespace Lastdew
 	public partial class GameMenu : CanvasLayer
 	{
 		private CharacterTab Character { get; set; }
+		private TeamData TeamData { get; set; }
 	
 		public override void _Ready()
 		{
@@ -13,9 +14,10 @@ namespace Lastdew
 			Character = GetNode<CharacterTab>("%Character");
 		}
 		
-		public void Initialize(InventoryManager inventoryManager)
+		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
-			Character.Initialize(inventoryManager);
+			TeamData = teamData;
+			Character.Initialize(teamData, inventoryManager);
 		}
 	
 		public override void _Input(InputEvent @event)
@@ -31,14 +33,23 @@ namespace Lastdew
 				}
 				else
 				{
-					Hide();
+					CloseMenu();
 				}
 				//Visible = !Visible;
 			}
 			if (@event.IsActionPressed(InputNames.EXIT_MENU))
 			{
-				Hide();
+				CloseMenu();
 			}
+		}
+		
+		private void CloseMenu()
+		{
+			if (TeamData.SelectedIndex != null)
+			{
+				TeamData.MenuSelectedIndex = (int)TeamData.SelectedIndex;
+			}
+			Hide();
 		}
 	}
 }

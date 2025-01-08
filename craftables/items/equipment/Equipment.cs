@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 namespace Lastdew
-{	
+{
 	// TODO: Use enum or subclasses?
 	public enum EquipmentType
 	{
@@ -27,9 +27,9 @@ namespace Lastdew
 			throw new NotImplementedException();
 		}
 	
-		public override void OnClickItem()
+		public override void OnClickItem(PlayerCharacter pc)
 		{
-			throw new NotImplementedException();
+			pc.Equip(this);
 		}
 	}
 }

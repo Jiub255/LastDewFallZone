@@ -11,10 +11,10 @@ namespace Lastdew
 	
 		private int _injury;
 		
-		private int Injury
+		public int Injury
 		{
 			get => _injury;
-			set
+			private set
 			{
 				_injury = value;
 				OnPainChanged?.Invoke();

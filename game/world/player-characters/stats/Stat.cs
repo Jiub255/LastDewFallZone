@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Lastdew
-{	
+{
 	public enum StatType
 	{
 		ATTACK,
@@ -25,6 +25,7 @@ namespace Lastdew
 			set
 			{
 				_baseValue = value;
+				CalculateValue();
 				OnBaseValueChanged?.Invoke();
 			}
 		}
@@ -45,9 +46,16 @@ namespace Lastdew
 			CalculateValue();
 		}
 		
+		public void RemoveModifier(int modifier)
+		{
+			Modifiers.Remove(modifier);
+			CalculateValue();
+		}
+		
 		public void ClearModifiers()
 		{
 			Modifiers.Clear();
+			CalculateValue();
 		}
 		
 		private void CalculateValue()

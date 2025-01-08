@@ -55,7 +55,8 @@
 			"title": "DOING",
 			"tasks": [
 				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
-				"11bf4796-3286-4c96-8087-f5db675bf9ba"
+				"11bf4796-3286-4c96-8087-f5db675bf9ba",
+				"43e7a2a8-de3c-4c98-b01a-927022b66792"
 			]
 		},
 		{
@@ -393,6 +394,13 @@
 			"title": "Setup Equipment System",
 			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "43e7a2a8-de3c-4c98-b01a-927022b66792",
+			"title": "How to set up game menu?",
+			"description": "In-game menus:\n\tEquip\n\tInventory (Usable items)\n\tCrafting\n\tBuilding\n\tGo Scavenging\n\nHave equip and inventory as tabs? Crafting? Building?\nOr just have separate menus for each? How to structure?\nButtons on in-game screen for each menu?\nMaybe have all separate except for equip and inv (and maybe crafting?), since they all involve items?",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

@@ -25,5 +25,18 @@ namespace Lastdew
 			
 			// TODO: Invoke event? Have Stat invoke events?
 		}
+		
+		public bool MeetsRequirements(Equipment equipment)
+		{
+			bool requirementsMet = true;
+			foreach (StatAmount statAmount in equipment.StatRequirements)
+			{
+				if (Stats.GetStatByType(statAmount.Type).Value < statAmount.Amount)
+				{
+					requirementsMet = false;
+				}
+			}
+			return requirementsMet;
+		}
 	}
 }

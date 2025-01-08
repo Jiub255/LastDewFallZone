@@ -41,25 +41,45 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_constants/separation = 100
 
-[node name="CharacterVBox" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
+[node name="CharacterDisplay" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 script = ExtResource("3_j1sv6")
 
-[node name="NameLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterDisplay"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="PreviousButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterDisplay/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Previous"
+
+[node name="NextButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterDisplay/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Next"
+
+[node name="NameLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 bbcode_enabled = true
 text = "[center]James[/center]"
 fit_content = true
 
-[node name="CharacterIcon" type="TextureRect" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterVBox"]
+[node name="CharacterIcon" type="TextureRect" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterDisplay"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("1_w4if1")
 expand_mode = 5
 
-[node name="StatsLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterVBox"]
+[node name="StatsLabel" type="RichTextLabel" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/CharacterDisplay"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3

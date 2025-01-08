@@ -16,9 +16,9 @@ namespace Lastdew
 			throw new NotImplementedException();
 		}
 	
-		public override void OnClickItem()
+		public override void OnClickItem(PlayerCharacter pc)
 		{
-			throw new NotImplementedException();
+			pc.UseItem(this);
 		}
 	}
 }

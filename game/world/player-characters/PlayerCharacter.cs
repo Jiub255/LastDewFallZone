@@ -69,6 +69,10 @@ namespace Lastdew
 		
 		public void Equip(Equipment equipment)
 		{
+			if (!StatManager.MeetsRequirements(equipment))
+			{
+				return;
+			}
 			if (Inventory.HasItem(equipment))
 			{
 				Inventory.RemoveItem(equipment);
@@ -88,6 +92,18 @@ namespace Lastdew
 			if (oldEquipment != null)
 			{
 				Inventory.AddItem(oldEquipment);
+			}
+		}
+		
+		public void UseItem(UsableItem item)
+		{
+			foreach (Effect effect in item.Effects)
+			{
+				effect.ApplyEffect(this);
+			}
+			if (!item.Reusable)
+			{
+				Inventory.RemoveItem(item);
 			}
 		}
 		

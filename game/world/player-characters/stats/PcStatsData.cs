@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Godot;
 
 namespace Lastdew
 {
@@ -21,6 +22,19 @@ namespace Lastdew
 			Farming = new Stat(StatType.FARMING, 1);
 			Medical = new Stat(StatType.MEDICAL, 1);
 			Scavenging = new Stat(StatType.SCAVENGING, 1);
+		}
+		
+		public Stat GetStatByType(StatType type)
+		{
+			foreach (Stat stat in this)
+			{
+				if (stat.Type == type)
+				{
+					return stat;
+				}
+			}
+			GD.PushWarning($"No stat found for type {type}");
+			return null;
 		}
 	
 		public IEnumerator<Stat> GetEnumerator()

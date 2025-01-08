@@ -30,12 +30,20 @@ namespace Lastdew
 			TeamData = teamData;
 		}
 	
-		// TODO: Add amount to display ui.
+		// TODO: Add amount to display ui?
 		public void SetItem(Item item, int amount)
 		{
 			Item = item;
 			ItemDisplay.Texture = item.Icon;
 			Description.Text = item.Description;
+			if (item is UsableItem)
+			{
+				UseEquip.Text = "Use";
+			}
+			else
+			{
+				UseEquip.Text = "Equip";
+			}
 		}
 	
 		public override void _ExitTree()

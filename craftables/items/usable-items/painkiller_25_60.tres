@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UsableItem" load_steps=4 format=3 uid="uid://ca61dv6wk4lrg"]
+
+[ext_resource type="Script" path="res://craftables/items/usable-items/UsableItem.cs" id="1_kewsa"]
+[ext_resource type="Resource" uid="uid://bhc2veoi3wd5o" path="res://craftables/items/usable-items/effects/relieve_pain_25_60.tres" id="1_oi84f"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_2j8lc"]
+
+[resource]
+script = ExtResource("1_kewsa")
+Reusable = false
+Effects = [ExtResource("1_oi84f")]
+ItemRarity = 100
+Tags = [1]
+Name = "Painkiller"
+Description = "Relieves 40 pain for 30 seconds."
+Icon = ExtResource("2_2j8lc")

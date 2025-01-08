@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://game/UI/hud.tscn" id="4_vau40"]
 [ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/TestCraftingMaterial.tres" id="6_n3ykd"]
 [ext_resource type="Script" path="res://craftables/items/ItemAmount.cs" id="7_a57cs"]
-[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/TestUsableItem.tres" id="8_hoib1"]
+[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_60.tres" id="8_hoib1"]
 [ext_resource type="Script" path="res://game/world/player-characters/management/PcManagerBase.cs" id="10_k1oih"]
 [ext_resource type="Script" path="res://game/world/enemies/EnemySpawner.cs" id="11_d3w3s"]
 

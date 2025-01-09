@@ -9,9 +9,9 @@ namespace Lastdew
 		[Export]
 		public EquipmentType Type { get; set; }
 		[Export]
-		public StatAmount[] EquipmentBonuses { get; set; }
+		public StatAmount[] EquipmentBonuses { get; set; } = Array.Empty<StatAmount>();
 		[Export]
-		public StatAmount[] StatRequirements { get; set; }
+		public StatAmount[] StatRequirements { get; set; } = Array.Empty<StatAmount>();
 		
 		public override void OnClickCraftable()
 		{

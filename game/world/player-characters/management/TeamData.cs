@@ -8,9 +8,11 @@ namespace Lastdew
 	public class TeamData
 	{
 		public event Action OnPcsInstantiated;
+		public event Action OnMenuSelectedChanged;
 		
 		private int? _selectedIndex;
 		private List<PlayerCharacter> _pcs = new();
+		private int _menuSelectedIndex;
 
 		// ------------------------ DATA TO SAVE ------------------------
 
@@ -48,8 +50,16 @@ namespace Lastdew
 				}
 			}
 		}
-		public int MenuSelectedIndex { get; set; }
-		
+		public int MenuSelectedIndex
+		{
+			get => _menuSelectedIndex;
+			set
+			{
+				_menuSelectedIndex = value;
+				OnMenuSelectedChanged?.Invoke();
+			}
+		}
+
 		private AllPcScenes AllPcs { get; }
 		
 		public TeamData(AllPcScenes allPcs, List<int> pcIndexes)

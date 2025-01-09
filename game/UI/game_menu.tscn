@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdhbrta7xgaqg"]
+[gd_scene load_steps=8 format=3 uid="uid://bdhbrta7xgaqg"]
 
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_w4if1"]
 [ext_resource type="Script" path="res://game/UI/GameMenu.cs" id="1_wwb6i"]
 [ext_resource type="Script" path="res://game/UI/CharacterTab.cs" id="2_vlrjn"]
 [ext_resource type="Script" path="res://game/UI/CharacterDisplay.cs" id="3_j1sv6"]
+[ext_resource type="Script" path="res://game/UI/EquipmentDisplay.cs" id="5_bae17"]
 [ext_resource type="Script" path="res://game/UI/SelectedItemPanel.cs" id="5_fxjof"]
+[ext_resource type="Script" path="res://game/UI/EquipmentButton.cs" id="6_qutin"]
 
 [node name="GameMenu" type="CanvasLayer"]
 script = ExtResource("1_wwb6i")
@@ -39,7 +41,6 @@ theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
 
 [node name="CharacterDisplay" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -90,6 +91,45 @@ Speed: 5
 Looting: 7
 Injury: 32
 Pain: 14"
+
+[node name="EquipmentDisplay" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+script = ExtResource("5_bae17")
+
+[node name="HeadButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_qutin")
+
+[node name="WeaponButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_qutin")
+
+[node name="BodyButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_qutin")
+
+[node name="FeetButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_qutin")
 
 [node name="ItemsVBox" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer"]
 layout_mode = 2

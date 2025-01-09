@@ -2,7 +2,7 @@ using System;
 using Godot;
 
 namespace Lastdew
-{	
+{
 	public partial class SelectedItemPanel : PanelContainer
 	{
 		public Item Item { get; private set; }

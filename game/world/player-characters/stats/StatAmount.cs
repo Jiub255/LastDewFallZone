@@ -12,6 +12,8 @@ namespace Lastdew
 		[Export]
 		public int Amount { get; set;}
 		
+		public StatAmount(){}
+		
 		public StatAmount(StatType type, int amount)
 		{
 			Type = type;

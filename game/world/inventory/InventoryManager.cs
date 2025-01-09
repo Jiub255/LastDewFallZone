@@ -1,9 +1,11 @@
 
-using System.Diagnostics;
+using System;
 
 namespace Lastdew
 {	public class InventoryManager
 	{
+		public event Action OnInventoryChanged;
+		
 		public InventoryController<CraftingMaterial> CraftingMaterials { get; }
 		public InventoryController<Equipment> Equipment { get; }
 		public InventoryController<UsableItem> UsableItems { get; }
@@ -20,14 +22,17 @@ namespace Lastdew
 			if (item is CraftingMaterial craftingMaterial)
 			{
 				CraftingMaterials.AddItems(craftingMaterial, amount);
+				OnInventoryChanged?.Invoke();
 			}
 			else if (item is Equipment equipment)
 			{
 				Equipment.AddItems(equipment, amount);
+				OnInventoryChanged?.Invoke();
 			}
 			else if (item is UsableItem usableItem)
 			{
 				UsableItems.AddItems(usableItem, amount);
+				OnInventoryChanged?.Invoke();
 			}
 		}
 		
@@ -40,15 +45,24 @@ namespace Lastdew
 		{
 			if (item is CraftingMaterial craftingMaterial)
 			{
-				CraftingMaterials.RemoveItems(craftingMaterial, amount);
+				if (CraftingMaterials.RemoveItems(craftingMaterial, amount))
+				{
+					OnInventoryChanged?.Invoke();
+				}
 			}
 			else if (item is Equipment equipment)
 			{
-				Equipment.RemoveItems(equipment, amount);
+				if (Equipment.RemoveItems(equipment, amount))
+				{
+					OnInventoryChanged?.Invoke();
+				}
 			}
 			else if (item is UsableItem usableItem)
 			{
-				UsableItems.RemoveItems(usableItem, amount);
+				if (UsableItems.RemoveItems(usableItem, amount))
+				{
+					OnInventoryChanged?.Invoke();
+				}
 			}
 		}
 		

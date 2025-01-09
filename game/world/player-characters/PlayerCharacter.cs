@@ -1,9 +1,12 @@
+using System;
 using Godot;
 
 namespace Lastdew
 {	
 	public partial class PlayerCharacter : CharacterBody3D
 	{
+		public event Action OnEquipmentChanged;
+		
 		[Export]
 		public new string Name { get; set; }
 		[Export]
@@ -83,6 +86,10 @@ namespace Lastdew
 			{
 				Inventory.AddItem(oldEquipment);
 			}
+			// TODO: Send equipment changed signal here for UI to catch?
+			// OR, just structure things differently? Like have a database with id and
+			// equipment columns and just have the ui hold on to that data?
+			OnEquipmentChanged?.Invoke();
 		}
 		
 		public void Unequip(EquipmentType equipmentType)

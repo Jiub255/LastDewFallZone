@@ -2,15 +2,15 @@ using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
-{	
+{
 	public partial class CharacterTab : PanelContainer
 	{
-		private TeamData TeamData { get; set; }
 		private InventoryManager InventoryManager { get; set; }
 		private GridContainer ItemsGrid { get; set; }
 		private SelectedItemPanel SelectedItemPanel { get; set; }
 		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>("res://game/UI/item_button.tscn");
 		private CharacterDisplay CharacterDisplay { get; set; }
+		private EquipmentDisplay EquipmentDisplay { get; set; }
 	
 		public override void _Ready()
 		{
@@ -19,13 +19,17 @@ namespace Lastdew
 			ItemsGrid = GetNode<GridContainer>("%ItemsGrid");
 			SelectedItemPanel = GetNode<SelectedItemPanel>("%SelectedItemPanel");
 			CharacterDisplay = GetNode<CharacterDisplay>("%CharacterDisplay");
+			EquipmentDisplay = GetNode<EquipmentDisplay>("%EquipmentDisplay");
 		}
 	
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
-			TeamData = teamData;
 			InventoryManager = inventoryManager;
 			CharacterDisplay.Initialize(teamData);
+			SelectedItemPanel.Initialize(teamData);
+			EquipmentDisplay.Initialize(teamData);
+
+			InventoryManager.OnInventoryChanged += PopulateInventoryUI;
 		}
 	
 		public override void _ExitTree()
@@ -36,9 +40,11 @@ namespace Lastdew
 			{
 				if (child is ItemButton button)
 				{
-					button.OnPressed -= SetupItemDisplay;
+					button.OnPressed -= SelectedItemPanel.SetItem;
 				}
 			}
+			
+			InventoryManager.OnInventoryChanged -= PopulateInventoryUI;
 		}
 	
 		public void PopulateInventoryUI()
@@ -47,7 +53,7 @@ namespace Lastdew
 			{
 				if (child is ItemButton itemButton)
 				{
-					itemButton.OnPressed -= SetupItemDisplay;
+					itemButton.OnPressed -= SelectedItemPanel.SetItem;
 					itemButton.QueueFree();
 				}
 			}
@@ -69,18 +75,13 @@ namespace Lastdew
 			ItemButton button = (ItemButton)ItemButtonScene.Instantiate();
 			ItemsGrid.CallDeferred(GridContainer.MethodName.AddChild, button);
 			button.CallDeferred(ItemButton.MethodName.Initialize, item, amount);
-			button.OnPressed += SetupItemDisplay;
+			button.OnPressed += SelectedItemPanel.SetItem;
 		}
 	
 		private void RemoveButton(ItemButton button)
 		{
-			button.OnPressed -= SetupItemDisplay;
+			button.OnPressed -= SelectedItemPanel.SetItem;
 			button.QueueFree();
-		}
-	
-		private void SetupItemDisplay(Item item, int amount)
-		{
-			SelectedItemPanel.SetItem(item, amount);
 		}
 	}
 }

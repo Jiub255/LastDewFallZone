@@ -1,3 +1,4 @@
+using Godot;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,9 +7,9 @@ namespace Lastdew
 	public class PcEquipment : IEnumerable<Equipment>
 	{
 		public Equipment Head { get; set; }
+		public Equipment Weapon { get; set; }
 		public Equipment Body { get; set; }
 		public Equipment Feet { get; set; }
-		public Equipment Weapon { get; set; }
 		public StatAmount[] Bonuses
 		{
 			get
@@ -16,7 +17,10 @@ namespace Lastdew
 				List<StatAmount> equipmentBonuses = new();
 				foreach (Equipment equipment in this)
 				{
-					equipmentBonuses.AddRange(equipment.EquipmentBonuses);
+					if (equipment != null && equipment.EquipmentBonuses.Length > 0)
+					{
+						equipmentBonuses.AddRange(equipment.EquipmentBonuses);
+					}
 				}
 				return equipmentBonuses.ToArray();
 			}
@@ -27,12 +31,16 @@ namespace Lastdew
 		/// <returns>Whatever was equipped before (null if nothing)</returns>
 		public Equipment Equip(Equipment equipment)
 		{
-			Equipment previous = null;
+			Equipment previous;
 			switch (equipment.Type)
 			{
 				case EquipmentType.HEAD:
 					previous = Head;
 					Head = equipment;
+					break;
+				case EquipmentType.WEAPON:
+					previous = Weapon;
+					Weapon = equipment;
 					break;
 				case EquipmentType.BODY:
 					previous = Body;
@@ -42,9 +50,9 @@ namespace Lastdew
 					previous = Feet;
 					Feet = equipment;
 					break;
-				case EquipmentType.WEAPON:
-					previous = Weapon;
-					Weapon = equipment;
+				default:
+					previous = null;
+					GD.PushWarning($"No equipment slot for type {equipment.Type}");
 					break;
 			}
 			return previous;
@@ -53,12 +61,16 @@ namespace Lastdew
 		/// <returns>Whatever was equipped before (null if nothing)</returns>
 		public Equipment Unequip(EquipmentType equipmentType)
 		{
-			Equipment previous = null;
+			Equipment previous;
 			switch (equipmentType)
 			{
 				case EquipmentType.HEAD:
 					previous = Head;
 					Head = null;
+					break;
+				case EquipmentType.WEAPON:
+					previous = Weapon;
+					Weapon = null;
 					break;
 				case EquipmentType.BODY:
 					previous = Body;
@@ -68,9 +80,9 @@ namespace Lastdew
 					previous = Feet;
 					Feet = null;
 					break;
-				case EquipmentType.WEAPON:
-					previous = Weapon;
-					Weapon = null;
+				default:
+					previous = null;
+					GD.PushWarning($"No equipment slot for type {equipmentType}");
 					break;
 			}
 			return previous;
@@ -79,9 +91,9 @@ namespace Lastdew
 		public IEnumerator<Equipment> GetEnumerator()
 		{
 			yield return Head;
+			yield return Weapon;
 			yield return Body;
 			yield return Feet;
-			yield return Weapon;
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()

@@ -12,8 +12,6 @@ namespace Lastdew
 		[Export]
 		public Texture2D Icon { get; set; }
 		public PcHealth Health { get; private set; }
-		// TODO: How to integrate stats/equipment into combat/health?
-		// Inventory is shared, but equipment and stats should be on the individual pc.
 		public PcStatManager StatManager { get; set; }
 		public PcEquipment Equipment { get; set; }
 		private PcStateMachine StateMachine { get; set; }
@@ -24,7 +22,7 @@ namespace Lastdew
 			PcStateContext context = new(this, inventoryManager);
 			StateMachine = new PcStateMachine(context);
 			Health = new PcHealth();
-			StatManager = new PcStatManager(new PcStatsData());
+			StatManager = new PcStatManager();
 			Equipment = new PcEquipment();
 			Inventory = inventoryManager;
 		}
@@ -56,10 +54,14 @@ namespace Lastdew
 			StateMachine.ChangeState(PcStateNames.MOVEMENT, movementTarget);
 		}
 		
+		/// <summary>
+		/// TODO: Make actual defense formula.
+		/// </summary>
 		/// <returns>true if pc incapacitated</returns>
 		public bool GetHit(Enemy attackingEnemy, int damage)
 		{
-			bool incapacitated = Health.TakeDamage(damage);
+			int actualDamage = damage - StatManager.Defense.Value;
+			bool incapacitated = Health.TakeDamage(actualDamage);
 			StateMachine.GetHit(attackingEnemy, incapacitated);
 			return incapacitated;
 		}

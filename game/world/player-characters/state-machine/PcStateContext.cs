@@ -22,6 +22,10 @@ namespace Lastdew
 			get => PC.Velocity.Length();
 		}
 		public InventoryManager InventoryManager { get; }
+		public int Attack
+		{
+			get => PC.StatManager.Attack.Value;
+		}
 		
 		private PlayerCharacter PC { get; }
 		

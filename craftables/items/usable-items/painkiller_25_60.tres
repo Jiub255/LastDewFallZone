@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://craftables/items/usable-items/UsableItem.cs" id="1_kewsa"]
 [ext_resource type="Resource" uid="uid://bhc2veoi3wd5o" path="res://craftables/items/usable-items/effects/relieve_pain_25_60.tres" id="1_oi84f"]
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_2j8lc"]
+[ext_resource type="Texture2D" uid="uid://yf5l7e24sw2q" path="res://unused-assets/icons/icon_painkillers_blank.png" id="2_hx1gq"]
 
 [resource]
 script = ExtResource("1_kewsa")
@@ -11,5 +11,5 @@ Effects = [ExtResource("1_oi84f")]
 ItemRarity = 100
 Tags = [1]
 Name = "Painkiller"
-Description = "Relieves 40 pain for 30 seconds."
-Icon = ExtResource("2_2j8lc")
+Description = "Relieve pain 25 for 60 seconds"
+Icon = ExtResource("2_hx1gq")

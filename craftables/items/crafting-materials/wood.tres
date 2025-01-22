@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CraftingMaterial" load_steps=3 format=3 uid="uid://duih4refp4eov"]
 
+[ext_resource type="Texture2D" uid="uid://h0aah8cvmen8" path="res://unused-assets/icons/icon_wood.png" id="1_6ocmb"]
 [ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_a5u7i"]
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_k6x2f"]
 
 [resource]
 script = ExtResource("1_a5u7i")
 Reusable = true
 ItemRarity = 100
 Tags = [4]
-Name = "Test crafting material 1"
-Description = "can make thing from it"
-Icon = ExtResource("1_k6x2f")
+Name = "Wood"
+Description = "Comes from trees"
+Icon = ExtResource("1_6ocmb")

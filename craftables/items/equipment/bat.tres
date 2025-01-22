@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=6 format=3 uid="uid://cqajr7dvaj717"]
+
+[ext_resource type="Script" path="res://game/world/player-characters/stats/StatAmount.cs" id="1_bfkib"]
+[ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="1_vbjsr"]
+[ext_resource type="Texture2D" uid="uid://ym4rh5rfmrp8" path="res://unused-assets/icons/icon_bat.png" id="2_eqpav"]
+
+[sub_resource type="Resource" id="Resource_0jxpl"]
+script = ExtResource("1_bfkib")
+Type = 0
+Amount = 2
+
+[sub_resource type="Resource" id="Resource_ar6ko"]
+script = ExtResource("1_bfkib")
+Type = 5
+Amount = 1
+
+[resource]
+script = ExtResource("1_vbjsr")
+Type = 3
+EquipmentBonuses = [SubResource("Resource_0jxpl"), SubResource("Resource_ar6ko")]
+StatRequirements = []
+ItemRarity = 100
+Tags = [0, 2]
+Name = "Baseball Bat"
+Description = "2 Damage, 1 Scavenging, Melee"
+Icon = ExtResource("2_eqpav")

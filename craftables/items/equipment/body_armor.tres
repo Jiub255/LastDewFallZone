@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=5 format=3 uid="uid://bs3r4jknvdnhm"]
+
+[ext_resource type="Script" path="res://game/world/player-characters/stats/StatAmount.cs" id="1_7c7mu"]
+[ext_resource type="Texture2D" uid="uid://ecdhib4xmc61" path="res://unused-assets/icons/icon_body_armor_blank.png" id="2_htjxw"]
+[ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="3_3humt"]
+
+[sub_resource type="Resource" id="Resource_bagsq"]
+script = ExtResource("1_7c7mu")
+Type = 1
+Amount = 2
+
+[resource]
+script = ExtResource("3_3humt")
+Type = 1
+EquipmentBonuses = [SubResource("Resource_bagsq")]
+StatRequirements = []
+ItemRarity = 100
+Tags = [0, 3]
+Name = "Body Armor"
+Description = "2 Defense"
+Icon = ExtResource("2_htjxw")

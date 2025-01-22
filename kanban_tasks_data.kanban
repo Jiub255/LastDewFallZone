@@ -30,7 +30,9 @@
 				"83757feb-77db-46c7-a1ac-e076ea02903b",
 				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
 				"16b4dbab-1c67-4a4b-af3a-be1d31a17467",
-				"4057ff66-af0f-496c-983d-8abfe7ddf0b3"
+				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
+				"844550fe-e567-461c-9da6-129cb0ef35fc",
+				"2d06c068-737d-437a-b839-676244c60b7d"
 			]
 		},
 		{
@@ -38,6 +40,7 @@
 			"title": "TODO",
 			"tasks": [
 				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
+				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
 				"99a74741-f3a9-450e-a0a4-444bacae30fc",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"da6960b9-4241-48f4-8e32-984ebd5dba84",
@@ -45,16 +48,15 @@
 				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
-				"30d813ed-f012-4fd7-b422-8ed68af1b530"
+				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
 				"43e7a2a8-de3c-4c98-b01a-927022b66792",
-				"3bc586d1-36f7-43e3-83f5-94273c8a79c4"
+				"30d813ed-f012-4fd7-b422-8ed68af1b530"
 			]
 		},
 		{
@@ -76,7 +78,8 @@
 				"da048501-b90d-4b8b-997d-87a79f921cdb",
 				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
 				"32eafed9-d72c-419c-b15f-690c3e0b0518",
-				"11bf4796-3286-4c96-8087-f5db675bf9ba"
+				"11bf4796-3286-4c96-8087-f5db675bf9ba",
+				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7"
 			]
 		},
 		{
@@ -205,7 +208,7 @@
 		{
 			"uuid": "da6960b9-4241-48f4-8e32-984ebd5dba84",
 			"title": "Crafting Menu/Manager",
-			"description": "",
+			"description": "Need to figure out how to handle recipe costs and such first. Database? Enum ids? String ids? int ids?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -357,7 +360,7 @@
 		{
 			"uuid": "30d813ed-f012-4fd7-b422-8ed68af1b530",
 			"title": "Game state machine?",
-			"description": "States:\n\tHome\n\tHome-defense\n\tScavenging\n\tMenus?\n\nCould pipe input in specific ways depending on which state. Might be a clean way to deal with different inputs for different scenarios.\n\nOr, maybe just put inputs on the objects they affect, like in the pc states, and have whichever scene is active dictate the \"game state\". For menus, just disable player input while they're open? ",
+			"description": "States:\n\tHome\n\tHome-defense\n\tScavenging - Maybe combine with Home-defense as Combat?\n\tMenus\n\tBuilding\n\nCould pipe input in specific ways depending on which state. Might be a clean way to deal with different inputs for different scenarios.\n\nOr, maybe just put inputs on the objects they affect, like in the pc states, and have whichever scene is active dictate the \"game state\". For menus, just disable player input while they're open? ",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -401,6 +404,27 @@
 			"title": "Make/Modify resource editor tool",
 			"description": "ResourceTables plugin is close, but need to be able to add enums, bools, textures, etc.\nAlso be able to quickly copy or make new resources.\nWould it be possible to use enums as ids? Like have a big ol enum with all the craftables' names, and\n\twhen you create a new craftable using the tool, it automatically adds the craftable's name to the enum.\n\tIt would make selecting the recipe costs, required buildings, and scrap results a lot easier (autofill in vscode, no int ids)  and safer (no strings). Would only have to do it for CraftingMaterials and Buildings, so it might not end up being too many enums.\n\tMaybe could have the Export string Name, then use the tool script to grab that and put it in the enum?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "844550fe-e567-461c-9da6-129cb0ef35fc",
+			"title": "Home Bases",
+			"description": "Maybe have different home bases to choose from instead of a boring blank one like in LSDZ.\nCould have a few starter bases to choose from. Like an old warehouse, a more tucked away naturey one, whatever.\nCould also maybe switch bases later to something better you find? Like a prison or something more secure?",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
+			"title": "Make text localizable",
+			"description": "How to do it?\nStatic classes with public const strings aren't gonna work well, need to pull it from some database. JSON?\n\nitem id --> name/description from text database, stats/icon/other data from item data database?\nOr keep all data together and have a simple way to extract/change/inject just the text, kinda SQL style?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "2d06c068-737d-437a-b839-676244c60b7d",
+			"title": "Secrets",
+			"description": "Have secret loot spots that aren't highlighted when you hover over them, but they might look suspicious.\nMaybe have some rare random scavenging runs where no enemies come and there's extra good loot.\n\tMaybe force one to happen in the first 30 runs or whatever to help new players.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

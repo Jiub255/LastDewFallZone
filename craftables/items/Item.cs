@@ -6,7 +6,7 @@ namespace Lastdew
 	{
 		[Export]
 		public Rarity ItemRarity { get; private set; } = Rarity.COMMON;
-		// Only using Godot array so it'll work in editor.
+		// Only using Godot array so it'll work in editor. Because it's an array of enums?`                                                                                                                                                                                                                
 		[Export]
 		public Godot.Collections.Array<ItemTags> Tags { get; private set; } = new Godot.Collections.Array<ItemTags> { };
 	

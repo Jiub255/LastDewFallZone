@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=5 format=3 uid="uid://q67jgrb6txg0"]
+
+[ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="1_rqv4s"]
+[ext_resource type="Script" path="res://game/world/player-characters/stats/StatAmount.cs" id="1_w21bd"]
+[ext_resource type="Texture2D" uid="uid://cob4eppc2j7p2" path="res://unused-assets/icons/icon_helmet_blank.png" id="2_ikr7h"]
+
+[sub_resource type="Resource" id="Resource_sm8xk"]
+script = ExtResource("1_w21bd")
+Type = 1
+Amount = 1
+
+[resource]
+script = ExtResource("1_rqv4s")
+Type = 0
+EquipmentBonuses = [SubResource("Resource_sm8xk")]
+StatRequirements = []
+ItemRarity = 100
+Tags = [0, 3]
+Name = "Helmet"
+Description = "1 Defense"
+Icon = ExtResource("2_ikr7h")

@@ -50,7 +50,7 @@ namespace Lastdew
 			string statText = "";
 			statText += $"Injury: {pc.Health.Injury}\n";
 			statText += $"Pain: {pc.Health.Pain}\n";
-			foreach (Stat stat in pc.StatManager.Stats)
+			foreach (Stat stat in pc.StatManager)
 			{
 				statText += $"{stat.Type}: {stat.Value}\n";
 			}

@@ -25,6 +25,7 @@ namespace Lastdew
 			}
 		}
 		
+		/// <returns>true if item was able to be removed</returns>
 		public bool RemoveItems(T item, int amount)
 		{
 			if (Inventory.ContainsKey(item))

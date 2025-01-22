@@ -5,7 +5,6 @@ namespace Lastdew
 	public partial class PcStateAttacking : PcCombatSubstate
 	{
 		private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
-		private int AttackPower { get; } = 1;
 		
 		public PcStateAttacking(PcStateContext context) : base(context)
 		{
@@ -43,7 +42,8 @@ namespace Lastdew
 		/// <returns>true if hit killed enemy</returns>
 		public bool HitEnemy(PlayerCharacter attackingPC)
 		{
-			return Target.GetHit(AttackPower, attackingPC);
+			int attack = Context.Attack;
+			return Target.GetHit(attack, attackingPC);
 		}
 		
 		private void OnAnimationFinished(string animationName)

@@ -4,7 +4,7 @@ namespace Lastdew
 {
 	public partial class Game : Node
 	{
-		// TODO: Implement InputManager and GameStateMachine, use them here. Not sure how yet.
+		// TODO: Redo using active scene instead of state machine for now.
 		private GameStateMachine GameStateMachine { get; } = new();
 
 		public override void _Input(InputEvent @event)

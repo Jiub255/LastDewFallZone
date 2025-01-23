@@ -167,8 +167,8 @@ layout_mode = 2
 
 [node name="ItemIcon" type="TextureRect" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(229, 229)
 layout_mode = 2
-texture = ExtResource("1_w4if1")
 expand_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer"]
@@ -180,9 +180,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Description of the item. Blakasjd advasjdvoaijsen asdlkva ns;dlvsaidjva esvsanlkdvoais evasldv asdvj las.
-Relieve pain 50 for 60 seconds. or
-Attack: 30 blah blah"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -192,22 +189,15 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Use/Equip"
 
 [node name="DropButton" type="Button" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Drop"
+text = "	Drop"
 
 [node name="Crafting" type="PanelContainer" parent="MarginContainer/TabContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
-
-[node name="Building" type="PanelContainer" parent="MarginContainer/TabContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2

@@ -31,18 +31,23 @@ namespace Lastdew
 			
 			Previous.Pressed -= PreviousPc;
 			Next.Pressed -= NextPc;
+			TeamData.OnMenuSelectedChanged -= SetupDisplay;
 		}
 
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
+			teamData.OnMenuSelectedChanged += SetupDisplay;
+			SetupDisplay();
 		}
 
-		public void SetupDisplay(PlayerCharacter pc)
+		public void SetupDisplay()
 		{
+			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
 			NameLabel.Text = pc.Name;
 			CharacterIcon.Texture = pc.Icon;
 			SetupStatsLabel(pc);
+			pc.OnEquipmentChanged += SetupDisplay;
 		}
 
 		private void SetupStatsLabel(PlayerCharacter pc)
@@ -52,26 +57,36 @@ namespace Lastdew
 			statText += $"Pain: {pc.Health.Pain}\n";
 			foreach (Stat stat in pc.StatManager)
 			{
-				statText += $"{stat.Type}: {stat.Value}\n";
+				statText += $"{stat.Type.ToString().ToPascalCase()}: {stat.Value}\n";
 			}
 			StatsLabel.Text = statText;
 		}
 		
 		private void PreviousPc()
 		{
-			TeamData.MenuSelectedIndex--;
-			if (TeamData.MenuSelectedIndex < 0)
+			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
+			pc.OnEquipmentChanged -= SetupDisplay;
+			if (TeamData.MenuSelectedIndex == 0)
 			{
 				TeamData.MenuSelectedIndex = TeamData.Pcs.Count - 1;
+			}
+			else
+			{
+				TeamData.MenuSelectedIndex--;
 			}
 		}
 		
 		private void NextPc()
 		{
-			TeamData.MenuSelectedIndex++;
-			if (TeamData.MenuSelectedIndex > TeamData.Pcs.Count - 1)
+			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
+			pc.OnEquipmentChanged -= SetupDisplay;
+			if (TeamData.MenuSelectedIndex == TeamData.Pcs.Count - 1)
 			{
 				TeamData.MenuSelectedIndex = 0;
+			}
+			else
+			{
+				TeamData.MenuSelectedIndex++;
 			}
 		}
 	}

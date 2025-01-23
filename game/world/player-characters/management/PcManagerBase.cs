@@ -7,26 +7,31 @@ namespace Lastdew
 	public partial class PcManagerBase : Node3D
 	{
 		private TeamData TeamData { get; set; }
+		private bool Started { get; set; }
 		
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
 			TeamData = teamData;
 			TeamData.SpawnPcs(this, inventoryManager);
+			Started = true;
 		}
 		
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
 
-			for (int i = 0; i < TeamData.Pcs.Count; i++)
+			if (Started)
 			{
-				if (i == TeamData.SelectedIndex)
+				for (int i = 0; i < TeamData.Pcs.Count; i++)
 				{
-					TeamData.Pcs[i].ProcessSelected(delta);
-				}
-				else
-				{
-					TeamData.Pcs[i].ProcessUnselected(delta);
+					if (i == TeamData.SelectedIndex)
+					{
+						TeamData.Pcs[i].ProcessSelected(delta);
+					}
+					else
+					{
+						TeamData.Pcs[i].ProcessUnselected(delta);
+					}
 				}
 			}
 		}
@@ -35,15 +40,18 @@ namespace Lastdew
 		{
 			base._PhysicsProcess(delta);
 
-			for (int i = 0; i < TeamData.Pcs.Count; i++)
+			if (Started)
 			{
-				if (i == TeamData.SelectedIndex)
+				for (int i = 0; i < TeamData.Pcs.Count; i++)
 				{
-					TeamData.Pcs[i].PhysicsProcessSelected(delta);
-				}
-				else
-				{
-					TeamData.Pcs[i].PhysicsProcessUnselected(delta);
+					if (i == TeamData.SelectedIndex)
+					{
+						TeamData.Pcs[i].PhysicsProcessSelected(delta);
+					}
+					else
+					{
+						TeamData.Pcs[i].PhysicsProcessUnselected(delta);
+					}
 				}
 			}
 		}
@@ -60,16 +68,7 @@ namespace Lastdew
 		
 		public void SelectPc(PlayerCharacter pc)
 		{
-			int pcIndex = TeamData.Pcs.IndexOf(pc);
-			if (pcIndex == -1)
-			{
-				TeamData.SelectedIndex = null;
-				GD.PushWarning($"{pc.Name} not found in TeamData.Pcs.");
-			}
-			else
-			{
-				TeamData.SelectedIndex = pcIndex;
-			}
+			TeamData.SelectPc(pc);
 		}
 		
 		public void DeselectPc()

@@ -1,10 +1,15 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lastdew
 {
 	public partial class EquipmentDisplay : VBoxContainer
 	{
+		public List<Button> Buttons
+		{
+			get => ButtonsByType.Values.ToList<Button>();
+		}
 		private TeamData TeamData { get; set; }
 		private Dictionary<EquipmentType, EquipmentButton> ButtonsByType { get; set; } = new();
 		private PlayerCharacter PC { get; set; }

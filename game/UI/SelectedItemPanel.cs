@@ -5,11 +5,11 @@ namespace Lastdew
 {
 	public partial class SelectedItemPanel : PanelContainer
 	{
-		public Item Item { get; private set; }
+		public ItemButton ItemButton { get; private set; }
 		public TextureRect ItemDisplay { get; private set; }
 		public RichTextLabel Description { get; private set; }
-		private Button UseEquip { get; set; }
-		private Button Drop { get; set; }
+		public Button UseEquip { get; private set; }
+		public Button Drop { get; private set; }
 		private TeamData TeamData { get; set; }
 	
 		public override void _Ready()
@@ -31,19 +31,30 @@ namespace Lastdew
 		}
 	
 		// TODO: Add amount to display ui?
-		public void SetItem(Item item, int amount)
+		public void SetItem(ItemButton itemButton)
 		{
-			Item = item;
-			ItemDisplay.Texture = item.Icon;
-			Description.Text = item.Description;
-			if (item is UsableItem)
+			ItemButton = itemButton;
+			ItemDisplay.Texture = itemButton.Item.Icon;
+			Description.Text = itemButton.Item.Description;
+			UseEquip.Visible = true;
+			Drop.Visible = true;
+			if (itemButton.Item is UsableItem)
 			{
 				UseEquip.Text = "Use";
 			}
-			else
+			else if (itemButton.Item is Equipment)
 			{
 				UseEquip.Text = "Equip";
 			}
+		}
+		
+		public void ClearItem()
+		{
+			ItemButton = null;
+			ItemDisplay.Texture = null;
+			Description.Text = "";
+			UseEquip.Visible = false;
+			Drop.Visible = false;
 		}
 	
 		public override void _ExitTree()
@@ -56,7 +67,13 @@ namespace Lastdew
 	
 		private void UseOrEquipItem()
 		{
-			Item.OnClickItem(TeamData.Pcs[TeamData.MenuSelectedIndex]);
+			ItemButton.Item.OnClickItem(TeamData.Pcs[TeamData.MenuSelectedIndex]);
+			// TODO: Clear display (or go to next item?) after using last item in stack/equipping something.
+			ItemButton.Decrement();
+			if (ItemButton.Amount == 0)
+			{
+				ClearItem();
+			}
 		}
 	
 		private void DropItem()

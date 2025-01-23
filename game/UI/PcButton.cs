@@ -5,10 +5,10 @@ namespace Lastdew
 {	
 	public partial class PcButton : Button
 	{
-		public event Action OnClickPc;
-		
 		private new TextureRect Icon { get; set; }
 		private new RichTextLabel Name { get; set; }
+		private PlayerCharacter PC { get; set; }
+		private TeamData TeamData { get; set; }
 	
 		public override void _Ready()
 		{
@@ -27,15 +27,17 @@ namespace Lastdew
 			Pressed -= SelectPc;
 		}
 		
-		public void Setup(Texture2D icon, string name)
+		public void Setup(PlayerCharacter pc, TeamData teamData)
 		{
-			Icon.Texture = icon;
-			Name.Text = name;
+			Icon.Texture = pc.Icon;
+			Name.Text = pc.Name;
+			PC = pc;
+			TeamData = teamData;
 		}
 		
 		private void SelectPc()
 		{
-			OnClickPc?.Invoke();
+			TeamData.SelectPc(PC);
 		}
 	}
 }

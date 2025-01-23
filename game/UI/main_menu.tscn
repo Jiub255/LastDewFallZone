@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://c7w0406ngl5dr"]
+[gd_scene load_steps=2 format=3 uid="uid://c7w0406ngl5dr"]
+
+[ext_resource type="Script" path="res://game/UI/MainMenu.cs" id="1_iggh1"]
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_iggh1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -28,26 +31,27 @@ text = "Last Dew: Fall Zone"
 fit_content = true
 autowrap_mode = 0
 
-[node name="ContinueButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+[node name="Continue" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Continue"
 
-[node name="LoadButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+[node name="LoadGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Load Game"
 
-[node name="NewButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+[node name="NewGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "New Game"
 
-[node name="SettingsButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="CreditsButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+[node name="Credits" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Credits"
 
-[node name="ExitButton" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"

@@ -5,7 +5,11 @@ using System.Collections.ObjectModel;
 
 namespace Lastdew
 {
-	public class TeamData
+	/// <summary>
+	/// TODO: Only inheriting RefCounted to get passed in a CallDeferred in Hud class.
+	/// Hopefully find a better way eventually.
+	/// </summary>
+	public partial class TeamData : RefCounted
 	{
 		public event Action OnPcsInstantiated;
 		public event Action OnMenuSelectedChanged;
@@ -79,6 +83,20 @@ namespace Lastdew
 				_pcs.Add(pc);
 			}
 			OnPcsInstantiated?.Invoke();
+		}
+		
+		public void SelectPc(PlayerCharacter pc)
+		{
+			int pcIndex = Pcs.IndexOf(pc);
+			if (pcIndex == -1)
+			{
+				SelectedIndex = null;
+				GD.PushWarning($"{pc.Name} not found in TeamData.Pcs.");
+			}
+			else
+			{
+				SelectedIndex = pcIndex;
+			}
 		}
 	}
 }

@@ -12,5 +12,7 @@ namespace Lastdew
 		public const string DESELECT = "deselect";
 		public const string GAME_MENU = "game_menu";
 		public const string EXIT_MENU = "exit_menu";
+		public const string MAIN_MENU = "main_menu";
+		public const string BUILD_MENU = "build_menu";
 	}
 }

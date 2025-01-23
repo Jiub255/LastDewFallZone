@@ -2,7 +2,7 @@ using Godot;
 
 namespace Lastdew
 {	
-	public partial class GameMenu : CanvasLayer
+	public partial class GameMenu : Menu
 	{
 		private CharacterTab Character { get; set; }
 		private TeamData TeamData { get; set; }
@@ -19,37 +19,22 @@ namespace Lastdew
 			TeamData = teamData;
 			Character.Initialize(teamData, inventoryManager);
 		}
-	
-		public override void _Input(InputEvent @event)
+		
+		public override void Open()
 		{
-			base._Input(@event);
+			base.Open();
 			
-			if (@event.IsActionPressed(InputNames.GAME_MENU))
-			{
-				if (!Visible)
-				{
-					Character.PopulateInventoryUI();
-					Show();
-				}
-				else
-				{
-					CloseMenu();
-				}
-				//Visible = !Visible;
-			}
-			if (@event.IsActionPressed(InputNames.EXIT_MENU))
-			{
-				CloseMenu();
-			}
+			Character.PopulateInventoryUI();
 		}
 		
-		private void CloseMenu()
+		public override void Close()
 		{
+			base.Close();
+			
 			if (TeamData.SelectedIndex != null)
 			{
 				TeamData.MenuSelectedIndex = (int)TeamData.SelectedIndex;
 			}
-			Hide();
 		}
 	}
 }

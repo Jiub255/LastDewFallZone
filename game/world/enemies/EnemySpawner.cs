@@ -10,17 +10,19 @@ namespace Lastdew
 		private float TimeBetweenSpawns { get; } = 2f;
 		private float Timer { get; set; } = 0.25f;
 		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>("res://game/world/enemies/enemy_TEST.tscn");
+		private bool Started { get; set; }
 		
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
+			Started = true;
 		}
 
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
 
-			if (EnemiesToSpawn > 0)
+			if (Started && EnemiesToSpawn > 0)
 			{
 				Timer -= (float)delta;
 				if (Timer < 0)

@@ -41,11 +41,11 @@
 			"tasks": [
 				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
 				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
-				"99a74741-f3a9-450e-a0a4-444bacae30fc",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"da6960b9-4241-48f4-8e32-984ebd5dba84",
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
-				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
+				"bc28b844-8360-4095-b52b-105b42061993",
+				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c"
@@ -56,7 +56,8 @@
 			"title": "DOING",
 			"tasks": [
 				"43e7a2a8-de3c-4c98-b01a-927022b66792",
-				"30d813ed-f012-4fd7-b422-8ed68af1b530"
+				"30d813ed-f012-4fd7-b422-8ed68af1b530",
+				"99a74741-f3a9-450e-a0a4-444bacae30fc"
 			]
 		},
 		{
@@ -79,7 +80,9 @@
 				"5b5b66d8-1a46-41cc-aee2-b9354f5dbe0a",
 				"32eafed9-d72c-419c-b15f-690c3e0b0518",
 				"11bf4796-3286-4c96-8087-f5db675bf9ba",
-				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7"
+				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
+				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
+				"780d7cee-87be-40cc-9254-9173f4a9d2dd"
 			]
 		},
 		{
@@ -360,7 +363,7 @@
 		{
 			"uuid": "30d813ed-f012-4fd7-b422-8ed68af1b530",
 			"title": "Game state machine?",
-			"description": "States:\n\tHome\n\tHome-defense\n\tScavenging - Maybe combine with Home-defense as Combat?\n\tMenus\n\tBuilding\n\nCould pipe input in specific ways depending on which state. Might be a clean way to deal with different inputs for different scenarios.\n\nOr, maybe just put inputs on the objects they affect, like in the pc states, and have whichever scene is active dictate the \"game state\". For menus, just disable player input while they're open? ",
+			"description": "States:\n\tHome\n\tHome-defense\n\tScavenging - Maybe combine with Home-defense as Combat?\n\tMenus\n\tBuilding\n\nCould pipe input in specific ways depending on which state. Might be a clean way to deal with different inputs for different scenarios.\n\nOr, maybe just put inputs on the objects they affect, like in the pc states, and have whichever scene is active dictate the \"game state\". For menus, just disable player input while they're open? \n\tProbably just do this for now. Can do states if it seems useful later. \n\tMaybe have a state machine for the home scene, since scavenging scenes are all combat and menus.\n\t\tBuilding\n\t\tHome-safe\n\t\tHome-combat\n\t\tMenus (not a state probably)",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -425,6 +428,27 @@
 			"title": "Secrets",
 			"description": "Have secret loot spots that aren't highlighted when you hover over them, but they might look suspicious.\nMaybe have some rare random scavenging runs where no enemies come and there's extra good loot.\n\tMaybe force one to happen in the first 30 runs or whatever to help new players.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "780d7cee-87be-40cc-9254-9173f4a9d2dd",
+			"title": "How to change scenes?",
+			"description": "Could have the base world node, with:\n\tMenus\n\tCameraRig\t\n\tPcManager\n\nAnd then just load in whatever physical scene, which has:\n\tDirectionalLight3D\n\tNavigationRegion3D\n\t\tWhatever physical things here, ground, walls, etc.\n\t\tEnemySpawner",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "bc28b844-8360-4095-b52b-105b42061993",
+			"title": "SFX/Music",
+			"description": "AudioManager? How to handle audio?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
+			"title": "Settings/Options",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

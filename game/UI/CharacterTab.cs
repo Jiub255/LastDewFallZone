@@ -20,6 +20,12 @@ namespace Lastdew
 			SelectedItemPanel = GetNode<SelectedItemPanel>("%SelectedItemPanel");
 			CharacterDisplay = GetNode<CharacterDisplay>("%CharacterDisplay");
 			EquipmentDisplay = GetNode<EquipmentDisplay>("%EquipmentDisplay");
+
+			SelectedItemPanel.UseEquip.Pressed += CharacterDisplay.SetupDisplay;
+			foreach(Button button in EquipmentDisplay.Buttons)
+			{
+				button.Pressed += CharacterDisplay.SetupDisplay;
+			}
 		}
 	
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
@@ -45,6 +51,12 @@ namespace Lastdew
 			}
 			
 			InventoryManager.OnInventoryChanged -= PopulateInventoryUI;
+			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.SetupDisplay;
+			
+			foreach(Button button in EquipmentDisplay.Buttons)
+			{
+				button.Pressed -= CharacterDisplay.SetupDisplay;
+			}
 		}
 	
 		public void PopulateInventoryUI()
@@ -65,6 +77,17 @@ namespace Lastdew
 			foreach (KeyValuePair<Equipment, int> equipment in InventoryManager.Equipment.Inventory)
 			{
 				SetupButton(equipment.Key, equipment.Value);
+			}
+			
+			foreach (Node child in ItemsGrid.GetChildren())
+			{
+				if (child is ItemButton itemButton)
+				{
+					//itemButton.GrabClickFocus();
+					SelectedItemPanel.SetItem(itemButton);
+					break;
+				}
+				SelectedItemPanel.ClearItem();
 			}
 		}
 	

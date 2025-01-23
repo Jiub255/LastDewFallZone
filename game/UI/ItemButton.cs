@@ -5,7 +5,7 @@ namespace Lastdew
 {	
 	public partial class ItemButton : Button
 	{
-		public event Action<Item, int> OnPressed;
+		public event Action<ItemButton> OnPressed;
 		
 		public Item Item { get; private set; }
 		public int Amount { get; private set; }
@@ -35,9 +35,18 @@ namespace Lastdew
 			Pressed += PressButton;
 		}
 		
+		public void Decrement()
+		{
+			Amount--;
+			if (Amount == 0)
+			{
+				
+			}
+		}
+		
 		private void PressButton()
 		{
-			OnPressed?.Invoke(Item, Amount);
+			OnPressed?.Invoke(this);
 		}
 	}
 }

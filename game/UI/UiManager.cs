@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 namespace Lastdew
 {
@@ -9,6 +8,7 @@ namespace Lastdew
 		public Hud Hud { get; private set; }
 		public GameMenu GameMenu { get; private set; }
 		public BuildMenu BuildMenu { get; private set; }
+		public MapMenu MapMenu { get; private set; }
 		private bool AnyMenuOpen { get; set; }
 		
 		public override void _Ready()
@@ -17,6 +17,7 @@ namespace Lastdew
 			Hud = GetNode<Hud>("%HUD");
 			GameMenu = GetNode<GameMenu>("%GameMenu");
 			BuildMenu = GetNode<BuildMenu>("%BuildMenu");
+			MapMenu = GetNode<MapMenu>("%MapMenu");
 		}
 	
 		public override void _Input(InputEvent @event)
@@ -36,6 +37,10 @@ namespace Lastdew
 			else if (@event.IsActionPressed(InputNames.BUILD_MENU))
 			{
 				Toggle(BuildMenu);
+			}
+			else if (@event.IsActionPressed(InputNames.MAP_MENU))
+			{
+				Toggle(MapMenu);
 			}
 			else if (@event.IsActionPressed(InputNames.MAIN_MENU))
 			{
@@ -80,6 +85,7 @@ namespace Lastdew
 		{
 			GameMenu.Close();
 			BuildMenu.Close();
+			MapMenu.Close();
 			MainMenu.Close();
 			
 			Hud.Open();

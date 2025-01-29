@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://4mxch05l0jh3"]
+
+[ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="1_ht8ij"]
+
+[resource]
+script = ExtResource("1_ht8ij")
+Type = 0
+EquipmentBonuses = []
+StatRequirementsToUse = []
+ItemRarity = 100
+Tags = []
+Name = "Test EQ"
+Description = "sefesfsef"
+_recipeCosts = null
+_requiredBuildings = null
+_statRequirements = null
+_scrapResults = null

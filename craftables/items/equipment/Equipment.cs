@@ -3,7 +3,7 @@ using System;
 
 namespace Lastdew
 {
-    [GlobalClass]
+	[GlobalClass, Tool]
 	public partial class Equipment : Item
 	{
 		[Export]
@@ -11,7 +11,9 @@ namespace Lastdew
 		[Export]
 		public StatAmount[] EquipmentBonuses { get; set; } = Array.Empty<StatAmount>();
 		[Export]
-		public StatAmount[] StatRequirements { get; set; } = Array.Empty<StatAmount>();
+		public StatAmount[] StatRequirementsToUse { get; set; } = Array.Empty<StatAmount>();
+		
+		public Equipment(){}
 		
 		public override void OnClickCraftable()
 		{

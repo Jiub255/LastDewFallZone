@@ -32,14 +32,15 @@
 				"16b4dbab-1c67-4a4b-af3a-be1d31a17467",
 				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
 				"844550fe-e567-461c-9da6-129cb0ef35fc",
-				"2d06c068-737d-437a-b839-676244c60b7d"
+				"2d06c068-737d-437a-b839-676244c60b7d",
+				"43e7a2a8-de3c-4c98-b01a-927022b66792",
+				"841db010-8366-48bb-8111-d5aa9e7ce5c4"
 			]
 		},
 		{
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "TODO",
 			"tasks": [
-				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
 				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"da6960b9-4241-48f4-8e32-984ebd5dba84",
@@ -48,16 +49,17 @@
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
-				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c"
+				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
+				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
+				"736f3cd4-0e90-4a80-a00f-326e61a820fe"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"43e7a2a8-de3c-4c98-b01a-927022b66792",
-				"30d813ed-f012-4fd7-b422-8ed68af1b530",
-				"99a74741-f3a9-450e-a0a4-444bacae30fc"
+				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
+				"d287994c-6ba3-46f0-bc96-4056d2a54906"
 			]
 		},
 		{
@@ -82,7 +84,9 @@
 				"11bf4796-3286-4c96-8087-f5db675bf9ba",
 				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
 				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
-				"780d7cee-87be-40cc-9254-9173f4a9d2dd"
+				"780d7cee-87be-40cc-9254-9173f4a9d2dd",
+				"99a74741-f3a9-450e-a0a4-444bacae30fc",
+				"30d813ed-f012-4fd7-b422-8ed68af1b530"
 			]
 		},
 		{
@@ -93,7 +97,8 @@
 				"9a00e51e-1668-4781-b4a8-bd3723ea6fd5",
 				"78d7226e-ba3e-4a00-8101-5f7398c1be57",
 				"489d060a-da4b-42e5-a578-3d40940c7958",
-				"dffc8eab-7892-4f42-a5c9-64fee165246f"
+				"dffc8eab-7892-4f42-a5c9-64fee165246f",
+				"e6c0f68c-f6fd-4517-95a1-a48f1f10450c"
 			]
 		},
 		{
@@ -155,7 +160,7 @@
 		{
 			"uuid": "78d7226e-ba3e-4a00-8101-5f7398c1be57",
 			"title": "PC Rotation working strangely",
-			"description": "FIXED my dumbass was reflecting the lookTarget across the origin for some reason, stopped with that nonsense and it works great.\nVery slowly rotating to face the direction of movement. Doesn't seem affected by turn speed at all. Not sure what's happening. ",
+			"description": "FIXED I was reflecting the lookTarget across the origin for some reason, stopped with that nonsense and it works great.\nVery slowly rotating to face the direction of movement. Doesn't seem affected by turn speed at all. Not sure what's happening. ",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -363,7 +368,7 @@
 		{
 			"uuid": "30d813ed-f012-4fd7-b422-8ed68af1b530",
 			"title": "Game state machine?",
-			"description": "States:\n\tHome\n\tHome-defense\n\tScavenging - Maybe combine with Home-defense as Combat?\n\tMenus\n\tBuilding\n\nCould pipe input in specific ways depending on which state. Might be a clean way to deal with different inputs for different scenarios.\n\nOr, maybe just put inputs on the objects they affect, like in the pc states, and have whichever scene is active dictate the \"game state\". For menus, just disable player input while they're open? \n\tProbably just do this for now. Can do states if it seems useful later. \n\tMaybe have a state machine for the home scene, since scavenging scenes are all combat and menus.\n\t\tBuilding\n\t\tHome-safe\n\t\tHome-combat\n\t\tMenus (not a state probably)",
+			"description": "States:\n\tHome\n\tHome-defense\n\tScavenging - Maybe combine with Home-defense as Combat?\n\tMenus\n\tBuilding\n\nCould pipe input in specific ways depending on which state. Might be a clean way to deal with different inputs for different scenarios.\n\nOr, maybe just put inputs on the objects they affect, like in the pc states, and have whichever scene is active dictate the \"game state\". For menus, just disable player input while they're open? \n\tProbably just do this for now. Can do states if it seems useful later. \n\tMaybe have a state machine for the home scene, since scavenging scenes are all combat and menus.\n\t\tBuilding\n\t\tHome-safe\n\t\tHome-combat\n\t\tMenus (not a state probably)\nCould actually do all this without states. Just pause for building mode/menus, and combat state with only be entered when there are enemies around, so that's already taken care of. ",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -398,7 +403,7 @@
 		{
 			"uuid": "43e7a2a8-de3c-4c98-b01a-927022b66792",
 			"title": "How to set up game menu?",
-			"description": "In-game menus:\n\tEquip\n\tInventory (Usable items)\n\tCrafting\n\tBuilding\n\tGo Scavenging\n\nHave equip and inventory as tabs? Crafting? Building?\nOr just have separate menus for each? How to structure?\nButtons on in-game screen for each menu?\nMaybe have all separate except for equip and inv (and maybe crafting?), since they all involve items?\n\nAlso, how to display equipment menu? Start with standard draggable icons?",
+			"description": "In-game menus:\n\tEquip\n\tInventory (Usable items)\n\tCrafting\n\tBuilding\n\tGo Scavenging (Map)\n\nHave:\nsave/load/options/quit menu\nChar/Inv 2-tab menu:\n\tCharacter/equip/useitems tab\n\tCrafting tab\nBuilding menu\n\tBasically different game mode/HUD around normal home base scene\nScavenging Map menu\n\tNot sure how to do this yet. Start with basic clickable map like LSDZ.\n",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -449,6 +454,41 @@
 			"title": "Settings/Options",
 			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "253ce29b-f64e-411f-86cb-762cfffd0f1e",
+			"title": "Make camera drag follow mouse",
+			"description": "Instead of it going a fixed speed, have it so the mouse stay at the same point on the ground as you drag. It'll be faster when you're zoomed out or at a shallow angle clicking far away. ",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "736f3cd4-0e90-4a80-a00f-326e61a820fe",
+			"title": "Add noise property to weapons",
+			"description": "Higher noise weapons will draw more enemies. Things like melee and slingshots or whatever are quieter, guns are super loud. \nCan make melee more attractive to use, especially until late game when you can produce a lot of ammo and just mow everything down.",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "d287994c-6ba3-46f0-bc96-4056d2a54906",
+			"title": "Figure out save all hotkey for vscode",
+			"description": "",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "841db010-8366-48bb-8111-d5aa9e7ce5c4",
+			"title": "Game Description",
+			"description": "You control a group of survivors in a post-apocalyptic world. Original game I'm ripping off (Last Stand: Dead Zone) was a zombie apocalypse, but I wan't to do something different. Maybe some invasive alien wild animals we accidentally brought over and let loose. Want to eventually have access to scifi level technology.\n\nYou go out into the city to scavenge supplies and food and the such. \n\nYou can build buildings and fortifications to improve your base. \n\tMedical buildings to heal characters\n\tFarm plots/animal coops and water catchers for food/water.\n\tDefensive buildings like walls and towers and traps\n\tBeds and showers and other comfort things to improve morale\n\tArt and entertainment things to improve morale\n\tWorkbenches and the such, to build other things/buildings.\n\nYou can craft useful items\n\tWeapons, melee and ranged\n\tArmor, helmets, torso, legs, feet\n\tAccessories to improve stats, medical equipment, stealthy stuff, tech gadgets eventually.\n\tUsable items, painkillers, bandages, drugs to improve performance, etc\n\tComponents to craft more advanced things\n\tTools to craft other things with\n\nStat system\n\tInstead of basic hp, have a pain/injury system. Injury is how much actual damage your body has taken, and pain is how much it affects your mental state (which affects stats negatively). Pain raises 1:1 with injury level (100 is max, which is death or KO), but you can use painkillers to temporarily reduce the negative effects of pain. You can only heal injury level at home base, not while out scavenging. \n\t(Still not sure about exact stats to use yet)\n\tAttack\n\tDefense (or just get these 2 from equipment?)\n\tScavenging\n\tEngineering\n\tFarming\n\tMedical\n\tStealth? (For possible noise stat that attracts enemies, guns and cars are very loud)\n\nMorale system\n\tThe team as a whole has a morale stat, which (negatively or positively) affects the stats of every character. It'll be on a -100 to 100 scale. Morale is affected by many things, like\n\tFood/Water levels\n\tComfort levels (enough beds, showers, entertainment, art, plants, etc)\n\tTotal injury level of team?\n\tRecent deaths on team?\n\tFinding a really good secret loot spot\n\tBuilding an important new building\n\nScavenging system\n\tNot sure how to choose scavenging location yet. Maybe just a map like LS:DZ. Or maybe a \"overworld\" mini-game where you walk/drive around the city and find a place. Different events could happen on the overworld map to keep it interesting: ambushes, mobs, special events. \n\tWhen you get to the spot, your team goes around and you loot what you can while fighting off enemies. Maybe more come the longer you stay so you eventually get overwhelmed and have to leave or die? Don't do a timer, that's no fun and doesn't make sense. Or maybe the \"flow\" of enemies varies? Like sometimes  you get overwhelmed and sometimes it's just mellow.\n\tIf a pc gets to 100 injury, they become incapacitated and have to recover for a good while back home. Not sure if they'll be killable yet. Maybe kinda like d&d with the death saving throws, like you can be killed once you're incapacitated so protect that pc well. \n\tSometimes you can meet other pcs and they'll join the team if you save them or whatever. Could be special event things.\n\nHome Base\n\tStarts simple, maybe just a hollowed out warehouse or something. Might have multiple to choose from, different themes and such. And maybe later in the game you can find better places like prisons to move into. \n\tYou slowly build up your base with scavenged/produced items. \n\tOccasionally you get invaded by enemies (human \"bandit\" types and/or other enemies). Combat is the same as when you're scavenging, except you can use your defensive buildings.\n\tOccasionally a random new pc will wander to your base and join you. Can also find new pcs out in the field. \n\n",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "e6c0f68c-f6fd-4517-95a1-a48f1f10450c",
+			"title": "Load not working",
+			"description": "FIXED: The craftables resource was loading fine, but it had never saved to begin with. Changed the c# dicts to godot dicts and put [Export] on each one, now they can save (had to be variant compatible to save the resource). \n\nNot loading the Craftables resource correctly, so it can't add the items to the inventory.\n\tPossibly to do with the Tool attribute in Craftables? No\n\n",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

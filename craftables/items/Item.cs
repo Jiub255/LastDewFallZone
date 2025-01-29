@@ -1,14 +1,16 @@
 using Godot;
+using Godot.Collections;
 
 namespace Lastdew
 {	
+	[GlobalClass, Tool]
 	public abstract partial class Item : Craftable
 	{
 		[Export]
 		public Rarity ItemRarity { get; private set; } = Rarity.COMMON;
-		// Only using Godot array so it'll work in editor. Because it's an array of enums?`                                                                                                                                                                                                                
+		// Only using Godot array so it'll work in editor.                                                                                                                                                                                                            
 		[Export]
-		public Godot.Collections.Array<ItemTags> Tags { get; private set; } = new Godot.Collections.Array<ItemTags> { };
+		public Array<ItemTags> Tags { get; private set; } = new Array<ItemTags> { };
 	
 		/// <summary>
 		/// For when you click on the item in the inventory menu.

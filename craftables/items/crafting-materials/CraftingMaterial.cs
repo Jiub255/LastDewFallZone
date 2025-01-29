@@ -3,7 +3,7 @@ using System;
 
 namespace Lastdew
 {	
-	[GlobalClass]
+	[GlobalClass, Tool]
 	public partial class CraftingMaterial : Item
 	{
 		// Instead of a Tool subclass of item, just doing reusable crafting items.
@@ -11,6 +11,8 @@ namespace Lastdew
 		// it just won't get used up. 
 		[Export]
 		public bool Reusable { get; private set; }
+
+		public CraftingMaterial(){}
 	
 		public override void OnClickCraftable()
 		{

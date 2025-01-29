@@ -1,4 +1,3 @@
-
 namespace Lastdew
 {	public static class InputNames
 	{
@@ -14,5 +13,6 @@ namespace Lastdew
 		public const string EXIT_MENU = "exit_menu";
 		public const string MAIN_MENU = "main_menu";
 		public const string BUILD_MENU = "build_menu";
+		public const string MAP_MENU = "map_menu";
 	}
 }

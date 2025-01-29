@@ -8,43 +8,78 @@ namespace Lastdew
 		private ClickHandler ClickHandler { get; set; }
 		private PcManagerBase PcManager { get; set; }
 		private UiManager UI { get; set; }
+		private InventoryManager InventoryManager { get; set; }
+		private TeamData TeamData { get; set; }
+		private SaverLoader SaverLoader { get; set; }
+		private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>("res://game/world/home-test-env.tscn");
+		private AllPcScenes AllPcs { get; } = GD.Load<AllPcScenes>("res://game/world/player-characters/management/all_pc_scenes.tres");
 		
 		public override void _Ready()
 		{
 			base._Ready();
-	
+
 			Camera camera = GetNode<Camera>("%CameraRig");
 			ClickHandler = camera.ClickHandler;
 			PcManager = GetNode<PcManagerBase>("%PcManager");
 			UI = GetNode<UiManager>("%UiManager");
-			
-			ClickHandler.OnClickedPc += PcManager.SelectPc;
-			ClickHandler.OnClickedMoveTarget += PcManager.MoveTo;
-			UI.MainMenu.OnNewGame += StartNewGame;
+			SaverLoader = new SaverLoader();
+			TeamData = new TeamData(AllPcs, new List<int>() { 0, 1, });
+			InventoryManager = new InventoryManager();
+
 			GetTree().Paused = true;
+
+			Subscribe();
 		}
-	
+
 		public override void _ExitTree()
 		{
 			base._ExitTree();
-			
+
+			Unsubscribe();
+		}
+
+		private void Subscribe()
+		{
+			ClickHandler.OnClickedPc += PcManager.SelectPc;
+			ClickHandler.OnClickedMoveTarget += PcManager.MoveTo;
+			UI.MainMenu.OnNewGame += StartNewGame;
+			UI.MainMenu.OnSaveGame += Save;
+			UI.MainMenu.OnLoadGame += Load;
+		}
+
+		private void Unsubscribe()
+		{
 			ClickHandler.OnClickedPc -= PcManager.SelectPc;
 			ClickHandler.OnClickedMoveTarget -= PcManager.MoveTo;
 			UI.MainMenu.OnNewGame -= StartNewGame;
+			UI.MainMenu.OnSaveGame -= Save;
+			UI.MainMenu.OnLoadGame -= Load;
 		}
-		
-		private void StartNewGame(PackedScene packedScene)
+
+		private void StartNewGame()
 		{
-			AllPcScenes AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/all_pc_scenes.tres");
-			TeamData teamData = new(AllPcs, new List<int>(){ 0, 1, });
-			InventoryManager inventoryManager = new();
-			
-			Level level = (Level)packedScene.Instantiate();
+			CreateNewLevel();
+		}
+
+		private void CreateNewLevel()
+		{
+			Level level = (Level)HomeBaseScene.Instantiate();
 			CallDeferred(World.MethodName.AddChild, level);
-	
-			level.Initialize(teamData);
-			PcManager.Initialize(teamData, inventoryManager);
-			UI.Initialize(teamData, inventoryManager);
+			level.Initialize(TeamData);
+			PcManager.Initialize(TeamData, InventoryManager);
+			UI.Initialize(TeamData, InventoryManager);
+		}
+
+		private void Save()
+		{
+			SaverLoader.Save(InventoryManager, TeamData);
+		}
+
+		private void Load()
+		{
+			// Must load data before creating new level
+			SaverLoader.Load(InventoryManager, TeamData);
+			CreateNewLevel();
 		}
 	}
 }

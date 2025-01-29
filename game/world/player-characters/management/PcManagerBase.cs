@@ -33,6 +33,11 @@ namespace Lastdew
 						TeamData.Pcs[i].ProcessUnselected(delta);
 					}
 				}
+
+				if (Input.IsActionJustPressed(InputNames.DESELECT))
+				{
+					DeselectPc();
+				}
 			}
 		}
 	
@@ -66,16 +71,6 @@ namespace Lastdew
 			}
 		}
 		
-		public void SelectPc(PlayerCharacter pc)
-		{
-			TeamData.SelectPc(pc);
-		}
-		
-		public void DeselectPc()
-		{
-			TeamData.SelectedIndex = null;
-		}
-		
 		public void MoveTo(MovementTarget movementTarget)
 		{
 			if (TeamData.SelectedIndex == null)
@@ -86,6 +81,16 @@ namespace Lastdew
 			{
 				TeamData.Pcs[(int)TeamData.SelectedIndex].MoveTo(movementTarget);
 			}
+		}
+		
+		public void SelectPc(PlayerCharacter pc)
+		{
+			TeamData.SelectPc(pc);
+		}
+		
+		private void DeselectPc()
+		{
+			TeamData.SelectedIndex = null;
 		}
 	}
 }

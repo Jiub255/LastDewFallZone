@@ -1,7 +1,10 @@
 using Godot;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Lastdew
-{	
+{
+	[GlobalClass, Tool]
 	public abstract partial class Craftable : Resource
 	{
 		[Export]
@@ -10,18 +13,60 @@ namespace Lastdew
 		public string Description { get; private set; } = "Enter Description";
 		[Export]
 		public Texture2D Icon { get; private set; }
-	
-		// TODO: How to store recipe data? 
-		// Want to eventually have a separate database, then just store arrays of ids here,
-		// so no circular references and extra data being stored.
-	/* 	[Export]
-		public (CraftingMaterial, int)[] RecipeCosts { get; private set; }
+
 		[Export]
-		public Building[] RequiredBuildings { get; private set; }
+		private CraftingMaterialAmount[] _recipeCosts;
 		[Export]
-		public (StatType, int)[] StatRequirements { get; private set; }
+		private Building[] _requiredBuildings;
 		[Export]
-		public (CraftingMaterial, int)[] ScrapResults { get; private set; } */
+		private StatAmount[] _statRequirements;
+		[Export]
+		private CraftingMaterialAmount[] _scrapResults;
+		
+		public Dictionary<string, int> RecipeCosts
+		{
+			get
+			{
+				Dictionary<string, int> dict = new();
+				foreach (CraftingMaterialAmount cma in _recipeCosts)
+				{
+					dict[cma.Material.Name] = cma.Amount;
+				}
+				return dict;
+			}
+		}
+		public string[] RequiredBuildings
+		{
+			get
+			{
+				return _requiredBuildings.Select(x => x.Name).ToArray();
+			}
+		}
+		public Dictionary<string, int> StatRequirements
+		{
+			get
+			{
+				Dictionary<string, int> dict = new();
+				foreach (StatAmount sa in _statRequirements)
+				{
+					dict[sa.Type.ToString()] = sa.Amount;
+				}
+				return dict;
+			}
+		}
+		public Dictionary<string, int> ScrapResults
+		{
+			get
+			{
+				Dictionary<string, int> dict = new();
+				foreach (CraftingMaterialAmount cma in _scrapResults)
+				{
+					dict[cma.Material.Name] = cma.Amount;
+				}
+				return dict;
+			}
+		}
+		
 	
 		/// <summary>
 		/// For when you click on the item in the crafting/building menu.

@@ -36,6 +36,7 @@ namespace Lastdew
 			{
 				PcButton buttonInstance = PcButtonScene.Instantiate() as PcButton;
 				Hbox.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
+				// This line is the only reason TeamData has to inherit RefCounted
 				buttonInstance.CallDeferred(PcButton.MethodName.Setup, pc, TeamData);
 			}
 		}

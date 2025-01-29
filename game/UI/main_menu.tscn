@@ -32,10 +32,17 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Continue" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
+[node name="SaveGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save Game"
+
 [node name="LoadGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Load Game"
 
@@ -45,13 +52,16 @@ layout_mode = 2
 text = "New Game"
 
 [node name="Settings" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Settings"
 
 [node name="Credits" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Credits"
 
 [node name="Exit" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"

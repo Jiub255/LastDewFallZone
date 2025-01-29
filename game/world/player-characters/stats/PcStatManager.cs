@@ -41,7 +41,7 @@ namespace Lastdew
 		public bool MeetsRequirements(Equipment equipment)
 		{
 			bool requirementsMet = true;
-			foreach (StatAmount statAmount in equipment.StatRequirements)
+			foreach (StatAmount statAmount in equipment.StatRequirementsToUse)
 			{
 				if (GetStatByType(statAmount.Type)?.Value < statAmount.Amount)
 				{

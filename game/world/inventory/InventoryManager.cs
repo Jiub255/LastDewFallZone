@@ -1,8 +1,10 @@
-
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Lastdew
-{	public class InventoryManager
+{
+	public class InventoryManager : IEnumerable
 	{
 		public event Action OnInventoryChanged;
 		
@@ -92,6 +94,51 @@ namespace Lastdew
 		public bool HasItem(Item item)
 		{
 			return HasItems(item, 1);
+		}
+
+		public IEnumerator GetEnumerator()
+		{
+			foreach (KeyValuePair<CraftingMaterial, int> kvp in CraftingMaterials)
+			{
+				Item item = (Item)kvp.Key;
+				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				yield return itemKvp;
+			}
+			foreach (KeyValuePair<Equipment, int> kvp in Equipment)
+			{
+				Item item = (Item)kvp.Key;
+				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				yield return itemKvp;
+			}
+			foreach (KeyValuePair<UsableItem, int> kvp in UsableItems)
+			{
+				Item item = (Item)kvp.Key;
+				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				yield return itemKvp;
+			}
+			/* yield return CraftingMaterials.GetEnumerator();
+			yield return Equipment.GetEnumerator();
+			yield return UsableItems.GetEnumerator(); */
+		}
+
+		public int this[Item item]
+		{
+			get
+			{
+				if (item is CraftingMaterial material)
+				{
+					return CraftingMaterials[material];
+				}
+				else if (item is Equipment equipment)
+				{
+					return Equipment[equipment];
+				}
+				else if (item is UsableItem usableItem)
+				{
+					return UsableItems[usableItem];
+				}
+				return 0;
+			}
 		}
 	}
 }

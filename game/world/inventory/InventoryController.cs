@@ -1,10 +1,10 @@
 using Godot;
-using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Lastdew
 {	
-	public class InventoryController<T> where T : Item
+	public class InventoryController<T> : IEnumerable where T : Item
 	{
 		public Dictionary<T, int> Inventory { get; } = new Dictionary<T, int>();
 		
@@ -52,6 +52,21 @@ namespace Lastdew
 		public bool HasItems(T item, int amount)
 		{
 			return Inventory.ContainsKey(item) && Inventory[item] >= amount;
+		}
+
+		public IEnumerator GetEnumerator()
+		{
+			foreach (KeyValuePair<T, int> item in Inventory)
+			{
+				yield return item;
+			}
+			
+			//return Inventory.GetEnumerator();
+		}
+
+		public int this[T key]
+		{
+			get => Inventory[key];
 		}
 	}
 }

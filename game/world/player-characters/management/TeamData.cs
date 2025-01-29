@@ -7,15 +7,15 @@ namespace Lastdew
 {
 	/// <summary>
 	/// TODO: Only inheriting RefCounted to get passed in a CallDeferred in Hud class.
-	/// Hopefully find a better way eventually.
+	/// Hopefully find a better way eventually. 
 	/// </summary>
 	public partial class TeamData : RefCounted
 	{
 		public event Action OnPcsInstantiated;
 		public event Action OnMenuSelectedChanged;
 		
-		private int? _selectedIndex;
 		private List<PlayerCharacter> _pcs = new();
+		private int? _selectedIndex;
 		private int _menuSelectedIndex;
 
 		// ------------------------ DATA TO SAVE ------------------------

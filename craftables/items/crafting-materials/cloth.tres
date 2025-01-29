@@ -11,3 +11,7 @@ Tags = [4]
 Name = "Cloth"
 Description = "Make clothes with it"
 Icon = ExtResource("1_1u4nl")
+_recipeCosts = []
+_requiredBuildings = []
+_statRequirements = []
+_scrapResults = []

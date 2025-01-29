@@ -11,3 +11,7 @@ Tags = [4]
 Name = "Metal"
 Description = "Strong building material"
 Icon = ExtResource("1_rydkw")
+_recipeCosts = []
+_requiredBuildings = []
+_statRequirements = []
+_scrapResults = []

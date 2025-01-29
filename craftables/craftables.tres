@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="Craftables" load_steps=13 format=3 uid="uid://dvk1r8uat43j6"]
+
+[ext_resource type="Resource" uid="uid://c8dprqclfyhv3" path="res://craftables/buildings/test_building.tres" id="1_saxsy"]
+[ext_resource type="Script" path="res://craftables/Craftables.cs" id="1_u67xb"]
+[ext_resource type="Resource" uid="uid://cqajr7dvaj717" path="res://craftables/items/equipment/bat.tres" id="2_frh78"]
+[ext_resource type="Resource" uid="uid://bllu8wsyhqs2x" path="res://craftables/items/equipment/pistol.tres" id="3_7u2y7"]
+[ext_resource type="Resource" uid="uid://q67jgrb6txg0" path="res://craftables/items/equipment/helmet.tres" id="4_hcow2"]
+[ext_resource type="Resource" uid="uid://bs3r4jknvdnhm" path="res://craftables/items/equipment/body_armor.tres" id="5_kf57n"]
+[ext_resource type="Resource" uid="uid://4mxch05l0jh3" path="res://craftables/items/equipment/testeq.tres" id="6_7sn6t"]
+[ext_resource type="Resource" uid="uid://dgesmlhv1ix8" path="res://craftables/items/crafting-materials/cloth.tres" id="7_go26v"]
+[ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="8_tk2k2"]
+[ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="9_0k1bl"]
+[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_60.tres" id="10_0taog"]
+[ext_resource type="Resource" uid="uid://0asfejrqfhsc" path="res://craftables/items/usable-items/painkiller_50_30.tres" id="11_6iust"]
+
+[resource]
+script = ExtResource("1_u67xb")
+Buildings = {
+"Test Building": ExtResource("1_saxsy")
+}
+Materials = {
+"Cloth": ExtResource("7_go26v"),
+"Metal": ExtResource("9_0k1bl"),
+"Wood": ExtResource("8_tk2k2")
+}
+Equipment = {
+"Baseball Bat": ExtResource("2_frh78"),
+"Body Armor": ExtResource("5_kf57n"),
+"Helmet": ExtResource("4_hcow2"),
+"Pistol": ExtResource("3_7u2y7"),
+"Test EQ": ExtResource("6_7sn6t")
+}
+UsableItems = {
+"Painkiller": ExtResource("10_0taog"),
+"Strong Painkiller": ExtResource("11_6iust")
+}

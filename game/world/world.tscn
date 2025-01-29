@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://n4s23mnl518e"]
+[gd_scene load_steps=22 format=3 uid="uid://n4s23mnl518e"]
 
 [ext_resource type="Script" path="res://game/world/World.cs" id="1_l0n7t"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://game/world/camera/camera.tscn" id="2_bcky2"]
@@ -6,11 +6,9 @@
 [ext_resource type="Script" path="res://game/world/looting/LootContainer.cs" id="3_wyfp0"]
 [ext_resource type="PackedScene" uid="uid://cbn0wxs4cak6x" path="res://game/UI/pause_menu.tscn" id="4_egbu1"]
 [ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://game/UI/hud.tscn" id="4_vau40"]
+[ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://game/world/looting/loot_container_test.tscn" id="5_w26gq"]
 [ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="6_n3ykd"]
 [ext_resource type="Script" path="res://craftables/items/ItemAmount.cs" id="7_a57cs"]
-[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_60.tres" id="8_hoib1"]
-[ext_resource type="Resource" uid="uid://bllu8wsyhqs2x" path="res://craftables/items/equipment/pistol.tres" id="9_rj6ni"]
-[ext_resource type="Resource" uid="uid://bs3r4jknvdnhm" path="res://craftables/items/equipment/body_armor.tres" id="10_0sp7e"]
 [ext_resource type="Script" path="res://game/world/player-characters/management/PcManagerBase.cs" id="10_k1oih"]
 [ext_resource type="Script" path="res://game/world/enemies/EnemySpawner.cs" id="11_d3w3s"]
 
@@ -38,29 +36,12 @@ script = ExtResource("7_a57cs")
 Item = ExtResource("6_n3ykd")
 Amount = 1
 
-[sub_resource type="Resource" id="Resource_ar82l"]
-script = ExtResource("7_a57cs")
-Item = ExtResource("8_hoib1")
-Amount = 3
-
-[sub_resource type="Resource" id="Resource_cdei1"]
-script = ExtResource("7_a57cs")
-Item = ExtResource("9_rj6ni")
-Amount = 1
-
-[sub_resource type="Resource" id="Resource_7g3ik"]
-script = ExtResource("7_a57cs")
-Item = ExtResource("10_0sp7e")
-Amount = 1
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qb4yi"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_04881"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_x6dq3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tksbp"]
 albedo_color = Color(0.359416, 0.220464, 0.150835, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_04881"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_l0n7t")
@@ -110,23 +91,7 @@ mesh = SubResource("BoxMesh_8f4jt")
 
 [node name="LootContainers" type="Node3D" parent="Environment/NavigationRegion3D"]
 
-[node name="LootContainerTest" type="StaticBody3D" parent="Environment/NavigationRegion3D/LootContainers"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02312, 0.5, -3.97649)
-collision_layer = 8
-collision_mask = 22
-script = ExtResource("3_wyfp0")
-Loot = [SubResource("Resource_0ebt0"), SubResource("Resource_ar82l"), SubResource("Resource_cdei1"), SubResource("Resource_7g3ik")]
-LootDuration = 1.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]
-shape = SubResource("BoxShape3D_qb4yi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]
-mesh = SubResource("BoxMesh_x6dq3")
-surface_material_override/0 = SubResource("StandardMaterial3D_tksbp")
-
-[node name="LootingSpot" type="Node3D" parent="Environment/NavigationRegion3D/LootContainers/LootContainerTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
+[node name="LootContainerTest" parent="Environment/NavigationRegion3D/LootContainers" instance=ExtResource("5_w26gq")]
 
 [node name="LootContainerTest2" type="StaticBody3D" parent="Environment/NavigationRegion3D/LootContainers"]
 transform = Transform3D(0.666819, 0, 0.74522, 0, 1, 0, -0.74522, 0, 0.666819, -12.9135, 0.5, -1.10959)

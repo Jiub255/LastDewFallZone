@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UsableItem" load_steps=3 format=3 uid="uid://bhh3umemjtsb5"]
+
+[ext_resource type="Texture2D" uid="uid://yf5l7e24sw2q" path="res://unused-assets/icons/icon_painkillers_blank.png" id="1_7vbhp"]
+[ext_resource type="Script" path="res://craftables/items/usable-items/UsableItem.cs" id="2_ad2s7"]
+
+[resource]
+script = ExtResource("2_ad2s7")
+Reusable = false
+Effects = []
+ItemRarity = 100
+Tags = [1]
+Name = "Strong Painkiller"
+Description = "Relieve pain 50 for 30 seconds"
+Icon = ExtResource("1_7vbhp")
+_recipeCosts = []
+_requiredBuildings = []
+_statRequirements = []
+_scrapResults = []

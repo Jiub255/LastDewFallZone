@@ -140,5 +140,15 @@ namespace Lastdew
 				return 0;
 			}
 		}
+		
+		public Dictionary<string, int> GetSaveData()
+		{
+			Dictionary<string, int> inventory = new();
+			foreach (KeyValuePair<Item, int> item in this)
+			{
+				inventory[item.Key.Name] = item.Value;
+			}
+			return inventory;
+		}
 	}
 }

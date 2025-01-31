@@ -10,9 +10,7 @@ namespace Lastdew
 		private UiManager UI { get; set; }
 		private InventoryManager InventoryManager { get; set; }
 		private TeamData TeamData { get; set; }
-		private SaverLoader SaverLoader { get; set; }
 		private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>("res://game/world/home-test-env.tscn");
-		private AllPcScenes AllPcs { get; } = GD.Load<AllPcScenes>("res://game/world/player-characters/management/all_pc_scenes.tres");
 		
 		public override void _Ready()
 		{
@@ -22,13 +20,14 @@ namespace Lastdew
 			ClickHandler = camera.ClickHandler;
 			PcManager = GetNode<PcManagerBase>("%PcManager");
 			UI = GetNode<UiManager>("%UiManager");
-			SaverLoader = new SaverLoader();
-			TeamData = new TeamData(AllPcs, new List<int>() { 0, 1, });
+			TeamData = new TeamData();
 			InventoryManager = new InventoryManager();
 
 			GetTree().Paused = true;
 
 			Subscribe();
+			
+			//this.PrintDebug($"Global user data directory: {OS.GetDataDir()}");
 		}
 
 		public override void _ExitTree()
@@ -56,17 +55,23 @@ namespace Lastdew
 			UI.MainMenu.OnLoadGame -= Load;
 		}
 
+		// JUST FOR TESTING
+		private List<PcSaveData> DefaultPcList = new List<PcSaveData>()
+		{
+			new PcSaveData()
+		};
+
 		private void StartNewGame()
 		{
-			CreateNewLevel();
+			CreateNewLevel(DefaultPcList);
 		}
 
-		private void CreateNewLevel()
+		private void CreateNewLevel(List<PcSaveData> pcSaveDatas)
 		{
 			Level level = (Level)HomeBaseScene.Instantiate();
 			CallDeferred(World.MethodName.AddChild, level);
 			level.Initialize(TeamData);
-			PcManager.Initialize(TeamData, InventoryManager);
+			PcManager.Initialize(TeamData, InventoryManager, pcSaveDatas);
 			UI.Initialize(TeamData, InventoryManager);
 		}
 
@@ -78,8 +83,8 @@ namespace Lastdew
 		private void Load()
 		{
 			// Must load data before creating new level
-			SaverLoader.Load(InventoryManager, TeamData);
-			CreateNewLevel();
+			List<PcSaveData> pcSaveDatas = SaverLoader.Load(InventoryManager);
+			CreateNewLevel(pcSaveDatas);
 		}
 	}
 }

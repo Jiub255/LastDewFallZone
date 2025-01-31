@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -9,10 +10,10 @@ namespace Lastdew
 		private TeamData TeamData { get; set; }
 		private bool Started { get; set; }
 		
-		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
+		public void Initialize(TeamData teamData, InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
 			TeamData = teamData;
-			TeamData.SpawnPcs(this, inventoryManager);
+			TeamData.SpawnPcs(this, inventoryManager, pcSaveDatas);
 			Started = true;
 		}
 		
@@ -73,11 +74,7 @@ namespace Lastdew
 		
 		public void MoveTo(MovementTarget movementTarget)
 		{
-			if (TeamData.SelectedIndex == null)
-			{
-				GD.PushWarning($"No selected PC for MoveTo()");
-			}
-			else
+			if (TeamData.SelectedIndex != null)
 			{
 				TeamData.Pcs[(int)TeamData.SelectedIndex].MoveTo(movementTarget);
 			}

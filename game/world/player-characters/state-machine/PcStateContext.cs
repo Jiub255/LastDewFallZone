@@ -7,7 +7,7 @@ namespace Lastdew
 		private const float SIGHT_DISTANCE = 20f;
 		
 		public NavigationAgent3D NavigationAgent { get; }
-		public PcAnimationTree PcAnimationTree { get; }
+		public AnimationTree PcAnimationTree { get; }
 		public AnimationNodeStateMachinePlayback AnimStateMachine { get; }
 		public Vector3 Position
 		{
@@ -35,7 +35,7 @@ namespace Lastdew
 			InventoryManager = inventoryManager;
 			
 			NavigationAgent = pc.GetNode<NavigationAgent3D>("%NavigationAgent3D");
-			PcAnimationTree = pc.GetNode<PcAnimationTree>("%AnimationTree");
+			PcAnimationTree = pc.GetNode<AnimationTree>("%AnimationTree");
 			AnimStateMachine = (AnimationNodeStateMachinePlayback)PcAnimationTree.Get("parameters/playback");
 		}
 		

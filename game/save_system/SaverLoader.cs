@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace Lastdew
@@ -6,15 +7,15 @@ namespace Lastdew
 	/// <summary>
 	/// TODO: Come up with a better name for this class than <c>SaverLoader</c>
 	/// </summary>
-	public class SaverLoader
+	public static class SaverLoader
 	{
 		private const string SAVE_PATH = "user://savegame.save";
 		
-		public SaverLoader() {}
-		
-		public void Save(InventoryManager inventoryManager, TeamData teamData)
+		public static void Save(InventoryManager inventoryManager, TeamData teamData)
 		{
-			SaveData saveData = new(inventoryManager, teamData);
+			Dictionary<string, int> inventory = inventoryManager.GetSaveData();
+			List<PcSaveData> pcSaveDatas = teamData.GetSaveData();
+			SaveData saveData = new(inventory, pcSaveDatas);
 			
 			string jsonString = JsonSerializer.Serialize(saveData);
 
@@ -23,12 +24,12 @@ namespace Lastdew
 			saveFile.StoreLine(jsonString);
 		}
 		
-		public void Load(InventoryManager inventoryManager, TeamData teamData)
+		public static List<PcSaveData> Load(InventoryManager inventoryManager)
 		{
 			if (!FileAccess.FileExists(SAVE_PATH))
 			{
 				GD.PushError($"No file found at {SAVE_PATH}");
-				return;
+				return null;
 			}
 			
 			using var saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Read);
@@ -38,11 +39,13 @@ namespace Lastdew
 			try
 			{
 				SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonString);
-				saveData.Load(inventoryManager, teamData);
+				saveData.Load(inventoryManager);
+				return saveData.PcSaveDatas;
 			}
 			catch (System.Exception ex)
 			{
 				GD.PushError("Error deserializing json: " + ex.Message);
+				return null;
 			}
 		}
 	}

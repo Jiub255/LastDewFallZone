@@ -18,27 +18,9 @@ namespace Lastdew
 		private int? _selectedIndex;
 		private int _menuSelectedIndex;
 
-		// ------------------------ DATA TO SAVE ------------------------
-
-		public List<int> PcIndexes { get; } = new List<int>();
-
-		// --------------------------------------------------------------
-
 		public ReadOnlyCollection<PlayerCharacter> Pcs
 		{
 			get => _pcs.AsReadOnly();
-		}
-		public List<PackedScene> PcScenes
-		{
-			get
-			{
-				List<PackedScene> pcScenes = new();
-				foreach (int index in PcIndexes)
-				{
-					pcScenes.Add(AllPcs.PcScenes[index]);
-				}
-				return pcScenes;
-			}
 		}
 		// Whenever Selected gets set, set menu to that. But keep menu as it was when deselecting.
 		// Changing Menu doesn't change Selected though. 
@@ -66,22 +48,28 @@ namespace Lastdew
 
 		private AllPcScenes AllPcs { get; }
 		
-		public TeamData(AllPcScenes allPcs, List<int> pcIndexes)
+		public TeamData()
 		{
-			AllPcs = allPcs;
-			PcIndexes = pcIndexes;
+			AllPcs = GD.Load<AllPcScenes>("res://game/world/player-characters/management/all_pc_scenes.tres");
 		}
 		
-		public void SpawnPcs(PcManagerBase pcManager, InventoryManager inventoryManager)
+		/// <summary>
+		/// TODO: Figure out how to pass down the loaded pc data. This is getting ridiculous passing this list around.
+		/// </summary>
+		public void SpawnPcs(PcManagerBase pcManager, InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
-			for (int i = 0; i < PcScenes.Count; i++)
+			int i = 0;
+			foreach (PcSaveData pcSaveData in pcSaveDatas)
 			{
-				PlayerCharacter pc = (PlayerCharacter)PcScenes[i].Instantiate();
+				PlayerCharacter pc = (PlayerCharacter)AllPcs[pcSaveData.Name].Instantiate();
 				pcManager.CallDeferred(PcManagerBase.MethodName.AddChild, pc);
+				// TODO: Add a spawn location for pcs.
 				pc.Position += Vector3.Right * i * 3;
-				pc.Initialize(inventoryManager);
+				i++;
+				pc.Initialize(inventoryManager, pcSaveData);
 				_pcs.Add(pc);
 			}
+			
 			OnPcsInstantiated?.Invoke();
 		}
 		
@@ -97,6 +85,16 @@ namespace Lastdew
 			{
 				SelectedIndex = pcIndex;
 			}
+		}
+		
+		public List<PcSaveData> GetSaveData()
+		{
+			List<PcSaveData> pcSaveDatas = new();
+			foreach (PlayerCharacter pc in _pcs)
+			{
+				pcSaveDatas.Add(pc.GetSaveData());
+			}
+			return pcSaveDatas;
 		}
 	}
 }

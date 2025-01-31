@@ -1,18 +1,30 @@
 using Godot;
 
 namespace Lastdew
-{	
+{
 	public partial class Hud : Menu
 	{
 		private TeamData TeamData { get; set; }
 		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load("res://game/UI/pc_button.tscn");
-		private HBoxContainer Hbox { get; set; }
+		private HBoxContainer ButtonParent { get; set; }
 	
 		public override void _Ready()
 		{
 			base._Ready();
 			
-			Hbox = GetNode<HBoxContainer>("%HBoxContainer");
+			ButtonParent = GetNode<HBoxContainer>("%HBoxContainer");
+		}
+		
+		public override void Open()
+		{
+			foreach (Node node in ButtonParent.GetChildren())
+			{
+				if (node is PcButton button)
+				{
+					button.SetHealthBars();
+				}
+			}
+			base.Open();
 		}
 		
 		public void Initialize(TeamData teamData)
@@ -35,7 +47,7 @@ namespace Lastdew
 			foreach (PlayerCharacter pc in TeamData.Pcs)
 			{
 				PcButton buttonInstance = PcButtonScene.Instantiate() as PcButton;
-				Hbox.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
+				ButtonParent.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
 				// This line is the only reason TeamData has to inherit RefCounted
 				buttonInstance.CallDeferred(PcButton.MethodName.Setup, pc, TeamData);
 			}

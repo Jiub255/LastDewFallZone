@@ -17,13 +17,13 @@ namespace Lastdew
 		private PcStateMachine StateMachine { get; set; }
 		private InventoryManager Inventory { get; set; }
 	
-		public void Initialize(InventoryManager inventoryManager)
+		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
 			PcStateContext context = new(this, inventoryManager);
 			StateMachine = new PcStateMachine(context);
-			Health = new PcHealth();
+			Health = new PcHealth(saveData);
 			StatManager = new PcStatManager();
-			Equipment = new PcEquipment();
+			Equipment = new PcEquipment(saveData);
 			Inventory = inventoryManager;
 		}
 	
@@ -119,6 +119,11 @@ namespace Lastdew
 		public void ExitTree()
 		{
 			StateMachine.ExitTree();
+		}
+		
+		public PcSaveData GetSaveData()
+		{
+			return new PcSaveData(Name, Equipment, Health);
 		}
 	}
 }

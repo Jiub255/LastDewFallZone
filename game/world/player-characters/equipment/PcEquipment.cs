@@ -26,7 +26,30 @@ namespace Lastdew
 			}
 		}
 		
-		public PcEquipment() {}
+		// JUST FOR TESTING
+		// TODO: How to store/access this in the future? Autoload? Pass it from the top down?
+		private Craftables Craftables { get; }
+		
+		public PcEquipment(PcSaveData pcSaveData)
+		{
+			Craftables = ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+			if (Craftables.Equipment.ContainsKey(pcSaveData.Head))
+			{
+				Equip((Equipment)Craftables[pcSaveData.Head]);
+			}
+			if (Craftables.Equipment.ContainsKey(pcSaveData.Weapon))
+			{
+				Equip((Equipment)Craftables[pcSaveData.Weapon]);
+			}
+			if (Craftables.Equipment.ContainsKey(pcSaveData.Body))
+			{
+				Equip((Equipment)Craftables[pcSaveData.Body]);
+			}
+			if (Craftables.Equipment.ContainsKey(pcSaveData.Feet))
+			{
+				Equip((Equipment)Craftables[pcSaveData.Feet]);
+			}
+		}
 		
 		/// <returns>Whatever was equipped before (null if nothing)</returns>
 		public Equipment Equip(Equipment equipment)

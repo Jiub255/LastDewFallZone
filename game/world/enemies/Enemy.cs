@@ -21,7 +21,7 @@ namespace Lastdew
 		private EnemyState State { get; set; } = EnemyState.MOVEMENT;
 
 		private int Health { get; set; } = 3;
-		private int Attack { get; } = 1;
+		private int Attack { get; } = 10;
 		private float MaxSpeed { get; } = 4f;
 		private float Acceleration { get; } = 35f;
 		private float TurnSpeed { get; } = 360f;

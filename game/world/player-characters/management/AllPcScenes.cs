@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -5,10 +6,12 @@ namespace Lastdew
 	[GlobalClass]
 	public partial class AllPcScenes : Resource
 	{
-		public PackedScene[] PcScenes { get; set; } = new PackedScene[]
+		public Dictionary<string, PackedScene> PcScenes { get; set; } = new()
 		{
-			GD.Load<PackedScene>("res://game/world/player-characters/humans_master.tscn"),
-			GD.Load<PackedScene>("res://game/world/player-characters/humans_master2.tscn"),
+			{"James", GD.Load<PackedScene>("res://game/world/player-characters/humans_master.tscn")},
+			{"Jaime", GD.Load<PackedScene>("res://game/world/player-characters/humans_master2.tscn") },
 		};
-	}
+
+        public PackedScene this[string name] => PcScenes[name];
+    }
 }

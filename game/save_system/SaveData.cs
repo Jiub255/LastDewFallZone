@@ -8,32 +8,47 @@ namespace Lastdew
 	/// </summary>
 	public class SaveData
 	{
-		public Dictionary<string, int> Inventory { get; set; } = new();
-		
 		// JUST FOR TESTING
-		private Craftables Craftables { get; init; }
+		// TODO: How to store/access this in the future? Autoload? Pass it from the top down?
+		private readonly Craftables _craftables;
 		
-		public SaveData()
-		{
-			Craftables = Godot.ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
-		}
+		public Dictionary<string, int> Inventory { get; set; } = new();
+		public List<PcSaveData> PcSaveDatas { get; set; } = new();
 		
-		public SaveData(InventoryManager inventoryManager, TeamData teamData)
+		/// <summary>
+		/// TODO: Change the constructor to only take parameters that correspond to properties in this class.
+		/// Also, make craftables a field so the json serializer ignores it (?)
+		/// Then, have SaverLoader to what's currently in the constructor here and basically retrieve the data,
+		/// then pass that data into the new constructor for SaveData. Hopefully it works. 
+		/// </summary>
+		/* public SaveData(InventoryManager inventoryManager, TeamData teamData)
 		{
-			Craftables = Godot.ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+			_craftables = Godot.ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
 			
 			foreach (KeyValuePair<Item, int> item in inventoryManager)
 			{
 				Inventory[item.Key.Name] = item.Value;
 			}
+
+			teamData.Save(PcSaveDatas);
+		} */
+		
+		public SaveData(Dictionary<string, int> inventory, List<PcSaveData> pcSaveDatas)
+		{
+			_craftables = Godot.ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+			Inventory = inventory;
+			PcSaveDatas = pcSaveDatas;
 		}
 		
-		public void Load(InventoryManager inventoryManager, TeamData teamData)
+		/// <summary>
+		/// TODO: Put this in SaverLoader (along with Craftables)? Where should it be?
+		/// </summary>
+		public void Load(InventoryManager inventoryManager)
 		{
 			foreach (KeyValuePair<string, int> kvp in Inventory)
 			{
-				this.PrintDebug($"Adding {Craftables[kvp.Key]} to inventory");
-				inventoryManager.AddItems((Item)Craftables[kvp.Key], kvp.Value);
+				this.PrintDebug($"Adding {_craftables[kvp.Key]} to inventory");
+				inventoryManager.AddItems((Item)_craftables[kvp.Key], kvp.Value);
 			}
 		}
 	}

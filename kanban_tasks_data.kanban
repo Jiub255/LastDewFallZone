@@ -47,6 +47,7 @@
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
 				"bc28b844-8360-4095-b52b-105b42061993",
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
+				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
@@ -59,7 +60,7 @@
 			"title": "DOING",
 			"tasks": [
 				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
-				"d287994c-6ba3-46f0-bc96-4056d2a54906"
+				"34970bc2-bcb4-4b8e-bb3b-478a943039e3"
 			]
 		},
 		{
@@ -86,7 +87,8 @@
 				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
 				"780d7cee-87be-40cc-9254-9173f4a9d2dd",
 				"99a74741-f3a9-450e-a0a4-444bacae30fc",
-				"30d813ed-f012-4fd7-b422-8ed68af1b530"
+				"30d813ed-f012-4fd7-b422-8ed68af1b530",
+				"d287994c-6ba3-46f0-bc96-4056d2a54906"
 			]
 		},
 		{
@@ -98,13 +100,17 @@
 				"78d7226e-ba3e-4a00-8101-5f7398c1be57",
 				"489d060a-da4b-42e5-a578-3d40940c7958",
 				"dffc8eab-7892-4f42-a5c9-64fee165246f",
-				"e6c0f68c-f6fd-4517-95a1-a48f1f10450c"
+				"e6c0f68c-f6fd-4517-95a1-a48f1f10450c",
+				"6d092696-1329-4f00-85af-27bc659f803a"
 			]
 		},
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
-			"tasks": []
+			"tasks": [
+				"2b160aba-1f2e-4d62-ba78-e475d0a7419c",
+				"9bc8dc7f-19ec-42e1-86b5-c5417f832fd4"
+			]
 		}
 	],
 	"tasks": [
@@ -230,7 +236,7 @@
 		{
 			"uuid": "95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
 			"title": "Save/Load System",
-			"description": "What to save?\n\tList of PCs.\n\tFor each PC:\n\t\tEquipment\n\t\tStats\n\t\tPain/Injury\n\tBuildings at base\n\t\tAny state variables of the buildings. Construction progress, progress toward making some resource, etc.\n\tInventory\n\nSave whenever, even in middle of scavenging/defending home base.\n\tPick up where you left off? Or just auto-finish?\n\tProbably just pick up where you left off, \n\tSo for combat saves, also save every pc and enemy's position, health, etc.",
+			"description": "What to save?\n\tList of PCs.\n\tFor each PC:\n\t\tEquipment\n\t\tStats\n\t\tPain/Injury\n\t\tCurrent task? (at home, repairing a building or farming a plot of land for example)\n\tBuildings at base\n\t\tAny state variables of the buildings. Construction progress, progress toward making some resource, etc.\n\tInventory\n\tMorale\n\nSave whenever, even in middle of scavenging/defending home base.\n\tPick up where you left off? Or just auto-finish?\n\tProbably just pick up where you left off, \n\tSo for combat saves, also save every pc and enemy's position, health, etc.\nNot sure if going to do combat saves yet. Gonna be difficult to save all that state and rebuild it. Maybe eventually. \n\nStore each pc's data on a PcSaveData object. Needs a unique id to reload the pcs from the allPcs database/list. Then just store all\n\tthe relevant data and have Initialize methods set them back after spawning the pcs on load. \nStore inventory data and List<PcSaveData> on SaveData class, which gets serialized to Json then saved to file. \nCraftables (buildings, items) get stored on SaveData as strings, then retrieved using a database with Dictionary<string, Craftable>.\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -473,7 +479,7 @@
 		{
 			"uuid": "d287994c-6ba3-46f0-bc96-4056d2a54906",
 			"title": "Figure out save all hotkey for vscode",
-			"description": "",
+			"description": "ctrl + shift + alt + s",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		},
@@ -488,6 +494,41 @@
 			"uuid": "e6c0f68c-f6fd-4517-95a1-a48f1f10450c",
 			"title": "Load not working",
 			"description": "FIXED: The craftables resource was loading fine, but it had never saved to begin with. Changed the c# dicts to godot dicts and put [Export] on each one, now they can save (had to be variant compatible to save the resource). \n\nNot loading the Craftables resource correctly, so it can't add the items to the inventory.\n\tPossibly to do with the Tool attribute in Craftables? No\n\n",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
+			"title": "Experience/Leveling system",
+			"description": "Not sure how to implement it yet. Get experience for doing anything? Probably yeah.\nCombat, looting, building, crafting, healing someone (medical), collecting/making resources.\nChoose what stats get raised? Or like Morrowind, where using the stat increases it?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "34970bc2-bcb4-4b8e-bb3b-478a943039e3",
+			"title": "Add pain/injury bars to HUD",
+			"description": "",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "6d092696-1329-4f00-85af-27bc659f803a",
+			"title": "Json deserialization error",
+			"description": "FIXED by changing the SaveData constructor to only take parameters that match its properties. \n\nE 0:00:13:0307   System.Collections.Generic.List`1[Lastdew.PcSaveData] Lastdew.SaverLoader.Load(Lastdew.InventoryManager): Error deserializing json: Each parameter in the deserialization constructor on type 'Lastdew.SaveData' must bind to an object property or field on deserialization. Each parameter name must match with a property or field on the object. Fields are only considered when 'JsonSerializerOptions.IncludeFields' is enabled. The match can be case-insensitive.\n  <C# Source>    SaverLoader.cs:39 @ System.Collections.Generic.List`1[Lastdew.PcSaveData] Lastdew.SaverLoader.Load(Lastdew.InventoryManager)\n  <Stack Trace>  GD.cs:366 @ void Godot.GD.PushError(string)\n                 SaverLoader.cs:39 @ System.Collections.Generic.List`1[Lastdew.PcSaveData] Lastdew.SaverLoader.Load(Lastdew.InventoryManager)\n                 World.cs:86 @ void Lastdew.World.Load()\n                 MainMenu.cs:48 @ void Lastdew.MainMenu.Load()\n                 Callable.generics.cs:39 @ void Godot.Callable.<From>g__Trampoline|1_0(object, Godot.NativeInterop.NativeVariantPtrArgs, Godot.NativeInterop.godot_variant&)\n                 DelegateUtils.cs:86 @ void Godot.DelegateUtils.InvokeWithVariantArgs(nint, System.Void*, Godot.NativeInterop.godot_variant**, int, Godot.NativeInterop.godot_variant*)\n",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "2b160aba-1f2e-4d62-ba78-e475d0a7419c",
+			"title": "Painkillers not working",
+			"description": "Either not working at all, or just not showing up on the hud or menu.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "9bc8dc7f-19ec-42e1-86b5-c5417f832fd4",
+			"title": "Load not loading equipment",
+			"description": "Equipment not getting reequipped on load game.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

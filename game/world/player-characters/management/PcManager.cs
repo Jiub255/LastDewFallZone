@@ -7,7 +7,7 @@ namespace Lastdew
 	public partial class PcManager : Node3D
 	{
 		// TODO: Setup way to load this data. Eventually from save file, but maybe a resource for now?
-		private MissionTeamData MissionTeamData { get; set; }
+		/* private MissionTeamData MissionTeamData { get; set; }
 	
 		public void Initialize(MissionTeamData missionTeamData, InventoryManager inventoryManager)
 		{
@@ -92,6 +92,6 @@ namespace Lastdew
 				pc.Initialize(inventoryManager);
 				MissionTeamData.UnselectedPcs.Add(pc);
 			}
-		}
+		} */
 	}
 }

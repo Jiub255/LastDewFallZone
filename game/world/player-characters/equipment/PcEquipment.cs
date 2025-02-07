@@ -32,7 +32,12 @@ namespace Lastdew
 		
 		public PcEquipment(PcSaveData pcSaveData)
 		{
+			this.PrintDebug($"Equipment: {pcSaveData.Head}, {pcSaveData.Weapon}, {pcSaveData.Body}, {pcSaveData.Feet}");
 			Craftables = ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+			foreach (KeyValuePair<string, Craftable> kvp in Craftables)
+			{
+				this.PrintDebug($"Craftable: {kvp.Key}");
+			}
 			if (Craftables.Equipment.ContainsKey(pcSaveData.Head))
 			{
 				Equip((Equipment)Craftables[pcSaveData.Head]);

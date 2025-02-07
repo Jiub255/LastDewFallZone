@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Lastdew
 {
-	public class InventoryManager : IEnumerable
+	public class InventoryManager : IEnumerable<KeyValuePair<Item, int>>
 	{
 		public event Action OnInventoryChanged;
 		
@@ -95,33 +95,18 @@ namespace Lastdew
 		{
 			return HasItems(item, 1);
 		}
-
-		public IEnumerator GetEnumerator()
+		
+		public Dictionary<string, int> GatherSaveData()
 		{
-			foreach (KeyValuePair<CraftingMaterial, int> kvp in CraftingMaterials)
+			Dictionary<string, int> inventory = new();
+			foreach (KeyValuePair<Item, int> item in this)
 			{
-				Item item = (Item)kvp.Key;
-				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
-				yield return itemKvp;
+				inventory[item.Key.Name] = item.Value;
 			}
-			foreach (KeyValuePair<Equipment, int> kvp in Equipment)
-			{
-				Item item = (Item)kvp.Key;
-				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
-				yield return itemKvp;
-			}
-			foreach (KeyValuePair<UsableItem, int> kvp in UsableItems)
-			{
-				Item item = (Item)kvp.Key;
-				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
-				yield return itemKvp;
-			}
-			/* yield return CraftingMaterials.GetEnumerator();
-			yield return Equipment.GetEnumerator();
-			yield return UsableItems.GetEnumerator(); */
+			return inventory;
 		}
 
-		public int this[Item item]
+		/* public int this[Item item]
 		{
 			get
 			{
@@ -139,16 +124,33 @@ namespace Lastdew
 				}
 				return 0;
 			}
-		}
-		
-		public Dictionary<string, int> GetSaveData()
+		} */
+
+		IEnumerator IEnumerable.GetEnumerator()
 		{
-			Dictionary<string, int> inventory = new();
-			foreach (KeyValuePair<Item, int> item in this)
+			return GetEnumerator();
+		}
+
+		public IEnumerator<KeyValuePair<Item, int>> GetEnumerator()
+		{
+			foreach (KeyValuePair<CraftingMaterial, int> kvp in CraftingMaterials)
 			{
-				inventory[item.Key.Name] = item.Value;
+				Item item = kvp.Key;
+				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				yield return itemKvp;
 			}
-			return inventory;
+			foreach (KeyValuePair<Equipment, int> kvp in Equipment)
+			{
+				Item item = kvp.Key;
+				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				yield return itemKvp;
+			}
+			foreach (KeyValuePair<UsableItem, int> kvp in UsableItems)
+			{
+				Item item = kvp.Key;
+				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				yield return itemKvp;
+			}
 		}
 	}
 }

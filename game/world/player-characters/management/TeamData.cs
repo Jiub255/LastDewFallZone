@@ -66,6 +66,7 @@ namespace Lastdew
 				// TODO: Add a spawn location for pcs.
 				pc.Position += Vector3.Right * i * 3;
 				i++;
+				// TODO: Does this need to be call deferred?
 				pc.Initialize(inventoryManager, pcSaveData);
 				_pcs.Add(pc);
 			}
@@ -87,7 +88,7 @@ namespace Lastdew
 			}
 		}
 		
-		public List<PcSaveData> GetSaveData()
+		public List<PcSaveData> GatherSaveData()
 		{
 			List<PcSaveData> pcSaveDatas = new();
 			foreach (PlayerCharacter pc in _pcs)

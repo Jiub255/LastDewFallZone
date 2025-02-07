@@ -13,18 +13,15 @@ namespace Lastdew
 		
 		public static void Save(InventoryManager inventoryManager, TeamData teamData)
 		{
-			Dictionary<string, int> inventory = inventoryManager.GetSaveData();
-			List<PcSaveData> pcSaveDatas = teamData.GetSaveData();
-			SaveData saveData = new(inventory, pcSaveDatas);
-			
+			SaveData saveData = GatherSaveData(inventoryManager, teamData);
+
 			string jsonString = JsonSerializer.Serialize(saveData);
 
 			using var saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);
-
 			saveFile.StoreLine(jsonString);
 		}
-		
-		public static List<PcSaveData> Load(InventoryManager inventoryManager)
+
+		public static SaveData Load()
 		{
 			if (!FileAccess.FileExists(SAVE_PATH))
 			{
@@ -39,14 +36,24 @@ namespace Lastdew
 			try
 			{
 				SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonString);
-				saveData.Load(inventoryManager);
-				return saveData.PcSaveDatas;
+				saveData.PrintDebug($"Json string: {jsonString}");
+				saveData.PrintData();
+				// TODO: Just unload the data into inv/pc manager in the same place, in World.?
+				//saveData.Load(inventoryManager);
+				return saveData;
 			}
 			catch (System.Exception ex)
 			{
 				GD.PushError("Error deserializing json: " + ex.Message);
 				return null;
 			}
+		}
+
+		private static SaveData GatherSaveData(InventoryManager inventoryManager, TeamData teamData)
+		{
+			Dictionary<string, int> inventory = inventoryManager.GatherSaveData();
+			List<PcSaveData> pcSaveDatas = teamData.GatherSaveData();
+			return new SaveData(inventory, pcSaveDatas);;
 		}
 	}
 }

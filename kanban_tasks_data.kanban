@@ -26,6 +26,7 @@
 			"uuid": "22b5bdc8-f0fd-4898-a5a2-6a3fa87d04dd",
 			"title": "NOTES",
 			"tasks": [
+				"841db010-8366-48bb-8111-d5aa9e7ce5c4",
 				"df44855f-0478-45ba-8998-406d91aa1eb7",
 				"83757feb-77db-46c7-a1ac-e076ea02903b",
 				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
@@ -33,8 +34,7 @@
 				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
 				"844550fe-e567-461c-9da6-129cb0ef35fc",
 				"2d06c068-737d-437a-b839-676244c60b7d",
-				"43e7a2a8-de3c-4c98-b01a-927022b66792",
-				"841db010-8366-48bb-8111-d5aa9e7ce5c4"
+				"43e7a2a8-de3c-4c98-b01a-927022b66792"
 			]
 		},
 		{
@@ -59,8 +59,7 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
-				"34970bc2-bcb4-4b8e-bb3b-478a943039e3"
+				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979"
 			]
 		},
 		{
@@ -88,7 +87,8 @@
 				"780d7cee-87be-40cc-9254-9173f4a9d2dd",
 				"99a74741-f3a9-450e-a0a4-444bacae30fc",
 				"30d813ed-f012-4fd7-b422-8ed68af1b530",
-				"d287994c-6ba3-46f0-bc96-4056d2a54906"
+				"d287994c-6ba3-46f0-bc96-4056d2a54906",
+				"34970bc2-bcb4-4b8e-bb3b-478a943039e3"
 			]
 		},
 		{
@@ -101,15 +101,17 @@
 				"489d060a-da4b-42e5-a578-3d40940c7958",
 				"dffc8eab-7892-4f42-a5c9-64fee165246f",
 				"e6c0f68c-f6fd-4517-95a1-a48f1f10450c",
-				"6d092696-1329-4f00-85af-27bc659f803a"
+				"6d092696-1329-4f00-85af-27bc659f803a",
+				"9bc8dc7f-19ec-42e1-86b5-c5417f832fd4",
+				"07734650-9ffd-4d37-99a4-22f92972adf3",
+				"44c8ddfb-f8b0-4265-8c6c-d9d052c2f18e"
 			]
 		},
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"2b160aba-1f2e-4d62-ba78-e475d0a7419c",
-				"9bc8dc7f-19ec-42e1-86b5-c5417f832fd4"
+				"2b160aba-1f2e-4d62-ba78-e475d0a7419c"
 			]
 		}
 	],
@@ -479,7 +481,7 @@
 		{
 			"uuid": "d287994c-6ba3-46f0-bc96-4056d2a54906",
 			"title": "Figure out save all hotkey for vscode",
-			"description": "ctrl + shift + alt + s",
+			"description": "Made a custom one: ctrl + shift + alt + s",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		},
@@ -528,7 +530,21 @@
 		{
 			"uuid": "9bc8dc7f-19ec-42e1-86b5-c5417f832fd4",
 			"title": "Load not loading equipment",
-			"description": "Equipment not getting reequipped on load game.",
+			"description": "FIXED by adding set accessors to all the properties of PcSaveData/SaveData.\nEquipment not getting reequipped on load game.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "07734650-9ffd-4d37-99a4-22f92972adf3",
+			"title": "Game crashing when pushing tab to open game menu",
+			"description": "FIXED by correcting the implementation of IEnumerable on InventoryManager/Controller.\nJust started happening, somehow related to the save/load system?",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "44c8ddfb-f8b0-4265-8c6c-d9d052c2f18e",
+			"title": "Also crashing when looting container, probably related to open menu crash?",
+			"description": "FIXED by correcting the implementation of IEnumerable on InventoryManager/Controller.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

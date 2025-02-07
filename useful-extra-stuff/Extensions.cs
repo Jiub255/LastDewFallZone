@@ -74,5 +74,36 @@ namespace Lastdew
 			float rotationAmount = Mathf.Min(Mathf.Abs(angleToTarget), turnAmount);
 			node3D.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(rotationAmount * Mathf.Sign(angleToTarget)));
 		}
+		
+		public static string FormatList(this string[] words)
+		{
+			if (words == null)
+			{
+				return "";
+			}
+			else if (words.Length == 0)
+			{
+				return "";
+			}
+			else if (words.Length == 1)
+			{
+				return words[0];
+			}
+			
+			string formatted = "";
+			if (words.Length == 2)
+			{
+				formatted = words[words.Length - 2] + " and " + words[words.Length - 1];
+			}
+			else
+			{
+				for (int i = 0; i < words.Length - 2; i++)
+				{
+					formatted += words[i] + ", ";
+				}
+				formatted += words[words.Length - 2] + " and " + words[words.Length - 1];
+			}
+			return formatted;
+		}
 	}
 }

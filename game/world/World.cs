@@ -66,7 +66,20 @@ namespace Lastdew
 			CreateNewLevel(DefaultPcList);
 		}
 
-		private void CreateNewLevel(List<PcSaveData> pcSaveDatas)
+		private void Save()
+		{
+			SaverLoader.Save(InventoryManager, TeamData);
+		}
+
+		private void Load()
+        {
+            //List<PcSaveData> pcSaveDatas = SaverLoader.Load(InventoryManager);
+            SaveData saveData = SaverLoader.Load();
+            LoadInventory(saveData);
+            CreateNewLevel(saveData.PcSaveDatas);
+        }
+
+        private void CreateNewLevel(List<PcSaveData> pcSaveDatas)
 		{
 			Level level = (Level)HomeBaseScene.Instantiate();
 			CallDeferred(World.MethodName.AddChild, level);
@@ -75,16 +88,14 @@ namespace Lastdew
 			UI.Initialize(TeamData, InventoryManager);
 		}
 
-		private void Save()
-		{
-			SaverLoader.Save(InventoryManager, TeamData);
-		}
-
-		private void Load()
-		{
-			// Must load data before creating new level
-			List<PcSaveData> pcSaveDatas = SaverLoader.Load(InventoryManager);
-			CreateNewLevel(pcSaveDatas);
-		}
+        private void LoadInventory(SaveData saveData)
+        {
+            Craftables craftables = Godot.ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+            foreach (KeyValuePair<string, int> kvp in saveData.Inventory)
+            {
+                this.PrintDebug($"Adding {craftables[kvp.Key]} to inventory");
+                InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
+            }
+        }
 	}
 }

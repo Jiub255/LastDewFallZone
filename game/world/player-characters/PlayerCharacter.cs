@@ -123,7 +123,13 @@ namespace Lastdew
 		
 		public PcSaveData GetSaveData()
 		{
-			return new PcSaveData(Name, Equipment, Health);
+			return new PcSaveData(
+				Name,
+				Equipment.Head?.Name,
+				Equipment.Weapon?.Name,
+				Equipment.Body?.Name,
+				Equipment.Feet?.Name,
+				Health.Injury);
 		}
 	}
 }

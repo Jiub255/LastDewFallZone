@@ -3,16 +3,6 @@ using System.Collections.Generic;
 
 namespace Lastdew
 {
-	public enum StatType
-	{
-		ATTACK,
-		DEFENSE,
-		ENGINEERING,
-		FARMING,
-		MEDICAL,
-		SCAVENGING,
-	}
-	
 	public class Stat
 	{	
 		public event Action OnBaseValueChanged;

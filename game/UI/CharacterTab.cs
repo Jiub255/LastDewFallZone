@@ -61,6 +61,7 @@ namespace Lastdew
 	
 		public void PopulateInventoryUI()
 		{
+			this.PrintDebug($"Populate inventory UI");
 			foreach (Node child in ItemsGrid.GetChildren())
 			{
 				if (child is ItemButton itemButton)
@@ -70,11 +71,11 @@ namespace Lastdew
 				}
 			}
 			
-			foreach (KeyValuePair<UsableItem, int> item in InventoryManager.UsableItems.Inventory)
+			foreach (KeyValuePair<UsableItem, int> item in InventoryManager.UsableItems)
 			{
 				SetupButton(item.Key, item.Value);
 			}
-			foreach (KeyValuePair<Equipment, int> equipment in InventoryManager.Equipment.Inventory)
+			foreach (KeyValuePair<Equipment, int> equipment in InventoryManager.Equipment)
 			{
 				SetupButton(equipment.Key, equipment.Value);
 			}

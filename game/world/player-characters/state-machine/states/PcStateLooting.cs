@@ -50,9 +50,12 @@ namespace Lastdew
 	
 		private void TickTimer(float delta)
 		{
+			this.PrintDebug($"Timer: {Timer}");
 			Timer -= delta;
+			this.PrintDebug($"Timer: {Timer}");
 			if (Timer < 0)
 			{
+				this.PrintDebug($"Inside if block, Timer: {Timer}");
 				Timer = 0;
 				GimmeTheLoot();
 				ChangeState(PcStateNames.IDLE, new MovementTarget(Context.Position));

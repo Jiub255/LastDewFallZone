@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game/world/looting/LootContainer.cs" id="1_b5trt"]
 [ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="2_6xl3a"]
 [ext_resource type="Script" path="res://craftables/items/ItemAmount.cs" id="3_5d7wd"]
-[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_60.tres" id="4_ybhf6"]
+[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_5.tres" id="4_ybhf6"]
 [ext_resource type="Resource" uid="uid://bllu8wsyhqs2x" path="res://craftables/items/equipment/pistol.tres" id="5_h50g4"]
 [ext_resource type="Resource" uid="uid://bs3r4jknvdnhm" path="res://craftables/items/equipment/body_armor.tres" id="6_rui7a"]
 

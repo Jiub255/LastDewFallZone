@@ -97,4 +97,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.01318, 0.5, 6.28534)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.76626, 0, -1.02311)
 script = ExtResource("1_silxs")
-EnemiesToSpawn = 0

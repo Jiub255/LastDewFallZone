@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="RelievePainEffect" load_steps=2 format=3 uid="uid://bhc2veoi3wd5o"]
-
-[ext_resource type="Script" path="res://craftables/items/usable-items/effects/RelievePainEffect.cs" id="1_6h67j"]
-
-[resource]
-script = ExtResource("1_6h67j")
-ReliefAmount = 25
-Duration = 60.0

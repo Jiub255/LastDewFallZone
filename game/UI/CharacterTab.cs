@@ -59,9 +59,14 @@ namespace Lastdew
 			}
 		}
 	
-		public void PopulateInventoryUI()
+		public void OnOpen()
 		{
-			this.PrintDebug($"Populate inventory UI");
+			PopulateInventoryUI();
+			CharacterDisplay.SetupDisplay();
+		}
+	
+		private void PopulateInventoryUI()
+		{
 			foreach (Node child in ItemsGrid.GetChildren())
 			{
 				if (child is ItemButton itemButton)

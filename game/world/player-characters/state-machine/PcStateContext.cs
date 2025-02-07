@@ -24,7 +24,7 @@ namespace Lastdew
 		public InventoryManager InventoryManager { get; }
 		public int Attack
 		{
-			get => PC.StatManager.Attack.Value;
+			get => PC.StatManager.Attack;
 		}
 		
 		private PlayerCharacter PC { get; }

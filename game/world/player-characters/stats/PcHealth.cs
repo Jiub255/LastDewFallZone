@@ -5,7 +5,10 @@ namespace Lastdew
 {	
 	public class PcHealth
 	{
-		public event Action OnHealthChanged;
+		/// <summary>
+		/// Sends Pain int
+		/// </summary>
+		public event Action<int> OnHealthChanged;
 		
 		private const int MAX_INJURY = 100;
 	
@@ -17,8 +20,7 @@ namespace Lastdew
 			private set
 			{
 				_injury = value;
-				this.PrintDebug($"Injury: {value}, Pain: {Pain}");
-				OnHealthChanged?.Invoke();
+				OnHealthChanged?.Invoke(Pain);
 			}
 		}
 		
@@ -63,13 +65,13 @@ namespace Lastdew
 		
 		public void ProcessRelief(float delta)
 		{
-			foreach (Relief relief in Reliefs)
+			for (int i = Reliefs.Count - 1; i >= 0; i--)
 			{
-				relief.Duration -= delta;
-				if (relief.Duration < 0)
+				Reliefs[i].Duration -= delta;
+				if (Reliefs[i].Duration < 0)
 				{
-					Reliefs.Remove(relief);
-					OnHealthChanged?.Invoke();
+					Reliefs.RemoveAt(i);
+					OnHealthChanged?.Invoke(Pain);
 				}
 			}
 		}
@@ -90,7 +92,8 @@ namespace Lastdew
 		public void RelievePain(int amount, float duration)
 		{
 			Reliefs.Add(new Relief(amount, duration));
-			OnHealthChanged?.Invoke();
+			OnHealthChanged?.Invoke(Pain);
+			this.PrintDebug($"Injury: {Injury}, Pain: {Pain}");
 		}
 	}
 }

@@ -18,17 +18,5 @@ namespace Lastdew
 			Inventory = inventory;
 			PcSaveDatas = pcSaveDatas;
 		}
-		
-		public void PrintData()
-		{
-			foreach (KeyValuePair<string, int> item in Inventory)
-			{
-				this.PrintDebug($"{item.Key}: {item.Value}");
-			}
-			foreach (PcSaveData pc in PcSaveDatas)
-			{
-				this.PrintDebug($"{pc.Name}, Equipment: {pc.Head}, {pc.Weapon}, {pc.Body}, {pc.Feet}, Injury: {pc.Injury}");
-			}
-		}
 	}
 }

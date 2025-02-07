@@ -46,6 +46,14 @@ namespace Lastdew
 			PC.Health.OnHealthChanged += SetHealthBars;
 		}
 		
+		/// <summary>
+		/// Useless parameter to subscribe method to event
+		/// </summary>
+		private void SetHealthBars(int _)
+		{
+			SetHealthBars();
+		}
+		
 		public void SetHealthBars()
 		{
 			PainBar.Value = PC.Health.Pain;

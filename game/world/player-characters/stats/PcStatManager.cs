@@ -6,21 +6,36 @@ namespace Lastdew
 {
 	public class PcStatManager : IEnumerable<Stat>
 	{
-		public Stat Attack { get; set; }
-		public Stat Defense { get; set; }
-		public Stat Engineering { get; set; }
-		public Stat Farming { get; set; }
-		public Stat Medical { get; set; }
-		public Stat Scavenging { get; set; }
+		private Stat _attack;
+		private Stat _defense;
+		private Stat _engineering;
+		private Stat _farming;
+		private Stat _medical;
+		private Stat _scavenging;
+		private int _pain;
+		
+		// Pain == 0 -> No effect. Pain == 100 -> Stat value halved. (for now at least)
+		public int Attack { get => _attack.Value * (200 - _pain) / 200; }
+		public int Defense { get => _defense.Value * (200 - _pain) / 200; }
+		public int Engineering { get => _engineering.Value * (200 - _pain) / 200; }
+		public int Farming { get => _farming.Value * (200 - _pain) / 200; }
+		public int Medical { get => _medical.Value * (200 - _pain) / 200; }
+		public int Scavenging { get => _scavenging.Value * (200 - _pain) / 200; }
 		
 		public PcStatManager()
 		{
-			Attack = new Stat(StatType.ATTACK, 1);
-			Defense = new Stat(StatType.DEFENSE, 1);
-			Engineering = new Stat(StatType.ENGINEERING, 1);
-			Farming = new Stat(StatType.FARMING, 1);
-			Medical = new Stat(StatType.MEDICAL, 1);
-			Scavenging = new Stat(StatType.SCAVENGING, 1);
+			_attack = new Stat(StatType.ATTACK, 1);
+			_defense = new Stat(StatType.DEFENSE, 1);
+			// SET TO 100 FOR TESTING
+			_engineering = new Stat(StatType.ENGINEERING, 100);
+			_farming = new Stat(StatType.FARMING, 1);
+			_medical = new Stat(StatType.MEDICAL, 1);
+			_scavenging = new Stat(StatType.SCAVENGING, 1);
+		}
+		
+		public void SetPain(int pain)
+		{
+			_pain = pain;
 		}
 		
 		public void CalculateStatModifiers(StatAmount[] equipmentBonuses)
@@ -53,12 +68,12 @@ namespace Lastdew
 	
 		public IEnumerator<Stat> GetEnumerator()
 		{
-			yield return Attack;
-			yield return Defense;
-			yield return Engineering;
-			yield return Farming;
-			yield return Medical;
-			yield return Scavenging;
+			yield return _attack;
+			yield return _defense;
+			yield return _engineering;
+			yield return _farming;
+			yield return _medical;
+			yield return _scavenging;
 		}
 	
 		IEnumerator IEnumerable.GetEnumerator()

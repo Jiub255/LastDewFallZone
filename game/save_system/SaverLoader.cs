@@ -36,10 +36,6 @@ namespace Lastdew
 			try
 			{
 				SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonString);
-				saveData.PrintDebug($"Json string: {jsonString}");
-				saveData.PrintData();
-				// TODO: Just unload the data into inv/pc manager in the same place, in World.?
-				//saveData.Load(inventoryManager);
 				return saveData;
 			}
 			catch (System.Exception ex)

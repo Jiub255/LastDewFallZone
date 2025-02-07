@@ -25,6 +25,8 @@ namespace Lastdew
 			StatManager = new PcStatManager();
 			Equipment = new PcEquipment(saveData);
 			Inventory = inventoryManager;
+
+			Health.OnHealthChanged += StatManager.SetPain;
 		}
 	
 		public void ProcessUnselected(double delta)
@@ -60,7 +62,7 @@ namespace Lastdew
 		/// <returns>true if pc incapacitated</returns>
 		public bool GetHit(Enemy attackingEnemy, int damage)
 		{
-			int actualDamage = damage - StatManager.Defense.Value;
+			int actualDamage = damage - StatManager.Defense;
 			bool incapacitated = Health.TakeDamage(actualDamage);
 			StateMachine.GetHit(attackingEnemy, incapacitated);
 			return incapacitated;
@@ -106,8 +108,10 @@ namespace Lastdew
 		
 		public void UseItem(UsableItem item)
 		{
+			this.PrintDebug($"Using {item.Name}, effects: {item.Effects.Length}");
 			foreach (Effect effect in item.Effects)
 			{
+				this.PrintDebug($"Effect: {effect}");
 				effect.ApplyEffect(this);
 			}
 			if (!item.Reusable)
@@ -119,6 +123,8 @@ namespace Lastdew
 		public void ExitTree()
 		{
 			StateMachine.ExitTree();
+			
+			Health.OnHealthChanged -= StatManager.SetPain;
 		}
 		
 		public PcSaveData GetSaveData()

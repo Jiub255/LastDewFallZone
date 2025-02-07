@@ -43,7 +43,6 @@ namespace Lastdew
 
 		private void Setup()
 		{
-			this.PrintDebug($"Setup called");
 			foreach (PlayerCharacter pc in TeamData.Pcs)
 			{
 				PcButton buttonInstance = PcButtonScene.Instantiate() as PcButton;

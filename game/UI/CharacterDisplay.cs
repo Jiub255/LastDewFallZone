@@ -53,12 +53,16 @@ namespace Lastdew
 		private void SetupStatsLabel(PlayerCharacter pc)
 		{
 			string statText = "";
+			
 			statText += $"Injury: {pc.Health.Injury}\n";
 			statText += $"Pain: {pc.Health.Pain}\n";
-			foreach (Stat stat in pc.StatManager)
-			{
-				statText += $"{stat.Type.ToString().ToPascalCase()}: {stat.Value}\n";
-			}
+			statText += $"Attack: {pc.StatManager.Attack}\n";
+			statText += $"Defense: {pc.StatManager.Defense}\n";
+			statText += $"Engineering: {pc.StatManager.Engineering}\n";
+			statText += $"Farming: {pc.StatManager.Farming}\n";
+			statText += $"Medical: {pc.StatManager.Medical}\n";
+			statText += $"Scavenging: {pc.StatManager.Scavenging}";
+			
 			StatsLabel.Text = statText;
 		}
 		

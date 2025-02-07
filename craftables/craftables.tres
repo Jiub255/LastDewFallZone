@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://dgesmlhv1ix8" path="res://craftables/items/crafting-materials/cloth.tres" id="7_go26v"]
 [ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="8_tk2k2"]
 [ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="9_0k1bl"]
-[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_60.tres" id="10_0taog"]
+[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_5.tres" id="10_0taog"]
 [ext_resource type="Resource" uid="uid://0asfejrqfhsc" path="res://craftables/items/usable-items/painkiller_50_30.tres" id="11_6iust"]
 
 [resource]

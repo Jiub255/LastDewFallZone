@@ -6,7 +6,7 @@ namespace Lastdew
 	/// TODO: Maybe just have pain killers relieve pain until the end of the scavenging/defense mission?
 	/// No reason to have them so limited.
 	/// </summary>
-	[GlobalClass]
+	[GlobalClass, Tool]
 	public partial class RelievePainEffect : Effect
 	{
 		[Export]

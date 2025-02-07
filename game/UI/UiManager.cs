@@ -22,7 +22,6 @@ namespace Lastdew
 	
 		public override void _Input(InputEvent @event)
 		{
-			//this.PrintDebug($"Event: {@event}");
 			base._Input(@event);
 			
 			if (AnyMenuOpen && @event.IsActionPressed(InputNames.EXIT_MENU))
@@ -33,7 +32,6 @@ namespace Lastdew
 			
 			if (@event.IsActionPressed(InputNames.GAME_MENU))
 			{
-				this.PrintDebug($"Game menu pressed");
 				Toggle(GameMenu);
 			}
 			else if (@event.IsActionPressed(InputNames.BUILD_MENU))

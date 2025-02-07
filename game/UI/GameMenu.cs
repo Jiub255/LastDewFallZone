@@ -24,7 +24,7 @@ namespace Lastdew
 		{
 			base.Open();
 			
-			CharacterTab.PopulateInventoryUI();
+			CharacterTab.OnOpen();
 		}
 		
 		public override void Close()

@@ -26,8 +26,6 @@ namespace Lastdew
 			GetTree().Paused = true;
 
 			Subscribe();
-			
-			//this.PrintDebug($"Global user data directory: {OS.GetDataDir()}");
 		}
 
 		public override void _ExitTree()
@@ -73,7 +71,6 @@ namespace Lastdew
 
 		private void Load()
         {
-            //List<PcSaveData> pcSaveDatas = SaverLoader.Load(InventoryManager);
             SaveData saveData = SaverLoader.Load();
             LoadInventory(saveData);
             CreateNewLevel(saveData.PcSaveDatas);
@@ -93,7 +90,6 @@ namespace Lastdew
             Craftables craftables = Godot.ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
             foreach (KeyValuePair<string, int> kvp in saveData.Inventory)
             {
-                this.PrintDebug($"Adding {craftables[kvp.Key]} to inventory");
                 InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
             }
         }

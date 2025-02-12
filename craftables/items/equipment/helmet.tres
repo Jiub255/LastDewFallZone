@@ -1,19 +1,32 @@
-[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://q67jgrb6txg0"]
+[gd_resource type="Resource" script_class="Equipment" load_steps=8 format=3 uid="uid://q67jgrb6txg0"]
 
+[ext_resource type="Script" path="res://world/player-characters/stats/StatAmount.cs" id="1_nt3pl"]
 [ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="1_rqv4s"]
-[ext_resource type="Texture2D" uid="uid://cob4eppc2j7p2" path="res://unused-assets/icons/icon_helmet_blank.png" id="2_ikr7h"]
+[ext_resource type="Texture2D" uid="uid://cob4eppc2j7p2" path="res://craftables/items/equipment/icon_helmet_blank.png" id="2_ikr7h"]
+[ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="3_3wuaw"]
+[ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterialAmount.cs" id="4_7b8qp"]
+
+[sub_resource type="Resource" id="Resource_luq0q"]
+script = ExtResource("1_nt3pl")
+Type = 1
+Amount = 1
+
+[sub_resource type="Resource" id="Resource_hewei"]
+script = ExtResource("4_7b8qp")
+Material = ExtResource("3_3wuaw")
+Amount = 1
 
 [resource]
 script = ExtResource("1_rqv4s")
 Type = 0
-EquipmentBonuses = []
+EquipmentBonuses = [SubResource("Resource_luq0q")]
 StatRequirementsToUse = []
 ItemRarity = 100
 Tags = [0, 3]
 Name = "Helmet"
 Description = "1 Defense"
 Icon = ExtResource("2_ikr7h")
-_recipeCosts = []
+_recipeCosts = [SubResource("Resource_hewei")]
 _requiredBuildings = []
 _statRequirements = []
 _scrapResults = []

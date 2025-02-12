@@ -22,7 +22,7 @@ resources_spreadsheet_view/fold_docks=false
 [application]
 
 config/name="LastDew:FallZone"
-run/main_scene="res://game/world/base_world.tscn"
+run/main_scene="res://world/base_world.tscn"
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
 config/icon="res://unused-assets/icon.svg"
 
@@ -37,16 +37,15 @@ enabled=PackedStringArray("res://addons/CraftablesFiller/plugin.cfg", "res://add
 [file_customization]
 
 folder_colors={
+"res://UI/": "green",
 "res://addons/": "pink",
-"res://craftables/": "orange",
-"res://game/": "yellow",
-"res://game/UI/": "blue",
-"res://game/save_system/": "red",
-"res://game/world/": "purple",
-"res://game/world/enemies/": "teal",
-"res://game/world/player-characters/": "green",
-"res://unused-assets/": "gray",
-"res://useful-extra-stuff/": "red"
+"res://craftables/": "red",
+"res://save_system/": "orange",
+"res://test/": "yellow",
+"res://unused-assets/": "teal",
+"res://useful-extra-stuff/": "blue",
+"res://world/": "purple",
+"res://world/player-characters/": "green"
 }
 
 [input]

@@ -61,9 +61,7 @@
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
-			"tasks": [
-				"da6960b9-4241-48f4-8e32-984ebd5dba84"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "4aeb1722-9a02-459d-81af-f17bb7d9e014",
@@ -93,7 +91,8 @@
 				"d287994c-6ba3-46f0-bc96-4056d2a54906",
 				"34970bc2-bcb4-4b8e-bb3b-478a943039e3",
 				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
-				"64c7d6c7-f4b1-402c-8023-48f1f6fc8457"
+				"64c7d6c7-f4b1-402c-8023-48f1f6fc8457",
+				"da6960b9-4241-48f4-8e32-984ebd5dba84"
 			]
 		},
 		{
@@ -111,7 +110,8 @@
 				"07734650-9ffd-4d37-99a4-22f92972adf3",
 				"44c8ddfb-f8b0-4265-8c6c-d9d052c2f18e",
 				"2b160aba-1f2e-4d62-ba78-e475d0a7419c",
-				"08183b6f-0330-4592-a82b-408bc62ecc1d"
+				"08183b6f-0330-4592-a82b-408bc62ecc1d",
+				"4cedf12d-2d3b-413f-a337-85acaebb4e01"
 			]
 		},
 		{
@@ -592,6 +592,13 @@
 			"uuid": "08183b6f-0330-4592-a82b-408bc62ecc1d",
 			"title": "Inv ui gets duplicated after crafting an item",
 			"description": "FIXED (kinda hacky) by using GameMenuTabs class on the tab container in the game menu. It just refreshes the inventory UI when you change tabs.\nProbably need to clean up grid before populating it.\nHappening from CharacterTab.SetupButton(). PopulateInventoryUI() gets called multiple times in a row when crafting an item, so the populate method can't queue free the buttons since they haven't been added to the tree yet. ",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "4cedf12d-2d3b-413f-a337-85acaebb4e01",
+			"title": "Equipping something with something of the same type already equipped causes same duplicate bug from before",
+			"description": "FIXED by storing instantiated buttons in a list so they can be deleted, instead of using GetChildren which wasn't working because of call deferred AddChild not being called yet. Also had to make SelectedItemPanel.SetItem into a call deferred since the button's Initialize() was also call deferred. \nThis proper fix got rid of the hacky GameMenuTabs fix from earlier too. Don't need that class at all now.\nMaybe update UI somehow other than the Inv event? ",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

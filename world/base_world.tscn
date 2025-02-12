@@ -1,0 +1,61 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvqh38ovds5vf"]
+
+[ext_resource type="Script" path="res://world/World.cs" id="1_ixco4"]
+[ext_resource type="PackedScene" uid="uid://c7w0406ngl5dr" path="res://UI/main/main_menu.tscn" id="2_aso4t"]
+[ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://UI/hud/hud.tscn" id="2_we7el"]
+[ext_resource type="PackedScene" uid="uid://bdhbrta7xgaqg" path="res://UI/game/game_menu.tscn" id="3_ocxly"]
+[ext_resource type="Script" path="res://UI/UiManager.cs" id="4_1iy4l"]
+[ext_resource type="PackedScene" uid="uid://6n0ajh50ivs0" path="res://UI/build/build_menu.tscn" id="9_pq4oq"]
+[ext_resource type="Script" path="res://UI/build/BuildMenu.cs" id="10_8gcsg"]
+[ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://world/camera/camera.tscn" id="11_huh4i"]
+[ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/map/map_menu.tscn" id="11_nbxj8"]
+[ext_resource type="Script" path="res://world/player-characters/management/PcManagerBase.cs" id="12_2gts1"]
+[ext_resource type="Script" path="res://UI/map/MapMenu.cs" id="12_7pdbb"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_ixco4")
+
+[node name="CameraRig" parent="." instance=ExtResource("11_huh4i")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 7)
+
+[node name="PcManager" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("12_2gts1")
+
+[node name="UiManager" type="Control" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_1iy4l")
+
+[node name="MainMenu" parent="UiManager" instance=ExtResource("2_aso4t")]
+unique_name_in_owner = true
+process_mode = 3
+
+[node name="HUD" parent="UiManager" instance=ExtResource("2_we7el")]
+unique_name_in_owner = true
+process_mode = 1
+visible = false
+
+[node name="GameMenu" parent="UiManager" instance=ExtResource("3_ocxly")]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+
+[node name="BuildMenu" parent="UiManager" instance=ExtResource("9_pq4oq")]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("10_8gcsg")
+
+[node name="MapMenu" parent="UiManager" instance=ExtResource("11_nbxj8")]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("12_7pdbb")

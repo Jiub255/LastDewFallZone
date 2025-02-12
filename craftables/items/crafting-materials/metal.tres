@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CraftingMaterial" load_steps=3 format=3 uid="uid://dyyxedbgcyiy"]
 
-[ext_resource type="Texture2D" uid="uid://bcqjtvteiews5" path="res://unused-assets/icons/icon_metal.png" id="1_rydkw"]
+[ext_resource type="Texture2D" uid="uid://bcqjtvteiews5" path="res://craftables/items/crafting-materials/icon_metal.png" id="1_rydkw"]
 [ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_twptw"]
 
 [resource]

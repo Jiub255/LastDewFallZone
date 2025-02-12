@@ -1,19 +1,32 @@
-[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://cqajr7dvaj717"]
+[gd_resource type="Resource" script_class="Equipment" load_steps=8 format=3 uid="uid://cqajr7dvaj717"]
 
+[ext_resource type="Script" path="res://world/player-characters/stats/StatAmount.cs" id="1_opmn1"]
 [ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="1_vbjsr"]
-[ext_resource type="Texture2D" uid="uid://ym4rh5rfmrp8" path="res://unused-assets/icons/icon_bat.png" id="2_eqpav"]
+[ext_resource type="Texture2D" uid="uid://ym4rh5rfmrp8" path="res://craftables/items/equipment/icon_bat.png" id="2_eqpav"]
+[ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="3_v27t1"]
+[ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterialAmount.cs" id="4_neg51"]
+
+[sub_resource type="Resource" id="Resource_4jk7v"]
+script = ExtResource("1_opmn1")
+Type = 0
+Amount = 1
+
+[sub_resource type="Resource" id="Resource_wr4sb"]
+script = ExtResource("4_neg51")
+Material = ExtResource("3_v27t1")
+Amount = 1
 
 [resource]
 script = ExtResource("1_vbjsr")
 Type = 3
-EquipmentBonuses = []
+EquipmentBonuses = [SubResource("Resource_4jk7v")]
 StatRequirementsToUse = []
 ItemRarity = 100
 Tags = [0, 2]
 Name = "Baseball Bat"
 Description = "2 Damage, 1 Scavenging, Melee"
 Icon = ExtResource("2_eqpav")
-_recipeCosts = []
+_recipeCosts = [SubResource("Resource_wr4sb")]
 _requiredBuildings = []
 _statRequirements = []
 _scrapResults = []

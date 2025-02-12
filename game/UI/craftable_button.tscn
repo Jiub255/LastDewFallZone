@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c63e8l6yg0iqe"]
+
+[ext_resource type="Script" path="res://game/UI/CraftableButton.cs" id="1_xkcbo"]
+
+[node name="CraftableButton" type="Button"]
+custom_minimum_size = Vector2(96, 96)
+expand_icon = true
+script = ExtResource("1_xkcbo")

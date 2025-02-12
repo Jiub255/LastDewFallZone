@@ -106,7 +106,7 @@ namespace Lastdew
 			return inventory;
 		}
 
-		/* public int this[Item item]
+		public int this[Item item]
 		{
 			get
 			{
@@ -124,7 +124,7 @@ namespace Lastdew
 				}
 				return 0;
 			}
-		} */
+		}
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{

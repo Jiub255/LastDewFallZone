@@ -69,7 +69,7 @@ namespace Lastdew
 		{
 			ItemButton.Item.OnClickItem(TeamData.Pcs[TeamData.MenuSelectedIndex]);
 			// TODO: Clear display (or go to next item?) after using last item in stack/equipping something.
-			ItemButton.Decrement();
+			ItemButton.Amount--;
 			if (ItemButton.Amount == 0)
 			{
 				ClearItem();

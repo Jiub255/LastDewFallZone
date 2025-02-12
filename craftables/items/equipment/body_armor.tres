@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="Equipment" load_steps=5 format=3 uid="uid://bs3r4jknvdnhm"]
+[gd_resource type="Resource" script_class="Equipment" load_steps=8 format=3 uid="uid://bs3r4jknvdnhm"]
 
 [ext_resource type="Script" path="res://game/world/player-characters/stats/StatAmount.cs" id="1_7c7mu"]
 [ext_resource type="Texture2D" uid="uid://ecdhib4xmc61" path="res://unused-assets/icons/icon_body_armor_blank.png" id="2_htjxw"]
 [ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="3_3humt"]
+[ext_resource type="Resource" uid="uid://dgesmlhv1ix8" path="res://craftables/items/crafting-materials/cloth.tres" id="3_imkno"]
+[ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterialAmount.cs" id="4_u5f1c"]
 
 [sub_resource type="Resource" id="Resource_bagsq"]
 script = ExtResource("1_7c7mu")
 Type = 1
+Amount = 2
+
+[sub_resource type="Resource" id="Resource_ciqqr"]
+script = ExtResource("4_u5f1c")
+Material = ExtResource("3_imkno")
 Amount = 2
 
 [resource]
@@ -19,7 +26,7 @@ Tags = [0, 3]
 Name = "Body Armor"
 Description = "2 Defense"
 Icon = ExtResource("2_htjxw")
-_recipeCosts = []
+_recipeCosts = [SubResource("Resource_ciqqr")]
 _requiredBuildings = []
 _statRequirements = []
 _scrapResults = []

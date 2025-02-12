@@ -14,20 +14,26 @@ namespace Lastdew
 		[Export]
 		public Texture2D Icon { get; private set; }
 
+		// Have to use Godot arrays below for the resources to load correctly.
 		[Export]
-		private CraftingMaterialAmount[] _recipeCosts;
+		private Godot.Collections.Array<CraftingMaterialAmount> _recipeCosts;
 		[Export]
-		private Building[] _requiredBuildings;
+		private Godot.Collections.Array<Building> _requiredBuildings;
 		[Export]
-		private StatAmount[] _statRequirements;
+		private Godot.Collections.Array<StatAmount> _statRequirements;
 		[Export]
-		private CraftingMaterialAmount[] _scrapResults;
+		private Godot.Collections.Array<CraftingMaterialAmount> _scrapResults;
 		
 		public Dictionary<string, int> RecipeCosts
 		{
 			get
 			{
 				Dictionary<string, int> dict = new();
+				if (_recipeCosts == null)
+				{
+					return dict;
+				}
+				
 				foreach (CraftingMaterialAmount cma in _recipeCosts)
 				{
 					dict[cma.Material.Name] = cma.Amount;

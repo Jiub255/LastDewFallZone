@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Craftables" load_steps=13 format=3 uid="uid://dvk1r8uat43j6"]
+[gd_resource type="Resource" script_class="Craftables" load_steps=14 format=3 uid="uid://dvk1r8uat43j6"]
 
 [ext_resource type="Resource" uid="uid://c8dprqclfyhv3" path="res://craftables/buildings/test_building.tres" id="1_saxsy"]
 [ext_resource type="Script" path="res://craftables/Craftables.cs" id="1_u67xb"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="8_tk2k2"]
 [ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="9_0k1bl"]
 [ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_5.tres" id="10_0taog"]
+[ext_resource type="Resource" uid="uid://bhh3umemjtsb5" path="res://craftables/items/usable-items/painkiller_50_60.tres" id="10_cbmxj"]
 [ext_resource type="Resource" uid="uid://0asfejrqfhsc" path="res://craftables/items/usable-items/painkiller_50_30.tres" id="11_6iust"]
 
 [resource]
@@ -31,6 +32,7 @@ Equipment = {
 "Test EQ": ExtResource("6_7sn6t")
 }
 UsableItems = {
-"Painkiller": ExtResource("10_0taog"),
-"Strong Painkiller": ExtResource("11_6iust")
+"Strong Long Painkiller": ExtResource("10_cbmxj"),
+"Strong Painkiller": ExtResource("11_6iust"),
+"Test Painkiller": ExtResource("10_0taog")
 }

@@ -34,21 +34,23 @@
 				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
 				"844550fe-e567-461c-9da6-129cb0ef35fc",
 				"2d06c068-737d-437a-b839-676244c60b7d",
-				"43e7a2a8-de3c-4c98-b01a-927022b66792"
+				"43e7a2a8-de3c-4c98-b01a-927022b66792",
+				"aab8ef9e-9ad4-478f-90fc-f61ab483b97d"
 			]
 		},
 		{
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "TODO",
 			"tasks": [
-				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
-				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
-				"da6960b9-4241-48f4-8e32-984ebd5dba84",
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
-				"bc28b844-8360-4095-b52b-105b42061993",
-				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
+				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
+				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
+				"bc28b844-8360-4095-b52b-105b42061993",
+				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
+				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
+				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
 				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
@@ -59,7 +61,9 @@
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
-			"tasks": []
+			"tasks": [
+				"da6960b9-4241-48f4-8e32-984ebd5dba84"
+			]
 		},
 		{
 			"uuid": "4aeb1722-9a02-459d-81af-f17bb7d9e014",
@@ -106,7 +110,8 @@
 				"9bc8dc7f-19ec-42e1-86b5-c5417f832fd4",
 				"07734650-9ffd-4d37-99a4-22f92972adf3",
 				"44c8ddfb-f8b0-4265-8c6c-d9d052c2f18e",
-				"2b160aba-1f2e-4d62-ba78-e475d0a7419c"
+				"2b160aba-1f2e-4d62-ba78-e475d0a7419c",
+				"08183b6f-0330-4592-a82b-408bc62ecc1d"
 			]
 		},
 		{
@@ -224,7 +229,7 @@
 		{
 			"uuid": "da6960b9-4241-48f4-8e32-984ebd5dba84",
 			"title": "Crafting Menu/Manager",
-			"description": "Need to figure out how to handle recipe costs and such first. Database? Enum ids? String ids? int ids?",
+			"description": "Currently pretty standard and similar to LSDZ. Going to change it over time.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -279,7 +284,7 @@
 		{
 			"uuid": "d1adddcc-8d19-4763-94e7-4180fac8440c",
 			"title": "Morale",
-			"description": "How exactly to set it up?\nHave individual morales, or just a team one?\n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs.",
+			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs, negatively or positively.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -342,7 +347,7 @@
 		{
 			"uuid": "83757feb-77db-46c7-a1ac-e076ea02903b",
 			"title": "Stats",
-			"description": "-Physical?\n\t-Attack\n\t-Defense\n-Engineering\n-Farming\n-Medical\n-Scavenging\n\nShould Attack/Defense be separate? Or derived from equipment only? Unlike the rest, which can be increased  naturally.\nOr could have a physical strength/endurance stat that determines a bonus to attack and defense.\n",
+			"description": "-Physical?\n\t-Attack/Strength\n\t-Defense/Toughness or constitution\n-Engineering\n-Farming\n-Medical\n-Scavenging\n-Speed?\n-Stealth?\n-Weapon categories? (eg. melee, one handed guns, two handed guns, whatever categories)\n-Charisma/speech? For the leader adding morale, or talking to other pcs/bases? Maybe.\n\n\nShould Attack/Defense be separate? Or derived from equipment only? Unlike the rest, which can be increased  naturally.\nOr could have a physical strength/endurance stat that determines a bonus to attack and defense.\n",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -411,7 +416,7 @@
 		{
 			"uuid": "43e7a2a8-de3c-4c98-b01a-927022b66792",
 			"title": "How to set up game menu?",
-			"description": "In-game menus:\n\tEquip\n\tInventory (Usable items)\n\tCrafting\n\tBuilding\n\tGo Scavenging (Map)\n\nHave:\nsave/load/options/quit menu\nChar/Inv 2-tab menu:\n\tCharacter/equip/useitems tab\n\tCrafting tab\nBuilding menu\n\tBasically different game mode/HUD around normal home base scene\nScavenging Map menu\n\tNot sure how to do this yet. Start with basic clickable map like LSDZ.\n",
+			"description": "In-game menus:\n\tEquip\n\tInventory (Usable items)\n\tCrafting\n\tBuilding\n\tGo Scavenging (Map)\n\nHave:\nsave/load/options/quit menu\nChar/Inv 2-tab menu:\n\tCharacter/equip/useitems tab\n\tCrafting tab\nBuilding menu\n\tBasically different game mode/HUD around normal home base scene\nScavenging Map menu\n\tNot sure how to do this yet. Start with basic clickable map like LSDZ.\nMorale menu\n\tShows all the factors affecting your team's morale, so you can focus on improving those factors. \n\tEx: Food/Water level per survivor, enough beds/showers/whatever comfort things, cleanliness, decorations (plants, art, etc), entertainment (sports, games, music, etc)",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -460,7 +465,7 @@
 		{
 			"uuid": "6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
 			"title": "Settings/Options",
-			"description": "",
+			"description": "Accessibility options?\n\tColors\n\tVolumes for different sound types\n\t\tMusic, voices, combat sfx, etc\n\tKey rebinding\n\t\tAs customizable as possible\n\tUI navigable with arrows/wasd/controller/mouse\nAutosave options\n\tOn/off\n\tHow often",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -488,7 +493,7 @@
 		{
 			"uuid": "841db010-8366-48bb-8111-d5aa9e7ce5c4",
 			"title": "Game Description",
-			"description": "You control a group of survivors in a post-apocalyptic world. Original game I'm ripping off (Last Stand: Dead Zone) was a zombie apocalypse, but I wan't to do something different. Maybe some invasive alien wild animals we accidentally brought over and let loose. Want to eventually have access to scifi level technology.\n\nYou go out into the city to scavenge supplies and food and the such. \n\nYou can build buildings and fortifications to improve your base. \n\tMedical buildings to heal characters\n\tFarm plots/animal coops and water catchers for food/water.\n\tDefensive buildings like walls and towers and traps\n\tBeds and showers and other comfort things to improve morale\n\tArt and entertainment things to improve morale\n\tWorkbenches and the such, to build other things/buildings.\n\nYou can craft useful items\n\tWeapons, melee and ranged\n\tArmor, helmets, torso, legs, feet\n\tAccessories to improve stats, medical equipment, stealthy stuff, tech gadgets eventually.\n\tUsable items, painkillers, bandages, drugs to improve performance, etc\n\tComponents to craft more advanced things\n\tTools to craft other things with\n\nStat system\n\tInstead of basic hp, have a pain/injury system. Injury is how much actual damage your body has taken, and pain is how much it affects your mental state (which affects stats negatively). Pain raises 1:1 with injury level (100 is max, which is death or KO), but you can use painkillers to temporarily reduce the negative effects of pain. You can only heal injury level at home base, not while out scavenging. \n\t(Still not sure about exact stats to use yet)\n\tAttack\n\tDefense (or just get these 2 from equipment?)\n\tScavenging\n\tEngineering\n\tFarming\n\tMedical\n\tStealth? (For possible noise stat that attracts enemies, guns and cars are very loud)\n\nMorale system\n\tThe team as a whole has a morale stat, which (negatively or positively) affects the stats of every character. It'll be on a -100 to 100 scale. Morale is affected by many things, like\n\tFood/Water levels\n\tComfort levels (enough beds, showers, entertainment, art, plants, etc)\n\tTotal injury level of team?\n\tRecent deaths on team?\n\tFinding a really good secret loot spot\n\tBuilding an important new building\n\nScavenging system\n\tNot sure how to choose scavenging location yet. Maybe just a map like LS:DZ. Or maybe a \"overworld\" mini-game where you walk/drive around the city and find a place. Different events could happen on the overworld map to keep it interesting: ambushes, mobs, special events. \n\tWhen you get to the spot, your team goes around and you loot what you can while fighting off enemies. Maybe more come the longer you stay so you eventually get overwhelmed and have to leave or die? Don't do a timer, that's no fun and doesn't make sense. Or maybe the \"flow\" of enemies varies? Like sometimes  you get overwhelmed and sometimes it's just mellow.\n\tIf a pc gets to 100 injury, they become incapacitated and have to recover for a good while back home. Not sure if they'll be killable yet. Maybe kinda like d&d with the death saving throws, like you can be killed once you're incapacitated so protect that pc well. \n\tSometimes you can meet other pcs and they'll join the team if you save them or whatever. Could be special event things.\n\nHome Base\n\tStarts simple, maybe just a hollowed out warehouse or something. Might have multiple to choose from, different themes and such. And maybe later in the game you can find better places like prisons to move into. \n\tYou slowly build up your base with scavenged/produced items. \n\tOccasionally you get invaded by enemies (human \"bandit\" types and/or other enemies). Combat is the same as when you're scavenging, except you can use your defensive buildings.\n\tOccasionally a random new pc will wander to your base and join you. Can also find new pcs out in the field. \n\n",
+			"description": "You control a group of survivors in a post-apocalyptic world. Original game I'm ripping off (Last Stand: Dead Zone) was a zombie apocalypse, but I wan't to do something different. Maybe some invasive alien wild animals we accidentally brought over and let loose. Want to eventually have access to scifi level technology.\n\nYou go out into the city to scavenge supplies and food and the such. \n\nYou can build buildings and fortifications to improve your base. \n\tMedical buildings to heal characters\n\tFarm plots/animal coops and water catchers for food/water.\n\tDefensive buildings like walls and towers and traps\n\tBeds and showers and other comfort things to improve morale\n\tArt and entertainment things to improve morale\n\tWorkbenches and the such, to build other things/buildings.\n\nYou can craft useful items\n\tWeapons, melee and ranged\n\tArmor, helmets, torso, legs, feet\n\tAccessories to improve stats, medical equipment, stealthy stuff, tech gadgets eventually.\n\tUsable items, painkillers, bandages, drugs to improve performance, etc\n\tComponents to craft more advanced things\n\tTools to craft other things with\n\nStat system\n\tInstead of basic hp, have a pain/injury system. Injury is how much actual damage your body has taken, and pain is how much it affects your mental state (which affects stats negatively). Pain raises 1:1 with injury level (100 is max, which is death or KO), but you can use painkillers to temporarily reduce the negative effects of pain. You can only heal injury level at home base, not while out scavenging. \n\t(Still not sure about exact stats to use yet)\n\tAttack\n\tDefense (or just get these 2 from equipment?)\n\tScavenging\n\tEngineering\n\tFarming\n\tMedical\n\tStealth? (For possible noise stat that attracts enemies, guns and cars are very loud)\n\nMorale system\n\tThe team as a whole has a morale stat, which (negatively or positively) affects the stats of every character. It'll be on a -100 to 100 scale. Morale is affected by many things, like\n\tFood/Water levels\n\tComfort levels (enough beds, showers, entertainment, art, plants, etc)\n\tTotal injury level of team?\n\tRecent deaths on team?\n\tFinding a really good secret loot spot\n\tBuilding an important new building\n\tMorale menu to show all the factors\n\nScavenging system\n\tNot sure how to choose scavenging location yet. Maybe just a map like LS:DZ. Or maybe a \"overworld\" mini-game where you walk/drive around the city and find a place. Different events could happen on the overworld map to keep it interesting: ambushes, mobs, special events. \n\tWhen you get to the spot, your team goes around and you loot what you can while fighting off enemies. Maybe more come the longer you stay so you eventually get overwhelmed and have to leave or die? Don't do a timer, that's no fun and doesn't make sense. Or maybe the \"flow\" of enemies varies? Like sometimes  you get overwhelmed and sometimes it's just mellow.\n\tIf a pc gets to 100 injury, they become incapacitated and have to recover for a good while back home. Not sure if they'll be killable yet. Maybe kinda like d&d with the death saving throws, like you can be killed once you're incapacitated so protect that pc well. \n\tSometimes you can meet other pcs and they'll join the team if you save them or whatever. Could be special event things.\n\nHome Base\n\tStarts simple, maybe just a hollowed out warehouse or something. Might have multiple to choose from, different themes and such. And maybe later in the game you can find better places like prisons to move into. \n\tYou slowly build up your base with scavenged/produced items. \n\tOccasionally you get invaded by enemies (human \"bandit\" types and/or other enemies). Combat is the same as when you're scavenging, except you can use your defensive buildings.\n\tOccasionally a random new pc will wander to your base and join you. Can also find new pcs out in the field. \n\n",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -502,7 +507,7 @@
 		{
 			"uuid": "9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
 			"title": "Experience/Leveling system",
-			"description": "Not sure how to implement it yet. Get experience for doing anything? Probably yeah.\nCombat, looting, building, crafting, healing someone (medical), collecting/making resources.\nChoose what stats get raised? Or like Morrowind, where using the stat increases it?",
+			"description": "Not sure how to implement it yet. Get experience for doing anything? Probably yeah.\nCombat, looting, building, crafting, healing someone (medical), collecting/making resources.\nChoose what stats get raised, classic exp/level style? Or like Morrowind, where using the stat increases it? Or something different?\nCould maybe just do a shared team exp, and anything anyone does adds to it.\n\tThen when it levels, everyone levels up.\n\tCould be tedious to level a bunch of pcs at once though. Also, how do they level?\nHow to level pcs?\n\tAutomatically/randomly?\n\tOr manually, using some skill point system?\n\tCould mix the two, have it so you can rank each pc's stats 1 - 6 (or however many). Then just apply whatever amount of points to each according to their rank. Then you could control their leveling, but still auto level a large team. Maybe each pc comes with their rankings randomized and you can change them to suit your needs if you want.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -560,6 +565,34 @@
 			"title": "Have shock for massive injuries?",
 			"description": "Like in real life, have a temporary lack of pain after a traumatic injury. Like over 50 injury at once and you get a minute of shock, pain-free. Or whatever.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
+			"title": "Improve Save system",
+			"description": "Add backups in case of failures, like that one old Unity video.\nAdd autosave functionality\nAdd multiple save slots.\n\tUnlimited? Or only limited by your computer's storage space?\n\tOr just many slots, like 100?\n\tOr just like 5 - 10 \"player\" slots that each hold one person's game?\n\t\tSo each save overwrites the slot, including autosaves?\nGet continue button working.",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "69b8fcbf-8b21-4392-b567-ba2f58b7512f",
+			"title": "Food/Water system",
+			"description": "Should do after building system is set up, and some sort of food and water producing buildings have been made.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "aab8ef9e-9ad4-478f-90fc-f61ab483b97d",
+			"title": "Classes/jobs?",
+			"description": "Have classes like LSDZ?\nCould have a big list of jobs for random pcs to have, with starting stats/rankings.\nCould also have certain special abilities or bonuses for certain jobs.\n\tEngineer joins team and you get new recipes\n\tMedic/doctor joins and you can use medical buildings/equipment and heal much better/faster\n\tChef joins and you get a morale bonus from your food stash\n\tEx-military joins and they have ridiculous str/con stats and some great starting equipment\n\tFarmer joins and your food production buildings/fields get a production boost\n\tTeacher joins and your team gains exp a little faster\n\tCarpenter joins and your team's building speed goes up a little bit\n\tMusician joins, has low stats, but gives a constant morale boost\n\tEtc.. could go nuts with this.\nJobs seem funner than just having a few classes like LSDZ. ",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "08183b6f-0330-4592-a82b-408bc62ecc1d",
+			"title": "Inv ui gets duplicated after crafting an item",
+			"description": "FIXED (kinda hacky) by using GameMenuTabs class on the tab container in the game menu. It just refreshes the inventory UI when you change tabs.\nProbably need to clean up grid before populating it.\nHappening from CharacterTab.SetupButton(). PopulateInventoryUI() gets called multiple times in a row when crafting an item, so the populate method can't queue free the buttons since they haven't been added to the tree yet. ",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

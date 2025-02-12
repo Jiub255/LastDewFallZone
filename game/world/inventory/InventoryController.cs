@@ -54,10 +54,10 @@ namespace Lastdew
 			return Inventory.ContainsKey(item) && Inventory[item] >= amount;
 		}
 
-        /* public int this[T key]
+        public int this[T key]
 		{
-			get => Inventory[key];
-		} */
+			get => Inventory.ContainsKey(key) ? Inventory[key] : 0;
+		}
 
         public IEnumerator<KeyValuePair<T, int>> GetEnumerator()
         {

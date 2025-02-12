@@ -1,8 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://ffc0mkxnmvb2"]
+[gd_scene load_steps=25 format=3 uid="uid://ffc0mkxnmvb2"]
 
 [ext_resource type="Script" path="res://game/world/Level.cs" id="1_iy0f7"]
 [ext_resource type="Script" path="res://game/world/enemies/EnemySpawner.cs" id="1_silxs"]
 [ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://game/world/looting/loot_container_test.tscn" id="2_i5jn1"]
+[ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="3_qqwc3"]
+[ext_resource type="Script" path="res://craftables/items/ItemAmount.cs" id="4_a1edd"]
+[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_5.tres" id="5_onbdq"]
+[ext_resource type="Resource" uid="uid://bllu8wsyhqs2x" path="res://craftables/items/equipment/pistol.tres" id="6_l48xd"]
+[ext_resource type="Resource" uid="uid://bs3r4jknvdnhm" path="res://craftables/items/equipment/body_armor.tres" id="7_0xmtm"]
+[ext_resource type="Resource" uid="uid://dgesmlhv1ix8" path="res://craftables/items/crafting-materials/cloth.tres" id="8_1mxja"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
 vertices = PackedVector3Array(-24.5, 0.5, -4.25, -11.75, 0.5, -4, -11.75, 0.5, -5.5, -10, 0.5, -5.75, -10.25, 0.5, -24.5, -24.5, 0.5, -24.5, 7.75, 0.5, -5.75, 8, 0.5, -24.5, 9.25, 0.5, -5.75, 9.5, 0.5, -5.25, 24.5, 0.5, -5.25, 24.5, 0.5, -24.5, 9.25, 0.5, -4.25, 8.25, 0.5, -4.25, 8.25, 0.5, -3.5, 9.25, 0.5, -3.25, 9.25, 0.5, 24.5, 24.5, 0.5, 24.5, -24.5, 0.5, 24.5, -11.75, 0.5, 24.5, -10.5, 0.5, 6.25, -9.25, 0.5, 6.25, -9, 0.5, 5.25, -10.5, 0.5, -4.25, -7.25, 0.5, 5.25, -7, 0.5, 6.5, 8, 0.5, 6.5, -9, 0.5, 7.5, -10.5, 0.5, 24.5, -7.25, 0.5, 7.5, 8, 0.5, 24.5)
@@ -34,6 +40,31 @@ size = Vector3(0.2, 2, 28)
 
 [sub_resource type="BoxMesh" id="BoxMesh_skjca"]
 size = Vector3(0.2, 2, 28)
+
+[sub_resource type="Resource" id="Resource_0ebt0"]
+script = ExtResource("4_a1edd")
+Item = ExtResource("3_qqwc3")
+Amount = 1
+
+[sub_resource type="Resource" id="Resource_ar82l"]
+script = ExtResource("4_a1edd")
+Item = ExtResource("5_onbdq")
+Amount = 3
+
+[sub_resource type="Resource" id="Resource_cdei1"]
+script = ExtResource("4_a1edd")
+Item = ExtResource("6_l48xd")
+Amount = 1
+
+[sub_resource type="Resource" id="Resource_7g3ik"]
+script = ExtResource("4_a1edd")
+Item = ExtResource("7_0xmtm")
+Amount = 1
+
+[sub_resource type="Resource" id="Resource_kpnnl"]
+script = ExtResource("4_a1edd")
+Item = ExtResource("8_1mxja")
+Amount = 5
 
 [node name="HomeBase" type="Node3D"]
 script = ExtResource("1_iy0f7")
@@ -92,8 +123,10 @@ mesh = SubResource("BoxMesh_skjca")
 
 [node name="LootContainerTest" parent="NavigationRegion3D" instance=ExtResource("2_i5jn1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.01318, 0.5, 6.28534)
+Loot = [SubResource("Resource_0ebt0"), SubResource("Resource_ar82l"), SubResource("Resource_cdei1"), SubResource("Resource_7g3ik"), SubResource("Resource_kpnnl")]
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.76626, 0, -1.02311)
 script = ExtResource("1_silxs")
+EnemiesToSpawn = 0

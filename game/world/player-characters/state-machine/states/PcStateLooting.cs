@@ -50,12 +50,9 @@ namespace Lastdew
 	
 		private void TickTimer(float delta)
 		{
-			this.PrintDebug($"Timer: {Timer}");
 			Timer -= delta;
-			this.PrintDebug($"Timer: {Timer}");
 			if (Timer < 0)
 			{
-				this.PrintDebug($"Inside if block, Timer: {Timer}");
 				Timer = 0;
 				GimmeTheLoot();
 				ChangeState(PcStateNames.IDLE, new MovementTarget(Context.Position));
@@ -64,10 +61,8 @@ namespace Lastdew
 	
 		private void GimmeTheLoot()
 		{
-			this.PrintDebug($"Gimme the loot, number of loot items: {LootContainer.Loot.Length}");
 			foreach (ItemAmount itemAmount in LootContainer.Loot)
 			{
-				this.PrintDebug($"Looting {itemAmount.Item.Name}");
 				Context.InventoryManager.AddItems(itemAmount.Item, itemAmount.Amount);
 			}
 			LootContainer.Empty = true;

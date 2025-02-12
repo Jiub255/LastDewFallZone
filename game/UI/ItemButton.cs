@@ -8,7 +8,7 @@ namespace Lastdew
 		public event Action<ItemButton> OnPressed;
 		
 		public Item Item { get; private set; }
-		public int Amount { get; private set; }
+		public int Amount { get; set; }
 		
 		private Label AmountLabel { get; set; }
 	
@@ -16,7 +16,7 @@ namespace Lastdew
 		{
 			base._Ready();
 			
-			AmountLabel = GetNode<Label>("Label");
+			AmountLabel = GetNode<Label>("%Label");
 		}
 	
 		public override void _ExitTree()
@@ -33,15 +33,6 @@ namespace Lastdew
 			Icon = item.Icon;
 			AmountLabel.Text = amount.ToString();
 			Pressed += PressButton;
-		}
-		
-		public void Decrement()
-		{
-			Amount--;
-			if (Amount == 0)
-			{
-				
-			}
 		}
 		
 		private void PressButton()

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://world/looting/loot_container_test.tscn" id="5_w26gq"]
 [ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="6_n3ykd"]
 [ext_resource type="Script" path="res://craftables/items/ItemAmount.cs" id="7_a57cs"]
-[ext_resource type="Script" path="res://world/player-characters/management/PcManagerBase.cs" id="10_k1oih"]
+[ext_resource type="Script" path="res://world/player-characters/management/PcManager.cs" id="10_k1oih"]
 [ext_resource type="Script" path="res://world/enemies/EnemySpawner.cs" id="11_d3w3s"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ekc5e"]

@@ -46,33 +46,7 @@ namespace Lastdew
 			}
 		}
 
-		private AllPcScenes AllPcs { get; }
-		
-		public TeamData()
-		{
-			AllPcs = GD.Load<AllPcScenes>("res://world/player-characters/management/all_pc_scenes.tres");
-		}
-		
-		/// <summary>
-		/// TODO: Figure out how to pass down the loaded pc data. This is getting ridiculous passing this list around.
-		/// </summary>
-		public void SpawnPcs(PcManagerBase pcManager, InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
-		{
-			int i = 0;
-			foreach (PcSaveData pcSaveData in pcSaveDatas)
-			{
-				PlayerCharacter pc = (PlayerCharacter)AllPcs[pcSaveData.Name].Instantiate();
-				pcManager.CallDeferred(PcManagerBase.MethodName.AddChild, pc);
-				// TODO: Add a spawn location for pcs.
-				pc.Position += Vector3.Right * i * 3;
-				i++;
-				// TODO: Does this need to be call deferred?
-				pc.Initialize(inventoryManager, pcSaveData);
-				_pcs.Add(pc);
-			}
-			
-			OnPcsInstantiated?.Invoke();
-		}
+		public TeamData() {}
 		
 		public void SelectPc(PlayerCharacter pc)
 		{
@@ -96,6 +70,21 @@ namespace Lastdew
 				pcSaveDatas.Add(pc.GetSaveData());
 			}
 			return pcSaveDatas;
+		}
+		
+		public void AddPc(PlayerCharacter pc)
+		{
+			_pcs.Add(pc);
+		}
+		
+		public void ClearPcs()
+		{
+			_pcs.Clear();
+		}
+		
+		public void SendPcsInstantiatedSignal()
+		{
+			OnPcsInstantiated?.Invoke();
 		}
 	}
 }

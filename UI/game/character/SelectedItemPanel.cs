@@ -68,11 +68,13 @@ namespace Lastdew
 		private void UseOrEquipItem()
 		{
 			ItemButton.Item.OnClickItem(TeamData.Pcs[TeamData.MenuSelectedIndex]);
-			// TODO: Clear display (or go to next item?) after using last item in stack/equipping something.
-			ItemButton.Amount--;
-			if (ItemButton.Amount == 0)
+			if (ItemButton != null)
 			{
-				ClearItem();
+				ItemButton.Amount--;
+				if (ItemButton.Amount == 0)
+				{
+					ClearItem();
+				}
 			}
 		}
 	

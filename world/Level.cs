@@ -1,22 +1,17 @@
 using Godot;
-using System;
 
 namespace Lastdew
 {
 	[GlobalClass]
 	public partial class Level : Node3D
 	{
-		private EnemySpawner EnemySpawner { get; set; }
+		public Node3D SpawnLocation { get; set; }
 		
-		public override void _Ready()
+		/// <returns>Spawn location</returns>
+		public virtual Vector3 Initialize(TeamData teamData)
 		{
-			EnemySpawner ??= GetNode<EnemySpawner>("%EnemySpawner");
-		}
-		
-		public void Initialize(TeamData teamData)
-		{
-			EnemySpawner ??= GetNode<EnemySpawner>("%EnemySpawner");
-			EnemySpawner.Initialize(teamData);
+			SpawnLocation = GetNode<Node3D>("%SpawnLocation");
+			return SpawnLocation.Position;
 		}
 	}
 }

@@ -37,13 +37,13 @@ enabled=PackedStringArray("res://addons/CraftablesFiller/plugin.cfg", "res://add
 [file_customization]
 
 folder_colors={
-"res://UI/": "green",
+"res://UI/": "teal",
 "res://addons/": "pink",
 "res://craftables/": "red",
-"res://save_system/": "orange",
-"res://test/": "yellow",
-"res://unused-assets/": "teal",
-"res://useful-extra-stuff/": "blue",
+"res://misc/": "orange",
+"res://save_system/": "yellow",
+"res://test/": "green",
+"res://unused-assets/": "blue",
 "res://world/": "purple",
 "res://world/player-characters/": "green"
 }

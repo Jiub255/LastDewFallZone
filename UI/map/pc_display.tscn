@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://8b0531d6h835"]
+
+[ext_resource type="Script" path="res://UI/map/PcDisplay.cs" id="1_2ilfa"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_i05fj"]
+
+[node name="PcDisplay" type="HBoxContainer"]
+theme_override_constants/separation = 15
+script = ExtResource("1_2ilfa")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+texture = ExtResource("2_i05fj")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "P. C. James MCVII"
+
+[node name="RemoveButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+text = "Remove"

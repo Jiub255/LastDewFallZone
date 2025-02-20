@@ -6,7 +6,7 @@ namespace Lastdew
 	public partial class World : Node3D
 	{
 		private ClickHandler ClickHandler { get; set; }
-		private PcManagerBase PcManager { get; set; }
+		private PcManager PcManager { get; set; }
 		private UiManager UI { get; set; }
 		private InventoryManager InventoryManager { get; set; }
 		private TeamData TeamData { get; set; }
@@ -18,10 +18,12 @@ namespace Lastdew
 
 			Camera camera = GetNode<Camera>("%CameraRig");
 			ClickHandler = camera.ClickHandler;
-			PcManager = GetNode<PcManagerBase>("%PcManager");
+			PcManager = GetNode<PcManager>("%PcManager");
 			UI = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
 			InventoryManager = new InventoryManager();
+			
+			PcManager.Initialize(TeamData);
 
 			GetTree().Paused = true;
 
@@ -42,6 +44,7 @@ namespace Lastdew
 			UI.MainMenu.OnNewGame += StartNewGame;
 			UI.MainMenu.OnSaveGame += Save;
 			UI.MainMenu.OnLoadGame += Load;
+			UI.MapMenu.OnStartScavenging += StartScavenging;
 		}
 
 		private void Unsubscribe()
@@ -51,6 +54,7 @@ namespace Lastdew
 			UI.MainMenu.OnNewGame -= StartNewGame;
 			UI.MainMenu.OnSaveGame -= Save;
 			UI.MainMenu.OnLoadGame -= Load;
+			UI.MapMenu.OnStartScavenging -= StartScavenging;
 		}
 
 		// JUST FOR TESTING
@@ -61,7 +65,7 @@ namespace Lastdew
 
 		private void StartNewGame()
 		{
-			CreateNewLevel(DefaultPcList);
+			SetupLevel(HomeBaseScene, DefaultPcList);
 		}
 
 		private void Save()
@@ -70,28 +74,42 @@ namespace Lastdew
 		}
 
 		private void Load()
-        {
-            SaveData saveData = SaverLoader.Load();
-            LoadInventory(saveData);
-            CreateNewLevel(saveData.PcSaveDatas);
-        }
-
-        private void CreateNewLevel(List<PcSaveData> pcSaveDatas)
 		{
-			Level level = (Level)HomeBaseScene.Instantiate();
+			SaveData saveData = SaverLoader.Load();
+			LoadInventory(saveData);
+			SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
+		}
+
+		private void StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
+		{
+			SetupLevel(scene, pcSaveDatas);
+		}
+
+		private void SetupLevel(PackedScene scene, List<PcSaveData> pcSaveDatas)
+		{
+			foreach (Node node in GetChildren())
+			{
+				if (node is Level oldLevel)
+				{
+					oldLevel.QueueFree();
+				}
+			}
+			Level level = (Level)scene.Instantiate();
 			CallDeferred(World.MethodName.AddChild, level);
 			level.Initialize(TeamData);
-			PcManager.Initialize(TeamData, InventoryManager, pcSaveDatas);
+			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
+			// UI.Initialize has to be called after PcManager.SpawnPcs,
+			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			UI.Initialize(TeamData, InventoryManager);
 		}
 
-        private void LoadInventory(SaveData saveData)
-        {
-            Craftables craftables = ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
-            foreach (KeyValuePair<string, int> kvp in saveData.Inventory)
-            {
-                InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
-            }
-        }
+		private void LoadInventory(SaveData saveData)
+		{
+			Craftables craftables = ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+			foreach (KeyValuePair<string, int> kvp in saveData.Inventory)
+			{
+				InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
+			}
+		}
 	}
 }

@@ -1,97 +1,122 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
 {
-	// TODO: Have a different PcManager for home base? What about base defense?
+	// TODO: Have a different PcManager for scavenging? What about base defense?
 	// Or just have different "modes" on this class? 
 	public partial class PcManager : Node3D
 	{
-		// TODO: Setup way to load this data. Eventually from save file, but maybe a resource for now?
-		/* private MissionTeamData MissionTeamData { get; set; }
-	
-		public void Initialize(MissionTeamData missionTeamData, InventoryManager inventoryManager)
+		private TeamData TeamData { get; set; }
+		private AllPcScenes AllPcs { get; set; }
+		
+		public void Initialize(TeamData teamData)
 		{
-			MissionTeamData = missionTeamData;
-			SpawnPcs(inventoryManager);
+			TeamData = teamData;
+			AllPcs = GD.Load<AllPcScenes>("res://world/player-characters/management/all_pc_scenes.tres");
 		}
 		
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
-			
-			foreach (PlayerCharacter pc in MissionTeamData.UnselectedPcs)
+
+			if (TeamData != null)
 			{
-				pc.ProcessUnselected(delta);
+				for (int i = 0; i < TeamData.Pcs.Count; i++)
+				{
+					if (i == TeamData.SelectedIndex)
+					{
+						TeamData.Pcs[i].ProcessSelected(delta);
+					}
+					else
+					{
+						TeamData.Pcs[i].ProcessUnselected(delta);
+					}
+				}
+
+				if (Input.IsActionJustPressed(InputNames.DESELECT))
+				{
+					DeselectPc();
+				}
 			}
-			
-			MissionTeamData.SelectedPc?.ProcessSelected(delta);
 		}
 	
 		public override void _PhysicsProcess(double delta)
 		{
 			base._PhysicsProcess(delta);
-			
-			foreach (PlayerCharacter pc in MissionTeamData.UnselectedPcs)
+
+			if (TeamData != null)
 			{
-				pc.PhysicsProcessUnselected(delta);
+				for (int i = 0; i < TeamData.Pcs.Count; i++)
+				{
+					if (i == TeamData.SelectedIndex)
+					{
+						TeamData.Pcs[i].PhysicsProcessSelected(delta);
+					}
+					else
+					{
+						TeamData.Pcs[i].PhysicsProcessUnselected(delta);
+					}
+				}
 			}
-			
-			MissionTeamData.SelectedPc?.PhysicsProcessSelected(delta);
 		}
 	
 		public override void _ExitTree()
 		{
 			base._ExitTree();
 			
-			foreach (PlayerCharacter pc in MissionTeamData.UnselectedPcs)
+			foreach (PlayerCharacter pc in TeamData.Pcs)
 			{
 				pc.ExitTree();
 			}
 		}
 		
-		public void SelectPc(PlayerCharacter pc)
-		{
-			if (MissionTeamData.SelectedPc != null)
-			{
-				if (MissionTeamData.SelectedPc == pc)
-				{
-					return;
-				}
-				MissionTeamData.UnselectedPcs.Add(MissionTeamData.SelectedPc);
-			}
-			MissionTeamData.UnselectedPcs.Remove(pc);
-			MissionTeamData.SelectedPc = pc;
-			this.PrintDebug($"Selected PC: {MissionTeamData.SelectedPc.Name}");
-			foreach (PlayerCharacter unselected in MissionTeamData.UnselectedPcs)
-			{
-				this.PrintDebug($"Unselected PC: {unselected.Name}");
-			}
-		}
-		
-		public void DeselectPc()
-		{
-			if (MissionTeamData.SelectedPc != null)
-			{
-				MissionTeamData.UnselectedPcs.Add(MissionTeamData.SelectedPc);
-				MissionTeamData.SelectedPc = null;
-			}
-		}
-		
 		public void MoveTo(MovementTarget movementTarget)
 		{
-			MissionTeamData.SelectedPc?.MoveTo(movementTarget);
+			if (TeamData.SelectedIndex != null)
+			{
+				TeamData.Pcs[(int)TeamData.SelectedIndex].MoveTo(movementTarget);
+			}
 		}
 		
-		private void SpawnPcs(InventoryManager inventoryManager)
-		{		
-			foreach (int index in MissionTeamData.TeamIndexes)
+		public void SelectPc(PlayerCharacter pc)
+		{
+			TeamData.SelectPc(pc);
+		}
+		
+		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
+		{
+			ClearPcs();
+			int i = 0;
+			foreach (PcSaveData pcSaveData in pcSaveDatas)
 			{
-				PlayerCharacter pc = (PlayerCharacter)MissionTeamData.Pcs.PcDatas[index].PcScene.Instantiate();
-				CallDeferred(MethodName.AddChild, pc);
-				pc.Position += Vector3.Right * index * 3;
-				pc.Initialize(inventoryManager);
-				MissionTeamData.UnselectedPcs.Add(pc);
+				PlayerCharacter pc = (PlayerCharacter)AllPcs[pcSaveData.Name].Instantiate();
+				CallDeferred(PcManager.MethodName.AddChild, pc);
+				// TODO: Add a spawn location for pcs.
+				pc.Position += Vector3.Right * i * 3;
+				i++;
+				pc.Initialize(inventoryManager, pcSaveData);
+				TeamData.AddPc(pc);
 			}
-		} */
+			
+			TeamData.SendPcsInstantiatedSignal();
+		}
+		
+		private void DeselectPc()
+		{
+			TeamData.SelectedIndex = null;
+		}
+
+		private void ClearPcs()
+		{
+			foreach (Node node in GetChildren())
+			{
+				if (node is PlayerCharacter pc)
+				{
+					pc.QueueFree();
+				}
+			}
+			TeamData.ClearPcs();
+		}
 	}
 }

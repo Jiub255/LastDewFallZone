@@ -17,8 +17,10 @@ namespace Lastdew
 		// Have to use Godot arrays below for the resources to load correctly.
 		[Export]
 		private Godot.Collections.Array<CraftingMaterialAmount> _recipeCosts;
+		// TODO: Buildings required to build? Or to have it show up in crafting menu?
 		[Export]
 		private Godot.Collections.Array<Building> _requiredBuildings;
+		// TODO: Stats required to build? Or to have it show up in crafting menu?
 		[Export]
 		private Godot.Collections.Array<StatAmount> _statRequirements;
 		[Export]
@@ -72,7 +74,6 @@ namespace Lastdew
 				return dict;
 			}
 		}
-		
 	
 		/// <summary>
 		/// For when you click on the item in the crafting/building menu.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvqh38ovds5vf"]
+[gd_scene load_steps=11 format=3 uid="uid://dvqh38ovds5vf"]
 
 [ext_resource type="Script" path="res://world/World.cs" id="1_ixco4"]
 [ext_resource type="PackedScene" uid="uid://c7w0406ngl5dr" path="res://UI/main/main_menu.tscn" id="2_aso4t"]
@@ -9,8 +9,7 @@
 [ext_resource type="Script" path="res://UI/build/BuildMenu.cs" id="10_8gcsg"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://world/camera/camera.tscn" id="11_huh4i"]
 [ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/map/map_menu.tscn" id="11_nbxj8"]
-[ext_resource type="Script" path="res://world/player-characters/management/PcManagerBase.cs" id="12_2gts1"]
-[ext_resource type="Script" path="res://UI/map/MapMenu.cs" id="12_7pdbb"]
+[ext_resource type="Script" path="res://world/player-characters/management/PcManager.cs" id="12_2gts1"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_ixco4")
@@ -58,4 +57,3 @@ script = ExtResource("10_8gcsg")
 [node name="MapMenu" parent="UiManager" instance=ExtResource("11_nbxj8")]
 unique_name_in_owner = true
 visible = false
-script = ExtResource("12_7pdbb")

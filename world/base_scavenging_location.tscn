@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://b285se1kywdqb"]
+
+[ext_resource type="Script" path="res://world/ScavengingLevel.cs" id="1_rnqc8"]
+[ext_resource type="Script" path="res://world/enemies/EnemySpawner.cs" id="2_cvlbe"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
+vertices = PackedVector3Array(-24.5, 0.5, -24.5, -24.5, 0.5, 24.5, 24.5, 0.5, 24.5, 24.5, 0.5, -24.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aqcaw"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tpwwi"]
+size = Vector3(50, 1, 50)
+
+[node name="BaseScavengingLocation" type="Node3D"]
+script = ExtResource("1_rnqc8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.897162, -0.274785, 0.345822, -0.436021, -0.425799, 0.792831, -0.0706071, -0.862084, -0.501822, 0, 0, 0)
+
+[node name="SpawnLocation" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="EnemySpawner" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_cvlbe")
+EnemiesToSpawn = 0
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_o3abj")
+
+[node name="NonInteractable" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D/NonInteractable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/NonInteractable/Ground"]
+shape = SubResource("BoxShape3D_aqcaw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/NonInteractable/Ground"]
+mesh = SubResource("BoxMesh_tpwwi")
+
+[node name="Buildings" type="Node3D" parent="NavigationRegion3D"]

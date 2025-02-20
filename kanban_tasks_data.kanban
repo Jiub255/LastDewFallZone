@@ -35,14 +35,14 @@
 				"844550fe-e567-461c-9da6-129cb0ef35fc",
 				"2d06c068-737d-437a-b839-676244c60b7d",
 				"43e7a2a8-de3c-4c98-b01a-927022b66792",
-				"aab8ef9e-9ad4-478f-90fc-f61ab483b97d"
+				"aab8ef9e-9ad4-478f-90fc-f61ab483b97d",
+				"cad890ca-25b5-420b-a491-59a849cad2b3"
 			]
 		},
 		{
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "TODO",
 			"tasks": [
-				"2db7c62a-055e-4fab-9fba-8db877a31df4",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
@@ -61,7 +61,9 @@
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
-			"tasks": []
+			"tasks": [
+				"2db7c62a-055e-4fab-9fba-8db877a31df4"
+			]
 		},
 		{
 			"uuid": "4aeb1722-9a02-459d-81af-f17bb7d9e014",
@@ -270,7 +272,7 @@
 		{
 			"uuid": "2db7c62a-055e-4fab-9fba-8db877a31df4",
 			"title": "Scavenging location selection",
-			"description": "How to handle this? Like LSDZ? Just show a city map and click whatever location?\n\nPossibly do procedurally generated scavenging locations and then have an infinite supply of them.\n\nOr, could have a little driving/walking mini game through a city to get to your location.\n\tMight be too much work. ",
+			"description": "How to handle this? Like LSDZ? Just show a city map and click whatever location?\n\nPossibly do procedurally generated scavenging locations and then have an infinite supply of them.\n\nOr, could have a little driving/walking mini game through a city to get to your location.\n\tMight be too much work. \n\nJust doing map LSDZ style for now\n\nTODO: Where to put \"scavenging team\" list of pcs? In TeamData? Or another class?\n\talso, how to change scenes to scavenging level? Clear Pcs with manager, switch scenes, then respawn with scavenging team?\n\tOr, just have a separate setup altogether? Like a different PcManager and stuff? Probably the first option. Seems clean enough. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -577,7 +579,7 @@
 		{
 			"uuid": "69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 			"title": "Food/Water system",
-			"description": "Should do after building system is set up, and some sort of food and water producing buildings have been made.",
+			"description": "Should do after building system is set up, and some sort of food and water producing buildings have been made.\nEach PC requires x food/day",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -600,6 +602,13 @@
 			"title": "Equipping something with something of the same type already equipped causes same duplicate bug from before",
 			"description": "FIXED by storing instantiated buttons in a list so they can be deleted, instead of using GetChildren which wasn't working because of call deferred AddChild not being called yet. Also had to make SelectedItemPanel.SetItem into a call deferred since the button's Initialize() was also call deferred. \nThis proper fix got rid of the hacky GameMenuTabs fix from earlier too. Don't need that class at all now.\nMaybe update UI somehow other than the Inv event? ",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "cad890ca-25b5-420b-a491-59a849cad2b3",
+			"title": "Choosing Scavenging Location",
+			"description": "Do it map-style like LSDZ?\nOr have a kind of mini game where you travel on the overworld map? \nDoing LSDZ style for now.\n\nHave areas other than just city. Like have some crazy cave out in the desert that has military shit or something. Have many unique areas is the idea.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

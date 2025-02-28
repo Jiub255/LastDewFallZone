@@ -12,3 +12,4 @@ unique_name_in_owner = true
 
 [node name="TeamSelectScreen" parent="." instance=ExtResource("3_eovdf")]
 unique_name_in_owner = true
+visible = false

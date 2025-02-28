@@ -8,8 +8,8 @@ namespace Lastdew
 	{
 		public Dictionary<string, PackedScene> PcScenes { get; set; } = new()
 		{
-			{"James", GD.Load<PackedScene>("res://world/player-characters/humans_master.tscn")},
-			{"Jaime", GD.Load<PackedScene>("res://world/player-characters/humans_master2.tscn") },
+			{"James", GD.Load<PackedScene>(UIDs.PC_1)},
+			{"Jaime", GD.Load<PackedScene>(UIDs.PC_2) },
 		};
 
         public PackedScene this[string name] => PcScenes[name];

@@ -11,7 +11,7 @@ namespace Lastdew
 		private GridContainer MaterialsGrid { get; set; }
 		private SelectedCraftableDisplay SelectedDisplay { get; set; }
 		private Craftables Craftables { get; set; }
-		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>("res://UI/game/crafting/craftable_button.tscn");
+		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(UIDs.CRAFTABLE_BUTTON);
 
 		public override void _Ready()
 		{
@@ -36,7 +36,7 @@ namespace Lastdew
 		
 		public void Initialize(InventoryManager inventory)
 		{
-			Craftables = ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+			Craftables = ResourceLoader.Load<Craftables>(UIDs.CRAFTABLES);
 			PopulateUI();
 			SelectedDisplay.Initialize(Craftables, inventory);
 		}

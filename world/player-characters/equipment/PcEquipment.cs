@@ -32,7 +32,7 @@ namespace Lastdew
 		
 		public PcEquipment(PcSaveData pcSaveData)
 		{
-			Craftables = ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+			Craftables = ResourceLoader.Load<Craftables>(UIDs.CRAFTABLES);
 			if (Craftables.Equipment.ContainsKey(pcSaveData.Head))
 			{
 				Equip((Equipment)Craftables[pcSaveData.Head]);

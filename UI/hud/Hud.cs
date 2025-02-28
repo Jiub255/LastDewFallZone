@@ -5,7 +5,7 @@ namespace Lastdew
 	public partial class Hud : Menu
 	{
 		private TeamData TeamData { get; set; }
-		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load("res://UI/hud/pc_button.tscn");
+		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(UIDs.PC_BUTTON);
 		private HBoxContainer ButtonParent { get; set; }
 	
 		public override void _Ready()

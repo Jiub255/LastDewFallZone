@@ -6,17 +6,12 @@ namespace Lastdew
 	{
 		private TextureRect Icon { get; set; }
 		private Label NameLabel { get; set; }
-
-		public override void _Ready()
-		{
-			base._Ready();
-			
-			Icon = GetNode<TextureRect>("%Icon");
-			NameLabel = GetNode<Label>("%Name");
-		}
 		
 		public void Initialize(Texture2D icon, string name)
 		{
+			Icon = GetNode<TextureRect>("%Icon");
+			NameLabel = GetNode<Label>("%Name");
+			
 			Icon.Texture = icon;
 			NameLabel.Text = name;
 		}

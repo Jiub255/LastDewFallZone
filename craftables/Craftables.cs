@@ -11,7 +11,8 @@ namespace Lastdew
 	/// </summary>
 	public partial class Craftables : Resource, IEnumerable
 	{
-		private const string PATH = "res://craftables/";
+		private const string DIRECTORY = "res://craftables/";
+		private const string PATH = "res://craftables/craftables.tres";
 		
 		[Export]
 		public Godot.Collections.Dictionary<string, Building> Buildings { get; set; } = new();
@@ -55,14 +56,14 @@ namespace Lastdew
 			Equipment.Clear();
 			UsableItems.Clear();
 			
-			PopulateDictionaries(PATH);
+			PopulateDictionaries(DIRECTORY);
 			
 			this.PrintDebug(
 				$"Buildings: {Buildings.Count}, " +
 				$"Materials: {Materials.Count}, " +
 				$"Equipment: {Equipment.Count}, " +
 				$"Usable Items: {UsableItems.Count}");
-			Error error = ResourceSaver.Save(this, "res://craftables/craftables.tres");
+			Error error = ResourceSaver.Save(this, PATH);
 			if (error != Error.Ok)
 			{
 				this.PrintDebug($"Error saving resource: {error}");
@@ -70,12 +71,12 @@ namespace Lastdew
 			TESTPRINT();
 		}
 		
-		private void PopulateDictionaries(string path)
+		private void PopulateDictionaries(string directory)
 		{
-			DirAccess dirAccess = DirAccess.Open(path);
+			DirAccess dirAccess = DirAccess.Open(directory);
 			if (dirAccess == null)
 			{
-				GD.PushError($"Failed to open directory: {path}");
+				GD.PushError($"Failed to open directory: {directory}");
 				return;
 			}
 
@@ -91,12 +92,12 @@ namespace Lastdew
 					}
 
 					// Recursively search subfolders
-					string subFolder = path + "/" + fileName;
+					string subFolder = directory + "/" + fileName;
 					PopulateDictionaries(subFolder);
 				}
 				else
 				{
-					string filePath = path + "/" + fileName;
+					string filePath = directory + "/" + fileName;
 					Resource resource = GD.Load<Resource>(filePath);
 					if (resource != null)
 					{

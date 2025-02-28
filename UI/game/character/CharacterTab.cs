@@ -4,11 +4,11 @@ using Godot;
 namespace Lastdew
 {
 	public partial class CharacterTab : PanelContainer
-	{
+	{	
 		private InventoryManager InventoryManager { get; set; }
 		private GridContainer ItemsGrid { get; set; }
 		private SelectedItemPanel SelectedItemPanel { get; set; }
-		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>("res://UI/game/character/item_button.tscn");
+		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>(UIDs.ITEM_BUTTON);
 		private CharacterDisplay CharacterDisplay { get; set; }
 		private EquipmentDisplay EquipmentDisplay { get; set; }
 		private List<ItemButton> Buttons { get; } = new();

@@ -3,13 +3,13 @@ using Godot;
 namespace Lastdew
 {
 	public partial class EnemySpawner : Node3D
-	{
+	{	
 		[Export]
 		private int EnemiesToSpawn { get; set; } = 1;
 		private TeamData TeamData { get; set; }
 		private float TimeBetweenSpawns { get; } = 2f;
 		private float Timer { get; set; } = 0.25f;
-		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>("res://world/enemies/enemy_TEST.tscn");
+		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(UIDs.ENEMY);
 		private bool Started { get; set; }
 		
 		public void Initialize(TeamData teamData)
@@ -42,14 +42,6 @@ namespace Lastdew
 			{
 				enemy.CallDeferred(Enemy.MethodName.SetTarget, TeamData.Pcs[0]);
 			}
-			/* if (TeamData.UnselectedPcs.Count > 0)
-			{
-				enemy.CallDeferred(Enemy.MethodName.SetTarget, TeamData.UnselectedPcs[0]);
-			}
-			else if (TeamData.SelectedPc != null)
-			{
-				enemy.CallDeferred(Enemy.MethodName.SetTarget, TeamData.SelectedPc);
-			}*/
 			else
 			{
 				GD.PushWarning("Couldn't find target PC for enemy");

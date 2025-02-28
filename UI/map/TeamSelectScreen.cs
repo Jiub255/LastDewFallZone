@@ -7,14 +7,15 @@ namespace Lastdew
 	public partial class TeamSelectScreen : MarginContainer
 	{
 		public event Action<PackedScene, List<PcSaveData>> OnStartPressed;
-		
+				
 		private TeamData TeamData { get; set; }
 		private LocationData LocationData { get; set; }
 		private LocationInfoUI LocationInfo { get; set; }
 		private Button AddButton { get; set; }
 		private Button StartButton { get; set; }
 		private VBoxContainer PcDisplayParent { get; set; }
-		private PackedScene PcDisplayScene { get; set; }
+		private CharacterDisplay CharacterDisplay { get; set; }
+		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(UIDs.PC_DISPLAY);
 		private List<PcSaveData> Pcs { get; set; }
 
 		public override void _Ready()
@@ -25,7 +26,7 @@ namespace Lastdew
 			AddButton = GetNode<Button>("%AddButton");
 			StartButton = GetNode<Button>("%StartButton");
 			PcDisplayParent = GetNode<VBoxContainer>("%PcDisplayParent");
-			PcDisplayScene = GD.Load<PackedScene>("uid://8b0531d6h835");
+			CharacterDisplay = GetNode<CharacterDisplay>("%CharacterDisplay");
 			Pcs = new List<PcSaveData>();
 
 			AddButton.Pressed += AddPcToTeam;
@@ -48,6 +49,7 @@ namespace Lastdew
 				locationData.Name,
 				locationData.Image,
 				locationData.Description);
+			CharacterDisplay.Initialize(teamData);
 			foreach (Node node in PcDisplayParent.GetChildren())
 			{
 				node.QueueFree();
@@ -58,10 +60,7 @@ namespace Lastdew
 
 		private void AddPcToTeam()
 		{
-			PcDisplay pcDisplay = (PcDisplay)PcDisplayScene.Instantiate();
-			PcDisplayParent.CallDeferred(VBoxContainer.MethodName.AddChild, pcDisplay);
-			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
-			pcDisplay.Initialize(pc.Icon, pc.Name);
+			PlayerCharacter pc = SetupDisplay();
 			PcSaveData data = new(
 				pc.Name,
 				pc.Equipment.Head.Name,
@@ -70,6 +69,15 @@ namespace Lastdew
 				pc.Equipment.Feet.Name,
 				pc.Health.Injury);
 			Pcs.Add(data);
+		}
+
+		private PlayerCharacter SetupDisplay()
+		{
+			PcDisplay pcDisplay = (PcDisplay)PcDisplayScene.Instantiate();
+			PcDisplayParent.CallDeferred(VBoxContainer.MethodName.AddChild, pcDisplay);
+			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
+			pcDisplay.Initialize(pc.Icon, pc.Name);
+			return pc;
 		}
 
 		private void StartScavenging()

@@ -11,7 +11,6 @@ namespace Lastdew
 		private TeamData TeamData { get; set; }
 		private MapScreen MapScreen { get; set; }
 		private TeamSelectScreen TeamSelectScreen { get; set; }
-		private Button SelectTeamButton { get; set; }
 
 		public override void _Ready()
 		{
@@ -19,9 +18,8 @@ namespace Lastdew
 			
 			MapScreen = GetNode<MapScreen>("%MapScreen");
 			TeamSelectScreen = GetNode<TeamSelectScreen>("%TeamSelectScreen");
-			SelectTeamButton = GetNode<Button>("%SelectTeamButton");
 
-			SelectTeamButton.Pressed += OpenTeamSelectMenu;
+			MapScreen.SelectTeamButton.Pressed += OpenTeamSelectMenu;
 			TeamSelectScreen.OnStartPressed += StartScavenging;
 		}
 
@@ -29,7 +27,7 @@ namespace Lastdew
 		{
 			base._ExitTree();
 			
-			SelectTeamButton.Pressed -= OpenTeamSelectMenu;
+			MapScreen.SelectTeamButton.Pressed -= OpenTeamSelectMenu;
 			TeamSelectScreen.OnStartPressed -= StartScavenging;
 		}
 

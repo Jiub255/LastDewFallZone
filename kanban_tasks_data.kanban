@@ -55,14 +55,17 @@
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
 				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
 				"736f3cd4-0e90-4a80-a00f-326e61a820fe",
-				"4e480fd7-ac8e-4a6f-8730-2cede90597ca"
+				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
+				"e09af5e4-ae95-4ebd-88f9-78e67d79f645"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"2db7c62a-055e-4fab-9fba-8db877a31df4"
+				"2db7c62a-055e-4fab-9fba-8db877a31df4",
+				"18aa9dce-2759-4551-81bb-5c681f7e1987",
+				"be6797e5-f4b2-4aef-81b2-160c524b7354"
 			]
 		},
 		{
@@ -609,6 +612,27 @@
 			"title": "Choosing Scavenging Location",
 			"description": "Do it map-style like LSDZ?\nOr have a kind of mini game where you travel on the overworld map? \nDoing LSDZ style for now.\n\nHave areas other than just city. Like have some crazy cave out in the desert that has military shit or something. Have many unique areas is the idea.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "18aa9dce-2759-4551-81bb-5c681f7e1987",
+			"title": "Build world out a bit",
+			"description": "Make like 4 different pcs, a handful of new items/equipment, a few scavenging locations, buildings once they're ready.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "be6797e5-f4b2-4aef-81b2-160c524b7354",
+			"title": "Change all file paths to uids",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "e09af5e4-ae95-4ebd-88f9-78e67d79f645",
+			"title": "Keep UIDs in static class?",
+			"description": "Seems cleaner, less duplication. Especially for PackedScenes/Resources that a lot of different classes use. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

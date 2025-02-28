@@ -4,13 +4,13 @@ using System.Collections.Generic;
 namespace Lastdew
 {
 	public partial class World : Node3D
-	{
+	{	
 		private ClickHandler ClickHandler { get; set; }
 		private PcManager PcManager { get; set; }
 		private UiManager UI { get; set; }
 		private InventoryManager InventoryManager { get; set; }
 		private TeamData TeamData { get; set; }
-		private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>("res://world/home-test-env.tscn");
+		private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>(UIDs.HOME_BASE);
 		
 		public override void _Ready()
 		{
@@ -105,7 +105,7 @@ namespace Lastdew
 
 		private void LoadInventory(SaveData saveData)
 		{
-			Craftables craftables = ResourceLoader.Load<Craftables>("res://craftables/craftables.tres");
+			Craftables craftables = ResourceLoader.Load<Craftables>(UIDs.CRAFTABLES);
 			foreach (KeyValuePair<string, int> kvp in saveData.Inventory)
 			{
 				InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);

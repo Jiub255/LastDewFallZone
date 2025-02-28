@@ -4,7 +4,7 @@ namespace Lastdew
 {
 	public partial class CraftablesTester : Node
 	{
-		private Craftables Craftables { get; set; } = GD.Load<Craftables>("res://craftables/craftables.tres");
+		private Craftables Craftables { get; set; } = GD.Load<Craftables>(UIDs.CRAFTABLES);
 
 		public override void _Ready()
 		{

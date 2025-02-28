@@ -5,6 +5,7 @@ namespace Lastdew
 	public partial class MapScreen : MarginContainer
 	{
 		public LocationData LocationData { get; private set; }
+		public Button SelectTeamButton { get; private set; }
 		private TextureRect Map { get; set; }
 		private LocationInfoUI LocationInfo { get; set; }
 
@@ -12,6 +13,7 @@ namespace Lastdew
 		{
 			base._Ready();
 			
+			SelectTeamButton = GetNode<Button>("%SelectTeamButton");
 			Map = GetNode<TextureRect>("%Map");
 			LocationInfo = GetNode<LocationInfoUI>("%LocationInfo");
 			

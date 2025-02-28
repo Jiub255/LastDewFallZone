@@ -52,6 +52,7 @@ namespace Lastdew
 		{
 			Hud.Initialize(teamData);
 			GameMenu.Initialize(teamData, inventoryManager);
+			MapMenu.Initialize(teamData);
 
 			MainMenu.Close();
 			Hud.Open();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Lastdew
 {
 	public partial class SelectedCraftableDisplay : PanelContainer
-	{
+	{	
 		private Item Item { get; set; }
 		private TextureRect Icon { get; set; }
 		private Label ItemName { get; set; }
@@ -13,7 +13,7 @@ namespace Lastdew
 		private Button CraftButton { get; set; }
 		private Craftables Craftables { get; set; }
 		private InventoryManager Inventory { get; set; }
-		private PackedScene RecipeCostScene { get; } = GD.Load<PackedScene>("res://UI/game/crafting/recipe_cost.tscn");
+		private PackedScene RecipeCostScene { get; set; } = GD.Load<PackedScene>(UIDs.RECIPE_COST_UI);
 
 		public override void _Ready()
 		{

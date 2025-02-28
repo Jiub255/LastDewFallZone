@@ -13,7 +13,7 @@ namespace Lastdew
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			AllPcs = GD.Load<AllPcScenes>("res://world/player-characters/management/all_pc_scenes.tres");
+			AllPcs = GD.Load<AllPcScenes>(UIDs.ALL_PC_SCENES);
 		}
 		
 		public override void _Process(double delta)

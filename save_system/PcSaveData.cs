@@ -4,6 +4,7 @@ namespace Lastdew
 	{
 		// TODO: How to id pc? Use index from allPcs? Or just use a name?
 		// Figure out later after character models have been chosen, just load the test pcs for now.
+		// Or maybe just replace string Name with PcData (which has name, icon, meshes, etc.)
 		public string Name { get; set; }
 		
 		// Equipment

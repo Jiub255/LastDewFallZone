@@ -14,6 +14,8 @@ namespace Lastdew
 		private const string DIRECTORY = "res://craftables/";
 		private const string PATH = "res://craftables/craftables.tres";
 		
+		// TODO: 1. Is Export necessary to save the dicts with the resource?
+		// and 2. Can it be done with C# dictionaries? Esp. if export not needed.
 		[Export]
 		public Godot.Collections.Dictionary<string, Building> Buildings { get; set; } = new();
 		[Export]
@@ -98,6 +100,7 @@ namespace Lastdew
 				else
 				{
 					string filePath = directory + "/" + fileName;
+					// TODO: How to "try" load resource instead? To catch errors for non resources.
 					Resource resource = GD.Load<Resource>(filePath);
 					if (resource != null)
 					{
@@ -128,19 +131,19 @@ namespace Lastdew
 		{
 			foreach (KeyValuePair<string, Building> kvp in Buildings)
 			{
-				yield return new KeyValuePair<string, Craftable>(kvp.Key, (Craftable)kvp.Value);
+				yield return new KeyValuePair<string, Craftable>(kvp.Key, kvp.Value);
 			}
 			foreach (KeyValuePair<string, CraftingMaterial> kvp in Materials)
 			{
-				yield return new KeyValuePair<string, Craftable>(kvp.Key, (Craftable)kvp.Value);
+				yield return new KeyValuePair<string, Craftable>(kvp.Key, kvp.Value);
 			}
 			foreach (KeyValuePair<string, Equipment> kvp in Equipment)
 			{
-				yield return new KeyValuePair<string, Craftable>(kvp.Key, (Craftable)kvp.Value);
+				yield return new KeyValuePair<string, Craftable>(kvp.Key, kvp.Value);
 			}
 			foreach (KeyValuePair<string, UsableItem> kvp in UsableItems)
 			{
-				yield return new KeyValuePair<string, Craftable>(kvp.Key, (Craftable)kvp.Value);
+				yield return new KeyValuePair<string, Craftable>(kvp.Key, kvp.Value);
 			}
 		}
 		

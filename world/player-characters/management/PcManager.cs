@@ -90,6 +90,8 @@ namespace Lastdew
 			int i = 0;
 			foreach (PcSaveData pcSaveData in pcSaveDatas)
 			{
+				// TODO: How to work in the PcData with this part and saving/loading?
+				// Just keep their mesh enums as "stats"? Or have each PcData as an unchanging resource? Probably that.
 				PlayerCharacter pc = (PlayerCharacter)AllPcs[pcSaveData.Name].Instantiate();
 				CallDeferred(PcManager.MethodName.AddChild, pc);
 				// TODO: Add a spawn location for pcs.

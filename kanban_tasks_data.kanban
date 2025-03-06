@@ -43,6 +43,7 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "TODO",
 			"tasks": [
+				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
@@ -51,12 +52,10 @@
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
 				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
 				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
-				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
 				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
 				"736f3cd4-0e90-4a80-a00f-326e61a820fe",
-				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
-				"e09af5e4-ae95-4ebd-88f9-78e67d79f645"
+				"4e480fd7-ac8e-4a6f-8730-2cede90597ca"
 			]
 		},
 		{
@@ -64,8 +63,7 @@
 			"title": "DOING",
 			"tasks": [
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
-				"18aa9dce-2759-4551-81bb-5c681f7e1987",
-				"be6797e5-f4b2-4aef-81b2-160c524b7354"
+				"18aa9dce-2759-4551-81bb-5c681f7e1987"
 			]
 		},
 		{
@@ -97,7 +95,10 @@
 				"34970bc2-bcb4-4b8e-bb3b-478a943039e3",
 				"95bf992a-5b8c-4cd0-b2a0-2c06d0ae9979",
 				"64c7d6c7-f4b1-402c-8023-48f1f6fc8457",
-				"da6960b9-4241-48f4-8e32-984ebd5dba84"
+				"da6960b9-4241-48f4-8e32-984ebd5dba84",
+				"be6797e5-f4b2-4aef-81b2-160c524b7354",
+				"e09af5e4-ae95-4ebd-88f9-78e67d79f645",
+				"28bed55e-437f-4209-adea-6c21e9b90ae2"
 			]
 		},
 		{
@@ -338,7 +339,7 @@
 		{
 			"uuid": "228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 			"title": "3D char model in menu",
-			"description": "Replace the character icon in the Character/Item/Equip menu with a separate viewport showing the 3d model in it's own scene. Then you can update equipment look realtime easily. \nDo the same for char faces in the HUD. Or use a stillshot?",
+			"description": "Replace the character icon in the Character/Item/Equip menu with a separate viewport showing the 3d model in it's own scene. Then you can update equipment look realtime easily. \nDo the same for char faces in the HUD.",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		},
@@ -630,8 +631,15 @@
 		},
 		{
 			"uuid": "e09af5e4-ae95-4ebd-88f9-78e67d79f645",
-			"title": "Keep UIDs in static class?",
+			"title": "Keep UIDs in static class",
 			"description": "Seems cleaner, less duplication. Especially for PackedScenes/Resources that a lot of different classes use. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "28bed55e-437f-4209-adea-6c21e9b90ae2",
+			"title": "Add mesh export vars to pc data class",
+			"description": "Add Feet, Legs, Body, and Head export int vars (from 1 - 11), can mix and match. \nThis way only need one pc packed scene, and can just set different mesh vars in the pc data (or randomly).\nJust using these models as placeholders for now, but it'll make it cleaner.\n\nRedo AllPcScenes also to fit the new setup.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

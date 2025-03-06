@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-	
+
 namespace Lastdew
 {
 	public partial class TeamSelectScreen : MarginContainer
 	{
 		public event Action<PackedScene, List<PcSaveData>> OnStartPressed;
-				
+		
 		private TeamData TeamData { get; set; }
 		private LocationData LocationData { get; set; }
 		private LocationInfoUI LocationInfo { get; set; }

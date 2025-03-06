@@ -9,7 +9,7 @@ namespace Lastdew
 		private TeamData TeamData { get; set; }
 		private float TimeBetweenSpawns { get; } = 2f;
 		private float Timer { get; set; } = 0.25f;
-		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(UIDs.ENEMY);
+		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(UIDs.TEST_ENEMY);
 		private bool Started { get; set; }
 		
 		public void Initialize(TeamData teamData)

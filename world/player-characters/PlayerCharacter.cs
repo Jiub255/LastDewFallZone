@@ -1,19 +1,20 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
-{	
+{
 	public partial class PlayerCharacter : CharacterBody3D
 	{
 		public event Action OnEquipmentChanged;
 		
-		[Export]
-		public new string Name { get; set; }
-		[Export]
-		public Texture2D Icon { get; set; }
+		public new string Name { get; private set; }
+		public Texture2D Icon { get; private set; }
+		
 		public PcHealth Health { get; private set; }
 		public PcStatManager StatManager { get; set; }
 		public PcEquipment Equipment { get; set; }
+		
 		private PcStateMachine StateMachine { get; set; }
 		private InventoryManager Inventory { get; set; }
 	
@@ -26,10 +27,12 @@ namespace Lastdew
 			Equipment = new PcEquipment(saveData);
 			Inventory = inventoryManager;
 
+			SetupPcData(saveData.Name);
+
 			Health.OnHealthChanged += StatManager.SetPain;
 		}
-	
-		public void ProcessUnselected(double delta)
+
+        public void ProcessUnselected(double delta)
 		{
 			StateMachine?.ProcessStateUnselected((float)delta);
 			Health.ProcessRelief((float)delta);
@@ -137,5 +140,29 @@ namespace Lastdew
 				Equipment.Feet?.Name,
 				Health.Injury);
 		}
+
+        private void SetupPcData(string name)
+        {
+			AllPcDatas allPcDatas = GD.Load<AllPcDatas>(UIDs.ALL_PC_DATAS);
+			PcData data = allPcDatas[name];
+			
+			Name = name;
+			Icon = data.Icon;
+			
+			Skeleton3D MeshParent = GetNode<Skeleton3D>("%Skeleton3D");
+			List<MeshInstance3D> meshes = new();
+            foreach (Node node in MeshParent.GetChildren())
+            {
+                if (node is MeshInstance3D mesh)
+                {
+                    meshes.Add(mesh);
+					mesh.Hide();
+                }
+            }
+			meshes[(int)data.HeadMesh * 4 - 1].Show();
+			meshes[(int)data.BodyMesh * 4 - 2].Show();
+			meshes[(int)data.LegsMesh * 4 - 3].Show();
+			meshes[(int)data.FeetMesh * 4 - 4].Show();
+        }
 	}
 }

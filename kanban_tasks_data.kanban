@@ -55,7 +55,8 @@
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
 				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
 				"736f3cd4-0e90-4a80-a00f-326e61a820fe",
-				"4e480fd7-ac8e-4a6f-8730-2cede90597ca"
+				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
+				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e"
 			]
 		},
 		{
@@ -98,7 +99,8 @@
 				"da6960b9-4241-48f4-8e32-984ebd5dba84",
 				"be6797e5-f4b2-4aef-81b2-160c524b7354",
 				"e09af5e4-ae95-4ebd-88f9-78e67d79f645",
-				"28bed55e-437f-4209-adea-6c21e9b90ae2"
+				"28bed55e-437f-4209-adea-6c21e9b90ae2",
+				"c776cb5f-c42a-4549-adbe-10e520298c17"
 			]
 		},
 		{
@@ -276,7 +278,7 @@
 		{
 			"uuid": "2db7c62a-055e-4fab-9fba-8db877a31df4",
 			"title": "Scavenging location selection",
-			"description": "How to handle this? Like LSDZ? Just show a city map and click whatever location?\n\nPossibly do procedurally generated scavenging locations and then have an infinite supply of them.\n\nOr, could have a little driving/walking mini game through a city to get to your location.\n\tMight be too much work. \n\nJust doing map LSDZ style for now\n\nTODO: Where to put \"scavenging team\" list of pcs? In TeamData? Or another class?\n\talso, how to change scenes to scavenging level? Clear Pcs with manager, switch scenes, then respawn with scavenging team?\n\tOr, just have a separate setup altogether? Like a different PcManager and stuff? Probably the first option. Seems clean enough. ",
+			"description": "How to handle this? Like LSDZ? Just show a city map and click whatever location?\n\nPossibly do procedurally generated scavenging locations and then have an infinite supply of them.\n\nOr, could have a little driving/walking mini game through a city to get to your location.\n\tMight be too much work. \n\nJust doing map LSDZ style for now\n\nTODO: How to get back to home base?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -290,7 +292,7 @@
 		{
 			"uuid": "d1adddcc-8d19-4763-94e7-4180fac8440c",
 			"title": "Morale",
-			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs, negatively or positively.",
+			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\nMaybe? Have it easier to increase when low, and harder when high. Like, finding a single book would be a huge morale boost if it's all you have, but not too big a deal if you already have a library. \n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\t\tQOL items: Books, Plants/decorations, games, musical instruments\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs, negatively or positively.\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -640,6 +642,20 @@
 			"uuid": "28bed55e-437f-4209-adea-6c21e9b90ae2",
 			"title": "Add mesh export vars to pc data class",
 			"description": "Add Feet, Legs, Body, and Head export int vars (from 1 - 11), can mix and match. \nThis way only need one pc packed scene, and can just set different mesh vars in the pc data (or randomly).\nJust using these models as placeholders for now, but it'll make it cleaner.\n\nRedo AllPcScenes also to fit the new setup.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
+			"title": "Medical Menu",
+			"description": "Have a menu (in home base only) for easily managing the health of all pcs. Put injured ones in hospital, etc. ",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "c776cb5f-c42a-4549-adbe-10e520298c17",
+			"title": "Put game state in UiManager",
+			"description": "So far, game state only affects which menus are available and what's on the main menu. Makes sense to handle it in UiManager for now.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

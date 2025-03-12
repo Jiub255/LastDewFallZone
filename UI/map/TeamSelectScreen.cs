@@ -16,7 +16,7 @@ namespace Lastdew
 		private VBoxContainer PcDisplayParent { get; set; }
 		private CharacterDisplay CharacterDisplay { get; set; }
 		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(UIDs.PC_DISPLAY);
-		private List<PcSaveData> Pcs { get; set; }
+		private List<PcSaveData> Pcs { get; set; } = new List<PcSaveData>();
 
 		public override void _Ready()
 		{
@@ -27,7 +27,6 @@ namespace Lastdew
 			StartButton = GetNode<Button>("%StartButton");
 			PcDisplayParent = GetNode<VBoxContainer>("%PcDisplayParent");
 			CharacterDisplay = GetNode<CharacterDisplay>("%CharacterDisplay");
-			Pcs = new List<PcSaveData>();
 
 			AddButton.Pressed += AddPcToTeam;
 			StartButton.Pressed += StartScavenging;
@@ -63,10 +62,10 @@ namespace Lastdew
 			PlayerCharacter pc = SetupDisplay();
 			PcSaveData data = new(
 				pc.Name,
-				pc.Equipment.Head.Name,
-				pc.Equipment.Weapon.Name,
-				pc.Equipment.Body.Name,
-				pc.Equipment.Feet.Name,
+				pc.Equipment.Head?.Name,
+				pc.Equipment.Weapon?.Name,
+				pc.Equipment.Body?.Name,
+				pc.Equipment.Feet?.Name,
 				pc.Health.Injury);
 			Pcs.Add(data);
 		}

@@ -10,6 +10,7 @@ namespace Lastdew
 		public BuildMenu BuildMenu { get; private set; }
 		public MapMenu MapMenu { get; private set; }
 		private bool AnyMenuOpen { get; set; }
+		private GameState CurrentState { get; set; }
 		
 		public override void _Ready()
 		{
@@ -18,9 +19,21 @@ namespace Lastdew
 			GameMenu = GetNode<GameMenu>("%GameMenu");
 			BuildMenu = GetNode<BuildMenu>("%BuildMenu");
 			MapMenu = GetNode<MapMenu>("%MapMenu");
+
+			ChangeState(new GameStateStart());			
 		}
-	
-		public override void _Input(InputEvent @event)
+
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+            
+            if (CurrentState != null)
+            {
+                UnsubscribeState(CurrentState);
+            }
+        }
+
+        public override void _Input(InputEvent @event)
 		{
 			base._Input(@event);
 			
@@ -29,23 +42,8 @@ namespace Lastdew
 				CloseAllMenus();
 				return;
 			}
-			
-			if (@event.IsActionPressed(InputNames.GAME_MENU))
-			{
-				Toggle(GameMenu);
-			}
-			else if (@event.IsActionPressed(InputNames.BUILD_MENU))
-			{
-				Toggle(BuildMenu);
-			}
-			else if (@event.IsActionPressed(InputNames.MAP_MENU))
-			{
-				Toggle(MapMenu);
-			}
-			else if (@event.IsActionPressed(InputNames.MAIN_MENU))
-			{
-				Toggle(MainMenu);
-			}
+
+			CurrentState.HandleInput(@event);
 		}
 		
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
@@ -59,15 +57,24 @@ namespace Lastdew
 			
 			GetTree().Paused = false;
 		}
+        
+        public void ChangeState(GameState gameState)
+        {
+			if (CurrentState != null)
+			{
+				UnsubscribeState(CurrentState);
+			}
+			CurrentState = gameState;
+			SubscribeState(gameState);
+			CurrentState.EnterState(MainMenu);
+			this.PrintDebug($"Entering {gameState.GetType()}");
+        }
 		
 		private void Toggle(Menu menu)
 		{
 			if (menu.Visible)
 			{
-				menu.Close();
-				Hud.Open();
-				AnyMenuOpen = false;
-				GetTree().Paused = false;
+				CloseAllMenus();
 			}
 			else
 			{
@@ -94,5 +101,21 @@ namespace Lastdew
 			AnyMenuOpen = false;
 			GetTree().Paused = false;
 		}
+        
+        private void SubscribeState(GameState state)
+        {
+			state.OnToggleMain += () => Toggle(MainMenu);
+			state.OnToggleGame += () => Toggle(GameMenu);
+			state.OnToggleBuild += () => Toggle(BuildMenu);
+			state.OnToggleMap += () => Toggle(MapMenu);
+        }
+        
+        private void UnsubscribeState(GameState state)
+        {
+			state.OnToggleMain -= () => Toggle(MainMenu);
+			state.OnToggleGame -= () => Toggle(GameMenu);
+			state.OnToggleBuild -= () => Toggle(BuildMenu);
+			state.OnToggleMap -= () => Toggle(MapMenu);
+        }
 	}
 }

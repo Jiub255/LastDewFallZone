@@ -57,6 +57,7 @@ namespace Lastdew
 		private void StartScavenging(PackedScene scene, List<PcSaveData> pcs)
 		{
 			OnStartScavenging?.Invoke(scene, pcs);
+			Close();
 		}
 	}
 }

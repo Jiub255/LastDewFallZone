@@ -9,15 +9,21 @@ namespace Lastdew
 		public event Action OnSaveGame;
 		public event Action OnLoadGame;
 		
-		private Button NewGame { get; set; }
-		private Button SaveGame { get; set;}
-		private Button LoadGame { get; set;}
+		public Button Continue { get; private set; }
+		public Button SaveGame { get; private set;}
+		public Button LoadGame { get; private set;}
+		public Button NewGame { get; private set; }
+		public Button Options { get; private set; }
+		public ExitButton Exit { get; private set; }
 		
 		public override void _Ready()
 		{
-			NewGame = GetNode<Button>("%NewGame");
+			Continue = GetNode<Button>("%Continue");
 			SaveGame = GetNode<Button>("%SaveGame");
 			LoadGame = GetNode<Button>("%LoadGame");
+			NewGame = GetNode<Button>("%NewGame");
+			Options = GetNode<Button>("%Options");
+			Exit = GetNode<ExitButton>("%Exit");
 
 			NewGame.Pressed += StartNewGame;
 			SaveGame.Pressed += Save;

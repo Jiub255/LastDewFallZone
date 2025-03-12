@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 namespace Lastdew
@@ -44,16 +45,18 @@ namespace Lastdew
 			UI.MainMenu.OnNewGame += StartNewGame;
 			UI.MainMenu.OnSaveGame += Save;
 			UI.MainMenu.OnLoadGame += Load;
+			UI.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
 			UI.MapMenu.OnStartScavenging += StartScavenging;
 		}
 
-		private void Unsubscribe()
+        private void Unsubscribe()
 		{
 			ClickHandler.OnClickedPc -= PcManager.SelectPc;
 			ClickHandler.OnClickedMoveTarget -= PcManager.MoveTo;
 			UI.MainMenu.OnNewGame -= StartNewGame;
 			UI.MainMenu.OnSaveGame -= Save;
 			UI.MainMenu.OnLoadGame -= Load;
+			UI.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
 			UI.MapMenu.OnStartScavenging -= StartScavenging;
 		}
 
@@ -66,6 +69,7 @@ namespace Lastdew
 		private void StartNewGame()
 		{
 			SetupLevel(HomeBaseScene, DefaultPcList);
+			UI.ChangeState(new GameStateHome());
 		}
 
 		private void Save()
@@ -78,11 +82,25 @@ namespace Lastdew
 			SaveData saveData = SaverLoader.Load();
 			LoadInventory(saveData);
 			SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
+			UI.ChangeState(new GameStateHome());
 		}
+        
+        private void ExitToStartMenu()
+        {
+			foreach (Node node in GetChildren())
+			{
+				if (node is Level oldLevel)
+				{
+					oldLevel.QueueFree();
+				}
+			}
+			UI.ChangeState(new GameStateStart());
+        }
 
 		private void StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
 		{
 			SetupLevel(scene, pcSaveDatas);
+			UI.ChangeState(new GameStateScavenging());
 		}
 
 		private void SetupLevel(PackedScene scene, List<PcSaveData> pcSaveDatas)
@@ -97,9 +115,9 @@ namespace Lastdew
 			Level level = (Level)scene.Instantiate();
 			CallDeferred(World.MethodName.AddChild, level);
 			level.Initialize(TeamData);
-			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			// UI.Initialize has to be called after PcManager.SpawnPcs,
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
+			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			UI.Initialize(TeamData, InventoryManager);
 		}
 

@@ -4,25 +4,23 @@ namespace Lastdew
 {
 	public partial class EnemySpawner : Node3D
 	{	
-		[Export]
-		private int EnemiesToSpawn { get; set; } = 1;
+		private int EnemiesToSpawn { get; set; }
 		private TeamData TeamData { get; set; }
 		private float TimeBetweenSpawns { get; } = 2f;
 		private float Timer { get; set; } = 0.25f;
 		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(UIDs.TEST_ENEMY);
-		private bool Started { get; set; }
 		
-		public void Initialize(TeamData teamData)
+		public void Initialize(TeamData teamData, int enemiesToSpawn)
 		{
 			TeamData = teamData;
-			Started = true;
+			EnemiesToSpawn = enemiesToSpawn;
 		}
 
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
 
-			if (Started && EnemiesToSpawn > 0)
+			if (EnemiesToSpawn > 0)
 			{
 				Timer -= (float)delta;
 				if (Timer < 0)

@@ -15,6 +15,6 @@ namespace Lastdew
 		[Export]
 		public PackedScene Scene { get; set; }
 		[Export]
-		public string UID { get; set; }
+		public string SceneUid { get; set; }
 	}
 }

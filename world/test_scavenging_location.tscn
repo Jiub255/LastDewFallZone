@@ -76,6 +76,7 @@ Amount = 7
 
 [node name="TestScavengingLocation" type="Node3D"]
 script = ExtResource("1_43o5v")
+EnemiesToSpawn = 2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.897162, -0.274785, 0.345822, -0.436021, -0.425799, 0.792831, -0.0706071, -0.862084, -0.501822, 0, 0, 0)
@@ -87,7 +88,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7271, -1.90735e-06, -14.0668)
 script = ExtResource("10_o5blp")
-EnemiesToSpawn = 0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_o3abj")

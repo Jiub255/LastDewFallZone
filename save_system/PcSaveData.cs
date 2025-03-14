@@ -44,5 +44,15 @@ namespace Lastdew
 			Feet = feet;
 			Injury = injury;
 		}
+		
+		public PcSaveData(PlayerCharacter pc)
+		{
+			Name = pc.Name;
+			Head = pc.Equipment.Head?.Name;
+			Weapon = pc.Equipment.Weapon?.Name;
+			Body = pc.Equipment.Body?.Name;
+			Feet = pc.Equipment.Feet?.Name;
+			Injury = pc.Health.Injury;
+		}
 	}
 }

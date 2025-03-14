@@ -56,14 +56,17 @@
 				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
 				"736f3cd4-0e90-4a80-a00f-326e61a820fe",
 				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
-				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e"
+				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
+				"e8dca1d4-a660-4b76-9812-c0e9b0bc7ea3",
+				"f9a1fa27-c374-43fe-a710-b10e4168a046"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"2db7c62a-055e-4fab-9fba-8db877a31df4",
+				"402f656a-c43a-4dec-8099-c5e4439c866a",
+				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
 				"18aa9dce-2759-4551-81bb-5c681f7e1987"
 			]
 		},
@@ -89,7 +92,6 @@
 				"11bf4796-3286-4c96-8087-f5db675bf9ba",
 				"0a72f08b-61ce-4ff2-8c82-b8fc5f9922f7",
 				"1cdbec4d-c628-4ef9-9dff-70a4ec8062f8",
-				"780d7cee-87be-40cc-9254-9173f4a9d2dd",
 				"99a74741-f3a9-450e-a0a4-444bacae30fc",
 				"30d813ed-f012-4fd7-b422-8ed68af1b530",
 				"d287994c-6ba3-46f0-bc96-4056d2a54906",
@@ -100,7 +102,9 @@
 				"be6797e5-f4b2-4aef-81b2-160c524b7354",
 				"e09af5e4-ae95-4ebd-88f9-78e67d79f645",
 				"28bed55e-437f-4209-adea-6c21e9b90ae2",
-				"c776cb5f-c42a-4549-adbe-10e520298c17"
+				"c776cb5f-c42a-4549-adbe-10e520298c17",
+				"2db7c62a-055e-4fab-9fba-8db877a31df4",
+				"780d7cee-87be-40cc-9254-9173f4a9d2dd"
 			]
 		},
 		{
@@ -125,7 +129,9 @@
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
-			"tasks": []
+			"tasks": [
+				"668f9df0-c1d7-4814-8809-bc08d8154352"
+			]
 		}
 	],
 	"tasks": [
@@ -459,7 +465,7 @@
 		{
 			"uuid": "780d7cee-87be-40cc-9254-9173f4a9d2dd",
 			"title": "How to change scenes?",
-			"description": "Could have the base world node, with:\n\tMenus\n\tCameraRig\t\n\tPcManager\n\nAnd then just load in whatever physical scene, which has:\n\tDirectionalLight3D\n\tNavigationRegion3D\n\t\tWhatever physical things here, ground, walls, etc.\n\t\tEnemySpawner",
+			"description": "Could have the base world node, with:\n\tMenus\n\tCameraRig\t\n\tPcManager\n\nAnd then just load in whatever physical scene, which has:\n\tDirectionalLight3D\n\tNavigationRegion3D\n\t\tWhatever physical things here, ground, walls, etc.\n\t\tEnemySpawner\n\nTODO: Keep references to Homebase and Scavenging levels. Hide() Homebase while scavenging, delete scavenging scenes when done. \nAlso, Hide() pcs that aren't on the scavenging team while scavenging. \nOR,\nConvert all Pcs to PcDatas on the select team screen. Hold selected in ScavengingTeam list and the rest in UnusedPcs list. Spawn scavenging team like normal, but just save the unused pcs in memory on TeamData or whatever. Then just do the pc -> data -> spawn thing again to get back to base, but use the stored unused pcs' datas too. Just gonna Hide() the home base level for now though, at least until building system is in place. <-- DID THIS ONE SO FAR\n",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -656,6 +662,41 @@
 			"uuid": "c776cb5f-c42a-4549-adbe-10e520298c17",
 			"title": "Put game state in UiManager",
 			"description": "So far, game state only affects which menus are available and what's on the main menu. Makes sense to handle it in UiManager for now.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "e8dca1d4-a660-4b76-9812-c0e9b0bc7ea3",
+			"title": "Vehicles for scavenging team capacity?",
+			"description": "Maybe you can unlock different vehicles to increase team capacity? Like a car adds 4 or 5, a motorcycle adds 2, etc. Or take as many as you want, but it'll be way slower? Kinda like LSDZ but obviously without the fuckery. ",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "147125ec-8a3a-486c-a4ef-c7f5b629144a",
+			"title": "Separate crafting and char menus",
+			"description": "Do away with the whole tab container situation, just make them fully separate menus.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "668f9df0-c1d7-4814-8809-bc08d8154352",
+			"title": "HUD adds new pc each time scene changes",
+			"description": "Just need to clear display before populating it probably. \nNot quite. Less buttons now, but still more than there should be. Not sure why yet. \nGetting rid of an extra Setup() call in Hud.Initialize helped, but still making a duplicate button when returning to base. \n\tWhy is Hud.Setup() being called twice when returning to base? SpawnPcs(), which is the only way to call Hud.Setup(), only gets called once. Is it something to do with the CallDeferreds messing things up?\n\tMaybe try keeping the PcButtons in a List, then deleting them from there instead of using GetChildren? Might fix the problem, even if Hud.Setup() is still getting double called. \nYup. Still calling Hud.Setup() twice, but not sure why. Seems to be fine now though with the above fix. Might have to come back to this later. ",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "402f656a-c43a-4dec-8099-c5e4439c866a",
+			"title": "Go through, clean up bugs, polish",
+			"description": "Get things running more smoothly, iron out little bugs. Clean up the UI as well, make it look half decent at least.\n\nAreas to work on:\n\tCombat\n\tUI\n\tStats/Equipment?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "f9a1fa27-c374-43fe-a710-b10e4168a046",
+			"title": "Balance stats with combat",
+			"description": "Do this later, when experience/leveling and building systems are working. \nResearch about experience/level/stat progression and balancing stat-based combat. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

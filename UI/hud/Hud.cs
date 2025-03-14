@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -7,6 +8,7 @@ namespace Lastdew
 		private TeamData TeamData { get; set; }
 		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(UIDs.PC_BUTTON);
 		private HBoxContainer ButtonParent { get; set; }
+		private List<PcButton> PcButtons { get; set; } = new List<PcButton>();
 	
 		public override void _Ready()
 		{
@@ -31,7 +33,6 @@ namespace Lastdew
 		{
 			TeamData = teamData;
 			TeamData.OnPcsInstantiated += Setup;
-			Setup();
 		}
 
 		public override void _ExitTree()
@@ -42,14 +43,27 @@ namespace Lastdew
 		}
 
 		private void Setup()
-		{
-			foreach (PlayerCharacter pc in TeamData.Pcs)
+        {
+            ClearPcButtons();
+            foreach (PlayerCharacter pc in TeamData.Pcs)
+            {
+				this.PrintDebug($"Setting up PcButton for {pc.Name}");
+                PcButton pcButton = PcButtonScene.Instantiate() as PcButton;
+                ButtonParent.CallDeferred(HBoxContainer.MethodName.AddChild, pcButton);
+                pcButton.CallDeferred(PcButton.MethodName.Setup, pc);
+				pcButton.OnSelectPc += TeamData.SelectPc;
+				PcButtons.Add(pcButton);
+            }
+        }
+
+        private void ClearPcButtons()
+        {
+			foreach (PcButton pcButton in PcButtons)
 			{
-				PcButton buttonInstance = PcButtonScene.Instantiate() as PcButton;
-				ButtonParent.CallDeferred(HBoxContainer.MethodName.AddChild, buttonInstance);
-				// This line is the only reason TeamData has to inherit RefCounted
-				buttonInstance.CallDeferred(PcButton.MethodName.Setup, pc, TeamData);
+				this.PrintDebug($"Deleting PcButton");
+				pcButton.OnSelectPc -= TeamData.SelectPc;
+				pcButton.QueueFree();
 			}
-		}
-	}
+        }
+    }
 }

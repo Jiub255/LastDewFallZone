@@ -42,6 +42,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Save Game"
 
+[node name="ReturnToBase" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Return To Base"
+
 [node name="LoadGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -68,7 +73,7 @@ unique_name_in_owner = true
 layer = 2
 visible = false
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup"]
+[node name="Background" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup"]
 self_modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,36 +81,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/PanelContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background"]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/PanelContainer2/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/PanelContainer2/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 15
 
-[node name="ToStartMenu" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ToStartMenu" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit To Start Menu"
 
-[node name="ToDesktop" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ToDesktop" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit To Desktop"
 
-[node name="Cancel" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Cancel" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cancel"

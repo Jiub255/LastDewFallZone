@@ -163,6 +163,14 @@ namespace Lastdew
 			meshes[(int)data.BodyMesh * 4 - 2].Show();
 			meshes[(int)data.LegsMesh * 4 - 3].Show();
 			meshes[(int)data.FeetMesh * 4 - 4].Show();
+			// TODO: Kinda hacky, could do better. Doesn't matter. Just doing this to free up some memory why not.
+            foreach (Node node in MeshParent.GetChildren())
+            {
+                if (node is MeshInstance3D mesh && mesh.Visible == false)
+                {
+					mesh.QueueFree();
+                }
+            }
         }
 	}
 }

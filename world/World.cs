@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 namespace Lastdew
@@ -12,6 +11,8 @@ namespace Lastdew
 		private InventoryManager InventoryManager { get; set; }
 		private TeamData TeamData { get; set; }
 		private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>(UIDs.HOME_BASE);
+		private Level HomeBase { get; set; }
+		private ScavengingLevel ScavengingLevel { get; set; }
 		
 		public override void _Ready()
 		{
@@ -47,6 +48,7 @@ namespace Lastdew
 			UI.MainMenu.OnLoadGame += Load;
 			UI.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
 			UI.MapMenu.OnStartScavenging += StartScavenging;
+			UI.MainMenu.ReturnToBase.Pressed += ReturnToBase;
 		}
 
         private void Unsubscribe()
@@ -58,6 +60,7 @@ namespace Lastdew
 			UI.MainMenu.OnLoadGame -= Load;
 			UI.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
 			UI.MapMenu.OnStartScavenging -= StartScavenging;
+			UI.MainMenu.ReturnToBase.Pressed -= ReturnToBase;
 		}
 
 		// JUST FOR TESTING
@@ -68,7 +71,7 @@ namespace Lastdew
 
 		private void StartNewGame()
 		{
-			SetupLevel(HomeBaseScene, DefaultPcList);
+			HomeBase = SetupLevel(HomeBaseScene, DefaultPcList);
 			UI.ChangeState(new GameStateHome());
 		}
 
@@ -81,7 +84,7 @@ namespace Lastdew
 		{
 			SaveData saveData = SaverLoader.Load();
 			LoadInventory(saveData);
-			SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
+			HomeBase = SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
 			UI.ChangeState(new GameStateHome());
 		}
         
@@ -99,19 +102,32 @@ namespace Lastdew
 
 		private void StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
 		{
-			SetupLevel(scene, pcSaveDatas);
+			RemoveChild(HomeBase);
+			ScavengingLevel = (ScavengingLevel)SetupLevel(scene, pcSaveDatas);
 			UI.ChangeState(new GameStateScavenging());
 		}
-
-		private void SetupLevel(PackedScene scene, List<PcSaveData> pcSaveDatas)
-		{
-			foreach (Node node in GetChildren())
+        
+        private void ReturnToBase()
+        {
+			ScavengingLevel?.QueueFree();
+			AddChild(HomeBase);
+			
+			// Spawn returning pcs from sent PcDatas, and the rest from saved PcDatas.
+			List<PcSaveData> pcSaveDatas = new();
+			foreach (PlayerCharacter pc in TeamData.Pcs)
 			{
-				if (node is Level oldLevel)
-				{
-					oldLevel.QueueFree();
-				}
+				PcSaveData pcSaveData = new(pc);
+				pcSaveDatas.Add(pcSaveData);
 			}
+			pcSaveDatas.AddRange(TeamData.UnusedPcDatas);
+			
+			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
+			UI.Initialize(TeamData, InventoryManager);
+			UI.ChangeState(new GameStateHome());
+        }
+
+        private Level SetupLevel(PackedScene scene, List<PcSaveData> pcSaveDatas)
+		{
 			Level level = (Level)scene.Instantiate();
 			CallDeferred(World.MethodName.AddChild, level);
 			level.Initialize(TeamData);
@@ -119,6 +135,7 @@ namespace Lastdew
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			UI.Initialize(TeamData, InventoryManager);
+			return level;
 		}
 
 		private void LoadInventory(SaveData saveData)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://4jja8qhc2te7"]
 
 [ext_resource type="Script" path="res://UI/map/TeamSelectScreen.cs" id="1_nqtx1"]
-[ext_resource type="Script" path="res://UI/game/character/CharacterDisplay.cs" id="2_dqdvb"]
+[ext_resource type="Script" path="res://UI/map/CharacterSelector.cs" id="2_dp6u0"]
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="3_6yykp"]
 [ext_resource type="PackedScene" uid="uid://8b0531d6h835" path="res://UI/map/pc_display.tscn" id="4_uvgn1"]
 [ext_resource type="PackedScene" uid="uid://ddkl0i3g78lb3" path="res://UI/map/location_info.tscn" id="5_h6bda"]
@@ -32,31 +32,31 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="CharacterDisplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="CharacterSelector" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-script = ExtResource("2_dqdvb")
+script = ExtResource("2_dp6u0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterDisplay"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="PreviousButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterDisplay/HBoxContainer"]
+[node name="PreviousButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Previous"
 
-[node name="NextButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterDisplay/HBoxContainer"]
+[node name="NextButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Next"
 
-[node name="NameLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterDisplay"]
+[node name="NameLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -64,13 +64,13 @@ bbcode_enabled = true
 text = "[center]James[/center]"
 fit_content = true
 
-[node name="CharacterIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterDisplay"]
+[node name="CharacterIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("3_6yykp")
 expand_mode = 5
 
-[node name="StatsLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterDisplay"]
+[node name="StatsLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -82,7 +82,7 @@ Looting: 7
 Injury: 32
 Pain: 14"
 
-[node name="AddButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterDisplay"]
+[node name="AddButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Add To Team"

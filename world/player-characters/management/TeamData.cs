@@ -5,11 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Lastdew
 {
-	/// <summary>
-	/// TODO: Only inheriting RefCounted to get passed in a CallDeferred in Hud class.
-	/// Hopefully find a better way eventually. 
-	/// </summary>
-	public partial class TeamData : RefCounted
+	public partial class TeamData
 	{
 		public event Action OnPcsInstantiated;
 		public event Action OnMenuSelectedChanged;
@@ -45,6 +41,7 @@ namespace Lastdew
 				OnMenuSelectedChanged?.Invoke();
 			}
 		}
+		public List<PcSaveData> UnusedPcDatas { get; private set; } = new List<PcSaveData>();
 
 		public TeamData() {}
 		

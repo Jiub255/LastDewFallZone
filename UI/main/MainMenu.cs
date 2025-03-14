@@ -11,6 +11,7 @@ namespace Lastdew
 		
 		public Button Continue { get; private set; }
 		public Button SaveGame { get; private set;}
+		public Button ReturnToBase { get; private set;}
 		public Button LoadGame { get; private set;}
 		public Button NewGame { get; private set; }
 		public Button Options { get; private set; }
@@ -20,6 +21,7 @@ namespace Lastdew
 		{
 			Continue = GetNode<Button>("%Continue");
 			SaveGame = GetNode<Button>("%SaveGame");
+			ReturnToBase = GetNode<Button>("%ReturnToBase");
 			LoadGame = GetNode<Button>("%LoadGame");
 			NewGame = GetNode<Button>("%NewGame");
 			Options = GetNode<Button>("%Options");

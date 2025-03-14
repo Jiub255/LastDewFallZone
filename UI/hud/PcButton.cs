@@ -1,18 +1,17 @@
+using System;
 using Godot;
 
 namespace Lastdew
 {
-	/// <summary>
-	/// TODO: Add Pain/Injury bars to HUD.
-	/// </summary>
 	public partial class PcButton : Button
 	{
+		public event Action<PlayerCharacter> OnSelectPc;
+	
 		private TextureRect PcIcon { get; set; }
 		private RichTextLabel PcName { get; set; }
 		private ProgressBar PainBar { get; set; }
 		private ProgressBar InjuryBar { get; set; }
 		private PlayerCharacter PC { get; set; }
-		private TeamData TeamData { get; set; }
 
 		public override void _Ready()
 		{
@@ -34,21 +33,17 @@ namespace Lastdew
 			PC.Health.OnHealthChanged -= SetHealthBars;
 		}
 		
-		public void Setup(PlayerCharacter pc, TeamData teamData)
+		public void Setup(PlayerCharacter pc)
 		{
 			PcIcon.Texture = pc.Icon;
 			PcName.Text = pc.Name;
 			PC = pc;
-			TeamData = teamData;
 			
 			SetHealthBars();
 			
 			PC.Health.OnHealthChanged += SetHealthBars;
 		}
 		
-		/// <summary>
-		/// Useless parameter to subscribe method to event
-		/// </summary>
 		private void SetHealthBars(int _)
 		{
 			SetHealthBars();
@@ -62,7 +57,7 @@ namespace Lastdew
 		
 		private void SelectPc()
 		{
-			TeamData.SelectPc(PC);
+			OnSelectPc?.Invoke(PC);
 		}
 	}
 }

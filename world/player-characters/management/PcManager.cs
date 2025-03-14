@@ -3,8 +3,6 @@ using Godot;
 
 namespace Lastdew
 {
-	// TODO: Have a different PcManager for scavenging? What about base defense?
-	// Or just have different "modes" on this class? 
 	public partial class PcManager : Node3D
 	{
 		private TeamData TeamData { get; set; }
@@ -102,6 +100,7 @@ namespace Lastdew
 			}
 			
 			TeamData.SendPcsInstantiatedSignal();
+			this.PrintDebug($"Spawn Pcs called");
 		}
 		
 		private void DeselectPc()

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Equipment" load_steps=10 format=3 uid="uid://bllu8wsyhqs2x"]
 
-[ext_resource type="Script" path="res://world/player-characters/stats/StatAmount.cs" id="1_obo0b"]
+[ext_resource type="Script" uid="uid://cbv58iicrql0c" path="res://world/player-characters/stats/StatAmount.cs" id="1_obo0b"]
 [ext_resource type="Texture2D" uid="uid://c53xh75pl5e48" path="res://craftables/items/equipment/icon_pistol.png" id="2_6qb8s"]
-[ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="3_1hwkl"]
+[ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="3_1hwkl"]
 [ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="3_pgvpp"]
-[ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterialAmount.cs" id="4_mkxho"]
+[ext_resource type="Script" uid="uid://d2rgbm1pvl2bv" path="res://craftables/items/crafting-materials/CraftingMaterialAmount.cs" id="4_mkxho"]
 [ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="5_fmnwb"]
 
 [sub_resource type="Resource" id="Resource_x5q8o"]
@@ -28,7 +28,7 @@ Type = 3
 EquipmentBonuses = [SubResource("Resource_x5q8o")]
 StatRequirementsToUse = []
 ItemRarity = 100
-Tags = [0, 2]
+Tags = Array[int]([0, 2])
 Name = "Pistol"
 Description = "2 Damage, Ranged"
 Icon = ExtResource("2_6qb8s")

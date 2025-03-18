@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7w0406ngl5dr"]
 
-[ext_resource type="Script" path="res://UI/main/MainMenu.cs" id="1_iggh1"]
-[ext_resource type="Script" path="res://UI/main/ExitButton.cs" id="2_ci0dg"]
+[ext_resource type="Script" uid="uid://cykw3kych5n6v" path="res://UI/main/MainMenu.cs" id="1_iggh1"]
+[ext_resource type="Script" uid="uid://v1lggq6oy527" path="res://UI/main/ExitButton.cs" id="2_ci0dg"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_iggh1")

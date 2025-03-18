@@ -1,13 +1,17 @@
 [gd_resource type="Resource" script_class="CraftingMaterial" load_steps=3 format=3 uid="uid://duih4refp4eov"]
 
 [ext_resource type="Texture2D" uid="uid://h0aah8cvmen8" path="res://craftables/items/crafting-materials/icon_wood.png" id="1_6ocmb"]
-[ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_a5u7i"]
+[ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_a5u7i"]
 
 [resource]
 script = ExtResource("1_a5u7i")
 Reusable = true
 ItemRarity = 100
-Tags = [4]
+Tags = Array[int]([4])
 Name = "Wood"
 Description = "Comes from trees"
 Icon = ExtResource("1_6ocmb")
+_recipeCosts = null
+_requiredBuildings = null
+_statRequirements = null
+_scrapResults = null

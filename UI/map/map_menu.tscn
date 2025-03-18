@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bbe31fnfx7jxl"]
 
-[ext_resource type="Script" path="res://UI/map/MapMenu.cs" id="1_4t7p4"]
+[ext_resource type="Script" uid="uid://tscoqptagws1" path="res://UI/map/MapMenu.cs" id="1_4t7p4"]
 [ext_resource type="PackedScene" uid="uid://dct2ycvtaaxft" path="res://UI/map/map_screen.tscn" id="2_kx73s"]
 [ext_resource type="PackedScene" uid="uid://4jja8qhc2te7" path="res://UI/map/team_select_screen.tscn" id="3_eovdf"]
 

@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CraftingMaterial" load_steps=3 format=3 uid="uid://dgesmlhv1ix8"]
 
 [ext_resource type="Texture2D" uid="uid://b74ul46fx48vy" path="res://craftables/items/crafting-materials/icon_cloth.png" id="1_1u4nl"]
-[ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_un7l5"]
+[ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_un7l5"]
 
 [resource]
 script = ExtResource("1_un7l5")
 Reusable = false
 ItemRarity = 100
-Tags = [4]
+Tags = Array[int]([4])
 Name = "Cloth"
 Description = "Make clothes with it"
 Icon = ExtResource("1_1u4nl")

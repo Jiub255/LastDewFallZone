@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://8b0531d6h835"]
 
-[ext_resource type="Script" path="res://UI/map/PcDisplay.cs" id="1_2ilfa"]
+[ext_resource type="Script" uid="uid://c50u6v7i30d50" path="res://UI/map/PcDisplay.cs" id="1_2ilfa"]
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_i05fj"]
 
 [node name="PcDisplay" type="HBoxContainer"]

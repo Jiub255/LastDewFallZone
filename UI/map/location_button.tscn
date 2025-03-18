@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b42o3j4m70oy7"]
 
-[ext_resource type="Script" path="res://UI/map/LocationButton.cs" id="1_fjvwv"]
+[ext_resource type="Script" uid="uid://dq2j3tkvcodxa" path="res://UI/map/LocationButton.cs" id="1_fjvwv"]
 
 [node name="LocationButton" type="Control"]
 layout_mode = 3

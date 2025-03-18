@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://c8dprqclfyhv3"]
 
 [ext_resource type="Texture2D" uid="uid://bg33n32q78vqt" path="res://unused-assets/icons/icon_building_blank.png" id="1_san2y"]
-[ext_resource type="Script" path="res://craftables/buildings/Building.cs" id="1_uwfxh"]
+[ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_uwfxh"]
 
 [resource]
 script = ExtResource("1_uwfxh")
@@ -9,3 +9,7 @@ Type = 0
 Name = "Test Building"
 Description = "test description. blah blah ..."
 Icon = ExtResource("1_san2y")
+_recipeCosts = null
+_requiredBuildings = null
+_statRequirements = null
+_scrapResults = null

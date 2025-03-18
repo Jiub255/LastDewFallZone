@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://4mxch05l0jh3"]
 
-[ext_resource type="Script" path="res://craftables/items/equipment/Equipment.cs" id="1_ht8ij"]
+[ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="1_ht8ij"]
 
 [resource]
 script = ExtResource("1_ht8ij")
@@ -8,7 +8,7 @@ Type = 0
 EquipmentBonuses = []
 StatRequirementsToUse = []
 ItemRarity = 100
-Tags = [3, 1]
+Tags = Array[int]([3, 1])
 Name = "Test EQ"
 Description = "sefesfsef"
 _recipeCosts = []

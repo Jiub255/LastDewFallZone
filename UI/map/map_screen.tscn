@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dct2ycvtaaxft"]
 
-[ext_resource type="Script" path="res://UI/map/MapScreen.cs" id="1_o3nxy"]
-[ext_resource type="Script" path="res://UI/map/MapScroll.cs" id="2_721ga"]
+[ext_resource type="Script" uid="uid://c55rp5xhx7xdx" path="res://UI/map/MapScreen.cs" id="1_o3nxy"]
+[ext_resource type="Script" uid="uid://csogh7ctti250" path="res://UI/map/MapScroll.cs" id="2_721ga"]
 [ext_resource type="Texture2D" uid="uid://cxjrba0cc3dhi" path="res://UI/map/test_map.png" id="3_nemkn"]
 [ext_resource type="PackedScene" uid="uid://b42o3j4m70oy7" path="res://UI/map/location_button.tscn" id="4_fsvth"]
 [ext_resource type="Resource" uid="uid://c7sm0cx1vlq2u" path="res://UI/map/test_location_data.tres" id="5_joa7o"]

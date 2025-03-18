@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="UsableItem" load_steps=4 format=3 uid="uid://ca61dv6wk4lrg"]
+[gd_resource type="Resource" script_class="UsableItem" load_steps=7 format=3 uid="uid://ca61dv6wk4lrg"]
 
 [ext_resource type="Resource" uid="uid://bhc2veoi3wd5o" path="res://craftables/items/usable-items/effects/relieve_pain_25_5.tres" id="1_sltpe"]
 [ext_resource type="Texture2D" uid="uid://yf5l7e24sw2q" path="res://craftables/items/usable-items/icon_painkillers_blank.png" id="2_yd7xh"]
 [ext_resource type="Script" path="res://craftables/items/usable-items/UsableItem.cs" id="3_0om8j"]
+[ext_resource type="Resource" uid="uid://dgesmlhv1ix8" path="res://craftables/items/crafting-materials/cloth.tres" id="3_n2lxo"]
+[ext_resource type="Script" path="res://craftables/items/crafting-materials/CraftingMaterialAmount.cs" id="4_4jvpv"]
+
+[sub_resource type="Resource" id="Resource_ci8oq"]
+script = ExtResource("4_4jvpv")
+Material = ExtResource("3_n2lxo")
+Amount = 1
 
 [resource]
 script = ExtResource("3_0om8j")
@@ -13,7 +20,7 @@ Tags = [1]
 Name = "Test Painkiller"
 Description = "Relieve pain 25 for 5 seconds"
 Icon = ExtResource("2_yd7xh")
-_recipeCosts = []
+_recipeCosts = [SubResource("Resource_ci8oq")]
 _requiredBuildings = []
 _statRequirements = []
 _scrapResults = []

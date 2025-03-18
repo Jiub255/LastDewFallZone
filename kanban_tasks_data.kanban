@@ -50,7 +50,6 @@
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"bc28b844-8360-4095-b52b-105b42061993",
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
-				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
 				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
 				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
@@ -67,7 +66,9 @@
 			"tasks": [
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
-				"18aa9dce-2759-4551-81bb-5c681f7e1987"
+				"18aa9dce-2759-4551-81bb-5c681f7e1987",
+				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
+				"cc73faed-a740-4f4c-92ff-e767faf2993d"
 			]
 		},
 		{
@@ -437,7 +438,7 @@
 		{
 			"uuid": "3bc586d1-36f7-43e3-83f5-94273c8a79c4",
 			"title": "Make/Modify resource editor tool",
-			"description": "ResourceTables plugin is close, but need to be able to add enums, bools, textures, etc.\nAlso be able to quickly copy or make new resources.\nWould it be possible to use enums as ids? Like have a big ol enum with all the craftables' names, and\n\twhen you create a new craftable using the tool, it automatically adds the craftable's name to the enum.\n\tIt would make selecting the recipe costs, required buildings, and scrap results a lot easier (autofill in vscode, no int ids)  and safer (no strings). Would only have to do it for CraftingMaterials and Buildings, so it might not end up being too many enums.\n\tMaybe could have the Export string Name, then use the tool script to grab that and put it in the enum?",
+			"description": "ResourceTables plugin is close, but need to be able to add enums, bools, textures, etc.\nAlso be able to quickly copy or make new resources.\nWould it be possible to use enums as ids? Like have a big ol enum with all the craftables' names, and\n\twhen you create a new craftable using the tool, it automatically adds the craftable's name to the enum.\n\tIt would make selecting the recipe costs, required buildings, and scrap results a lot easier (autofill in vscode, no int ids)  and safer (no strings). Would only have to do it for CraftingMaterials and Buildings, so it might not end up being too many enums.\n\tMaybe could have the Export string Name, then use the tool script to grab that and put it in the enum?\n\nHave a quick create/edit button that shows a popup for the resource. \n\tFor recipe costs, etc, just have a dropdown of the appropriate resource type and an int field, with up/down arrow buttons and everything. \n\tFigure out how handle enums the same, with a drop down menu.\n\tHave the main screen show a list of the resources with their data.\n\t\tHave filters for categories.\n\t\tMake it sortable by any category that makes sense.\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -697,6 +698,13 @@
 			"uuid": "f9a1fa27-c374-43fe-a710-b10e4168a046",
 			"title": "Balance stats with combat",
 			"description": "Do this later, when experience/leveling and building systems are working. \nResearch about experience/level/stat progression and balancing stat-based combat. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "cc73faed-a740-4f4c-92ff-e767faf2993d",
+			"title": "Upgrade to 4.4 for typed dicts",
+			"description": "Hopefully can do export typed (godot) dictionaries so I can stop using StatAmount, ItemAmount, CraftingMaterialAmount resources. Just use a <Craftable, int> dict. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

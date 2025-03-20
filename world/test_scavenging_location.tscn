@@ -1,14 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://4g1wsvcfefhh"]
+[gd_scene load_steps=14 format=3 uid="uid://4g1wsvcfefhh"]
 
 [ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/ScavengingLevel.cs" id="1_43o5v"]
 [ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://world/looting/loot_container_test.tscn" id="2_ocac3"]
-[ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="3_donvm"]
-[ext_resource type="Script" uid="uid://bmwceqma1sg73" path="res://craftables/items/ItemAmount.cs" id="4_hoke6"]
-[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_5.tres" id="5_lqt0y"]
-[ext_resource type="Resource" uid="uid://bllu8wsyhqs2x" path="res://craftables/items/equipment/pistol.tres" id="6_pkvub"]
-[ext_resource type="Resource" uid="uid://bs3r4jknvdnhm" path="res://craftables/items/equipment/body_armor.tres" id="7_41vqt"]
-[ext_resource type="Resource" uid="uid://dgesmlhv1ix8" path="res://craftables/items/crafting-materials/cloth.tres" id="8_ilajp"]
-[ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="9_ph5ah"]
 [ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://world/enemies/EnemySpawner.cs" id="10_o5blp"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
@@ -43,36 +36,6 @@ size = Vector3(0.2, 2, 28)
 
 [sub_resource type="BoxMesh" id="BoxMesh_skjca"]
 size = Vector3(0.2, 2, 28)
-
-[sub_resource type="Resource" id="Resource_0ebt0"]
-script = ExtResource("4_hoke6")
-Item = ExtResource("3_donvm")
-Amount = 6
-
-[sub_resource type="Resource" id="Resource_ar82l"]
-script = ExtResource("4_hoke6")
-Item = ExtResource("5_lqt0y")
-Amount = 3
-
-[sub_resource type="Resource" id="Resource_cdei1"]
-script = ExtResource("4_hoke6")
-Item = ExtResource("6_pkvub")
-Amount = 1
-
-[sub_resource type="Resource" id="Resource_7g3ik"]
-script = ExtResource("4_hoke6")
-Item = ExtResource("7_41vqt")
-Amount = 1
-
-[sub_resource type="Resource" id="Resource_kpnnl"]
-script = ExtResource("4_hoke6")
-Item = ExtResource("8_ilajp")
-Amount = 5
-
-[sub_resource type="Resource" id="Resource_jvucu"]
-script = ExtResource("4_hoke6")
-Item = ExtResource("9_ph5ah")
-Amount = 7
 
 [node name="TestScavengingLocation" type="Node3D"]
 script = ExtResource("1_43o5v")
@@ -140,4 +103,4 @@ mesh = SubResource("BoxMesh_skjca")
 
 [node name="LootContainerTest" parent="NavigationRegion3D" instance=ExtResource("2_ocac3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.01318, 0.5, 6.28534)
-Loot = [SubResource("Resource_0ebt0"), SubResource("Resource_ar82l"), SubResource("Resource_cdei1"), SubResource("Resource_7g3ik"), SubResource("Resource_kpnnl"), SubResource("Resource_jvucu")]
+Loot = null

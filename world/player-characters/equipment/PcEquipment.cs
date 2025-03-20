@@ -10,19 +10,29 @@ namespace Lastdew
 		public Equipment Weapon { get; set; }
 		public Equipment Body { get; set; }
 		public Equipment Feet { get; set; }
-		public StatAmount[] Bonuses
+		public Dictionary<StatType, int> Bonuses
 		{
 			get
 			{
-				List<StatAmount> equipmentBonuses = new();
+				Dictionary<StatType, int> equipmentBonuses = new();
 				foreach (Equipment equipment in this)
 				{
-					if (equipment != null && equipment.EquipmentBonuses.Length > 0)
+					if (equipment != null && equipment.EquipmentBonuses.Count > 0)
 					{
-						equipmentBonuses.AddRange(equipment.EquipmentBonuses);
+						foreach (KeyValuePair<StatType, int> kvp in equipment.EquipmentBonuses)
+						{
+						    if (equipmentBonuses.ContainsKey(kvp.Key))
+						    {
+						        equipmentBonuses[kvp.Key] += kvp.Value;
+						    }
+						    else
+						    {
+						        equipmentBonuses[kvp.Key] = kvp.Value;
+						    }
+						}
 					}
 				}
-				return equipmentBonuses.ToArray();
+				return equipmentBonuses;
 			}
 		}
 		

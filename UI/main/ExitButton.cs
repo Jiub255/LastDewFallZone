@@ -6,7 +6,6 @@ namespace Lastdew
 	public partial class ExitButton : Button
 	{
 		public event Action OnToStartMenu;
-		public event Action OnToDesktop;
 
 		public bool InStartMenu { get; set; } = true;
 		

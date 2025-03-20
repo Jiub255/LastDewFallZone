@@ -1,31 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://x2gtjq08dbsc"]
+[gd_scene load_steps=5 format=3 uid="uid://x2gtjq08dbsc"]
 
 [ext_resource type="Script" uid="uid://ixr4jog3lxc7" path="res://world/looting/LootContainer.cs" id="1_b5trt"]
-[ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="2_6xl3a"]
-[ext_resource type="Script" uid="uid://bmwceqma1sg73" path="res://craftables/items/ItemAmount.cs" id="3_5d7wd"]
-[ext_resource type="Resource" uid="uid://ca61dv6wk4lrg" path="res://craftables/items/usable-items/painkiller_25_5.tres" id="4_ybhf6"]
-[ext_resource type="Resource" uid="uid://bllu8wsyhqs2x" path="res://craftables/items/equipment/pistol.tres" id="5_h50g4"]
-[ext_resource type="Resource" uid="uid://bs3r4jknvdnhm" path="res://craftables/items/equipment/body_armor.tres" id="6_rui7a"]
-
-[sub_resource type="Resource" id="Resource_0ebt0"]
-script = ExtResource("3_5d7wd")
-Item = ExtResource("2_6xl3a")
-Amount = 1
-
-[sub_resource type="Resource" id="Resource_ar82l"]
-script = ExtResource("3_5d7wd")
-Item = ExtResource("4_ybhf6")
-Amount = 3
-
-[sub_resource type="Resource" id="Resource_cdei1"]
-script = ExtResource("3_5d7wd")
-Item = ExtResource("5_h50g4")
-Amount = 1
-
-[sub_resource type="Resource" id="Resource_7g3ik"]
-script = ExtResource("3_5d7wd")
-Item = ExtResource("6_rui7a")
-Amount = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qb4yi"]
 
@@ -35,11 +10,9 @@ Amount = 1
 albedo_color = Color(0.359416, 0.220464, 0.150835, 1)
 
 [node name="LootContainerTest" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02312, 0.5, -3.97649)
 collision_layer = 8
 collision_mask = 22
 script = ExtResource("1_b5trt")
-Loot = [SubResource("Resource_0ebt0"), SubResource("Resource_ar82l"), SubResource("Resource_cdei1"), SubResource("Resource_7g3ik")]
 LootDuration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

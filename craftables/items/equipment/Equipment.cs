@@ -9,9 +9,9 @@ namespace Lastdew
 		[Export]
 		public EquipmentType Type { get; set; }
 		[Export]
-		public StatAmount[] EquipmentBonuses { get; set; } = Array.Empty<StatAmount>();
+		public Godot.Collections.Dictionary<StatType, int> EquipmentBonuses { get; set; }
 		[Export]
-		public StatAmount[] StatRequirementsToUse { get; set; } = Array.Empty<StatAmount>();
+		public Godot.Collections.Dictionary<StatType, int>  StatsNeededToEquip { get; set; }
 		
 		public Equipment(){}
 		

@@ -16,16 +16,16 @@ namespace Lastdew
 
 		// Have to use Godot arrays below for the resources to load correctly.
 		[Export]
-		private Godot.Collections.Array<CraftingMaterialAmount> _recipeCosts;
+		private Godot.Collections.Dictionary<CraftingMaterial, int> _recipeCosts;
 		// TODO: Buildings required to build? Or to have it show up in crafting menu?
 		[Export]
 		private Godot.Collections.Array<Building> _requiredBuildings;
 		// TODO: Stats required to build? Or to have it show up in crafting menu?
 		[Export]
-		private Godot.Collections.Array<StatAmount> _statRequirements;
-		[Export]
-		private Godot.Collections.Array<CraftingMaterialAmount> _scrapResults;
+		private Godot.Collections.Dictionary<CraftingMaterial, int> _scrapResults;
 		
+		[Export]
+		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; }
 		public Dictionary<string, int> RecipeCosts
 		{
 			get
@@ -36,9 +36,9 @@ namespace Lastdew
 					return dict;
 				}
 				
-				foreach (CraftingMaterialAmount cma in _recipeCosts)
+				foreach (KeyValuePair<CraftingMaterial, int> kvp in _recipeCosts)
 				{
-					dict[cma.Material.Name] = cma.Amount;
+					dict[kvp.Key.Name] = kvp.Value;
 				}
 				return dict;
 			}
@@ -50,26 +50,14 @@ namespace Lastdew
 				return _requiredBuildings.Select(x => x.Name).ToArray();
 			}
 		}
-		public Dictionary<string, int> StatRequirements
-		{
-			get
-			{
-				Dictionary<string, int> dict = new();
-				foreach (StatAmount sa in _statRequirements)
-				{
-					dict[sa.Type.ToString()] = sa.Amount;
-				}
-				return dict;
-			}
-		}
 		public Dictionary<string, int> ScrapResults
 		{
 			get
 			{
 				Dictionary<string, int> dict = new();
-				foreach (CraftingMaterialAmount cma in _scrapResults)
+				foreach (KeyValuePair<CraftingMaterial, int> kvp in _scrapResults)
 				{
-					dict[cma.Material.Name] = cma.Amount;
+					dict[kvp.Key.Name] = kvp.Value;
 				}
 				return dict;
 			}

@@ -14,20 +14,18 @@ namespace Lastdew
 		private Stat _scavenging;
 		private int _pain;
 		
-		// Pain == 0 -> No effect. Pain == 100 -> Stat value halved. (for now at least)
-		public int Attack { get => _attack.Value * (200 - _pain) / 200; }
-		public int Defense { get => _defense.Value * (200 - _pain) / 200; }
-		public int Engineering { get => _engineering.Value * (200 - _pain) / 200; }
-		public int Farming { get => _farming.Value * (200 - _pain) / 200; }
-		public int Medical { get => _medical.Value * (200 - _pain) / 200; }
-		public int Scavenging { get => _scavenging.Value * (200 - _pain) / 200; }
+		public int Attack { get => PainFormula(_attack.Value, _pain); }
+		public int Defense { get => PainFormula(_defense.Value, _pain); }
+		public int Engineering { get => PainFormula(_engineering.Value, _pain); }
+		public int Farming { get => PainFormula(_farming.Value, _pain); }
+		public int Medical { get => PainFormula(_medical.Value, _pain); }
+		public int Scavenging { get => PainFormula(_scavenging.Value, _pain); }
 		
 		public PcStatManager()
 		{
 			_attack = new Stat(StatType.ATTACK, 1);
 			_defense = new Stat(StatType.DEFENSE, 1);
-			// SET TO 100 FOR TESTING
-			_engineering = new Stat(StatType.ENGINEERING, 100);
+			_engineering = new Stat(StatType.ENGINEERING, 1);
 			_farming = new Stat(StatType.FARMING, 1);
 			_medical = new Stat(StatType.MEDICAL, 1);
 			_scavenging = new Stat(StatType.SCAVENGING, 1);
@@ -38,16 +36,16 @@ namespace Lastdew
 			_pain = pain;
 		}
 		
-		public void CalculateStatModifiers(StatAmount[] equipmentBonuses)
+		public void CalculateStatModifiers(Dictionary<StatType, int> equipmentBonuses)
 		{
 			foreach (Stat stat in this)
 			{
 				stat.ClearModifiers();
-				foreach (StatAmount bonus in equipmentBonuses)
+				foreach (KeyValuePair<StatType, int> kvp in equipmentBonuses)
 				{
-					if (bonus.Type == stat.Type)
+					if (kvp.Key == stat.Type)
 					{
-						stat.AddModifier(bonus.Amount);
+						stat.AddModifier(kvp.Value);
 					}
 				}
 			}
@@ -56,9 +54,9 @@ namespace Lastdew
 		public bool MeetsRequirements(Equipment equipment)
 		{
 			bool requirementsMet = true;
-			foreach (StatAmount statAmount in equipment.StatRequirementsToUse)
+			foreach (KeyValuePair<StatType, int> kvp in equipment.StatsNeededToEquip)
 			{
-				if (GetStatByType(statAmount.Type)?.Value < statAmount.Amount)
+				if (GetStatByType(kvp.Key)?.Value < kvp.Value)
 				{
 					requirementsMet = false;
 				}
@@ -92,6 +90,12 @@ namespace Lastdew
 			}
 			GD.PushWarning($"No stat found for type {type}");
 			return null;
+		}
+		
+		// Pain == 0 -> No effect. Pain == 100 -> Stat value halved. (for now at least)
+		private int PainFormula(int statValue, int pain)
+		{
+		    return statValue * (200 - pain) / 200;
 		}
 	}
 }

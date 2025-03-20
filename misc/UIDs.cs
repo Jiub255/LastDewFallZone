@@ -14,5 +14,7 @@ namespace Lastdew
 		public const string TEST_PC_2 = "uid://cxqnm5wb7brx2";
 		public const string ALL_PC_SCENES = "uid://b5pn7fvdncqw4";
 		public const string ALL_PC_DATAS = "uid://dckb2dlhbg7ny";
+		public const string EDITOR_MAIN_SCREEN = "uid://dmxi1hfast2yx";
+		public const string CRAFTABLE_ICON = "uid://cu7k0yye0m81b";
     }
 }

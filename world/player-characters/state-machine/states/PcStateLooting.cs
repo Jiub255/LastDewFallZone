@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+
 namespace Lastdew
 {	
 	public class PcStateLooting : PcState
@@ -61,9 +63,9 @@ namespace Lastdew
 	
 		private void GimmeTheLoot()
 		{
-			foreach (ItemAmount itemAmount in LootContainer.Loot)
+			foreach (KeyValuePair<Item, int> kvp in LootContainer.Loot)
 			{
-				Context.InventoryManager.AddItems(itemAmount.Item, itemAmount.Amount);
+				Context.InventoryManager.AddItems(kvp.Key, kvp.Value);
 			}
 			LootContainer.Empty = true;
 		}

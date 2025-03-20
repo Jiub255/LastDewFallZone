@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -8,7 +9,7 @@ namespace Lastdew
 	//	[Export]
 		public Godot.Collections.Array<ItemTags> Tags { get; private set; }
 		[Export]
-		public ItemAmount[] Loot { get; private set; } = new ItemAmount[0];
+		public Godot.Collections.Dictionary<Item, int> Loot { get; private set; }
 		[Export]
 		public float LootDuration { get; private set; }
 		public bool Empty { get; set; }

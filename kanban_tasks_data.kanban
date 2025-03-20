@@ -36,13 +36,15 @@
 				"2d06c068-737d-437a-b839-676244c60b7d",
 				"43e7a2a8-de3c-4c98-b01a-927022b66792",
 				"aab8ef9e-9ad4-478f-90fc-f61ab483b97d",
-				"cad890ca-25b5-420b-a491-59a849cad2b3"
+				"cad890ca-25b5-420b-a491-59a849cad2b3",
+				"b35faef0-d1f8-43ec-bd5f-6f4cc79545ea"
 			]
 		},
 		{
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "TODO",
 			"tasks": [
+				"1dd34408-ff72-4b11-a37c-91fef3827e18",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
@@ -67,8 +69,7 @@
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
 				"18aa9dce-2759-4551-81bb-5c681f7e1987",
-				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
-				"cc73faed-a740-4f4c-92ff-e767faf2993d"
+				"3bc586d1-36f7-43e3-83f5-94273c8a79c4"
 			]
 		},
 		{
@@ -105,7 +106,9 @@
 				"28bed55e-437f-4209-adea-6c21e9b90ae2",
 				"c776cb5f-c42a-4549-adbe-10e520298c17",
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
-				"780d7cee-87be-40cc-9254-9173f4a9d2dd"
+				"780d7cee-87be-40cc-9254-9173f4a9d2dd",
+				"cc73faed-a740-4f4c-92ff-e767faf2993d",
+				"ea8718cf-9c0e-43dc-94fa-21f5cb910190"
 			]
 		},
 		{
@@ -437,8 +440,8 @@
 		},
 		{
 			"uuid": "3bc586d1-36f7-43e3-83f5-94273c8a79c4",
-			"title": "Make/Modify resource editor tool",
-			"description": "ResourceTables plugin is close, but need to be able to add enums, bools, textures, etc.\nAlso be able to quickly copy or make new resources.\nWould it be possible to use enums as ids? Like have a big ol enum with all the craftables' names, and\n\twhen you create a new craftable using the tool, it automatically adds the craftable's name to the enum.\n\tIt would make selecting the recipe costs, required buildings, and scrap results a lot easier (autofill in vscode, no int ids)  and safer (no strings). Would only have to do it for CraftingMaterials and Buildings, so it might not end up being too many enums.\n\tMaybe could have the Export string Name, then use the tool script to grab that and put it in the enum?\n\nHave a quick create/edit button that shows a popup for the resource. \n\tFor recipe costs, etc, just have a dropdown of the appropriate resource type and an int field, with up/down arrow buttons and everything. \n\tFigure out how handle enums the same, with a drop down menu.\n\tHave the main screen show a list of the resources with their data.\n\t\tHave filters for categories.\n\t\tMake it sortable by any category that makes sense.\n",
+			"title": "Make resource editor tool",
+			"description": "ResourceTables plugin is close, but need to be able to add Craftables, bools, textures, etc.\nAlso be able to quickly edit or make new resources.\n\nMain screen plugin, have it in a tab container with a tab for each type of resource. Or do filter style.\n\tShows a list of all the resources and their data in a condensed form. \n\tClick on a resource entry to edit or have an edit button?\n\tMake it sortable by any category that makes sense.\n\nHave a quick create/edit button that shows a popup for the resource. \n\tFor recipe costs, etc, just have a dropdown of the appropriate resource type and an int field, with up/down arrow buttons and everything. \n\tFigure out how handle enums the same, with a drop down menu.\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -706,6 +709,27 @@
 			"title": "Upgrade to 4.4 for typed dicts",
 			"description": "Hopefully can do export typed (godot) dictionaries so I can stop using StatAmount, ItemAmount, CraftingMaterialAmount resources. Just use a <Craftable, int> dict. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "ea8718cf-9c0e-43dc-94fa-21f5cb910190",
+			"title": "Change all [Craftable]Amount godot arrays to godot typed dicts",
+			"description": "Hopefully can do away with all the ItemAmount, StatAmount, etc resources. Just use a typed export godot <whatever craftable, int> dictionary. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "1dd34408-ff72-4b11-a37c-91fef3827e18",
+			"title": "Make plain Node top level class \"Game\"",
+			"description": "Have World (minus UIManager) as a child, and UiManager. Apparently it's not good to have controls as children of node3ds. Would have to rework World.cs too. Might look into it more first. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "b35faef0-d1f8-43ec-bd5f-6f4cc79545ea",
+			"title": "How to deal with effects/usable items?",
+			"description": "How many effects will there be? Is there a need for the general Effect class? \nAnd how to display it in the resource editor? Might have to make special code for each effect type. \n\nEffects:\n\tRelieve pain: X points for Y seconds\n\tBoost stats (drugs): X points for Y seconds\n\tFood? Or is that just gonna be a meter like in LSDZ? Probably that. \n\tMusic? To boost morale temporarily in battle?",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

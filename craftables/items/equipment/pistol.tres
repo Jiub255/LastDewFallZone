@@ -9,7 +9,7 @@
 script = ExtResource("3_1hwkl")
 Type = 3
 EquipmentBonuses = {}
-StatsNeededToUse = {}
+StatsNeededToEquip = {}
 ItemRarity = 100
 Tags = Array[int]([0, 2])
 Name = "Pistol"
@@ -21,4 +21,4 @@ ExtResource("5_fmnwb"): 1
 }
 _requiredBuildings = []
 _scrapResults = {}
-StatsNeededToCraft = {}
+StatsNeededToCraft = Dictionary[int, int]({})

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace Lastdew
 {
-	[GlobalClass, Tool]
 	/// <summary>
 	/// Tool script that runs through the craftables directory and adds each craftable to the 
-	/// appropriate dictionary<string (name), [Craftable subtype]>
+	/// appropriate dictionary(string, Craftable subtype)
 	/// </summary>
+	[GlobalClass, Tool]
 	public partial class Craftables : Resource, IEnumerable
 	{
 		private const string DIRECTORY = "res://craftables/";

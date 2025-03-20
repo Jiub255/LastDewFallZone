@@ -14,4 +14,4 @@ Icon = ExtResource("1_1u4nl")
 _recipeCosts = {}
 _requiredBuildings = []
 _scrapResults = {}
-StatsNeededToCraft = {}
+StatsNeededToCraft = Dictionary[int, int]({})

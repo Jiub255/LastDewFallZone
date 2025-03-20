@@ -441,7 +441,7 @@
 		{
 			"uuid": "3bc586d1-36f7-43e3-83f5-94273c8a79c4",
 			"title": "Make resource editor tool",
-			"description": "ResourceTables plugin is close, but need to be able to add Craftables, bools, textures, etc.\nAlso be able to quickly edit or make new resources.\n\nMain screen plugin, have it in a tab container with a tab for each type of resource. Or do filter style.\n\tShows a list of all the resources and their data in a condensed form. \n\tClick on a resource entry to edit or have an edit button?\n\tMake it sortable by any category that makes sense.\n\nHave a quick create/edit button that shows a popup for the resource. \n\tFor recipe costs, etc, just have a dropdown of the appropriate resource type and an int field, with up/down arrow buttons and everything. \n\tFigure out how handle enums the same, with a drop down menu.\n",
+			"description": "ResourceTables plugin is close, but need to be able to add Craftables, bools, textures, etc.\nAlso be able to quickly edit or make new resources.\n\nMain screen plugin, have it in a tab container with a tab for each type of resource. Or do filter style.\n\tShows a list of all the resources and their data in a condensed form. \n\tClick on a resource entry to edit or have an edit button?\n\tMake it sortable by any category that makes sense.\n\nHave a quick create/edit button that shows a popup for the resource. \n\tFor recipe costs, etc, just have a dropdown of the appropriate resource type and an int field, with up/down arrow buttons and everything. \n\tFigure out how handle enums the same, with a drop down menu.\n\nTODO: Check that the resource name isn't already in use when creating a new resource/renaming one. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},

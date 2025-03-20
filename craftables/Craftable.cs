@@ -23,9 +23,9 @@ namespace Lastdew
 		// TODO: Stats required to build? Or to have it show up in crafting menu?
 		[Export]
 		private Godot.Collections.Dictionary<CraftingMaterial, int> _scrapResults;
-		
+
 		[Export]
-		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; }
+		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; } = new();
 		public Dictionary<string, int> RecipeCosts
 		{
 			get

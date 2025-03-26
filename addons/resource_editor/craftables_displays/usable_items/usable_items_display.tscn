@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://6d8iaetjj2im"]
+
+[ext_resource type="Script" uid="uid://cq4dlsgpkvrwk" path="res://addons/resource_editor/craftables_displays/usable_items/UsableItemsdisplay.cs" id="1_6ijos"]
+[ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/craftable_display_style_box.tres" id="1_e1k8n"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_e1k8n"]
+[ext_resource type="Script" uid="uid://c8ri58i2mwkme" path="res://addons/resource_editor/craftables_displays/StatsDisplay.cs" id="3_ioy3p"]
+[ext_resource type="PackedScene" uid="uid://civrf6dvwrb6x" path="res://addons/resource_editor/craftables_displays/recipe_costs_display.tscn" id="4_pu3bc"]
+[ext_resource type="PackedScene" uid="uid://yxir25fmejcd" path="res://addons/resource_editor/craftables_displays/required_buildings_display.tscn" id="5_bv3ks"]
+[ext_resource type="PackedScene" uid="uid://dt1g0b5rh8con" path="res://addons/resource_editor/craftables_displays/scrap_results_display.tscn" id="6_imxkk"]
+[ext_resource type="Script" uid="uid://5hqe811hpy8i" path="res://addons/resource_editor/craftables_displays/usable_items/EffectsDisplay.cs" id="7_aihu1"]
+
+[node name="UsableItemsDisplay" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_e1k8n")
+script = ExtResource("1_6ijos")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_e1k8n")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Test Resource"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Description" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Description blah blah ljaskjvv voisajdv asleivlaskdnvn alsidnv alisenv aslijdv ;laisjd vliasjdvi asjelansdvl; ajs.dkva sjdivaslidvj aolisdvj"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="StatsNeededToCraft" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Atk 2, Eng 5"
+clip_text = true
+text_overrun_behavior = 3
+script = ExtResource("3_ioy3p")
+
+[node name="RecipeCosts" parent="HBoxContainer" instance=ExtResource("4_pu3bc")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RequiredBuildings" parent="HBoxContainer" instance=ExtResource("5_bv3ks")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ScrapResults" parent="HBoxContainer" instance=ExtResource("6_imxkk")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(71, 50)
+layout_mode = 2
+
+[node name="Reusable" type="CheckBox" parent="HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+button_pressed = true
+button_mask = 0
+
+[node name="Effects" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("7_aihu1")

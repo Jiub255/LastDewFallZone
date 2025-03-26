@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://qdtjm66v1jbk"]
+
+[ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/craftable_display_style_box.tres" id="1_0s18b"]
+[ext_resource type="Script" uid="uid://bwajagut7jnwk" path="res://addons/resource_editor/craftables_displays/equipment/EquipmentResourceDisplay.cs" id="1_pgtuu"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_0s18b"]
+[ext_resource type="Script" uid="uid://c8ri58i2mwkme" path="res://addons/resource_editor/craftables_displays/StatsDisplay.cs" id="3_p54vn"]
+[ext_resource type="PackedScene" uid="uid://civrf6dvwrb6x" path="res://addons/resource_editor/craftables_displays/recipe_costs_display.tscn" id="4_4h57x"]
+[ext_resource type="PackedScene" uid="uid://yxir25fmejcd" path="res://addons/resource_editor/craftables_displays/required_buildings_display.tscn" id="5_1ctt5"]
+[ext_resource type="PackedScene" uid="uid://dt1g0b5rh8con" path="res://addons/resource_editor/craftables_displays/scrap_results_display.tscn" id="6_ne71n"]
+
+[node name="EquipmentDisplay" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_0s18b")
+script = ExtResource("1_pgtuu")
+
+[node name="EquipmentDisplay" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_0s18b")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Test Resource"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Description" type="Label" parent="EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Description blah blah ljaskjvv voisajdv asleivlaskdnvn alsidnv alisenv aslijdv ;laisjd vliasjdvi asjelansdvl; ajs.dkva sjdivaslidvj aolisdvj"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="StatsNeededToCraft" type="Label" parent="EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Atk 2, Eng 5"
+clip_text = true
+text_overrun_behavior = 3
+script = ExtResource("3_p54vn")
+
+[node name="RecipeCosts" parent="EquipmentDisplay" instance=ExtResource("4_4h57x")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RequiredBuildings" parent="EquipmentDisplay" instance=ExtResource("5_1ctt5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ScrapResults" parent="EquipmentDisplay" instance=ExtResource("6_ne71n")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Type" type="Label" parent="EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Weapon"
+
+[node name="EquipmentBonuses" type="Label" parent="EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Atk 2, Def 1"
+script = ExtResource("3_p54vn")
+
+[node name="StatsNeededToEquip" type="Label" parent="EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Atk 1, Eng 3"
+script = ExtResource("3_p54vn")

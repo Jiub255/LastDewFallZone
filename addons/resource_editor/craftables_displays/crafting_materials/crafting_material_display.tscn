@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8hftoshjxj53"]
+
+[ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/craftable_display_style_box.tres" id="1_28r1v"]
+[ext_resource type="Script" uid="uid://dskvya2rwjna6" path="res://addons/resource_editor/craftables_displays/crafting_materials/CraftingMaterialDisplay.cs" id="2_88lpm"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="3_kryj7"]
+[ext_resource type="Script" uid="uid://c8ri58i2mwkme" path="res://addons/resource_editor/craftables_displays/StatsDisplay.cs" id="4_8hmev"]
+[ext_resource type="PackedScene" uid="uid://civrf6dvwrb6x" path="res://addons/resource_editor/craftables_displays/recipe_costs_display.tscn" id="5_n0rto"]
+[ext_resource type="PackedScene" uid="uid://yxir25fmejcd" path="res://addons/resource_editor/craftables_displays/required_buildings_display.tscn" id="6_sa3er"]
+[ext_resource type="PackedScene" uid="uid://dt1g0b5rh8con" path="res://addons/resource_editor/craftables_displays/scrap_results_display.tscn" id="7_vtx6b"]
+
+[node name="CraftingMaterialDisplay" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_28r1v")
+script = ExtResource("2_88lpm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_kryj7")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Test Resource"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Description" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Description blah blah ljaskjvv voisajdv asleivlaskdnvn alsidnv alisenv aslijdv ;laisjd vliasjdvi asjelansdvl; ajs.dkva sjdivaslidvj aolisdvj"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="StatsNeededToCraft" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Atk 2, Eng 5"
+clip_text = true
+text_overrun_behavior = 3
+script = ExtResource("4_8hmev")
+
+[node name="RecipeCosts" parent="HBoxContainer" instance=ExtResource("5_n0rto")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RequiredBuildings" parent="HBoxContainer" instance=ExtResource("6_sa3er")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ScrapResults" parent="HBoxContainer" instance=ExtResource("7_vtx6b")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(71, 50)
+layout_mode = 2
+
+[node name="Reusable" type="CheckBox" parent="HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+button_pressed = true
+button_mask = 0

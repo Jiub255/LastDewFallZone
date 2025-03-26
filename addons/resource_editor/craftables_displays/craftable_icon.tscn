@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu7k0yye0m81b"]
+
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_ue2kx"]
+[ext_resource type="Script" uid="uid://cw2f0ujbuxxqp" path="res://addons/resource_editor/craftables_displays/CraftableIcon.cs" id="2_ue2kx"]
+
+[node name="CraftableIcon" type="TextureRect"]
+custom_minimum_size = Vector2(44, 44)
+texture = ExtResource("1_ue2kx")
+expand_mode = 1
+script = ExtResource("2_ue2kx")
+
+[node name="Amount" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+vertical_alignment = 1

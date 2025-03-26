@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://yxir25fmejcd"]
+
+[ext_resource type="Script" uid="uid://cw6gyatjy8ugd" path="res://addons/resource_editor/craftables_displays/RequiredBuildingsDisplay.cs" id="1_c0tep"]
+
+[node name="RequiredBuildings" type="PanelContainer"]
+custom_minimum_size = Vector2(97, 50)
+offset_right = 97.0
+offset_bottom = 50.0
+mouse_filter = 1
+script = ExtResource("1_c0tep")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IconsParent" type="HBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 3

@@ -31,21 +31,21 @@ namespace Lastdew
 		{
 			get
 			{
-				if (Buildings.ContainsKey(name))
+				if (Buildings.TryGetValue(name, out Building building))
 				{
-					return Buildings[name];
+					return building;
 				}
-				else if (Materials.ContainsKey(name))
+				else if (Materials.TryGetValue(name, out CraftingMaterial material))
 				{
-					return Materials[name];
+					return material;
 				}
-				else if (Equipment.ContainsKey(name))
+				else if (Equipment.TryGetValue(name, out Equipment equipment))
 				{
-					return Equipment[name];
+					return equipment;
 				}
-				else if (UsableItems.ContainsKey(name))
+				else if (UsableItems.TryGetValue(name, out UsableItem item))
 				{
-					return UsableItems[name];
+					return item;
 				}
 				return null;
 			}

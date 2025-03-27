@@ -108,7 +108,8 @@
 				"2db7c62a-055e-4fab-9fba-8db877a31df4",
 				"780d7cee-87be-40cc-9254-9173f4a9d2dd",
 				"cc73faed-a740-4f4c-92ff-e767faf2993d",
-				"ea8718cf-9c0e-43dc-94fa-21f5cb910190"
+				"ea8718cf-9c0e-43dc-94fa-21f5cb910190",
+				"16cf0de4-f734-4375-bca9-f07dbe0a77c8"
 			]
 		},
 		{
@@ -730,6 +731,13 @@
 			"title": "How to deal with effects/usable items?",
 			"description": "How many effects will there be? Is there a need for the general Effect class? \nAnd how to display it in the resource editor? Might have to make special code for each effect type. \n\nEffects:\n\tRelieve pain: X points for Y seconds\n\tBoost stats (drugs): X points for Y seconds\n\tFood? Or is that just gonna be a meter like in LSDZ? Probably that. \n\tMusic? To boost morale temporarily in battle?",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "16cf0de4-f734-4375-bca9-f07dbe0a77c8",
+			"title": "Script to auto-populate UIDs class",
+			"description": "ENDED UP DECIDING AGAINST\nGo through res folder, if it's a resource, grab its name and uid and add the line:\n\t\"\\t\\tpublic const string {name.ToUpper()} = \\\"{uid}\\\";\"\n\t\tBut instead of ToUpper(), make a custom method to add in underscore separators, easy enough. \nCan just ignore scripts, at least for now. Just custom resources and scenes. All of them? \n\tMakes sense for scenes, why have a packed scene if you're never gonna instantiate it?\n\tBut for resources, might just need Craftables and AllPcDatas/Scenes, since the rest of the custom resources can be accessed through them. \nMight be easier to do as a quick tool script in C#?\nActually this whole thing might be pointless. Can just throw the UID in to Uids.cs the first time you need one, otherwise you obviously don't need it so we're good. And craftables/pcDatas get auto-filled already. ",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		}
 	],

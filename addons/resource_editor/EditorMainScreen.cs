@@ -51,7 +51,7 @@ namespace Lastdew
                 CraftableDisplay display = (CraftableDisplay)displayScene.Instantiate();
                 parent.AddChild(display);
                 display.Setup(craftable);
-                // TODO: Where to unsubscribe?
+                // TODO: Where to unsubscribe? On delete resource, and on ExitTree?
                 display.OnOpenPopupPressed += OpenPopup;
             }
         }

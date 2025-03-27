@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c84ib3j45qkxc"]
+[gd_scene load_steps=9 format=3 uid="uid://c84ib3j45qkxc"]
 
 [ext_resource type="Script" uid="uid://b1a2hi11fvhex" path="res://addons/resource_editor/edit_resource_popup/EditResourcePopup.cs" id="1_b6g7e"]
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_uq640"]
 [ext_resource type="Script" uid="uid://copwv6oe23xnu" path="res://addons/resource_editor/edit_resource_popup/IconButton.cs" id="3_degfr"]
 [ext_resource type="StyleBox" uid="uid://dt7ngvxf0s5qm" path="res://addons/resource_editor/white_style_box.tres" id="4_5xoq7"]
+[ext_resource type="Script" uid="uid://do20glqo2o8py" path="res://addons/resource_editor/edit_resource_popup/StatsToCraftUI.cs" id="4_uq640"]
 [ext_resource type="Texture2D" uid="uid://bcqjtvteiews5" path="res://craftables/items/crafting-materials/icon_metal.png" id="5_swn0j"]
 [ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://unused-assets/icons/icon_water.png" id="6_ij1an"]
 
@@ -55,6 +56,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="IconButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 icon = ExtResource("2_uq640")
@@ -69,6 +71,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
 [node name="NameLineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
@@ -76,6 +79,7 @@ placeholder_text = "Enter Resource Name"
 alignment = 1
 
 [node name="DescriptionTextEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 placeholder_text = "Enter Resource Description"
@@ -92,6 +96,7 @@ layout_mode = 2
 [node name="StatsToCraft" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
+script = ExtResource("4_uq640")
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft"]
 custom_minimum_size = Vector2(150, 0)

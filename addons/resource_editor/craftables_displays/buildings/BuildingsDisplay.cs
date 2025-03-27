@@ -28,7 +28,7 @@ namespace Lastdew
             Building building = craftable as Building;
           //  Building = building;
             Type.Text = building.Type.ToString();
-            Scene.Text = building.Scene != null ? building.Scene.ResourcePath : "";
+            Scene.Text = building.SceneUid;
         }
 
         /* protected override void OpenEditPopup()

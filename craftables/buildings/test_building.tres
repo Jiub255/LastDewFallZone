@@ -6,10 +6,11 @@
 [resource]
 script = ExtResource("1_uwfxh")
 Type = 0
+SceneUid = "uid://dpvyox8j34ruc"
 Name = "Test Building"
 Description = "test description. blah blah ..."
 Icon = ExtResource("1_san2y")
-_recipeCosts = null
-_requiredBuildings = null
-_statRequirements = null
-_scrapResults = null
+_recipeCosts = {}
+_requiredBuildings = []
+_scrapResults = {}
+StatsNeededToCraft = Dictionary[int, int]({})

@@ -6,12 +6,12 @@ namespace Lastdew
 	public partial class PcManager : Node3D
 	{
 		private TeamData TeamData { get; set; }
-		private AllPcScenes AllPcs { get; set; }
+		private PackedScene PcScene { get; set; }
 		
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			AllPcs = GD.Load<AllPcScenes>(UIDs.ALL_PC_SCENES);
+			PcScene = GD.Load<PackedScene>(UIDs.PC_BASE);
 		}
 		
 		public override void _Process(double delta)
@@ -90,7 +90,7 @@ namespace Lastdew
 			{
 				// TODO: How to work in the PcData with this part and saving/loading?
 				// Just keep their mesh enums as "stats"? Or have each PcData as an unchanging resource? Probably that.
-				PlayerCharacter pc = (PlayerCharacter)AllPcs[pcSaveData.Name].Instantiate();
+				PlayerCharacter pc = (PlayerCharacter)PcScene.Instantiate();
 				CallDeferred(PcManager.MethodName.AddChild, pc);
 				// TODO: Add a spawn location for pcs.
 				pc.Position += Vector3.Right * i * 3;

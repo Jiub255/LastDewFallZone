@@ -8,9 +8,8 @@ namespace Lastdew
 	{
 		[Export]
 		public BuildingType Type { get; set; }
-		// TODO: Store UID instead?
 		[Export]
-		public PackedScene Scene { get; set; }
+		public string SceneUid { get; set; }
 		
 		public Building(){}
 		

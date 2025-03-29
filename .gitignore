@@ -6,9 +6,7 @@ android/
 .import/
 export.cfg
 export_presets.cfg
-/addons/
-!/addons/resource_editor/
-!/addons/resource_database_filler/
+/addons/kanban_tasks/
 
 # Imported translations (automatically generated from CSV files)
 *.translation

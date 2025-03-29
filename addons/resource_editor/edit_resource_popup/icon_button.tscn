@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://h82oyfspxk6s"]
+
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_f7fow"]
+[ext_resource type="Script" uid="uid://copwv6oe23xnu" path="res://addons/resource_editor/edit_resource_popup/IconButton.cs" id="2_53bbf"]
+
+[node name="IconButton" type="Button"]
+custom_minimum_size = Vector2(150, 150)
+icon = ExtResource("1_f7fow")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_53bbf")

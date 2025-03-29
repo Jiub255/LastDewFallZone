@@ -1,12 +1,12 @@
 #if TOOLS
 using Godot;
-using System;
 
 namespace Lastdew
 {
     [Tool]
     public partial class EditResourcePopup : CenterContainer
     {
+        // TODO: Copy each of these to its respective UI class.
         private const string NAME = "Name";
         private const string DESCRIPTION = "Description";
         private const string ICON = "Icon";
@@ -15,34 +15,36 @@ namespace Lastdew
         private const string SCRAP_RESULTS = "_scrapResults";
         private const string STATS_TO_CRAFT = "StatsNeededToCraft";
     
-        private Craftable Original { get; set; }
-        private Craftable Copy { get; set; }
-        
+        private Craftable Craftable { get; set; }
         private IconButton IconButton { get; set; }
-        private LineEdit NameLineEdit { get; set; }
-        private TextEdit Description { get; set; }
-        // TODO: Make custom types for the more complex properties. Add them here.
-    
+        private LineEdit NameEdit { get; set; }
+        private TextEdit DescriptionEdit { get; set; }
+        private Button SaveButton { get; set; }
+        private VBoxContainer Column1 { get; set; }
+        private VBoxContainer Column2 { get; set; }
+        private PackedScene IconButtonScene { get; } = GD.Load<PackedScene>(UIDs.ICON_BUTTON);
+        private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(UIDs.STATS_TO_CRAFT);
+
+
         public override void _Ready()
         {
             base._Ready();
-            
-            IconButton = GetNode<IconButton>("%IconButton");
-            NameLineEdit = GetNode<LineEdit>("%NameLineEdit");
-            Description = GetNode<TextEdit>("%DescriptionTextEdit");
 
-            IconButton.OnSetIcon += SetIcon;
-            NameLineEdit.TextChanged += SetName;
-            Description.TextChanged += SetDescription;
+            IconButton = GetNode<IconButton>("%IconButton");
+            NameEdit = GetNode<LineEdit>("NameEdit");
+            DescriptionEdit = GetNode<TextEdit>("%DescriptionEdit");
+            SaveButton = GetNode<Button>("%SaveButton");
+            Column1 = GetNode<VBoxContainer>("%Column1");
+            Column2 = GetNode<VBoxContainer>("%Column2");
+
+            SaveButton.Pressed += Save;
         }
 
         public override void _ExitTree()
         {
             base._ExitTree();
             
-            IconButton.OnSetIcon -= SetIcon;
-            NameLineEdit.TextChanged -= SetName;
-            Description.TextChanged -= SetDescription;
+            SaveButton.Pressed -= Save;
         }
 
         public override void _GuiInput(InputEvent @event)
@@ -55,25 +57,23 @@ namespace Lastdew
             }
         }
 
-        // TODO: How to handle new craftables? Have to hide/show the correct property displays.
         public void Setup(Craftable craftable)
         {
-            Original = craftable;
-            // Make a copy of the resource to edit/mess with until you click save or cancel.
-            Copy = (Craftable)craftable.Duplicate();
-            // TODO: Have all the property displays send signals when they change,
-            // and then change the copy craftable accordingly.
-            // Then save the copy back to the original when you press save.
+            Craftable = craftable;
+            // TODO: Instantiate each property UI as needed. 
+            StatsToCraftUi statsToCraft = (StatsToCraftUi)StatsToCraftScene.Instantiate();
+            Column1.AddChild(statsToCraft);
             
-            // TODO: Do the Ready() stuff here?
-            // Then can only GetNode/subscribe events for the needed properties.
-            // Especially since eventually going to be editing PcDatas and other stuff w/ no similar properties.
-
-            // TODO: Set all general craftable properties in the displays
-            IconButton.Icon = Copy.Icon;
-             
+            // Initialize property UIs
+            IconButton.Icon = craftable.Icon;
+            NameEdit.Text = craftable.Name;
+            DescriptionEdit.Text = craftable.Description;
+            // Using Get() to get private properties.
+            // TODO: Change craftable properties to be string/int dicts instead, and handle all the conversion here,
+            // and in custom inspectors. 
+            statsToCraft.Setup((Godot.Collections.Dictionary<Lastdew.StatType, int>)craftable.Get(STATS_TO_CRAFT));
             
-            // TODO: Set all specific properties, and hide/show appropriate displays
+            // TODO: Instantiate/initialize all specific properties
             switch (craftable)
             {
                 case Building building:
@@ -89,23 +89,20 @@ namespace Lastdew
             }
         }
         
-        private void SetIcon(Texture2D icon)
+        private void Save()
         {
-            Copy.Set(ICON, icon);
+            Craftable.Set(NAME, NameEdit.Text);
+            Craftable.Set(DESCRIPTION, DescriptionEdit.Text);
+            Craftable.Set(ICON, IconButton.Icon);
+            // TODO: For each property UI, get the data from it and save it to the resource. 
+            foreach (Node node in GetChildren())
+            {
+                if (node is IPropertyUi propertyUi)
+                {
+                    propertyUi.Save(Craftable);
+                }
+            }
         }
-        
-        private new void SetName(string name)
-        {
-            Copy.Set(NAME, name);
-        }
-        
-        private void SetDescription()
-        {
-            Copy.Set(DESCRIPTION, Description.Text);
-        }
-
-        // TODO: The rest of the methods, like above. Extra steps for the dict ones obviously. 
-        
     }
 }
 #endif

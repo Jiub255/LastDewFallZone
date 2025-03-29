@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c84ib3j45qkxc"]
+[gd_scene load_steps=8 format=3 uid="uid://c84ib3j45qkxc"]
 
 [ext_resource type="Script" uid="uid://b1a2hi11fvhex" path="res://addons/resource_editor/edit_resource_popup/EditResourcePopup.cs" id="1_b6g7e"]
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_uq640"]
-[ext_resource type="Script" uid="uid://copwv6oe23xnu" path="res://addons/resource_editor/edit_resource_popup/IconButton.cs" id="3_degfr"]
+[ext_resource type="PackedScene" uid="uid://h82oyfspxk6s" path="res://addons/resource_editor/edit_resource_popup/icon_button.tscn" id="2_b6g7e"]
 [ext_resource type="StyleBox" uid="uid://dt7ngvxf0s5qm" path="res://addons/resource_editor/white_style_box.tres" id="4_5xoq7"]
-[ext_resource type="Script" uid="uid://do20glqo2o8py" path="res://addons/resource_editor/edit_resource_popup/StatsToCraftUI.cs" id="4_uq640"]
+[ext_resource type="PackedScene" uid="uid://dxtbey0a7pn2m" path="res://addons/resource_editor/edit_resource_popup/stats_to_craft.tscn" id="4_uq640"]
 [ext_resource type="Texture2D" uid="uid://bcqjtvteiews5" path="res://craftables/items/crafting-materials/icon_metal.png" id="5_swn0j"]
 [ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://unused-assets/icons/icon_water.png" id="6_ij1an"]
 
@@ -55,14 +54,9 @@ theme_override_constants/separation = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="IconButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription"]
+[node name="IconButton" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription" instance=ExtResource("2_b6g7e")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
-icon = ExtResource("2_uq640")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("3_degfr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription"]
 custom_minimum_size = Vector2(150, 0)
@@ -70,7 +64,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="NameLineEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription/VBoxContainer"]
+[node name="NameEdit" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -78,168 +72,54 @@ theme_override_font_sizes/font_size = 22
 placeholder_text = "Enter Resource Name"
 alignment = 1
 
-[node name="DescriptionTextEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription/VBoxContainer"]
+[node name="DescriptionEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 placeholder_text = "Enter Resource Description"
 wrap_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Properties" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Column1" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 
-[node name="StatsToCraft" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="StatsToCraft" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1" instance=ExtResource("4_uq640")]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 5
-script = ExtResource("4_uq640")
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "Stats To Craft"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft"]
+[node name="RecipeCosts" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="StatAmount" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer"]
-self_modulate = Color(0.56103, 0, 0.12298, 1)
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_5xoq7")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount"]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "ATK"
-
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-text = "2"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "x"
-
-[node name="StatAmount2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer"]
-self_modulate = Color(0.56103, 0, 0.12298, 1)
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_5xoq7")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount2"]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount2/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "ATK"
-
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount2/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-text = "2"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount2"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "x"
-
-[node name="StatAmount3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer"]
-self_modulate = Color(0.56103, 0, 0.12298, 1)
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_5xoq7")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount3"]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount3/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "ATK"
-
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount3/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-text = "2"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer/StatAmount3"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "x"
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "+"
-
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsToCraft"]
-layout_mode = 2
-
-[node name="RecipeCosts" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RecipeCosts"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Recipe Costs"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RecipeCosts"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="CraftableAmount" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RecipeCosts/HBoxContainer"]
+[node name="CraftableAmount" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer"]
 self_modulate = Color(1.49205e-06, 0.416103, 0.0977085, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RecipeCosts/HBoxContainer/CraftableAmount"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer/CraftableAmount"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RecipeCosts/HBoxContainer/CraftableAmount/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer/CraftableAmount/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("5_swn0j")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RecipeCosts/HBoxContainer/CraftableAmount/MarginContainer/TextureRect"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer/CraftableAmount/MarginContainer/TextureRect"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -250,278 +130,279 @@ grow_vertical = 0
 text = "12"
 vertical_alignment = 2
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RecipeCosts/HBoxContainer/CraftableAmount"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer/CraftableAmount"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/RecipeCosts/HBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "+"
 
-[node name="Rarity" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Rarity" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Rarity"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/Rarity"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Rarity"
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Rarity"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/Rarity"]
 custom_minimum_size = Vector2(105, 50)
 layout_mode = 2
 text = "COMMON"
 
-[node name="Reusable" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Reusable" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Reusable"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/Reusable"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Reusable"
 vertical_alignment = 1
 
-[node name="CheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Reusable"]
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/Reusable"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="EquipmentType" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="EquipmentType" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentType"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentType"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Equipment Type"
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentType"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentType"]
 custom_minimum_size = Vector2(105, 50)
 layout_mode = 2
 text = "WPN"
 
-[node name="EquipmentBonuses" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="EquipmentBonuses" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Bonuses"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="StatAmount" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer"]
+[node name="StatAmount" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer"]
 self_modulate = Color(0.56103, 0, 0.12298, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount/MarginContainer"]
+[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "ATK"
 
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount/MarginContainer"]
+[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "2"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="StatAmount2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer"]
+[node name="StatAmount2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer"]
 self_modulate = Color(0.56103, 0, 0.12298, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount2"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount2"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount2/MarginContainer"]
+[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount2/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "ATK"
 
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount2/MarginContainer"]
+[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount2/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "2"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount2"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount2"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="StatAmount3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer"]
+[node name="StatAmount3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer"]
 self_modulate = Color(0.56103, 0, 0.12298, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount3"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount3"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount3/MarginContainer"]
+[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount3/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "ATK"
 
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount3/MarginContainer"]
+[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount3/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "2"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer/StatAmount3"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer/StatAmount3"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses/HBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "+"
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/EquipmentBonuses"]
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/EquipmentBonuses"]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Column2" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 
-[node name="RequiredBuildings" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="RequiredBuildings" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RequiredBuildings"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/RequiredBuildings"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Required Buildings"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RequiredBuildings"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/RequiredBuildings"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RequiredBuildings/HBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/RequiredBuildings/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "+"
 
-[node name="ScrapResults" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="ScrapResults" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrapResults"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/ScrapResults"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Scrap Results"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrapResults"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/ScrapResults"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrapResults/HBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/ScrapResults/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "+"
 
-[node name="Tags" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Tags" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Tags"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Tags"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Tags"
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Tags"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Tags"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 text = "WPN"
 
-[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Tags"]
+[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Tags"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="Effects" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Effects" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Effects"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Effect" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer"]
+[node name="Effect" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer"]
 self_modulate = Color(1.49205e-06, 0.416103, 0.0977085, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("6_ij1an")
 expand_mode = 1
 
-[node name="StrengthLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect/MarginContainer/TextureRect"]
+[node name="StrengthLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect/MarginContainer/TextureRect"]
 layout_mode = 1
 offset_right = 40.0
 offset_bottom = 23.0
 text = "50"
 vertical_alignment = 2
 
-[node name="DurationLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect/MarginContainer/TextureRect"]
+[node name="DurationLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect/MarginContainer/TextureRect"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -532,34 +413,34 @@ grow_vertical = 0
 text = "30s"
 vertical_alignment = 2
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="Effect2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer"]
+[node name="Effect2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer"]
 self_modulate = Color(1.49205e-06, 0.416103, 0.0977085, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect2"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect2"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect2/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect2/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("6_ij1an")
 expand_mode = 1
 
-[node name="StrengthLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect2/MarginContainer/TextureRect"]
+[node name="StrengthLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect2/MarginContainer/TextureRect"]
 layout_mode = 1
 offset_right = 40.0
 offset_bottom = 23.0
 text = "50"
 vertical_alignment = 2
 
-[node name="DurationLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect2/MarginContainer/TextureRect"]
+[node name="DurationLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect2/MarginContainer/TextureRect"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -570,34 +451,34 @@ grow_vertical = 0
 text = "30s"
 vertical_alignment = 2
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect2"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect2"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="Effect3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer"]
+[node name="Effect3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer"]
 self_modulate = Color(1.49205e-06, 0.416103, 0.0977085, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect3"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect3"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect3/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect3/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("6_ij1an")
 expand_mode = 1
 
-[node name="StrengthLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect3/MarginContainer/TextureRect"]
+[node name="StrengthLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect3/MarginContainer/TextureRect"]
 layout_mode = 1
 offset_right = 40.0
 offset_bottom = 23.0
 text = "50"
 vertical_alignment = 2
 
-[node name="DurationLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect3/MarginContainer/TextureRect"]
+[node name="DurationLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect3/MarginContainer/TextureRect"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -608,136 +489,137 @@ grow_vertical = 0
 text = "30s"
 vertical_alignment = 2
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer/Effect3"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer/Effect3"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Effects/HBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/Effects/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "+"
 
-[node name="StatsToEquip" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="StatsToEquip" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Stats To Equip"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="StatAmount" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer"]
+[node name="StatAmount" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer"]
 self_modulate = Color(0.56103, 0, 0.12298, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount/MarginContainer"]
+[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "ATK"
 
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount/MarginContainer"]
+[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "2"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="StatAmount2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer"]
+[node name="StatAmount2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer"]
 self_modulate = Color(0.56103, 0, 0.12298, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount2"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount2"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount2/MarginContainer"]
+[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount2/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "ATK"
 
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount2/MarginContainer"]
+[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount2/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "2"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount2"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount2"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="StatAmount3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer"]
+[node name="StatAmount3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer"]
 self_modulate = Color(0.56103, 0, 0.12298, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_5xoq7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount3"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount3"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount3/MarginContainer"]
+[node name="StatLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount3/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "ATK"
 
-[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount3/MarginContainer"]
+[node name="AmountLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount3/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "2"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer/StatAmount3"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer/StatAmount3"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "x"
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip/HBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "+"
 
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/StatsToEquip"]
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/StatsToEquip"]
 layout_mode = 2
 
 [node name="SaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Save"

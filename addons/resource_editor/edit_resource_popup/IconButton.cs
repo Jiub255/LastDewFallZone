@@ -1,14 +1,11 @@
 #if TOOLS
 using Godot;
-using System;
 
 namespace Lastdew
 {
     [Tool]
     public partial class IconButton : Button
     {
-        public event Action<Texture2D> OnSetIcon;
-        
         private EditorInterface EditorInterface { get; } = EditorInterface.Singleton;
         private Callable SetIconCallable { get; set; }
     
@@ -35,7 +32,7 @@ namespace Lastdew
 
         private void SetIcon(string path)
         {
-            OnSetIcon?.Invoke(GD.Load<Texture2D>(path));
+            Icon = GD.Load<Texture2D>(path);
         }
     }
 }

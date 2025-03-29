@@ -32,7 +32,7 @@ project/assembly_name="LastDew-FallZone"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/CraftablesFiller/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg")
+enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg", "res://addons/resource_database_filler/plugin.cfg")
 
 [file_customization]
 

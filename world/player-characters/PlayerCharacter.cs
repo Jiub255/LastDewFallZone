@@ -134,10 +134,10 @@ namespace Lastdew
 		{
 			return new PcSaveData(
 				Name,
-				Equipment.Head?.Name,
-				Equipment.Weapon?.Name,
-				Equipment.Body?.Name,
-				Equipment.Feet?.Name,
+				Extensions.GetUid(Equipment.Weapon),
+				Extensions.GetUid(Equipment.Head),
+				Extensions.GetUid(Equipment.Body),
+				Extensions.GetUid(Equipment.Feet),
 				Health.Injury);
 		}
 

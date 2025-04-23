@@ -1,15 +1,12 @@
 #if TOOLS
 using Godot;
-using System;
 using System.Collections.Generic;
 
 namespace Lastdew
 {
     [Tool]
-    public partial class StatsToCraftUi : HBoxContainer, IPropertyUi
+    public partial class StatsToCraftEdit : HBoxContainer, IPropertyUi
     {
-        private const string STATS_TO_CRAFT = "StatsNeededToCraft";
-    
         private HBoxContainer Parent { get; set; }
         private Button Add { get; set; }
         private PackedScene StatAmountScene { get; } = GD.Load<PackedScene>(UIDs.STAT_AMOUNT_UI);
@@ -87,7 +84,7 @@ namespace Lastdew
         
         public void Save(Craftable craftable)
         {
-            craftable.Set(STATS_TO_CRAFT, Stats);
+            craftable.Set(Craftable.PropertyName.StatsNeededToCraft, Stats);
         }
     }
 }

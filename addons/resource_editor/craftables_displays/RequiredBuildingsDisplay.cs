@@ -8,7 +8,7 @@ namespace Lastdew
     {
         protected override void PopulateIcons(Craftable craftable)
         {
-            foreach (string building in craftable.RequiredBuildings)
+            foreach (long building in craftable.RequiredBuildings)
             {
                 CraftableIcon icon = (CraftableIcon)CraftableIconScene.Instantiate();
                 IconsParent.AddChild(icon);

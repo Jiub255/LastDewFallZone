@@ -59,6 +59,7 @@ namespace Lastdew
             Icon.Texture = craftable.Icon;
             NameLabel.Text = craftable.Name;
             Description.Text = craftable.Description;
+            Description.TooltipText = craftable.Description;
             StatsNeededToCraft.Setup(craftable.StatsNeededToCraft);
             RecipeCosts.Setup(craftable);
             RequiredBuildings.Setup(craftable);

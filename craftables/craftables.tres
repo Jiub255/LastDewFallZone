@@ -20,23 +20,23 @@
 
 [resource]
 script = ExtResource("1_u67xb")
-Buildings = Dictionary[String, ExtResource("1_f1bwi")]({
-"Test Building": ExtResource("1_saxsy")
+Buildings = Dictionary[int, ExtResource("1_f1bwi")]({
+7096208298061964914: ExtResource("1_saxsy")
 })
-Materials = Dictionary[String, ExtResource("9_rqomc")]({
-"Cloth": ExtResource("7_go26v"),
-"Metal": ExtResource("9_0k1bl"),
-"Wood": ExtResource("8_tk2k2")
+Materials = Dictionary[int, ExtResource("9_rqomc")]({
+223228457320003087: ExtResource("7_go26v"),
+261610092879113432: ExtResource("9_0k1bl"),
+8580031652169573497: ExtResource("8_tk2k2")
 })
-Equipment = Dictionary[String, ExtResource("3_nstv5")]({
-"Baseball Bat": ExtResource("2_frh78"),
-"Body Armor": ExtResource("5_kf57n"),
-"Helmet": ExtResource("4_hcow2"),
-"Pistol": ExtResource("3_7u2y7"),
-"Test EQ": ExtResource("6_7sn6t")
+Equipment = Dictionary[int, ExtResource("3_nstv5")]({
+1188976565987453481: ExtResource("4_hcow2"),
+2061649468635412006: ExtResource("6_7sn6t"),
+3182480574480943461: ExtResource("3_7u2y7"),
+3708706911968681782: ExtResource("5_kf57n"),
+5896441363362155068: ExtResource("2_frh78")
 })
-UsableItems = Dictionary[String, ExtResource("13_jowtw")]({
-"Strong Long Painkiller": ExtResource("10_cbmxj"),
-"Strong Painkiller": ExtResource("11_6iust"),
-"Test Painkiller": ExtResource("10_0taog")
+UsableItems = Dictionary[int, ExtResource("13_jowtw")]({
+1755823150580759562: ExtResource("11_6iust"),
+2893929662130744240: ExtResource("10_cbmxj"),
+4838422228849083644: ExtResource("10_0taog")
 })

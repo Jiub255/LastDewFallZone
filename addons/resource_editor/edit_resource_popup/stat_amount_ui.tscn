@@ -10,7 +10,6 @@ self_modulate = Color(0.56103, 0, 0.12298, 1)
 custom_minimum_size = Vector2(50, 50)
 theme_override_styles/panel = ExtResource("1_a06b3")
 script = ExtResource("2_k1bwo")
-theme_override_styles/panel = ExtResource("1_a06b3")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -32,7 +31,7 @@ size_flags_horizontal = 3
 text = "99"
 horizontal_alignment = 1
 
-[node name="DeleteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Delete" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(23, 23)
 layout_mode = 2

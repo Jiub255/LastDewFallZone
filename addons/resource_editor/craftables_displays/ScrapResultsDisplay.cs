@@ -9,7 +9,7 @@ namespace Lastdew
     {
         protected override void PopulateIcons(Craftable craftable)
         {
-            foreach (KeyValuePair<string, int> kvp in craftable.ScrapResults)
+            foreach (KeyValuePair<long, int> kvp in craftable.ScrapResults)
             {
                 CraftableIcon icon = (CraftableIcon)CraftableIconScene.Instantiate();
                 IconsParent.AddChild(icon);

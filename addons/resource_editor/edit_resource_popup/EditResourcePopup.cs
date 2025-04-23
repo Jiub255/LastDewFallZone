@@ -1,4 +1,5 @@
 #if TOOLS
+using System;
 using Godot;
 
 namespace Lastdew
@@ -6,15 +7,8 @@ namespace Lastdew
     [Tool]
     public partial class EditResourcePopup : CenterContainer
     {
-        // TODO: Copy each of these to its respective UI class.
-        private const string NAME = "Name";
-        private const string DESCRIPTION = "Description";
-        private const string ICON = "Icon";
-        private const string RECIPE_COSTS = "_recipeCosts";
-        private const string REQUIRED_BUILDINGS = "_requiredBuildings";
-        private const string SCRAP_RESULTS = "_scrapResults";
-        private const string STATS_TO_CRAFT = "StatsNeededToCraft";
-    
+        public event Action<long> OnSaveCraftable;
+
         private Craftable Craftable { get; set; }
         private IconButton IconButton { get; set; }
         private LineEdit NameEdit { get; set; }
@@ -31,7 +25,7 @@ namespace Lastdew
             base._Ready();
 
             IconButton = GetNode<IconButton>("%IconButton");
-            NameEdit = GetNode<LineEdit>("NameEdit");
+            NameEdit = GetNode<LineEdit>("%NameEdit");
             DescriptionEdit = GetNode<TextEdit>("%DescriptionEdit");
             SaveButton = GetNode<Button>("%SaveButton");
             Column1 = GetNode<VBoxContainer>("%Column1");
@@ -51,7 +45,7 @@ namespace Lastdew
         {
             base._GuiInput(@event);
             
-            if (@event is InputEventMouseButton button && button.ButtonIndex == MouseButton.Left && button.Pressed)
+            if (@event.IsLeftClick())
             {
                 Hide();
             }
@@ -60,8 +54,9 @@ namespace Lastdew
         public void Setup(Craftable craftable)
         {
             Craftable = craftable;
+            ClearColumns();
             // TODO: Instantiate each property UI as needed. 
-            StatsToCraftUi statsToCraft = (StatsToCraftUi)StatsToCraftScene.Instantiate();
+            StatsToCraftEdit statsToCraft = (StatsToCraftEdit)StatsToCraftScene.Instantiate();
             Column1.AddChild(statsToCraft);
             
             // Initialize property UIs
@@ -71,9 +66,9 @@ namespace Lastdew
             // Using Get() to get private properties.
             // TODO: Change craftable properties to be string/int dicts instead, and handle all the conversion here,
             // and in custom inspectors. 
-            statsToCraft.Setup((Godot.Collections.Dictionary<Lastdew.StatType, int>)craftable.Get(STATS_TO_CRAFT));
+            statsToCraft.Setup((Godot.Collections.Dictionary<StatType, int>)craftable.Get(Craftable.PropertyName.StatsNeededToCraft));
             
-            // TODO: Instantiate/initialize all specific properties
+            // TODO: Instantiate/initialize all subclass-specific properties
             switch (craftable)
             {
                 case Building building:
@@ -89,11 +84,23 @@ namespace Lastdew
             }
         }
         
+        private void ClearColumns()
+        {
+            foreach (Node child in Column1.GetChildren())
+            {
+                child.QueueFree();
+            }
+            foreach (Node child in Column2.GetChildren())
+            {
+                child.QueueFree();
+            }
+        }
+        
         private void Save()
         {
-            Craftable.Set(NAME, NameEdit.Text);
-            Craftable.Set(DESCRIPTION, DescriptionEdit.Text);
-            Craftable.Set(ICON, IconButton.Icon);
+            Craftable.Set(Craftable.PropertyName.Name, NameEdit.Text);
+            Craftable.Set(Craftable.PropertyName.Description, DescriptionEdit.Text);
+            Craftable.Set(Craftable.PropertyName.Icon, IconButton.Icon);
             // TODO: For each property UI, get the data from it and save it to the resource. 
             foreach (Node node in GetChildren())
             {
@@ -102,6 +109,8 @@ namespace Lastdew
                     propertyUi.Save(Craftable);
                 }
             }
+
+            OnSaveCraftable?.Invoke(Extensions.GetUid(Craftable));
         }
     }
 }

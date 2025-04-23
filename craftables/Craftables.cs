@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,34 +17,35 @@ namespace Lastdew
 		
 		// TODO: 1. Is Export necessary to save the dicts with the resource?
 		// and 2. Can it be done with C# dictionaries? Esp. if export not needed.
+		// TODO: Replace string with long (UID)? Names will change, UIDs don't.
 		[Export]
-		public Godot.Collections.Dictionary<string, Building> Buildings { get; set; } = new();
+		public Godot.Collections.Dictionary<long, Building> Buildings { get; set; } = [];
 		[Export]
-		public Godot.Collections.Dictionary<string, CraftingMaterial> Materials { get; set; } = new();
+		public Godot.Collections.Dictionary<long, CraftingMaterial> Materials { get; set; } = [];
 		[Export]
-		public Godot.Collections.Dictionary<string, Equipment> Equipment { get; set;} = new();
+		public Godot.Collections.Dictionary<long, Equipment> Equipment { get; set;} = [];
 		[Export]
-		public Godot.Collections.Dictionary<string, UsableItem> UsableItems { get; set; } = new();
+		public Godot.Collections.Dictionary<long, UsableItem> UsableItems { get; set; } = [];
 		
 		public int Count => Buildings.Count + Materials.Count + Equipment.Count + UsableItems.Count;
 		
-		public Craftable this[string name]
+		public Craftable this[long uid]
 		{
 			get
 			{
-				if (Buildings.TryGetValue(name, out Building building))
+				if (Buildings.TryGetValue(uid, out Building building))
 				{
 					return building;
 				}
-				else if (Materials.TryGetValue(name, out CraftingMaterial material))
+				else if (Materials.TryGetValue(uid, out CraftingMaterial material))
 				{
 					return material;
 				}
-				else if (Equipment.TryGetValue(name, out Equipment equipment))
+				else if (Equipment.TryGetValue(uid, out Equipment equipment))
 				{
 					return equipment;
 				}
-				else if (UsableItems.TryGetValue(name, out UsableItem item))
+				else if (UsableItems.TryGetValue(uid, out UsableItem item))
 				{
 					return item;
 				}
@@ -100,27 +102,28 @@ namespace Lastdew
 				else
 				{
 					string filePath = directory + "/" + fileName;
-					// TODO: How to "try" load resource instead? To catch errors for non resources.
-					Resource resource = GD.Load<Resource>(filePath);
-					if (resource != null)
+					if (!fileName.EndsWith(".tres"))
 					{
-						switch (resource)
-						{
-							case Building building:
-								Buildings[building.Name] = building;
-								break;
-							case CraftingMaterial material:
-								Materials[material.Name] = material;
-								break;
-							case Equipment equipment:
-								Equipment[equipment.Name] = equipment;
-								break;
-							case UsableItem usableItem:
-								UsableItems[usableItem.Name] = usableItem;
-								break;
-							default:
-								break;
-						} 
+						continue;
+					}
+					long uid = ResourceLoader.GetResourceUid(filePath);
+					Resource resource = ResourceLoader.Load(filePath, "Craftable");
+					switch (resource)
+					{
+						case Building building:
+							Buildings[uid] = building;
+							break;
+						case CraftingMaterial material:
+							Materials[uid] = material;
+							break;
+						case Equipment equipment:
+							Equipment[uid] = equipment;
+							break;
+						case UsableItem usableItem:
+							UsableItems[uid] = usableItem;
+							break;
+						default:
+							break;
 					}
 				}
 			}
@@ -129,28 +132,28 @@ namespace Lastdew
 
 		public IEnumerator GetEnumerator()
 		{
-			foreach (KeyValuePair<string, Building> kvp in Buildings)
+			foreach (KeyValuePair<long, Building> kvp in Buildings)
 			{
-				yield return new KeyValuePair<string, Craftable>(kvp.Key, kvp.Value);
+				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}
-			foreach (KeyValuePair<string, CraftingMaterial> kvp in Materials)
+			foreach (KeyValuePair<long, CraftingMaterial> kvp in Materials)
 			{
-				yield return new KeyValuePair<string, Craftable>(kvp.Key, kvp.Value);
+				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}
-			foreach (KeyValuePair<string, Equipment> kvp in Equipment)
+			foreach (KeyValuePair<long, Equipment> kvp in Equipment)
 			{
-				yield return new KeyValuePair<string, Craftable>(kvp.Key, kvp.Value);
+				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}
-			foreach (KeyValuePair<string, UsableItem> kvp in UsableItems)
+			foreach (KeyValuePair<long, UsableItem> kvp in UsableItems)
 			{
-				yield return new KeyValuePair<string, Craftable>(kvp.Key, kvp.Value);
+				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}
 		}
 		
 		public void TESTPRINT()
 		{
 			this.PrintDebug($"Craftables count {this.Count}");
-			foreach (KeyValuePair<string, Craftable> kvp in this)
+			foreach (KeyValuePair<long, Craftable> kvp in this)
 			{
 				this.PrintDebug($"Craftable: {kvp}");
 			}

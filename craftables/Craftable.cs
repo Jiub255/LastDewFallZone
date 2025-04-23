@@ -26,11 +26,14 @@ namespace Lastdew
 
 		[Export]
 		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; } = [];
-		public Dictionary<string, int> RecipeCosts
+		/// <summary>
+		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
+		/// </summary>
+		public Dictionary<long, int> RecipeCosts
 		{
 			get
 			{
-				Dictionary<string, int> dict = new();
+				Dictionary<long, int> dict = new();
 				if (_recipeCosts == null)
 				{
 					return dict;
@@ -38,26 +41,34 @@ namespace Lastdew
 				
 				foreach (KeyValuePair<CraftingMaterial, int> kvp in _recipeCosts)
 				{
-					dict[kvp.Key.Name] = kvp.Value;
+					long uid = Extensions.GetUid(kvp.Key);
+					dict[uid] = kvp.Value;
 				}
 				return dict;
 			}
 		}
-		public string[] RequiredBuildings
+		/// <summary>
+		/// Stored as resource UID. Use Craftables resource to get the actual resource.
+		/// </summary>
+		public long[] RequiredBuildings
 		{
 			get
 			{
-				return _requiredBuildings.Select(x => x.Name).ToArray();
+				return [.. _requiredBuildings.Select(Extensions.GetUid)];
 			}
 		}
-		public Dictionary<string, int> ScrapResults
+		/// <summary>
+		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
+		/// </summary>
+		public Dictionary<long, int> ScrapResults
 		{
 			get
 			{
-				Dictionary<string, int> dict = new();
+				Dictionary<long, int> dict = new();
 				foreach (KeyValuePair<CraftingMaterial, int> kvp in _scrapResults)
 				{
-					dict[kvp.Key.Name] = kvp.Value;
+					long uid = Extensions.GetUid(kvp.Key);
+					dict[uid] = kvp.Value;
 				}
 				return dict;
 			}

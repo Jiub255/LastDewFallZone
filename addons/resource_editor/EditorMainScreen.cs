@@ -20,6 +20,8 @@ namespace Lastdew
 
         private Craftables Craftables { get; } = GD.Load<Craftables>(UIDs.CRAFTABLES);
 
+        private Dictionary<long, CraftableDisplay> DisplaysByUid { get; } = [];
+
         public override void _Ready()
         {
             base._Ready();
@@ -29,8 +31,17 @@ namespace Lastdew
             UsableItemsParent = GetNode<VBoxContainer>("%UsableItemsParent");
             BuildingsParent = GetNode<VBoxContainer>("%BuildingsParent");
             EditResourcePopup = GetNode<EditResourcePopup>("%EditResourcePopup");
+
+            EditResourcePopup.OnSaveCraftable += UpdateDisplay;
             
             Setup();
+        }
+
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+
+            EditResourcePopup.OnSaveCraftable -= UpdateDisplay;
         }
         
         private void Setup()
@@ -53,6 +64,7 @@ namespace Lastdew
                 display.Setup(craftable);
                 // TODO: Where to unsubscribe? On delete resource, and on ExitTree?
                 display.OnOpenPopupPressed += OpenPopup;
+                DisplaysByUid[Extensions.GetUid(craftable)] = display;
             }
         }
         
@@ -60,6 +72,11 @@ namespace Lastdew
         {
             EditResourcePopup.Show();
             EditResourcePopup.Setup(craftable);
+        }
+        
+        private void UpdateDisplay(long uid)
+        {
+            DisplaysByUid[uid].Setup(Craftables[uid]);
         }
     }
 }

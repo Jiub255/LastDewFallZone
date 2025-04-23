@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 namespace Lastdew
 {	
@@ -75,7 +74,7 @@ namespace Lastdew
 			node3D.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(rotationAmount * Mathf.Sign(angleToTarget)));
 		}
 		
-		public static string FormatList(this string[] words)
+		public static string CommaFormatList(this string[] words)
 		{
 			if (words == null)
 			{
@@ -93,7 +92,7 @@ namespace Lastdew
 			string formatted = "";
 			if (words.Length == 2)
 			{
-				formatted = words[words.Length - 2] + " and " + words[words.Length - 1];
+				formatted = words[0] + " and " + words[1];
 			}
 			else
 			{
@@ -101,9 +100,28 @@ namespace Lastdew
 				{
 					formatted += words[i] + ", ";
 				}
-				formatted += words[words.Length - 2] + " and " + words[words.Length - 1];
+				formatted += words[^2] + " and " + words[^1];
 			}
 			return formatted;
+		}
+		
+		public static bool IsLeftClick(this InputEvent @event)
+		{
+		    if (@event is InputEventMouseButton button && button.ButtonIndex == MouseButton.Left && button.Pressed)
+            {
+                return true;
+            }
+            return false;
+		}
+		
+		public static long GetUid(Resource resource)
+		{
+		    if (resource != null)
+		    {
+				long uid = ResourceLoader.GetResourceUid(resource.ResourcePath);
+				return uid;
+		    }
+			return -1;
 		}
 	}
 }

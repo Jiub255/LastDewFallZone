@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Godot;
 
 namespace Lastdew
 {
@@ -96,12 +97,13 @@ namespace Lastdew
 			return HasItems(item, 1);
 		}
 		
-		public Dictionary<string, int> GatherSaveData()
+		public Dictionary<long, int> GatherSaveData()
 		{
-			Dictionary<string, int> inventory = new();
+			Dictionary<long, int> inventory = new();
 			foreach (KeyValuePair<Item, int> item in this)
 			{
-				inventory[item.Key.Name] = item.Value;
+				long uid = ResourceLoader.GetResourceUid(item.Key.ResourcePath);
+				inventory[uid] = item.Value;
 			}
 			return inventory;
 		}

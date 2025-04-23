@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dt1g0b5rh8con" path="res://addons/resource_editor/craftables_displays/scrap_results_display.tscn" id="7_vtx6b"]
 
 [node name="CraftingMaterialDisplay" type="PanelContainer"]
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_28r1v")
 script = ExtResource("2_88lpm")
 
@@ -34,6 +35,7 @@ text_overrun_behavior = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "Description blah blah ljaskjvv voisajdv asleivlaskdnvn alsidnv alisenv aslijdv ;laisjd vliasjdvi asjelansdvl; ajs.dkva sjdivaslidvj aolisdvj"
 clip_text = true
 text_overrun_behavior = 3

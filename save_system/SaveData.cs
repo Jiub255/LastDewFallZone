@@ -9,11 +9,11 @@ namespace Lastdew
 	/// </summary>
 	public class SaveData
 	{		
-		public Dictionary<string, int> Inventory { get; set; } = new();
+		public Dictionary<long, int> Inventory { get; set; } = new();
 		public List<PcSaveData> PcSaveDatas { get; set; } = new();
 		
 		// Constructor only takes parameters that correspond to properties in this class, needed for Json serializer?
-		public SaveData(Dictionary<string, int> inventory, List<PcSaveData> pcSaveDatas)
+		public SaveData(Dictionary<long, int> inventory, List<PcSaveData> pcSaveDatas)
 		{
 			Inventory = inventory;
 			PcSaveDatas = pcSaveDatas;

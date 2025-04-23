@@ -1,12 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxtbey0a7pn2m"]
 
-[ext_resource type="Script" uid="uid://do20glqo2o8py" path="res://addons/resource_editor/edit_resource_popup/StatsToCraftUi.cs" id="1_aandr"]
+[ext_resource type="Script" uid="uid://do20glqo2o8py" path="res://addons/resource_editor/edit_resource_popup/StatsToCraftEdit.cs" id="1_aandr"]
 [ext_resource type="PackedScene" uid="uid://ofu0begpoa84" path="res://addons/resource_editor/edit_resource_popup/stat_amount_ui.tscn" id="2_wvkyv"]
 
 [node name="StatsToCraft" type="HBoxContainer"]
 theme_override_constants/separation = 5
 script = ExtResource("1_aandr")
-theme_override_constants/separation = 5
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(150, 0)

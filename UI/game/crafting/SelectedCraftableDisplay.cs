@@ -56,7 +56,7 @@ namespace Lastdew
 				}
 			}
 			CraftButton.Disabled = false;
-			foreach (KeyValuePair<string, int> kvp in item.RecipeCosts)
+			foreach (KeyValuePair<long, int> kvp in item.RecipeCosts)
 			{
 				if (SetupRecipeCostUI(kvp) == false)
 				{
@@ -67,7 +67,7 @@ namespace Lastdew
 		
 		public void Craft()
 		{
-			foreach (KeyValuePair<string, int> kvp in Item.RecipeCosts)
+			foreach (KeyValuePair<long, int> kvp in Item.RecipeCosts)
 			{
 				Inventory.RemoveItems((Item)Craftables[kvp.Key], kvp.Value);
 			}
@@ -76,7 +76,7 @@ namespace Lastdew
 		}
 
 		/// <returns>true if required amount in inventory</returns>
-		private bool SetupRecipeCostUI(KeyValuePair<string, int> kvp)
+		private bool SetupRecipeCostUI(KeyValuePair<long, int> kvp)
 		{
 			RecipeCostUI recipeCost = (RecipeCostUI)RecipeCostScene.Instantiate();
 			RecipeCosts.CallDeferred(VBoxContainer.MethodName.AddChild, recipeCost);

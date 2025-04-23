@@ -47,7 +47,7 @@ namespace Lastdew
 
 		private static SaveData GatherSaveData(InventoryManager inventoryManager, TeamData teamData)
 		{
-			Dictionary<string, int> inventory = inventoryManager.GatherSaveData();
+			Dictionary<long, int> inventory = inventoryManager.GatherSaveData();
 			List<PcSaveData> pcSaveDatas = teamData.GatherSaveData();
 			return new SaveData(inventory, pcSaveDatas);;
 		}

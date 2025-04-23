@@ -141,7 +141,7 @@ namespace Lastdew
 		private void LoadInventory(SaveData saveData)
 		{
 			Craftables craftables = ResourceLoader.Load<Craftables>(UIDs.CRAFTABLES);
-			foreach (KeyValuePair<string, int> kvp in saveData.Inventory)
+			foreach (KeyValuePair<long, int> kvp in saveData.Inventory)
 			{
 				InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
 			}

@@ -12,13 +12,14 @@ namespace Lastdew
         private StatType Stat { get; set; }
     
         private SpinBox Amount { get; set; }
-        private ButtonGroup Group { get; set; } = new ButtonGroup();
+        /* private ButtonGroup Group { get; set; } */
         private Button Attack { get; set; } 
         private Button Defense { get; set; } 
         private Button Engineering { get; set; } 
         private Button Farming { get; set; } 
         private Button Medical { get; set; } 
         private Button Scavenging { get; set; }
+        private PanelContainer Panel { get; set; }
 
         public override void _Ready()
         {
@@ -32,15 +33,25 @@ namespace Lastdew
             Farming = GetNode<Button>("%Farming");
             Medical = GetNode<Button>("%Medical");
             Scavenging = GetNode<Button>("%Scavenging");
+            Panel = GetNode<PanelContainer>("%PanelContainer");
 
-            Attack.ButtonGroup = Group;
-            Defense.ButtonGroup = Group;
-            Engineering.ButtonGroup = Group;
-            Farming.ButtonGroup = Group;
-            Medical.ButtonGroup = Group;
-            Scavenging.ButtonGroup = Group;
+            Attack.Pressed += () => AssignStat(Attack);
+            Defense.Pressed += () => AssignStat(Defense);
+            Engineering.Pressed += () => AssignStat(Attack);
+            Farming.Pressed += () => AssignStat(Farming);
+            Medical.Pressed += () => AssignStat(Medical);
+            Scavenging.Pressed += () => AssignStat(Scavenging);
 
-            Group.Pressed += AssignStat;
+            /*  Attack.ButtonGroup = Group;
+             Defense.ButtonGroup = Group;
+             Engineering.ButtonGroup = Group;
+             Farming.ButtonGroup = Group;
+             Medical.ButtonGroup = Group;
+             Scavenging.ButtonGroup = Group; */
+
+            /* Group = Attack.ButtonGroup;
+
+            Group.Pressed += AssignStat; */
             CloseRequested += Close;
         }
 
@@ -48,14 +59,32 @@ namespace Lastdew
         {
             base._ExitTree();
             
-            Group.Pressed -= AssignStat;
+            Attack.Pressed -= () => AssignStat(Attack);
+            Defense.Pressed -= () => AssignStat(Defense);
+            Engineering.Pressed -= () => AssignStat(Attack);
+            Farming.Pressed -= () => AssignStat(Farming);
+            Medical.Pressed -= () => AssignStat(Medical);
+            Scavenging.Pressed -= () => AssignStat(Scavenging);
+            
+           /*  Group.Pressed -= AssignStat; */
             CloseRequested -= Close;
         }
+
+        /* public override void _GuiInput(InputEvent @event)
+        {
+            base._GuiInput(@event);
+            
+            if (@event.IsLeftClick())
+            {
+                Close();
+            }
+        } */
         
-        public void Setup(StatType stat, int amount)
+        public void Setup(StatType stat, int amount, Vector2 position)
         {
             Stat = stat;
             Amount.Value = amount;
+            Panel.Position = position;
         }
 
         private void AssignStat(BaseButton button)

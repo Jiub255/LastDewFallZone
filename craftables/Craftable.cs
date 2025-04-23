@@ -41,7 +41,7 @@ namespace Lastdew
 				
 				foreach (KeyValuePair<CraftingMaterial, int> kvp in _recipeCosts)
 				{
-					long uid = Extensions.GetUid(kvp.Key);
+					long uid = kvp.Key.GetUid();
 					dict[uid] = kvp.Value;
 				}
 				return dict;
@@ -54,7 +54,7 @@ namespace Lastdew
 		{
 			get
 			{
-				return [.. _requiredBuildings.Select(Extensions.GetUid)];
+				return [.. _requiredBuildings.Select(x => x.GetUid())];
 			}
 		}
 		/// <summary>
@@ -67,7 +67,7 @@ namespace Lastdew
 				Dictionary<long, int> dict = new();
 				foreach (KeyValuePair<CraftingMaterial, int> kvp in _scrapResults)
 				{
-					long uid = Extensions.GetUid(kvp.Key);
+					long uid = kvp.Key.GetUid();
 					dict[uid] = kvp.Value;
 				}
 				return dict;

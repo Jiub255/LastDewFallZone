@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce5ga25bknng5"]
+
+[ext_resource type="Script" uid="uid://bsp8umnghtbe8" path="res://addons/resource_editor/edit_resource_popup/StatAmountEdit.cs" id="1_ptpmh"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_uqfdy"]
+
+[node name="StatAmountEdit" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ptpmh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 255.0
+value = 1.0
+rounded = true
+custom_arrow_step = 1.0
+
+[node name="MenuButton" type="MenuButton" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+text = "Engineering"
+item_count = 6
+popup/item_0/text = "Attack"
+popup/item_0/id = 0
+popup/item_1/text = "Defense"
+popup/item_1/id = 1
+popup/item_2/text = "Engineering"
+popup/item_2/id = 2
+popup/item_3/text = "Farming"
+popup/item_3/id = 3
+popup/item_4/text = "Medical"
+popup/item_4/id = 4
+popup/item_5/text = "Scavenging"
+popup/item_5/id = 5
+
+[node name="Delete" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+icon = ExtResource("2_uqfdy")
+icon_alignment = 1

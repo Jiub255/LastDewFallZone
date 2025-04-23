@@ -28,5 +28,6 @@ namespace Lastdew
 		public const string STAT_AMOUNT_UI = "uid://ofu0begpoa84";
 		public const string ICON_BUTTON = "uid://h82oyfspxk6s";
 		public const string STATS_TO_CRAFT = "uid://dxtbey0a7pn2m";
+		public const string STAT_AMOUNT_EDIT = "uid://ce5ga25bknng5";
     }
 }

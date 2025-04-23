@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -114,7 +115,7 @@ namespace Lastdew
             return false;
 		}
 		
-		public static long GetUid(Resource resource)
+		public static long GetUid(this Resource resource)
 		{
 		    if (resource != null)
 		    {
@@ -122,6 +123,22 @@ namespace Lastdew
 				return uid;
 		    }
 			return -1;
+		}
+		
+		public static Node[] GetChildrenRecursive(this Node node)
+		{
+			List<Node> nodes = [];
+			Godot.Collections.Array<Node> children = node.GetChildren();
+			nodes.Add(node);
+			if (children.Count == 0)
+			{
+				return [.. nodes];
+			}
+			foreach (Node child in children)
+			{
+				nodes.AddRange(GetChildrenRecursive(child));
+			}
+			return [.. nodes];
 		}
 	}
 }

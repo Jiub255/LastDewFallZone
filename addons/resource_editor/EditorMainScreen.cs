@@ -64,7 +64,7 @@ namespace Lastdew
                 display.Setup(craftable);
                 // TODO: Where to unsubscribe? On delete resource, and on ExitTree?
                 display.OnOpenPopupPressed += OpenPopup;
-                DisplaysByUid[Extensions.GetUid(craftable)] = display;
+                DisplaysByUid[craftable.GetUid()] = display;
             }
         }
         

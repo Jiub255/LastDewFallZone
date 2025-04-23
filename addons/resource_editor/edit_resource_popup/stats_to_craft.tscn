@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxtbey0a7pn2m"]
 
 [ext_resource type="Script" uid="uid://do20glqo2o8py" path="res://addons/resource_editor/edit_resource_popup/StatsToCraftEdit.cs" id="1_aandr"]
-[ext_resource type="PackedScene" uid="uid://ofu0begpoa84" path="res://addons/resource_editor/edit_resource_popup/stat_amount_ui.tscn" id="2_wvkyv"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="3_gvmmh"]
 
 [node name="StatsToCraft" type="HBoxContainer"]
 theme_override_constants/separation = 5
@@ -12,21 +12,18 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Stats To Craft"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(249, 0)
 layout_mode = 2
-theme_override_constants/separation = 5
 
-[node name="Parent" type="HBoxContainer" parent="HBoxContainer"]
+[node name="Parent" type="VBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 5
 
-[node name="StatAmountUI" parent="HBoxContainer/Parent" instance=ExtResource("2_wvkyv")]
-layout_mode = 2
-
-[node name="Add" type="Button" parent="HBoxContainer"]
+[node name="Add" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "+"
+icon = ExtResource("3_gvmmh")
+icon_alignment = 1

@@ -7,9 +7,9 @@ namespace Lastdew
     [Tool]
     public partial class StatsToCraftEdit : HBoxContainer, IPropertyUi
     {
-        private HBoxContainer Parent { get; set; }
+        private VBoxContainer Parent { get; set; }
         private Button Add { get; set; }
-        private PackedScene StatAmountScene { get; } = GD.Load<PackedScene>(UIDs.STAT_AMOUNT_UI);
+        private PackedScene StatAmountScene { get; } = GD.Load<PackedScene>(UIDs.STAT_AMOUNT_EDIT);
         private Godot.Collections.Dictionary<StatType, int> Stats
         {
             get
@@ -23,7 +23,7 @@ namespace Lastdew
         {
             base._Ready();
             
-            Parent = GetNode<HBoxContainer>("%Parent");
+            Parent = GetNode<VBoxContainer>("%Parent");
             Add = GetNode<Button>("%Add");
 
             Add.Pressed += NewStatAmount;
@@ -38,6 +38,7 @@ namespace Lastdew
         
         public void Setup(Godot.Collections.Dictionary<StatType, int> statAmounts)
         {
+            this.PrintDebug($"Setting up {statAmounts.Count} stat amounts");
             foreach (KeyValuePair<StatType, int> kvp in statAmounts)
             {
                 SetupStatAmount(kvp.Key, kvp.Value);
@@ -49,19 +50,20 @@ namespace Lastdew
             Godot.Collections.Dictionary<StatType, int> stats = [];
             foreach (Node node in Parent.GetChildren())
             {
-                if (node is StatAmountUi statAmount)
+                if (node is StatAmountEdit statAmount)
                 {
-                    stats[statAmount.Stat] = statAmount.Amount;
+                    stats[statAmount.Stat] = (int)statAmount.Amount.Value;
                 }
             }
             return stats;
         }
         
-        private void SetupStatAmount(StatType stat, int amount, bool openPopup = false)
+        private void SetupStatAmount(StatType stat, int amount)
         {
-            StatAmountUi statAmount = (StatAmountUi)StatAmountScene.Instantiate();
+            StatAmountEdit statAmount = (StatAmountEdit)StatAmountScene.Instantiate();
             Parent.AddChild(statAmount);
-            statAmount.Setup(stat, amount, openPopup);
+            statAmount.Setup(stat, amount);
+            statAmount.OnDelete += OnRemoveStatAmount;
         }
         
         private void NewStatAmount()
@@ -69,7 +71,7 @@ namespace Lastdew
             int children = Parent.GetChildren().Count;
             if (children <= 3)
             {
-                SetupStatAmount(StatType.ATTACK, 1, true);
+                SetupStatAmount(StatType.ATTACK, 1);
             }
             if (children == 3)
             {
@@ -77,13 +79,19 @@ namespace Lastdew
             }
         }
         
-        private void OnRemoveStatAmount()
+        private void OnRemoveStatAmount(StatAmountEdit statAmount)
         {
+            statAmount.OnDelete -= OnRemoveStatAmount;
             Add.Show();
         }
         
         public void Save(Craftable craftable)
         {
+            this.PrintDebug($"Saving {craftable.Name}");
+            foreach (KeyValuePair<StatType, int> stat in Stats)
+            {
+                this.PrintDebug($"Stat: {stat.Value} {stat.Key}");
+            }
             craftable.Set(Craftable.PropertyName.StatsNeededToCraft, Stats);
         }
     }

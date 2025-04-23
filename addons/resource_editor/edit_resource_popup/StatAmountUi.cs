@@ -68,12 +68,12 @@ namespace Lastdew
             try
             {
                 int amount = AmountLabel.Text.ToInt();
-                StatAmountPopup.Setup(Stat, amount);
+                StatAmountPopup.Setup(Stat, amount, Position);
             }
             catch (Exception ex)
             {
                 this.PrintDebug($"Amount label text not an int, setting to 1. {ex}");
-                StatAmountPopup.Setup(Stat, 1);
+                StatAmountPopup.Setup(Stat, 1, Position);
             }
         }
     }

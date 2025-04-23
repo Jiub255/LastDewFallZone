@@ -102,15 +102,18 @@ namespace Lastdew
             Craftable.Set(Craftable.PropertyName.Description, DescriptionEdit.Text);
             Craftable.Set(Craftable.PropertyName.Icon, IconButton.Icon);
             // TODO: For each property UI, get the data from it and save it to the resource. 
-            foreach (Node node in GetChildren())
+            foreach (Node node in this.GetChildrenRecursive())
             {
+                this.PrintDebug($"Node: {node.Name}");
                 if (node is IPropertyUi propertyUi)
                 {
+                    this.PrintDebug($"IPropertyUi: {node.Name}");
                     propertyUi.Save(Craftable);
                 }
             }
 
-            OnSaveCraftable?.Invoke(Extensions.GetUid(Craftable));
+            OnSaveCraftable?.Invoke(Craftable.GetUid());
+            Hide();
         }
     }
 }

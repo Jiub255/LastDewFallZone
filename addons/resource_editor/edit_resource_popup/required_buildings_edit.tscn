@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://siyvsne6fc8a"]
+
+[ext_resource type="Script" uid="uid://5jj7aay460w8" path="res://addons/resource_editor/edit_resource_popup/RequiredBuildingsEdit.cs" id="1_v6bj1"]
+
+[node name="RequiredBuildings" type="HBoxContainer"]
+theme_override_constants/separation = 5
+script = ExtResource("1_v6bj1")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Required Buildings"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Parent" type="HBoxContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Add" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "+"

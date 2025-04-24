@@ -16,8 +16,9 @@ namespace Lastdew
         private Button SaveButton { get; set; }
         private VBoxContainer Column1 { get; set; }
         private VBoxContainer Column2 { get; set; }
-        private PackedScene IconButtonScene { get; } = GD.Load<PackedScene>(UIDs.ICON_BUTTON);
         private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(UIDs.STATS_TO_CRAFT);
+        private PackedScene RecipeCostsScene { get; } = GD.Load<PackedScene>(UIDs.RECIPE_COSTS_EDIT);
+        private PackedScene RequiredBuildingsScene { get; } = GD.Load<PackedScene>(UIDs.REQUIRED_BUILDINGS_EDIT);
 
 
         public override void _Ready()
@@ -55,18 +56,28 @@ namespace Lastdew
         {
             Craftable = craftable;
             ClearColumns();
+            
             // TODO: Instantiate each property UI as needed. 
+            RecipeCostsEdit recipeCosts = (RecipeCostsEdit)RecipeCostsScene.Instantiate();
+            Column1.AddChild(recipeCosts);
+
             StatsToCraftEdit statsToCraft = (StatsToCraftEdit)StatsToCraftScene.Instantiate();
-            Column1.AddChild(statsToCraft);
+            Column2.AddChild(statsToCraft);
+
+            RequiredBuildingsEdit requiredBuildings = (RequiredBuildingsEdit)RequiredBuildingsScene.Instantiate();
+            Column1.AddChild(requiredBuildings);
             
             // Initialize property UIs
             IconButton.Icon = craftable.Icon;
             NameEdit.Text = craftable.Name;
             DescriptionEdit.Text = craftable.Description;
-            // Using Get() to get private properties.
-            // TODO: Change craftable properties to be string/int dicts instead, and handle all the conversion here,
+            
+            // TODO: Change craftable properties to be long(UID)/int(Amount) dicts instead, and handle all the conversion here,
             // and in custom inspectors. 
+            // Using Get() to get private properties.
             statsToCraft.Setup((Godot.Collections.Dictionary<StatType, int>)craftable.Get(Craftable.PropertyName.StatsNeededToCraft));
+            recipeCosts.Setup((Godot.Collections.Dictionary<CraftingMaterial, int>)craftable.Get(Craftable.PropertyName._recipeCosts));
+            requiredBuildings.Setup((Godot.Collections.Array<Building>)craftable.Get(Craftable.PropertyName._requiredBuildings));
             
             // TODO: Instantiate/initialize all subclass-specific properties
             switch (craftable)
@@ -101,6 +112,7 @@ namespace Lastdew
             Craftable.Set(Craftable.PropertyName.Name, NameEdit.Text);
             Craftable.Set(Craftable.PropertyName.Description, DescriptionEdit.Text);
             Craftable.Set(Craftable.PropertyName.Icon, IconButton.Icon);
+            
             // TODO: For each property UI, get the data from it and save it to the resource. 
             foreach (Node node in this.GetChildrenRecursive())
             {

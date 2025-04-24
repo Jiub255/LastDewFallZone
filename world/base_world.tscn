@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cqpu56xet75gu" path="res://UI/build/BuildMenu.cs" id="10_8gcsg"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://world/camera/camera.tscn" id="11_huh4i"]
 [ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/map/map_menu.tscn" id="11_nbxj8"]
-[ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://world/player-characters/management/PcManager.cs" id="12_2gts1"]
+[ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://characters/player-characters/management/PcManager.cs" id="12_2gts1"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_ixco4")

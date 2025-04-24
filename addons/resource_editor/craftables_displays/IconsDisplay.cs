@@ -6,7 +6,6 @@ namespace Lastdew
     [Tool]
     public abstract partial class IconsDisplay : PanelContainer
     {
-        protected Craftables Craftables { get; } = GD.Load<Craftables>(UIDs.CRAFTABLES);
         protected PackedScene CraftableIconScene { get; } = GD.Load<PackedScene>(UIDs.CRAFTABLE_ICON);
         protected HBoxContainer IconsParent { get; set; }
 

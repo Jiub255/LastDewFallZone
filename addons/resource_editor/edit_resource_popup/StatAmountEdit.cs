@@ -9,10 +9,24 @@ namespace Lastdew
     public partial class StatAmountEdit : PanelContainer
     {
         public event Action<StatAmountEdit> OnDelete;
+
+        private StatType _stat;
     
-        public StatType Stat { get; private set; } = StatType.ATTACK;
-        public SpinBox Amount { get; private set; }
-        private Dictionary<long, StatType> StatsByIndex = new()
+        public StatType Stat
+        {
+            get => _stat;
+            private set
+            {
+                _stat = value;
+                if (MenuButton != null)
+                {
+                    MenuButton.Text = value.ToString().Capitalize();
+                }
+            }
+        }
+        public int Amount { get => (int)SpinBox.Value; }
+        
+        private readonly Dictionary<long, StatType> StatsByIndex = new()
         {
             {0, StatType.ATTACK },
             {1, StatType.DEFENSE },
@@ -21,6 +35,7 @@ namespace Lastdew
             {4, StatType.MEDICAL },
             {5, StatType.SCAVENGING },
         };
+        private SpinBox SpinBox { get; set; }
         private MenuButton MenuButton { get; set; }
         private PopupMenu PopupMenu { get; set; }
         private Button DeleteButton { get; set; }
@@ -29,7 +44,7 @@ namespace Lastdew
         {
             base._Ready();
 
-            Amount = GetNode<SpinBox>("%SpinBox");
+            SpinBox = GetNode<SpinBox>("%SpinBox");
             MenuButton = GetNode<MenuButton>("%MenuButton");
             DeleteButton = GetNode<Button>("%Delete");
             
@@ -50,14 +65,12 @@ namespace Lastdew
         public void Setup(StatType stat, int amount)
         {
             Stat = stat;
-            MenuButton.Text = Stat.ToString().Capitalize();
-            Amount.Value = amount;
+            SpinBox.Value = amount;
         }
 
         private void ChangeStat(long index)
         {
             Stat = StatsByIndex[index];
-            MenuButton.Text = Stat.ToString().Capitalize();
         }
         
         private void Delete()

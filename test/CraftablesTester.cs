@@ -4,17 +4,16 @@ namespace Lastdew
 {
 	public partial class CraftablesTester : Node
 	{
-		private Craftables Craftables { get; set; } = GD.Load<Craftables>(UIDs.CRAFTABLES);
-
 		public override void _Ready()
 		{
 			base._Ready();
 
+			Craftables craftables = Databases.CRAFTABLES;
 			this.PrintDebug(
-				$"Buildings: {Craftables.Buildings.Count}, " +
-				$"Materials: {Craftables.Materials.Count}, " +
-				$"Equipment: {Craftables.Equipment.Count}, " +
-				$"Usable Items: {Craftables.UsableItems.Count}");
+				$"Buildings: {craftables.Buildings.Count}, " +
+				$"Materials: {craftables.Materials.Count}, " +
+				$"Equipment: {craftables.Equipment.Count}, " +
+				$"Usable Items: {craftables.UsableItems.Count}");
 		}
 	}
 }

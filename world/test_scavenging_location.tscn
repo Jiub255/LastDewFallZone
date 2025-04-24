@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/ScavengingLevel.cs" id="1_43o5v"]
 [ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://world/looting/loot_container_test.tscn" id="2_ocac3"]
-[ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://world/enemies/EnemySpawner.cs" id="10_o5blp"]
+[ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://characters/enemies/EnemySpawner.cs" id="10_o5blp"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
 vertices = PackedVector3Array(-24.5, 0.5, -4.25, -11.75, 0.5, -4, -11.75, 0.5, -5.5, -10, 0.5, -5.75, -10.25, 0.5, -24.5, -24.5, 0.5, -24.5, 7.75, 0.5, -5.75, 8, 0.5, -24.5, 9.25, 0.5, -5.75, 9.5, 0.5, -5.25, 24.5, 0.5, -5.25, 24.5, 0.5, -24.5, 9.25, 0.5, -4.25, 8.25, 0.5, -4.25, 8.25, 0.5, -3.5, 9.25, 0.5, -3.25, 9.25, 0.5, 24.5, 24.5, 0.5, 24.5, -24.5, 0.5, 24.5, -11.75, 0.5, 24.5, -10.5, 0.5, 6.25, -9.25, 0.5, 6.25, -9, 0.5, 5.25, -10.5, 0.5, -4.25, -7.25, 0.5, 5.25, -7, 0.5, 6.5, 8, 0.5, 6.5, -9, 0.5, 7.5, -10.5, 0.5, 24.5, -7.25, 0.5, 7.5, 8, 0.5, 24.5)

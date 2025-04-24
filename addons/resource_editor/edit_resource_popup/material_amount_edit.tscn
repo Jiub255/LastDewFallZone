@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1y4b0yxpa327"]
+
+[ext_resource type="Script" uid="uid://ch274o8uw0igf" path="res://addons/resource_editor/edit_resource_popup/MaterialAmountEdit.cs" id="1_iqdbb"]
+[ext_resource type="Theme" uid="uid://yrycfvumiqae" path="res://addons/resource_editor/spin_box_theme.tres" id="1_ocrqw"]
+[ext_resource type="Texture2D" uid="uid://ym4rh5rfmrp8" path="res://craftables/items/equipment/icon_bat.png" id="1_xk7uo"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_ocrqw"]
+
+[node name="MaterialAmountEdit" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+script = ExtResource("1_iqdbb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_ocrqw")
+min_value = 1.0
+max_value = 255.0
+value = 1.0
+rounded = true
+custom_arrow_step = 1.0
+
+[node name="Select" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Gate"
+text = "Gate"
+icon = ExtResource("1_xk7uo")
+alignment = 0
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="Delete" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+icon = ExtResource("2_ocrqw")
+icon_alignment = 1

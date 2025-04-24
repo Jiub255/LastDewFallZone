@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c84ib3j45qkxc"]
+[gd_scene load_steps=9 format=3 uid="uid://c84ib3j45qkxc"]
 
 [ext_resource type="Script" uid="uid://b1a2hi11fvhex" path="res://addons/resource_editor/edit_resource_popup/EditResourcePopup.cs" id="1_b6g7e"]
 [ext_resource type="PackedScene" uid="uid://h82oyfspxk6s" path="res://addons/resource_editor/edit_resource_popup/icon_button.tscn" id="2_b6g7e"]
 [ext_resource type="StyleBox" uid="uid://dt7ngvxf0s5qm" path="res://addons/resource_editor/white_style_box.tres" id="4_5xoq7"]
-[ext_resource type="PackedScene" uid="uid://dxtbey0a7pn2m" path="res://addons/resource_editor/edit_resource_popup/stats_to_craft.tscn" id="4_uq640"]
-[ext_resource type="Texture2D" uid="uid://bcqjtvteiews5" path="res://craftables/items/crafting-materials/icon_metal.png" id="5_swn0j"]
+[ext_resource type="PackedScene" uid="uid://bptw12qdeseh" path="res://addons/resource_editor/edit_resource_popup/recipe_costs_edit.tscn" id="4_b6g7e"]
+[ext_resource type="PackedScene" uid="uid://dxtbey0a7pn2m" path="res://addons/resource_editor/edit_resource_popup/stats_to_craft_edit.tscn" id="4_uq640"]
 [ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://unused-assets/icons/icon_water.png" id="6_ij1an"]
+[ext_resource type="PackedScene" uid="uid://siyvsne6fc8a" path="res://addons/resource_editor/edit_resource_popup/required_buildings_edit.tscn" id="6_uq640"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6g7e"]
 bg_color = Color(0.329158, 0.329158, 0.329158, 1)
@@ -89,58 +90,10 @@ custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 
 [node name="StatsToCraft" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1" instance=ExtResource("4_uq640")]
-unique_name_in_owner = true
 layout_mode = 2
 
-[node name="RecipeCosts" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1"]
+[node name="RecipeCosts" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1" instance=ExtResource("4_b6g7e")]
 layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "Recipe Costs"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="CraftableAmount" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer"]
-self_modulate = Color(1.49205e-06, 0.416103, 0.0977085, 1)
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("4_5xoq7")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer/CraftableAmount"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer/CraftableAmount/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("5_swn0j")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer/CraftableAmount/MarginContainer/TextureRect"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 40.0
-grow_vertical = 0
-text = "12"
-vertical_alignment = 2
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer/CraftableAmount"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "x"
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1/RecipeCosts/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "+"
 
 [node name="Rarity" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1"]
 custom_minimum_size = Vector2(0, 50)
@@ -309,24 +262,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 
-[node name="RequiredBuildings" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
+[node name="RequiredBuildings" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2" instance=ExtResource("6_uq640")]
 layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/RequiredBuildings"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "Required Buildings"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/RequiredBuildings"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/RequiredBuildings/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "+"
 
 [node name="ScrapResults" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
 layout_mode = 2

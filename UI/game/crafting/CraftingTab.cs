@@ -10,7 +10,6 @@ namespace Lastdew
 		private GridContainer UsablesGrid { get; set; }
 		private GridContainer MaterialsGrid { get; set; }
 		private SelectedCraftableDisplay SelectedDisplay { get; set; }
-		private Craftables Craftables { get; set; }
 		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(UIDs.CRAFTABLE_BUTTON);
 
 		public override void _Ready()
@@ -36,22 +35,21 @@ namespace Lastdew
 		
 		public void Initialize(InventoryManager inventory)
 		{
-			Craftables = ResourceLoader.Load<Craftables>(UIDs.CRAFTABLES);
 			PopulateUI();
-			SelectedDisplay.Initialize(Craftables, inventory);
+			SelectedDisplay.Initialize(Databases.CRAFTABLES, inventory);
 		}
 		
 		private void PopulateUI()
 		{
-			foreach (Equipment equipment in Craftables.Equipment.Values)
+			foreach (Equipment equipment in Databases.CRAFTABLES.Equipment.Values)
 			{
 				AddButtonToGrids(equipment, EquipmentGrid);
 			}
-			foreach (UsableItem usableItem in Craftables.UsableItems.Values)
+			foreach (UsableItem usableItem in Databases.CRAFTABLES.UsableItems.Values)
 			{
 				AddButtonToGrids(usableItem, UsablesGrid);
 			}
-			foreach (CraftingMaterial material in Craftables.Materials.Values)
+			foreach (CraftingMaterial material in Databases.CRAFTABLES.Materials.Values)
 			{
 				AddButtonToGrids(material, MaterialsGrid);
 			}

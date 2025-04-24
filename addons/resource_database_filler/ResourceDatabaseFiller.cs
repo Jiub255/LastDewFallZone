@@ -37,28 +37,12 @@ namespace Lastdew
 
 		private void OnCraftablesButtonPressed()
 		{
-			Craftables craftables = GD.Load<Craftables>(UIDs.CRAFTABLES);
-			if (craftables != null)
-			{
-				craftables.PopulateDictionaries();
-			}
-			else
-			{
-				GD.PrintErr("Craftables resource not found");
-			}
+			Databases.CRAFTABLES.PopulateDictionaries();
 		}
 
 		private void OnPcDatasButtonPressed()
 		{
-			AllPcDatas allPcDatas = GD.Load<AllPcDatas>(UIDs.ALL_PC_DATAS);
-			if (allPcDatas != null)
-			{
-				allPcDatas.PopulateDictionary();
-			}
-			else
-			{
-				GD.PrintErr("AllPcDatas resource not found");
-			}
+			Databases.PC_DATAS.PopulateDictionary();
 		}
 	}
 }

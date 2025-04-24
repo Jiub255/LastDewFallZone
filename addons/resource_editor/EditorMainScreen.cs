@@ -18,8 +18,6 @@ namespace Lastdew
         private PackedScene UsableItemDisplayScene { get; } = GD.Load<PackedScene>(UIDs.USABLE_ITEM_DISPLAY);
         private PackedScene BuildingDisplayScene { get; } = GD.Load<PackedScene>(UIDs.BUILDING_DISPLAY);
 
-        private Craftables Craftables { get; } = GD.Load<Craftables>(UIDs.CRAFTABLES);
-
         private Dictionary<long, CraftableDisplay> DisplaysByUid { get; } = [];
 
         public override void _Ready()
@@ -46,10 +44,11 @@ namespace Lastdew
         
         private void Setup()
         {
-            SetupResourceDisplays(Craftables.Materials.Values, CraftingMaterialsParent, CraftingMaterialDisplayScene);
-            SetupResourceDisplays(Craftables.Equipment.Values, EquipmentParent, EquipmentDisplayScene);
-            SetupResourceDisplays(Craftables.UsableItems.Values, UsableItemsParent, UsableItemDisplayScene);
-            SetupResourceDisplays(Craftables.Buildings.Values, BuildingsParent, BuildingDisplayScene);
+            Craftables craftables = Databases.CRAFTABLES;
+            SetupResourceDisplays(craftables.Materials.Values, CraftingMaterialsParent, CraftingMaterialDisplayScene);
+            SetupResourceDisplays(craftables.Equipment.Values, EquipmentParent, EquipmentDisplayScene);
+            SetupResourceDisplays(craftables.UsableItems.Values, UsableItemsParent, UsableItemDisplayScene);
+            SetupResourceDisplays(craftables.Buildings.Values, BuildingsParent, BuildingDisplayScene);
         }
         
         private void SetupResourceDisplays(IEnumerable<Craftable> craftables, VBoxContainer parent, PackedScene displayScene)
@@ -76,7 +75,7 @@ namespace Lastdew
         
         private void UpdateDisplay(long uid)
         {
-            DisplaysByUid[uid].Setup(Craftables[uid]);
+            DisplaysByUid[uid].Setup(Databases.CRAFTABLES[uid]);
         }
     }
 }

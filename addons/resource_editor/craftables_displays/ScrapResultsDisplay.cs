@@ -13,7 +13,7 @@ namespace Lastdew
             {
                 CraftableIcon icon = (CraftableIcon)CraftableIconScene.Instantiate();
                 IconsParent.AddChild(icon);
-                icon.Setup(Craftables[kvp.Key], kvp.Value.ToString());
+                icon.Setup(Databases.CRAFTABLES[kvp.Key], kvp.Value.ToString());
             }
         }
     }

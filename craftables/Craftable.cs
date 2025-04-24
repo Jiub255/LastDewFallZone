@@ -14,18 +14,21 @@ namespace Lastdew
 		[Export]
 		public Texture2D Icon { get; private set; }
 
-		// Have to use Godot arrays below for the resources to load correctly.
+		// Have to use Godot collections below for the resources to load correctly.
 		[Export]
 		private Godot.Collections.Dictionary<CraftingMaterial, int> _recipeCosts;
+		
 		// TODO: Buildings required to build? Or to have it show up in crafting menu?
 		[Export]
 		private Godot.Collections.Array<Building> _requiredBuildings;
-		// TODO: Stats required to build? Or to have it show up in crafting menu?
+		
 		[Export]
 		private Godot.Collections.Dictionary<CraftingMaterial, int> _scrapResults;
 
+		// TODO: Stats required to build? Or to have it show up in crafting menu?
 		[Export]
-		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; } = [];
+		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; }
+		
 		/// <summary>
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
@@ -33,7 +36,7 @@ namespace Lastdew
 		{
 			get
 			{
-				Dictionary<long, int> dict = new();
+				Dictionary<long, int> dict = [];
 				if (_recipeCosts == null)
 				{
 					return dict;
@@ -47,6 +50,7 @@ namespace Lastdew
 				return dict;
 			}
 		}
+		
 		/// <summary>
 		/// Stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
@@ -57,6 +61,7 @@ namespace Lastdew
 				return [.. _requiredBuildings.Select(x => x.GetUid())];
 			}
 		}
+		
 		/// <summary>
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
@@ -64,7 +69,7 @@ namespace Lastdew
 		{
 			get
 			{
-				Dictionary<long, int> dict = new();
+				Dictionary<long, int> dict = [];
 				foreach (KeyValuePair<CraftingMaterial, int> kvp in _scrapResults)
 				{
 					long uid = kvp.Key.GetUid();

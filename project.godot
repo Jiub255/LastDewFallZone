@@ -32,20 +32,20 @@ project/assembly_name="LastDew-FallZone"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg", "res://addons/resource_database_filler/plugin.cfg", "res://addons/resource_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg", "res://addons/namespacer/plugin.cfg", "res://addons/resource_database_filler/plugin.cfg", "res://addons/resource_editor/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://UI/": "teal",
-"res://addons/": "pink",
+"res://addons/": "gray",
+"res://characters/": "pink",
 "res://craftables/": "red",
 "res://misc/": "orange",
 "res://save_system/": "yellow",
 "res://test/": "green",
 "res://unused-assets/": "blue",
-"res://world/": "purple",
-"res://world/player-characters/": "green"
+"res://world/": "purple"
 }
 
 [gui]

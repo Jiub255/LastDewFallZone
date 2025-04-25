@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxs5r6evcoahk"]
+
+[ext_resource type="Script" uid="uid://ccqrd76imba84" path="res://addons/resource_editor/resource_editor_popup/ScrapResultsEditor.cs" id="1_664gy"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="2_500a7"]
+
+[node name="ScrapResults" type="HBoxContainer"]
+theme_override_constants/separation = 5
+script = ExtResource("1_664gy")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Recipe Costs"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(249, 0)
+layout_mode = 2
+
+[node name="Parent" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Add" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+icon = ExtResource("2_500a7")
+icon_alignment = 1

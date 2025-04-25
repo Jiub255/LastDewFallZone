@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmxi1hfast2yx"]
+[gd_scene load_steps=6 format=3 uid="uid://dmxi1hfast2yx"]
 
 [ext_resource type="Script" uid="uid://cgkut7ddpw757" path="res://addons/resource_editor/EditorMainScreen.cs" id="1_8ovy3"]
-[ext_resource type="PackedScene" uid="uid://c84ib3j45qkxc" path="res://addons/resource_editor/edit_resource_popup/edit_resource_popup.tscn" id="2_kdxhd"]
+[ext_resource type="StyleBox" uid="uid://b6fv5va0dcilx" path="res://addons/resource_editor/new_resource_hover_stylebox.tres" id="2_8ovy3"]
+[ext_resource type="PackedScene" uid="uid://c84ib3j45qkxc" path="res://addons/resource_editor/resource_editor_popup/resource_editor_popup.tscn" id="2_kdxhd"]
+[ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/craftable_display_style_box.tres" id="3_jmdfd"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="4_hlnk2"]
 
 [node name="EditorMainScreen" type="PanelContainer"]
 anchors_preset = 15
@@ -94,6 +97,18 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="CreateNew" type="Button" parent="MarginContainer/TabContainer/Crafting Materials/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/hover_mirrored = ExtResource("2_8ovy3")
+theme_override_styles/hover = ExtResource("2_8ovy3")
+theme_override_styles/pressed_mirrored = ExtResource("3_jmdfd")
+theme_override_styles/pressed = ExtResource("3_jmdfd")
+theme_override_styles/normal_mirrored = ExtResource("3_jmdfd")
+theme_override_styles/normal = ExtResource("3_jmdfd")
+icon = ExtResource("4_hlnk2")
+icon_alignment = 1
 
 [node name="Equipment" type="MarginContainer" parent="MarginContainer/TabContainer"]
 visible = false

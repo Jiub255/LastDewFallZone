@@ -4,7 +4,7 @@ using Godot;
 namespace Lastdew
 {
     [Tool]
-    public partial class IconButton : Button
+    public partial class IconEditor : Button
     {
         private EditorInterface EditorInterface { get; } = EditorInterface.Singleton;
         private Callable SetIconCallable { get; set; }

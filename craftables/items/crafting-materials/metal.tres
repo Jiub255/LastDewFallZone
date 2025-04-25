@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=2 format=3 uid="uid://cfw2xp7h3qpko"]
+[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=3 format=3 uid="uid://cfw2xp7h3qpko"]
 
+[ext_resource type="Texture2D" uid="uid://bcqjtvteiews5" path="res://craftables/items/crafting-materials/icon_metal.png" id="1_pol43"]
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_twptw"]
 
 [resource]
@@ -7,10 +8,11 @@ script = ExtResource("1_twptw")
 Reusable = false
 ItemRarity = 100
 Tags = Array[int]([])
-Name = "Enter Unique Name"
-Description = "Enter Description"
-RecipeCosts = null
-RequiredBuildings = null
-ScrapResults = null
-StatsNeededToCraft = null
+Name = "Metal"
+Description = "Made from supernovas."
+Icon = ExtResource("1_pol43")
+RecipeCosts = Dictionary[int, int]({})
+RequiredBuildings = Array[int]([])
+ScrapResults = {}
+StatsNeededToCraft = Dictionary[int, int]({})
 metadata/_custom_type_script = "uid://qdbtt4hu4417"

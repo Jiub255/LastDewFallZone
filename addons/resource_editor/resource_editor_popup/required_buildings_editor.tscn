@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://siyvsne6fc8a"]
 
-[ext_resource type="Script" uid="uid://5jj7aay460w8" path="res://addons/resource_editor/edit_resource_popup/RequiredBuildingsEdit.cs" id="1_v6bj1"]
+[ext_resource type="Script" uid="uid://5jj7aay460w8" path="res://addons/resource_editor/resource_editor_popup/RequiredBuildingsEditor.cs" id="1_v6bj1"]
 
 [node name="RequiredBuildings" type="HBoxContainer"]
 theme_override_constants/separation = 5

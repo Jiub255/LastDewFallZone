@@ -31,5 +31,6 @@ namespace Lastdew
 		public const string RECIPE_COSTS_EDIT = "uid://bptw12qdeseh";
 		public const string BUILDING_EDIT = "uid://btxev5v7o7ao0";
 		public const string REQUIRED_BUILDINGS_EDIT = "uid://siyvsne6fc8a";
+		public const string SCRAP_RESULTS_EDIT = "uid://dxs5r6evcoahk";
     }
 }

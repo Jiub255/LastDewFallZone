@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bptw12qdeseh"]
+[gd_scene load_steps=3 format=3 uid="uid://dxtbey0a7pn2m"]
 
-[ext_resource type="Script" uid="uid://3mc7vdyk7e6d" path="res://addons/resource_editor/edit_resource_popup/RecipeCostsEdit.cs" id="1_cehnj"]
-[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="1_ius7j"]
+[ext_resource type="Script" uid="uid://do20glqo2o8py" path="res://addons/resource_editor/resource_editor_popup/StatsToCraftEditor.cs" id="1_wb6mf"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="2_lmigj"]
 
-[node name="RecipeCostsEdit" type="HBoxContainer"]
+[node name="StatsToCraftEdit" type="HBoxContainer"]
 theme_override_constants/separation = 5
-script = ExtResource("1_cehnj")
+script = ExtResource("1_wb6mf")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Recipe Costs"
+text = "Stats To Craft"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(249, 0)
@@ -24,5 +24,6 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-icon = ExtResource("1_ius7j")
+theme_override_font_sizes/font_size = 30
+icon = ExtResource("2_lmigj")
 icon_alignment = 1

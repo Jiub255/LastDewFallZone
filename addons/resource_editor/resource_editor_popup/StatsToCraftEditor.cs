@@ -9,7 +9,7 @@ namespace Lastdew
     /// Probably replace IPropertyUI interface with the abstract base class.
     /// </summary>
     [Tool]
-    public partial class StatsToCraftEdit : HBoxContainer, IPropertyUi
+    public partial class StatsToCraftEditor : HBoxContainer, IPropertyEditor
     {
         private VBoxContainer Parent { get; set; }
         private Button Add { get; set; }
@@ -43,7 +43,6 @@ namespace Lastdew
         // Could just unpack it to whatever collection inside the method instead of before.
         public void Setup(Dictionary<StatType, int> statAmounts)
         {
-            this.PrintDebug($"Setting up {statAmounts.Count} stat amounts");
             ClearStatAmounts();
             foreach (var kvp in statAmounts)
             {
@@ -53,11 +52,11 @@ namespace Lastdew
         
         public void Save(Craftable craftable)
         {
-            this.PrintDebug($"Saving {craftable.Name}");
+            /* this.PrintDebug($"Saving {craftable.Name}");
             foreach (var stat in Stats)
             {
                 this.PrintDebug($"Stat: {stat.Value} {stat.Key}");
-            }
+            } */
             craftable.Set(Craftable.PropertyName.StatsNeededToCraft, Stats);
         }
         
@@ -68,7 +67,7 @@ namespace Lastdew
             stats = [];
             foreach (Node node in Parent.GetChildren())
             {
-                if (node is StatAmountEdit statAmount)
+                if (node is StatAmountEditor statAmount)
                 {
                     stats[statAmount.Stat] = statAmount.Amount;
                 }
@@ -81,7 +80,7 @@ namespace Lastdew
             int children = Parent.GetChildren().Count;
             if (children <= 3)
             {
-                StatAmountEdit statAmount = (StatAmountEdit)StatAmountScene.Instantiate();
+                StatAmountEditor statAmount = (StatAmountEditor)StatAmountScene.Instantiate();
                 Parent.AddChild(statAmount);
                 statAmount.Setup(stat, amount);
                 statAmount.OnDelete += OnRemoveStatAmount;
@@ -97,7 +96,7 @@ namespace Lastdew
             NewStatAmount(StatType.ATTACK, 1);
         }
         
-        private void OnRemoveStatAmount(StatAmountEdit statAmount)
+        private void OnRemoveStatAmount(StatAmountEditor statAmount)
         {
             statAmount.OnDelete -= OnRemoveStatAmount;
             Add.Show();
@@ -107,7 +106,7 @@ namespace Lastdew
         {
             foreach (Node node in Parent.GetChildren())
             {
-                if (node is StatAmountEdit statAmount)
+                if (node is StatAmountEditor statAmount)
                 {
                     statAmount.QueueFree();
                 }

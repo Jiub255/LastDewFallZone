@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1y4b0yxpa327"]
 
-[ext_resource type="Script" uid="uid://ch274o8uw0igf" path="res://addons/resource_editor/edit_resource_popup/MaterialAmountEdit.cs" id="1_iqdbb"]
+[ext_resource type="Script" uid="uid://ch274o8uw0igf" path="res://addons/resource_editor/resource_editor_popup/MaterialAmountEditor.cs" id="1_iqdbb"]
 [ext_resource type="Theme" uid="uid://yrycfvumiqae" path="res://addons/resource_editor/spin_box_theme.tres" id="1_ocrqw"]
 [ext_resource type="Texture2D" uid="uid://ym4rh5rfmrp8" path="res://craftables/items/equipment/icon_bat.png" id="1_xk7uo"]
 [ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_ocrqw"]

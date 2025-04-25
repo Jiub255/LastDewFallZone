@@ -5,9 +5,9 @@ using System;
 namespace Lastdew
 {
 	[Tool]
-	public partial class BuildingEdit : PanelContainer
+	public partial class BuildingEditor : PanelContainer
 	{
-        public event Action<BuildingEdit> OnDelete;
+        public event Action<BuildingEditor> OnDelete;
 
         private long _building;
         

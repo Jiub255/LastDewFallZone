@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=2 format=3 uid="uid://dkkgjyi55etp"]
+[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=3 format=3 uid="uid://dkkgjyi55etp"]
 
+[ext_resource type="Texture2D" uid="uid://b74ul46fx48vy" path="res://craftables/items/crafting-materials/icon_cloth.png" id="1_c3lsi"]
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_un7l5"]
 
 [resource]
@@ -7,10 +8,11 @@ script = ExtResource("1_un7l5")
 Reusable = false
 ItemRarity = 100
 Tags = Array[int]([])
-Name = "Enter Unique Name"
-Description = "Enter Description"
-RecipeCosts = null
-RequiredBuildings = null
-ScrapResults = null
-StatsNeededToCraft = null
+Name = "Cloth"
+Description = "Made from llamas and plants."
+Icon = ExtResource("1_c3lsi")
+RecipeCosts = Dictionary[int, int]({})
+RequiredBuildings = Array[int]([])
+ScrapResults = {}
+StatsNeededToCraft = Dictionary[int, int]({})
 metadata/_custom_type_script = "uid://qdbtt4hu4417"

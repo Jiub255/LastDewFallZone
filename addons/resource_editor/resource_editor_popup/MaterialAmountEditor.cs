@@ -5,9 +5,9 @@ using System;
 namespace Lastdew
 {
 	[Tool]
-	public partial class MaterialAmountEdit : PanelContainer
+	public partial class MaterialAmountEditor : PanelContainer
 	{
-        public event Action<MaterialAmountEdit> OnDelete;
+        public event Action<MaterialAmountEditor> OnDelete;
 
         private long _craftingMaterial;
         

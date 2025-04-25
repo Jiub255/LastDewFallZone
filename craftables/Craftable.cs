@@ -20,22 +20,22 @@ namespace Lastdew
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Dictionary<long, int> RecipeCosts { get; set; }
+		public Dictionary<long, int> RecipeCosts { get; private set; }
 		
 		/// <summary>
 		/// Stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Array<long> RequiredBuildings { get; set; }
+		public Array<long> RequiredBuildings { get; private set; }
 		
 		/// <summary>
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Dictionary<long, int> ScrapResults { get; set; }
+		public Dictionary<long, int> ScrapResults { get; private set; }
 
 		[Export]
-		public Dictionary<StatType, int> StatsNeededToCraft { get; set; }
+		public Dictionary<StatType, int> StatsNeededToCraft { get; private set; }
 		
 		/// <summary>
 		/// For when you click on the item in the crafting/building menu.

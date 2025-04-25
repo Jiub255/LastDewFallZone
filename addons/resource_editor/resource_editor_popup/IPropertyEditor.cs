@@ -1,6 +1,6 @@
 namespace Lastdew
 {
-    public interface IPropertyUi
+    public interface IPropertyEditor
     {
         /// <summary>
         /// Use Set(StringName property, Variant value) method to set the Craftable's private properties.

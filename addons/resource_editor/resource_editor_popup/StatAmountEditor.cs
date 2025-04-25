@@ -6,9 +6,9 @@ using System.Collections.Generic;
 namespace Lastdew
 {
     [Tool]
-    public partial class StatAmountEdit : PanelContainer
+    public partial class StatAmountEditor : PanelContainer
     {
-        public event Action<StatAmountEdit> OnDelete;
+        public event Action<StatAmountEditor> OnDelete;
 
         private StatType _stat;
     

@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://c84ib3j45qkxc"]
+[gd_scene load_steps=10 format=3 uid="uid://c84ib3j45qkxc"]
 
-[ext_resource type="Script" uid="uid://b1a2hi11fvhex" path="res://addons/resource_editor/edit_resource_popup/EditResourcePopup.cs" id="1_b6g7e"]
-[ext_resource type="PackedScene" uid="uid://h82oyfspxk6s" path="res://addons/resource_editor/edit_resource_popup/icon_button.tscn" id="2_b6g7e"]
+[ext_resource type="Script" uid="uid://b1a2hi11fvhex" path="res://addons/resource_editor/resource_editor_popup/ResourceEditorPopup.cs" id="1_b6g7e"]
+[ext_resource type="PackedScene" uid="uid://h82oyfspxk6s" path="res://addons/resource_editor/resource_editor_popup/icon_editor.tscn" id="2_b6g7e"]
 [ext_resource type="StyleBox" uid="uid://dt7ngvxf0s5qm" path="res://addons/resource_editor/white_style_box.tres" id="4_5xoq7"]
-[ext_resource type="PackedScene" uid="uid://bptw12qdeseh" path="res://addons/resource_editor/edit_resource_popup/recipe_costs_edit.tscn" id="4_b6g7e"]
-[ext_resource type="PackedScene" uid="uid://dxtbey0a7pn2m" path="res://addons/resource_editor/edit_resource_popup/stats_to_craft_edit.tscn" id="4_uq640"]
+[ext_resource type="PackedScene" uid="uid://bptw12qdeseh" path="res://addons/resource_editor/resource_editor_popup/recipe_costs_editor.tscn" id="4_b6g7e"]
+[ext_resource type="PackedScene" uid="uid://dxtbey0a7pn2m" path="res://addons/resource_editor/resource_editor_popup/stats_to_craft_editor.tscn" id="4_uq640"]
 [ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://unused-assets/icons/icon_water.png" id="6_ij1an"]
-[ext_resource type="PackedScene" uid="uid://siyvsne6fc8a" path="res://addons/resource_editor/edit_resource_popup/required_buildings_edit.tscn" id="6_uq640"]
+[ext_resource type="PackedScene" uid="uid://siyvsne6fc8a" path="res://addons/resource_editor/resource_editor_popup/required_buildings_editor.tscn" id="6_uq640"]
+[ext_resource type="PackedScene" uid="uid://dxs5r6evcoahk" path="res://addons/resource_editor/resource_editor_popup/scrap_results_editor.tscn" id="7_degfr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6g7e"]
 bg_color = Color(0.329158, 0.329158, 0.329158, 1)
@@ -72,6 +73,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 22
 placeholder_text = "Enter Resource Name"
 alignment = 1
+select_all_on_focus = true
 
 [node name="DescriptionEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/IconNameDescription/VBoxContainer"]
 unique_name_in_owner = true
@@ -89,10 +91,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 
-[node name="StatsToCraft" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1" instance=ExtResource("4_uq640")]
+[node name="RecipeCosts" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1" instance=ExtResource("4_b6g7e")]
 layout_mode = 2
 
-[node name="RecipeCosts" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1" instance=ExtResource("4_b6g7e")]
+[node name="RequiredBuildings" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1" instance=ExtResource("6_uq640")]
 layout_mode = 2
 
 [node name="Rarity" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column1"]
@@ -262,27 +264,11 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(376, 0)
 layout_mode = 2
 
-[node name="RequiredBuildings" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2" instance=ExtResource("6_uq640")]
+[node name="StatsToCraft" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2" instance=ExtResource("4_uq640")]
 layout_mode = 2
 
-[node name="ScrapResults" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
+[node name="ScrapResults" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2" instance=ExtResource("7_degfr")]
 layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/ScrapResults"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "Scrap Results"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/ScrapResults"]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2/ScrapResults/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "+"
 
 [node name="Tags" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Properties/Column2"]
 custom_minimum_size = Vector2(0, 50)

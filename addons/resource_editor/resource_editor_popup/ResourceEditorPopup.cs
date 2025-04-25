@@ -5,12 +5,12 @@ using Godot;
 namespace Lastdew
 {
     [Tool]
-    public partial class EditResourcePopup : CenterContainer
+    public partial class ResourceEditorPopup : CenterContainer
     {
         public event Action<long> OnSaveCraftable;
 
         private Craftable Craftable { get; set; }
-        private IconButton IconButton { get; set; }
+        private IconEditor IconButton { get; set; }
         private LineEdit NameEdit { get; set; }
         private TextEdit DescriptionEdit { get; set; }
         private Button SaveButton { get; set; }
@@ -19,13 +19,14 @@ namespace Lastdew
         private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(UIDs.STATS_TO_CRAFT);
         private PackedScene RecipeCostsScene { get; } = GD.Load<PackedScene>(UIDs.RECIPE_COSTS_EDIT);
         private PackedScene RequiredBuildingsScene { get; } = GD.Load<PackedScene>(UIDs.REQUIRED_BUILDINGS_EDIT);
+        private PackedScene ScrapResultsScene { get; } = GD.Load<PackedScene>(UIDs.SCRAP_RESULTS_EDIT);
 
 
         public override void _Ready()
         {
             base._Ready();
 
-            IconButton = GetNode<IconButton>("%IconButton");
+            IconButton = GetNode<IconEditor>("%IconButton");
             NameEdit = GetNode<LineEdit>("%NameEdit");
             DescriptionEdit = GetNode<TextEdit>("%DescriptionEdit");
             SaveButton = GetNode<Button>("%SaveButton");
@@ -42,6 +43,7 @@ namespace Lastdew
             SaveButton.Pressed -= Save;
         }
 
+        // Hides popup (without saving) when clicking outside of popup.
         public override void _GuiInput(InputEvent @event)
         {
             base._GuiInput(@event);
@@ -57,29 +59,29 @@ namespace Lastdew
             Craftable = craftable;
             ClearColumns();
             
-            // TODO: Instantiate each property UI as needed. 
-            RecipeCostsEdit recipeCosts = (RecipeCostsEdit)RecipeCostsScene.Instantiate();
+            // Instantiate property editors
+            MaterialAmountsEditor recipeCosts = (MaterialAmountsEditor)RecipeCostsScene.Instantiate();
             Column1.AddChild(recipeCosts);
 
-            StatsToCraftEdit statsToCraft = (StatsToCraftEdit)StatsToCraftScene.Instantiate();
+            StatsToCraftEditor statsToCraft = (StatsToCraftEditor)StatsToCraftScene.Instantiate();
             Column2.AddChild(statsToCraft);
 
-            RequiredBuildingsEdit requiredBuildings = (RequiredBuildingsEdit)RequiredBuildingsScene.Instantiate();
+            RequiredBuildingsEditor requiredBuildings = (RequiredBuildingsEditor)RequiredBuildingsScene.Instantiate();
             Column1.AddChild(requiredBuildings);
+
+            ScrapResultsEditor scrapResults = (ScrapResultsEditor)ScrapResultsScene.Instantiate();
+            Column2.AddChild(scrapResults);
             
-            // Initialize property UIs
+            // Initialize property editors
             IconButton.Icon = craftable.Icon;
             NameEdit.Text = craftable.Name;
             DescriptionEdit.Text = craftable.Description;
             
-            // TODO: Change craftable properties to be long(UID)/int(Amount) dicts instead, and handle all the conversion here,
-            // and in custom inspectors. 
-            // Using Get() to get private properties.
             statsToCraft.Setup(craftable.StatsNeededToCraft);
             recipeCosts.Setup(craftable.RecipeCosts);
             requiredBuildings.Setup(craftable.RequiredBuildings);
             
-            // TODO: Instantiate/initialize all subclass-specific properties
+            // TODO: Instantiate/initialize all subclass-specific property editors
             switch (craftable)
             {
                 case Building building:
@@ -113,15 +115,21 @@ namespace Lastdew
             Craftable.Set(Craftable.PropertyName.Description, DescriptionEdit.Text);
             Craftable.Set(Craftable.PropertyName.Icon, IconButton.Icon);
             
-            // TODO: For each property UI, get the data from it and save it to the resource. 
+            // For each property editor, get the data from it and set it to the resource. 
             foreach (Node node in this.GetChildrenRecursive())
             {
-                this.PrintDebug($"Node: {node.Name}");
-                if (node is IPropertyUi propertyUi)
+                //this.PrintDebug($"Node: {node.Name}");
+                if (node is IPropertyEditor propertyEditor)
                 {
-                    this.PrintDebug($"IPropertyUi: {node.Name}");
-                    propertyUi.Save(Craftable);
+                    //this.PrintDebug($"IPropertyUi: {node.Name}");
+                    propertyEditor.Save(Craftable);
                 }
+            }
+
+            Error error = ResourceSaver.Save(Craftable);
+            if (error != Error.Ok)
+            {
+                GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
             }
 
             OnSaveCraftable?.Invoke(Craftable.GetUid());

@@ -9,7 +9,7 @@ namespace Lastdew
     /// Probably replace IPropertyUI interface with the abstract base class.
     /// </summary>
 	[Tool]
-	public partial class RequiredBuildingsEdit : HBoxContainer, IPropertyUi
+	public partial class RequiredBuildingsEditor : HBoxContainer, IPropertyEditor
 	{
         private HBoxContainer Parent { get; set; }
         private Button Add { get; set; }
@@ -41,7 +41,6 @@ namespace Lastdew
         
         public void Setup(Array<long> buildings)
         {
-            this.PrintDebug($"Setting up {buildings.Count} Building Edits");
             ClearBuildingEdits();
             foreach (long building in buildings)
             {
@@ -51,12 +50,12 @@ namespace Lastdew
         
         public void Save(Craftable craftable)
         {
-            this.PrintDebug($"Saving {craftable.Name}");
+            /* this.PrintDebug($"Saving {craftable.Name}");
             foreach (long building in Buildings)
             {
                 this.PrintDebug($"Building: {Databases.CRAFTABLES[building]?.Name}");
-            }
-            craftable.RequiredBuildings = Buildings;
+            } */
+            craftable.Set(Craftable.PropertyName.RequiredBuildings, Buildings);
         }
         
         private Array<long> GatherBuildings()
@@ -65,7 +64,7 @@ namespace Lastdew
             buildings = [];
             foreach (Node node in Parent.GetChildren())
             {
-                if (node is BuildingEdit buildingEdit)
+                if (node is BuildingEditor buildingEdit)
                 {
                     buildings.Add(buildingEdit.Building);
                 }
@@ -78,7 +77,7 @@ namespace Lastdew
             int children = Parent.GetChildren().Count;
             if (children <= 3)
             {
-                BuildingEdit buildingEdit = (BuildingEdit)BuildingEditScene.Instantiate();
+                BuildingEditor buildingEdit = (BuildingEditor)BuildingEditScene.Instantiate();
                 Parent.AddChild(buildingEdit);
                 buildingEdit.Setup(building);
                 buildingEdit.OnDelete += OnRemoveBuilding;
@@ -94,7 +93,7 @@ namespace Lastdew
             NewBuildingEdit(0);
         }
         
-        private void OnRemoveBuilding(BuildingEdit Building)
+        private void OnRemoveBuilding(BuildingEditor Building)
         {
             Building.OnDelete -= OnRemoveBuilding;
             Add.Show();
@@ -104,7 +103,7 @@ namespace Lastdew
         {
             foreach (Node node in Parent.GetChildren())
             {
-                if (node is BuildingEdit buildingEdit)
+                if (node is BuildingEditor buildingEdit)
                 {
                     buildingEdit.QueueFree();
                 }

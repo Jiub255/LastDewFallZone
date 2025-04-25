@@ -11,7 +11,7 @@ namespace Lastdew
         private VBoxContainer EquipmentParent { get; set; }
         private VBoxContainer UsableItemsParent { get; set; }
         private VBoxContainer BuildingsParent { get; set; }
-        private EditResourcePopup EditResourcePopup { get; set; }
+        private ResourceEditorPopup EditResourcePopup { get; set; }
         
         private PackedScene CraftingMaterialDisplayScene { get; } = GD.Load<PackedScene>(UIDs.CRAFTING_MATERIAL_DISPLAY);
         private PackedScene EquipmentDisplayScene { get; } = GD.Load<PackedScene>(UIDs.EQUIPMENT_RESOURCE_DISPLAY);
@@ -28,7 +28,7 @@ namespace Lastdew
             EquipmentParent = GetNode<VBoxContainer>("%EquipmentParent");
             UsableItemsParent = GetNode<VBoxContainer>("%UsableItemsParent");
             BuildingsParent = GetNode<VBoxContainer>("%BuildingsParent");
-            EditResourcePopup = GetNode<EditResourcePopup>("%EditResourcePopup");
+            EditResourcePopup = GetNode<ResourceEditorPopup>("%EditResourcePopup");
 
             EditResourcePopup.OnSaveCraftable += UpdateDisplay;
             
@@ -53,9 +53,6 @@ namespace Lastdew
         
         private void SetupResourceDisplays(IEnumerable<Craftable> craftables, VBoxContainer parent, PackedScene displayScene)
         {
-            // TODO: Separate these by subtype first, so you can subscribe to their specific events.
-            // OR, Just put one Action<Craftable> in CraftingDisplay, and then send that through OpenPopup().
-            // Then have EditResourcePopup deal with the subtypes.
             foreach (Craftable craftable in craftables)
             {
                 CraftableDisplay display = (CraftableDisplay)displayScene.Instantiate();

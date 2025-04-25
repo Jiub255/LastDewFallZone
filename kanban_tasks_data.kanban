@@ -135,7 +135,8 @@
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"668f9df0-c1d7-4814-8809-bc08d8154352"
+				"668f9df0-c1d7-4814-8809-bc08d8154352",
+				"3a259a69-d68d-47b6-82d8-8e98d184e6f9"
 			]
 		}
 	],
@@ -738,6 +739,13 @@
 			"title": "Script to auto-populate UIDs class",
 			"description": "ENDED UP DECIDING AGAINST\nGo through res folder, if it's a resource, grab its name and uid and add the line:\n\t\"\\t\\tpublic const string {name.ToUpper()} = \\\"{uid}\\\";\"\n\t\tBut instead of ToUpper(), make a custom method to add in underscore separators, easy enough. \nCan just ignore scripts, at least for now. Just custom resources and scenes. All of them? \n\tMakes sense for scenes, why have a packed scene if you're never gonna instantiate it?\n\tBut for resources, might just need Craftables and AllPcDatas/Scenes, since the rest of the custom resources can be accessed through them. \nMight be easier to do as a quick tool script in C#?\nActually this whole thing might be pointless. Can just throw the UID in to Uids.cs the first time you need one, otherwise you obviously don't need it so we're good. And craftables/pcDatas get auto-filled already. ",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "3a259a69-d68d-47b6-82d8-8e98d184e6f9",
+			"title": "Resource broken, wont load.",
+			"description": "Caused by having Godot dicts/arrays with non-primitive keys. Something about references breaking, not sure. Changing Craftable resource to only store UIDs (long) instead of Craftables. The resource editor will handle the actual setting, no need for UIDs in the inspector. ",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

@@ -14,7 +14,7 @@ namespace Lastdew
         private HBoxContainer Parent { get; set; }
         private Button Add { get; set; }
         private PackedScene BuildingEditScene { get; } = GD.Load<PackedScene>(UIDs.BUILDING_EDIT);
-        private Array<Building> Buildings
+        private Array<long> Buildings
         {
             get
             {
@@ -39,11 +39,11 @@ namespace Lastdew
             Add.Pressed -= NewBuildingEdit;
         }
         
-        public void Setup(Array<Building> buildings)
+        public void Setup(Array<long> buildings)
         {
             this.PrintDebug($"Setting up {buildings.Count} Building Edits");
             ClearBuildingEdits();
-            foreach (Building building in buildings)
+            foreach (long building in buildings)
             {
                 NewBuildingEdit(building);
             }
@@ -52,20 +52,20 @@ namespace Lastdew
         public void Save(Craftable craftable)
         {
             this.PrintDebug($"Saving {craftable.Name}");
-            foreach (Building building in Buildings)
+            foreach (long building in Buildings)
             {
-                this.PrintDebug($"Building: {building?.Name}");
+                this.PrintDebug($"Building: {Databases.CRAFTABLES[building]?.Name}");
             }
-            craftable.Set(Craftable.PropertyName._requiredBuildings, Buildings);
+            craftable.RequiredBuildings = Buildings;
         }
         
-        private Array<Building> GatherBuildings()
+        private Array<long> GatherBuildings()
         {
-            Array<Building> buildings;
+            Array<long> buildings;
             buildings = [];
             foreach (Node node in Parent.GetChildren())
             {
-                if (node is BuildingEdit buildingEdit && buildingEdit.Building != null)
+                if (node is BuildingEdit buildingEdit)
                 {
                     buildings.Add(buildingEdit.Building);
                 }
@@ -73,7 +73,7 @@ namespace Lastdew
             return buildings;
         }
         
-        private void NewBuildingEdit(Building building)
+        private void NewBuildingEdit(long building)
         {
             int children = Parent.GetChildren().Count;
             if (children <= 3)
@@ -91,7 +91,7 @@ namespace Lastdew
         
         private void NewBuildingEdit()
         {
-            NewBuildingEdit(null);
+            NewBuildingEdit(0);
         }
         
         private void OnRemoveBuilding(BuildingEdit Building)

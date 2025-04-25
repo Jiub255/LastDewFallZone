@@ -1,27 +1,16 @@
-[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=5 format=3 uid="uid://duih4refp4eov"]
+[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=2 format=3 uid="uid://7jo3uy4gbavf"]
 
-[ext_resource type="Texture2D" uid="uid://h0aah8cvmen8" path="res://craftables/items/crafting-materials/icon_wood.png" id="1_6ocmb"]
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_a5u7i"]
-[ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="3_4wgqc"]
-[ext_resource type="Resource" uid="uid://dgesmlhv1ix8" path="res://craftables/items/crafting-materials/cloth.tres" id="4_w118f"]
 
 [resource]
 script = ExtResource("1_a5u7i")
-Reusable = true
+Reusable = false
 ItemRarity = 100
-Tags = Array[int]([4])
-Name = "Wood"
-Description = "Comes from trees"
-Icon = ExtResource("1_6ocmb")
-_recipeCosts = Dictionary[ExtResource("1_a5u7i"), int]({
-ExtResource("3_4wgqc"): 4,
-null: 1,
-ExtResource("4_w118f"): 1
-})
-_requiredBuildings = []
-_scrapResults = {}
-StatsNeededToCraft = Dictionary[int, int]({
-0: 1,
-2: 4,
-3: 55
-})
+Tags = Array[int]([])
+Name = "Enter Unique Name"
+Description = "Enter Description"
+RecipeCosts = null
+RequiredBuildings = null
+ScrapResults = null
+StatsNeededToCraft = null
+metadata/_custom_type_script = "uid://qdbtt4hu4417"

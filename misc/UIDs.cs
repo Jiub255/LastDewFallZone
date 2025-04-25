@@ -3,7 +3,7 @@ namespace Lastdew
     public static class UIDs
     {
 		// Resource Databases
-		public const string CRAFTABLES = "uid://dvk1r8uat43j6";
+		public const string CRAFTABLES = "uid://71lhgtyj3vnx";
 		public const string ALL_PC_DATAS = "uid://dckb2dlhbg7ny";
 		
 		// In-game UI

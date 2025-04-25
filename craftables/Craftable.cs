@@ -1,6 +1,5 @@
 using Godot;
-using System.Collections.Generic;
-using System.Linq;
+using Godot.Collections;
 
 namespace Lastdew
 {
@@ -8,77 +7,36 @@ namespace Lastdew
 	public abstract partial class Craftable : Resource
 	{
 		[Export]
-		public string Name { get; private set; } = "Enter Unique Name";
+		public string Name { get; private set; }
 		[Export]
-		public string Description { get; private set; } = "Enter Description";
+		public string Description { get; private set; }
 		[Export]
 		public Texture2D Icon { get; private set; }
 
 		// Have to use Godot collections below for the resources to load correctly.
-		[Export]
-		private Godot.Collections.Dictionary<CraftingMaterial, int> _recipeCosts;
-		
-		// TODO: Buildings required to build? Or to have it show up in crafting menu?
-		[Export]
-		private Godot.Collections.Array<Building> _requiredBuildings;
-		
-		[Export]
-		private Godot.Collections.Dictionary<CraftingMaterial, int> _scrapResults;
-
-		// TODO: Stats required to build? Or to have it show up in crafting menu?
-		[Export]
-		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; }
+		// TODO: Is that still necessary? Could c# collections be used instead?
 		
 		/// <summary>
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
-		public Dictionary<long, int> RecipeCosts
-		{
-			get
-			{
-				Dictionary<long, int> dict = [];
-				if (_recipeCosts == null)
-				{
-					return dict;
-				}
-				
-				foreach (KeyValuePair<CraftingMaterial, int> kvp in _recipeCosts)
-				{
-					long uid = kvp.Key.GetUid();
-					dict[uid] = kvp.Value;
-				}
-				return dict;
-			}
-		}
+		[Export]
+		public Dictionary<long, int> RecipeCosts { get; set; }
 		
 		/// <summary>
 		/// Stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
-		public long[] RequiredBuildings
-		{
-			get
-			{
-				return [.. _requiredBuildings.Select(x => x.GetUid())];
-			}
-		}
+		[Export]
+		public Array<long> RequiredBuildings { get; set; }
 		
 		/// <summary>
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
-		public Dictionary<long, int> ScrapResults
-		{
-			get
-			{
-				Dictionary<long, int> dict = [];
-				foreach (KeyValuePair<CraftingMaterial, int> kvp in _scrapResults)
-				{
-					long uid = kvp.Key.GetUid();
-					dict[uid] = kvp.Value;
-				}
-				return dict;
-			}
-		}
-	
+		[Export]
+		public Dictionary<long, int> ScrapResults { get; set; }
+
+		[Export]
+		public Dictionary<StatType, int> StatsNeededToCraft { get; set; }
+		
 		/// <summary>
 		/// For when you click on the item in the crafting/building menu.
 		/// </summary>

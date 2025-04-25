@@ -1,24 +1,18 @@
-[gd_resource type="Resource" script_class="Equipment" load_steps=5 format=3 uid="uid://bllu8wsyhqs2x"]
+[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://uaemgs7vnwb1"]
 
-[ext_resource type="Texture2D" uid="uid://c53xh75pl5e48" path="res://craftables/items/equipment/icon_pistol.png" id="2_6qb8s"]
 [ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="3_1hwkl"]
-[ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="3_pgvpp"]
-[ext_resource type="Resource" uid="uid://duih4refp4eov" path="res://craftables/items/crafting-materials/wood.tres" id="5_fmnwb"]
 
 [resource]
 script = ExtResource("3_1hwkl")
-Type = 3
-EquipmentBonuses = {}
-StatsNeededToEquip = {}
+Type = 0
+EquipmentBonuses = null
+StatsNeededToEquip = null
 ItemRarity = 100
-Tags = Array[int]([0, 2])
-Name = "Pistol"
-Description = "2 Damage, Ranged"
-Icon = ExtResource("2_6qb8s")
-_recipeCosts = {
-ExtResource("3_pgvpp"): 1,
-ExtResource("5_fmnwb"): 1
-}
-_requiredBuildings = []
-_scrapResults = {}
-StatsNeededToCraft = Dictionary[int, int]({})
+Tags = Array[int]([])
+Name = "Enter Unique Name"
+Description = "Enter Description"
+RecipeCosts = null
+RequiredBuildings = null
+ScrapResults = null
+StatsNeededToCraft = null
+metadata/_custom_type_script = "uid://k0j5nuaqbpjc"

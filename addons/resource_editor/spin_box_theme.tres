@@ -1315,7 +1315,7 @@ cache/0/30/0/glyphs/14/size = Vector2(17, 17)
 cache/0/30/0/glyphs/14/uv_rect = Rect2(1, 1, 17, 17)
 cache/0/30/0/glyphs/14/texture_idx = 0
 
-[sub_resource type="Image" id="Image_i1jmt"]
+[sub_resource type="Image" id="Image_shneu"]
 data = {
 "data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////YP///2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///2D///9gAAAAAAAAAAAAAAAA////YP///7////+/////YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///2D///+/////v////2AAAAAAAAAAAP///2D///+/////v////7////9gAAAAAAAAAAAAAAAAAAAAAP///2D///+/////v////7////9gAAAAAAAAAAAAAAAA////YP///7////+/////v////2AAAAAAAAAAAP///2D///+/////v////7////9gAAAAAAAAAAAAAAAAAAAAAAAAAAD///9g////v////7////+/////YP///2D///+/////v////7////9gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///2D///+/////v////7////+/////v////7////9gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////YP///7////+/////v////7////9gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///2D///+/////v////7////+/////YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///2D///+/////v////7////+/////v////7////9gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///2D///+/////v////7////9g////YP///7////+/////v////2AAAAAAAAAAAAAAAAAAAAAAAAAAAP///2D///+/////v////7////9gAAAAAAAAAAD///9g////v////7////+/////YAAAAAAAAAAAAAAAAP///2D///+/////v////7////9gAAAAAAAAAAAAAAAAAAAAAP///2D///+/////v////7////9gAAAAAAAAAAD///9g////v////7////9gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////YP///7////+/////YAAAAAAAAAAAAAAAAP///2D///9gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///9g////YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="),
 "format": "RGBA8",
@@ -1325,7 +1325,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_fjr84"]
-image = SubResource("Image_i1jmt")
+image = SubResource("Image_shneu")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_isq83"]
 content_margin_left = 4.0

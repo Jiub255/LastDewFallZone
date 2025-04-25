@@ -14,7 +14,7 @@ namespace Lastdew
         private VBoxContainer Parent { get; set; }
         private Button Add { get; set; }
         private PackedScene MaterialAmountScene { get; } = GD.Load<PackedScene>(UIDs.MATERIAL_AMOUNT_EDIT);
-        private Dictionary<CraftingMaterial, int> Materials
+        private Dictionary<long, int> Materials
         {
             get
             {
@@ -39,7 +39,7 @@ namespace Lastdew
             Add.Pressed -= NewMaterialAmount;
         }
         
-        public void Setup(Dictionary<CraftingMaterial, int> materialAmounts)
+        public void Setup(Dictionary<long, int> materialAmounts)
         {
             this.PrintDebug($"Setting up {materialAmounts.Count} material amounts");
             ClearMaterialAmounts();
@@ -54,18 +54,18 @@ namespace Lastdew
             this.PrintDebug($"Saving {craftable.Name}");
             foreach (var material in Materials)
             {
-                this.PrintDebug($"Material: {material.Value} {material.Key.Name}");
+                this.PrintDebug($"Material: {material.Value} {Databases.CRAFTABLES[material.Key]?.Name}");
             }
-            craftable.Set(Craftable.PropertyName._recipeCosts, Materials);
+            craftable.RecipeCosts = Materials;
         }
         
-        private Dictionary<CraftingMaterial, int> GatherMaterials()
+        private Dictionary<long, int> GatherMaterials()
         {
-            Dictionary<CraftingMaterial, int> materials;
+            Dictionary<long, int> materials;
             materials = [];
             foreach (Node node in Parent.GetChildren())
             {
-                if (node is MaterialAmountEdit materialAmount && materialAmount.CraftingMaterial != null)
+                if (node is MaterialAmountEdit materialAmount)
                 {
                     materials[materialAmount.CraftingMaterial] = materialAmount.Amount;
                 }
@@ -73,7 +73,7 @@ namespace Lastdew
             return materials;
         }
         
-        private void NewMaterialAmount(CraftingMaterial material, int amount)
+        private void NewMaterialAmount(long material, int amount)
         {
             int children = Parent.GetChildren().Count;
             if (children <= 3)
@@ -91,7 +91,8 @@ namespace Lastdew
         
         private void NewMaterialAmount()
         {
-            NewMaterialAmount(null, 1);
+            // TODO: Not sure this will work as a blank MaterialAmountEdit. It should?
+            NewMaterialAmount(0, 1);
         }
         
         private void OnRemoveMaterialAmount(MaterialAmountEdit materialAmount)

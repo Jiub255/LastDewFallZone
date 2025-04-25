@@ -1,19 +1,17 @@
-[gd_resource type="Resource" script_class="UsableItem" load_steps=4 format=3 uid="uid://0asfejrqfhsc"]
+[gd_resource type="Resource" script_class="UsableItem" load_steps=2 format=3 uid="uid://da588em7oo06t"]
 
 [ext_resource type="Script" uid="uid://d2k7fseog6yq2" path="res://craftables/items/usable-items/UsableItem.cs" id="1_jp7sh"]
-[ext_resource type="Resource" uid="uid://df7ulh21l2u15" path="res://craftables/items/usable-items/effects/relieve_pain_50_30.tres" id="1_p10h2"]
-[ext_resource type="Texture2D" uid="uid://yf5l7e24sw2q" path="res://craftables/items/usable-items/icon_painkillers_blank.png" id="2_lre3e"]
 
 [resource]
 script = ExtResource("1_jp7sh")
 Reusable = false
-Effects = [ExtResource("1_p10h2")]
+Effects = []
 ItemRarity = 100
-Tags = Array[int]([1])
-Name = "Strong Painkiller"
-Description = "Relieve pain 50 for 30 seconds"
-Icon = ExtResource("2_lre3e")
-_recipeCosts = {}
-_requiredBuildings = []
-_scrapResults = {}
-StatsNeededToCraft = Dictionary[int, int]({})
+Tags = Array[int]([])
+Name = "Enter Unique Name"
+Description = "Enter Description"
+RecipeCosts = null
+RequiredBuildings = null
+ScrapResults = null
+StatsNeededToCraft = null
+metadata/_custom_type_script = "uid://d2k7fseog6yq2"

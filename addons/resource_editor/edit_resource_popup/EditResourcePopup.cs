@@ -75,9 +75,9 @@ namespace Lastdew
             // TODO: Change craftable properties to be long(UID)/int(Amount) dicts instead, and handle all the conversion here,
             // and in custom inspectors. 
             // Using Get() to get private properties.
-            statsToCraft.Setup((Godot.Collections.Dictionary<StatType, int>)craftable.Get(Craftable.PropertyName.StatsNeededToCraft));
-            recipeCosts.Setup((Godot.Collections.Dictionary<CraftingMaterial, int>)craftable.Get(Craftable.PropertyName._recipeCosts));
-            requiredBuildings.Setup((Godot.Collections.Array<Building>)craftable.Get(Craftable.PropertyName._requiredBuildings));
+            statsToCraft.Setup(craftable.StatsNeededToCraft);
+            recipeCosts.Setup(craftable.RecipeCosts);
+            requiredBuildings.Setup(craftable.RequiredBuildings);
             
             // TODO: Instantiate/initialize all subclass-specific properties
             switch (craftable)

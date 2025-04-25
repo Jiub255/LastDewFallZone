@@ -9,16 +9,16 @@ namespace Lastdew
 	{
         public event Action<MaterialAmountEdit> OnDelete;
 
-        private CraftingMaterial _craftingMaterial;
+        private long _craftingMaterial;
         
-        public CraftingMaterial CraftingMaterial
+        public long CraftingMaterial
         {
             get => _craftingMaterial;
             private set
             {
                 _craftingMaterial = value;
-                SelectButton.Icon = value?.Icon;
-                SelectButton.Text = value?.Name;
+                SelectButton.Icon = Craftables?[value]?.Icon;
+                SelectButton.Text = Craftables?[value]?.Name;
             }
         }
         public int Amount { get => (int)SpinBox.Value; }
@@ -28,6 +28,7 @@ namespace Lastdew
         private Button DeleteButton { get; set; }
         private EditorInterface EditorInterface { get; } = EditorInterface.Singleton;
         private Callable SetMaterialCallable { get; set; }
+        private Craftables Craftables { get; } = Databases.CRAFTABLES;
 
         public override void _Ready()
         {
@@ -51,7 +52,7 @@ namespace Lastdew
             DeleteButton.Pressed -= Delete;
         }
         
-        public void Setup(CraftingMaterial material, int amount)
+        public void Setup(long material, int amount)
         {
             CraftingMaterial = material;
             SpinBox.Value = amount;
@@ -64,7 +65,7 @@ namespace Lastdew
         
         private void SetMaterial(string path)
         {
-            CraftingMaterial = GD.Load<CraftingMaterial>(path);
+            CraftingMaterial = ResourceLoader.GetResourceUid(path);
         }
         
         private void Delete()

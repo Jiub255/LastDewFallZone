@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://d03mjt77jys5x"]
+[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://ctk85wdoln0g6"]
 
-[ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="1_rqv4s"]
+[ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="1_8ycmd"]
 
 [resource]
-script = ExtResource("1_rqv4s")
+script = ExtResource("1_8ycmd")
 Type = 0
 EquipmentBonuses = null
 StatsNeededToEquip = null

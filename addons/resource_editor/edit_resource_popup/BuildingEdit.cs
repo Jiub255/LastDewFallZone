@@ -9,15 +9,15 @@ namespace Lastdew
 	{
         public event Action<BuildingEdit> OnDelete;
 
-        private Building _building;
+        private long _building;
         
-        public Building Building
+        public long Building
         {
             get => _building;
             private set
             {
                 _building = value;
-                BuildingButton.Icon = value.Icon;
+                BuildingButton.Icon = Craftables?[value]?.Icon;
             }
         }
         
@@ -25,6 +25,7 @@ namespace Lastdew
         private Button DeleteButton { get; set; }
         private EditorInterface EditorInterface { get; } = EditorInterface.Singleton;
         private Callable SetBuildingCallable { get; set; }
+        private Craftables Craftables { get; } = Databases.CRAFTABLES;
 
         public override void _Ready()
         {
@@ -47,7 +48,7 @@ namespace Lastdew
             DeleteButton.Pressed -= Delete;
         }
         
-        public void Setup(Building building)
+        public void Setup(long building)
         {
             Building = building;
         }
@@ -59,7 +60,7 @@ namespace Lastdew
         
         private void SetBuilding(string path)
         {
-            Building = GD.Load<Building>(path);
+            Building = ResourceLoader.GetResourceUid(path);
         }
         
         private void Delete()

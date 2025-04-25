@@ -1,8 +1,9 @@
 using Godot;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
+// TODO: Is this class even necessary or useful? Could just Load(uid) any resource at this point.
+// Does this just act like a preload and/or centralized location for the craftables?
 namespace Lastdew
 {
 	/// <summary>

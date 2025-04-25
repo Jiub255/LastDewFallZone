@@ -1,24 +1,16 @@
-[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=6 format=3 uid="uid://dgesmlhv1ix8"]
+[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=2 format=3 uid="uid://dkkgjyi55etp"]
 
-[ext_resource type="Texture2D" uid="uid://b74ul46fx48vy" path="res://craftables/items/crafting-materials/icon_cloth.png" id="1_1u4nl"]
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_un7l5"]
-[ext_resource type="Resource" uid="uid://dyyxedbgcyiy" path="res://craftables/items/crafting-materials/metal.tres" id="3_bgwul"]
-[ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="3_ymufi"]
-[ext_resource type="Resource" uid="uid://c8dprqclfyhv3" path="res://craftables/buildings/test_building.tres" id="4_bgwul"]
 
 [resource]
 script = ExtResource("1_un7l5")
 Reusable = false
 ItemRarity = 100
-Tags = Array[int]([4])
-Name = "Cloth"
-Description = "Make clothes with it."
-Icon = ExtResource("1_1u4nl")
-_recipeCosts = Dictionary[ExtResource("1_un7l5"), int]({
-ExtResource("3_bgwul"): 3
-})
-_requiredBuildings = Array[ExtResource("3_ymufi")]([ExtResource("4_bgwul")])
-_scrapResults = {}
-StatsNeededToCraft = Dictionary[int, int]({
-0: 5
-})
+Tags = Array[int]([])
+Name = "Enter Unique Name"
+Description = "Enter Description"
+RecipeCosts = null
+RequiredBuildings = null
+ScrapResults = null
+StatsNeededToCraft = null
+metadata/_custom_type_script = "uid://qdbtt4hu4417"

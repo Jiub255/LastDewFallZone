@@ -1,5 +1,6 @@
 #if TOOLS
 using Godot;
+using System;
 using System.Collections.Generic;
 
 namespace Lastdew
@@ -7,6 +8,8 @@ namespace Lastdew
     [Tool]
     public partial class EditorMainScreen : PanelContainer
     {
+        private TabCraftingMaterials CraftingMaterialsTab { get; set; }
+    
         private VBoxContainer CraftingMaterialsParent { get; set; }
         private VBoxContainer EquipmentParent { get; set; }
         private VBoxContainer UsableItemsParent { get; set; }
@@ -23,6 +26,8 @@ namespace Lastdew
         public override void _Ready()
         {
             base._Ready();
+
+            CraftingMaterialsTab = GetNode<TabCraftingMaterials>("%CraftingMaterials");
             
             CraftingMaterialsParent = GetNode<VBoxContainer>("%CraftingMaterialsParent");
             EquipmentParent = GetNode<VBoxContainer>("%EquipmentParent");
@@ -30,14 +35,31 @@ namespace Lastdew
             BuildingsParent = GetNode<VBoxContainer>("%BuildingsParent");
             EditResourcePopup = GetNode<ResourceEditorPopup>("%EditResourcePopup");
 
+            CraftingMaterialsTab.OnCreateNew += CreateNewCraftable;
+
             EditResourcePopup.OnSaveCraftable += UpdateDisplay;
             
             Setup();
         }
 
+        private void CreateNewCraftable(Type type)
+        {
+            if (!typeof(Craftable).IsAssignableFrom(type))
+            {
+                throw new ArgumentException("Type must inherit from Craftable", nameof(type));
+            }
+            Craftable craftable = (Craftable)Activator.CreateInstance(type);
+            
+            // TODO: Finish setting up craftable.
+            // TODO: Cast it to its subtype when passed back to its tab?
+            // TODO: Add to Craftables database.
+        }
+
         public override void _ExitTree()
         {
             base._ExitTree();
+            
+            CraftingMaterialsTab.OnCreateNew -= CreateNewCraftable;
 
             EditResourcePopup.OnSaveCraftable -= UpdateDisplay;
         }

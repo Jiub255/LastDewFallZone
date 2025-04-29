@@ -792,7 +792,7 @@
 		{
 			"uuid": "af025637-f6fb-4570-93f6-5dae247fbf86",
 			"title": "On EditorMainScreen, save tab and duplicate it four times.",
-			"description": "Instead of repeating the same thing four times, just save branch as scene and duplicate that. Gonna have to put a script on it and integrate it with EditorMainScreen to set things up and signal changes.",
+			"description": "Instead of repeating the same thing four times, just save branch as scene and duplicate that. Gonna have to put a script on it and integrate it with EditorMainScreen to set things up and signal changes.\n\nWon't work. Each tab needs unique property labels and displays. Still probably gonna save each as a scene to clean it up. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

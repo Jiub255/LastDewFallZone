@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmxi1hfast2yx"]
+
+[ext_resource type="Script" uid="uid://cgkut7ddpw757" path="res://addons/resource_editor/main_screen/EditorMainScreen.cs" id="1_8ovy3"]
+[ext_resource type="PackedScene" uid="uid://bs1qdn11cwa4e" path="res://addons/resource_editor/main_screen/tab_crafting_materials.tscn" id="2_5vsnc"]
+[ext_resource type="PackedScene" uid="uid://c84ib3j45qkxc" path="res://addons/resource_editor/resource_editor_popup/resource_editor_popup.tscn" id="2_kdxhd"]
+[ext_resource type="PackedScene" uid="uid://d025bf6pjp1wg" path="res://addons/resource_editor/main_screen/tab_equipment.tscn" id="4_mp8mn"]
+[ext_resource type="PackedScene" uid="uid://brqyv2d53kgik" path="res://addons/resource_editor/main_screen/tab_usable_items.tscn" id="5_mu2m7"]
+[ext_resource type="PackedScene" uid="uid://j12dw3n0rtty" path="res://addons/resource_editor/main_screen/tab_buildings.tscn" id="6_hsev8"]
+
+[node name="EditorMainScreen" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_8ovy3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+layout_mode = 2
+current_tab = 0
+
+[node name="Crafting Materials" parent="MarginContainer/TabContainer" instance=ExtResource("2_5vsnc")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Equipment" parent="MarginContainer/TabContainer" instance=ExtResource("4_mp8mn")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Usable Items" parent="MarginContainer/TabContainer" instance=ExtResource("5_mu2m7")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Buildings" parent="MarginContainer/TabContainer" instance=ExtResource("6_hsev8")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ResourceEditorPopup" parent="." instance=ExtResource("2_kdxhd")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2

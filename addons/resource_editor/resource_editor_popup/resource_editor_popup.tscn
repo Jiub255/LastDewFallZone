@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1a2hi11fvhex" path="res://addons/resource_editor/resource_editor_popup/ResourceEditorPopup.cs" id="1_b6g7e"]
 [ext_resource type="PackedScene" uid="uid://h82oyfspxk6s" path="res://addons/resource_editor/resource_editor_popup/icon_editor.tscn" id="2_b6g7e"]
-[ext_resource type="StyleBox" uid="uid://dt7ngvxf0s5qm" path="res://addons/resource_editor/white_style_box.tres" id="4_5xoq7"]
+[ext_resource type="StyleBox" uid="uid://dt7ngvxf0s5qm" path="res://addons/resource_editor/themes/white_style_box.tres" id="4_5xoq7"]
 [ext_resource type="PackedScene" uid="uid://bptw12qdeseh" path="res://addons/resource_editor/resource_editor_popup/recipe_costs_editor.tscn" id="4_b6g7e"]
 [ext_resource type="PackedScene" uid="uid://dxtbey0a7pn2m" path="res://addons/resource_editor/resource_editor_popup/stats_to_craft_editor.tscn" id="4_uq640"]
 [ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://unused-assets/icons/icon_water.png" id="6_ij1an"]

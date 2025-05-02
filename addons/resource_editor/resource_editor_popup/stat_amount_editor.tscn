@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ce5ga25bknng5"]
 
 [ext_resource type="Script" uid="uid://bsp8umnghtbe8" path="res://addons/resource_editor/resource_editor_popup/StatAmountEditor.cs" id="1_ptpmh"]
-[ext_resource type="Theme" uid="uid://yrycfvumiqae" path="res://addons/resource_editor/spin_box_theme.tres" id="2_gt3fx"]
+[ext_resource type="Theme" uid="uid://yrycfvumiqae" path="res://addons/resource_editor/themes/spin_box_theme.tres" id="2_gt3fx"]
 [ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_uqfdy"]
 
 [node name="StatAmountEdit" type="PanelContainer"]

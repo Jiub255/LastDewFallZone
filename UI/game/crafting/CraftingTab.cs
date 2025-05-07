@@ -49,7 +49,7 @@ namespace Lastdew
 			{
 				AddButtonToGrids(usableItem, UsablesGrid);
 			}
-			foreach (CraftingMaterial material in Databases.CRAFTABLES.Materials.Values)
+			foreach (CraftingMaterial material in Databases.CRAFTABLES.CraftingMaterials.Values)
 			{
 				AddButtonToGrids(material, MaterialsGrid);
 			}

@@ -12,7 +12,10 @@ namespace Lastdew
 		[Export]
 		public bool Reusable { get; private set; }
 
-		public CraftingMaterial(){}
+		public CraftingMaterial() : base()
+		{
+			Reusable = false;
+		}
 	
 		public override void OnClickCraftable()
 		{

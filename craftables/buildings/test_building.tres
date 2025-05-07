@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Building" load_steps=2 format=3 uid="uid://bbw26e1wuuv0j"]
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://bbw26e1wuuv0j"]
 
+[ext_resource type="Texture2D" uid="uid://bg33n32q78vqt" path="res://unused-assets/icons/icon_building_blank.png" id="1_cwc26"]
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_uwfxh"]
 
 [resource]
 script = ExtResource("1_uwfxh")
 Type = 0
 SceneUid = ""
-Name = "Enter Unique Name"
-Description = "Enter Description"
-RecipeCosts = null
-RequiredBuildings = null
-ScrapResults = null
-StatsNeededToCraft = null
+Name = "Test Building"
+Description = ";alksjdv asdv lsidvinl"
+Icon = ExtResource("1_cwc26")
+RecipeCosts = Dictionary[int, int]({})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})
 metadata/_custom_type_script = "uid://dvt86qfllpnlr"

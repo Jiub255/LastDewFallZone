@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://ctk85wdoln0g6"]
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://ctk85wdoln0g6"]
 
+[ext_resource type="Texture2D" uid="uid://ecdhib4xmc61" path="res://craftables/items/equipment/icon_body_armor_blank.png" id="1_0pd63"]
 [ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="1_8ycmd"]
 
 [resource]
 script = ExtResource("1_8ycmd")
-Type = 0
-EquipmentBonuses = null
-StatsNeededToEquip = null
+Type = 1
+EquipmentBonuses = {}
+StatsNeededToEquip = {}
 ItemRarity = 100
 Tags = Array[int]([])
-Name = "Enter Unique Name"
-Description = "Enter Description"
-RecipeCosts = null
-RequiredBuildings = null
-ScrapResults = null
-StatsNeededToCraft = null
+Name = "Armor"
+Description = "Gate"
+Icon = ExtResource("1_0pd63")
+RecipeCosts = Dictionary[int, int]({})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})
 metadata/_custom_type_script = "uid://k0j5nuaqbpjc"

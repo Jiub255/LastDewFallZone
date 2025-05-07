@@ -7,10 +7,16 @@ namespace Lastdew
 	public abstract partial class Item : Craftable
 	{
 		[Export]
-		public Rarity ItemRarity { get; private set; } = Rarity.COMMON;
+		public Rarity ItemRarity { get; private set; }
 		// Only using Godot array so it'll work in editor.                                                                                                                                                                                                            
 		[Export]
-		public Array<ItemTags> Tags { get; private set; } = new Array<ItemTags> { };
+		public Array<ItemTags> Tags { get; private set; }
+	
+		public Item() : base()
+		{
+			ItemRarity = Rarity.COMMON;
+			Tags = [];
+		}
 	
 		/// <summary>
 		/// For when you click on the item in the inventory menu.

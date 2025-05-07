@@ -9,9 +9,13 @@ namespace Lastdew
 		[Export]
 		public bool Reusable { get; set; }
 		[Export]
-		public Effect[] Effects { get; set; } = Array.Empty<Effect>();
+		public Effect[] Effects { get; set; }
 	
-		public UsableItem(){}
+		public UsableItem() : base()
+		{
+			Reusable = false;
+			Effects = [];
+		}
 	
 		public override void OnClickCraftable()
 		{

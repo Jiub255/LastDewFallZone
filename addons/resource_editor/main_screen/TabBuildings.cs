@@ -14,20 +14,22 @@ namespace Lastdew
             {
                 Craftables.Add(craftable);
             }
-            //Craftables = (ICollection<Craftable>)Databases.CRAFTABLES.Buildings.Values.Cast<Craftable>();
             CraftableDisplayScene = GD.Load<PackedScene>(UIDs.BUILDING_DISPLAY);
+           // Path = "res://craftables/buildings/";
         }
         
         protected override void CreateNewCraftable()
         {
             Building building = new();
             
-            // TODO: Finish setting up craftable. Then save resource? Needed to get UID?
+            // TODO: Get filename from popup window before saving. 
+            // OR, just don't save the resource until pressing save (with name field filled out and not already in use)
+           // ResourceSaver.Save(building, Path);
+
+           // long uid = ResourceLoader.GetResourceUid(Path);
+            //Databases.CRAFTABLES.Buildings[uid] = building;
             
-            // TODO: Add to Craftables database.
-            
-            // TODO: Open resource editor popup with new craftable.
-            
+            OpenPopup(building);
         }
 	}
 }

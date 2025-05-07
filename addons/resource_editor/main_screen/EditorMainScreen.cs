@@ -66,9 +66,28 @@ namespace Lastdew
         
         private void UpdateDisplay(long uid)
         {
-            foreach (TabCraftable tab in Tabs)
+            // TODO: Need to only setup new display for the correct tab. Maybe do in EditorMainScreen?
+            /* foreach (TabCraftable tab in Tabs)
             {
                 tab.UpdateDisplay(uid);
+            } */
+            Craftable craftable = Databases.CRAFTABLES[uid];
+            switch (craftable)
+            {
+                case CraftingMaterial:
+                    CraftingMaterialsTab.UpdateDisplay(uid);
+                    break;
+                case Equipment:
+                    EquipmentTab.UpdateDisplay(uid);
+                    break;
+                case UsableItem:
+                    UsableItemsTab.UpdateDisplay(uid);
+                    break;
+                case Building:
+                    BuildingsTab.UpdateDisplay(uid);
+                    break;
+                default:
+                    break;
             }
         }
     }

@@ -13,7 +13,12 @@ namespace Lastdew
 		[Export]
 		public Godot.Collections.Dictionary<StatType, int>  StatsNeededToEquip { get; set; }
 		
-		public Equipment(){}
+		public Equipment() : base()
+		{
+			Type = EquipmentType.HEAD;
+			EquipmentBonuses = [];
+			StatsNeededToEquip = [];
+		}
 		
 		public override void OnClickCraftable()
 		{

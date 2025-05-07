@@ -9,11 +9,13 @@ namespace Lastdew
 	public abstract partial class TabCraftable : MarginContainer
 	{
         public event Action<Craftable> OnOpenPopupPressed;
-	
+
         protected VBoxContainer Parent { get; set; }
-        protected Dictionary<long, CraftableDisplay> DisplaysByUid { get; } = [];
-        protected ICollection<Craftable> Craftables { get; set; } = [];
+        protected Dictionary<long, CraftableDisplay> DisplaysByUid { get; private set; }
+        protected ICollection<Craftable> Craftables { get; set; }
         protected PackedScene CraftableDisplayScene { get; set; }
+        //protected string Path { get; set; }
+        
         private Button NewButton { get; set; }
 
         public override void _Ready()
@@ -22,6 +24,9 @@ namespace Lastdew
 
             Parent = GetNode<VBoxContainer>("%Parent");
             NewButton = GetNode<Button>("%New");
+
+            DisplaysByUid = [];
+            Craftables = [];
 
             NewButton.Pressed += CreateNewCraftable;
         }
@@ -40,23 +45,37 @@ namespace Lastdew
         {
             foreach (Craftable craftable in Craftables)
             {
-                CraftableDisplay display = (CraftableDisplay)CraftableDisplayScene.Instantiate();
-                Parent.AddChild(display);
-                display.Setup(craftable);
-                // TODO: Unsubscribe on delete resource.
-                display.OnOpenPopupPressed += OpenPopup;
-                DisplaysByUid[craftable.GetUid()] = display;
+                SetupNewDisplay(craftable);
             }
         }
-        
+
+        private void SetupNewDisplay(Craftable craftable)
+        {
+            CraftableDisplay display = (CraftableDisplay)CraftableDisplayScene.Instantiate();
+            Parent.AddChild(display);
+            // TODO: Why the fuck does this call the wrong subclass each fucking time?
+            // Always calls CraftingMaterialDisplay, except when it should, then it calls EquipmentResourceDisplay.
+            // Tried making this protected abstract and specifically casting it to the subtypes in the subclasses, but it still fucked around.
+            this.PrintDebug($"Display type: {display.GetType()}, Craftable type: {craftable.GetType()}");
+            display.Setup(craftable);
+            // TODO: Unsubscribe on delete resource.
+            display.OnOpenPopupPressed += OpenPopup;
+            DisplaysByUid[craftable.GetUid()] = display;
+        }
+
         public void UpdateDisplay(long uid)
         {
+            Craftable craftable = Databases.CRAFTABLES[uid];
             if (DisplaysByUid.TryGetValue(uid, out CraftableDisplay craftableDisplay))
             {
-                craftableDisplay.Setup(Databases.CRAFTABLES[uid]);
+                craftableDisplay.Setup(craftable);
+            }
+            else
+            {
+                SetupNewDisplay(craftable);
             }
         }
-        
+
         protected void OpenPopup(Craftable craftable)
         {
             OnOpenPopupPressed?.Invoke(craftable);

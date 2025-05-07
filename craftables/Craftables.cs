@@ -18,17 +18,16 @@ namespace Lastdew
 		
 		// TODO: 1. Is Export necessary to save the dicts with the resource?
 		// and 2. Can it be done with C# dictionaries? Esp. if export not needed.
-		// TODO: Replace string with long (UID)? Names will change, UIDs don't.
 		[Export]
-		public Godot.Collections.Dictionary<long, Building> Buildings { get; set; } = [];
+		public Godot.Collections.Dictionary<long, Building> Buildings { get; set; }
 		[Export]
-		public Godot.Collections.Dictionary<long, CraftingMaterial> Materials { get; set; } = [];
+		public Godot.Collections.Dictionary<long, CraftingMaterial> CraftingMaterials { get; set; }
 		[Export]
-		public Godot.Collections.Dictionary<long, Equipment> Equipment { get; set;} = [];
+		public Godot.Collections.Dictionary<long, Equipment> Equipment { get; set;}
 		[Export]
-		public Godot.Collections.Dictionary<long, UsableItem> UsableItems { get; set; } = [];
+		public Godot.Collections.Dictionary<long, UsableItem> UsableItems { get; set; }
 		
-		public int Count => Buildings.Count + Materials.Count + Equipment.Count + UsableItems.Count;
+		public int Count => Buildings.Count + CraftingMaterials.Count + Equipment.Count + UsableItems.Count;
 		
 		public Craftable this[long uid]
 		{
@@ -38,7 +37,7 @@ namespace Lastdew
 				{
 					return building;
 				}
-				else if (Materials.TryGetValue(uid, out CraftingMaterial material))
+				else if (CraftingMaterials.TryGetValue(uid, out CraftingMaterial material))
 				{
 					return material;
 				}
@@ -54,10 +53,18 @@ namespace Lastdew
 			}
 		}
 		
+		public Craftables() : base()
+		{
+			Buildings = [];
+			CraftingMaterials = [];
+			Equipment = [];
+			UsableItems = [];
+		}
+		
 		public void PopulateDictionaries()
 		{
 			Buildings.Clear();
-			Materials.Clear();
+			CraftingMaterials.Clear();
 			Equipment.Clear();
 			UsableItems.Clear();
 			
@@ -65,7 +72,7 @@ namespace Lastdew
 			
 			this.PrintDebug(
 				$"Buildings: {Buildings.Count}, " +
-				$"Materials: {Materials.Count}, " +
+				$"Crafting Materials: {CraftingMaterials.Count}, " +
 				$"Equipment: {Equipment.Count}, " +
 				$"Usable Items: {UsableItems.Count}");
 			Error error = ResourceSaver.Save(this, PATH);
@@ -115,7 +122,7 @@ namespace Lastdew
 							Buildings[uid] = building;
 							break;
 						case CraftingMaterial material:
-							Materials[uid] = material;
+							CraftingMaterials[uid] = material;
 							break;
 						case Equipment equipment:
 							Equipment[uid] = equipment;
@@ -137,7 +144,7 @@ namespace Lastdew
 			{
 				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}
-			foreach (KeyValuePair<long, CraftingMaterial> kvp in Materials)
+			foreach (KeyValuePair<long, CraftingMaterial> kvp in CraftingMaterials)
 			{
 				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}

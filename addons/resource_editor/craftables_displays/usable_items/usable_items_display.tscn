@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://6d8iaetjj2im"]
 
-[ext_resource type="Script" uid="uid://cq4dlsgpkvrwk" path="res://addons/resource_editor/craftables_displays/usable_items/UsableItemsdisplay.cs" id="1_6ijos"]
+[ext_resource type="Script" uid="uid://cq4dlsgpkvrwk" path="res://addons/resource_editor/craftables_displays/usable_items/UsableItemsDisplay.cs" id="1_6ijos"]
 [ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/themes/craftable_display_style_box.tres" id="1_e1k8n"]
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_e1k8n"]
 [ext_resource type="Script" uid="uid://c8ri58i2mwkme" path="res://addons/resource_editor/craftables_displays/StatsDisplay.cs" id="3_ioy3p"]

@@ -11,7 +11,7 @@ namespace Lastdew
 			Craftables craftables = Databases.CRAFTABLES;
 			this.PrintDebug(
 				$"Buildings: {craftables.Buildings.Count}, " +
-				$"Materials: {craftables.Materials.Count}, " +
+				$"Materials: {craftables.CraftingMaterials.Count}, " +
 				$"Equipment: {craftables.Equipment.Count}, " +
 				$"Usable Items: {craftables.UsableItems.Count}");
 		}

@@ -5,7 +5,7 @@ using Godot;
 namespace Lastdew
 {
     [Tool]
-    public partial class UsableItemsdisplay : CraftableDisplay
+    public partial class UsableItemsDisplay : CraftableDisplay
     {
         /* public event Action<UsableItem> OnOpenPopupPressed;
         

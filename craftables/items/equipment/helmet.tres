@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="Equipment" load_steps=2 format=3 uid="uid://d03mjt77jys5x"]
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://d03mjt77jys5x"]
 
+[ext_resource type="Texture2D" uid="uid://cob4eppc2j7p2" path="res://craftables/items/equipment/icon_helmet_blank.png" id="1_2phcr"]
 [ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="1_rqv4s"]
 
 [resource]
 script = ExtResource("1_rqv4s")
 Type = 0
-EquipmentBonuses = null
-StatsNeededToEquip = null
+EquipmentBonuses = {}
+StatsNeededToEquip = {}
 ItemRarity = 100
 Tags = Array[int]([])
-Name = "Enter Unique Name"
-Description = "Enter Description"
-RecipeCosts = null
-RequiredBuildings = null
-ScrapResults = null
-StatsNeededToCraft = null
+Name = "Helmet"
+Description = "lkjasd vawe\\\\\\\\\\\\\\\\sdv"
+Icon = ExtResource("1_2phcr")
+RecipeCosts = Dictionary[int, int]({})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})
 metadata/_custom_type_script = "uid://k0j5nuaqbpjc"

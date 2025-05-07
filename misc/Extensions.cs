@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -122,6 +123,7 @@ namespace Lastdew
 				long uid = ResourceLoader.GetResourceUid(resource.ResourcePath);
 				return uid;
 		    }
+			GD.PushWarning($"{resource.ResourceName} has no UID");
 			return -1;
 		}
 		
@@ -139,6 +141,13 @@ namespace Lastdew
 				nodes.AddRange(GetChildrenRecursive(child));
 			}
 			return [.. nodes];
+		}
+		
+		public static string ToSnakeCase(this string text)
+		{
+			text = text.ToLower();
+			string[] words = text.Split(" ");
+			return words.Join("_");
 		}
 	}
 }

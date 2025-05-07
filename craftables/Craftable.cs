@@ -36,6 +36,17 @@ namespace Lastdew
 
 		[Export]
 		public Dictionary<StatType, int> StatsNeededToCraft { get; private set; }
+
+		public Craftable() : base()
+		{
+			Name = "";
+			Description = "";
+			Icon = null;
+			RecipeCosts = [];
+			RequiredBuildings = [];
+			ScrapResults = [];
+			StatsNeededToCraft = [];
+		}
 		
 		/// <summary>
 		/// For when you click on the item in the crafting/building menu.

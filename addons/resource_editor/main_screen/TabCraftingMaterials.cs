@@ -10,24 +10,26 @@ namespace Lastdew
         {
             base._Ready();
 
-            foreach (Craftable craftable in Databases.CRAFTABLES.Materials.Values)
+            foreach (Craftable craftable in Databases.CRAFTABLES.CraftingMaterials.Values)
             {
                 Craftables.Add(craftable);
             }
-            //Craftables = (ICollection<Craftable>)Databases.CRAFTABLES.Materials.Values.Cast<Craftable>();
             CraftableDisplayScene = GD.Load<PackedScene>(UIDs.CRAFTING_MATERIAL_DISPLAY);
+            //Path = "res://craftables/items/crafting-materials/";
         }
         
         protected override void CreateNewCraftable()
         {
             CraftingMaterial craftingMaterial = new();
+
+            // TODO: Get filename from popup window before saving. 
+            // OR, just don't save the resource until pressing save (with name field filled out and not already in use)
+           // ResourceSaver.Save(craftingMaterial, Path);
+
+          //  long uid = ResourceLoader.GetResourceUid(Path);
+           // Databases.CRAFTABLES.CraftingMaterials[uid] = craftingMaterial;
             
-            // TODO: Finish setting up craftable. Then save resource? Needed to get UID?
-            
-            // TODO: Add to Craftables database.
-            
-            // TODO: Open resource editor popup with new craftable.
-            
+            OpenPopup(craftingMaterial);
         }
 	}
 }

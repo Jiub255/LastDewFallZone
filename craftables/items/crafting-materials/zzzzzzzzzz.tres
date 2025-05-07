@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=3 format=3 uid="uid://bmhx82vtwsphq"]
+
+[ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://unused-assets/icons/icon_water.png" id="1_lf2j2"]
+[ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="1_w648q"]
+
+[resource]
+script = ExtResource("1_w648q")
+Reusable = false
+ItemRarity = 100
+Tags = Array[int]([])
+Name = "zzzzzzzzzz"
+Description = "Gate"
+Icon = ExtResource("1_lf2j2")
+RecipeCosts = Dictionary[int, int]({})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})

@@ -2,11 +2,11 @@ namespace Lastdew
 {
     public enum BuildingType
 	{
-		MEDICAL,
-		DEFENSIVE,
 		CRAFTING,
-		QOL,
+		DEFENSIVE,
 		FARMING, // Or production?
+		MEDICAL,
+		QOL,
 		STORAGE,
 	}
 }

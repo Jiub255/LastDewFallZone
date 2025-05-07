@@ -158,6 +158,27 @@ namespace Lastdew
 			}
 		}
 		
+		public bool DeleteCraftable(Craftable craftable)
+		{
+		    switch (craftable)
+		    {
+		        case CraftingMaterial craftingMaterial:
+					CraftingMaterials.Remove(craftingMaterial.GetUid());
+					return true;
+		        case Equipment equipment:
+					Equipment.Remove(equipment.GetUid());
+					return true;
+		        case UsableItem usableItem:
+					UsableItems.Remove(usableItem.GetUid());
+					return true;
+		        case Building building:
+					Buildings.Remove(building.GetUid());
+					return true;
+		        default:
+					return false;
+		    }
+		}
+		
 		public void TESTPRINT()
 		{
 			this.PrintDebug($"Craftables count {this.Count}");

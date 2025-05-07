@@ -4,6 +4,7 @@ using Godot;
 
 namespace Lastdew
 {
+    // TODO: Add delete craftable button. Pressing it shows a confirmation popup before deleting the resource.
     [Tool]
     public abstract partial class CraftableDisplay : PanelContainer
     {
@@ -17,6 +18,8 @@ namespace Lastdew
         private RecipeCostsDisplay RecipeCosts { get; set; }
         private RequiredBuildingsDisplay RequiredBuildings { get; set; }
         private ScrapResultsDisplay ScrapResults { get; set; }
+        private Button DeleteButton { get; set; }
+        private ConfirmationDialog Dialog { get; set; }
 
         public override void _Ready()
         {
@@ -29,10 +32,25 @@ namespace Lastdew
             RecipeCosts = GetNode<RecipeCostsDisplay>("%RecipeCosts");
             RequiredBuildings = GetNode<RequiredBuildingsDisplay>("%RequiredBuildings");
             ScrapResults = GetNode<ScrapResultsDisplay>("%ScrapResults");
+            DeleteButton = GetNode<Button>("%Delete");
+            Dialog = GetNode<ConfirmationDialog>("%ConfirmationDialog");
+
+            DeleteButton.Pressed += ConfirmDeleteCraftable;
+            Dialog.Canceled += Dialog.Hide;
+            Dialog.Confirmed += DeleteCraftable;
             
             // TODO:
             //MouseEntered += // Set to hover color. Use selfmodulate to not conflict with button modulate?
             //MouseExited += // Set back to normal
+        }
+
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+            
+            DeleteButton.Pressed -= ConfirmDeleteCraftable;
+            Dialog.Canceled -= Dialog.Hide;
+            Dialog.Confirmed -= DeleteCraftable;
         }
 
         public override void _GuiInput(InputEvent @event)
@@ -66,11 +84,34 @@ namespace Lastdew
             ScrapResults.Setup(craftable);
         }
 
-        // TODO: Make abstract instead? Figure out later.
         private void OpenEditPopup()
         {
-            // TODO: Setup Edit popup.
             OnOpenPopupPressed?.Invoke(Craftable);
+        }
+        
+        private void ConfirmDeleteCraftable()
+        {
+            Dialog.Show();
+        }
+
+        // TODO: Only the QueueFree() is working. Still need to properly delete resource, from FileSystem and Database.
+        private void DeleteCraftable()
+        {
+            this.PrintDebug($"Deleting {Craftable.Name}");
+            // TODO: Delete craftable file.
+            Error error = DirAccess.RemoveAbsolute(Craftable.ResourcePath);
+            if (error != Error.Ok)
+            {
+                GD.PushError($"File not deleted successfully. {error}");
+            }
+            // TODO: Delete craftable from Craftables database.
+            bool deletion_successful = Databases.CRAFTABLES.DeleteCraftable(Craftable);
+            if (!deletion_successful)
+            {
+                GD.PushError($"Craftable {Craftable.Name} not deleted from Craftables Database.");
+            }
+            // TODO: Delete craftable display.
+            QueueFree();
         }
     }
 }

@@ -66,11 +66,6 @@ namespace Lastdew
         
         private void UpdateDisplay(long uid)
         {
-            // TODO: Need to only setup new display for the correct tab. Maybe do in EditorMainScreen?
-            /* foreach (TabCraftable tab in Tabs)
-            {
-                tab.UpdateDisplay(uid);
-            } */
             Craftable craftable = Databases.CRAFTABLES[uid];
             switch (craftable)
             {

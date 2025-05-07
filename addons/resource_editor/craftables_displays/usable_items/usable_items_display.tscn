@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://6d8iaetjj2im"]
+[gd_scene load_steps=10 format=3 uid="uid://6d8iaetjj2im"]
 
 [ext_resource type="Script" uid="uid://cq4dlsgpkvrwk" path="res://addons/resource_editor/craftables_displays/usable_items/UsableItemsDisplay.cs" id="1_6ijos"]
 [ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/themes/craftable_display_style_box.tres" id="1_e1k8n"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://yxir25fmejcd" path="res://addons/resource_editor/craftables_displays/required_buildings_display.tscn" id="5_bv3ks"]
 [ext_resource type="PackedScene" uid="uid://dt1g0b5rh8con" path="res://addons/resource_editor/craftables_displays/scrap_results_display.tscn" id="6_imxkk"]
 [ext_resource type="Script" uid="uid://5hqe811hpy8i" path="res://addons/resource_editor/craftables_displays/usable_items/EffectsDisplay.cs" id="7_aihu1"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="9_y2h8q"]
 
 [node name="UsableItemsDisplay" type="PanelContainer"]
 theme_override_styles/panel = ExtResource("1_e1k8n")
@@ -16,14 +17,17 @@ script = ExtResource("1_6ijos")
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("2_e1k8n")
 expand_mode = 1
 
-[node name="Name" type="Label" parent="HBoxContainer"]
+[node name="Name" type="Label" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -31,7 +35,7 @@ text = "Test Resource"
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Description" type="Label" parent="HBoxContainer"]
+[node name="Description" type="Label" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -39,7 +43,7 @@ text = "Description blah blah ljaskjvv voisajdv asleivlaskdnvn alsidnv alisenv a
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="StatsNeededToCraft" type="Label" parent="HBoxContainer"]
+[node name="StatsNeededToCraft" type="Label" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -48,31 +52,46 @@ clip_text = true
 text_overrun_behavior = 3
 script = ExtResource("3_ioy3p")
 
-[node name="RecipeCosts" parent="HBoxContainer" instance=ExtResource("4_pu3bc")]
+[node name="RecipeCosts" parent="HBoxContainer/HBoxContainer" instance=ExtResource("4_pu3bc")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="RequiredBuildings" parent="HBoxContainer" instance=ExtResource("5_bv3ks")]
+[node name="RequiredBuildings" parent="HBoxContainer/HBoxContainer" instance=ExtResource("5_bv3ks")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ScrapResults" parent="HBoxContainer" instance=ExtResource("6_imxkk")]
+[node name="ScrapResults" parent="HBoxContainer/HBoxContainer" instance=ExtResource("6_imxkk")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(71, 50)
 layout_mode = 2
 
-[node name="Reusable" type="CheckBox" parent="HBoxContainer/CenterContainer"]
+[node name="Reusable" type="CheckBox" parent="HBoxContainer/HBoxContainer/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 button_pressed = true
 button_mask = 0
 
-[node name="Effects" type="Label" parent="HBoxContainer"]
+[node name="Effects" type="Label" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 script = ExtResource("7_aihu1")
+
+[node name="Delete" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+icon = ExtResource("9_y2h8q")
+icon_alignment = 1
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(480, 106)
+dialog_text = "Are you sure you want to delete this Craftable resource?
+This cannot be undone"

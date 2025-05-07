@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Craftables" load_steps=30 format=3 uid="uid://71lhgtyj3vnx"]
+[gd_resource type="Resource" script_class="Craftables" load_steps=31 format=3 uid="uid://71lhgtyj3vnx"]
 
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_f1bwi"]
 [ext_resource type="Resource" uid="uid://bbw26e1wuuv0j" path="res://craftables/buildings/test_building.tres" id="1_saxsy"]
@@ -16,10 +16,10 @@
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="9_rqomc"]
 [ext_resource type="Resource" uid="uid://cfw2xp7h3qpko" path="res://craftables/items/crafting-materials/metal.tres" id="10_nstv5"]
 [ext_resource type="Resource" uid="uid://hy2co7mkgbib" path="res://craftables/items/crafting-materials/dfgh65.tres" id="10_rqomc"]
-[ext_resource type="Resource" uid="uid://cqjwdakrma3p5" path="res://craftables/items/crafting-materials/jytddjty_tdjty.tres" id="11_mm2ex"]
+[ext_resource type="Resource" path="res://craftables/items/crafting-materials/jytddjty_tdjty.tres" id="11_mm2ex"]
 [ext_resource type="Resource" uid="uid://b034inupvw0ee" path="res://craftables/items/crafting-materials/uiopuiop.tres" id="12_iee5f"]
 [ext_resource type="Resource" uid="uid://da588em7oo06t" path="res://craftables/items/usable-items/painkiller_50_30.tres" id="12_rqomc"]
-[ext_resource type="Resource" uid="uid://t10tnyuslad4" path="res://craftables/items/crafting-materials/hhhhhhhhhhhhh.tres" id="13_ykj3c"]
+[ext_resource type="Resource" path="res://craftables/items/crafting-materials/hhhhhhhhhhhhh.tres" id="13_ykj3c"]
 [ext_resource type="Resource" uid="uid://dqc2s68iuq6v6" path="res://craftables/items/crafting-materials/yyyyyyyyyyyyyyy.tres" id="14_kgeti"]
 [ext_resource type="Resource" uid="uid://njub8caiodr1" path="res://craftables/items/equipment/gater.tres" id="15_jowtw"]
 [ext_resource type="Resource" uid="uid://bmhx82vtwsphq" path="res://craftables/items/crafting-materials/zzzzzzzzzz.tres" id="15_ykj3c"]
@@ -29,6 +29,7 @@
 [ext_resource type="Resource" uid="uid://cx63ncbky6vy6" path="res://craftables/items/equipment/pouipoiu.tres" id="23_6cvtu"]
 [ext_resource type="Resource" uid="uid://d3pobpn72262i" path="res://craftables/items/equipment/bbbbbbbbbbb.tres" id="25_kgeti"]
 [ext_resource type="Resource" uid="uid://d0q5may4e5csh" path="res://craftables/items/usable-items/dfgnj.tres" id="26_g87bx"]
+[ext_resource type="Resource" uid="uid://ybve325sah4y" path="res://craftables/items/usable-items/uuuuuuuuu.tres" id="29_kgeti"]
 
 [resource]
 script = ExtResource("1_u67xb")
@@ -61,6 +62,7 @@ Equipment = Dictionary[int, ExtResource("2_taw0v")]({
 9156367972371564130: ExtResource("25_kgeti")
 })
 UsableItems = Dictionary[int, ExtResource("4_eg58c")]({
+1687880338841201454: ExtResource("29_kgeti"),
 7223256205765527397: ExtResource("12_rqomc"),
 8948856163804382531: ExtResource("26_g87bx")
 })

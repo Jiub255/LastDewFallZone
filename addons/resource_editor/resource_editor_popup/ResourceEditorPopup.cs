@@ -112,21 +112,8 @@ namespace Lastdew
         
         private void Save()
         {
-            Craftable.Set(Craftable.PropertyName.Name, NameEdit.Text);
-            Craftable.Set(Craftable.PropertyName.Description, DescriptionEdit.Text);
-            Craftable.Set(Craftable.PropertyName.Icon, IconButton.Icon);
-            
-            // For each property editor, get the data from it and set it to the resource. 
-            foreach (Node node in this.GetChildrenRecursive())
-            {
-                if (node is IPropertyEditor propertyEditor)
-                {
-                    propertyEditor.Save(Craftable);
-                }
-            }
-            
-            Error error = new();
-            this.PrintDebug($"Resource path: {Craftable.ResourcePath}");
+            SetCraftableProperties();
+
             if (Craftable.ResourcePath == "")
             {
                 if (Craftable.Name == "")
@@ -139,82 +126,34 @@ namespace Lastdew
                 {
                     case CraftingMaterial:
                         string material_path = $"res://craftables/items/crafting-materials/{Craftable.Name.ToSnakeCase()}.tres";
-                        if (ResourceLoader.Exists(material_path))
+                        bool crafting_material_saved = TrySaveCraftable(material_path, Databases.CRAFTABLES.CraftingMaterials);
+                        if (!crafting_material_saved)
                         {
-                            // TODO: Popup saying name already taken.
-                            GD.PushError($"Resource already exists at {material_path}");
                             return;
-                        }
-                        error = ResourceSaver.Save(Craftable, material_path);
-                        if (error == Error.Ok)
-                        {
-                            Craftable = ResourceLoader.Load<CraftingMaterial>(material_path);
-                            Databases.CRAFTABLES.CraftingMaterials[Craftable.GetUid()] = (CraftingMaterial)Craftable;
-                            this.PrintDebug($"Saved {Craftable.Name} to {material_path}");
-                        }
-                        else
-                        {
-                            GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
                         }
                         break;
                     case Equipment:
                         string equipment_path = $"res://craftables/items/equipment/{Craftable.Name.ToSnakeCase()}.tres";
-                        if (ResourceLoader.Exists(equipment_path))
+                        bool equipment_saved = TrySaveCraftable(equipment_path, Databases.CRAFTABLES.Equipment);
+                        if (!equipment_saved)
                         {
-                            // TODO: Popup saying name already taken.
-                            GD.PushError($"Resource already exists at {equipment_path}");
                             return;
-                        }
-                        error = ResourceSaver.Save(Craftable, equipment_path);
-                        if (error == Error.Ok)
-                        {
-                            Craftable = ResourceLoader.Load<Equipment>(equipment_path);
-                            Databases.CRAFTABLES.Equipment[Craftable.GetUid()] = (Equipment)Craftable;
-                            this.PrintDebug($"Saved {Craftable.Name} to {equipment_path}");
-                        }
-                        else
-                        {
-                            GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
                         }
                         break;
                     case UsableItem:
                         string usable_item_path = $"res://craftables/items/usable-items/{Craftable.Name.ToSnakeCase()}.tres";
-                        if (ResourceLoader.Exists(usable_item_path))
+                        bool usable_item_saved = TrySaveCraftable(usable_item_path, Databases.CRAFTABLES.UsableItems);
+                        if (!usable_item_saved)
                         {
-                            // TODO: Popup saying name already taken.
-                            GD.PushError($"Resource already exists at {usable_item_path}");
                             return;
-                        }
-                        error = ResourceSaver.Save(Craftable, usable_item_path);
-                        if (error == Error.Ok)
-                        {
-                            Craftable = ResourceLoader.Load<UsableItem>(usable_item_path);
-                            Databases.CRAFTABLES.UsableItems[Craftable.GetUid()] = (UsableItem)Craftable;
-                            this.PrintDebug($"Saved {Craftable.Name} to {usable_item_path}");
-                        }
-                        else
-                        {
-                            GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
                         }
                         break;
                     case Building:
                         string building_path = $"res://craftables/bulidings/{Craftable.Name.ToSnakeCase()}.tres";
-                        if (ResourceLoader.Exists(building_path))
+                        bool building_saved = TrySaveCraftable(building_path, Databases.CRAFTABLES.Buildings);
+                        if (!building_saved)
                         {
-                            // TODO: Popup saying name already taken.
-                            GD.PushError($"Resource already exists at {building_path}");
                             return;
-                        }
-                        error = ResourceSaver.Save(Craftable, building_path);
-                        if (error == Error.Ok)
-                        {
-                            Craftable = ResourceLoader.Load<Building>(building_path);
-                            Databases.CRAFTABLES.Buildings[Craftable.GetUid()] = (Building)Craftable;
-                            this.PrintDebug($"Saved {Craftable.Name} to {building_path}");
-                        }
-                        else
-                        {
-                            GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
                         }
                         break;
                     default:
@@ -223,16 +162,55 @@ namespace Lastdew
             }
             else
             {
-                error = ResourceSaver.Save(Craftable);
-            }
-            if (error != Error.Ok)
-            {
-                GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
+                Error error = ResourceSaver.Save(Craftable);
+                if (error != Error.Ok)
+                {
+                    GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
+                    return;
+                }
             }
 
-            // TODO: Refresh tab with new CraftableDisplay. Use this event?
             OnSaveCraftable?.Invoke(Craftable.GetUid());
             Hide();
+        }
+
+        private void SetCraftableProperties()
+        {
+            Craftable.Set(Craftable.PropertyName.Name, NameEdit.Text);
+            Craftable.Set(Craftable.PropertyName.Description, DescriptionEdit.Text);
+            Craftable.Set(Craftable.PropertyName.Icon, IconButton.Icon);
+
+            // For each property editor, get the data from it and set it to the resource. 
+            foreach (Node node in this.GetChildrenRecursive())
+            {
+                if (node is IPropertyEditor propertyEditor)
+                {
+                    propertyEditor.Save(Craftable);
+                }
+            }
+        }
+
+        private bool TrySaveCraftable<[MustBeVariant] T>(string material_path, Godot.Collections.Dictionary<long, T> database) where T : Craftable
+        {
+            if (ResourceLoader.Exists(material_path))
+            {
+                // TODO: Popup saying name already taken.
+                GD.PushError($"Resource already exists at {material_path}");
+                return false;
+            }
+            Error error = ResourceSaver.Save(Craftable, material_path);
+            if (error == Error.Ok)
+            {
+                Craftable = ResourceLoader.Load<T>(material_path);
+                database[Craftable.GetUid()] = (T)Craftable;
+            }
+            else
+            {
+                GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
+                return false;
+            }
+
+            return true;
         }
     }
 }

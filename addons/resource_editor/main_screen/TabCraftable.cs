@@ -14,8 +14,7 @@ namespace Lastdew
         protected Dictionary<long, CraftableDisplay> DisplaysByUid { get; private set; }
         protected ICollection<Craftable> Craftables { get; set; }
         protected PackedScene CraftableDisplayScene { get; set; }
-        //protected string Path { get; set; }
-        
+
         private Button NewButton { get; set; }
 
         public override void _Ready()
@@ -53,9 +52,6 @@ namespace Lastdew
         {
             CraftableDisplay display = (CraftableDisplay)CraftableDisplayScene.Instantiate();
             Parent.AddChild(display);
-            // TODO: Why the fuck does this call the wrong subclass each fucking time?
-            // Always calls CraftingMaterialDisplay, except when it should, then it calls EquipmentResourceDisplay.
-            // Tried making this protected abstract and specifically casting it to the subtypes in the subclasses, but it still fucked around.
             this.PrintDebug($"Display type: {display.GetType()}, Craftable type: {craftable.GetType()}");
             display.Setup(craftable);
             // TODO: Unsubscribe on delete resource.

@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3frh6sldpqeo"]
+
+[ext_resource type="Script" uid="uid://be3vd5r4cmxdi" path="res://addons/resource_editor/resource_editor_popup/items/TagButton.cs" id="1_tj3ga"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_xtxl5"]
+
+[node name="TagButton" type="PanelContainer"]
+custom_minimum_size = Vector2(50, 50)
+script = ExtResource("1_tj3ga")
+
+[node name="MenuButton" type="MenuButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "WPN"
+alignment = 0
+clip_text = true
+item_count = 5
+popup/item_0/text = "Combat"
+popup/item_0/id = 0
+popup/item_1/text = "Medical"
+popup/item_1/id = 1
+popup/item_2/text = "Weapon"
+popup/item_2/id = 2
+popup/item_3/text = "Armor"
+popup/item_3/id = 3
+popup/item_4/text = "Crafting"
+popup/item_4/id = 4
+
+[node name="Delete" type="Button" parent="MenuButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+icon = ExtResource("2_xtxl5")

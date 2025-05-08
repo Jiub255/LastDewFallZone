@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="8_xndr7"]
 
 [node name="BuildingsDisplay" type="PanelContainer"]
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_uc4qa")
 script = ExtResource("1_kfqvl")
 
@@ -38,6 +39,7 @@ text_overrun_behavior = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "Description blah blah ljaskjvv voisajdv asleivlaskdnvn alsidnv alisenv aslijdv ;laisjd vliasjdvi asjelansdvl; ajs.dkva sjdivaslidvj aolisdvj"
 clip_text = true
 text_overrun_behavior = 3
@@ -71,8 +73,12 @@ text = "Defensive"
 
 [node name="Scene" type="Label" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(155, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "uid://c8dprqclfyhv3"
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="Delete" type="Button" parent="HBoxContainer"]
 unique_name_in_owner = true

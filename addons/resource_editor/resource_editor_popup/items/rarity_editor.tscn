@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://were1kh6e5is"]
+
+[ext_resource type="Script" uid="uid://c3kyj5en4ukil" path="res://addons/resource_editor/resource_editor_popup/items/RarityEditor.cs" id="1_fguc8"]
+
+[node name="Rarity" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+theme_override_constants/separation = 5
+script = ExtResource("1_fguc8")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Rarity"
+
+[node name="MenuButton" type="MenuButton" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(105, 50)
+layout_mode = 2
+text = "COMMON"
+item_count = 4
+popup/item_0/text = "Common"
+popup/item_0/id = 0
+popup/item_1/text = "Uncommon"
+popup/item_1/id = 1
+popup/item_2/text = "Rare"
+popup/item_2/id = 2
+popup/item_3/text = "Unique"
+popup/item_3/id = 3

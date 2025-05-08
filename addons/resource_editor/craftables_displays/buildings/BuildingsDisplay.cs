@@ -1,5 +1,4 @@
 #if TOOLS
-using System;
 using Godot;
     
 namespace Lastdew    
@@ -7,9 +6,6 @@ namespace Lastdew
     [Tool]
     public partial class BuildingsDisplay : CraftableDisplay
     {
-        /* public event Action<Building> OnOpenPopupPressed;
-    
-        private Building Building { get; set; } */
         private Label Type { get; set; }
         private Label Scene { get; set; }
 
@@ -26,15 +22,10 @@ namespace Lastdew
             base.Setup(craftable);
             
             Building building = craftable as Building;
-          //  Building = building;
             Type.Text = building.Type.ToString();
             Scene.Text = building.SceneUid;
+            Scene.TooltipText = building.SceneUid;
         }
-
-        /* protected override void OpenEditPopup()
-        {
-            OnOpenPopupPressed?.Invoke(Building);
-        } */
     }
 }
 #endif

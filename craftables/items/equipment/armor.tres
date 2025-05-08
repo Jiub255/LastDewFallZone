@@ -6,10 +6,12 @@
 [resource]
 script = ExtResource("1_8ycmd")
 Type = 1
-EquipmentBonuses = {}
-StatsNeededToEquip = {}
-ItemRarity = 100
-Tags = Array[int]([])
+EquipmentBonuses = Dictionary[int, int]({})
+StatsNeededToEquip = Dictionary[int, int]({
+0: 1
+})
+ItemRarity = 0
+Tags = Array[int]([3])
 Name = "Armor"
 Description = "Gate"
 Icon = ExtResource("1_0pd63")

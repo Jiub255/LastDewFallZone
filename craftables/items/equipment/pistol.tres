@@ -6,10 +6,17 @@
 [resource]
 script = ExtResource("3_1hwkl")
 Type = 3
-EquipmentBonuses = {}
-StatsNeededToEquip = {}
-ItemRarity = 100
-Tags = Array[int]([])
+EquipmentBonuses = Dictionary[int, int]({
+3: 8
+})
+StatsNeededToEquip = Dictionary[int, int]({
+0: 1,
+2: 18,
+3: 13,
+5: 6
+})
+ItemRarity = 3
+Tags = Array[int]([2, 0])
 Name = "Pistol"
 Description = "That was definitely a gunshot"
 Icon = ExtResource("1_sr5s8")

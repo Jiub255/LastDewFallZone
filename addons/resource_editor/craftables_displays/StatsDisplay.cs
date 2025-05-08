@@ -31,6 +31,7 @@ namespace Lastdew
             }
             string labelText = string.Join(", ", stats);
             Text = labelText;
+            TooltipText = labelText;
         }
     }
 }

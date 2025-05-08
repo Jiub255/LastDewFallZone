@@ -30,19 +30,6 @@ custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Engineering"
-item_count = 6
-popup/item_0/text = "Attack"
-popup/item_0/id = 0
-popup/item_1/text = "Defense"
-popup/item_1/id = 1
-popup/item_2/text = "Engineering"
-popup/item_2/id = 2
-popup/item_3/text = "Farming"
-popup/item_3/id = 3
-popup/item_4/text = "Medical"
-popup/item_4/id = 4
-popup/item_5/text = "Scavenging"
-popup/item_5/id = 5
 
 [node name="Delete" type="Button" parent="HBoxContainer"]
 unique_name_in_owner = true

@@ -73,7 +73,7 @@ text = "Type"
 horizontal_alignment = 1
 
 [node name="UidOrPathLabel" type="Label" parent="ScrollContainer/VBoxContainer/PropertyLabels"]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(155, 0)
 layout_mode = 2
 text = "UID Or Path"
 

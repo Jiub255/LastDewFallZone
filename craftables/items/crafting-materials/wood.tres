@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_a5u7i")
 Reusable = false
-ItemRarity = 100
-Tags = Array[int]([])
+ItemRarity = 0
+Tags = Array[int]([4])
 Name = "Wood"
 Description = "Made from trees. "
 Icon = ExtResource("1_m2g6u")
@@ -15,6 +15,6 @@ RecipeCosts = Dictionary[int, int]({})
 RequiredBuildings = Array[int]([])
 ScrapResults = Dictionary[int, int]({})
 StatsNeededToCraft = Dictionary[int, int]({
-3: 1
+2: 1
 })
 metadata/_custom_type_script = "uid://qdbtt4hu4417"

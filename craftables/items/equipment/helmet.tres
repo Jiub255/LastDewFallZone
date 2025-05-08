@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://bfcafkdja2gu1"]
+
+[ext_resource type="Texture2D" uid="uid://cob4eppc2j7p2" path="res://craftables/items/equipment/icon_helmet_blank.png" id="1_2phcr"]
+[ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="2_ltk62"]
+
+[resource]
+script = ExtResource("2_ltk62")
+Type = 0
+EquipmentBonuses = Dictionary[int, int]({
+1: 1
+})
+StatsNeededToEquip = Dictionary[int, int]({})
+ItemRarity = 0
+Tags = Array[int]([0, 3])
+Name = "Helmet"
+Description = "Head covering for protection."
+Icon = ExtResource("1_2phcr")
+RecipeCosts = Dictionary[int, int]({
+5170883165870291646: 2
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({
+5170883165870291646: 1
+})
+StatsNeededToCraft = Dictionary[int, int]({
+2: 1
+})

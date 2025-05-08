@@ -1,24 +1,20 @@
 #if TOOLS
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
 {
     [Tool]
-    public partial class UsableItemsDisplay : CraftableDisplay
+    public partial class UsableItemsDisplay : ItemDisplay
     {
-        /* public event Action<UsableItem> OnOpenPopupPressed;
-        
-        private UsableItem UsableItem { get; set; } */
         private CheckBox Reusable { get; set; }
-        private EffectsDisplay Effects { get; set; }
 
         public override void _Ready()
         {
             base._Ready();
             
             Reusable = GetNode<CheckBox>("%Reusable");
-            Effects = GetNode<EffectsDisplay>("%Effects");
         }
 
         public override void Setup(Craftable craftable)
@@ -26,14 +22,8 @@ namespace Lastdew
             base.Setup(craftable);
             
             UsableItem usableItem = craftable as UsableItem;
-           // UsableItem = usableItem;
             Reusable.ButtonPressed = usableItem.Reusable;
         }
-
-     /*    protected override void OpenEditPopup()
-        {
-            OnOpenPopupPressed?.Invoke(UsableItem);
-        } */
     }
 }
 #endif

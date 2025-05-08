@@ -65,6 +65,22 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="Rarity" type="Label" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+mouse_filter = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Tags" type="Label" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+mouse_filter = 1
+clip_text = true
+text_overrun_behavior = 3
+
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(71, 50)
 layout_mode = 2

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 namespace Lastdew
@@ -7,9 +8,9 @@ namespace Lastdew
 	public partial class UsableItem : Item
 	{
 		[Export]
-		public bool Reusable { get; set; }
+		public bool Reusable { get; private set; }
 		[Export]
-		public Effect[] Effects { get; set; }
+		public Array<Effect> Effects { get; private set; }
 	
 		public UsableItem() : base()
 		{

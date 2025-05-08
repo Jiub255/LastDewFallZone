@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://btk0kqeonlxca"]
+
+[ext_resource type="Script" uid="uid://m47jw2r0r2ts" path="res://addons/resource_editor/resource_editor_popup/buildings/SceneUidEditor.cs" id="1_e3dy3"]
+
+[node name="SceneUID" type="HBoxContainer"]
+theme_override_constants/separation = 5
+script = ExtResource("1_e3dy3")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+text = "Scene UID"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3

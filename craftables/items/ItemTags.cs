@@ -8,6 +8,6 @@ namespace Lastdew
 		MEDICAL,
 		WEAPON,
 		ARMOR,
-		CRAFTING_MATERIAL,
+		CRAFTING,
 	}
 }

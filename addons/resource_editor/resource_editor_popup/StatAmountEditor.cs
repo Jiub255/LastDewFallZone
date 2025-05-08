@@ -1,7 +1,6 @@
 #if TOOLS
 using Godot;
 using System;
-using System.Collections.Generic;
 
 namespace Lastdew
 {
@@ -26,15 +25,6 @@ namespace Lastdew
         }
         public int Amount { get => (int)SpinBox.Value; }
         
-        private readonly Dictionary<long, StatType> StatsByIndex = new()
-        {
-            {0, StatType.ATTACK },
-            {1, StatType.DEFENSE },
-            {2, StatType.ENGINEERING },
-            {3, StatType.FARMING },
-            {4, StatType.MEDICAL },
-            {5, StatType.SCAVENGING },
-        };
         private SpinBox SpinBox { get; set; }
         private MenuButton MenuButton { get; set; }
         private PopupMenu PopupMenu { get; set; }
@@ -49,6 +39,11 @@ namespace Lastdew
             DeleteButton = GetNode<Button>("%Delete");
             
             PopupMenu = MenuButton.GetPopup();
+            PopupMenu.Clear();
+            foreach (StatType statType in Enum.GetValues<StatType>())
+            {
+                PopupMenu.AddItem(statType.ToString().Capitalize());
+            }
 
             PopupMenu.IndexPressed += ChangeStat;
             DeleteButton.Pressed += Delete;
@@ -70,7 +65,7 @@ namespace Lastdew
 
         private void ChangeStat(long index)
         {
-            Stat = StatsByIndex[index];
+            Stat = (StatType)index;
         }
         
         private void Delete()

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 namespace Lastdew
@@ -7,11 +8,11 @@ namespace Lastdew
 	public partial class Equipment : Item
 	{
 		[Export]
-		public EquipmentType Type { get; set; }
+		public EquipmentType Type { get; private set; }
 		[Export]
-		public Godot.Collections.Dictionary<StatType, int> EquipmentBonuses { get; set; }
+		public Dictionary<StatType, int> EquipmentBonuses { get; private set; }
 		[Export]
-		public Godot.Collections.Dictionary<StatType, int>  StatsNeededToEquip { get; set; }
+		public Dictionary<StatType, int>  StatsNeededToEquip { get; private set; }
 		
 		public Equipment() : base()
 		{

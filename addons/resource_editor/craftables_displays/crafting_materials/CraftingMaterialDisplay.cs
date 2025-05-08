@@ -4,7 +4,7 @@ using Godot;
 namespace Lastdew
 {
     [Tool]
-    public partial class CraftingMaterialDisplay : CraftableDisplay
+    public partial class CraftingMaterialDisplay : ItemDisplay
     {
         private CheckBox Reusable { get; set; }
 

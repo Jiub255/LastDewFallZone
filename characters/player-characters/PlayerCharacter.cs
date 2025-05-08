@@ -111,7 +111,7 @@ namespace Lastdew
 		
 		public void UseItem(UsableItem item)
 		{
-			this.PrintDebug($"Using {item.Name}, effects: {item.Effects.Length}");
+			this.PrintDebug($"Using {item.Name}, effects: {item.Effects.Count}");
 			foreach (Effect effect in item.Effects)
 			{
 				this.PrintDebug($"Effect: {effect}");

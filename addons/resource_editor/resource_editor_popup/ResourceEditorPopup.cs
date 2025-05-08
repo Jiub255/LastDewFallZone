@@ -14,12 +14,22 @@ namespace Lastdew
         private LineEdit NameEdit { get; set; }
         private TextEdit DescriptionEdit { get; set; }
         private Button SaveButton { get; set; }
+        private AcceptDialog AcceptDialog { get; set; }
         private VBoxContainer Column1 { get; set; }
         private VBoxContainer Column2 { get; set; }
-        private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(UIDs.STATS_TO_CRAFT);
-        private PackedScene RecipeCostsScene { get; } = GD.Load<PackedScene>(UIDs.RECIPE_COSTS_EDIT);
-        private PackedScene RequiredBuildingsScene { get; } = GD.Load<PackedScene>(UIDs.REQUIRED_BUILDINGS_EDIT);
-        private PackedScene ScrapResultsScene { get; } = GD.Load<PackedScene>(UIDs.SCRAP_RESULTS_EDIT);
+        private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(UIDs.STATS_TO_CRAFT_EDITOR);
+        private PackedScene RecipeCostsScene { get; } = GD.Load<PackedScene>(UIDs.RECIPE_COSTS_EDITOR);
+        private PackedScene RequiredBuildingsScene { get; } = GD.Load<PackedScene>(UIDs.REQUIRED_BUILDINGS_EDITOR);
+        private PackedScene ScrapResultsScene { get; } = GD.Load<PackedScene>(UIDs.SCRAP_RESULTS_EDITOR);
+        private PackedScene RarityEditorScene { get; } = GD.Load<PackedScene>(UIDs.RARITY_EDITOR);
+        private PackedScene TagsEditorScene { get; } = GD.Load<PackedScene>(UIDs.TAGS_EDITOR);
+        private PackedScene ReusableEditorScene { get; } = GD.Load<PackedScene>(UIDs.REUSABLE_EDITOR);
+        private PackedScene EquipmentBonusesScene { get; } = GD.Load<PackedScene>(UIDs.EQUIPMENT_BONUSES_EDITOR);
+        private PackedScene EquipmentTypeScene { get; } = GD.Load<PackedScene>(UIDs.EQUIPMENT_TYPE_EDITOR);
+        private PackedScene StatsToEquipScene { get; } = GD.Load<PackedScene>(UIDs.STATS_TO_EQUIP_EDITOR);
+        private PackedScene BuildingTypeScene { get; } = GD.Load<PackedScene>(UIDs.BUILDING_TYPE_EDITOR);
+        private PackedScene SceneUIDScene { get; } = GD.Load<PackedScene>(UIDs.SCENE_UID_EDITOR);
+        private PackedScene EffectsScene { get; } = GD.Load<PackedScene>(UIDs.EFFECTS_EDITOR);
 
 
         public override void _Ready()
@@ -30,6 +40,7 @@ namespace Lastdew
             NameEdit = GetNode<LineEdit>("%NameEdit");
             DescriptionEdit = GetNode<TextEdit>("%DescriptionEdit");
             SaveButton = GetNode<Button>("%SaveButton");
+            AcceptDialog = GetNode<AcceptDialog>("%AcceptDialog");
             Column1 = GetNode<VBoxContainer>("%Column1");
             Column2 = GetNode<VBoxContainer>("%Column2");
 
@@ -59,40 +70,80 @@ namespace Lastdew
             Craftable = craftable;
             ClearColumns();
             
-            // Instantiate property editors
-            MaterialAmountsEditor recipeCosts = (MaterialAmountsEditor)RecipeCostsScene.Instantiate();
-            Column1.AddChild(recipeCosts);
-
-            StatsToCraftEditor statsToCraft = (StatsToCraftEditor)StatsToCraftScene.Instantiate();
-            Column2.AddChild(statsToCraft);
-
-            RequiredBuildingsEditor requiredBuildings = (RequiredBuildingsEditor)RequiredBuildingsScene.Instantiate();
-            Column1.AddChild(requiredBuildings);
-
-            ScrapResultsEditor scrapResults = (ScrapResultsEditor)ScrapResultsScene.Instantiate();
-            Column2.AddChild(scrapResults);
-            
-            // Initialize property editors
+            // Instantiate/Initialize property editors
             IconButton.Icon = craftable.Icon;
             NameEdit.Text = craftable.Name;
             DescriptionEdit.Text = craftable.Description;
             
-            statsToCraft.Setup(craftable.StatsNeededToCraft);
+            MaterialAmountsEditor recipeCosts = (MaterialAmountsEditor)RecipeCostsScene.Instantiate();
+            Column1.AddChild(recipeCosts);
             recipeCosts.Setup(craftable.RecipeCosts);
+
+            StatsToCraftEditor statsToCraft = (StatsToCraftEditor)StatsToCraftScene.Instantiate();
+            Column2.AddChild(statsToCraft);
+            statsToCraft.Setup(craftable.StatsNeededToCraft);
+
+            RequiredBuildingsEditor requiredBuildings = (RequiredBuildingsEditor)RequiredBuildingsScene.Instantiate();
+            Column1.AddChild(requiredBuildings);
             requiredBuildings.Setup(craftable.RequiredBuildings);
+
+            ScrapResultsEditor scrapResults = (ScrapResultsEditor)ScrapResultsScene.Instantiate();
+            Column2.AddChild(scrapResults);
             scrapResults.Setup(craftable.ScrapResults);
             
-            // TODO: Instantiate/initialize all subclass-specific property editors
+            if (craftable is Item item)
+            {
+                RarityEditor rarityEditor = (RarityEditor)RarityEditorScene.Instantiate();
+                Column1.AddChild(rarityEditor);
+                rarityEditor.Setup(item.ItemRarity);
+
+                TagsEditor tagsEditor = (TagsEditor)TagsEditorScene.Instantiate();
+                Column2.AddChild(tagsEditor);
+                tagsEditor.Setup(item.Tags);
+            }
+            
             switch (craftable)
             {
                 case Building building:
+                    BuildingTypeEditor buildingTypeEditor = (BuildingTypeEditor)BuildingTypeScene.Instantiate();
+                    Column1.AddChild(buildingTypeEditor);
+                    buildingTypeEditor.Setup(building.Type);
+
+                    SceneUidEditor sceneUidEditor = (SceneUidEditor)SceneUIDScene.Instantiate();
+                    Column2.AddChild(sceneUidEditor);
+                    sceneUidEditor.Setup(building.SceneUid);
                     break;
+                    
                 case CraftingMaterial craftingMaterial:
+                    ReusableEditor materialReusableEditor = (ReusableEditor)ReusableEditorScene.Instantiate();
+                    Column1.AddChild(materialReusableEditor);
+                    materialReusableEditor.Setup(craftingMaterial.Reusable);
                     break;
+                    
                 case Equipment equipment:
+                    EquipmentTypeEditor equipmentTypeEditor = (EquipmentTypeEditor)EquipmentTypeScene.Instantiate();
+                    Column1.AddChild(equipmentTypeEditor);
+                    equipmentTypeEditor.Setup(equipment.Type);
+
+                    EquipmentBonusesEditor equipmentBonusesEditor = (EquipmentBonusesEditor)EquipmentBonusesScene.Instantiate();
+                    Column2.AddChild(equipmentBonusesEditor);
+                    equipmentBonusesEditor.Setup(equipment.EquipmentBonuses);
+
+                    StatsToEquipEditor statsToEquipEditor = (StatsToEquipEditor)StatsToEquipScene.Instantiate();
+                    Column1.AddChild(statsToEquipEditor);
+                    statsToEquipEditor.Setup(equipment.StatsNeededToEquip);
                     break;
+                    
                 case UsableItem usableItem:
+                    ReusableEditor usableReusableEditor = (ReusableEditor)ReusableEditorScene.Instantiate();
+                    Column1.AddChild(usableReusableEditor);
+                    usableReusableEditor.Setup(usableItem.Reusable);
+
+                    EffectsEditor effectsEditor = (EffectsEditor)EffectsScene.Instantiate();
+                    Column2.AddChild(effectsEditor);
+                    effectsEditor.Setup(usableItem.Effects);
                     break;
+                    
                 default:
                     break;
             }
@@ -118,7 +169,8 @@ namespace Lastdew
             {
                 if (Craftable.Name == "")
                 {
-                    // TODO: Popup saying name can't be empty.
+                    AcceptDialog.DialogText = "Craftable Name can't be empty.";
+                    AcceptDialog.Show();
                     GD.PushError($"New {Craftable.GetType()} name can't be empty");
                     return;
                 }
@@ -149,7 +201,7 @@ namespace Lastdew
                         }
                         break;
                     case Building:
-                        string building_path = $"res://craftables/bulidings/{Craftable.Name.ToSnakeCase()}.tres";
+                        string building_path = $"res://craftables/buildings/{Craftable.Name.ToSnakeCase()}.tres";
                         bool building_saved = TrySaveCraftable(building_path, Databases.CRAFTABLES.Buildings);
                         if (!building_saved)
                         {
@@ -180,12 +232,11 @@ namespace Lastdew
             Craftable.Set(Craftable.PropertyName.Description, DescriptionEdit.Text);
             Craftable.Set(Craftable.PropertyName.Icon, IconButton.Icon);
 
-            // For each property editor, get the data from it and set it to the resource. 
             foreach (Node node in this.GetChildrenRecursive())
             {
                 if (node is IPropertyEditor propertyEditor)
                 {
-                    propertyEditor.Save(Craftable);
+                    propertyEditor.SetProperty(Craftable);
                 }
             }
         }
@@ -194,7 +245,8 @@ namespace Lastdew
         {
             if (ResourceLoader.Exists(material_path))
             {
-                // TODO: Popup saying name already taken.
+                AcceptDialog.DialogText = "Craftable Name already taken.";
+                AcceptDialog.Show();
                 GD.PushError($"Resource already exists at {material_path}");
                 return false;
             }
@@ -206,7 +258,7 @@ namespace Lastdew
             }
             else
             {
-                GD.PushError($"Craftable {Craftable.Name} save failed. {error}");
+                GD.PushError($"Craftable {Craftable.Name} save failed at {material_path}. {error}");
                 return false;
             }
 

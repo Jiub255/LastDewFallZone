@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ei5w0vmmup2l"]
+
+[ext_resource type="Script" uid="uid://bmxmj8dahi6uv" path="res://addons/resource_editor/resource_editor_popup/usable_items/EffectButton.cs" id="1_dtqk0"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_cfm87"]
+
+[node name="EffectButton" type="Button"]
+custom_minimum_size = Vector2(50, 50)
+text = "R.P."
+script = ExtResource("1_dtqk0")
+
+[node name="Delete" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+icon = ExtResource("2_cfm87")

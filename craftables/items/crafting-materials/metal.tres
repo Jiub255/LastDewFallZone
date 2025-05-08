@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_twptw")
 Reusable = false
-ItemRarity = 100
-Tags = Array[int]([])
+ItemRarity = 0
+Tags = Array[int]([4, 1])
 Name = "Metal"
 Description = "Made from supernovas."
 Icon = ExtResource("1_pol43")

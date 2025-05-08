@@ -52,11 +52,17 @@ namespace Lastdew
         {
             CraftableDisplay display = (CraftableDisplay)CraftableDisplayScene.Instantiate();
             Parent.AddChild(display);
-            this.PrintDebug($"Display type: {display.GetType()}, Craftable type: {craftable.GetType()}");
+            //this.PrintDebug($"Display type: {display.GetType()}, Craftable type: {craftable.GetType()}");
             display.Setup(craftable);
-            // TODO: Unsubscribe on delete resource.
             display.OnOpenPopupPressed += OpenPopup;
+            display.OnDelete += OnDeleteCraftable;
             DisplaysByUid[craftable.GetUid()] = display;
+        }
+        
+        private void OnDeleteCraftable(CraftableDisplay display)
+        {
+            display.OnOpenPopupPressed -= OpenPopup;
+            display.OnDelete -= OnDeleteCraftable;
         }
 
         public void UpdateDisplay(long uid)

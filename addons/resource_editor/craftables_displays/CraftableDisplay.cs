@@ -4,11 +4,11 @@ using Godot;
 
 namespace Lastdew
 {
-    // TODO: Add delete craftable button. Pressing it shows a confirmation popup before deleting the resource.
     [Tool]
     public abstract partial class CraftableDisplay : PanelContainer
     {
         public event Action<Craftable> OnOpenPopupPressed;
+        public event Action<CraftableDisplay> OnDelete;
 
         private Craftable Craftable;
         private TextureRect Icon { get; set; }
@@ -121,6 +121,8 @@ namespace Lastdew
             
             // Refresh FileSystem dock
             EditorInterface.Singleton.GetResourceFilesystem().Scan();
+
+            OnDelete?.Invoke(this);
         }
     }
 }

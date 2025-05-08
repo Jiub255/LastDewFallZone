@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba8ojy40xix8n"]
+
+[ext_resource type="Script" uid="uid://cec1cqxuabp5v" path="res://addons/resource_editor/resource_editor_popup/equipment/EquipmentTypeEditor.cs" id="1_pxyg5"]
+
+[node name="EquipmentType" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+theme_override_constants/separation = 5
+script = ExtResource("1_pxyg5")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Equipment Type"
+
+[node name="MenuButton" type="MenuButton" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(105, 50)
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "Head"
+popup/item_0/id = 0
+popup/item_1/text = "Body"
+popup/item_1/id = 1
+popup/item_2/text = "Feet"
+popup/item_2/id = 2
+popup/item_3/text = "Weapon"
+popup/item_3/id = 3

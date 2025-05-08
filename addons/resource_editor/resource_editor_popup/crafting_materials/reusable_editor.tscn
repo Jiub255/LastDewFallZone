@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://duccv88mkvegx"]
+
+[ext_resource type="Script" uid="uid://bh7vsdwcxhypg" path="res://addons/resource_editor/resource_editor_popup/crafting_materials/ReusableEditor.cs" id="1_q6rnc"]
+
+[node name="Reusable" type="HBoxContainer"]
+theme_override_constants/separation = 5
+script = ExtResource("1_q6rnc")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Reusable"
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2

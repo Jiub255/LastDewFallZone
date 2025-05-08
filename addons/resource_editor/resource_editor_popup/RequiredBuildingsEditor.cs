@@ -4,16 +4,12 @@ using Godot.Collections;
 
 namespace Lastdew
 {
-    /// <summary>
-    /// TODO: Combine RecipeCostsEdit, RequiredBuildingsEdit, and StatsToCraftEdit into a base class.
-    /// Probably replace IPropertyUI interface with the abstract base class.
-    /// </summary>
 	[Tool]
 	public partial class RequiredBuildingsEditor : HBoxContainer, IPropertyEditor
 	{
         private HBoxContainer Parent { get; set; }
         private Button Add { get; set; }
-        private PackedScene BuildingEditScene { get; } = GD.Load<PackedScene>(UIDs.BUILDING_EDIT);
+        private PackedScene BuildingEditScene { get; } = GD.Load<PackedScene>(UIDs.BUILDING_EDITOR);
         private Array<long> Buildings
         {
             get
@@ -48,13 +44,8 @@ namespace Lastdew
             }
         }
         
-        public void Save(Craftable craftable)
+        public void SetProperty(Craftable craftable)
         {
-            /* this.PrintDebug($"Saving {craftable.Name}");
-            foreach (long building in Buildings)
-            {
-                this.PrintDebug($"Building: {Databases.CRAFTABLES[building]?.Name}");
-            } */
             craftable.Set(Craftable.PropertyName.RequiredBuildings, Buildings);
         }
         

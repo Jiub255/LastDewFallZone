@@ -66,6 +66,18 @@ layout_mode = 2
 text = "Scrap Results"
 horizontal_alignment = 1
 
+[node name="RarityLabel" type="Label" parent="ScrollContainer/VBoxContainer/PropertyLabels"]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+text = "Rarity"
+horizontal_alignment = 1
+
+[node name="TagsLabel" type="Label" parent="ScrollContainer/VBoxContainer/PropertyLabels"]
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+text = "Tags"
+horizontal_alignment = 1
+
 [node name="TypeLabel" type="Label" parent="ScrollContainer/VBoxContainer/PropertyLabels"]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2

@@ -7,8 +7,8 @@
 script = ExtResource("1_d62t3")
 Reusable = false
 Effects = []
-ItemRarity = 100
-Tags = Array[int]([])
+ItemRarity = 0
+Tags = Array[int]([1])
 Name = "uuuuuuuuu"
 Description = ""
 Icon = ExtResource("1_jogvb")

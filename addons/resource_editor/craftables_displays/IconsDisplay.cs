@@ -20,10 +20,6 @@ namespace Lastdew
         public void Setup(Craftable craftable)
         {
             ClearIcons();
-            if (craftable.RecipeCosts.Count == 0)
-            {
-                return;
-            }
             PopulateIcons(craftable);
         }
 

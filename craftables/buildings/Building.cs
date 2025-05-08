@@ -7,16 +7,14 @@ namespace Lastdew
 	public partial class Building : Craftable
 	{
 		[Export]
-		public BuildingType Type { get; set; }
-		// TODO: Should this be a long (for the uid) instead?
+		public BuildingType Type { get; private set; }
 		[Export]
-		public string SceneUid { get; set; }
+		public string SceneUid { get; private set; }
 		
 		public Building() : base()
 		{
 			Type = BuildingType.CRAFTING;
 		}
-		
 		public override void OnClickCraftable()
 		{
 			throw new NotImplementedException();

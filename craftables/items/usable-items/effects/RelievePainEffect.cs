@@ -10,11 +10,14 @@ namespace Lastdew
 	public partial class RelievePainEffect : Effect
 	{
 		[Export]
-		public int ReliefAmount { get; set; }
+		public int ReliefAmount { get; private set; }
 		[Export]
-		public float Duration { get; set; }
-		
-		public override void ApplyEffect(PlayerCharacter pc)
+		public float Duration { get; private set; }
+
+        public override string Description => $"Relieves {ReliefAmount} pain for {Duration}s";
+        public override string Abbreviation => "R.P.";
+
+        public override void ApplyEffect(PlayerCharacter pc)
 		{
 			pc.Health.RelievePain(ReliefAmount, Duration);
 		}

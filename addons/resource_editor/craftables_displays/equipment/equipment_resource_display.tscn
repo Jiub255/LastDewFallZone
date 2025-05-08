@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="8_wnnvb"]
 
 [node name="EquipmentDisplay" type="PanelContainer"]
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("1_0s18b")
 script = ExtResource("1_pgtuu")
 
@@ -38,6 +39,7 @@ text_overrun_behavior = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "Description blah blah ljaskjvv voisajdv asleivlaskdnvn alsidnv alisenv aslijdv ;laisjd vliasjdvi asjelansdvl; ajs.dkva sjdivaslidvj aolisdvj"
 clip_text = true
 text_overrun_behavior = 3
@@ -63,24 +65,45 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="Rarity" type="Label" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+mouse_filter = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Tags" type="Label" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(82, 0)
+layout_mode = 2
+mouse_filter = 1
+clip_text = true
+text_overrun_behavior = 3
+
 [node name="Type" type="Label" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
-text = "Weapon"
 
 [node name="EquipmentBonuses" type="Label" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "Atk 2, Def 1"
+clip_text = true
+text_overrun_behavior = 3
 script = ExtResource("3_p54vn")
 
 [node name="StatsNeededToEquip" type="Label" parent="HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "Atk 1, Eng 3"
+clip_text = true
+text_overrun_behavior = 3
 script = ExtResource("3_p54vn")
 
 [node name="Delete" type="Button" parent="HBoxContainer"]

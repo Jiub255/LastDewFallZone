@@ -4,16 +4,12 @@ using Godot.Collections;
 
 namespace Lastdew
 {
-    /// <summary>
-    /// TODO: Combine RecipeCostsEdit, RequiredBuildingsEdit, and StatsToCraftEdit into a base class.
-    /// Probably replace IPropertyUI interface with the abstract base class.
-    /// </summary>
     [Tool]
     public partial class MaterialAmountsEditor : HBoxContainer
     {
         private VBoxContainer Parent { get; set; }
         private Button Add { get; set; }
-        private PackedScene MaterialAmountScene { get; } = GD.Load<PackedScene>(UIDs.MATERIAL_AMOUNT_EDIT);
+        private PackedScene MaterialAmountScene { get; } = GD.Load<PackedScene>(UIDs.MATERIAL_AMOUNT_EDITOR);
         protected Dictionary<long, int> Materials
         {
             get

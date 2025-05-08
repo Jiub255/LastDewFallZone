@@ -25,12 +25,23 @@ namespace Lastdew
 		public const string EQUIPMENT_RESOURCE_DISPLAY = "uid://qdtjm66v1jbk";
 		public const string USABLE_ITEM_DISPLAY = "uid://6d8iaetjj2im";
 		public const string BUILDING_DISPLAY = "uid://ctg3by00x7ge3";
-		public const string STATS_TO_CRAFT = "uid://dxtbey0a7pn2m";
-		public const string STAT_AMOUNT_EDIT = "uid://ce5ga25bknng5";
-		public const string MATERIAL_AMOUNT_EDIT = "uid://c1y4b0yxpa327";
-		public const string RECIPE_COSTS_EDIT = "uid://bptw12qdeseh";
-		public const string BUILDING_EDIT = "uid://btxev5v7o7ao0";
-		public const string REQUIRED_BUILDINGS_EDIT = "uid://siyvsne6fc8a";
-		public const string SCRAP_RESULTS_EDIT = "uid://dxs5r6evcoahk";
+		public const string STATS_TO_CRAFT_EDITOR = "uid://dxtbey0a7pn2m";
+		public const string STAT_AMOUNT_EDITOR = "uid://ce5ga25bknng5";
+		public const string MATERIAL_AMOUNT_EDITOR = "uid://c1y4b0yxpa327";
+		public const string RECIPE_COSTS_EDITOR = "uid://bptw12qdeseh";
+		public const string BUILDING_EDITOR = "uid://btxev5v7o7ao0";
+		public const string REQUIRED_BUILDINGS_EDITOR = "uid://siyvsne6fc8a";
+		public const string SCRAP_RESULTS_EDITOR = "uid://dxs5r6evcoahk";
+		public const string RARITY_EDITOR = "uid://were1kh6e5is";
+		public const string TAG_BUTTON = "uid://b3frh6sldpqeo";
+		public const string TAGS_EDITOR = "uid://2md27oigm3of";
+		public const string REUSABLE_EDITOR = "uid://duccv88mkvegx";
+		public const string EQUIPMENT_BONUSES_EDITOR = "uid://d3oju1wydcjyp";
+		public const string EQUIPMENT_TYPE_EDITOR = "uid://ba8ojy40xix8n";
+		public const string STATS_TO_EQUIP_EDITOR = "uid://bl08nu2qmkkab";
+		public const string BUILDING_TYPE_EDITOR = "uid://b4fxe8o2dnre5";
+		public const string SCENE_UID_EDITOR = "uid://btk0kqeonlxca";
+		public const string EFFECT_BUTTON = "uid://ei5w0vmmup2l";
+		public const string EFFECTS_EDITOR = "uid://bqv2hwt4exeol";
     }
 }

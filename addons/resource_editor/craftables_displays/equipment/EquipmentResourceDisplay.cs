@@ -4,7 +4,7 @@ using Godot;
 namespace Lastdew
 {
     [Tool]
-    public partial class EquipmentResourceDisplay : CraftableDisplay
+    public partial class EquipmentResourceDisplay : ItemDisplay
     {
         private Label Type { get; set; }
         private StatsDisplay EquipmentBonuses { get; set; }

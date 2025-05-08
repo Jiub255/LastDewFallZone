@@ -15,7 +15,7 @@ namespace Lastdew
 	{
 		private const string DIRECTORY = "res://craftables/";
 		private const string PATH = "res://craftables/craftables.tres";
-		
+
 		// TODO: 1. Is Export necessary to save the dicts with the resource?
 		// and 2. Can it be done with C# dictionaries? Esp. if export not needed.
 		[Export]
@@ -23,12 +23,12 @@ namespace Lastdew
 		[Export]
 		public Godot.Collections.Dictionary<long, CraftingMaterial> CraftingMaterials { get; set; }
 		[Export]
-		public Godot.Collections.Dictionary<long, Equipment> Equipment { get; set;}
+		public Godot.Collections.Dictionary<long, Equipment> Equipments { get; set;}
 		[Export]
 		public Godot.Collections.Dictionary<long, UsableItem> UsableItems { get; set; }
-		
-		public int Count => Buildings.Count + CraftingMaterials.Count + Equipment.Count + UsableItems.Count;
-		
+
+		public int Count => Buildings.Count + CraftingMaterials.Count + Equipments.Count + UsableItems.Count;
+
 		public Craftable this[long uid]
 		{
 			get
@@ -41,7 +41,7 @@ namespace Lastdew
 				{
 					return material;
 				}
-				else if (Equipment.TryGetValue(uid, out Equipment equipment))
+				else if (Equipments.TryGetValue(uid, out Equipment equipment))
 				{
 					return equipment;
 				}
@@ -52,20 +52,20 @@ namespace Lastdew
 				return null;
 			}
 		}
-		
+
 		public Craftables() : base()
 		{
 			Buildings = [];
 			CraftingMaterials = [];
-			Equipment = [];
+			Equipments = [];
 			UsableItems = [];
 		}
-		
+
 		public void PopulateDictionaries()
 		{
 			Buildings.Clear();
 			CraftingMaterials.Clear();
-			Equipment.Clear();
+			Equipments.Clear();
 			UsableItems.Clear();
 			
 			PopulateDictionaries(DIRECTORY);
@@ -73,7 +73,7 @@ namespace Lastdew
 			this.PrintDebug(
 				$"Buildings: {Buildings.Count}, " +
 				$"Crafting Materials: {CraftingMaterials.Count}, " +
-				$"Equipment: {Equipment.Count}, " +
+				$"Equipment: {Equipments.Count}, " +
 				$"Usable Items: {UsableItems.Count}");
 			Error error = ResourceSaver.Save(this, PATH);
 			if (error != Error.Ok)
@@ -82,7 +82,7 @@ namespace Lastdew
 			}
 			TESTPRINT();
 		}
-		
+
 		private void PopulateDictionaries(string directory)
 		{
 			DirAccess dirAccess = DirAccess.Open(directory);
@@ -125,7 +125,7 @@ namespace Lastdew
 							CraftingMaterials[uid] = material;
 							break;
 						case Equipment equipment:
-							Equipment[uid] = equipment;
+							Equipments[uid] = equipment;
 							break;
 						case UsableItem usableItem:
 							UsableItems[uid] = usableItem;
@@ -148,7 +148,7 @@ namespace Lastdew
 			{
 				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}
-			foreach (KeyValuePair<long, Equipment> kvp in Equipment)
+			foreach (KeyValuePair<long, Equipment> kvp in Equipments)
 			{
 				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}
@@ -157,28 +157,19 @@ namespace Lastdew
 				yield return new KeyValuePair<long, Craftable>(kvp.Key, kvp.Value);
 			}
 		}
-		
+
 		public bool DeleteCraftable(Craftable craftable)
 		{
-		    switch (craftable)
-		    {
-		        case CraftingMaterial craftingMaterial:
-					CraftingMaterials.Remove(craftingMaterial.GetUid());
-					return true;
-		        case Equipment equipment:
-					Equipment.Remove(equipment.GetUid());
-					return true;
-		        case UsableItem usableItem:
-					UsableItems.Remove(usableItem.GetUid());
-					return true;
-		        case Building building:
-					Buildings.Remove(building.GetUid());
-					return true;
-		        default:
-					return false;
-		    }
-		}
-		
+            return craftable switch
+            {
+                CraftingMaterial => CraftingMaterials.Remove(craftable.GetUid()),
+                Equipment => Equipments.Remove(craftable.GetUid()),
+                UsableItem => UsableItems.Remove(craftable.GetUid()),
+                Building => Buildings.Remove(craftable.GetUid()),
+                _ => false,
+            };
+        }
+
 		public void TESTPRINT()
 		{
 			this.PrintDebug($"Craftables count {this.Count}");

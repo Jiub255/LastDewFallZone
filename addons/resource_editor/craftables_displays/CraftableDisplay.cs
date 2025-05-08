@@ -70,7 +70,7 @@ namespace Lastdew
                 }
             }
         }
-        
+
         public virtual void Setup(Craftable craftable)
         {
             Craftable = craftable;
@@ -88,30 +88,39 @@ namespace Lastdew
         {
             OnOpenPopupPressed?.Invoke(Craftable);
         }
-        
+
         private void ConfirmDeleteCraftable()
         {
             Dialog.Show();
         }
 
-        // TODO: Only the QueueFree() is working. Still need to properly delete resource, from FileSystem and Database.
         private void DeleteCraftable()
         {
-            this.PrintDebug($"Deleting {Craftable.Name}");
-            // TODO: Delete craftable file.
-            Error error = DirAccess.RemoveAbsolute(Craftable.ResourcePath);
+            string path = Craftable.ResourcePath;
+            string name = Craftable.Name;
+            
+            // Delete craftable from Craftables database.
+            bool deletion_successful = Databases.CRAFTABLES.DeleteCraftable(Craftable);
+            if (!deletion_successful)
+            {
+                GD.PushError($"Craftable {name} not deleted from Craftables Database.");
+            }
+            
+            // Stop referencing craftable resource.
+            Craftable = null;
+            
+            // Delete craftable display.
+            QueueFree();
+            
+            // Delete craftable file.
+            Error error = DirAccess.RemoveAbsolute(path);
             if (error != Error.Ok)
             {
                 GD.PushError($"File not deleted successfully. {error}");
             }
-            // TODO: Delete craftable from Craftables database.
-            bool deletion_successful = Databases.CRAFTABLES.DeleteCraftable(Craftable);
-            if (!deletion_successful)
-            {
-                GD.PushError($"Craftable {Craftable.Name} not deleted from Craftables Database.");
-            }
-            // TODO: Delete craftable display.
-            QueueFree();
+            
+            // Refresh FileSystem dock
+            EditorInterface.Singleton.GetResourceFilesystem().Scan();
         }
     }
 }

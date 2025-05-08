@@ -41,7 +41,7 @@ namespace Lastdew
 		
 		private void PopulateUI()
 		{
-			foreach (Equipment equipment in Databases.CRAFTABLES.Equipment.Values)
+			foreach (Equipment equipment in Databases.CRAFTABLES.Equipments.Values)
 			{
 				AddButtonToGrids(equipment, EquipmentGrid);
 			}

@@ -10,7 +10,7 @@ namespace Lastdew
         {
             base._Ready();
 
-            foreach (Craftable craftable in Databases.CRAFTABLES.Equipment.Values)
+            foreach (Craftable craftable in Databases.CRAFTABLES.Equipments.Values)
             {
                 Craftables.Add(craftable);
             }

@@ -134,7 +134,7 @@ namespace Lastdew
                         break;
                     case Equipment:
                         string equipment_path = $"res://craftables/items/equipment/{Craftable.Name.ToSnakeCase()}.tres";
-                        bool equipment_saved = TrySaveCraftable(equipment_path, Databases.CRAFTABLES.Equipment);
+                        bool equipment_saved = TrySaveCraftable(equipment_path, Databases.CRAFTABLES.Equipments);
                         if (!equipment_saved)
                         {
                             return;

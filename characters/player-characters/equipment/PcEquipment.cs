@@ -39,19 +39,19 @@ namespace Lastdew
 		public PcEquipment(PcSaveData pcSaveData)
 		{
 			Craftables craftables = Databases.CRAFTABLES;
-			if (craftables.Equipment.ContainsKey(pcSaveData.Head))
+			if (craftables.Equipments.ContainsKey(pcSaveData.Head))
 			{
 				Equip((Equipment)craftables[pcSaveData.Head]);
 			}
-			if (craftables.Equipment.ContainsKey(pcSaveData.Weapon))
+			if (craftables.Equipments.ContainsKey(pcSaveData.Weapon))
 			{
 				Equip((Equipment)craftables[pcSaveData.Weapon]);
 			}
-			if (craftables.Equipment.ContainsKey(pcSaveData.Body))
+			if (craftables.Equipments.ContainsKey(pcSaveData.Body))
 			{
 				Equip((Equipment)craftables[pcSaveData.Body]);
 			}
-			if (craftables.Equipment.ContainsKey(pcSaveData.Feet))
+			if (craftables.Equipments.ContainsKey(pcSaveData.Feet))
 			{
 				Equip((Equipment)craftables[pcSaveData.Feet]);
 			}

@@ -1,34 +1,17 @@
-[gd_resource type="Resource" script_class="Craftables" load_steps=31 format=3 uid="uid://71lhgtyj3vnx"]
+[gd_resource type="Resource" script_class="Craftables" load_steps=14 format=3 uid="uid://71lhgtyj3vnx"]
 
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_f1bwi"]
 [ext_resource type="Resource" uid="uid://bbw26e1wuuv0j" path="res://craftables/buildings/test_building.tres" id="1_saxsy"]
 [ext_resource type="Script" uid="uid://cdksnkutkwfx2" path="res://craftables/Craftables.cs" id="1_u67xb"]
 [ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="2_taw0v"]
-[ext_resource type="Resource" uid="uid://dsw4wwyr4itqs" path="res://craftables/items/crafting-materials/gersef.tres" id="4_3ya1e"]
 [ext_resource type="Script" uid="uid://d2k7fseog6yq2" path="res://craftables/items/usable-items/UsableItem.cs" id="4_eg58c"]
 [ext_resource type="Resource" uid="uid://ctk85wdoln0g6" path="res://craftables/items/equipment/armor.tres" id="4_inbtb"]
-[ext_resource type="Resource" uid="uid://cv0gpma25e5nj" path="res://craftables/items/crafting-materials/james_gate.tres" id="5_01mmw"]
 [ext_resource type="Resource" uid="uid://uaemgs7vnwb1" path="res://craftables/items/equipment/pistol.tres" id="5_3ipo4"]
-[ext_resource type="Resource" uid="uid://d03mjt77jys5x" path="res://craftables/items/equipment/helmet.tres" id="6_3ya1e"]
 [ext_resource type="Resource" uid="uid://dkkgjyi55etp" path="res://craftables/items/crafting-materials/cloth.tres" id="8_01mmw"]
-[ext_resource type="Resource" uid="uid://bfsoyqg1kq7hh" path="res://craftables/items/crafting-materials/asdf.tres" id="9_01mmw"]
 [ext_resource type="Resource" uid="uid://7jo3uy4gbavf" path="res://craftables/items/crafting-materials/wood.tres" id="9_f1bwi"]
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="9_rqomc"]
 [ext_resource type="Resource" uid="uid://cfw2xp7h3qpko" path="res://craftables/items/crafting-materials/metal.tres" id="10_nstv5"]
-[ext_resource type="Resource" uid="uid://hy2co7mkgbib" path="res://craftables/items/crafting-materials/dfgh65.tres" id="10_rqomc"]
-[ext_resource type="Resource" path="res://craftables/items/crafting-materials/jytddjty_tdjty.tres" id="11_mm2ex"]
-[ext_resource type="Resource" uid="uid://b034inupvw0ee" path="res://craftables/items/crafting-materials/uiopuiop.tres" id="12_iee5f"]
 [ext_resource type="Resource" uid="uid://da588em7oo06t" path="res://craftables/items/usable-items/painkiller_50_30.tres" id="12_rqomc"]
-[ext_resource type="Resource" path="res://craftables/items/crafting-materials/hhhhhhhhhhhhh.tres" id="13_ykj3c"]
-[ext_resource type="Resource" uid="uid://dqc2s68iuq6v6" path="res://craftables/items/crafting-materials/yyyyyyyyyyyyyyy.tres" id="14_kgeti"]
-[ext_resource type="Resource" uid="uid://njub8caiodr1" path="res://craftables/items/equipment/gater.tres" id="15_jowtw"]
-[ext_resource type="Resource" uid="uid://bmhx82vtwsphq" path="res://craftables/items/crafting-materials/zzzzzzzzzz.tres" id="15_ykj3c"]
-[ext_resource type="Resource" uid="uid://d17iklo76ndth" path="res://craftables/items/equipment/jjjjt.tres" id="20_yw7og"]
-[ext_resource type="Resource" uid="uid://c5buecev6ys4y" path="res://craftables/items/equipment/werewerew.tres" id="21_xho36"]
-[ext_resource type="Resource" uid="uid://b3ab1uw6eih5n" path="res://craftables/items/equipment/fdffffffffff.tres" id="22_3ue4w"]
-[ext_resource type="Resource" uid="uid://cx63ncbky6vy6" path="res://craftables/items/equipment/pouipoiu.tres" id="23_6cvtu"]
-[ext_resource type="Resource" uid="uid://d3pobpn72262i" path="res://craftables/items/equipment/bbbbbbbbbbb.tres" id="25_kgeti"]
-[ext_resource type="Resource" uid="uid://d0q5may4e5csh" path="res://craftables/items/usable-items/dfgnj.tres" id="26_g87bx"]
 [ext_resource type="Resource" uid="uid://ybve325sah4y" path="res://craftables/items/usable-items/uuuuuuuuu.tres" id="29_kgeti"]
 
 [resource]
@@ -38,32 +21,15 @@ Buildings = Dictionary[int, ExtResource("1_f1bwi")]({
 })
 CraftingMaterials = Dictionary[int, ExtResource("9_rqomc")]({
 231828703336004085: ExtResource("8_01mmw"),
-542510687275634661: ExtResource("10_rqomc"),
-1388814426443576955: ExtResource("13_ykj3c"),
 2265523525199636055: ExtResource("9_f1bwi"),
-2775417449246566229: ExtResource("9_01mmw"),
-3244594325125142474: ExtResource("15_ykj3c"),
-4200720145309179344: ExtResource("12_iee5f"),
-5170883165870291646: ExtResource("10_nstv5"),
-5915783412840350444: ExtResource("11_mm2ex"),
-6298808248048789403: ExtResource("5_01mmw"),
-8288085487484199269: ExtResource("14_kgeti"),
-8469878820809838382: ExtResource("4_3ya1e")
+5170883165870291646: ExtResource("10_nstv5")
 })
 Equipment = Dictionary[int, ExtResource("2_taw0v")]({
-932252229101601752: ExtResource("15_jowtw"),
 1404041514687685708: ExtResource("5_3ipo4"),
-4351816539059168645: ExtResource("22_3ue4w"),
-6129131569427307495: ExtResource("4_inbtb"),
-6452903879634199195: ExtResource("23_6cvtu"),
-6881792649534635658: ExtResource("21_xho36"),
-8972531444046447915: ExtResource("6_3ya1e"),
-9050736268559227121: ExtResource("20_yw7og"),
-9156367972371564130: ExtResource("25_kgeti")
+6129131569427307495: ExtResource("4_inbtb")
 })
 UsableItems = Dictionary[int, ExtResource("4_eg58c")]({
 1687880338841201454: ExtResource("29_kgeti"),
-7223256205765527397: ExtResource("12_rqomc"),
-8948856163804382531: ExtResource("26_g87bx")
+7223256205765527397: ExtResource("12_rqomc")
 })
 metadata/_custom_type_script = "uid://cdksnkutkwfx2"

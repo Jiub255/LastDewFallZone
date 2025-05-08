@@ -12,7 +12,7 @@ namespace Lastdew
 			this.PrintDebug(
 				$"Buildings: {craftables.Buildings.Count}, " +
 				$"Materials: {craftables.CraftingMaterials.Count}, " +
-				$"Equipment: {craftables.Equipment.Count}, " +
+				$"Equipment: {craftables.Equipments.Count}, " +
 				$"Usable Items: {craftables.UsableItems.Count}");
 		}
 	}

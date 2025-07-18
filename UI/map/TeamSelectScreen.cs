@@ -8,7 +8,7 @@ namespace Lastdew
 	/// <summary>
 	/// TODO: Add RemoveFromTeam() method,
 	/// deal with UnselectedPcs getting emptied by adding to team,
-	/// disable start button until SelectedPcs in non-empty.
+	/// disable start button until SelectedPcs is non-empty.
 	/// </summary>
 	public partial class TeamSelectScreen : MarginContainer
 	{
@@ -18,6 +18,7 @@ namespace Lastdew
 		
 		private TeamData TeamData { get; set; }
 		private LocationData LocationData { get; set; }
+		
 		private LocationInfoUI LocationInfo { get; set; }
 		private Button AddButton { get; set; }
 		private Button StartButton { get; set; }

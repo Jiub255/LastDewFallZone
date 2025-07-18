@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Lastdew
 {
 	public class PcSaveData
@@ -50,10 +48,10 @@ namespace Lastdew
 		public PcSaveData(PlayerCharacter pc)
 		{
 			Name = pc.Name;
-			Head = pc.Equipment.Head.GetUid();
-			Weapon = pc.Equipment.Weapon.GetUid();
-			Body = pc.Equipment.Body.GetUid();
-			Feet = pc.Equipment.Feet.GetUid();
+			Head = pc.Equipment.Head == null ? 0 : pc.Equipment.Head.GetUid();
+			Weapon = pc.Equipment.Weapon == null ? 0 : pc.Equipment.Weapon.GetUid();
+			Body = pc.Equipment.Body == null ? 0 : pc.Equipment.Body.GetUid();
+            Feet = pc.Equipment.Feet == null ? 0 : pc.Equipment.Feet.GetUid();
 			Injury = pc.Health.Injury;
 		}
 	}

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Craftables" load_steps=16 format=3 uid="uid://71lhgtyj3vnx"]
+[gd_resource type="Resource" script_class="Craftables" load_steps=18 format=3 uid="uid://71lhgtyj3vnx"]
 
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_f1bwi"]
 [ext_resource type="Script" uid="uid://cdksnkutkwfx2" path="res://craftables/Craftables.cs" id="1_u67xb"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" uid="uid://d2k7fseog6yq2" path="res://craftables/items/usable-items/UsableItem.cs" id="4_eg58c"]
 [ext_resource type="Resource" uid="uid://ctk85wdoln0g6" path="res://craftables/items/equipment/armor.tres" id="4_inbtb"]
 [ext_resource type="Resource" uid="uid://7jo3uy4gbavf" path="res://craftables/items/crafting-materials/wood.tres" id="5_3ya1e"]
+[ext_resource type="Resource" uid="uid://ca08aml6vt64h" path="res://craftables/items/crafting-materials/wool.tres" id="5_f1bwi"]
 [ext_resource type="Resource" uid="uid://cfw2xp7h3qpko" path="res://craftables/items/crafting-materials/metal.tres" id="6_01mmw"]
+[ext_resource type="Resource" uid="uid://dy00grwgvhfe7" path="res://craftables/items/crafting-materials/string.tres" id="7_nstv5"]
 [ext_resource type="Resource" uid="uid://uaemgs7vnwb1" path="res://craftables/items/equipment/pistol.tres" id="9_f1bwi"]
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting-materials/CraftingMaterial.cs" id="9_rqomc"]
 [ext_resource type="Resource" uid="uid://bfcafkdja2gu1" path="res://craftables/items/equipment/helmet.tres" id="10_3ya1e"]
@@ -24,7 +26,9 @@ Buildings = Dictionary[int, ExtResource("1_f1bwi")]({
 CraftingMaterials = Dictionary[int, ExtResource("9_rqomc")]({
 231828703336004085: ExtResource("4_3ipo4"),
 2265523525199636055: ExtResource("5_3ya1e"),
-5170883165870291646: ExtResource("6_01mmw")
+4826455120709384933: ExtResource("5_f1bwi"),
+5170883165870291646: ExtResource("6_01mmw"),
+8896933309009772036: ExtResource("7_nstv5")
 })
 Equipments = Dictionary[int, ExtResource("2_taw0v")]({
 1404041514687685708: ExtResource("9_f1bwi"),

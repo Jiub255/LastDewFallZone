@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://4g1wsvcfefhh"]
 
-[ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/ScavengingLevel.cs" id="1_43o5v"]
+[ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/looting/ScavengingLevel.cs" id="1_43o5v"]
 [ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://world/looting/loot_container_test.tscn" id="2_ocac3"]
 [ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://characters/enemies/EnemySpawner.cs" id="10_o5blp"]
 

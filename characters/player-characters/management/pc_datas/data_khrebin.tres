@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PcData" load_steps=3 format=3 uid="uid://hiyhdi8pggjm"]
+
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_o252p"]
+[ext_resource type="Script" uid="uid://pd0g5gnhmbt6" path="res://characters/player-characters/management/pc_datas/PcData.cs" id="1_pffyi"]
+
+[resource]
+script = ExtResource("1_pffyi")
+Name = "Khrebin"
+Icon = ExtResource("1_o252p")
+HeadMesh = 8
+BodyMesh = 8
+LegsMesh = 10
+FeetMesh = 9
+metadata/_custom_type_script = "uid://pd0g5gnhmbt6"

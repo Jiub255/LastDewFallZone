@@ -45,6 +45,7 @@
 			"title": "TODO",
 			"tasks": [
 				"1dd34408-ff72-4b11-a37c-91fef3827e18",
+				"04003aba-42e8-4b2e-a52a-533f72b55ac3",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
@@ -68,6 +69,7 @@
 			"tasks": [
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
+				"cd7d53a6-8ba3-41c8-855e-623615812278",
 				"18aa9dce-2759-4551-81bb-5c681f7e1987"
 			]
 		},
@@ -140,7 +142,8 @@
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"668f9df0-c1d7-4814-8809-bc08d8154352"
+				"668f9df0-c1d7-4814-8809-bc08d8154352",
+				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d"
 			]
 		}
 	],
@@ -778,6 +781,27 @@
 			"title": "On EditorMainScreen, save tab and duplicate it four times.",
 			"description": "Instead of repeating the same thing four times, just save branch as scene and duplicate that. Gonna have to put a script on it and integrate it with EditorMainScreen to set things up and signal changes.\n\nWon't work. Each tab needs unique property labels and displays. Still probably gonna save each as a scene to clean it up. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
+			"title": "Resource Editor inconsistently adding to database",
+			"description": "Sometimes it doesn't seem to add new craftables to the Craftables database after they're created and saved.\nHave to use the \"populate craftables\" editor button afterwards.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "cd7d53a6-8ba3-41c8-855e-623615812278",
+			"title": "Fill out HUD",
+			"description": "Have character buttons, the different menu buttons, whatever else. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "04003aba-42e8-4b2e-a52a-533f72b55ac3",
+			"title": "Put selected icon on pc",
+			"description": "Little red circle at feet?\nLittle floaty diamond above head?",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		}
 	],

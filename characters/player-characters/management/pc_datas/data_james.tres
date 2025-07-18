@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="PcData" load_steps=3 format=3 uid="uid://cvscwbigsi3w3"]
 
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_legtp"]
-[ext_resource type="Script" uid="uid://pd0g5gnhmbt6" path="res://characters/player-characters/management/PcData.cs" id="2_63b2p"]
+[ext_resource type="Script" uid="uid://pd0g5gnhmbt6" path="res://characters/player-characters/management/pc_datas/PcData.cs" id="2_rvhg5"]
 
 [resource]
-script = ExtResource("2_63b2p")
+script = ExtResource("2_rvhg5")
 Name = "James"
 Icon = ExtResource("1_legtp")
 HeadMesh = 1

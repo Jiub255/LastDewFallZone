@@ -18,7 +18,7 @@ namespace Lastdew
         public void Setup(Craftable craftable, string amount)
         {
             Texture = craftable?.Icon;
-            TooltipText = craftable?.Name;
+            TooltipText = $"{amount} {craftable?.Name}";
             Amount.Text = amount;
         }
     }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Lastdew
@@ -9,8 +8,8 @@ namespace Lastdew
 	/// </summary>
 	public class SaveData
 	{		
-		public Dictionary<long, int> Inventory { get; set; } = new();
-		public List<PcSaveData> PcSaveDatas { get; set; } = new();
+		public Dictionary<long, int> Inventory { get; set; } = [];
+		public List<PcSaveData> PcSaveDatas { get; set; } = [];
 		
 		// Constructor only takes parameters that correspond to properties in this class, needed for Json serializer?
 		public SaveData(Dictionary<long, int> inventory, List<PcSaveData> pcSaveDatas)

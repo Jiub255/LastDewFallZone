@@ -1,33 +1,56 @@
 using Godot;
+using Godot.Collections;
 
 namespace Lastdew
 {
+	/// <summary>
+    /// TODO: When fighting multiple enemies, only the one targeted by the PC does the attack animation,
+    /// even though it seems to run the code fine on each enemy. Maybe look into how PC changing targets affects enemies?
+    /// </summary>
 	public partial class Enemy : CharacterBody3D
 	{
-		// TODO: Start with simple test class. Don't bother with state machine and health component and stuff yet.
-		private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
+        private PlayerCharacter _target;
+        private EnemyState _state = EnemyState.MOVEMENT;
+
+        // TODO: Start with simple test class. Don't bother with state machine and health component and stuff yet.
+        private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
 		private const float A_LITTLE_BIT = 1.25f;
 		private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve_2";
 		private const string DEATH_ANIM_NAME = "CharacterArmature|Death";
 		private const float SIGHT_DISTANCE = 20f;
-		
-		private enum EnemyState 
+
+        private enum EnemyState 
 		{
 			MOVEMENT,
 			COMBAT,
 			DEAD
 		}
-		private EnemyState State { get; set; } = EnemyState.MOVEMENT;
-
-		private int Health { get; set; } = 3;
+        private EnemyState State
+		{
+			get => _state;
+            set
+            {
+                this.PrintDebug($"{Name}'s state set to {value}");
+                _state = value;
+            }
+        }
+        private int Health { get; set; } = 3;
 		private int Attack { get; } = 10;
 		private float MaxSpeed { get; } = 4f;
 		private float Acceleration { get; } = 35f;
 		private float TurnSpeed { get; } = 360f;
-		private float AttackRadius { get; } = 1f;
-		private PlayerCharacter Target { get; set; }
-		private NavigationAgent3D NavigationAgent { get; set; }
+		private float AttackRadius { get; } = 0.5f;
+        private PlayerCharacter Target
+		{
+			get => _target;
+            set
+            {
+                this.PrintDebug($"{Name}'s target set to {(value == null ? "null" : value.Name)}");
+                _target = value;
+            }
+        }
+        private NavigationAgent3D NavigationAgent { get; set; }
 		private AnimationTree EnemyAnimationTree { get; set; }
 		private AnimationNodeStateMachinePlayback AnimStateMachine { get; set; }
 		private Vector3 LastTargetPosition { get; set; }
@@ -44,7 +67,7 @@ namespace Lastdew
 
 			NavigationAgent.Connect(
 				NavigationAgent3D.SignalName.VelocityComputed,
-				Callable.From((Vector3 safeVelocity) => ActuallyMove(safeVelocity)));
+				Callable.From((Vector3 safeVelocity) => Move(safeVelocity)));
 
 			AnimStateMachine = (AnimationNodeStateMachinePlayback)EnemyAnimationTree.Get("parameters/playback");
 		}
@@ -123,7 +146,7 @@ namespace Lastdew
 			}
 			Animate();
 			Vector3 nextPosition = NavigationAgent.GetNextPathPosition();
-			Move(delta, nextPosition);
+			Accelerate(delta, nextPosition);
 			Rotate(delta, nextPosition);
 		}
 
@@ -132,24 +155,21 @@ namespace Lastdew
 			float blendAmount = Mathf.Clamp(Velocity.Length() / MaxSpeed, 0, 1);
 			EnemyAnimationTree.Set(BlendAmountPath, blendAmount);
 		}
-
-		private void Move(float delta, Vector3 nextPosition)
-		{
-			Vector3 direction = (nextPosition - GlobalPosition).Normalized();
-			Accelerate(direction * MaxSpeed, Acceleration * delta);
-		}
 		
 		private void Rotate(float delta, Vector3 targetToFace)
 		{
 			this.RotateToward(targetToFace, TurnSpeed * delta);
 		}
 
-		private void Accelerate(Vector3 targetVelocity, float accelerationAmount)
+		private void Accelerate(float delta, Vector3 nextPosition)
 		{
-			NavigationAgent.Velocity = Velocity.MoveToward(targetVelocity, accelerationAmount);
+			Vector3 direction = (nextPosition - GlobalPosition).Normalized();
+            Vector3 targetVelocity = direction * MaxSpeed;
+            float accelerationAmount = Acceleration * delta;
+            NavigationAgent.Velocity = Velocity.MoveToward(targetVelocity, accelerationAmount);
 		}
 		
-		private void ActuallyMove(Vector3 safeVelocity)
+		private void Move(Vector3 safeVelocity)
 		{
 			Velocity = safeVelocity;
 			MoveAndSlide();
@@ -166,28 +186,38 @@ namespace Lastdew
 			Rotate(delta, Target.GlobalPosition);
 			
 			AttackTimer -= delta;
-			if (AttackTimer < 0)
+            //this.PrintDebug($"{Name}'s attack timer: {AttackTimer}");
+            if (AttackTimer < 0)
 			{
 				AttackTimer = TimeBetweenAttacks;
 				
 				// Attack animation (Calls HitTarget from animation)
 				AnimStateMachine.Travel(ATTACK_ANIM_NAME);
-			}
+                this.PrintDebug($"{Name}'s travel to attack animation just called.");
+            }
 		}
 		
 		private bool WithinRangeOfEnemy()
 		{
-			return NavigationAgent.IsNavigationFinished();
+			return /* Target != null || */ NavigationAgent.IsNavigationFinished();
 		}
 		
 		private bool OutOfRangeOfEnemy()
 		{
+			/* if (Target == null)
+			{
+                return true;
+            } */
 			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
-			return distanceSquared > AttackRadius * AttackRadius  + A_LITTLE_BIT ;
+			return distanceSquared > AttackRadius * AttackRadius + A_LITTLE_BIT;
 		}
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()
 		{
+			/* if (Target == null)
+			{
+                return;
+            } */
 			Vector3 attackPosition = AttackPosition(Target.GlobalPosition);
 			if (attackPosition.DistanceSquaredTo(LastTargetPosition) > RECALCULATION_DISTANCE_SQUARED)
 			{
@@ -203,42 +233,48 @@ namespace Lastdew
 		}
 		
 		private PlayerCharacter FindNearestPC(PlayerCharacter currentTarget)
-		{
-			PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
-			SphereShape3D sphereShape = new(){ Radius = SIGHT_DISTANCE };
-			PhysicsShapeQueryParameters3D query = new()
-			{
-				ShapeRid = sphereShape.GetRid(),
-				CollideWithBodies = true,
-				Transform = new Transform3D(Basis.Identity, GlobalPosition),
-				Exclude = new Godot.Collections.Array<Rid>(new Rid[1]{ GetRid() }),
-				CollisionMask = 0b10
-			};
-			
-			Godot.Collections.Array<Godot.Collections.Dictionary> result = spaceState.IntersectShape(query);
+        {
+            Array<Dictionary> results = SphereCastForNearbyPcs();
 
-			PlayerCharacter closest = null;
-			foreach (Godot.Collections.Dictionary dict in result)
-			{
-				CollisionObject3D collider = (CollisionObject3D)dict["collider"];
-				//this.PrintDebug($"Collider: {collider?.Name}"); 
-				if (collider is PlayerCharacter pc)
-				{
-					if (pc != currentTarget)
-					{
-						if (closest == null)
-						{
-							closest = pc;
-						}
-						else if (GlobalPosition.DistanceSquaredTo(pc.GlobalPosition) < 
-							GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
-						{
-							closest = pc;
-						}
-					}
-				}
-			}
-			return closest;
-		}
-	}
+            PlayerCharacter closest = null;
+            foreach (Dictionary dict in results)
+            {
+                CollisionObject3D collider = (CollisionObject3D)dict["collider"];
+                //this.PrintDebug($"Collider: {collider?.Name}"); 
+                if (collider is PlayerCharacter pc)
+                {
+                    if (pc != currentTarget)
+                    {
+                        if (closest == null)
+                        {
+                            closest = pc;
+                        }
+                        else if (GlobalPosition.DistanceSquaredTo(pc.GlobalPosition) <
+                            GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+                        {
+                            closest = pc;
+                        }
+                    }
+                }
+            }
+            return closest;
+        }
+
+        private Array<Dictionary> SphereCastForNearbyPcs()
+        {
+            PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+            SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };
+            PhysicsShapeQueryParameters3D query = new()
+            {
+                ShapeRid = sphereShape.GetRid(),
+                CollideWithBodies = true,
+                Transform = new Transform3D(Basis.Identity, GlobalPosition),
+                Exclude = new Array<Rid>(new Rid[1] { GetRid() }),
+                CollisionMask = 0b10
+            };
+
+            Array<Dictionary> result = spaceState.IntersectShape(query);
+            return result;
+        }
+    }
 }

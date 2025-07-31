@@ -125,6 +125,10 @@ namespace Lastdew
 			Context.Move(safeVelocity);
 		}
 		
+		/// <summary>
+        /// TODO: Is this necessary or does nav agent take care of the "attack radius" somehow?
+        /// This doesn't get used in the enemy script, look into it.
+        /// </summary>
 		private Vector3 AttackPosition(Vector3 enemyPosition)
 		{
 			Vector3 direction = (Context.GlobalPosition - enemyPosition).Normalized();

@@ -25,7 +25,6 @@ unique_name_in_owner = true
 [node name="EnemySpawner" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_cvlbe")
-EnemiesToSpawn = 0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_o3abj")

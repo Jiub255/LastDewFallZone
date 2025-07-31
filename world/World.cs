@@ -3,18 +3,27 @@ using System.Collections.Generic;
 
 namespace Lastdew
 {
-	public partial class World : Node3D
-	{	
-		private ClickHandler ClickHandler { get; set; }
-		private PcManager PcManager { get; set; }
-		private UiManager UI { get; set; }
-		private InventoryManager InventoryManager { get; set; }
-		private TeamData TeamData { get; set; }
-		private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>(UIDs.HOME_BASE);
-		private Level HomeBase { get; set; }
-		private ScavengingLevel ScavengingLevel { get; set; }
-		
-		public override void _Ready()
+    public partial class World : Node3D
+    {
+        private ClickHandler ClickHandler { get; set; }
+        private PcManager PcManager { get; set; }
+        private UiManager UI { get; set; }
+        private InventoryManager InventoryManager { get; set; }
+        private TeamData TeamData { get; set; }
+        private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>(UIDs.HOME_BASE);
+        private Level HomeBase { get; set; }
+        private ScavengingLevel ScavengingLevel { get; set; }
+
+        // TESTING STUFF
+
+        private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
+        [Export]
+        private bool CombatTesting { get; set; } = false;
+
+        // END OF TESTING STUFF
+
+
+        public override void _Ready()
 		{
 			base._Ready();
 
@@ -29,17 +38,22 @@ namespace Lastdew
 
 			GetTree().Paused = true;
 
-			Subscribe();
+			SubscribeToEvents();
+
+			if (CombatTesting)
+			{
+                StartCombatTest();
+            }
 		}
 
 		public override void _ExitTree()
 		{
 			base._ExitTree();
 
-			Unsubscribe();
+			UnsubscribeFromEvents();
 		}
 
-		private void Subscribe()
+		private void SubscribeToEvents()
 		{
 			ClickHandler.OnClickedPc += PcManager.SelectPc;
 			ClickHandler.OnClickedMoveTarget += PcManager.MoveTo;
@@ -51,7 +65,7 @@ namespace Lastdew
 			UI.MainMenu.ReturnToBase.Pressed += ReturnToBase;
 		}
 
-        private void Unsubscribe()
+        private void UnsubscribeFromEvents()
 		{
 			ClickHandler.OnClickedPc -= PcManager.SelectPc;
 			ClickHandler.OnClickedMoveTarget -= PcManager.MoveTo;
@@ -64,14 +78,20 @@ namespace Lastdew
 		}
 
 		// JUST FOR TESTING
-		private List<PcSaveData> DefaultPcList = new List<PcSaveData>()
-		{
-			new PcSaveData()
-		};
+		private readonly List<PcSaveData> DefaultPcList =
+        [
+            new PcSaveData()
+		];
 
 		private void StartNewGame()
 		{
 			HomeBase = SetupLevel(HomeBaseScene, DefaultPcList);
+			UI.ChangeState(new GameStateHome());
+		}
+
+		private void StartCombatTest()
+		{
+			HomeBase = SetupLevel(CombatTestScene, DefaultPcList);
 			UI.ChangeState(new GameStateHome());
 		}
 
@@ -86,6 +106,27 @@ namespace Lastdew
 			LoadInventory(saveData);
 			HomeBase = SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
 			UI.ChangeState(new GameStateHome());
+		}
+
+		private void LoadInventory(SaveData saveData)
+		{
+			Craftables craftables = Databases.CRAFTABLES;
+			foreach (KeyValuePair<long, int> kvp in saveData.Inventory)
+			{
+				InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
+			}
+		}
+
+        private Level SetupLevel(PackedScene levelScene, List<PcSaveData> pcSaveDatas)
+		{
+			Level level = (Level)levelScene.Instantiate();
+			CallDeferred(World.MethodName.AddChild, level);
+			level.Initialize(TeamData);
+			// UI.Initialize has to be called after PcManager.SpawnPcs,
+			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
+			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
+			UI.Initialize(TeamData, InventoryManager);
+			return level;
 		}
         
         private void ExitToStartMenu()
@@ -125,26 +166,5 @@ namespace Lastdew
 			UI.Initialize(TeamData, InventoryManager);
 			UI.ChangeState(new GameStateHome());
         }
-
-        private Level SetupLevel(PackedScene scene, List<PcSaveData> pcSaveDatas)
-		{
-			Level level = (Level)scene.Instantiate();
-			CallDeferred(World.MethodName.AddChild, level);
-			level.Initialize(TeamData);
-			// UI.Initialize has to be called after PcManager.SpawnPcs,
-			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
-			UI.Initialize(TeamData, InventoryManager);
-			return level;
-		}
-
-		private void LoadInventory(SaveData saveData)
-		{
-			Craftables craftables = Databases.CRAFTABLES;
-			foreach (KeyValuePair<long, int> kvp in saveData.Inventory)
-			{
-				InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
-			}
-		}
 	}
 }

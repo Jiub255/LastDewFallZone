@@ -1,10 +1,8 @@
 namespace Lastdew
 {
-	public partial class PcStateWaiting : PcCombatSubstate
+	public partial class PcStateWaiting(PcStateContext context) : PcCombatSubstate(context)
 	{
-		public PcStateWaiting(PcStateContext context) : base(context) {}
-
-		public override void ProcessSelected(float delta)
+        public override void ProcessSelected(float delta)
 		{
 			base.ProcessSelected(delta);
 			

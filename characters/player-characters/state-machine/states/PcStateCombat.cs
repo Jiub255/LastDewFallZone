@@ -11,7 +11,7 @@ namespace Lastdew
 		
 		public PcStateCombat(PcStateContext context) : base(context)
 		{
-			SetupStates(context);
+			SetupSubstates(context);
 		}
 	
 		public override void EnterState(MovementTarget target)
@@ -84,7 +84,7 @@ namespace Lastdew
 			}
 		}
 	
-		private void SetupStates(PcStateContext context)
+		private void SetupSubstates(PcStateContext context)
 		{
 			PcStateWaiting waiting = new(context);
 			PcStateAttacking attacking = new(context);

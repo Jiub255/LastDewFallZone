@@ -2,26 +2,20 @@ using System;
 
 namespace Lastdew
 {
-	public abstract class PcCombatSubstate
-	{
+	public abstract class PcCombatSubstate(PcStateContext context)
+    {
 		public event Action<PcCombatSubstateNames> OnChangeSubstate;
-		
-		protected PcStateContext Context { get; set; }
-		protected Enemy Target { get; set; }
+
+        protected PcStateContext Context { get; set; } = context;
+        protected Enemy Target { get; set; }
 		protected float TimeBetweenAttacks { get; } = 2.3f;
 		protected float Timer { get; set; }
 		/// <summary>
 		/// Degrees per second
 		/// </summary>
 		protected float TurnSpeed { get; set; } = 360f;
-		
-		
-		protected PcCombatSubstate(PcStateContext context)
-		{
-			Context = context;
-		}
 
-		public virtual void EnterState(Enemy target)
+        public virtual void EnterState(Enemy target)
 		{
 			Target = target;
 		}

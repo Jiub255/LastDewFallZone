@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 namespace Lastdew
 {
@@ -56,48 +57,54 @@ namespace Lastdew
 		}
 		
 		public Enemy FindNearestEnemy(Enemy currentTarget)
-		{
-			PhysicsDirectSpaceState3D spaceState = PC.GetWorld3D().DirectSpaceState;
-			SphereShape3D sphereShape = new(){ Radius = SIGHT_DISTANCE };
-			PhysicsShapeQueryParameters3D query = new()
-			{
-				ShapeRid = sphereShape.GetRid(),
-				CollideWithBodies = true,
-				Transform = new Transform3D(Basis.Identity, PC.GlobalPosition),
-				Exclude = new Godot.Collections.Array<Rid>(new Rid[1]{ PC.GetRid() }),
-				CollisionMask = 0b100
-			};
-			
-			Godot.Collections.Array<Godot.Collections.Dictionary> result = spaceState.IntersectShape(query);
+        {
+            Array<Dictionary> results = SphereCastForNearbyEnemies();
 
-			Enemy closest = null;
-			foreach (Godot.Collections.Dictionary dict in result)
-			{
-				CollisionObject3D collider = (CollisionObject3D)dict["collider"];
-				//this.PrintDebug($"Collider: {collider?.Name}"); 
-				if (collider is Enemy enemy)
-				{
-					if (enemy != currentTarget)
-					{
-						if (closest == null)
-						{
-							closest = enemy;
-						}
-						else if (PC.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) < 
-							PC.GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
-						{
-							closest = enemy;
-						}
-					}
-				}
-			}
-			return closest;
-		}
-		
-		public void DisablePC()
+            Enemy closest = null;
+            foreach (Dictionary dict in results)
+            {
+                CollisionObject3D collider = (CollisionObject3D)dict["collider"];
+                //this.PrintDebug($"Collider: {collider?.Name}"); 
+                if (collider is Enemy enemy)
+                {
+                    if (enemy != currentTarget)
+                    {
+                        if (closest == null)
+                        {
+                            closest = enemy;
+                        }
+                        else if (PC.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) <
+                            PC.GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+                        {
+                            closest = enemy;
+                        }
+                    }
+                }
+            }
+            return closest;
+        }
+
+        public void DisablePC()
 		{
 			PC.CollisionLayer = 0;
 			NavigationAgent.AvoidanceEnabled = false;
 		}
+
+        private Array<Dictionary> SphereCastForNearbyEnemies()
+        {
+            PhysicsDirectSpaceState3D spaceState = PC.GetWorld3D().DirectSpaceState;
+            SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };
+            PhysicsShapeQueryParameters3D query = new()
+            {
+                ShapeRid = sphereShape.GetRid(),
+                CollideWithBodies = true,
+                Transform = new Transform3D(Basis.Identity, PC.GlobalPosition),
+                Exclude = new Array<Rid>(new Rid[1] { PC.GetRid() }),
+                CollisionMask = 0b100
+            };
+
+            Array<Dictionary> result = spaceState.IntersectShape(query);
+            return result;
+        }
 	}
 }

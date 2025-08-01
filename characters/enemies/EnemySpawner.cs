@@ -38,7 +38,7 @@ namespace Lastdew
 			CallDeferred(MethodName.AddChild, enemy);
 			if (TeamData.Pcs.Count > 0)
 			{
-				enemy.CallDeferred(Enemy.MethodName.SetTarget, TeamData.Pcs[0]);
+				enemy.SetDeferred(Enemy.PropertyName.Target, TeamData.Pcs[0]);
 			}
 			else
 			{

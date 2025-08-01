@@ -93,9 +93,9 @@ namespace Lastdew
 		}
 		
 		// Pain == 0 -> No effect. Pain == 100 -> Stat value halved. (for now at least)
-		private int PainFormula(int statValue, int pain)
+		private static int PainFormula(int statValue, int pain)
 		{
-		    return statValue * (200 - pain) / 200;
+		    return Mathf.RoundToInt(statValue * (200f - pain) / 200f);
 		}
 	}
 }

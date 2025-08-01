@@ -14,14 +14,13 @@ namespace Lastdew
         private Level HomeBase { get; set; }
         private ScavengingLevel ScavengingLevel { get; set; }
 
-        // TESTING STUFF
+#region TESTING STUFF
 
         private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
         [Export]
         private bool CombatTesting { get; set; } = false;
 
-        // END OF TESTING STUFF
-
+#endregion
 
         public override void _Ready()
 		{

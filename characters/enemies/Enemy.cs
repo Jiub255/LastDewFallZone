@@ -14,8 +14,9 @@ namespace Lastdew
 
         // TODO: Start with simple test class. Don't bother with state machine and health component and stuff yet.
         private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
-		private const float A_LITTLE_BIT = 1.25f;
-		private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
+		private const float A_LITTLE_BIT = /* 1.25f */2f;
+        private const string MOVEMENT_BLEND_TREE_NAME = "movement_blend_tree";
+        private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve_2";
 		private const string DEATH_ANIM_NAME = "CharacterArmature|Death";
 		private const float SIGHT_DISTANCE = 20f;
@@ -35,7 +36,7 @@ namespace Lastdew
                 _state = value;
             }
         }
-        private int Health { get; set; } = 3;
+        private int Health { get; set; } = 5;
 		private int Attack { get; } = 10;
 		private float MaxSpeed { get; } = 4f;
 		private float Acceleration { get; } = 35f;
@@ -47,7 +48,10 @@ namespace Lastdew
             set
             {
                 this.PrintDebug($"{Name}'s target set to {(value == null ? "null" : value.Name)}");
-                _target = value;
+				_target = value;
+				Vector3 attackPosition = AttackPosition(value.GlobalPosition);
+				NavigationAgent.TargetPosition = attackPosition;
+				LastTargetPosition = attackPosition;
             }
         }
         private NavigationAgent3D NavigationAgent { get; set; }
@@ -82,7 +86,7 @@ namespace Lastdew
 			}
 			else if (State == EnemyState.COMBAT)
 			{
-				Fight((float)delta);
+				CombatProcess((float)delta);
 			}
 		}
 
@@ -97,7 +101,8 @@ namespace Lastdew
 		public bool GetHit(int damage, PlayerCharacter attackingPC)
 		{
 			Health -= damage;
-			if (Health <= 0)
+            this.PrintDebug($"{Name} hit for {damage} damage, health: {Health}");
+            if (Health <= 0)
 			{
 				Health = 0;
 				Die();
@@ -116,15 +121,7 @@ namespace Lastdew
 			if (pcIncapacitated)
 			{
 				Target = FindNearestPC(Target);
-			}
-		}
-		
-		public void SetTarget(PlayerCharacter target)
-		{
-			Target = target;
-			Vector3 attackPosition = AttackPosition(Target.GlobalPosition);
-			NavigationAgent.TargetPosition = attackPosition;
-			LastTargetPosition = attackPosition;
+            }
 		}
 
 		private void Die()
@@ -175,11 +172,12 @@ namespace Lastdew
 			MoveAndSlide();
 		}
 		
-		private void Fight(float delta)
+		private void CombatProcess(float delta)
 		{
 			if (OutOfRangeOfEnemy())
 			{
 				State = EnemyState.MOVEMENT;
+				AnimStateMachine.Travel(MOVEMENT_BLEND_TREE_NAME);
 				return;
 			}
 
@@ -193,7 +191,7 @@ namespace Lastdew
 				
 				// Attack animation (Calls HitTarget from animation)
 				AnimStateMachine.Travel(ATTACK_ANIM_NAME);
-                this.PrintDebug($"{Name}'s travel to attack animation just called.");
+                this.PrintDebug($"{Name}'s travel to attack animation just called. Current node: {AnimStateMachine.GetCurrentNode()}");
             }
 		}
 		
@@ -241,19 +239,16 @@ namespace Lastdew
             {
                 CollisionObject3D collider = (CollisionObject3D)dict["collider"];
                 //this.PrintDebug($"Collider: {collider?.Name}"); 
-                if (collider is PlayerCharacter pc)
+                if (collider is PlayerCharacter pc && pc != currentTarget)
                 {
-                    if (pc != currentTarget)
+                    if (closest == null)
                     {
-                        if (closest == null)
-                        {
-                            closest = pc;
-                        }
-                        else if (GlobalPosition.DistanceSquaredTo(pc.GlobalPosition) <
-                            GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
-                        {
-                            closest = pc;
-                        }
+                        closest = pc;
+                    }
+                    else if (GlobalPosition.DistanceSquaredTo(pc.GlobalPosition) <
+                        GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+                    {
+                        closest = pc;
                     }
                 }
             }

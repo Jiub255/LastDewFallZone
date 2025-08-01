@@ -101,7 +101,7 @@ namespace Lastdew
 				{
 					Dragging = true;
 				}
-				if (!Dragging && !MoveEdgeScroll((float)delta))
+				if (!Dragging/*  && !MoveEdgeScroll((float)delta) */)
 				{
 					MoveKeyboard((float)delta);
 				}

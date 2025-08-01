@@ -43,7 +43,8 @@ namespace Lastdew
 		public bool HitEnemy(PlayerCharacter attackingPC)
 		{
 			int attack = Context.Attack;
-			return Target.GetHit(attack, attackingPC);
+            this.PrintDebug($"Attack: {attack}");
+            return Target.GetHit(attack, attackingPC);
 		}
 		
 		private void OnAnimationFinished(string animationName)

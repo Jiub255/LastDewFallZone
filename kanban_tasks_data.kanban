@@ -122,6 +122,7 @@
 			"uuid": "58e832d9-b0c0-48ff-970d-0b94fc413b14",
 			"title": "FIXED BUGS",
 			"tasks": [
+				"3ddaf881-8ca1-4c9d-b76b-2c7dc81998ef",
 				"bd9a1b36-f709-4984-be8e-1a4caac1c8f0",
 				"9a00e51e-1668-4781-b4a8-bd3723ea6fd5",
 				"78d7226e-ba3e-4a00-8101-5f7398c1be57",
@@ -142,7 +143,6 @@
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"3ddaf881-8ca1-4c9d-b76b-2c7dc81998ef",
 				"668f9df0-c1d7-4814-8809-bc08d8154352",
 				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d"
 			]
@@ -808,7 +808,7 @@
 		{
 			"uuid": "3ddaf881-8ca1-4c9d-b76b-2c7dc81998ef",
 			"title": "Only targeted enemy fights when multiple enemies on screen",
-			"description": "When fighting multiple enemies, only the targeted one attacks the player. The other just stand there, even though the combat code seems to be running fine on them. Their \"travel to attack animation\" gets called but never actually happens.\n\nMaybe from the enemy_anim_tree being saved and shared? Or something along those lines, from cloning multiple of the same enemy scene?",
+			"description": "FIXED by setting the animationnodestatemachinetransition's advance mode to auto on the transitions from attack and get hit animations to movement blend tree. They were getting stuck on those animations before.\n\nWhen fighting multiple enemies, only the targeted one attacks the player. The other just stand there, even though the combat code seems to be running fine on them. Their \"travel to attack animation\" gets called but never actually happens.\n\nMaybe from the enemy_anim_tree being saved and shared? Or something along those lines, from cloning multiple of the same enemy scene?",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

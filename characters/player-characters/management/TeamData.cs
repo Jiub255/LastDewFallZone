@@ -41,7 +41,7 @@ namespace Lastdew
 				OnMenuSelectedChanged?.Invoke();
 			}
 		}
-		public List<PcSaveData> UnusedPcDatas { get; private set; } = new List<PcSaveData>();
+		public List<PcSaveData> UnusedPcDatas { get; private set; } = [];
 
 		public TeamData() {}
 		
@@ -61,7 +61,7 @@ namespace Lastdew
 		
 		public List<PcSaveData> GatherSaveData()
 		{
-			List<PcSaveData> pcSaveDatas = new();
+			List<PcSaveData> pcSaveDatas = [];
 			foreach (PlayerCharacter pc in _pcs)
 			{
 				pcSaveDatas.Add(pc.GetSaveData());

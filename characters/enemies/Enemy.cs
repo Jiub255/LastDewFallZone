@@ -60,7 +60,7 @@ namespace Lastdew
 		private Vector3 LastTargetPosition { get; set; }
 		private StringName BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
 		private float AttackTimer { get; set; }
-		private float TimeBetweenAttacks { get; } = 3.5f;
+		private float TimeBetweenAttacks { get; } = 2.5f;
 
 		public override void _Ready()
 		{
@@ -79,6 +79,7 @@ namespace Lastdew
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
+            //this.PrintDebug($"{Name}'s current node: {AnimStateMachine.GetCurrentNode()}");
 			
 			if (State == EnemyState.MOVEMENT)
 			{
@@ -185,7 +186,8 @@ namespace Lastdew
 			
 			AttackTimer -= delta;
             //this.PrintDebug($"{Name}'s attack timer: {AttackTimer}");
-            if (AttackTimer < 0)
+			// TODO: Make sure not in "get hit" animation before starting attack. Probably just introduce "GETTING_HIT" state.
+            if (AttackTimer < 0 /* && AnimStateMachine.GetCurrentNode() == MOVEMENT_BLEND_TREE_NAME */)
 			{
 				AttackTimer = TimeBetweenAttacks;
 				

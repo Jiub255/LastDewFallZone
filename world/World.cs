@@ -19,6 +19,8 @@ namespace Lastdew
         private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
         [Export]
         private bool CombatTesting { get; set; } = false;
+        [Export]
+        private int NumberOfPcs { get; set; } = 1;
 
 #endregion
 
@@ -36,6 +38,11 @@ namespace Lastdew
 			PcManager.Initialize(TeamData);
 
 			GetTree().Paused = true;
+
+			for (int i = 0; i < NumberOfPcs; i++)
+			{
+                DefaultPcList.Add(new PcSaveData());
+            }
 
 			SubscribeToEvents();
 
@@ -76,11 +83,8 @@ namespace Lastdew
 			UI.MainMenu.ReturnToBase.Pressed -= ReturnToBase;
 		}
 
-		// JUST FOR TESTING
-		private readonly List<PcSaveData> DefaultPcList =
-        [
-            new PcSaveData()
-		];
+        // JUST FOR TESTING
+        private List<PcSaveData> DefaultPcList = [];
 
 		private void StartNewGame()
 		{

@@ -7,7 +7,7 @@ namespace Lastdew
 		public ClickHandler ClickHandler { get; private set; }
 		
 		[Export(PropertyHint.Range, "5, 50, 1")]
-		private float MovementSpeed { get; set; } = 10f;
+		private float MovementSpeed { get; set; } = 50f;
 		
 		[ExportGroup("Keyboard Movement")]
 		[Export(PropertyHint.Range, "5, 50, 1")]
@@ -90,33 +90,35 @@ namespace Lastdew
 		}
 	
 		public override void _Process(double delta)
-		{
-			base._Process(delta);
+        {
+            base._Process(delta);
+
+            if (Input.IsActionJustReleased(InputNames.CAMERA_DRAG))
+            {
+                Dragging = false;
+            }
+
+            if (Input.IsActionPressed(InputNames.CAMERA_ROTATE))
+            {
+                return;
+            }
+
+            SetMovementBasisVectors();
 			
-			// TODO: Redo this spaghetti logic. Make it more clear what's happening.
-			if (!Input.IsActionPressed(InputNames.CAMERA_ROTATE))
-			{
-				SetMovementBasisVectors();
-				if (Input.IsActionJustPressed(InputNames.CAMERA_DRAG))
-				{
-					Dragging = true;
-				}
-				if (!Dragging/*  && !MoveEdgeScroll((float)delta) */)
-				{
-					MoveKeyboard((float)delta);
-				}
-			}
-			
-			if (Input.IsActionJustReleased(InputNames.CAMERA_DRAG))
-			{
-				Dragging = false;
-			}
-	
-			// The three "Move" methods only set target position, this actually moves the camera.
-			Position = Position.MoveToward(TargetPosition, MovementSpeed * (float)delta);
-		}
-	
-		public override void _Input(InputEvent @event)
+            if (Input.IsActionJustPressed(InputNames.CAMERA_DRAG))
+            {
+                Dragging = true;
+            }
+
+			// TODO: Fix the edge scroll logic here. MoveCamera still needs to be called when edge scrolling.
+            if (!Dragging/*  && !MoveTargetPositionWithEdgeScroll((float)delta) */)
+            {
+                MoveTargetPositionWithKeyboard((float)delta);
+                MoveCamera(delta);
+            }
+        }
+
+        public override void _Input(InputEvent @event)
 		{
 			base._Input(@event);
 			
@@ -129,7 +131,7 @@ namespace Lastdew
 				}
 				else if (Dragging)
 				{
-					MoveDrag(motionEvent);
+					MoveWithMouseDragFollow(motionEvent);
 				}
 			}
 			else if (@event is InputEventMouseButton mouseButtonEvent)
@@ -166,16 +168,52 @@ namespace Lastdew
 			Right = Right.Normalized();
 		}
 		
-		private void MoveDrag(InputEventMouseMotion motionEvent)
+		/* private void MoveWithMouseDrag(InputEventMouseMotion motionEvent)
 		{
 			Vector2 dragMovement = motionEvent.Relative;
 			Vector3 movement = (Forward * dragMovement.Y) + (Right * -dragMovement.X);
 			movement = movement.Normalized();
 			TargetPosition = Position + (movement * DragSpeed);
-		}
+		} */
+		
+		private void MoveWithMouseDragFollow(InputEventMouseMotion motionEvent)
+		{
+            // Get start and end points of mouse movement.
+            Vector2 endpoint = motionEvent.Position;
+            Vector2 startpoint = endpoint - motionEvent.Relative;
+            // Translate them to world space at whatever constant z-value. Use raycast?
+            // Get the vector difference between the world space points.
+            Vector3 startPointWorld = ScreenToWorldPoint(startpoint);
+            Vector3 endPointWorld = ScreenToWorldPoint(endpoint);
+			if (startPointWorld == Vector3.Zero || endPointWorld == Vector3.Zero)
+			{
+                return;
+            }
+            Vector3 difference = startPointWorld - endPointWorld;
+            // Move the camera using the opposite vector.
+            Position += difference;
+        }
+
+		private Vector3 ScreenToWorldPoint(Vector2 screenPoint)
+		{
+			PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+			// TODO: Cache camera in ready.
+            Camera3D camera = GetNode<Camera3D>("%Camera3D");
+            int rayLength = 1000;
+
+            Vector3 origin = camera.ProjectRayOrigin(screenPoint);
+			Vector3 end = origin + camera.ProjectRayNormal(screenPoint) * rayLength;
+			PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(origin, end);
+            query.CollisionMask = 0b10000;
+            //query.CollideWithAreas = true;
+
+            Godot.Collections.Dictionary result = spaceState.IntersectRay(query);
+			// TODO: Make this safer. Make sure it collided first.
+            return result.ContainsKey("position") ? (Vector3)result["position"] : Vector3.Zero;
+        }
 		
 		/// <returns>true if mouse in edge scrolling zone.</returns>
-		private bool MoveEdgeScroll(float delta)
+		private bool MoveTargetPositionWithEdgeScroll(float delta)
 		{
 			Vector2 mousePosition = Viewport.GetMousePosition();
 			Vector2 mouseMovement = Vector2.Zero;
@@ -208,7 +246,7 @@ namespace Lastdew
 			return false;
 		}
 		
-		private void MoveKeyboard(float delta)
+		private void MoveTargetPositionWithKeyboard(float delta)
 		{
 			float x = Input.GetAxis(InputNames.CAMERA_LEFT, InputNames.CAMERA_RIGHT);
 			float y = Input.GetAxis(InputNames.CAMERA_BACKWARD, InputNames.CAMERA_FORWARD);
@@ -216,5 +254,10 @@ namespace Lastdew
 			movement = movement.Normalized();
 			TargetPosition = Position + (movement * MovementSensitivity * delta);
 		}
+
+        private void MoveCamera(double delta)
+        {
+            Position = Position.MoveToward(TargetPosition, MovementSpeed * (float)delta);
+        }
 	}
 }

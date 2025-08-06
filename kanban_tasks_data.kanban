@@ -42,25 +42,11 @@
 		},
 		{
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
-			"title": "TODO",
+			"title": "NEXT",
 			"tasks": [
-				"1dd34408-ff72-4b11-a37c-91fef3827e18",
-				"04003aba-42e8-4b2e-a52a-533f72b55ac3",
-				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
-				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
-				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
-				"d1adddcc-8d19-4763-94e7-4180fac8440c",
-				"bc28b844-8360-4095-b52b-105b42061993",
-				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
-				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
-				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
-				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
-				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
-				"736f3cd4-0e90-4a80-a00f-326e61a820fe",
-				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
-				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
-				"e8dca1d4-a660-4b76-9812-c0e9b0bc7ea3",
-				"f9a1fa27-c374-43fe-a710-b10e4168a046"
+				"cd7d53a6-8ba3-41c8-855e-623615812278",
+				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
+				"18aa9dce-2759-4551-81bb-5c681f7e1987"
 			]
 		},
 		{
@@ -68,9 +54,7 @@
 			"title": "DOING",
 			"tasks": [
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
-				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
-				"cd7d53a6-8ba3-41c8-855e-623615812278",
-				"18aa9dce-2759-4551-81bb-5c681f7e1987"
+				"d7bc729f-5541-4e3e-8fba-d50a028ac220"
 			]
 		},
 		{
@@ -115,7 +99,8 @@
 				"f09284a4-a2c1-460b-811b-d00b5a777e5f",
 				"af025637-f6fb-4570-93f6-5dae247fbf86",
 				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
-				"74f09b72-359a-4662-85a2-ed88979e5af0"
+				"74f09b72-359a-4662-85a2-ed88979e5af0",
+				"253ce29b-f64e-411f-86cb-762cfffd0f1e"
 			]
 		},
 		{
@@ -145,6 +130,29 @@
 			"tasks": [
 				"668f9df0-c1d7-4814-8809-bc08d8154352",
 				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d"
+			]
+		},
+		{
+			"uuid": "cb445b97-3f31-4e34-bb97-47dcecba7c8c",
+			"title": "TODO",
+			"tasks": [
+				"1dd34408-ff72-4b11-a37c-91fef3827e18",
+				"34e912a0-057e-4b11-94de-32e8f8ee6ba0",
+				"04003aba-42e8-4b2e-a52a-533f72b55ac3",
+				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
+				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
+				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
+				"d1adddcc-8d19-4763-94e7-4180fac8440c",
+				"bc28b844-8360-4095-b52b-105b42061993",
+				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
+				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
+				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
+				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
+				"e8dca1d4-a660-4b76-9812-c0e9b0bc7ea3",
+				"736f3cd4-0e90-4a80-a00f-326e61a820fe",
+				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
+				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
+				"f9a1fa27-c374-43fe-a710-b10e4168a046"
 			]
 		}
 	],
@@ -811,6 +819,20 @@
 			"description": "FIXED by setting the animationnodestatemachinetransition's advance mode to auto on the transitions from attack and get hit animations to movement blend tree. They were getting stuck on those animations before.\n\nWhen fighting multiple enemies, only the targeted one attacks the player. The other just stand there, even though the combat code seems to be running fine on them. Their \"travel to attack animation\" gets called but never actually happens.\n\nMaybe from the enemy_anim_tree being saved and shared? Or something along those lines, from cloning multiple of the same enemy scene?",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
+		},
+		{
+			"uuid": "34e912a0-057e-4b11-94de-32e8f8ee6ba0",
+			"title": "Make dead enemies into loot containers",
+			"description": "Just have them act like normal loot containers once they're dead.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "d7bc729f-5541-4e3e-8fba-d50a028ac220",
+			"title": "Fix edge scrolling logic in Camera",
+			"description": "Need to be able to call MoveCamera while edge scrolling. Broke after changing drag movement.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
 		}
 	],
 	"layout": {
@@ -819,7 +841,8 @@
 				"22b5bdc8-f0fd-4898-a5a2-6a3fa87d04dd"
 			],
 			[
-				"35398ea1-69e0-486b-bafd-d8ad72565c5f"
+				"35398ea1-69e0-486b-bafd-d8ad72565c5f",
+				"cb445b97-3f31-4e34-bb97-47dcecba7c8c"
 			],
 			[
 				"07e4bee6-492d-441d-a2c0-7a8198384f07",

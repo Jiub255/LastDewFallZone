@@ -26,6 +26,7 @@ unique_name_in_owner = true
 script = ExtResource("4_pyb5o")
 
 [node name="Camera3D" type="Camera3D" parent="OuterGimbal/InnerGimbal/Zoomer"]
+unique_name_in_owner = true
 
 [node name="ClickHandler" type="RayCast3D" parent="OuterGimbal/InnerGimbal/Zoomer/Camera3D"]
 unique_name_in_owner = true

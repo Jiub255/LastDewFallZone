@@ -37,7 +37,7 @@ namespace Lastdew
             }
         }
         private int Health { get; set; } = 5;
-		private int Attack { get; } = 10;
+		private int Attack { get; } = 40;
 		private float MaxSpeed { get; } = 4f;
 		private float Acceleration { get; } = 35f;
 		private float TurnSpeed { get; } = 360f;
@@ -49,7 +49,11 @@ namespace Lastdew
             {
                 this.PrintDebug($"{Name}'s target set to {(value == null ? "null" : value.Name)}");
 				_target = value;
-				Vector3 attackPosition = AttackPosition(value.GlobalPosition);
+                if (value == null)
+				{
+					return;
+				}
+                Vector3 attackPosition = AttackPosition(value.GlobalPosition);
 				NavigationAgent.TargetPosition = attackPosition;
 				LastTargetPosition = attackPosition;
             }
@@ -80,8 +84,14 @@ namespace Lastdew
 		{
 			base._Process(delta);
             //this.PrintDebug($"{Name}'s current node: {AnimStateMachine.GetCurrentNode()}");
-			
-			if (State == EnemyState.MOVEMENT)
+
+            if (Target == null)
+			{
+                // TODO: Check for new target every second or so.
+                return;
+            }
+
+            if (State == EnemyState.MOVEMENT)
 			{
 				MovementProcess((float)delta);
 			}
@@ -94,6 +104,11 @@ namespace Lastdew
 		public override void _PhysicsProcess(double delta)
 		{
 			base._PhysicsProcess(delta);
+
+			if (Target == null)
+			{
+                return;
+            }
 
 			RecalculateTargetPositionIfTargetMovedEnough();
 		}
@@ -214,10 +229,6 @@ namespace Lastdew
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()
 		{
-			/* if (Target == null)
-			{
-                return;
-            } */
 			Vector3 attackPosition = AttackPosition(Target.GlobalPosition);
 			if (attackPosition.DistanceSquaredTo(LastTargetPosition) > RECALCULATION_DISTANCE_SQUARED)
 			{

@@ -49,10 +49,10 @@ namespace Lastdew
 			{
 				combat.HitEnemy(attackingPC);
 			}
-			else
+			/* else
 			{
 				GD.PushWarning($"PC not in combat state. Current state is {CurrentState.GetType()}");
-			}
+			} */
 		}
 	
 		public void GetHit(Enemy attacker, bool incapacitated)

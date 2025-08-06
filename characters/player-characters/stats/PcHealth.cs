@@ -27,6 +27,7 @@ namespace Lastdew
 		// TODO: Have high pain affect your stats negatively.
 		// Do it in a way that makes sense.
 		// TODO: Lower amount of relief over time? Or have it follow some curve down?
+		// OR just have it last until you get back home?
 		public int Pain
 		{
 			get
@@ -44,19 +45,13 @@ namespace Lastdew
 			}
 		}
 		
-		private class Relief
-		{
-			public int Amount { get; }
-			public float Duration { get; set; }
-			
-			public Relief(int amount, float duration)
-			{
-				Amount = amount;
-				Duration = duration;
-			}
-		}
+		private class Relief(int amount, float duration)
+        {
+            public int Amount { get; } = amount;
+            public float Duration { get; set; } = duration;
+        }
 		
-		private List<Relief> Reliefs { get; set; } = new List<Relief>();
+		private List<Relief> Reliefs { get; set; } = [];
 		
 		public PcHealth(PcSaveData pcSaveData)
 		{

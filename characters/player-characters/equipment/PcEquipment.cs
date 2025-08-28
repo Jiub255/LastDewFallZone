@@ -6,10 +6,10 @@ namespace Lastdew
 {
 	public class PcEquipment : IEnumerable<Equipment>
 	{
-		public Equipment Head { get; set; }
-		public Equipment Weapon { get; set; }
-		public Equipment Body { get; set; }
-		public Equipment Feet { get; set; }
+		public Equipment Head { get; private set; }
+		public Equipment Weapon { get; private set; }
+		public Equipment Body { get; private set; }
+		public Equipment Feet { get; private set; }
 		public Dictionary<StatType, int> Bonuses
 		{
 			get

@@ -16,11 +16,12 @@ namespace Lastdew
 
 #region TESTING STUFF
 
-        private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
         [Export]
-        private bool CombatTesting { get; set; } = false;
+        private bool CombatTesting { get; set; }
         [Export]
         private int NumberOfPcs { get; set; } = 1;
+        private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
+        private List<PcSaveData> DefaultPcList { get; }= [];
 
 #endregion
 
@@ -82,9 +83,6 @@ namespace Lastdew
 			UI.MapMenu.OnStartScavenging -= StartScavenging;
 			UI.MainMenu.ReturnToBase.Pressed -= ReturnToBase;
 		}
-
-        // JUST FOR TESTING
-        private List<PcSaveData> DefaultPcList = [];
 
 		private void StartNewGame()
 		{

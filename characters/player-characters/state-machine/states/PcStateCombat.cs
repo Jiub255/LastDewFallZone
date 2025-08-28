@@ -49,25 +49,23 @@ namespace Lastdew
 		
 		public void HitEnemy(PlayerCharacter attackingPC)
 		{
-			if (CurrentSubstate is PcStateAttacking attackState)
-            {
-                bool targetKilled = attackState.HitEnemy(attackingPC);
-                if (!targetKilled)
-                {
-                    return;
-                }
-                TryFindNearestEnemy();
-            }
-            /* else
+			if (CurrentSubstate is not PcStateAttacking attackState)
 			{
 				GD.PushWarning($"Not in attacking substate. Current substate: {CurrentSubstate.GetType()}");
-			} */
-        }
+				return;
+			}
+			bool targetKilled = attackState.HitEnemy(attackingPC);
+			if (targetKilled)
+			{
+				TryFindNearestEnemy();
+			}
+		}
 
         public void GetHit(Enemy attacker, bool incapacitated)
 		{
 			if (incapacitated)
 			{
+				Context.Incapacitated = true;
 				ChangeSubstate(PcCombatSubstateNames.INCAPACITATED);
 			}
 			else

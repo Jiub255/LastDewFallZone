@@ -25,17 +25,18 @@ namespace Lastdew
 				return;
 			}
 			_timer -= delta;
-			if (_timer < 0)
+			if (_timer > 0)
 			{
-				_action?.Invoke();
-				if (_repeating)
-				{
-					_timer = _duration;
-				}
-				else
-				{
-					_done = true;
-				}
+				return;
+			}
+			_action?.Invoke();
+			if (_repeating)
+			{
+				_timer = _duration;
+			}
+			else
+			{
+				_done = true;
 			}
 		}
 	}

@@ -38,7 +38,7 @@ size = Vector3(0.2, 2, 28)
 
 [node name="TestCombatLevel" type="Node3D"]
 script = ExtResource("1_nfk2h")
-EnemiesToSpawn = 2
+EnemiesToSpawn = 13
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.897162, -0.274785, 0.345822, -0.436021, -0.425799, 0.792831, -0.0706071, -0.862084, -0.501822, 0, 0, 0)
@@ -48,7 +48,7 @@ unique_name_in_owner = true
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7271, -1.90735e-06, -14.0668)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.34026, -1.90735e-06, 17.4286)
 script = ExtResource("2_7q3mb")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

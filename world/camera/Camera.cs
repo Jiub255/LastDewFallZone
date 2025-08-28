@@ -12,9 +12,11 @@ namespace Lastdew
 		[ExportGroup("Keyboard Movement")]
 		[Export(PropertyHint.Range, "5, 50, 1")]
 		private float MovementSensitivity { get; set; } = 15f;
-		
-		[ExportGroup("Edge Scrolling")]
-		[Export(PropertyHint.Range, "5, 50, 1")]
+
+        [ExportGroup("Edge Scrolling")]
+        [Export]
+        private bool EdgeScrollingEnabled { get; set; } = false;
+        [Export(PropertyHint.Range, "5, 50, 1")]
 		private float ScrollSpeed { get; set; } = 15f;
 		[Export(PropertyHint.Range, "0, 50, 0.1")]
 		private float ScrollZoneThicknessPct { get; set; } = 10f;
@@ -110,12 +112,14 @@ namespace Lastdew
                 Dragging = true;
             }
 
-			// TODO: Fix the edge scroll logic here. MoveCamera still needs to be called when edge scrolling.
-            if (!Dragging/*  && !MoveTargetPositionWithEdgeScroll((float)delta) */)
+            if (!Dragging)
             {
-                MoveTargetPositionWithKeyboard((float)delta);
-                MoveCamera(delta);
-            }
+				if (!EdgeScrollingEnabled || !MoveTargetPositionWithEdgeScroll((float)delta))
+                {
+					MoveTargetPositionWithKeyboard((float)delta);
+				}
+				MoveCamera(delta);
+            }	
         }
 
         public override void _Input(InputEvent @event)

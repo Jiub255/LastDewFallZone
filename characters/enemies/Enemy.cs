@@ -37,7 +37,7 @@ namespace Lastdew
             }
         }
         private int Health { get; set; } = 5;
-		private int Attack { get; } = 40;
+		private int Attack { get; } = 10;
 		private float MaxSpeed { get; } = 4f;
 		private float Acceleration { get; } = 35f;
 		private float TurnSpeed { get; } = 360f;
@@ -65,6 +65,7 @@ namespace Lastdew
 		private StringName BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
 		private float AttackTimer { get; set; }
 		private float TimeBetweenAttacks { get; } = 2.5f;
+		//private float Delta { get; set; }
 
 		public override void _Ready()
 		{
@@ -125,12 +126,13 @@ namespace Lastdew
 				return true;
 			}
 			// TODO: Not sure if this does anything at the moment. When is Target null?
-			Target ??= attackingPC;
+			Target /*??*/= attackingPC;
 			AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 			return false;
 		}
 
 		// Called from animation method track
+		// Does it need to be public?
 		public void HitTarget()
 		{
 			bool pcIncapacitated = Target.GetHit(this, Attack);
@@ -180,12 +182,14 @@ namespace Lastdew
             Vector3 targetVelocity = direction * MaxSpeed;
             float accelerationAmount = Acceleration * delta;
             NavigationAgent.Velocity = Velocity.MoveToward(targetVelocity, accelerationAmount);
+            //Delta = delta;
 		}
 		
 		private void Move(Vector3 safeVelocity)
 		{
 			Velocity = safeVelocity;
 			MoveAndSlide();
+			//MoveAndCollide(safeVelocity/* * Delta*/);
 		}
 		
 		private void CombatProcess(float delta)
@@ -214,17 +218,13 @@ namespace Lastdew
 		
 		private bool WithinRangeOfEnemy()
 		{
-			return /* Target != null || */ NavigationAgent.IsNavigationFinished();
+			return /* Target != null && */ NavigationAgent.IsNavigationFinished();
 		}
 		
 		private bool OutOfRangeOfEnemy()
 		{
-			/* if (Target == null)
-			{
-                return true;
-            } */
 			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
-			return distanceSquared > AttackRadius * AttackRadius + A_LITTLE_BIT;
+			return /* Target != null && */ distanceSquared > AttackRadius * AttackRadius + A_LITTLE_BIT;
 		}
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()
@@ -252,17 +252,14 @@ namespace Lastdew
             {
                 CollisionObject3D collider = (CollisionObject3D)dict["collider"];
                 //this.PrintDebug($"Collider: {collider?.Name}"); 
-                if (collider is PlayerCharacter pc && pc != currentTarget)
+                if (collider is not PlayerCharacter pc || pc == currentTarget)
                 {
-                    if (closest == null)
-                    {
-                        closest = pc;
-                    }
-                    else if (GlobalPosition.DistanceSquaredTo(pc.GlobalPosition) <
-                        GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
-                    {
-                        closest = pc;
-                    }
+	                continue;
+                }
+                if (closest == null || GlobalPosition.DistanceSquaredTo(pc.GlobalPosition) <
+                    GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+                {
+	                closest = pc;
                 }
             }
             return closest;

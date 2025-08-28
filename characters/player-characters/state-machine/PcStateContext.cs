@@ -10,24 +10,13 @@ namespace Lastdew
 		public NavigationAgent3D NavigationAgent { get; }
 		public AnimationTree PcAnimationTree { get; }
 		public AnimationNodeStateMachinePlayback AnimStateMachine { get; }
-		public Vector3 Position
-		{
-			get => PC.Position;
-		}
-		public Vector3 GlobalPosition
-		{
-			get => PC.GlobalPosition;
-		}
-		public float Speed
-		{
-			get => PC.Velocity.Length();
-		}
+		public Vector3 Position => PC.Position;
+		public Vector3 GlobalPosition => PC.GlobalPosition;
+		public float Speed => PC.Velocity.Length();
 		public InventoryManager InventoryManager { get; }
-		public int Attack
-		{
-			get => PC.StatManager.Attack;
-		}
-		
+		public int Attack => PC.StatManager.Attack;
+		public bool Incapacitated { get; set; }
+
 		private PlayerCharacter PC { get; }
 		
 		public PcStateContext(PlayerCharacter pc, InventoryManager inventoryManager)
@@ -65,20 +54,17 @@ namespace Lastdew
             {
                 CollisionObject3D collider = (CollisionObject3D)dict["collider"];
                 //this.PrintDebug($"Collider: {collider?.Name}"); 
-                if (collider is Enemy enemy)
+                if (collider is Enemy enemy && enemy != currentTarget)
                 {
-                    if (enemy != currentTarget)
-                    {
-                        if (closest == null)
-                        {
-                            closest = enemy;
-                        }
-                        else if (PC.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) <
-                            PC.GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
-                        {
-                            closest = enemy;
-                        }
-                    }
+	                if (closest == null)
+	                {
+		                closest = enemy;
+	                }
+	                else if (PC.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) <
+	                         PC.GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+	                {
+		                closest = enemy;
+	                }
                 }
             }
             return closest;

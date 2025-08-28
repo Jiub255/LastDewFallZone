@@ -8,6 +8,7 @@
 
 [node name="CameraRig" type="Node3D"]
 script = ExtResource("1_1njid")
+RotationMinX = 30.0
 ZoomSpeed = 20.0
 ZoomMinDistance = 5.0
 ZoomMaxDistance = 25.0

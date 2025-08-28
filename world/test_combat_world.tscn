@@ -14,6 +14,7 @@
 [node name="World" type="Node3D"]
 script = ExtResource("1_6au83")
 CombatTesting = true
+NumberOfPcs = 3
 
 [node name="CameraRig" parent="." instance=ExtResource("2_k2vof")]
 unique_name_in_owner = true

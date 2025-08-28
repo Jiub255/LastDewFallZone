@@ -48,10 +48,10 @@ namespace Lastdew
 		public PcSaveData(PlayerCharacter pc)
 		{
 			Name = pc.Name;
-			Head = pc.Equipment.Head == null ? 0 : pc.Equipment.Head.GetUid();
-			Weapon = pc.Equipment.Weapon == null ? 0 : pc.Equipment.Weapon.GetUid();
-			Body = pc.Equipment.Body == null ? 0 : pc.Equipment.Body.GetUid();
-            Feet = pc.Equipment.Feet == null ? 0 : pc.Equipment.Feet.GetUid();
+			Head = pc.Equipment.Head?.GetUid() ?? 0;
+			Weapon = pc.Equipment.Weapon?.GetUid() ?? 0;
+			Body = pc.Equipment.Body?.GetUid() ?? 0;
+            Feet = pc.Equipment.Feet?.GetUid() ?? 0;
 			Injury = pc.Health.Injury;
 		}
 	}

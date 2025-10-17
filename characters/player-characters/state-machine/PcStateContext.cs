@@ -15,6 +15,8 @@ namespace Lastdew
 		public float Speed => PC.Velocity.Length();
 		public InventoryManager InventoryManager { get; }
 		public int Attack => PC.StatManager.Attack;
+		// Only needed to prevent animation triggering a method in PcStateGettingHit that causes player to 
+		// transition to PcStateWaiting even if already in PcStateIncapacitated.
 		public bool Incapacitated { get; set; }
 
 		private PlayerCharacter PC { get; }
@@ -54,17 +56,14 @@ namespace Lastdew
             {
                 CollisionObject3D collider = (CollisionObject3D)dict["collider"];
                 //this.PrintDebug($"Collider: {collider?.Name}"); 
-                if (collider is Enemy enemy && enemy != currentTarget)
+                if (collider is not Enemy enemy || enemy == currentTarget)
                 {
-	                if (closest == null)
-	                {
-		                closest = enemy;
-	                }
-	                else if (PC.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) <
-	                         PC.GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
-	                {
-		                closest = enemy;
-	                }
+	                continue;
+                }
+                if (closest == null || PC.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) <
+                    PC.GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+                {
+	                closest = enemy;
                 }
             }
             return closest;

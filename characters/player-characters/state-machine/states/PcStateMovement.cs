@@ -8,7 +8,7 @@ namespace Lastdew
 		
 		public MovementTarget MovementTarget { get; private set; }
 	
-		// TODO: Get this info from pc stats eventually? Or just have everyone move the same?
+		// TODO: Get this info from pc stats (through PcStateContext) eventually? Or just have everyone move the same?
 		private float MaxSpeed { get; set; } = 7f;
 		private float Acceleration { get; set; } = 50f;
 		private Vector3 LastTargetPosition { get; set; }

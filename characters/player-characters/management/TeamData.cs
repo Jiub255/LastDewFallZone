@@ -10,14 +10,12 @@ namespace Lastdew
 		public event Action OnPcsInstantiated;
 		public event Action OnMenuSelectedChanged;
 		
-		private List<PlayerCharacter> _pcs = new();
+		private readonly List<PlayerCharacter> _pcs = [];
 		private int? _selectedIndex;
 		private int _menuSelectedIndex;
 
-		public ReadOnlyCollection<PlayerCharacter> Pcs
-		{
-			get => _pcs.AsReadOnly();
-		}
+		public ReadOnlyCollection<PlayerCharacter> Pcs => _pcs.AsReadOnly();
+
 		// Whenever Selected gets set, set menu to that. But keep menu as it was when deselecting.
 		// Changing Menu doesn't change Selected though. 
 		public int? SelectedIndex

@@ -9,7 +9,7 @@ namespace Lastdew
 		public PcStateGettingHit(PcStateContext context) : base(context)
 		{
 			context.PcAnimationTree.Connect(
-				AnimationTree.SignalName.AnimationFinished,
+				AnimationMixer.SignalName.AnimationFinished,
 				Callable.From((string animationName) => OnAnimationFinished(animationName)));
 		}
 
@@ -19,8 +19,11 @@ namespace Lastdew
 			
 			Context.AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 		}
-
-		public override void GetHit() {}
+ 
+		public override void GetHit()
+		{
+			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT);
+		}
 		
 		// TODO: This still getting called from the AnimationTree signal, even if the pc died
 		// and is in incapacitated state. Might be fixed with Context.Incapacitated?

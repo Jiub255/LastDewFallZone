@@ -1,9 +1,7 @@
 
 namespace Lastdew
-{	public class PcStateIdle : PcState
+{	public class PcStateIdle(PcStateContext context) : PcState(context)
 	{
-		public PcStateIdle(PcStateContext context) : base(context) {}
-	
 		public override void EnterState(MovementTarget target) {}
 		public override void ExitState() {}
 		public override void PhysicsProcessSelected(float delta) {}

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace Lastdew
 {	
-	public class PcStateLooting : PcState
+	public class PcStateLooting(PcStateContext context) : PcState(context)
 	{
 		private const string LOOTING_ANIM_NAME = "CharacterArmature|Loot";
 		private const string MOVEMENT_BLEND_TREE_NAME = "movement_blend_tree";
-		
-		public PcStateLooting(PcStateContext context) : base(context) {}
-		
+
 		public LootContainer LootContainer { get; private set; }
 		private float Timer { get; set; }
 	

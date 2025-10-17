@@ -1,36 +1,45 @@
 using Godot;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lastdew
 {
 	public class PcStatManager : IEnumerable<Stat>
 	{
-		private Stat _attack;
-		private Stat _defense;
-		private Stat _engineering;
-		private Stat _farming;
-		private Stat _medical;
-		private Stat _scavenging;
+		private Stat _attack = new(StatType.ATTACK, 1);
+		private Stat _defense = new(StatType.DEFENSE, 1);
+		private Stat _engineering = new(StatType.ENGINEERING, 1);
+		private Stat _farming = new(StatType.FARMING, 1);
+		private Stat _medical = new(StatType.MEDICAL, 1);
+		private Stat _scavenging = new(StatType.SCAVENGING, 1);
 		private int _pain;
 		
-		public int Attack { get => PainFormula(_attack.Value, _pain); }
-		public int Defense { get => PainFormula(_defense.Value, _pain); }
-		public int Engineering { get => PainFormula(_engineering.Value, _pain); }
-		public int Farming { get => PainFormula(_farming.Value, _pain); }
-		public int Medical { get => PainFormula(_medical.Value, _pain); }
-		public int Scavenging { get => PainFormula(_scavenging.Value, _pain); }
-		
-		public PcStatManager()
+		public int Attack
 		{
-			_attack = new Stat(StatType.ATTACK, 1);
-			_defense = new Stat(StatType.DEFENSE, 1);
-			_engineering = new Stat(StatType.ENGINEERING, 1);
-			_farming = new Stat(StatType.FARMING, 1);
-			_medical = new Stat(StatType.MEDICAL, 1);
-			_scavenging = new Stat(StatType.SCAVENGING, 1);
+			get => PainFormula(_attack.Value, _pain);
 		}
-		
+		public int Defense
+		{
+			get => PainFormula(_defense.Value, _pain);
+		}
+		public int Engineering
+		{
+			get => PainFormula(_engineering.Value, _pain);
+		}
+		public int Farming
+		{
+			get => PainFormula(_farming.Value, _pain);
+		}
+		public int Medical
+		{
+			get => PainFormula(_medical.Value, _pain);
+		}
+		public int Scavenging
+		{
+			get => PainFormula(_scavenging.Value, _pain);
+		}
+
 		public void SetPain(int pain)
 		{
 			_pain = pain;
@@ -41,12 +50,9 @@ namespace Lastdew
 			foreach (Stat stat in this)
 			{
 				stat.ClearModifiers();
-				foreach (KeyValuePair<StatType, int> kvp in equipmentBonuses)
+				foreach (KeyValuePair<StatType, int> kvp in equipmentBonuses.Where(kvp => kvp.Key == stat.Type))
 				{
-					if (kvp.Key == stat.Type)
-					{
-						stat.AddModifier(kvp.Value);
-					}
+					stat.AddModifier(kvp.Value);
 				}
 			}
 		}
@@ -54,12 +60,10 @@ namespace Lastdew
 		public bool MeetsRequirements(Equipment equipment)
 		{
 			bool requirementsMet = true;
-			foreach (KeyValuePair<StatType, int> kvp in equipment.StatsNeededToEquip)
+			foreach (KeyValuePair<StatType, int> kvp in equipment.StatsNeededToEquip
+				         .Where(kvp => GetStatByType(kvp.Key)?.Value < kvp.Value))
 			{
-				if (GetStatByType(kvp.Key)?.Value < kvp.Value)
-				{
-					requirementsMet = false;
-				}
+				requirementsMet = false;
 			}
 			return requirementsMet;
 		}

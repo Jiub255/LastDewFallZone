@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lastdew
 {	
@@ -32,11 +33,7 @@ namespace Lastdew
 		{
 			get
 			{
-				int pain = _injury;
-				foreach (Relief relief in Reliefs)
-				{
-					pain -= relief.Amount;
-				}
+				int pain = Reliefs.Aggregate(_injury, (current, relief) => current - relief.Amount);
 				if (pain < 0)
 				{
 					pain = 0;
@@ -51,7 +48,7 @@ namespace Lastdew
             public float Duration { get; set; } = duration;
         }
 		
-		private List<Relief> Reliefs { get; set; } = [];
+		private List<Relief> Reliefs { get; } = [];
 		
 		public PcHealth(PcSaveData pcSaveData)
 		{
@@ -75,13 +72,13 @@ namespace Lastdew
 		public bool TakeDamage(int damage)
 		{
 			Injury += damage;
-			if (Injury > MAX_INJURY)
+			if (Injury < MAX_INJURY)
 			{
-				Injury = MAX_INJURY;
-				// TODO: Become incapacitated until healing at home base. Or die?
-				return true;
+				return false;
 			}
-			return false;
+			Injury = MAX_INJURY;
+			// TODO: Become incapacitated until healing at home base. Or die?
+			return true;
 		}
 		
 		public void RelievePain(int amount, float duration)

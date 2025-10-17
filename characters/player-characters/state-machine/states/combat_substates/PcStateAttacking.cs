@@ -9,7 +9,7 @@ namespace Lastdew
 		public PcStateAttacking(PcStateContext context) : base(context)
 		{
 			context.PcAnimationTree.Connect(
-				AnimationTree.SignalName.AnimationFinished,
+				AnimationMixer.SignalName.AnimationFinished,
 				Callable.From((string animationName) => OnAnimationFinished(animationName)));
 		}
 

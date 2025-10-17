@@ -1,18 +1,15 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
 namespace Lastdew
 {
-	/// <summary>
-    /// TODO: When fighting multiple enemies, only the one targeted by the PC does the attack animation,
-    /// even though it seems to run the code fine on each enemy. Maybe look into how PC changing targets affects enemies?
-    /// </summary>
 	public partial class Enemy : CharacterBody3D
 	{
-        private PlayerCharacter _target;
+        private EnemyTarget _target;
+        private Node3D _slot;
         private EnemyState _state = EnemyState.MOVEMENT;
 
-        // TODO: Start with simple test class. Don't bother with state machine and health component and stuff yet.
         private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
 		private const float A_LITTLE_BIT = /* 1.25f */2f;
         private const string MOVEMENT_BLEND_TREE_NAME = "movement_blend_tree";
@@ -42,18 +39,19 @@ namespace Lastdew
 		private float Acceleration { get; } = 35f;
 		private float TurnSpeed { get; } = 360f;
 		private float AttackRadius { get; } = 0.5f;
-        private PlayerCharacter Target
+		// TODO: Make a class EnemyTarget that has PlayerCharacter and CombatSlot?
+        private EnemyTarget Target
 		{
 			get => _target;
             set
             {
-                this.PrintDebug($"{Name}'s target set to {(value == null ? "null" : value.Name)}");
+                this.PrintDebug($"{Name}'s target set to {(value == null ? "null" : value.PC.Name)}");
 				_target = value;
                 if (value == null)
 				{
 					return;
 				}
-                Vector3 attackPosition = AttackPosition(value.GlobalPosition);
+                Vector3 attackPosition = AttackPosition(value.PC.GlobalPosition);
 				NavigationAgent.TargetPosition = attackPosition;
 				LastTargetPosition = attackPosition;
             }
@@ -65,6 +63,8 @@ namespace Lastdew
 		private StringName BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
 		private float AttackTimer { get; set; }
 		private float TimeBetweenAttacks { get; } = 2.5f;
+		private float CheckForTargetTimer { get; set; }
+		private float TimeBetweenChecks { get; } = 1f;
 		//private float Delta { get; set; }
 
 		public override void _Ready()
@@ -88,18 +88,28 @@ namespace Lastdew
 
             if (Target == null)
 			{
-                // TODO: Check for new target every second or so.
+                CheckForTargetTimer -= (float)delta;
+                if (CheckForTargetTimer <= 0)
+                {
+	                CheckForTargetTimer = TimeBetweenChecks;
+	                Target = FindNearestPC();
+                }
+                
                 return;
             }
 
-            if (State == EnemyState.MOVEMENT)
-			{
-				MovementProcess((float)delta);
-			}
-			else if (State == EnemyState.COMBAT)
-			{
-				CombatProcess((float)delta);
-			}
+            switch (State)
+            {
+	            case EnemyState.MOVEMENT:
+		            MovementProcess((float)delta);
+		            break;
+	            case EnemyState.COMBAT:
+		            CombatProcess((float)delta);
+		            break;
+	            case EnemyState.DEAD:
+	            default:
+		            break;
+            }
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -126,7 +136,8 @@ namespace Lastdew
 				return true;
 			}
 			// TODO: Not sure if this does anything at the moment. When is Target null?
-			Target /*??*/= attackingPC;
+			// Figure it out later.
+			//Target /*??*/= attackingPC;
 			AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 			return false;
 		}
@@ -135,13 +146,14 @@ namespace Lastdew
 		// Does it need to be public?
 		public void HitTarget()
 		{
-			bool pcIncapacitated = Target.GetHit(this, Attack);
+			bool pcIncapacitated = Target.PC.GetHit(this, Attack);
 			if (pcIncapacitated)
 			{
-				Target = FindNearestPC(Target);
+				Target = FindNearestPC(Target.PC);
             }
 		}
 
+		// TODO: Inform all PCs that this enemy is dead, so they look for a new target or set it to null.
 		private void Die()
 		{
 			AnimStateMachine.Travel(DEATH_ANIM_NAME);
@@ -201,10 +213,9 @@ namespace Lastdew
 				return;
 			}
 
-			Rotate(delta, Target.GlobalPosition);
+			Rotate(delta, Target.PC.GlobalPosition);
 			
 			AttackTimer -= delta;
-            //this.PrintDebug($"{Name}'s attack timer: {AttackTimer}");
 			// TODO: Make sure not in "get hit" animation before starting attack. Probably just introduce "GETTING_HIT" state.
             if (AttackTimer < 0 /* && AnimStateMachine.GetCurrentNode() == MOVEMENT_BLEND_TREE_NAME */)
 			{
@@ -223,13 +234,13 @@ namespace Lastdew
 		
 		private bool OutOfRangeOfEnemy()
 		{
-			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.GlobalPosition));
+			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.PC.GlobalPosition));
 			return /* Target != null && */ distanceSquared > AttackRadius * AttackRadius + A_LITTLE_BIT;
 		}
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()
 		{
-			Vector3 attackPosition = AttackPosition(Target.GlobalPosition);
+			Vector3 attackPosition = AttackPosition(Target.PC.GlobalPosition);
 			if (attackPosition.DistanceSquaredTo(LastTargetPosition) > RECALCULATION_DISTANCE_SQUARED)
 			{
 				NavigationAgent.TargetPosition = attackPosition;
@@ -239,30 +250,29 @@ namespace Lastdew
 		
 		private Vector3 AttackPosition(Vector3 targetPosition)
 		{
-			Vector3 direction = (GlobalPosition - targetPosition).Normalized();
+			Vector3 direction = Target.CombatDirection.Rotated(Vector3.Up, Target.PC.GlobalRotation.Y);
 			return targetPosition + direction * AttackRadius;
 		}
 		
-		private PlayerCharacter FindNearestPC(PlayerCharacter currentTarget)
+		private EnemyTarget FindNearestPC(PlayerCharacter currentTarget = null)
         {
             Array<Dictionary> results = SphereCastForNearbyPcs();
 
-            PlayerCharacter closest = null;
-            foreach (Dictionary dict in results)
+            System.Collections.Generic.IEnumerable<PlayerCharacter> pcs = results
+	            .Where(d => (CollisionObject3D)d["collider"] is PlayerCharacter)
+	            .Select(x => (PlayerCharacter)x["collider"])
+	            .OrderBy(y => y.GlobalPosition.DistanceTo(GlobalPosition));
+
+            foreach (PlayerCharacter pc in pcs)
             {
-                CollisionObject3D collider = (CollisionObject3D)dict["collider"];
-                //this.PrintDebug($"Collider: {collider?.Name}"); 
-                if (collider is not PlayerCharacter pc || pc == currentTarget)
-                {
-	                continue;
-                }
-                if (closest == null || GlobalPosition.DistanceSquaredTo(pc.GlobalPosition) <
-                    GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
-                {
-	                closest = pc;
-                }
+	            Vector3? openCombatDirection = pc.GetOpenCombatDirection();
+	            if (openCombatDirection.HasValue)
+	            {
+		            return new EnemyTarget(pc, openCombatDirection.Value);
+	            }
             }
-            return closest;
+
+            return null;
         }
 
         private Array<Dictionary> SphereCastForNearbyPcs()

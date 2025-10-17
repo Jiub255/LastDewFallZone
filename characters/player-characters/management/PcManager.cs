@@ -18,24 +18,25 @@ namespace Lastdew
 		{
 			base._Process(delta);
 
-			if (TeamData != null)
+			if (TeamData == null)
 			{
-				for (int i = 0; i < TeamData.Pcs.Count; i++)
+				return;
+			}
+			for (int i = 0; i < TeamData.Pcs.Count; i++)
+			{
+				if (i == TeamData.SelectedIndex)
 				{
-					if (i == TeamData.SelectedIndex)
-					{
-						TeamData.Pcs[i].ProcessSelected(delta);
-					}
-					else
-					{
-						TeamData.Pcs[i].ProcessUnselected(delta);
-					}
+					TeamData.Pcs[i].ProcessSelected(delta);
 				}
+				else
+				{
+					TeamData.Pcs[i].ProcessUnselected(delta);
+				}
+			}
 
-				if (Input.IsActionJustPressed(InputNames.DESELECT))
-				{
-					DeselectPc();
-				}
+			if (Input.IsActionJustPressed(InputNames.DESELECT))
+			{
+				DeselectPc();
 			}
 		}
 	
@@ -43,18 +44,19 @@ namespace Lastdew
 		{
 			base._PhysicsProcess(delta);
 
-			if (TeamData != null)
+			if (TeamData == null)
 			{
-				for (int i = 0; i < TeamData.Pcs.Count; i++)
+				return;
+			}
+			for (int i = 0; i < TeamData.Pcs.Count; i++)
+			{
+				if (i == TeamData.SelectedIndex)
 				{
-					if (i == TeamData.SelectedIndex)
-					{
-						TeamData.Pcs[i].PhysicsProcessSelected(delta);
-					}
-					else
-					{
-						TeamData.Pcs[i].PhysicsProcessUnselected(delta);
-					}
+					TeamData.Pcs[i].PhysicsProcessSelected(delta);
+				}
+				else
+				{
+					TeamData.Pcs[i].PhysicsProcessUnselected(delta);
 				}
 			}
 		}
@@ -91,7 +93,7 @@ namespace Lastdew
 				// TODO: How to work in the PcData with this part and saving/loading?
 				// Just keep their mesh enums as "stats"? Or have each PcData as an unchanging resource? Probably that.
 				PlayerCharacter pc = (PlayerCharacter)PcScene.Instantiate();
-				CallDeferred(PcManager.MethodName.AddChild, pc);
+				CallDeferred(Node.MethodName.AddChild, pc);
 				// TODO: Add a spawn location for pcs.
 				pc.Position += Vector3.Right * i * 3;
 				i++;

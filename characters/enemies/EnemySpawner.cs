@@ -5,6 +5,9 @@ namespace Lastdew
 	public partial class EnemySpawner : Node3D
 	{	
 		private int EnemiesToSpawn { get; set; }
+		/// <summary>
+		/// TODO: Might not need this here.
+		/// </summary>
 		private TeamData TeamData { get; set; }
 		private float TimeBetweenSpawns { get; } = 2f;
 		private float Timer { get; set; } = 0.25f;
@@ -36,14 +39,14 @@ namespace Lastdew
 			EnemiesToSpawn--;
 			Enemy enemy = EnemyScene.Instantiate<Enemy>();
 			CallDeferred(MethodName.AddChild, enemy);
-			if (TeamData.Pcs.Count > 0)
-			{
-				enemy.SetDeferred(Enemy.PropertyName.Target, TeamData.Pcs[0]);
-			}
-			else
-			{
-				GD.PushWarning("Couldn't find target PC for enemy");
-			} 
+			// if (TeamData.Pcs.Count > 0)
+			// {
+			// 	enemy.SetDeferred(Enemy.PropertyName.Target, TeamData.Pcs[0]);
+			// }
+			// else
+			// {
+			// 	GD.PushWarning("Couldn't find target PC for enemy");
+			// }
 		}
 	}
 }

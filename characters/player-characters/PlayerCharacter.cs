@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Godot;
 
 namespace Lastdew
@@ -12,11 +13,30 @@ namespace Lastdew
 		public Texture2D Icon { get; private set; }
 		
 		public PcHealth Health { get; private set; }
-		public PcStatManager StatManager { get; set; }
-		public PcEquipment Equipment { get; set; }
+		public PcStatManager StatManager { get; private set; }
+		public PcEquipment Equipment { get; private set; }
 		
 		private PcStateMachine StateMachine { get; set; }
 		private InventoryManager Inventory { get; set; }
+
+		private static readonly List<Vector3> _combatDirections =
+		[
+			Vector3.Forward,
+			Vector3.Left,
+			Vector3.Right,
+			Vector3.Back
+		];
+
+		public ReadOnlyCollection<Vector3> CombatDirections { get; private set; } = new(_combatDirections);
+		
+		// Only four keys, Forward, left, right, back.
+		public Dictionary<Vector3, bool> CombatDirectionsOccupied { get; private set; } = new()
+		{
+			{Vector3.Forward , false },
+			{Vector3.Left , false },
+			{Vector3.Right , false },
+			{Vector3.Back , false },
+		};
 	
 		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
@@ -57,6 +77,20 @@ namespace Lastdew
 		public void MoveTo(MovementTarget movementTarget)
 		{
 			StateMachine.ChangeState(PcStateNames.MOVEMENT, movementTarget);
+		}
+
+		public Vector3? GetOpenCombatDirection()
+		{
+			foreach (Vector3 direction in CombatDirections)
+			{
+				if (CombatDirectionsOccupied.TryGetValue(direction, out bool occupied) && occupied == false)
+				{
+					CombatDirectionsOccupied[direction] = true;
+					return direction;
+				}
+			}
+
+			return null;
 		}
 		
 		/// <summary>
@@ -148,9 +182,9 @@ namespace Lastdew
 			Name = name;
 			Icon = data.Icon;
 			
-			Skeleton3D MeshParent = GetNode<Skeleton3D>("%Skeleton3D");
-			List<MeshInstance3D> meshes = new();
-            foreach (Node node in MeshParent.GetChildren())
+			Skeleton3D meshParent = GetNode<Skeleton3D>("%Skeleton3D");
+			List<MeshInstance3D> meshes = [];
+            foreach (Node node in meshParent.GetChildren())
             {
                 if (node is MeshInstance3D mesh)
                 {
@@ -163,9 +197,9 @@ namespace Lastdew
 			meshes[(int)data.LegsMesh * 4 - 3].Show();
 			meshes[(int)data.FeetMesh * 4 - 4].Show();
 			// TODO: Kinda hacky, could do better. Doesn't matter. Just doing this to free up some memory why not.
-            foreach (Node node in MeshParent.GetChildren())
+            foreach (Node node in meshParent.GetChildren())
             {
-                if (node is MeshInstance3D mesh && mesh.Visible == false)
+                if (node is MeshInstance3D { Visible: false } mesh)
                 {
 					mesh.QueueFree();
                 }

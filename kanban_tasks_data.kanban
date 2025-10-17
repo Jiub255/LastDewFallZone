@@ -54,6 +54,7 @@
 			"title": "DOING",
 			"tasks": [
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
+				"d3ac029a-c3b4-4875-b55d-8a265ce057f1",
 				"1cf9dd0c-8cab-48b6-a35e-e5147197d523"
 			]
 		},
@@ -832,7 +833,7 @@
 		{
 			"uuid": "d7bc729f-5541-4e3e-8fba-d50a028ac220",
 			"title": "Fix edge scrolling logic in Camera",
-			"description": "Need to be able to call MoveCamera while edge scrolling. Broke after changing drag movement.",
+			"description": "FIXED by fixing bad code\nNeed to be able to call MoveCamera while edge scrolling. Broke after changing drag movement.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -845,9 +846,16 @@
 		},
 		{
 			"uuid": "1cf9dd0c-8cab-48b6-a35e-e5147197d523",
-			"title": "Put \"Combat slots\" around characters",
-			"description": "Put preset \"combat slots\" around each character that get filled with attackers during combat. To help with too many combat characters pushing and sliding each other around while fighting.\nOr maybe just use a grid for movement/combat?\nTry slots thing first. Start with four, one on each side. If all slots are full of attackers, others just find a different target or wait.  And if a slot is blocked by a wall or something, temporarily disable it. ",
+			"title": "Fix combat crowding problem with nav agents",
+			"description": "Enabling avoidance makes them avoid each other, but they push and slide each other out of the way to get to a shared target. Want to find a way to have new characters approach from a free side, without nudging other characters, or just choose a new target if this one is 'full' of attackers.\nPut preset \"combat slots\" around each character that get filled with attackers during combat? To help with too many combat characters pushing and sliding each other around while fighting.\nOr maybe just use a grid for movement/combat?\nTry slots thing first. Start with four, one on each side. If all slots are full of attackers, others just find a different target or wait.  And if a slot is blocked by a wall or something, temporarily disable it. \n\nEach PC has four CombatSlots (with Node3D and occupied bool).\nFor enemy to find a target, they search each pc closest to farthest.\nSearch each slot, if it's not occupied, that slot/PC is the target.\nEnemy has a EnemyTarget (with PC and CombatSlot)",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "d3ac029a-c3b4-4875-b55d-8a265ce057f1",
+			"title": "Break Enemy.cs into state machine and other components",
+			"description": "Getting too big and sloppy.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

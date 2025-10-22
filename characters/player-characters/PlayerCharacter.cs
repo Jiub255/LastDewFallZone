@@ -27,10 +27,10 @@ namespace Lastdew
 			Vector3.Back
 		];
 
-		public ReadOnlyCollection<Vector3> CombatDirections { get; private set; } = new(_combatDirections);
+		private ReadOnlyCollection<Vector3> CombatDirections { get; } = new(_combatDirections);
 		
 		// Only four keys, Forward, left, right, back.
-		public Dictionary<Vector3, bool> CombatDirectionsOccupied { get; private set; } = new()
+		private Dictionary<Vector3, bool> CombatDirectionsOccupied { get; } = new()
 		{
 			{Vector3.Forward , false },
 			{Vector3.Left , false },
@@ -99,7 +99,7 @@ namespace Lastdew
 		/// <returns>true if pc incapacitated</returns>
 		public bool GetHit(Enemy attackingEnemy, int damage)
 		{
-			int actualDamage = damage - StatManager.Defense;
+			int actualDamage = Mathf.Max(0, damage - StatManager.Defense);
 			bool incapacitated = Health.TakeDamage(actualDamage);
 			StateMachine.GetHit(attackingEnemy, incapacitated);
 			return incapacitated;

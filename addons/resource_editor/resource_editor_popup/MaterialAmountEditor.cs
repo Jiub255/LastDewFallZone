@@ -28,7 +28,7 @@ namespace Lastdew
         private Button DeleteButton { get; set; }
         private EditorInterface EditorInterface { get; } = EditorInterface.Singleton;
         private Callable SetMaterialCallable { get; set; }
-        private Craftables Craftables { get; } = Databases.CRAFTABLES;
+        private static Craftables Craftables => Databases.CRAFTABLES;
 
         public override void _Ready()
         {

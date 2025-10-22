@@ -55,7 +55,8 @@ namespace Lastdew
             foreach (Dictionary dict in results)
             {
                 CollisionObject3D collider = (CollisionObject3D)dict["collider"];
-                //this.PrintDebug($"Collider: {collider?.Name}"); 
+                //this.PrintDebug($"Collider: {collider?.Name}");
+                // TODO: Why not allow currentTarget in finding closest target?
                 if (collider is not Enemy enemy || enemy == currentTarget)
                 {
 	                continue;

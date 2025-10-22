@@ -9,7 +9,7 @@ namespace Lastdew
 		/// TODO: Might not need this here.
 		/// </summary>
 		private TeamData TeamData { get; set; }
-		private float TimeBetweenSpawns { get; } = 2f;
+		private static float TimeBetweenSpawns => 2f;
 		private float Timer { get; set; } = 0.25f;
 		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(UIDs.TEST_ENEMY);
 		
@@ -38,7 +38,7 @@ namespace Lastdew
 		{
 			EnemiesToSpawn--;
 			Enemy enemy = EnemyScene.Instantiate<Enemy>();
-			CallDeferred(MethodName.AddChild, enemy);
+			CallDeferred(Node.MethodName.AddChild, enemy);
 			// if (TeamData.Pcs.Count > 0)
 			// {
 			// 	enemy.SetDeferred(Enemy.PropertyName.Target, TeamData.Pcs[0]);

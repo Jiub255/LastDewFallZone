@@ -7,7 +7,7 @@ namespace Lastdew
     [Tool]
     public partial class NamespaceContextMenu : EditorContextMenuPlugin
     {
-        string Namespace { get; } = "Lastdew";
+        static string Namespace => "Lastdew";
         Texture2D Icon { get; } = GD.Load<Texture2D>("uid://ci1ycdtuh12k7");
 
         public override void _PopupMenu(string[] paths)
@@ -122,7 +122,7 @@ namespace Lastdew
             }
         }
 
-        private void AddTool(string path)
+        private static void AddTool(string path)
         {
             string[] lines = GetLines(path);
             

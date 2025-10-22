@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 
 namespace Lastdew
-{	
+{
 	public class PcStateMachine
 	{
 		private PcState CurrentState { get; set; }
@@ -12,7 +12,7 @@ namespace Lastdew
 		{
 			SetupStates(context);
 	
-			CurrentState = StatesByEnum[PcStateNames.MOVEMENT];
+			CurrentState = StatesByEnum[PcStateNames.IDLE];
 		}
 	
 		public void ProcessStateUnselected(float delta)
@@ -82,7 +82,6 @@ namespace Lastdew
 			PcStateLooting looting = new(context);
 			PcStateCombat combat = new(context);
 	
-			// Populate states dictionary
 			StatesByEnum.Add(PcStateNames.IDLE, idle);
 			StatesByEnum.Add(PcStateNames.MOVEMENT, movement);
 			StatesByEnum.Add(PcStateNames.LOOTING, looting);

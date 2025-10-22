@@ -9,7 +9,7 @@ namespace Lastdew
 		public event Action<MovementTarget> OnClickedMoveTarget;
 		
 		// TODO: Base this off of zoom distance?
-		private float RayLength { get; } = 2000;
+		private static float RayLength => 2000;
 		private Viewport Viewport { get; set; }
 		private Camera3D Camera { get; set; }
 	

@@ -7,11 +7,13 @@ namespace Lastdew
 		public event Action<PcStateNames, MovementTarget> OnChangeState;
 
         protected PcStateContext Context { get; private set; } = context;
-        protected string BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
-		/// <summary>
+        protected static string BlendAmountPath => "parameters/movement_blend_tree/idle_move/blend_amount";
+
+        /// <summary>
 		/// TODO: Get this from PC weapon/stats eventually.
 		/// </summary>
-		protected float AttackRadius { get; } = 0.5f;
+		protected static float AttackRadius => 0.5f;
+
 		/// <summary>
 		/// Degrees per second
 		/// </summary>

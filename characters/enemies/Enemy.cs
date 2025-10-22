@@ -11,7 +11,7 @@ namespace Lastdew
         private EnemyState _state = EnemyState.MOVEMENT;
 
         private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
-		private const float A_LITTLE_BIT = /* 1.25f */2f;
+		private const float A_LITTLE_BIT = 1f;
         private const string MOVEMENT_BLEND_TREE_NAME = "movement_blend_tree";
         private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve_2";
@@ -24,22 +24,24 @@ namespace Lastdew
 			COMBAT,
 			DEAD
 		}
-        private EnemyState State
+
+		private EnemyState State
 		{
 			get => _state;
-            set
-            {
-                this.PrintDebug($"{Name}'s state set to {value}");
-                _state = value;
-            }
-        }
+			set
+			{
+				this.PrintDebug($"{Name}'s state set to {value}");
+				_state = value;
+			}
+		}
+		// TODO: Get the following from stats/enemy data resource later.
         private int Health { get; set; } = 5;
-		private int Attack { get; } = 10;
-		private float MaxSpeed { get; } = 4f;
-		private float Acceleration { get; } = 35f;
-		private float TurnSpeed { get; } = 360f;
-		private float AttackRadius { get; } = 0.5f;
-		// TODO: Make a class EnemyTarget that has PlayerCharacter and CombatSlot?
+		private static int Attack => 10;
+		private static float MaxSpeed => 4f;
+		private static float Acceleration => 35f;
+		private static float TurnSpeed => 360f;
+		private static float AttackRadius => 1f;
+
         private EnemyTarget Target
 		{
 			get => _target;
@@ -60,13 +62,19 @@ namespace Lastdew
 		private AnimationTree EnemyAnimationTree { get; set; }
 		private AnimationNodeStateMachinePlayback AnimStateMachine { get; set; }
 		private Vector3 LastTargetPosition { get; set; }
-		private StringName BlendAmountPath { get; } = "parameters/movement_blend_tree/idle_move/blend_amount";
+		private static StringName BlendAmountPath => "parameters/movement_blend_tree/idle_move/blend_amount";
 		private float AttackTimer { get; set; }
-		private float TimeBetweenAttacks { get; } = 2.5f;
+		private static float TimeBetweenAttacks => 2.5f;
 		private float CheckForTargetTimer { get; set; }
-		private float TimeBetweenChecks { get; } = 1f;
+		private static float TimeBetweenChecks => 1f;
+		
 		//private float Delta { get; set; }
-
+		private class EnemyTarget(PlayerCharacter pc, Vector3 combatDirection)
+		{
+			public PlayerCharacter PC { get; set; } = pc;
+			public Vector3 CombatDirection { get; set; } = combatDirection;
+		}
+		
 		public override void _Ready()
 		{
 			base._Ready();
@@ -167,8 +175,10 @@ namespace Lastdew
 		{
 			if (WithinRangeOfEnemy())
 			{
+				this.PrintDebug($"Within range of enemy");
 				State = EnemyState.COMBAT;
 				EnemyAnimationTree.Set(BlendAmountPath, 0);
+				//NavigationAgent.TargetPosition = GlobalPosition;
 				return;
 			}
 			Animate();
@@ -201,7 +211,7 @@ namespace Lastdew
 		{
 			Velocity = safeVelocity;
 			MoveAndSlide();
-			//MoveAndCollide(safeVelocity/* * Delta*/);
+			//MoveAndCollide(safeVelocity * Delta);
 		}
 		
 		private void CombatProcess(float delta)
@@ -229,12 +239,13 @@ namespace Lastdew
 		
 		private bool WithinRangeOfEnemy()
 		{
-			return /* Target != null && */ NavigationAgent.IsNavigationFinished();
+			return GlobalPosition.DistanceSquaredTo(Target.PC.GlobalPosition) < AttackRadius * AttackRadius + A_LITTLE_BIT/2f;
+			//return /* Target != null && */ NavigationAgent.IsNavigationFinished();
 		}
 		
 		private bool OutOfRangeOfEnemy()
 		{
-			float distanceSquared = GlobalPosition.DistanceSquaredTo(AttackPosition(Target.PC.GlobalPosition));
+			float distanceSquared = GlobalPosition.DistanceSquaredTo(/*AttackPosition*/(Target.PC.GlobalPosition));
 			return /* Target != null && */ distanceSquared > AttackRadius * AttackRadius + A_LITTLE_BIT;
 		}
 		
@@ -250,7 +261,8 @@ namespace Lastdew
 		
 		private Vector3 AttackPosition(Vector3 targetPosition)
 		{
-			Vector3 direction = Target.CombatDirection.Rotated(Vector3.Up, Target.PC.GlobalRotation.Y);
+			// TODO: Check this math.
+			Vector3 direction = Target.CombatDirection/*.Rotated(Vector3.Up, Target.PC.GlobalRotation.Y)*/;
 			return targetPosition + direction * AttackRadius;
 		}
 		

@@ -8,7 +8,7 @@ namespace Lastdew
 
         protected PcStateContext Context { get; set; } = context;
         protected Enemy Target { get; set; }
-		protected float TimeBetweenAttacks { get; } = 2.3f;
+		protected static float TimeBetweenAttacks => 2.3f;
 		protected float Timer { get; set; }
 		/// <summary>
 		/// Degrees per second

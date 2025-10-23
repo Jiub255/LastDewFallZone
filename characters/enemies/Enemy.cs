@@ -53,9 +53,8 @@ namespace Lastdew
 				{
 					return;
 				}
-                Vector3 attackPosition = AttackPosition(value.PC.GlobalPosition);
-				NavigationAgent.TargetPosition = attackPosition;
-				LastTargetPosition = attackPosition;
+				NavigationAgent.TargetPosition = value.AttackPosition;
+				LastTargetPosition = value.AttackPosition;
             }
         }
         private NavigationAgent3D NavigationAgent { get; set; }
@@ -71,8 +70,9 @@ namespace Lastdew
 		//private float Delta { get; set; }
 		private class EnemyTarget(PlayerCharacter pc, Vector3 combatDirection)
 		{
-			public PlayerCharacter PC { get; set; } = pc;
-			public Vector3 CombatDirection { get; set; } = combatDirection;
+			public PlayerCharacter PC { get; } = pc;
+			private Vector3 CombatDirection { get; } = combatDirection;
+			public Vector3 AttackPosition => PC.GlobalPosition + CombatDirection * AttackRadius;
 		}
 		
 		public override void _Ready()
@@ -178,7 +178,6 @@ namespace Lastdew
 				this.PrintDebug($"Within range of enemy");
 				State = EnemyState.COMBAT;
 				EnemyAnimationTree.Set(BlendAmountPath, 0);
-				//NavigationAgent.TargetPosition = GlobalPosition;
 				return;
 			}
 			Animate();
@@ -203,7 +202,8 @@ namespace Lastdew
 			Vector3 direction = (nextPosition - GlobalPosition).Normalized();
             Vector3 targetVelocity = direction * MaxSpeed;
             float accelerationAmount = Acceleration * delta;
-            NavigationAgent.Velocity = Velocity.MoveToward(targetVelocity, accelerationAmount);
+            /*NavigationAgent.*/Velocity = Velocity.MoveToward(targetVelocity, accelerationAmount);
+			MoveAndSlide();
             //Delta = delta;
 		}
 		
@@ -239,31 +239,24 @@ namespace Lastdew
 		
 		private bool WithinRangeOfEnemy()
 		{
-			return GlobalPosition.DistanceSquaredTo(Target.PC.GlobalPosition) < AttackRadius * AttackRadius + A_LITTLE_BIT/2f;
-			//return /* Target != null && */ NavigationAgent.IsNavigationFinished();
+			//return GlobalPosition.DistanceSquaredTo(Target.PC.GlobalPosition) < AttackRadius * AttackRadius + A_LITTLE_BIT / 2;
+			return /* Target != null && */ NavigationAgent.IsNavigationFinished();
 		}
 		
 		private bool OutOfRangeOfEnemy()
 		{
-			float distanceSquared = GlobalPosition.DistanceSquaredTo(/*AttackPosition*/(Target.PC.GlobalPosition));
-			return /* Target != null && */ distanceSquared > AttackRadius * AttackRadius + A_LITTLE_BIT;
+			float distanceSquared = GlobalPosition.DistanceSquaredTo(Target.AttackPosition);
+			return /* Target != null && */ distanceSquared > A_LITTLE_BIT;
 		}
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()
 		{
-			Vector3 attackPosition = AttackPosition(Target.PC.GlobalPosition);
+			Vector3 attackPosition = Target.AttackPosition;
 			if (attackPosition.DistanceSquaredTo(LastTargetPosition) > RECALCULATION_DISTANCE_SQUARED)
 			{
 				NavigationAgent.TargetPosition = attackPosition;
 				LastTargetPosition = attackPosition;
 			}
-		}
-		
-		private Vector3 AttackPosition(Vector3 targetPosition)
-		{
-			// TODO: Check this math.
-			Vector3 direction = Target.CombatDirection/*.Rotated(Vector3.Up, Target.PC.GlobalRotation.Y)*/;
-			return targetPosition + direction * AttackRadius;
 		}
 		
 		private EnemyTarget FindNearestPC(PlayerCharacter currentTarget = null)

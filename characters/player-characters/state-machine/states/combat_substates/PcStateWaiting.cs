@@ -6,14 +6,14 @@ namespace Lastdew
 		{
 			base.ProcessSelected(delta);
 			
-			Pc.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(Pc.MovementTarget.Target.GlobalPosition, TurnSpeed * delta);
 		}
 
 		public override void ProcessUnselected(float delta)
 		{
 			base.ProcessUnselected(delta);
 			
-			Pc.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(Pc.MovementTarget.Target.GlobalPosition, TurnSpeed * delta);
 		}
 		
 		public override void GetHit()

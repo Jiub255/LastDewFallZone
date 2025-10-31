@@ -11,19 +11,23 @@ namespace Lastdew
 		private LootContainer LootContainer { get; set; }
 		private float Timer { get; set; }
 	
-		public override void EnterState(MovementTarget target)
+		public override void EnterState()
 		{
-			if (target.Target is LootContainer lootContainer)
+			if (Pc.MovementTarget.Target is LootContainer lootContainer)
 			{
 				LootContainer = lootContainer;
 				if (lootContainer.Empty || lootContainer.BeingLooted)
 				{
-					ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
+					ChangeState(PcStateNames.IDLE);
 					return;
 				}
 				lootContainer.BeingLooted = true;
 				Pc.AnimStateMachine.Travel(LOOTING_ANIM_NAME);
 				Timer = lootContainer.LootDuration;
+			}
+			else
+			{
+				ChangeState(PcStateNames.IDLE);
 			}
 		}
 	
@@ -55,7 +59,7 @@ namespace Lastdew
 			{
 				Timer = 0;
 				GimmeTheLoot();
-				ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
+				ChangeState(PcStateNames.IDLE);
 			}
 		}
 	

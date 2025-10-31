@@ -4,10 +4,11 @@ namespace Lastdew
 	{
 		private const string DEATH_ANIM_NAME = "CharacterArmature|Death";
 
-        public override void EnterState(Enemy target)
+        public override void EnterState()
 		{
-			base.EnterState(target);
+			base.EnterState();
 
+			Pc.MovementTarget = new MovementTarget();
 			Pc.AnimStateMachine.Travel(DEATH_ANIM_NAME);
 			Pc.DisablePc();
 		}

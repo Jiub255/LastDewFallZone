@@ -53,7 +53,7 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"5912eb5c-2c85-4855-84df-61b358aa083e",
+				"43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
 				"d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
 				"402f656a-c43a-4dec-8099-c5e4439c866a"
 			]
@@ -106,7 +106,8 @@
 				"d3ac029a-c3b4-4875-b55d-8a265ce057f1",
 				"8ac24760-da31-4b67-9762-5cc6223e53a9",
 				"90c97e2a-852d-4c7f-9acd-4d886bcac1fa",
-				"12f4e22a-c7b3-4887-bf84-567c7d213552"
+				"12f4e22a-c7b3-4887-bf84-567c7d213552",
+				"5912eb5c-2c85-4855-84df-61b358aa083e"
 			]
 		},
 		{
@@ -896,6 +897,13 @@
 			"title": "Redo combat without the \"combat directions\"",
 			"description": "How would that work with multiple pcs attacking the same enemy?\nMight have to do it more LSDZ style and disable collision/avoidance and just let everyone overlap. \nCould do things to help them spread out so it doesn't look too bad. \nWatch some LSDZ videos, and other similar combat games, to get ideas.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
+			"title": "Let Pcs get one hit in after gethit state.",
+			"description": "As is, Pcs get overwhelmed and immediately thrown back into get hit state after recovering. \nEither let them attack once immediately after leaving get hit state,\nor, do an invincibility thing for a little bit after recovering, like a Recovering state.",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		}
 	],

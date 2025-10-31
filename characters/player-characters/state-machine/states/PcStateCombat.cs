@@ -8,19 +8,21 @@ namespace Lastdew
 		private const float SIGHT_DISTANCE = 20f;
 		private PcCombatSubstate CurrentSubstate { get; set; }
 		private System.Collections.Generic.Dictionary<PcCombatSubstateNames, PcCombatSubstate> StatesByEnum { get; } = new();
-		private Enemy Target { get; set; }
 		
 		public PcStateCombat(PlayerCharacter pc) : base(pc)
 		{
 			SetupSubstates(pc);
 		}
 	
-		public override void EnterState(MovementTarget target)
+		public override void EnterState()
 		{
-			if (target.Target is Enemy enemy)
+			if (Pc.MovementTarget.Target is Enemy enemy)
 			{
-				Target = enemy;
 				ChangeSubstate(PcCombatSubstateNames.WAITING);
+			}
+			else
+			{
+				ChangeState(PcStateNames.IDLE);
 			}
 		}
 
@@ -28,7 +30,9 @@ namespace Lastdew
 		{
 			if (TargetDead())
 			{
-				ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
+				// TODO: Look for new target instead. Or just do that in idle (unselected) state?
+				//ChangeState(PcStateNames.IDLE);
+				TryFindNearestEnemy();
 			}
 			CurrentSubstate.ProcessSelected(delta);
 		}
@@ -37,7 +41,9 @@ namespace Lastdew
 		{
 			if (TargetDead())
 			{
-				ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
+				// TODO: Look for new target instead. Or just do that in idle (unselected) state?
+				//ChangeState(PcStateNames.IDLE);
+				TryFindNearestEnemy();
 			}
 			CurrentSubstate.ProcessUnselected(delta);
 		}
@@ -56,32 +62,29 @@ namespace Lastdew
 			}
 		}
 		
-		public void HitEnemy(PlayerCharacter attackingPc)
+		public void HitEnemy()
 		{
 			if (CurrentSubstate is not PcStateAttacking attackState)
 			{
 				GD.PushWarning($"Not in attacking substate. Current substate: {CurrentSubstate.GetType()}");
 				return;
 			}
-			bool targetKilled = attackState.HitEnemy(attackingPc);
+			bool targetKilled = attackState.HitEnemy();
 			if (targetKilled)
 			{
 				TryFindNearestEnemy();
 			}
 		}
 
-        public void GetHit(Enemy attacker, bool incapacitated)
+        public void GetHit(bool incapacitated)
 		{
 			if (incapacitated)
 			{
 				Pc.Incapacitated = true;
 				ChangeSubstate(PcCombatSubstateNames.INCAPACITATED);
+				return;
 			}
-			else
-			{
-				Target ??= attacker;
-				CurrentSubstate.GetHit();
-			}
+			CurrentSubstate.GetHit();
 		}
 	
 		private void SetupSubstates(PlayerCharacter pc)
@@ -105,21 +108,31 @@ namespace Lastdew
 
         private void TryFindNearestEnemy()
         {
-            Enemy nearest = FindNearestEnemy(Target);
+	        Enemy nearest = null;
+	        if (Pc.MovementTarget.Target is Enemy enemy)
+	        {
+	            nearest = FindNearestEnemy(enemy);
+	        }
+	        else
+	        {
+		        nearest = FindNearestEnemy(null);
+	        }
+	        
             if (nearest != null)
             {
-                ChangeState(PcStateNames.MOVEMENT, new MovementTarget(nearest.GlobalPosition, nearest));
+	            Pc.MovementTarget = new MovementTarget(nearest.GlobalPosition, nearest);
+                ChangeState(PcStateNames.MOVEMENT);
             }
             else
             {
-                ChangeState(PcStateNames.IDLE, new MovementTarget());
+                ChangeState(PcStateNames.IDLE);
             }
         }
 		
 		private void ChangeSubstate(PcCombatSubstateNames substateName)
 		{
 			CurrentSubstate = StatesByEnum[substateName];
-			CurrentSubstate?.EnterState(Target);
+			CurrentSubstate?.EnterState();
 		}
 		
 		private Enemy FindNearestEnemy(Enemy currentTarget)
@@ -164,7 +177,11 @@ namespace Lastdew
 
 		private bool TargetDead()
 		{
-			return Target.Health <= 0;
+			if (Pc.MovementTarget.Target is Enemy enemy)
+			{
+				return enemy.Health <= 0;
+			}
+			return false;
 		}
 	}
 }

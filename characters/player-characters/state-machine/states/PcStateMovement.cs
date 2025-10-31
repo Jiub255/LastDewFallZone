@@ -6,8 +6,6 @@ namespace Lastdew
 	{
 		private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
 		
-		public MovementTarget MovementTarget { get; private set; }
-	
 		// TODO: Get this info from pc stats (through PcStateContext) eventually? Or just have everyone move the same?
 		private float MaxSpeed { get; set; } = 7f;
 		private float Acceleration { get; set; } = 50f;
@@ -30,18 +28,17 @@ namespace Lastdew
 			MovementProcess(delta);
 		}
 	
-		public override void EnterState(MovementTarget target)
+		public override void EnterState()
 		{
-			MovementTarget = target;
-			if (target.Target is Enemy)
+			if (Pc.MovementTarget.Target is Enemy enemy)
 			{
-				Vector3 attackPosition = AttackPosition(target.Target.GlobalPosition);
+				Vector3 attackPosition = AttackPosition(enemy.GlobalPosition);
 				Pc.NavigationAgent.TargetPosition = attackPosition;
 				LastTargetPosition = attackPosition;
 			}
 			else
 			{
-				Pc.NavigationAgent.TargetPosition = target.TargetPosition;
+				Pc.NavigationAgent.TargetPosition = Pc.MovementTarget.TargetPosition;
 			}
 			//this.PrintDebug($"Move target position: {Context.NavigationAgent.TargetPosition}");
 		}
@@ -57,13 +54,13 @@ namespace Lastdew
 		{
 			if (TargetDead())
 			{
-				ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
+				ChangeState(PcStateNames.IDLE);
 			}
 			
 			if (DestinationReached())
 			{
 				PcStateNames stateName;
-				switch (MovementTarget.Target)
+				switch (Pc.MovementTarget.Target)
 				{
 					case null:
 						stateName = PcStateNames.IDLE;
@@ -79,7 +76,7 @@ namespace Lastdew
 						stateName = PcStateNames.IDLE;
 						break;
 				}
-				ChangeState(stateName, MovementTarget);
+				ChangeState(stateName);
 				return;
 			}
 			Animate();
@@ -101,7 +98,7 @@ namespace Lastdew
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()
 		{
-			if (MovementTarget.Target is Enemy enemy)
+			if (Pc.MovementTarget.Target is Enemy enemy)
 			{
 				Vector3 attackPosition = AttackPosition(enemy.GlobalPosition);
 				if (attackPosition.DistanceSquaredTo(LastTargetPosition) > RECALCULATION_DISTANCE_SQUARED)
@@ -137,7 +134,6 @@ namespace Lastdew
 		
 		/// <summary>
         /// TODO: Is this necessary or does nav agent take care of the "attack radius" somehow?
-        /// This doesn't get used in the enemy script, look into it.
         /// </summary>
 		private Vector3 AttackPosition(Vector3 enemyPosition)
 		{
@@ -147,7 +143,7 @@ namespace Lastdew
 
 		private bool TargetDead()
 		{
-			if (MovementTarget.Target is Enemy enemy)
+			if (Pc.MovementTarget.Target is Enemy enemy)
 			{
 				return enemy.Health <= 0;
 			}

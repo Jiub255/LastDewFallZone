@@ -8,6 +8,7 @@ namespace Lastdew
 	{
 		public event Action OnEquipmentChanged;
 		
+		public MovementTarget MovementTarget { get; set; }
 		public bool Incapacitated { get; set; }
 		public new string Name { get; private set; }
 		public Texture2D Icon { get; private set; }
@@ -62,7 +63,8 @@ namespace Lastdew
 		
 		public void MoveTo(MovementTarget movementTarget)
 		{
-			StateMachine.ChangeState(PcStateNames.MOVEMENT, movementTarget);
+			MovementTarget = movementTarget;
+			StateMachine.ChangeState(PcStateNames.MOVEMENT);
 		}
 
 		/// <summary>
@@ -71,17 +73,21 @@ namespace Lastdew
 		/// <returns>true if pc incapacitated</returns>
 		public bool GetHit(Enemy attackingEnemy, int damage)
 		{
+			if (MovementTarget.Target is not Enemy)
+			{
+				MovementTarget = new MovementTarget(attackingEnemy.Position, attackingEnemy);
+			}
 			int actualDamage = Mathf.Max(0, damage - StatManager.Defense);
 			bool incapacitated = Health.TakeDamage(actualDamage);
 			//this.PrintDebug($"{GetRid()} took {damage} damage");
-			StateMachine.GetHit(attackingEnemy, incapacitated);
+			StateMachine.GetHit(incapacitated);
 			return incapacitated;
 		}
 		
 		// Called from animation method track
 		public void HitEnemy()
 		{
-			StateMachine.HitEnemy(this);
+			StateMachine.HitEnemy();
 		}
 		
 		public void Equip(Equipment equipment)

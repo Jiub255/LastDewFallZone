@@ -2,7 +2,10 @@
 namespace Lastdew
 {	public class PcStateIdle(PlayerCharacter pc) : PcState(pc)
 	{
-		public override void EnterState(MovementTarget target) {}
+		public override void EnterState()
+		{
+			pc.MovementTarget = new MovementTarget();
+		}
 		public override void ExitState() {}
 		public override void PhysicsProcessSelected(float delta) {}
 		public override void PhysicsProcessUnselected(float delta) {}

@@ -17,19 +17,19 @@ namespace Lastdew
 		{
 			base.ProcessSelected(delta);
 			
-			Pc.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(Pc.MovementTarget.Target.GlobalPosition, TurnSpeed * delta);
 		}
 
 		public override void ProcessUnselected(float delta)
 		{
 			base.ProcessUnselected(delta);
 			
-			Pc.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(Pc.MovementTarget.Target.GlobalPosition, TurnSpeed * delta);
 		}
 
-		public override void EnterState(Enemy target)
+		public override void EnterState()
 		{
-			base.EnterState(target);
+			base.EnterState();
 
 			Pc.AnimStateMachine.Travel(ATTACK_ANIM_NAME);
 		}
@@ -40,11 +40,15 @@ namespace Lastdew
 		}
 		
 		/// <returns>true if hit killed enemy</returns>
-		public bool HitEnemy(PlayerCharacter attackingPc)
+		public bool HitEnemy()
 		{
-			int attack = Pc.StatManager.Attack;
-            //this.PrintDebug($"Attack: {attack}");
-            return Target.GetHit(attack, attackingPc);
+			if (Pc.MovementTarget.Target is Enemy enemy)
+			{
+				int attack = Pc.StatManager.Attack;
+	            //this.PrintDebug($"Attack: {attack}");
+	            return enemy.GetHit(attack, Pc);
+			}
+			return false;
 		}
 		
 		private void OnAnimationFinished(string animationName)

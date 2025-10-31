@@ -35,19 +35,19 @@ namespace Lastdew
 			CurrentState?.PhysicsProcessSelected(delta);
 		}
 	
-		public void ChangeState(PcStateNames stateName, MovementTarget target)
+		public void ChangeState(PcStateNames stateName)
 		{
 			//this.PrintDebug($"Changing to {stateName}");
 			CurrentState?.ExitState();
 			CurrentState = StatesByEnum[stateName];
-			CurrentState?.EnterState(target);
+			CurrentState?.EnterState();
 		}
 	
-		public void HitEnemy(PlayerCharacter attackingPc)
+		public void HitEnemy()
 		{
 			if (CurrentState is PcStateCombat combat)
 			{
-				combat.HitEnemy(attackingPc);
+				combat.HitEnemy();
 			}
 			/* else
 			{
@@ -55,14 +55,14 @@ namespace Lastdew
 			} */
 		}
 	
-		public void GetHit(Enemy attacker, bool incapacitated)
+		public void GetHit(bool incapacitated)
 		{
 			if (CurrentState is not PcStateCombat)
 			{
-				ChangeState(PcStateNames.COMBAT, new MovementTarget(Vector3.Zero, attacker));
+				ChangeState(PcStateNames.COMBAT);
 			}
 			PcStateCombat combat = (PcStateCombat)CurrentState;
-			combat.GetHit(attacker, incapacitated);
+			combat.GetHit(incapacitated);
 		}
 	
 		public void ExitTree()

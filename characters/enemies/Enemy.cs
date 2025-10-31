@@ -14,7 +14,7 @@ namespace Lastdew
         public Vector3 LastTargetPosition { get; set; }
         public NavigationAgent3D NavigationAgent { get; set; }
 		public AnimationNodeStateMachinePlayback AnimStateMachine { get; set; }
-        public int Health { get; private set; } = 5;
+        public int Health { get; private set; } = 3;
 
         private EnemyStateMachine StateMachine { get; set; }
 		private AnimationTree EnemyAnimationTree { get; set; }

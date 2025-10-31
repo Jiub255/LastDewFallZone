@@ -13,16 +13,16 @@ namespace Lastdew
 				Callable.From((string animationName) => OnAnimationFinished(animationName)));
 		}
 
-		public override void EnterState(Enemy target)
+		public override void EnterState()
 		{
-			base.EnterState(target);
+			base.EnterState();
 			
 			Pc.AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 		}
  
 		public override void GetHit()
 		{
-			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT);
+			//ChangeSubstate(PcCombatSubstateNames.GETTING_HIT);
 		}
 		
 		// TODO: This still getting called from the AnimationTree signal, even if the pc died

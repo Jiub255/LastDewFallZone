@@ -7,7 +7,7 @@ namespace Lastdew
 		public LocationData LocationData { get; private set; }
 		public Button SelectTeamButton { get; private set; }
 		private TextureRect Map { get; set; }
-		private LocationInfoUI LocationInfo { get; set; }
+		private LocationInfoUi LocationInfo { get; set; }
 
 		public override void _Ready()
 		{
@@ -15,7 +15,7 @@ namespace Lastdew
 			
 			SelectTeamButton = GetNode<Button>("%SelectTeamButton");
 			Map = GetNode<TextureRect>("%Map");
-			LocationInfo = GetNode<LocationInfoUI>("%LocationInfo");
+			LocationInfo = GetNode<LocationInfoUi>("%LocationInfo");
 			
 			foreach (Node node in Map.GetChildren())
 			{

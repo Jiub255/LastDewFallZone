@@ -11,7 +11,7 @@ namespace Lastdew
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			PcScene = GD.Load<PackedScene>(UIDs.PC_BASE);
+			PcScene = GD.Load<PackedScene>(UiDs.PC_BASE);
 		}
 		
 		public override void _Process(double delta)

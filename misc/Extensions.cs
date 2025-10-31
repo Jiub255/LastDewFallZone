@@ -6,7 +6,7 @@ namespace Lastdew
 {	
 	public static class Extensions
 	{
-		private static readonly int PADDING = 70;
+		private static readonly int Padding = 70;
 		
 		/// <summary>
 		/// Prints the type and name of the object that sent message.
@@ -20,13 +20,13 @@ namespace Lastdew
 				{
 					type += $" : {resource.GetType().BaseType.Name}";
 				}
-				GD.Print($"Resource    |    {type}".PadRight(PADDING)
+				GD.Print($"Resource    |    {type}".PadRight(Padding)
 					+ $" |    {message}");
 			}
 			else if (obj is RefCounted refCounted)
 			{
 				string type = refCounted.GetType().Name;
-				GD.Print($"RefCounted  |    {type}".PadRight(PADDING)
+				GD.Print($"RefCounted  |    {type}".PadRight(Padding)
 					+ $" |    {message}");
 			}
 			else if (obj is Node node)
@@ -36,7 +36,7 @@ namespace Lastdew
 				{
 					name += $" : {node.GetType().BaseType.Name}";
 				}
-				GD.Print($"Node        |    {name}".PadRight(PADDING)
+				GD.Print($"Node        |    {name}".PadRight(Padding)
 					+ $" |    {message}");
 			}
 			else
@@ -46,7 +46,7 @@ namespace Lastdew
 				{
 					type += $" : {obj.GetType().BaseType.Name}";
 				}
-				GD.Print($"C# Object   |    {type}".PadRight(PADDING)
+				GD.Print($"C# Object   |    {type}".PadRight(Padding)
 					+ $" |    {message}");
 			}
 		}

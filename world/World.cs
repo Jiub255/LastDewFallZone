@@ -7,10 +7,10 @@ namespace Lastdew
     {
         private ClickHandler ClickHandler { get; set; }
         private PcManager PcManager { get; set; }
-        private UiManager UI { get; set; }
+        private UiManager Ui { get; set; }
         private InventoryManager InventoryManager { get; set; }
         private TeamData TeamData { get; set; }
-        private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>(UIDs.HOME_BASE);
+        private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>(UiDs.HOME_BASE);
         private Level HomeBase { get; set; }
         private ScavengingLevel ScavengingLevel { get; set; }
 
@@ -32,7 +32,7 @@ namespace Lastdew
 			Camera camera = GetNode<Camera>("%CameraRig");
 			ClickHandler = camera.ClickHandler;
 			PcManager = GetNode<PcManager>("%PcManager");
-			UI = GetNode<UiManager>("%UiManager");
+			Ui = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
 			InventoryManager = new InventoryManager();
 			
@@ -64,36 +64,36 @@ namespace Lastdew
 		{
 			ClickHandler.OnClickedPc += PcManager.SelectPc;
 			ClickHandler.OnClickedMoveTarget += PcManager.MoveTo;
-			UI.MainMenu.OnNewGame += StartNewGame;
-			UI.MainMenu.OnSaveGame += Save;
-			UI.MainMenu.OnLoadGame += Load;
-			UI.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
-			UI.MapMenu.OnStartScavenging += StartScavenging;
-			UI.MainMenu.ReturnToBase.Pressed += ReturnToBase;
+			Ui.MainMenu.OnNewGame += StartNewGame;
+			Ui.MainMenu.OnSaveGame += Save;
+			Ui.MainMenu.OnLoadGame += Load;
+			Ui.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
+			Ui.MapMenu.OnStartScavenging += StartScavenging;
+			Ui.MainMenu.ReturnToBase.Pressed += ReturnToBase;
 		}
 
         private void UnsubscribeFromEvents()
 		{
 			ClickHandler.OnClickedPc -= PcManager.SelectPc;
 			ClickHandler.OnClickedMoveTarget -= PcManager.MoveTo;
-			UI.MainMenu.OnNewGame -= StartNewGame;
-			UI.MainMenu.OnSaveGame -= Save;
-			UI.MainMenu.OnLoadGame -= Load;
-			UI.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
-			UI.MapMenu.OnStartScavenging -= StartScavenging;
-			UI.MainMenu.ReturnToBase.Pressed -= ReturnToBase;
+			Ui.MainMenu.OnNewGame -= StartNewGame;
+			Ui.MainMenu.OnSaveGame -= Save;
+			Ui.MainMenu.OnLoadGame -= Load;
+			Ui.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
+			Ui.MapMenu.OnStartScavenging -= StartScavenging;
+			Ui.MainMenu.ReturnToBase.Pressed -= ReturnToBase;
 		}
 
 		private void StartNewGame()
 		{
 			HomeBase = SetupLevel(HomeBaseScene, DefaultPcList);
-			UI.ChangeState(new GameStateHome());
+			Ui.ChangeState(new GameStateHome());
 		}
 
 		private void StartCombatTest()
 		{
 			HomeBase = SetupLevel(CombatTestScene, DefaultPcList);
-			UI.ChangeState(new GameStateHome());
+			Ui.ChangeState(new GameStateHome());
 		}
 
 		private void Save()
@@ -106,12 +106,12 @@ namespace Lastdew
 			SaveData saveData = SaverLoader.Load();
 			LoadInventory(saveData);
 			HomeBase = SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
-			UI.ChangeState(new GameStateHome());
+			Ui.ChangeState(new GameStateHome());
 		}
 
 		private void LoadInventory(SaveData saveData)
 		{
-			Craftables craftables = Databases.CRAFTABLES;
+			Craftables craftables = Databases.Craftables;
 			foreach (KeyValuePair<long, int> kvp in saveData.Inventory)
 			{
 				InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
@@ -126,7 +126,7 @@ namespace Lastdew
 			// UI.Initialize has to be called after PcManager.SpawnPcs,
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
-			UI.Initialize(TeamData, InventoryManager);
+			Ui.Initialize(TeamData, InventoryManager);
 			return level;
 		}
         
@@ -139,14 +139,14 @@ namespace Lastdew
 					oldLevel.QueueFree();
 				}
 			}
-			UI.ChangeState(new GameStateStart());
+			Ui.ChangeState(new GameStateStart());
         }
 
 		private void StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
 		{
 			RemoveChild(HomeBase);
 			ScavengingLevel = (ScavengingLevel)SetupLevel(scene, pcSaveDatas);
-			UI.ChangeState(new GameStateScavenging());
+			Ui.ChangeState(new GameStateScavenging());
 		}
         
         private void ReturnToBase()
@@ -155,7 +155,7 @@ namespace Lastdew
 			AddChild(HomeBase);
 			
 			// Spawn returning pcs from sent PcDatas, and the rest from saved PcDatas.
-			List<PcSaveData> pcSaveDatas = new();
+			List<PcSaveData> pcSaveDatas = [];
 			foreach (PlayerCharacter pc in TeamData.Pcs)
 			{
 				PcSaveData pcSaveData = new(pc);
@@ -164,8 +164,8 @@ namespace Lastdew
 			pcSaveDatas.AddRange(TeamData.UnusedPcDatas);
 			
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
-			UI.Initialize(TeamData, InventoryManager);
-			UI.ChangeState(new GameStateHome());
+			Ui.Initialize(TeamData, InventoryManager);
+			Ui.ChangeState(new GameStateHome());
         }
 	}
 }

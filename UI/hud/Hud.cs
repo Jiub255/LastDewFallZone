@@ -6,7 +6,7 @@ namespace Lastdew
 	public partial class Hud : Menu
 	{
 		private TeamData TeamData { get; set; }
-		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(UIDs.PC_BUTTON);
+		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(UiDs.PC_BUTTON);
 		private HBoxContainer ButtonParent { get; set; }
 		private List<PcButton> PcButtons { get; set; } = new List<PcButton>();
 	

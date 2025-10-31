@@ -12,7 +12,7 @@ namespace Lastdew
 		}
 		private TeamData TeamData { get; set; }
 		private Dictionary<EquipmentType, EquipmentButton> ButtonsByType { get; set; } = new();
-		private PlayerCharacter PC { get; set; }
+		private PlayerCharacter Pc { get; set; }
 
 		public override void _Ready()
 		{
@@ -33,7 +33,7 @@ namespace Lastdew
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			PC = teamData.Pcs[teamData.MenuSelectedIndex];
+			Pc = teamData.Pcs[teamData.MenuSelectedIndex];
 			TeamData.OnMenuSelectedChanged += SetNewPc;
 			SetNewPc();
 		}
@@ -51,12 +51,12 @@ namespace Lastdew
 		
 		private void SetNewPc()
 		{
-			if (PC != null)
+			if (Pc != null)
 			{
-				PC.OnEquipmentChanged -= SetupButtons;
+				Pc.OnEquipmentChanged -= SetupButtons;
 			}
-			PC = TeamData.Pcs[TeamData.MenuSelectedIndex];
-			PC.OnEquipmentChanged += SetupButtons;
+			Pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
+			Pc.OnEquipmentChanged += SetupButtons;
 			SetupButtons();
 		}
 		

@@ -2,13 +2,13 @@ using Godot;
 
 namespace Lastdew
 {
-	public partial class PcStateAttacking : PcCombatSubstate
+	public class PcStateAttacking : PcCombatSubstate
 	{
 		private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		
-		public PcStateAttacking(PcStateContext context) : base(context)
+		public PcStateAttacking(PlayerCharacter pc) : base(pc)
 		{
-			context.PcAnimationTree.Connect(
+			pc.PcAnimationTree.Connect(
 				AnimationMixer.SignalName.AnimationFinished,
 				Callable.From((string animationName) => OnAnimationFinished(animationName)));
 		}
@@ -17,21 +17,21 @@ namespace Lastdew
 		{
 			base.ProcessSelected(delta);
 			
-			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
 		}
 
 		public override void ProcessUnselected(float delta)
 		{
 			base.ProcessUnselected(delta);
 			
-			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
 		}
 
 		public override void EnterState(Enemy target)
 		{
 			base.EnterState(target);
 
-			Context.AnimStateMachine.Travel(ATTACK_ANIM_NAME);
+			Pc.AnimStateMachine.Travel(ATTACK_ANIM_NAME);
 		}
  
 		public override void GetHit()
@@ -40,11 +40,11 @@ namespace Lastdew
 		}
 		
 		/// <returns>true if hit killed enemy</returns>
-		public bool HitEnemy(PlayerCharacter attackingPC)
+		public bool HitEnemy(PlayerCharacter attackingPc)
 		{
-			int attack = Context.Attack;
+			int attack = Pc.StatManager.Attack;
             this.PrintDebug($"Attack: {attack}");
-            return Target.GetHit(attack, attackingPC);
+            return Target.GetHit(attack, attackingPc);
 		}
 		
 		private void OnAnimationFinished(string animationName)

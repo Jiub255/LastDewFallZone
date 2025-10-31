@@ -17,19 +17,19 @@ namespace Lastdew
         private AcceptDialog AcceptDialog { get; set; }
         private VBoxContainer Column1 { get; set; }
         private VBoxContainer Column2 { get; set; }
-        private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(UIDs.STATS_TO_CRAFT_EDITOR);
-        private PackedScene RecipeCostsScene { get; } = GD.Load<PackedScene>(UIDs.RECIPE_COSTS_EDITOR);
-        private PackedScene RequiredBuildingsScene { get; } = GD.Load<PackedScene>(UIDs.REQUIRED_BUILDINGS_EDITOR);
-        private PackedScene ScrapResultsScene { get; } = GD.Load<PackedScene>(UIDs.SCRAP_RESULTS_EDITOR);
-        private PackedScene RarityEditorScene { get; } = GD.Load<PackedScene>(UIDs.RARITY_EDITOR);
-        private PackedScene TagsEditorScene { get; } = GD.Load<PackedScene>(UIDs.TAGS_EDITOR);
-        private PackedScene ReusableEditorScene { get; } = GD.Load<PackedScene>(UIDs.REUSABLE_EDITOR);
-        private PackedScene EquipmentBonusesScene { get; } = GD.Load<PackedScene>(UIDs.EQUIPMENT_BONUSES_EDITOR);
-        private PackedScene EquipmentTypeScene { get; } = GD.Load<PackedScene>(UIDs.EQUIPMENT_TYPE_EDITOR);
-        private PackedScene StatsToEquipScene { get; } = GD.Load<PackedScene>(UIDs.STATS_TO_EQUIP_EDITOR);
-        private PackedScene BuildingTypeScene { get; } = GD.Load<PackedScene>(UIDs.BUILDING_TYPE_EDITOR);
-        private PackedScene SceneUIDScene { get; } = GD.Load<PackedScene>(UIDs.SCENE_UID_EDITOR);
-        private PackedScene EffectsScene { get; } = GD.Load<PackedScene>(UIDs.EFFECTS_EDITOR);
+        private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(UiDs.STATS_TO_CRAFT_EDITOR);
+        private PackedScene RecipeCostsScene { get; } = GD.Load<PackedScene>(UiDs.RECIPE_COSTS_EDITOR);
+        private PackedScene RequiredBuildingsScene { get; } = GD.Load<PackedScene>(UiDs.REQUIRED_BUILDINGS_EDITOR);
+        private PackedScene ScrapResultsScene { get; } = GD.Load<PackedScene>(UiDs.SCRAP_RESULTS_EDITOR);
+        private PackedScene RarityEditorScene { get; } = GD.Load<PackedScene>(UiDs.RARITY_EDITOR);
+        private PackedScene TagsEditorScene { get; } = GD.Load<PackedScene>(UiDs.TAGS_EDITOR);
+        private PackedScene ReusableEditorScene { get; } = GD.Load<PackedScene>(UiDs.REUSABLE_EDITOR);
+        private PackedScene EquipmentBonusesScene { get; } = GD.Load<PackedScene>(UiDs.EQUIPMENT_BONUSES_EDITOR);
+        private PackedScene EquipmentTypeScene { get; } = GD.Load<PackedScene>(UiDs.EQUIPMENT_TYPE_EDITOR);
+        private PackedScene StatsToEquipScene { get; } = GD.Load<PackedScene>(UiDs.STATS_TO_EQUIP_EDITOR);
+        private PackedScene BuildingTypeScene { get; } = GD.Load<PackedScene>(UiDs.BUILDING_TYPE_EDITOR);
+        private PackedScene SceneUidScene { get; } = GD.Load<PackedScene>(UiDs.SCENE_UID_EDITOR);
+        private PackedScene EffectsScene { get; } = GD.Load<PackedScene>(UiDs.EFFECTS_EDITOR);
 
 
         public override void _Ready()
@@ -109,7 +109,7 @@ namespace Lastdew
                     Column1.AddChild(buildingTypeEditor);
                     buildingTypeEditor.Setup(building.Type);
 
-                    SceneUidEditor sceneUidEditor = (SceneUidEditor)SceneUIDScene.Instantiate();
+                    SceneUidEditor sceneUidEditor = (SceneUidEditor)SceneUidScene.Instantiate();
                     Column2.AddChild(sceneUidEditor);
                     sceneUidEditor.Setup(building.SceneUid);
                     break;
@@ -177,33 +177,33 @@ namespace Lastdew
                 switch (Craftable)
                 {
                     case CraftingMaterial:
-                        string material_path = $"res://craftables/items/crafting-materials/{Craftable.Name.ToSnakeCase()}.tres";
-                        bool crafting_material_saved = TrySaveCraftable(material_path, Databases.CRAFTABLES.CraftingMaterials);
-                        if (!crafting_material_saved)
+                        string materialPath = $"res://craftables/items/crafting-materials/{Craftable.Name.ToSnakeCase()}.tres";
+                        bool craftingMaterialSaved = TrySaveCraftable(materialPath, Databases.Craftables.CraftingMaterials);
+                        if (!craftingMaterialSaved)
                         {
                             return;
                         }
                         break;
                     case Equipment:
-                        string equipment_path = $"res://craftables/items/equipment/{Craftable.Name.ToSnakeCase()}.tres";
-                        bool equipment_saved = TrySaveCraftable(equipment_path, Databases.CRAFTABLES.Equipments);
-                        if (!equipment_saved)
+                        string equipmentPath = $"res://craftables/items/equipment/{Craftable.Name.ToSnakeCase()}.tres";
+                        bool equipmentSaved = TrySaveCraftable(equipmentPath, Databases.Craftables.Equipments);
+                        if (!equipmentSaved)
                         {
                             return;
                         }
                         break;
                     case UsableItem:
-                        string usable_item_path = $"res://craftables/items/usable-items/{Craftable.Name.ToSnakeCase()}.tres";
-                        bool usable_item_saved = TrySaveCraftable(usable_item_path, Databases.CRAFTABLES.UsableItems);
-                        if (!usable_item_saved)
+                        string usableItemPath = $"res://craftables/items/usable-items/{Craftable.Name.ToSnakeCase()}.tres";
+                        bool usableItemSaved = TrySaveCraftable(usableItemPath, Databases.Craftables.UsableItems);
+                        if (!usableItemSaved)
                         {
                             return;
                         }
                         break;
                     case Building:
-                        string building_path = $"res://craftables/buildings/{Craftable.Name.ToSnakeCase()}.tres";
-                        bool building_saved = TrySaveCraftable(building_path, Databases.CRAFTABLES.Buildings);
-                        if (!building_saved)
+                        string buildingPath = $"res://craftables/buildings/{Craftable.Name.ToSnakeCase()}.tres";
+                        bool buildingSaved = TrySaveCraftable(buildingPath, Databases.Craftables.Buildings);
+                        if (!buildingSaved)
                         {
                             return;
                         }
@@ -241,24 +241,24 @@ namespace Lastdew
             }
         }
 
-        private bool TrySaveCraftable<[MustBeVariant] T>(string material_path, Godot.Collections.Dictionary<long, T> database) where T : Craftable
+        private bool TrySaveCraftable<[MustBeVariant] T>(string materialPath, Godot.Collections.Dictionary<long, T> database) where T : Craftable
         {
-            if (ResourceLoader.Exists(material_path))
+            if (ResourceLoader.Exists(materialPath))
             {
                 AcceptDialog.DialogText = "Craftable Name already taken.";
                 AcceptDialog.Show();
-                GD.PushError($"Resource already exists at {material_path}");
+                GD.PushError($"Resource already exists at {materialPath}");
                 return false;
             }
-            Error error = ResourceSaver.Save(Craftable, material_path);
+            Error error = ResourceSaver.Save(Craftable, materialPath);
             if (error == Error.Ok)
             {
-                Craftable = ResourceLoader.Load<T>(material_path);
+                Craftable = ResourceLoader.Load<T>(materialPath);
                 database[Craftable.GetUid()] = (T)Craftable;
             }
             else
             {
-                GD.PushError($"Craftable {Craftable.Name} save failed at {material_path}. {error}");
+                GD.PushError($"Craftable {Craftable.Name} save failed at {materialPath}. {error}");
                 return false;
             }
 

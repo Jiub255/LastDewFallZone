@@ -1,19 +1,19 @@
 namespace Lastdew
 {
-	public partial class PcStateWaiting(PcStateContext context) : PcCombatSubstate(context)
+	public class PcStateWaiting(PlayerCharacter pc) : PcCombatSubstate(pc)
 	{
         public override void ProcessSelected(float delta)
 		{
 			base.ProcessSelected(delta);
 			
-			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
 		}
 
 		public override void ProcessUnselected(float delta)
 		{
 			base.ProcessUnselected(delta);
 			
-			Context.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(Target.GlobalPosition, TurnSpeed * delta);
 		}
 		
 		public override void GetHit()

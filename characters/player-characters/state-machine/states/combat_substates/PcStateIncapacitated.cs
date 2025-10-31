@@ -1,6 +1,6 @@
 namespace Lastdew
 {
-	public class PcStateIncapacitated(PcStateContext context) : PcCombatSubstate(context)
+	public class PcStateIncapacitated(PlayerCharacter pc) : PcCombatSubstate(pc)
 	{
 		private const string DEATH_ANIM_NAME = "CharacterArmature|Death";
 
@@ -8,8 +8,8 @@ namespace Lastdew
 		{
 			base.EnterState(target);
 
-			Context.AnimStateMachine.Travel(DEATH_ANIM_NAME);
-			Context.DisablePC();
+			Pc.AnimStateMachine.Travel(DEATH_ANIM_NAME);
+			Pc.DisablePc();
 		}
 
 		public override void GetHit(){}

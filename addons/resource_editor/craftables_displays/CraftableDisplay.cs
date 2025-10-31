@@ -10,7 +10,7 @@ namespace Lastdew
         public event Action<Craftable> OnOpenPopupPressed;
         public event Action<CraftableDisplay> OnDelete;
 
-        private Craftable Craftable;
+        private Craftable _craftable;
         private TextureRect Icon { get; set; }
         protected Label NameLabel { get; set; }
         private Label Description { get; set; }
@@ -73,7 +73,7 @@ namespace Lastdew
 
         public virtual void Setup(Craftable craftable)
         {
-            Craftable = craftable;
+            _craftable = craftable;
             Icon.Texture = craftable.Icon;
             NameLabel.Text = craftable.Name;
             Description.Text = craftable.Description;
@@ -86,7 +86,7 @@ namespace Lastdew
 
         private void OpenEditPopup()
         {
-            OnOpenPopupPressed?.Invoke(Craftable);
+            OnOpenPopupPressed?.Invoke(_craftable);
         }
 
         private void ConfirmDeleteCraftable()
@@ -96,18 +96,18 @@ namespace Lastdew
 
         private void DeleteCraftable()
         {
-            string path = Craftable.ResourcePath;
-            string name = Craftable.Name;
+            string path = _craftable.ResourcePath;
+            string name = _craftable.Name;
             
             // Delete craftable from Craftables database.
-            bool deletion_successful = Databases.CRAFTABLES.DeleteCraftable(Craftable);
-            if (!deletion_successful)
+            bool deletionSuccessful = Databases.Craftables.DeleteCraftable(_craftable);
+            if (!deletionSuccessful)
             {
                 GD.PushError($"Craftable {name} not deleted from Craftables Database.");
             }
             
             // Stop referencing craftable resource.
-            Craftable = null;
+            _craftable = null;
             
             // Delete craftable display.
             QueueFree();

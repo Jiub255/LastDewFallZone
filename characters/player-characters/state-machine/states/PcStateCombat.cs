@@ -1,17 +1,18 @@
 using Godot;
-using System.Collections.Generic;
+using Godot.Collections;
 
 namespace Lastdew
 {
-	public partial class PcStateCombat : PcState
+	public class PcStateCombat : PcState
 	{
+		private const float SIGHT_DISTANCE = 20f;
 		private PcCombatSubstate CurrentSubstate { get; set; }
-		private Dictionary<PcCombatSubstateNames, PcCombatSubstate> StatesByEnum { get; } = new();
+		private System.Collections.Generic.Dictionary<PcCombatSubstateNames, PcCombatSubstate> StatesByEnum { get; } = new();
 		private Enemy Target { get; set; }
 		
-		public PcStateCombat(PcStateContext context) : base(context)
+		public PcStateCombat(PlayerCharacter pc) : base(pc)
 		{
-			SetupSubstates(context);
+			SetupSubstates(pc);
 		}
 	
 		public override void EnterState(MovementTarget target)
@@ -47,14 +48,14 @@ namespace Lastdew
 			}
 		}
 		
-		public void HitEnemy(PlayerCharacter attackingPC)
+		public void HitEnemy(PlayerCharacter attackingPc)
 		{
 			if (CurrentSubstate is not PcStateAttacking attackState)
 			{
 				GD.PushWarning($"Not in attacking substate. Current substate: {CurrentSubstate.GetType()}");
 				return;
 			}
-			bool targetKilled = attackState.HitEnemy(attackingPC);
+			bool targetKilled = attackState.HitEnemy(attackingPc);
 			if (targetKilled)
 			{
 				TryFindNearestEnemy();
@@ -65,7 +66,7 @@ namespace Lastdew
 		{
 			if (incapacitated)
 			{
-				Context.Incapacitated = true;
+				Pc.Incapacitated = true;
 				ChangeSubstate(PcCombatSubstateNames.INCAPACITATED);
 			}
 			else
@@ -75,12 +76,12 @@ namespace Lastdew
 			}
 		}
 	
-		private void SetupSubstates(PcStateContext context)
+		private void SetupSubstates(PlayerCharacter pc)
 		{
-			PcStateWaiting waiting = new(context);
-			PcStateAttacking attacking = new(context);
-			PcStateGettingHit gettingHit = new(context);
-			PcStateIncapacitated incapacitated = new(context);
+			PcStateWaiting waiting = new(pc);
+			PcStateAttacking attacking = new(pc);
+			PcStateGettingHit gettingHit = new(pc);
+			PcStateIncapacitated incapacitated = new(pc);
 			
 			// Populate states dictionary
 			StatesByEnum.Add(PcCombatSubstateNames.WAITING, waiting);
@@ -96,7 +97,7 @@ namespace Lastdew
 
         private void TryFindNearestEnemy()
         {
-            Enemy nearest = Context.FindNearestEnemy(Target);
+            Enemy nearest = FindNearestEnemy(Target);
             if (nearest != null)
             {
                 ChangeState(PcStateNames.MOVEMENT, new MovementTarget(nearest.GlobalPosition, nearest));
@@ -111,6 +112,46 @@ namespace Lastdew
 		{
 			CurrentSubstate = StatesByEnum[substateName];
 			CurrentSubstate?.EnterState(Target);
+		}
+		
+		private Enemy FindNearestEnemy(Enemy currentTarget)
+		{
+			Array<Dictionary> results = SphereCastForNearbyEnemies();
+
+			Enemy closest = null;
+			foreach (Dictionary dict in results)
+			{
+				CollisionObject3D collider = (CollisionObject3D)dict["collider"];
+				//this.PrintDebug($"Collider: {collider?.Name}");
+				// TODO: Why not allow currentTarget in finding closest target?
+				if (collider is not Enemy enemy || enemy == currentTarget)
+				{
+					continue;
+				}
+				if (closest == null || Pc.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) <
+				    Pc.GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+				{
+					closest = enemy;
+				}
+			}
+			return closest;
+		}
+
+		private Array<Dictionary> SphereCastForNearbyEnemies()
+		{
+			PhysicsDirectSpaceState3D spaceState = Pc.GetWorld3D().DirectSpaceState;
+			SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };
+			PhysicsShapeQueryParameters3D query = new()
+			{
+				ShapeRid = sphereShape.GetRid(),
+				CollideWithBodies = true,
+				Transform = new Transform3D(Basis.Identity, Pc.GlobalPosition),
+				Exclude = new Array<Rid>(new Rid[1] { Pc.GetRid() }),
+				CollisionMask = 0b100
+			};
+
+			Array<Dictionary> result = spaceState.IntersectShape(query);
+			return result;
 		}
 	}
 }

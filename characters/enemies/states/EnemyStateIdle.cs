@@ -21,11 +21,11 @@ namespace Lastdew
 			if (CheckForTargetTimer > TIME_BETWEEN_CHECKS)
 			{
 				CheckForTargetTimer = 0;
-				FindNearestPC();
+				FindNearestPc();
 			}
 		}
 		
-		private void FindNearestPC()
+		private void FindNearestPc()
 		{
 			Array<Dictionary> results = SphereCastForNearbyPcs();
 

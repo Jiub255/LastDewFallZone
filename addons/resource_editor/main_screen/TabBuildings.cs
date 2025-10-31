@@ -10,11 +10,11 @@ namespace Lastdew
         {
             base._Ready();
 
-            foreach (Craftable craftable in Databases.CRAFTABLES.Buildings.Values)
+            foreach (Craftable craftable in Databases.Craftables.Buildings.Values)
             {
                 Craftables.Add(craftable);
             }
-            CraftableDisplayScene = GD.Load<PackedScene>(UIDs.BUILDING_DISPLAY);
+            CraftableDisplayScene = GD.Load<PackedScene>(UiDs.BUILDING_DISPLAY);
         }
         
         protected override void CreateNewCraftable()

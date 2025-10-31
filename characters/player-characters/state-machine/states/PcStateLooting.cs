@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Lastdew
 {	
-	public class PcStateLooting(PcStateContext context) : PcState(context)
+	public class PcStateLooting(PlayerCharacter pc) : PcState(pc)
 	{
 		private const string LOOTING_ANIM_NAME = "CharacterArmature|Loot";
 		private const string MOVEMENT_BLEND_TREE_NAME = "movement_blend_tree";
 
-		public LootContainer LootContainer { get; private set; }
+		private LootContainer LootContainer { get; set; }
 		private float Timer { get; set; }
 	
 		public override void EnterState(MovementTarget target)
@@ -18,11 +18,11 @@ namespace Lastdew
 				LootContainer = lootContainer;
 				if (lootContainer.Empty || lootContainer.BeingLooted)
 				{
-					ChangeState(PcStateNames.IDLE, new MovementTarget(Context.Position));
+					ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
 					return;
 				}
 				lootContainer.BeingLooted = true;
-				Context.AnimStateMachine.Travel(LOOTING_ANIM_NAME);
+				Pc.AnimStateMachine.Travel(LOOTING_ANIM_NAME);
 				Timer = lootContainer.LootDuration;
 			}
 		}
@@ -30,18 +30,18 @@ namespace Lastdew
 		public override void ExitState()
 		{
 			LootContainer.BeingLooted = false;
-			Context.AnimStateMachine.Travel(MOVEMENT_BLEND_TREE_NAME);
+			Pc.AnimStateMachine.Travel(MOVEMENT_BLEND_TREE_NAME);
 		}
 	
 		public override void ProcessUnselected(float delta)
 		{
-			Context.RotateToward(LootContainer.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(LootContainer.GlobalPosition, TurnSpeed * delta);
 			TickTimer(delta);
 		}
 	
 		public override void ProcessSelected(float delta)
 		{
-			Context.RotateToward(LootContainer.GlobalPosition, TurnSpeed * delta);
+			Pc.RotateToward(LootContainer.GlobalPosition, TurnSpeed * delta);
 			TickTimer(delta);
 		}
 	
@@ -55,7 +55,7 @@ namespace Lastdew
 			{
 				Timer = 0;
 				GimmeTheLoot();
-				ChangeState(PcStateNames.IDLE, new MovementTarget(Context.Position));
+				ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
 			}
 		}
 	
@@ -63,7 +63,7 @@ namespace Lastdew
 		{
 			foreach (KeyValuePair<Item, int> kvp in LootContainer.Loot)
 			{
-				Context.InventoryManager.AddItems(kvp.Key, kvp.Value);
+				Pc.CollectLoot(kvp.Key, kvp.Value);
 			}
 			LootContainer.Empty = true;
 		}

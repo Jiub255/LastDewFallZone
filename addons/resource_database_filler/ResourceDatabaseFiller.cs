@@ -37,12 +37,12 @@ namespace Lastdew
 
 		private void OnCraftablesButtonPressed()
 		{
-			Databases.CRAFTABLES.PopulateDictionaries();
+			Databases.Craftables.PopulateDictionaries();
 		}
 
 		private void OnPcDatasButtonPressed()
 		{
-			Databases.PC_DATAS.PopulateDictionary();
+			Databases.PcDatas.PopulateDictionary();
 		}
 	}
 }

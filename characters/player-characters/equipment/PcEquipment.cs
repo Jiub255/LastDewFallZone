@@ -38,7 +38,7 @@ namespace Lastdew
 		
 		public PcEquipment(PcSaveData pcSaveData)
 		{
-			Craftables craftables = Databases.CRAFTABLES;
+			Craftables craftables = Databases.Craftables;
 			if (craftables.Equipments.ContainsKey(pcSaveData.Head))
 			{
 				Equip((Equipment)craftables[pcSaveData.Head]);

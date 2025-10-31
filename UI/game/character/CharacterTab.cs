@@ -8,7 +8,7 @@ namespace Lastdew
 		private InventoryManager InventoryManager { get; set; }
 		private GridContainer ItemsGrid { get; set; }
 		private SelectedItemPanel SelectedItemPanel { get; set; }
-		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>(UIDs.ITEM_BUTTON);
+		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>(UiDs.ITEM_BUTTON);
 		private CharacterDisplay CharacterDisplay { get; set; }
 		private EquipmentDisplay EquipmentDisplay { get; set; }
 		private List<ItemButton> Buttons { get; } = new();
@@ -36,7 +36,7 @@ namespace Lastdew
 			SelectedItemPanel.Initialize(teamData);
 			EquipmentDisplay.Initialize(teamData);
 
-			InventoryManager.OnInventoryChanged += PopulateInventoryUI;
+			InventoryManager.OnInventoryChanged += PopulateInventoryUi;
 		}
 	
 		public override void _ExitTree()
@@ -51,7 +51,7 @@ namespace Lastdew
 				}
 			}
 			
-			InventoryManager.OnInventoryChanged -= PopulateInventoryUI;
+			InventoryManager.OnInventoryChanged -= PopulateInventoryUi;
 			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.SetupDisplay;
 			
 			foreach(Button button in EquipmentDisplay.Buttons)
@@ -62,11 +62,11 @@ namespace Lastdew
 	
 		public void RefreshDisplay()
 		{
-			PopulateInventoryUI();
+			PopulateInventoryUi();
 			CharacterDisplay.SetupDisplay();
 		}
 	
-		private void PopulateInventoryUI()
+		private void PopulateInventoryUi()
 		{
 			for (int i = Buttons.Count - 1; i >= 0; i--)
 			{

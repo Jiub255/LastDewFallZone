@@ -8,7 +8,7 @@ namespace Lastdew
 		{
 			base._Ready();
 
-			Craftables craftables = Databases.CRAFTABLES;
+			Craftables craftables = Databases.Craftables;
 			this.PrintDebug(
 				$"Buildings: {craftables.Buildings.Count}, " +
 				$"Materials: {craftables.CraftingMaterials.Count}, " +

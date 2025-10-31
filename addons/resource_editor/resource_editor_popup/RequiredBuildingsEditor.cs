@@ -9,7 +9,7 @@ namespace Lastdew
 	{
         private HBoxContainer Parent { get; set; }
         private Button Add { get; set; }
-        private PackedScene BuildingEditScene { get; } = GD.Load<PackedScene>(UIDs.BUILDING_EDITOR);
+        private PackedScene BuildingEditScene { get; } = GD.Load<PackedScene>(UiDs.BUILDING_EDITOR);
         private Array<long> Buildings
         {
             get
@@ -84,9 +84,9 @@ namespace Lastdew
             NewBuildingEdit(0);
         }
         
-        private void OnRemoveBuilding(BuildingEditor Building)
+        private void OnRemoveBuilding(BuildingEditor building)
         {
-            Building.OnDelete -= OnRemoveBuilding;
+            building.OnDelete -= OnRemoveBuilding;
             Add.Show();
         }
         

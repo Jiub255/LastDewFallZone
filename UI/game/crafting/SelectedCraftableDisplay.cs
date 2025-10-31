@@ -13,7 +13,7 @@ namespace Lastdew
 		private Button CraftButton { get; set; }
 		private Craftables Craftables { get; set; }
 		private InventoryManager Inventory { get; set; }
-		private PackedScene RecipeCostScene { get; set; } = GD.Load<PackedScene>(UIDs.RECIPE_COST_DISPLAY);
+		private PackedScene RecipeCostScene { get; set; } = GD.Load<PackedScene>(UiDs.RECIPE_COST_DISPLAY);
 
 		public override void _Ready()
 		{
@@ -50,7 +50,7 @@ namespace Lastdew
 			
 			foreach (Node node in RecipeCosts.GetChildren())
 			{
-				if (node is RecipeCostUI recipeCost)
+				if (node is RecipeCostUi recipeCost)
 				{
 					recipeCost.QueueFree();
 				}
@@ -58,7 +58,7 @@ namespace Lastdew
 			CraftButton.Disabled = false;
 			foreach (KeyValuePair<long, int> kvp in item.RecipeCosts)
 			{
-				if (SetupRecipeCostUI(kvp) == false)
+				if (SetupRecipeCostUi(kvp) == false)
 				{
 					CraftButton.Disabled = true;
 				}
@@ -76,9 +76,9 @@ namespace Lastdew
 		}
 
 		/// <returns>true if required amount in inventory</returns>
-		private bool SetupRecipeCostUI(KeyValuePair<long, int> kvp)
+		private bool SetupRecipeCostUi(KeyValuePair<long, int> kvp)
 		{
-			RecipeCostUI recipeCost = (RecipeCostUI)RecipeCostScene.Instantiate();
+			RecipeCostUi recipeCost = (RecipeCostUi)RecipeCostScene.Instantiate();
 			RecipeCosts.CallDeferred(VBoxContainer.MethodName.AddChild, recipeCost);
 			
 			CraftingMaterial material = (CraftingMaterial)Craftables[kvp.Key];

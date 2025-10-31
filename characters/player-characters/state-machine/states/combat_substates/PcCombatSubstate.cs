@@ -2,12 +2,12 @@ using System;
 
 namespace Lastdew
 {
-	public abstract class PcCombatSubstate(PcStateContext context)
+	public abstract class PcCombatSubstate(PlayerCharacter pc)
     {
 		public event Action<PcCombatSubstateNames> OnChangeSubstate;
 
-        protected PcStateContext Context { get; set; } = context;
-        protected Enemy Target { get; set; }
+        protected PlayerCharacter Pc { get; } = pc;
+        protected Enemy Target { get; private set; }
 		protected static float TimeBetweenAttacks => 2.3f;
 		protected float Timer { get; set; }
 		/// <summary>

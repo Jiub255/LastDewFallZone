@@ -24,7 +24,7 @@ namespace Lastdew
                 return;
             }
 
-            Enemy.RotateToward(Enemy.Target.PC.GlobalPosition, Enemy.TURN_SPEED * delta);
+            Enemy.RotateToward(Enemy.Target.Pc.GlobalPosition, Enemy.TURN_SPEED * delta);
 			
             AttackTimer -= delta;
             // TODO: Make sure not in "get hit" animation before starting attack. Probably just introduce "GETTING_HIT" state.

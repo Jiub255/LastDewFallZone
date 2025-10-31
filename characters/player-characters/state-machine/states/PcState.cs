@@ -2,11 +2,11 @@ using System;
 
 namespace Lastdew
 {	
-	public abstract class PcState(PcStateContext context)
+	public abstract class PcState(PlayerCharacter pc)
     {
 		public event Action<PcStateNames, MovementTarget> OnChangeState;
 
-        protected PcStateContext Context { get; private set; } = context;
+        protected PlayerCharacter Pc { get; private set; } = pc;
         protected static string BlendAmountPath => "parameters/movement_blend_tree/idle_move/blend_amount";
 
         /// <summary>

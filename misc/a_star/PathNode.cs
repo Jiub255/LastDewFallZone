@@ -5,19 +5,19 @@ namespace Lastdew
 {
 	public partial class PathNode : Node
 	{
-		private int x;
-		private int y;
+		private int _x;
+		private int _y;
 
-		public int gCost;
-		public int hCost;
-		public int fCost;
+		public int GCost;
+		public int HCost;
+		public int FCost;
 
 		public PathNode PrecedingNode;
 
 		public PathNode(int x, int y)
 		{
-			this.x = x;
-			this.y = y;
+			this._x = x;
+			this._y = y;
 		}
 	}
 }

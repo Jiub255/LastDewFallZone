@@ -53,10 +53,9 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"8ac24760-da31-4b67-9762-5cc6223e53a9",
+				"90c97e2a-852d-4c7f-9acd-4d886bcac1fa",
 				"5912eb5c-2c85-4855-84df-61b358aa083e",
 				"12f4e22a-c7b3-4887-bf84-567c7d213552",
-				"90c97e2a-852d-4c7f-9acd-4d886bcac1fa",
 				"d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
 				"402f656a-c43a-4dec-8099-c5e4439c866a"
 			]
@@ -106,7 +105,8 @@
 				"74f09b72-359a-4662-85a2-ed88979e5af0",
 				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
 				"1cf9dd0c-8cab-48b6-a35e-e5147197d523",
-				"d3ac029a-c3b4-4875-b55d-8a265ce057f1"
+				"d3ac029a-c3b4-4875-b55d-8a265ce057f1",
+				"8ac24760-da31-4b67-9762-5cc6223e53a9"
 			]
 		},
 		{
@@ -866,7 +866,7 @@
 		{
 			"uuid": "8ac24760-da31-4b67-9762-5cc6223e53a9",
 			"title": "Get rid of PcStateContext",
-			"description": "Just pass in PlayerCharacter to states, the context doesn't add anything. Can't access state machine or states from pc (they're private) so same amount of circular dependency either way.\nThe trade off is making PlayerCharacter properties public. Might work fine as is.",
+			"description": "Just pass in PlayerCharacter to states, the context doesn't add anything. Can't access state machine or states from pc (they're private) so same amount of circular dependency either way.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},

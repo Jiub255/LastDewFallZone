@@ -80,7 +80,7 @@ namespace Lastdew
 			{
 				this.PrintDebug($"Error saving resource: {error}");
 			}
-			TESTPRINT();
+			Testprint();
 		}
 
 		private void PopulateDictionaries(string directory)
@@ -170,7 +170,7 @@ namespace Lastdew
             };
         }
 
-		public void TESTPRINT()
+		public void Testprint()
 		{
 			this.PrintDebug($"Craftables count {this.Count}");
 			foreach (KeyValuePair<long, Craftable> kvp in this)

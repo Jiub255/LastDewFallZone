@@ -1,6 +1,6 @@
 namespace Lastdew
 {
-    public static class UIDs
+    public static class UiDs
     {
 		// Resource Databases
 		public const string CRAFTABLES = "uid://71lhgtyj3vnx";

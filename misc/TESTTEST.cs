@@ -1,6 +1,6 @@
 using Godot;
 using System;
 
-public partial class TESTTEST : Node
+public partial class Testtest : Node
 {
 }

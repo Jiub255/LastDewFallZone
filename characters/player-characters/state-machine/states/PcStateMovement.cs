@@ -13,9 +13,9 @@ namespace Lastdew
 		private float Acceleration { get; set; } = 50f;
 		private Vector3 LastTargetPosition { get; set; }
 	
-		public PcStateMovement(PcStateContext context) : base(context)
+		public PcStateMovement(PlayerCharacter pc) : base(pc)
 		{
-			context.NavigationAgent.Connect(
+			pc.NavigationAgent.Connect(
 				NavigationAgent3D.SignalName.VelocityComputed,
 				Callable.From((Vector3 safeVelocity) => SetSafeVelocity(safeVelocity)));
 		}
@@ -36,19 +36,19 @@ namespace Lastdew
 			if (target.Target is Enemy)
 			{
 				Vector3 attackPosition = AttackPosition(target.Target.GlobalPosition);
-				Context.NavigationAgent.TargetPosition = attackPosition;
+				Pc.NavigationAgent.TargetPosition = attackPosition;
 				LastTargetPosition = attackPosition;
 			}
 			else
 			{
-				Context.NavigationAgent.TargetPosition = target.TargetPosition;
+				Pc.NavigationAgent.TargetPosition = target.TargetPosition;
 			}
 			//this.PrintDebug($"Move target position: {Context.NavigationAgent.TargetPosition}");
 		}
 	
 		public override void ExitState()
 		{
-			Context.PcAnimationTree.Set(BlendAmountPath, 0);
+			Pc.PcAnimationTree.Set(BlendAmountPath, 0);
 		}
 		public override void ProcessUnselected(float delta) {}
 		public override void ProcessSelected(float delta) {}
@@ -88,14 +88,14 @@ namespace Lastdew
 	
 		private bool DestinationReached()
 		{
-			bool navFinished = Context.NavigationAgent.IsNavigationFinished();
+			bool navFinished = Pc.NavigationAgent.IsNavigationFinished();
 			return navFinished;
 		}
 	
 		private void Animate()
 		{
-			float blendAmount = Mathf.Clamp(Context.Speed / MaxSpeed, 0, 1);
-			Context.PcAnimationTree.Set(BlendAmountPath, blendAmount);
+			float blendAmount = Mathf.Clamp(Pc.Velocity.Length() / MaxSpeed, 0, 1);
+			Pc.PcAnimationTree.Set(BlendAmountPath, blendAmount);
 		}
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()
@@ -105,7 +105,7 @@ namespace Lastdew
 				Vector3 attackPosition = AttackPosition(enemy.GlobalPosition);
 				if (attackPosition.DistanceSquaredTo(LastTargetPosition) > RECALCULATION_DISTANCE_SQUARED)
 				{
-					Context.NavigationAgent.TargetPosition = attackPosition;
+					Pc.NavigationAgent.TargetPosition = attackPosition;
 					LastTargetPosition = attackPosition;
 				}
 			}
@@ -113,16 +113,27 @@ namespace Lastdew
 	
 		private void MoveAndRotate(float delta)
 		{
-			Vector3 nextPosition = Context.NavigationAgent.GetNextPathPosition();
-			Context.RotateToward(nextPosition, TurnSpeed * delta);
+			Vector3 nextPosition = Pc.NavigationAgent.GetNextPathPosition();
+			Pc.RotateToward(nextPosition, TurnSpeed * delta);
 			
-			Vector3 direction = (nextPosition - Context.GlobalPosition).Normalized();
-			Context.Accelerate(direction * MaxSpeed, Acceleration * delta);
+			Vector3 direction = (nextPosition - Pc.GlobalPosition).Normalized();
+			Accelerate(direction * MaxSpeed, Acceleration * delta);
 		}
 	
 		private void SetSafeVelocity(Vector3 safeVelocity)
 		{
-			Context.Move(safeVelocity);
+			Move(safeVelocity);
+		}
+
+		private void Accelerate(Vector3 targetVelocity, float accelerationAmount)
+		{
+			Pc.NavigationAgent.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
+		}
+
+		private void Move(Vector3 velocity)
+		{
+			Pc.Velocity = velocity;
+			Pc.MoveAndSlide();
 		}
 		
 		/// <summary>
@@ -131,7 +142,7 @@ namespace Lastdew
         /// </summary>
 		private Vector3 AttackPosition(Vector3 enemyPosition)
 		{
-			Vector3 direction = (Context.GlobalPosition - enemyPosition).Normalized();
+			Vector3 direction = (Pc.GlobalPosition - enemyPosition).Normalized();
 			return enemyPosition + direction * AttackRadius;
 		}
 	}

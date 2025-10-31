@@ -8,15 +8,19 @@ namespace Lastdew
 	{
 		public event Action OnEquipmentChanged;
 		
+		
+		public bool Incapacitated { get; set; }
 		public new string Name { get; private set; }
 		public Texture2D Icon { get; private set; }
-		
 		public PcHealth Health { get; private set; }
 		public PcStatManager StatManager { get; private set; }
 		public PcEquipment Equipment { get; private set; }
 		
 		private PcStateMachine StateMachine { get; set; }
 		private InventoryManager Inventory { get; set; }
+		public NavigationAgent3D NavigationAgent { get; private set; }
+		public AnimationTree PcAnimationTree { get; private set; }
+		public AnimationNodeStateMachinePlayback AnimStateMachine { get; private set; }
 		
 		private Dictionary<Vector3, bool> CombatDirectionsOccupied { get; } = new()
 		{
@@ -28,8 +32,11 @@ namespace Lastdew
 	
 		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
-			PcStateContext context = new(this, inventoryManager);
-			StateMachine = new PcStateMachine(context);
+			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
+			PcAnimationTree = GetNode<AnimationTree>("%AnimationTree");
+			AnimStateMachine = (AnimationNodeStateMachinePlayback)PcAnimationTree.Get("parameters/playback");
+			
+			StateMachine = new PcStateMachine(this);
 			Health = new PcHealth(saveData);
 			StatManager = new PcStatManager();
 			Equipment = new PcEquipment(saveData);
@@ -145,6 +152,17 @@ namespace Lastdew
 				Inventory.RemoveItem(item);
 			}
 		}
+
+		public void CollectLoot(Item item, int amount)
+		{
+			Inventory.AddItems(item, amount);
+		}
+
+		public void DisablePc()
+		{
+			CollisionLayer = 0;
+			NavigationAgent.AvoidanceEnabled = false;
+		}
 		
 		public void ExitTree()
 		{
@@ -166,7 +184,7 @@ namespace Lastdew
 
         private void SetupPcData(string name)
         {
-			PcData data = Databases.PC_DATAS[name];
+			PcData data = Databases.PcDatas[name];
 			
 			Name = name;
 			Icon = data.Icon;

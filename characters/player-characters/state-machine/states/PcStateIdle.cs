@@ -1,6 +1,6 @@
 
 namespace Lastdew
-{	public class PcStateIdle(PcStateContext context) : PcState(context)
+{	public class PcStateIdle(PlayerCharacter pc) : PcState(pc)
 	{
 		public override void EnterState(MovementTarget target) {}
 		public override void ExitState() {}
@@ -13,7 +13,6 @@ namespace Lastdew
 		// stronger ones target enemies. 
 		public override void ProcessUnselected(float delta)
 		{
-			
 		}
 	}
 }

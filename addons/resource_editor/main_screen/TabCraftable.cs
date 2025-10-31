@@ -67,7 +67,7 @@ namespace Lastdew
 
         public void UpdateDisplay(long uid)
         {
-            Craftable craftable = Databases.CRAFTABLES[uid];
+            Craftable craftable = Databases.Craftables[uid];
             if (DisplaysByUid.TryGetValue(uid, out CraftableDisplay craftableDisplay))
             {
                 craftableDisplay.Setup(craftable);

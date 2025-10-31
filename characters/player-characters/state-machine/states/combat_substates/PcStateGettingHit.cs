@@ -2,13 +2,13 @@ using Godot;
 
 namespace Lastdew
 {
-	public partial class PcStateGettingHit : PcCombatSubstate
+	public class PcStateGettingHit : PcCombatSubstate
 	{
 		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve";
 		
-		public PcStateGettingHit(PcStateContext context) : base(context)
+		public PcStateGettingHit(PlayerCharacter pc) : base(pc)
 		{
-			context.PcAnimationTree.Connect(
+			pc.PcAnimationTree.Connect(
 				AnimationMixer.SignalName.AnimationFinished,
 				Callable.From((string animationName) => OnAnimationFinished(animationName)));
 		}
@@ -17,7 +17,7 @@ namespace Lastdew
 		{
 			base.EnterState(target);
 			
-			Context.AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
+			Pc.AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 		}
  
 		public override void GetHit()
@@ -29,7 +29,7 @@ namespace Lastdew
 		// and is in incapacitated state. Might be fixed with Context.Incapacitated?
 		private void OnAnimationFinished(string animationName)
 		{
-			if (animationName == GETTING_HIT_ANIM_NAME && !Context.Incapacitated)
+			if (animationName == GETTING_HIT_ANIM_NAME && !Pc.Incapacitated)
 			{
 				ChangeSubstate(PcCombatSubstateNames.WAITING);
 			}

@@ -19,12 +19,12 @@ namespace Lastdew
 		private TeamData TeamData { get; set; }
 		private LocationData LocationData { get; set; }
 		
-		private LocationInfoUI LocationInfo { get; set; }
+		private LocationInfoUi LocationInfo { get; set; }
 		private Button AddButton { get; set; }
 		private Button StartButton { get; set; }
 		private VBoxContainer PcDisplayParent { get; set; }
 		private CharacterSelector CharacterSelector { get; set; }
-		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(UIDs.PC_DISPLAY);
+		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(UiDs.PC_DISPLAY);
 		private List<PlayerCharacter> UnselectedPcs { get; set; } = new List<PlayerCharacter>();
 		private List<PlayerCharacter> SelectedPcs { get; set; } = new List<PlayerCharacter>();
 		private int Index
@@ -41,7 +41,7 @@ namespace Lastdew
 		{
 			base._Ready();
 			
-			LocationInfo = GetNode<LocationInfoUI>("%LocationInfo");
+			LocationInfo = GetNode<LocationInfoUi>("%LocationInfo");
 			AddButton = GetNode<Button>("%AddButton");
 			StartButton = GetNode<Button>("%StartButton");
 			PcDisplayParent = GetNode<VBoxContainer>("%PcDisplayParent");

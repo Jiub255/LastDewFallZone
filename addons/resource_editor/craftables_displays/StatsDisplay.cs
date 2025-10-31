@@ -7,7 +7,7 @@ namespace Lastdew
     [Tool]
     public partial class StatsDisplay : Label
     {
-        private Dictionary<StatType, string> StatAbbreviationsByName = new Dictionary<StatType, string>()
+        private Dictionary<StatType, string> _statAbbreviationsByName = new Dictionary<StatType, string>()
         {
             { StatType.ATTACK, "Atk" },
             { StatType.DEFENSE, "Def" },
@@ -27,7 +27,7 @@ namespace Lastdew
             List<string> stats = new();
             foreach (KeyValuePair<StatType, int> kvp in statDict)
             {
-                stats.Add($"{StatAbbreviationsByName[kvp.Key]} {kvp.Value}");
+                stats.Add($"{_statAbbreviationsByName[kvp.Key]} {kvp.Value}");
             }
             string labelText = string.Join(", ", stats);
             Text = labelText;

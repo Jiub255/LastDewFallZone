@@ -15,9 +15,9 @@ namespace Lastdew
             LineEdit = GetNode<LineEdit>("%LineEdit");
         }
         
-        public void Setup(string sceneUID)
+        public void Setup(string sceneUid)
         {
-            LineEdit.Text = sceneUID;
+            LineEdit.Text = sceneUid;
         }
 
         public void SetProperty(Craftable craftable)

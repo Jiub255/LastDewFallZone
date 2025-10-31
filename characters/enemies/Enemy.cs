@@ -49,7 +49,7 @@ namespace Lastdew
 		}
 		
 		/// <returns>true if hit killed enemy</returns>
-		public bool GetHit(int damage, PlayerCharacter attackingPC)
+		public bool GetHit(int damage, PlayerCharacter attackingPc)
 		{
 			Health -= damage;
             this.PrintDebug($"{Name} hit for {damage} damage, health: {Health}");
@@ -61,7 +61,7 @@ namespace Lastdew
 			}
 			// TODO: Not sure if this does anything at the moment. When is Target null?
 			// Figure it out later.
-			//Target /*??*/= attackingPC;
+			//Target /*??*/= attackingPc;
 			AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 			return false;
 		}
@@ -70,7 +70,7 @@ namespace Lastdew
 		// Does it need to be public?
 		public void HitTarget()
 		{
-			bool pcIncapacitated = Target.PC.GetHit(this, ATTACK);
+			bool pcIncapacitated = Target.Pc.GetHit(this, ATTACK);
 			if (pcIncapacitated)
 			{
 				StateMachine.ChangeState(EnemyStateNames.IDLE);

@@ -6,7 +6,7 @@ namespace Lastdew
     [Tool]
     public partial class ResourceEditor : EditorPlugin
     {
-        private PackedScene MainScreenScene { get; } = GD.Load<PackedScene>(UIDs.EDITOR_MAIN_SCREEN);
+        private PackedScene MainScreenScene { get; } = GD.Load<PackedScene>(UiDs.EDITOR_MAIN_SCREEN);
         private EditorMainScreen MainScreenInstance { get; set; }
         private EditorInterface EditorInterface { get; } = EditorInterface.Singleton;
         private EditorFileDialog EditorFileDialog { get; set; }

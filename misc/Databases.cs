@@ -4,7 +4,7 @@ namespace Lastdew
 {
 	public static class Databases
 	{
-	    public static readonly Craftables CRAFTABLES = GD.Load<Craftables>(UIDs.CRAFTABLES);
-        public static readonly AllPcDatas PC_DATAS = GD.Load<AllPcDatas>(UIDs.ALL_PC_DATAS);
+	    public static readonly Craftables Craftables = GD.Load<Craftables>(UiDs.CRAFTABLES);
+        public static readonly AllPcDatas PcDatas = GD.Load<AllPcDatas>(UiDs.ALL_PC_DATAS);
 	}
 }

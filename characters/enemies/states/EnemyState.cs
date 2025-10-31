@@ -26,7 +26,7 @@ namespace Lastdew
 		
 		protected static Vector3 GetAttackPosition(EnemyTarget target)
 		{
-			return target.PC.GlobalPosition + target.CombatDirection * ATTACK_RADIUS;
+			return target.Pc.GlobalPosition + target.CombatDirection * ATTACK_RADIUS;
 		}
 		
 		protected void RecalculateTargetPositionIfTargetMovedEnough(float delta)

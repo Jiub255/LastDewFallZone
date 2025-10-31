@@ -11,7 +11,7 @@ namespace Lastdew
 		private RichTextLabel PcName { get; set; }
 		private ProgressBar PainBar { get; set; }
 		private ProgressBar InjuryBar { get; set; }
-		private PlayerCharacter PC { get; set; }
+		private PlayerCharacter Pc { get; set; }
 
 		public override void _Ready()
 		{
@@ -30,18 +30,18 @@ namespace Lastdew
 			base._ExitTree();
 			
 			Pressed -= SelectPc;
-			PC.Health.OnHealthChanged -= SetHealthBars;
+			Pc.Health.OnHealthChanged -= SetHealthBars;
 		}
 		
 		public void Setup(PlayerCharacter pc)
 		{
 			PcIcon.Texture = pc.Icon;
 			PcName.Text = pc.Name;
-			PC = pc;
+			Pc = pc;
 			
 			SetHealthBars();
 			
-			PC.Health.OnHealthChanged += SetHealthBars;
+			Pc.Health.OnHealthChanged += SetHealthBars;
 		}
 		
 		private void SetHealthBars(int _)
@@ -51,13 +51,13 @@ namespace Lastdew
 		
 		public void SetHealthBars()
 		{
-			PainBar.Value = PC.Health.Pain;
-			InjuryBar.Value = PC.Health.Injury;
+			PainBar.Value = Pc.Health.Pain;
+			InjuryBar.Value = Pc.Health.Injury;
 		}
 		
 		private void SelectPc()
 		{
-			OnSelectPc?.Invoke(PC);
+			OnSelectPc?.Invoke(Pc);
 		}
 	}
 }

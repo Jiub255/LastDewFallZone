@@ -2,7 +2,7 @@ using Godot;
 
 namespace Lastdew
 {
-	public partial class LocationInfoUI : VBoxContainer
+	public partial class LocationInfoUi : VBoxContainer
 	{
 		private Label PlaceName { get; set; }
 		private TextureRect Image { get; set; }

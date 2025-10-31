@@ -9,7 +9,7 @@ namespace Lastdew
     {
         private VBoxContainer Parent { get; set; }
         private Button Add { get; set; }
-        private PackedScene StatAmountScene { get; } = GD.Load<PackedScene>(UIDs.STAT_AMOUNT_EDITOR);
+        private PackedScene StatAmountScene { get; } = GD.Load<PackedScene>(UiDs.STAT_AMOUNT_EDITOR);
         protected Dictionary<StatType, int> Stats
         {
             get

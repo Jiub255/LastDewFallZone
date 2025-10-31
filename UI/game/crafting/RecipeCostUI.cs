@@ -1,7 +1,7 @@
 using Godot;
 using Lastdew;
 
-public partial class RecipeCostUI : HBoxContainer
+public partial class RecipeCostUi : HBoxContainer
 {
 	private TextureRect Icon { get; set; }
 	private Label ItemName { get; set; }

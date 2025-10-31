@@ -66,7 +66,7 @@ namespace Lastdew
         
         private void UpdateDisplay(long uid)
         {
-            Craftable craftable = Databases.CRAFTABLES[uid];
+            Craftable craftable = Databases.Craftables[uid];
             switch (craftable)
             {
                 case CraftingMaterial:

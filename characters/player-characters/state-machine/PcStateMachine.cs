@@ -8,9 +8,9 @@ namespace Lastdew
 		private PcState CurrentState { get; set; }
 		private Dictionary<PcStateNames, PcState> StatesByEnum { get; } = new();
 	
-		public PcStateMachine(PcStateContext context)
+		public PcStateMachine(PlayerCharacter pc)
 		{
-			SetupStates(context);
+			SetupStates(pc);
 	
 			CurrentState = StatesByEnum[PcStateNames.IDLE];
 		}
@@ -43,11 +43,11 @@ namespace Lastdew
 			CurrentState?.EnterState(target);
 		}
 	
-		public void HitEnemy(PlayerCharacter attackingPC)
+		public void HitEnemy(PlayerCharacter attackingPc)
 		{
 			if (CurrentState is PcStateCombat combat)
 			{
-				combat.HitEnemy(attackingPC);
+				combat.HitEnemy(attackingPc);
 			}
 			/* else
 			{
@@ -75,12 +75,12 @@ namespace Lastdew
 			combat.ExitTree();
 		}
 	
-		private void SetupStates(PcStateContext context)
+		private void SetupStates(PlayerCharacter pc)
 		{
-			PcStateIdle idle = new(context);
-			PcStateMovement movement = new(context);
-			PcStateLooting looting = new(context);
-			PcStateCombat combat = new(context);
+			PcStateIdle idle = new(pc);
+			PcStateMovement movement = new(pc);
+			PcStateLooting looting = new(pc);
+			PcStateCombat combat = new(pc);
 	
 			StatesByEnum.Add(PcStateNames.IDLE, idle);
 			StatesByEnum.Add(PcStateNames.MOVEMENT, movement);

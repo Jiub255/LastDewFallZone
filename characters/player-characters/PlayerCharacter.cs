@@ -8,28 +8,19 @@ namespace Lastdew
 	{
 		public event Action OnEquipmentChanged;
 		
-		
 		public bool Incapacitated { get; set; }
 		public new string Name { get; private set; }
 		public Texture2D Icon { get; private set; }
 		public PcHealth Health { get; private set; }
 		public PcStatManager StatManager { get; private set; }
 		public PcEquipment Equipment { get; private set; }
-		
-		private PcStateMachine StateMachine { get; set; }
-		private InventoryManager Inventory { get; set; }
 		public NavigationAgent3D NavigationAgent { get; private set; }
 		public AnimationTree PcAnimationTree { get; private set; }
 		public AnimationNodeStateMachinePlayback AnimStateMachine { get; private set; }
 		
-		private Dictionary<Vector3, bool> CombatDirectionsOccupied { get; } = new()
-		{
-			{Vector3.Forward , false },
-			{Vector3.Left , false },
-			{Vector3.Right , false },
-			{Vector3.Back , false },
-		};
-	
+		private PcStateMachine StateMachine { get; set; }
+		private InventoryManager Inventory { get; set; }
+		
 		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
 			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
@@ -74,20 +65,6 @@ namespace Lastdew
 			StateMachine.ChangeState(PcStateNames.MOVEMENT, movementTarget);
 		}
 
-		public Vector3? GetOpenCombatDirection()
-		{
-			foreach (Vector3 direction in CombatDirectionsOccupied.Keys)
-			{
-				if (CombatDirectionsOccupied.TryGetValue(direction, out bool occupied) && occupied == false)
-				{
-					CombatDirectionsOccupied[direction] = true;
-					return direction;
-				}
-			}
-			
-			return null;
-		}
-		
 		/// <summary>
 		/// TODO: Make actual defense formula.
 		/// </summary>

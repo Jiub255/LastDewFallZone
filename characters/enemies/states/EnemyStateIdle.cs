@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -29,21 +30,22 @@ namespace Lastdew
 		{
 			Array<Dictionary> results = SphereCastForNearbyPcs();
 
-			System.Collections.Generic.IEnumerable<PlayerCharacter> pcs = results
+			PlayerCharacter[] pcs = results
 				.Where(d => (CollisionObject3D)d["collider"] is PlayerCharacter)
 				.Select(x => (PlayerCharacter)x["collider"])
-				.OrderBy(y => y.GlobalPosition.DistanceTo(Enemy.GlobalPosition));
+				.OrderBy(y => y.GlobalPosition.DistanceTo(Enemy.GlobalPosition))
+				.ToArray();
 
-			foreach (PlayerCharacter pc in pcs)
+			if (pcs.Length == 0)
 			{
-				Vector3? openCombatDirection = pc.GetOpenCombatDirection();
-				if (openCombatDirection.HasValue)
-				{
-					Enemy.Target = new EnemyTarget(pc, openCombatDirection.Value);
-					ChangeState(EnemyStateNames.MOVEMENT);
-					return;
-				}
+				GD.Print("Length zero");
+				return;
 			}
+			
+			Enemy.Target = new EnemyTarget(
+				pcs[0],
+				Vector3.Forward.Rotated(Vector3.Up, GD.Randf() * Mathf.Tau));
+			ChangeState(EnemyStateNames.MOVEMENT);
 		}
 
 		private Array<Dictionary> SphereCastForNearbyPcs()

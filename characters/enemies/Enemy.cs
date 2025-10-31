@@ -7,7 +7,7 @@ namespace Lastdew
         public const float TURN_SPEED = 360f;
 		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve_2";
 		private const string BLEND_AMOUNT_PATH = "parameters/movement_blend_tree/idle_move/blend_amount";
-        private const int ATTACK = 25;
+        private const int ATTACK = 10;
 
         public EnemyTarget Target { get; set; }
         public Vector3 LastTargetPosition { get; set; }

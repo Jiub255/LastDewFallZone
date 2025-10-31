@@ -7,11 +7,9 @@ namespace Lastdew
 	{
 		private Node3D SpawnLocation { get; set; }
 		
-		/// <returns>Spawn location</returns>
-		public virtual Vector3 Initialize(TeamData teamData)
+		public virtual void Initialize(TeamData teamData)
 		{
 			SpawnLocation = GetNode<Node3D>("%SpawnLocation");
-			return SpawnLocation.Position;
 		}
 	}
 }

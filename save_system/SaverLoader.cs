@@ -5,7 +5,7 @@ using System.Text.Json;
 namespace Lastdew
 {
 	/// <summary>
-	/// TODO: Come up with a better name for this class than <c>SaverLoader</c>
+	/// TODO: Split into Saver and Loader classes.
 	/// </summary>
 	public static class SaverLoader
 	{

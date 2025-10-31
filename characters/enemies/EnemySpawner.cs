@@ -4,18 +4,13 @@ namespace Lastdew
 {
 	public partial class EnemySpawner : Node3D
 	{	
+		private const float TIME_BETWEEN_SPAWNS = 2f;
 		private int EnemiesToSpawn { get; set; }
-		/// <summary>
-		/// TODO: Might not need this here.
-		/// </summary>
-		private TeamData TeamData { get; set; }
-		private static float TimeBetweenSpawns => 2f;
-		private float Timer { get; set; } = 0.25f;
+		private float Timer { get; set; }
 		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(UIDs.TEST_ENEMY);
 		
-		public void Initialize(TeamData teamData, int enemiesToSpawn)
+		public void Initialize(int enemiesToSpawn)
 		{
-			TeamData = teamData;
 			EnemiesToSpawn = enemiesToSpawn;
 		}
 
@@ -23,14 +18,15 @@ namespace Lastdew
 		{
 			base._Process(delta);
 
-			if (EnemiesToSpawn > 0)
+			if (EnemiesToSpawn <= 0)
 			{
-				Timer -= (float)delta;
-				if (Timer < 0)
-				{
-					Timer = TimeBetweenSpawns;
-					SpawnEnemy();
-				}
+				return;
+			}
+			Timer += (float)delta;
+			if (Timer > TIME_BETWEEN_SPAWNS)
+			{
+				Timer = 0;
+				SpawnEnemy();
 			}
 		}
 		
@@ -39,14 +35,6 @@ namespace Lastdew
 			EnemiesToSpawn--;
 			Enemy enemy = EnemyScene.Instantiate<Enemy>();
 			CallDeferred(Node.MethodName.AddChild, enemy);
-			// if (TeamData.Pcs.Count > 0)
-			// {
-			// 	enemy.SetDeferred(Enemy.PropertyName.Target, TeamData.Pcs[0]);
-			// }
-			// else
-			// {
-			// 	GD.PushWarning("Couldn't find target PC for enemy");
-			// }
 		}
 	}
 }

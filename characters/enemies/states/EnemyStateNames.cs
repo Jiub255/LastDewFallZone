@@ -5,5 +5,6 @@ namespace Lastdew
 		IDLE,
 		MOVEMENT,
 		COMBAT,
+		DEAD,
 	}
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Godot;
 
 namespace Lastdew
@@ -18,18 +17,7 @@ namespace Lastdew
 		
 		private PcStateMachine StateMachine { get; set; }
 		private InventoryManager Inventory { get; set; }
-
-		private static readonly List<Vector3> _combatDirections =
-		[
-			Vector3.Forward,
-			Vector3.Left,
-			Vector3.Right,
-			Vector3.Back
-		];
-
-		private ReadOnlyCollection<Vector3> CombatDirections { get; } = new(_combatDirections);
 		
-		// Only four keys, Forward, left, right, back.
 		private Dictionary<Vector3, bool> CombatDirectionsOccupied { get; } = new()
 		{
 			{Vector3.Forward , false },
@@ -81,7 +69,7 @@ namespace Lastdew
 
 		public Vector3? GetOpenCombatDirection()
 		{
-			foreach (Vector3 direction in CombatDirections)
+			foreach (Vector3 direction in CombatDirectionsOccupied.Keys)
 			{
 				if (CombatDirectionsOccupied.TryGetValue(direction, out bool occupied) && occupied == false)
 				{
@@ -89,7 +77,7 @@ namespace Lastdew
 					return direction;
 				}
 			}
-
+			
 			return null;
 		}
 		
@@ -101,6 +89,7 @@ namespace Lastdew
 		{
 			int actualDamage = Mathf.Max(0, damage - StatManager.Defense);
 			bool incapacitated = Health.TakeDamage(actualDamage);
+			this.PrintDebug($"{GetRid()} took {damage} damage");
 			StateMachine.GetHit(attackingEnemy, incapacitated);
 			return incapacitated;
 		}

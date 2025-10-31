@@ -121,7 +121,7 @@ namespace Lastdew
         private Level SetupLevel(PackedScene levelScene, List<PcSaveData> pcSaveDatas)
 		{
 			Level level = (Level)levelScene.Instantiate();
-			CallDeferred(World.MethodName.AddChild, level);
+			CallDeferred(Node.MethodName.AddChild, level);
 			level.Initialize(TeamData);
 			// UI.Initialize has to be called after PcManager.SpawnPcs,
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).

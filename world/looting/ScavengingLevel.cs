@@ -8,12 +8,12 @@ namespace Lastdew
 		private int EnemiesToSpawn { get; set; } = 1;
 		private EnemySpawner EnemySpawner { get; set; }
 		
-		public override Vector3 Initialize(TeamData teamData)
+		public override void Initialize(TeamData teamData)
 		{
 			EnemySpawner = GetNode<EnemySpawner>("%EnemySpawner");
-			EnemySpawner.Initialize(teamData, EnemiesToSpawn);
+			EnemySpawner.Initialize(EnemiesToSpawn);
 
-			return base.Initialize(teamData);
+			base.Initialize(teamData);
 		}
 	}
 }

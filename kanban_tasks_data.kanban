@@ -53,9 +53,12 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"402f656a-c43a-4dec-8099-c5e4439c866a",
-				"d3ac029a-c3b4-4875-b55d-8a265ce057f1",
-				"1cf9dd0c-8cab-48b6-a35e-e5147197d523"
+				"8ac24760-da31-4b67-9762-5cc6223e53a9",
+				"5912eb5c-2c85-4855-84df-61b358aa083e",
+				"12f4e22a-c7b3-4887-bf84-567c7d213552",
+				"90c97e2a-852d-4c7f-9acd-4d886bcac1fa",
+				"d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
+				"402f656a-c43a-4dec-8099-c5e4439c866a"
 			]
 		},
 		{
@@ -101,7 +104,9 @@
 				"af025637-f6fb-4570-93f6-5dae247fbf86",
 				"3bc586d1-36f7-43e3-83f5-94273c8a79c4",
 				"74f09b72-359a-4662-85a2-ed88979e5af0",
-				"253ce29b-f64e-411f-86cb-762cfffd0f1e"
+				"253ce29b-f64e-411f-86cb-762cfffd0f1e",
+				"1cf9dd0c-8cab-48b6-a35e-e5147197d523",
+				"d3ac029a-c3b4-4875-b55d-8a265ce057f1"
 			]
 		},
 		{
@@ -847,15 +852,50 @@
 		{
 			"uuid": "1cf9dd0c-8cab-48b6-a35e-e5147197d523",
 			"title": "Fix combat crowding problem with nav agents",
-			"description": "Enabling avoidance makes them avoid each other, but they push and slide each other out of the way to get to a shared target. Want to find a way to have new characters approach from a free side, without nudging other characters, or just choose a new target if this one is 'full' of attackers.\nPut preset \"combat slots\" around each character that get filled with attackers during combat? To help with too many combat characters pushing and sliding each other around while fighting.\nOr maybe just use a grid for movement/combat?\nTry slots thing first. Start with four, one on each side. If all slots are full of attackers, others just find a different target or wait.  And if a slot is blocked by a wall or something, temporarily disable it. \n\nEach PC has four CombatSlots (with Node3D and occupied bool).\nFor enemy to find a target, they search each pc closest to farthest.\nSearch each slot, if it's not occupied, that slot/PC is the target.\nEnemy has a EnemyTarget (with PC and CombatSlot)\n\nMaybe don't use MoveAndSlide()? Probably the source of all the pushing/sliding.\n\nMaybe don't use CharacterBody3D, might not even need collisions if using navigation agents properly. Just have it pathfind around obstacles, and head to attack position instead of directly to player/enemy. Or just stop a certain distance from their target. \n\nChanging Avoidance layer/mask to 2 on PC, and lowering the avoidance radius from 0.5 to 0.25 on Enemy has helped, but still has awkward crowding and spinning. \nChanging \"Time Horizon Agents\" to 10 seconds helped too. Still wonky though.\nMaybe change the player attack directions to be absolute, and not depend on the pc's' facing direction?\n\nCurrently trying putting nav obstacles on the enemy and rebaking / repathing every few seconds. Not working well at all so far, very slow and weird things are happening. Probably because the agent is always inside of its own obstacle?\n\nOr maybe just do it like LSDZ and let enemies overlap. Makes for scarier swarms too. And way easier.\nJust use avoidance on enemies (different avoidance layer than pcs), and have them run at the nearest target. ",
-			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"description": "GOOD ENOUGH FOR NOW. Ended up disabling collision and avoidance on enemies, and just having them go 4 to a pc, one on each side. Might change it up later.\n\nEnabling avoidance makes them avoid each other, but they push and slide each other out of the way to get to a shared target. Want to find a way to have new characters approach from a free side, without nudging other characters, or just choose a new target if this one is 'full' of attackers.\nPut preset \"combat slots\" around each character that get filled with attackers during combat? To help with too many combat characters pushing and sliding each other around while fighting.\nOr maybe just use a grid for movement/combat?\nTry slots thing first. Start with four, one on each side. If all slots are full of attackers, others just find a different target or wait.  And if a slot is blocked by a wall or something, temporarily disable it. \n\nEach PC has four CombatSlots (with Node3D and occupied bool).\nFor enemy to find a target, they search each pc closest to farthest.\nSearch each slot, if it's not occupied, that slot/PC is the target.\nEnemy has a EnemyTarget (with PC and CombatSlot)\n\nMaybe don't use MoveAndSlide()? Probably the source of all the pushing/sliding.\n\nMaybe don't use CharacterBody3D, might not even need collisions if using navigation agents properly. Just have it pathfind around obstacles, and head to attack position instead of directly to player/enemy. Or just stop a certain distance from their target. \n\nChanging Avoidance layer/mask to 2 on PC, and lowering the avoidance radius from 0.5 to 0.25 on Enemy has helped, but still has awkward crowding and spinning. \nChanging \"Time Horizon Agents\" to 10 seconds helped too. Still wonky though.\nMaybe change the player attack directions to be absolute, and not depend on the pc's' facing direction?\n\nCurrently trying putting nav obstacles on the enemy and rebaking / repathing every few seconds. Not working well at all so far, very slow and weird things are happening. Probably because the agent is always inside of its own obstacle?\n\nOr maybe just do it like LSDZ and let enemies overlap. Makes for scarier swarms too. And way easier.\nJust use avoidance on enemies (different avoidance layer than pcs), and have them run at the nearest target. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
 		{
 			"uuid": "d3ac029a-c3b4-4875-b55d-8a265ce057f1",
 			"title": "Break Enemy.cs into state machine and other components",
-			"description": "Getting too big and sloppy.",
+			"description": "FindNewTarget() not working after first PC has its 4 slots filled. \nWorks when enemies aren't spawned within range of pcs, but that defeats the whole purpose of the find target method.\nFixed by putting a missing return in EnemyStateIdle.FindNearestPC().",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "8ac24760-da31-4b67-9762-5cc6223e53a9",
+			"title": "Get rid of PcStateContext",
+			"description": "Just pass in PlayerCharacter to states, the context doesn't add anything. Can't access state machine or states from pc (they're private) so same amount of circular dependency either way.\nThe trade off is making PlayerCharacter properties public. Might work fine as is.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "5912eb5c-2c85-4855-84df-61b358aa083e",
+			"title": "Stop passing MovementTarget in PcStates? Just keep the target in PC.",
+			"description": "",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
+			"title": "Get rid of nav avoidance in Pcs too.",
+			"description": "",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "12f4e22a-c7b3-4887-bf84-567c7d213552",
+			"title": "Check for all Targets' deaths each frame? Both enemies and pcs.",
+			"description": "Then PCs can free up a combat direction, and other enemies that didn't kill their target know to look for another. ",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "90c97e2a-852d-4c7f-9acd-4d886bcac1fa",
+			"title": "Redo combat without the \"combat directions\"",
+			"description": "How would that work with multiple pcs attacking the same enemy?\nMight have to do it more LSDZ style and disable collision/avoidance and just let everyone overlap. \nCould do things to help them spread out so it doesn't look too bad. \nWatch some LSDZ videos, and other similar combat games, to get ideas.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

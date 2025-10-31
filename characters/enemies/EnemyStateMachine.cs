@@ -1,4 +1,3 @@
-using Godot;
 using System.Collections.Generic;
 
 namespace Lastdew
@@ -19,16 +18,10 @@ namespace Lastdew
 		{
 			CurrentState?.ProcessState(delta);
 		}
-	
-		public void PhysicsProcessState(float delta)
-		{
-			CurrentState?.PhysicsProcessState(delta);
-		}
 		
 		public void ChangeState(EnemyStateNames stateName)
 		{
 			//this.PrintDebug($"Changing to {stateName}");
-			CurrentState?.ExitState();
 			CurrentState = StatesByEnum[stateName];
 			CurrentState?.EnterState();
 		}
@@ -39,8 +32,6 @@ namespace Lastdew
 			{
 				state.OnChangeState -= ChangeState;
 			}
-			// PcStateCombat combat = (PcStateCombat)StatesByEnum[PcStateNames.COMBAT];
-			// combat.ExitTree();
 		}
 	
 		private void SetupStates(Enemy enemy)
@@ -48,10 +39,12 @@ namespace Lastdew
 			EnemyStateIdle idle = new(enemy);
 			EnemyStateMovement movement = new(enemy);
 			EnemyStateCombat combat = new(enemy);
+			EnemyStateDead dead = new(enemy);
 	
 			StatesByEnum.Add(EnemyStateNames.IDLE, idle);
 			StatesByEnum.Add(EnemyStateNames.MOVEMENT, movement);
 			StatesByEnum.Add(EnemyStateNames.COMBAT, combat);
+			StatesByEnum.Add(EnemyStateNames.DEAD, dead);
 			
 			foreach (EnemyState state in StatesByEnum.Values)
 			{

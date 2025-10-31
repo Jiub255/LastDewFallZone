@@ -44,5 +44,10 @@ namespace Lastdew
 				}
 			}
 		}
+
+		protected bool TargetDead()
+		{
+			return Enemy.Target.Pc.Incapacitated;
+		}
 	}
 }

@@ -73,7 +73,7 @@ namespace Lastdew
 		{
 			int actualDamage = Mathf.Max(0, damage - StatManager.Defense);
 			bool incapacitated = Health.TakeDamage(actualDamage);
-			this.PrintDebug($"{GetRid()} took {damage} damage");
+			//this.PrintDebug($"{GetRid()} took {damage} damage");
 			StateMachine.GetHit(attackingEnemy, incapacitated);
 			return incapacitated;
 		}
@@ -139,6 +139,7 @@ namespace Lastdew
 		{
 			CollisionLayer = 0;
 			NavigationAgent.AvoidanceEnabled = false;
+			// TODO: Let PcManager (or TeamData) know Pc is dead so it can deselect it if it's selected.
 		}
 		
 		public void ExitTree()

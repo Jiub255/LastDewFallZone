@@ -7,14 +7,15 @@ namespace Lastdew
         public const float TURN_SPEED = 360f;
 		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve_2";
 		private const string BLEND_AMOUNT_PATH = "parameters/movement_blend_tree/idle_move/blend_amount";
+		// TODO: Make EnemyData resource and get attack, speed, etc. from that.
         private const int ATTACK = 10;
 
         public EnemyTarget Target { get; set; }
         public Vector3 LastTargetPosition { get; set; }
         public NavigationAgent3D NavigationAgent { get; set; }
 		public AnimationNodeStateMachinePlayback AnimStateMachine { get; set; }
+        public int Health { get; private set; } = 5;
 
-        private int Health { get; set; } = 5;
         private EnemyStateMachine StateMachine { get; set; }
 		private AnimationTree EnemyAnimationTree { get; set; }
 
@@ -52,16 +53,18 @@ namespace Lastdew
 		public bool GetHit(int damage, PlayerCharacter attackingPc)
 		{
 			Health -= damage;
-            this.PrintDebug($"{Name} hit for {damage} damage, health: {Health}");
+            //this.PrintDebug($"{Name} hit for {damage} damage, health: {Health}");
             if (Health <= 0)
 			{
 				Health = 0;
 				Die();
 				return true;
 			}
-			// TODO: Not sure if this does anything at the moment. When is Target null?
-			// Figure it out later.
-			//Target /*??*/= attackingPc;
+			// TODO: Have Enemy switch targets when hit? Maybe have a chance it happens?
+			
+			// Target = new EnemyTarget(
+			// 	attackingPc,
+			// 	Vector3.Forward.Rotated(Vector3.Up, GD.Randf() * Mathf.Tau));
 			AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
 			return false;
 		}
@@ -70,6 +73,10 @@ namespace Lastdew
 		// Does it need to be public?
 		public void HitTarget()
 		{
+			if (Target == null)
+			{
+				return;
+			}
 			bool pcIncapacitated = Target.Pc.GetHit(this, ATTACK);
 			if (pcIncapacitated)
 			{

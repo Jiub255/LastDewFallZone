@@ -26,11 +26,19 @@ namespace Lastdew
 
 		public override void ProcessSelected(float delta)
 		{
+			if (TargetDead())
+			{
+				ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
+			}
 			CurrentSubstate.ProcessSelected(delta);
 		}
 	
 		public override void ProcessUnselected(float delta)
 		{
+			if (TargetDead())
+			{
+				ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
+			}
 			CurrentSubstate.ProcessUnselected(delta);
 		}
 
@@ -152,6 +160,11 @@ namespace Lastdew
 
 			Array<Dictionary> result = spaceState.IntersectShape(query);
 			return result;
+		}
+
+		private bool TargetDead()
+		{
+			return Target.Health <= 0;
 		}
 	}
 }

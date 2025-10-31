@@ -14,6 +14,7 @@ namespace Lastdew
 		public override void EnterState()
 		{
 			Enemy.Target = null;
+			Enemy.SetBlendAmount(0f);
 		}
 
 		public override void ProcessState(float delta)
@@ -38,7 +39,6 @@ namespace Lastdew
 
 			if (pcs.Length == 0)
 			{
-				GD.Print("Length zero");
 				return;
 			}
 			

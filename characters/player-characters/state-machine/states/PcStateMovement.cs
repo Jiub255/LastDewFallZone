@@ -17,7 +17,7 @@ namespace Lastdew
 		{
 			pc.NavigationAgent.Connect(
 				NavigationAgent3D.SignalName.VelocityComputed,
-				Callable.From((Vector3 safeVelocity) => SetSafeVelocity(safeVelocity)));
+				Callable.From((Vector3 safeVelocity) => Move(safeVelocity)));
 		}
 	
 		public override void PhysicsProcessUnselected(float delta)
@@ -55,6 +55,11 @@ namespace Lastdew
 	
 		private void MovementProcess(float delta)
 		{
+			if (TargetDead())
+			{
+				ChangeState(PcStateNames.IDLE, new MovementTarget(Pc.Position));
+			}
+			
 			if (DestinationReached())
 			{
 				PcStateNames stateName;
@@ -75,10 +80,6 @@ namespace Lastdew
 						break;
 				}
 				ChangeState(stateName, MovementTarget);
-				if (stateName != PcStateNames.IDLE)
-				{
-					// TODO: Face PC toward target. Just instantaneously for now, can do a tween/lerp later.
-				}
 				return;
 			}
 			Animate();
@@ -119,15 +120,13 @@ namespace Lastdew
 			Vector3 direction = (nextPosition - Pc.GlobalPosition).Normalized();
 			Accelerate(direction * MaxSpeed, Acceleration * delta);
 		}
-	
-		private void SetSafeVelocity(Vector3 safeVelocity)
-		{
-			Move(safeVelocity);
-		}
 
 		private void Accelerate(Vector3 targetVelocity, float accelerationAmount)
 		{
 			Pc.NavigationAgent.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
+			// Uncomment below for non nav-avoidance movement.
+			// Pc.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
+			// Pc.MoveAndSlide();
 		}
 
 		private void Move(Vector3 velocity)
@@ -144,6 +143,15 @@ namespace Lastdew
 		{
 			Vector3 direction = (Pc.GlobalPosition - enemyPosition).Normalized();
 			return enemyPosition + direction * AttackRadius;
+		}
+
+		private bool TargetDead()
+		{
+			if (MovementTarget.Target is Enemy enemy)
+			{
+				return enemy.Health <= 0;
+			}
+			return false;
 		}
 	}
 }

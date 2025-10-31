@@ -43,7 +43,7 @@ namespace Lastdew
 		public bool HitEnemy(PlayerCharacter attackingPc)
 		{
 			int attack = Pc.StatManager.Attack;
-            this.PrintDebug($"Attack: {attack}");
+            //this.PrintDebug($"Attack: {attack}");
             return Target.GetHit(attack, attackingPc);
 		}
 		

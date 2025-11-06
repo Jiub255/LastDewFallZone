@@ -44,19 +44,16 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "NEXT",
 			"tasks": [
+				"18aa9dce-2759-4551-81bb-5c681f7e1987",
 				"cd7d53a6-8ba3-41c8-855e-623615812278",
-				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
-				"18aa9dce-2759-4551-81bb-5c681f7e1987"
+				"147125ec-8a3a-486c-a4ef-c7f5b629144a"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
-				"d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
-				"402f656a-c43a-4dec-8099-c5e4439c866a",
-				"7385db03-0d3c-4560-9192-ce43a0da59d8"
+				"402f656a-c43a-4dec-8099-c5e4439c866a"
 			]
 		},
 		{
@@ -108,7 +105,10 @@
 				"8ac24760-da31-4b67-9762-5cc6223e53a9",
 				"90c97e2a-852d-4c7f-9acd-4d886bcac1fa",
 				"12f4e22a-c7b3-4887-bf84-567c7d213552",
-				"5912eb5c-2c85-4855-84df-61b358aa083e"
+				"5912eb5c-2c85-4855-84df-61b358aa083e",
+				"7385db03-0d3c-4560-9192-ce43a0da59d8",
+				"d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
+				"43aa14f9-20a4-4fbe-aaec-cffd2c7c7955"
 			]
 		},
 		{
@@ -139,8 +139,7 @@
 			"title": "BUGS",
 			"tasks": [
 				"668f9df0-c1d7-4814-8809-bc08d8154352",
-				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
-				"8586a14c-d25c-4586-928c-f79e91264424"
+				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d"
 			]
 		},
 		{
@@ -904,7 +903,7 @@
 		{
 			"uuid": "43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
 			"title": "Let Pcs get one hit in after gethit state.",
-			"description": "As is, Pcs get overwhelmed and immediately thrown back into get hit state after recovering. \nEither let them attack once immediately after leaving get hit state,\nor, do an invincibility thing for a little bit after recovering, like a Recovering state. Could just add an \"invincible\" bool to PlayerCharacter and check it in GetHit().",
+			"description": "As is, Pcs get overwhelmed and immediately thrown back into get hit state after recovering. \nEither let them attack once immediately after leaving get hit state,\nor, do an invincibility thing for a little bit after recovering, like a Recovering state. Could just add an \"invincible\" bool to PlayerCharacter and check it in GetHit().\nWent with an Invulnerable bool on PlayerCharacter. Gets set true after leaving get hit state, then lasts a short while. ",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		},

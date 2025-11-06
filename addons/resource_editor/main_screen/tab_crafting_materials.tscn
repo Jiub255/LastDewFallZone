@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://b6fv5va0dcilx" path="res://addons/resource_editor/themes/new_resource_hover_stylebox.tres" id="1_3oj27"]
 [ext_resource type="Script" uid="uid://dctcl6ebbgmex" path="res://addons/resource_editor/main_screen/TabCraftingMaterials.cs" id="1_husyc"]
 [ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/themes/craftable_display_style_box.tres" id="2_husyc"]
-[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="3_2spxn"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://addons/resource_editor/assets/Add.svg" id="3_2spxn"]
 
 [node name="Crafting Materials" type="MarginContainer"]
 theme_override_constants/margin_left = 15

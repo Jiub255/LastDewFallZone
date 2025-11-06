@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://2md27oigm3of"]
 
 [ext_resource type="Script" uid="uid://xc2r8arfta57" path="res://addons/resource_editor/resource_editor_popup/items/TagsEditor.cs" id="1_t0obv"]
-[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="3_t0obv"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://addons/resource_editor/assets/Add.svg" id="3_t0obv"]
 
 [node name="Tags" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)

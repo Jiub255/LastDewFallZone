@@ -4,8 +4,6 @@ namespace Lastdew
 {
     public class GameStateStart : GameState
     {
-        public GameStateStart() : base() {}
-    
         public override void EnterState(MainMenu mainMenu)
         {
             mainMenu.Continue.Show();

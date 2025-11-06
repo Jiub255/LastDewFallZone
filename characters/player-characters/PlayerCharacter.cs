@@ -32,6 +32,9 @@ namespace Lastdew
 			}
 		}
 		public bool Incapacitated { get; private set; }
+		public bool Invulnerable { get; set; }
+		private float InvulnerabilityDuration { get; } = 1f;
+		private float InvulnerabilityTimer { get; set; }
 		public new string Name { get; private set; }
 		public Texture2D Icon { get; private set; }
 		public PcHealth Health { get; private set; }
@@ -62,11 +65,11 @@ namespace Lastdew
 		}
 
         public void ProcessUnselected(double delta)
-		{
-			StateMachine?.ProcessStateUnselected((float)delta);
-			Health.ProcessRelief((float)delta);
-		}
-	
+        {
+	        StateMachine?.ProcessStateUnselected((float)delta);
+	        SharedProcess(delta);
+        }
+
 		public void PhysicsProcessUnselected(double delta)
 		{
 			StateMachine?.PhysicsProcessStateUnselected((float)delta);
@@ -75,7 +78,7 @@ namespace Lastdew
 		public void ProcessSelected(double delta)
 		{
 			StateMachine?.ProcessStateSelected((float)delta);
-			Health.ProcessRelief((float)delta);
+			SharedProcess(delta);
 		}
 	
 		public void PhysicsProcessSelected(double delta)
@@ -96,9 +99,14 @@ namespace Lastdew
 			{
 				MovementTarget = new MovementTarget(attackingEnemy.Position, attackingEnemy);
 			}
+			
+			if (Invulnerable)
+			{
+				return;
+			}
+			
 			int actualDamage = Mathf.Max(0, damage - StatManager.Defense);
 			bool incapacitated = Health.TakeDamage(actualDamage);
-			//this.PrintDebug($"{GetRid()} took {damage} damage");
 			StateMachine.GetHit(incapacitated);
 			if (incapacitated)
 			{
@@ -193,6 +201,26 @@ namespace Lastdew
 		private void HitEnemy()
 		{
 			StateMachine.HitEnemy();
+		}
+
+		private void SharedProcess(double delta)
+		{
+			Health.ProcessRelief((float)delta);
+			TickInvulnerability((float)delta);
+		}
+
+		private void TickInvulnerability(float delta)
+		{
+			if (!Invulnerable)
+			{
+				return;
+			}
+			InvulnerabilityTimer += delta;
+			if (InvulnerabilityTimer >= InvulnerabilityDuration)
+			{
+				InvulnerabilityTimer = 0;
+				Invulnerable = false;
+			}
 		}
 
         private void SetupPcData(string name)

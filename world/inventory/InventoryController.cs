@@ -6,22 +6,13 @@ namespace Lastdew
 {	
 	public class InventoryController<T> : IEnumerable<KeyValuePair<T, int>> where T : Item
 	{
-		private Dictionary<T, int> Inventory { get; } = new Dictionary<T, int>();
-		
-		public InventoryController()
-		{
-			Inventory = new Dictionary<T, int>();
-		}
-		
+		private Dictionary<T, int> Inventory { get; } = new();
+
 		public void AddItems(T item, int amount)
 		{
-			if (Inventory.ContainsKey(item))
+			if (!Inventory.TryAdd(item, amount))
 			{
 				Inventory[item] += amount;
-			}
-			else
-			{
-				Inventory[item] = amount;
 			}
 		}
 		
@@ -35,12 +26,13 @@ namespace Lastdew
 					Inventory[item] -= amount;
 					return true;
 				}
-				else if (Inventory[item] == amount)
+
+				if (Inventory[item] == amount)
 				{
 					Inventory.Remove(item);
 					return true;
 				}
-				
+
 				GD.PushWarning($"Not enough of {item.Name} to remove {amount} of them.");
 				return false;
 			}
@@ -54,10 +46,7 @@ namespace Lastdew
 			return Inventory.ContainsKey(item) && Inventory[item] >= amount;
 		}
 
-        public int this[T key]
-		{
-			get => Inventory.ContainsKey(key) ? Inventory[key] : 0;
-		}
+        public int this[T key] => Inventory.GetValueOrDefault(key, 0);
 
         public IEnumerator<KeyValuePair<T, int>> GetEnumerator()
         {

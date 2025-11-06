@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt52qlxl7hge3"
-path="res://.godot/imported/Close.svg-d80e8d08dcc8533683c79606c60d521c.ctex"
+uid="uid://dnsq05qfoy463"
+path="res://.godot/imported/icon.svg-d36e49be0e7602b1dd0a333de2a21fda.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://unused-assets/Close.svg"
-dest_files=["res://.godot/imported/Close.svg-d80e8d08dcc8533683c79606c60d521c.ctex"]
+source_file="res://craftables/icons/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-d36e49be0e7602b1dd0a333de2a21fda.ctex"]
 
 [params]
 

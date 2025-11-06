@@ -11,7 +11,7 @@ namespace Lastdew
 		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>(UiDs.ITEM_BUTTON);
 		private CharacterDisplay CharacterDisplay { get; set; }
 		private EquipmentDisplay EquipmentDisplay { get; set; }
-		private List<ItemButton> Buttons { get; } = new();
+		private List<ItemButton> Buttons { get; } = [];
 	
 		public override void _Ready()
 		{
@@ -100,7 +100,7 @@ namespace Lastdew
 		private void SetupButton(Item item, int amount)
 		{
 			ItemButton button = (ItemButton)ItemButtonScene.Instantiate();
-			ItemsGrid.CallDeferred(GridContainer.MethodName.AddChild, button);
+			ItemsGrid.CallDeferred(Node.MethodName.AddChild, button);
 			button.CallDeferred(ItemButton.MethodName.Initialize, item, amount);
 			button.OnPressed += SelectedItemPanel.SetItem;
 			Buttons.Add(button);

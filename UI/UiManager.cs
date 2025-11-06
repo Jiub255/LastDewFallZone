@@ -89,6 +89,26 @@ namespace Lastdew
 			}
 		}
 
+		private void ToggleMainMenu()
+		{
+			Toggle(MainMenu);
+		}
+
+		private void ToggleGameMenu()
+		{
+			Toggle(GameMenu);
+		}
+
+		private void ToggleMapMenu()
+		{
+			Toggle(MapMenu);
+		}
+
+		private void ToggleBuildMenu()
+		{
+			Toggle(BuildMenu);
+		}
+
 		private void CloseAllMenus()
 		{
 			GameMenu.Close();
@@ -104,18 +124,18 @@ namespace Lastdew
         
         private void SubscribeState(GameState state)
         {
-			state.OnToggleMain += () => Toggle(MainMenu);
-			state.OnToggleGame += () => Toggle(GameMenu);
-			state.OnToggleBuild += () => Toggle(BuildMenu);
-			state.OnToggleMap += () => Toggle(MapMenu);
+			state.OnToggleMain += ToggleMainMenu;
+			state.OnToggleGame += ToggleGameMenu;
+			state.OnToggleBuild += ToggleBuildMenu;
+			state.OnToggleMap += ToggleMapMenu;
         }
         
         private void UnsubscribeState(GameState state)
         {
-			state.OnToggleMain -= () => Toggle(MainMenu);
-			state.OnToggleGame -= () => Toggle(GameMenu);
-			state.OnToggleBuild -= () => Toggle(BuildMenu);
-			state.OnToggleMap -= () => Toggle(MapMenu);
+	        state.OnToggleMain -= ToggleMainMenu;
+	        state.OnToggleGame -= ToggleGameMenu;
+	        state.OnToggleBuild -= ToggleBuildMenu;
+	        state.OnToggleMap -= ToggleMapMenu;
         }
 	}
 }

@@ -98,21 +98,21 @@ namespace Lastdew
 
 		private void Save()
 		{
-			SaverLoader.Save(InventoryManager, TeamData);
+			SaveSystem.Save(InventoryManager, TeamData);
 		}
 
 		private void Load()
 		{
-			SaveData saveData = SaverLoader.Load();
-			LoadInventory(saveData);
+			SaveData saveData = SaveSystem.Load();
+			LoadInventory(saveData.Inventory);
 			HomeBase = SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
 			Ui.ChangeState(new GameStateHome());
 		}
 
-		private void LoadInventory(SaveData saveData)
+		private void LoadInventory(Dictionary<long, int> inventory)
 		{
 			Craftables craftables = Databases.Craftables;
-			foreach (KeyValuePair<long, int> kvp in saveData.Inventory)
+			foreach (KeyValuePair<long, int> kvp in inventory)
 			{
 				InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
 			}

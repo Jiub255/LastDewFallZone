@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlxnuepjs376y"
-path="res://.godot/imported/OptionButton.svg-31ab4a7bd1b9b39a9933412d524581bf.ctex"
+uid="uid://bg33n32q78vqt"
+path="res://.godot/imported/icon_building_blank.png-18d4ff26f27e50700e1ef2b07a876519.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://unused-assets/OptionButton.svg"
-dest_files=["res://.godot/imported/OptionButton.svg-31ab4a7bd1b9b39a9933412d524581bf.ctex"]
+source_file="res://craftables/icons/icon_building_blank.png"
+dest_files=["res://.godot/imported/icon_building_blank.png-18d4ff26f27e50700e1ef2b07a876519.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

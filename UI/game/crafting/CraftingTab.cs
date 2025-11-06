@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 namespace Lastdew
@@ -41,6 +40,7 @@ namespace Lastdew
 		
 		private void PopulateUi()
 		{
+			ClearGrids();
 			foreach (Equipment equipment in Databases.Craftables.Equipments.Values)
 			{
 				AddButtonToGrids(equipment, EquipmentGrid);
@@ -80,6 +80,26 @@ namespace Lastdew
 				if (node is CraftableButton button)
 				{
 					button.OnPressed -= SelectedDisplay.SetItem;
+				}
+			}
+		}
+
+		private void ClearGrids()
+		{
+			ClearGrid(AllGrid);
+			ClearGrid(EquipmentGrid);
+			ClearGrid(MaterialsGrid);
+			ClearGrid(UsablesGrid);
+		}
+
+		private void ClearGrid(GridContainer grid)
+		{
+			foreach (Node child in grid.GetChildren())
+			{
+				if (child is CraftableButton button)
+				{
+					button.OnPressed -= SelectedDisplay.SetItem;
+					button.QueueFree();
 				}
 			}
 		}

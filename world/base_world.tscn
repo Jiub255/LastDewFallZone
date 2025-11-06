@@ -13,6 +13,7 @@
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_ixco4")
+NumberOfPcs = 2
 
 [node name="CameraRig" parent="." instance=ExtResource("11_huh4i")]
 unique_name_in_owner = true

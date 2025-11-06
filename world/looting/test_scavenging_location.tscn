@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://4g1wsvcfefhh"]
+[gd_scene load_steps=15 format=3 uid="uid://4g1wsvcfefhh"]
 
 [ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/looting/ScavengingLevel.cs" id="1_43o5v"]
 [ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://world/looting/loot_container_test.tscn" id="2_ocac3"]
+[ext_resource type="Resource" uid="uid://uaemgs7vnwb1" path="res://craftables/items/equipment/pistol.tres" id="4_420no"]
 [ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://characters/enemies/EnemySpawner.cs" id="10_o5blp"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
@@ -103,3 +104,6 @@ mesh = SubResource("BoxMesh_skjca")
 
 [node name="LootContainerTest" parent="NavigationRegion3D" instance=ExtResource("2_ocac3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.01318, 0.5, 6.28534)
+Loot = Dictionary[Object, int]({
+ExtResource("4_420no"): 1
+})

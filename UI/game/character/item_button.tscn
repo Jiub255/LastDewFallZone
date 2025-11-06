@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckdovcojyp62n"]
 
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_5aaay"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="1_5aaay"]
 [ext_resource type="Script" uid="uid://bcl2tj6uu0q2q" path="res://UI/game/character/ItemButton.cs" id="2_yotii"]
 
 [node name="ItemButton" type="Button"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddkl0i3g78lb3"]
 
 [ext_resource type="Script" uid="uid://sjp76ncbl8r2" path="res://UI/map/LocationInfoUi.cs" id="1_vq7hb"]
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="2_v7wu5"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="2_v7wu5"]
 
 [node name="LocationInfo" type="VBoxContainer"]
 size_flags_horizontal = 3

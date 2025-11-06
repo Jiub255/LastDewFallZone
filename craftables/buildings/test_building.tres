@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://bbw26e1wuuv0j"]
 
-[ext_resource type="Texture2D" uid="uid://bg33n32q78vqt" path="res://unused-assets/icons/icon_building_blank.png" id="1_cwc26"]
+[ext_resource type="Texture2D" uid="uid://bg33n32q78vqt" path="res://craftables/icons/icon_building_blank.png" id="1_cwc26"]
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_uwfxh"]
 
 [resource]

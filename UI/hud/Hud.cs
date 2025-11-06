@@ -8,7 +8,7 @@ namespace Lastdew
 		private TeamData TeamData { get; set; }
 		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(UiDs.PC_BUTTON);
 		private HBoxContainer ButtonParent { get; set; }
-		private List<PcButton> PcButtons { get; set; } = new List<PcButton>();
+		private List<PcButton> PcButtons { get; set; } = [];
 	
 		public override void _Ready()
 		{

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci1ycdtuh12k7"
-path="res://.godot/imported/Add.svg-217b235da38e8dc5d88f23e42f9440c5.ctex"
+uid="uid://lgytv07nml1y"
+path="res://.godot/imported/icon_food.png-e00c3610f1bc016e63dcbaefb76cb472.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://unused-assets/Add.svg"
-dest_files=["res://.godot/imported/Add.svg-217b235da38e8dc5d88f23e42f9440c5.ctex"]
+source_file="res://craftables/icons/icon_food.png"
+dest_files=["res://.godot/imported/icon_food.png-e00c3610f1bc016e63dcbaefb76cb472.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

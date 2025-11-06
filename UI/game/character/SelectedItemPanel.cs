@@ -67,15 +67,17 @@ namespace Lastdew
 	
 		private void UseOrEquipItem()
 		{
-			ItemButton.Item.OnClickItem(TeamData.Pcs[TeamData.MenuSelectedIndex]);
-			if (ItemButton != null)
+			if (ItemButton == null)
 			{
-				ItemButton.Amount--;
-				if (ItemButton.Amount == 0)
-				{
-					ClearItem();
-				}
+				return;
 			}
+			ItemButton.Item.OnClickItem(TeamData.Pcs[TeamData.MenuSelectedIndex]);
+			ItemButton.Amount--;
+			if (ItemButton.Amount == 0)
+			{
+				ClearItem();
+			}
+			// TODO: Refresh Character tab, at least the item grid part. 
 		}
 	
 		private void DropItem()

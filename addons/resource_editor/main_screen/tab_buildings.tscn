@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cj0j1qno7noqw" path="res://addons/resource_editor/main_screen/TabBuildings.cs" id="1_brvdl"]
 [ext_resource type="StyleBox" uid="uid://b6fv5va0dcilx" path="res://addons/resource_editor/themes/new_resource_hover_stylebox.tres" id="2_bqibf"]
 [ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/themes/craftable_display_style_box.tres" id="3_qeoty"]
-[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="4_reujp"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://addons/resource_editor/assets/Add.svg" id="4_reujp"]
 
 [node name="Buildings" type="MarginContainer"]
 visible = false

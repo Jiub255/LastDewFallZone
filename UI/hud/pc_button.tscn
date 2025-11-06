@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cl3ga8e5ivvvy"]
 
 [ext_resource type="Script" uid="uid://b6emfh7fpf6sn" path="res://UI/hud/PcButton.cs" id="1_05tvu"]
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_fjfo1"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="1_fjfo1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb0kh"]
 bg_color = Color(0.832181, 0.756824, 1.15514e-06, 1)

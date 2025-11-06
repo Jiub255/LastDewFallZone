@@ -9,28 +9,26 @@ namespace Lastdew
         public event Action OnToggleGame;
         public event Action OnToggleBuild;
         public event Action OnToggleMap;
-    
-        public GameState() {}
-    
+
         public abstract void EnterState(MainMenu mainMenu);
         public abstract void HandleInput(InputEvent @event);
         
-        protected void ToggleMain()
+        protected void ToggleMainMenu()
         {
             OnToggleMain?.Invoke();
         }
         
-        protected void ToggleGame()
+        protected void ToggleGameMenu()
         {
             OnToggleGame?.Invoke();
         }
         
-        protected void ToggleBuild()
+        protected void ToggleBuildMenu()
         {
             OnToggleBuild?.Invoke();
         }
         
-        protected void ToggleMap()
+        protected void ToggleMapMenu()
         {
             OnToggleMap?.Invoke();
         }

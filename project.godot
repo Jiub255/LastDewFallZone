@@ -22,9 +22,9 @@ resources_spreadsheet_view/fold_docks=false
 [application]
 
 config/name="LastDew:FallZone"
-run/main_scene="uid://dnkgovt2ggm05"
+run/main_scene="uid://dvqh38ovds5vf"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
-config/icon="res://unused-assets/icon.svg"
+config/icon="res://craftables/icons/icon.svg"
 
 [dotnet]
 
@@ -44,7 +44,7 @@ folder_colors={
 "res://misc/": "orange",
 "res://save_system/": "yellow",
 "res://test/": "green",
-"res://unused-assets/": "blue",
+"res://unused_assets/": "blue",
 "res://world/": "purple"
 }
 

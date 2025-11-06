@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ch274o8uw0igf" path="res://addons/resource_editor/resource_editor_popup/MaterialAmountEditor.cs" id="1_iqdbb"]
 [ext_resource type="Theme" uid="uid://yrycfvumiqae" path="res://addons/resource_editor/themes/spin_box_theme.tres" id="1_ocrqw"]
 [ext_resource type="Texture2D" uid="uid://ym4rh5rfmrp8" path="res://craftables/items/equipment/icon_bat.png" id="1_xk7uo"]
-[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_ocrqw"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://addons/resource_editor/assets/Close.svg" id="2_ocrqw"]
 
 [node name="MaterialAmountEdit" type="PanelContainer"]
 offset_right = 40.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://btxev5v7o7ao0"]
 
 [ext_resource type="Script" uid="uid://t30rqaat2uvo" path="res://addons/resource_editor/resource_editor_popup/BuildingEditor.cs" id="1_0pa1f"]
-[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="3_jmui7"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://addons/resource_editor/assets/Close.svg" id="3_jmui7"]
 
 [node name="BuildingEdit" type="PanelContainer"]
 custom_minimum_size = Vector2(50, 50)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bdhbrta7xgaqg"]
 
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://unused-assets/icon.svg" id="1_w4if1"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="1_w4if1"]
 [ext_resource type="Script" uid="uid://c70eyrobadxh" path="res://UI/game/GameMenu.cs" id="1_wwb6i"]
 [ext_resource type="Script" uid="uid://cch7gj0xxyn4d" path="res://UI/game/character/CharacterTab.cs" id="2_vlrjn"]
 [ext_resource type="Script" uid="uid://cud7b2pso0mxq" path="res://UI/game/character/CharacterDisplay.cs" id="3_j1sv6"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://cva1octdfmlvj" path="res://UI/game/character/SelectedItemPanel.cs" id="5_fxjof"]
 [ext_resource type="Script" uid="uid://nlili2t5sfqm" path="res://UI/game/character/EquipmentButton.cs" id="6_qutin"]
 [ext_resource type="Script" uid="uid://bcgcytk1ootfk" path="res://UI/game/crafting/CraftingTab.cs" id="8_2uyxp"]
-[ext_resource type="Texture2D" uid="uid://c8uv451fraiei" path="res://unused-assets/icons/icon_leg_armor_blank.png" id="8_vwjle"]
+[ext_resource type="Texture2D" uid="uid://c8uv451fraiei" path="res://craftables/icons/icon_leg_armor_blank.png" id="8_vwjle"]
 [ext_resource type="Script" uid="uid://dcqypmfdgyh0w" path="res://UI/game/crafting/SelectedCraftableDisplay.cs" id="9_wfr7w"]
 
 [node name="GameMenu" type="CanvasLayer"]
@@ -27,10 +27,11 @@ theme_override_constants/margin_bottom = 20
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
-current_tab = 0
+current_tab = 1
 
 [node name="Character" type="PanelContainer" parent="MarginContainer/TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 script = ExtResource("2_vlrjn")
 metadata/_tab_index = 0
@@ -200,7 +201,6 @@ text = "Drop"
 
 [node name="Crafting" type="PanelContainer" parent="MarginContainer/TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 script = ExtResource("8_2uyxp")
 metadata/_tab_index = 1

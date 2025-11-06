@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bptw12qdeseh"]
 
 [ext_resource type="Script" uid="uid://gx45yv18qigc" path="res://addons/resource_editor/resource_editor_popup/RecipeCostsEditor.cs" id="1_cehnj"]
-[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="1_ius7j"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://addons/resource_editor/assets/Add.svg" id="1_ius7j"]
 
 [node name="RecipeCosts" type="HBoxContainer"]
 theme_override_constants/separation = 5

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3frh6sldpqeo"]
 
 [ext_resource type="Script" uid="uid://be3vd5r4cmxdi" path="res://addons/resource_editor/resource_editor_popup/items/TagButton.cs" id="1_tj3ga"]
-[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_xtxl5"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://addons/resource_editor/assets/Close.svg" id="2_xtxl5"]
 
 [node name="TagButton" type="PanelContainer"]
 custom_minimum_size = Vector2(50, 50)

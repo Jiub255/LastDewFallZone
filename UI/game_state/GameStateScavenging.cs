@@ -4,8 +4,6 @@ namespace Lastdew
 {
     public class GameStateScavenging : GameState
     {
-        public GameStateScavenging() : base() {}
-    
         public override void EnterState(MainMenu mainMenu)
         {
             mainMenu.Continue.Hide();
@@ -20,11 +18,11 @@ namespace Lastdew
         {
             if (@event.IsActionPressed(InputNames.GAME_MENU))
 			{
-                ToggleGame();
+                ToggleGameMenu();
 			}
 			else if (@event.IsActionPressed(InputNames.MAIN_MENU))
 			{
-                ToggleMain();
+                ToggleMainMenu();
 			}
         }
     }

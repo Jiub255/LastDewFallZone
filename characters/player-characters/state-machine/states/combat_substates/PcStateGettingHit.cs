@@ -29,6 +29,7 @@ namespace Lastdew
 		{
 			if (animationName == GETTING_HIT_ANIM_NAME && !Pc.Incapacitated)
 			{
+				Pc.Invulnerable = true;
 				ChangeSubstate(PcCombatSubstateNames.WAITING);
 			}
 		}

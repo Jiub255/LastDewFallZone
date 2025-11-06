@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxs5r6evcoahk"]
 
 [ext_resource type="Script" uid="uid://ccqrd76imba84" path="res://addons/resource_editor/resource_editor_popup/ScrapResultsEditor.cs" id="1_664gy"]
-[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://unused-assets/Add.svg" id="2_500a7"]
+[ext_resource type="Texture2D" uid="uid://ci1ycdtuh12k7" path="res://addons/resource_editor/assets/Add.svg" id="2_500a7"]
 
 [node name="ScrapResults" type="HBoxContainer"]
 theme_override_constants/separation = 5

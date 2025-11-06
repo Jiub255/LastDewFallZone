@@ -4,9 +4,7 @@ namespace Lastdew
 {
     public class GameStateHome : GameState
     {
-        public GameStateHome() : base() {}
-    
-        public override void EnterState(MainMenu mainMenu)
+	    public override void EnterState(MainMenu mainMenu)
         {
             mainMenu.Continue.Hide();
             mainMenu.SaveGame.Show();
@@ -20,19 +18,19 @@ namespace Lastdew
         {
             if (@event.IsActionPressed(InputNames.GAME_MENU))
 			{
-                ToggleGame();
+                ToggleGameMenu();
 			}
 			else if (@event.IsActionPressed(InputNames.MAIN_MENU))
 			{
-                ToggleMain();
+                ToggleMainMenu();
 			}
 			else if (@event.IsActionPressed(InputNames.BUILD_MENU))
 			{
-                ToggleBuild();
+                ToggleBuildMenu();
 			}
 			else if (@event.IsActionPressed(InputNames.MAP_MENU))
 			{
-                ToggleMap();
+                ToggleMapMenu();
 			}
         }
     }

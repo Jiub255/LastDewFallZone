@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ei5w0vmmup2l"]
 
 [ext_resource type="Script" uid="uid://bmxmj8dahi6uv" path="res://addons/resource_editor/resource_editor_popup/usable_items/EffectButton.cs" id="1_dtqk0"]
-[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://unused-assets/Close.svg" id="2_cfm87"]
+[ext_resource type="Texture2D" uid="uid://bt52qlxl7hge3" path="res://addons/resource_editor/assets/Close.svg" id="2_cfm87"]
 
 [node name="EffectButton" type="Button"]
 custom_minimum_size = Vector2(50, 50)

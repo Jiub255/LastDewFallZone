@@ -4,10 +4,7 @@ using System.Text.Json;
 
 namespace Lastdew
 {
-	/// <summary>
-	/// TODO: Split into Saver and Loader classes.
-	/// </summary>
-	public static class SaverLoader
+	public static class SaveSystem
 	{
 		private const string SAVE_PATH = "user://savegame.save";
 		
@@ -17,7 +14,7 @@ namespace Lastdew
 
 			string jsonString = JsonSerializer.Serialize(saveData);
 
-			using var saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);
+			using FileAccess saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);
 			saveFile.StoreLine(jsonString);
 		}
 
@@ -29,7 +26,7 @@ namespace Lastdew
 				return null;
 			}
 			
-			using var saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Read);
+			using FileAccess saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Read);
 
 			string jsonString = saveFile.GetLine();
 			

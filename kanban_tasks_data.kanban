@@ -55,7 +55,8 @@
 			"tasks": [
 				"43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
 				"d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
-				"402f656a-c43a-4dec-8099-c5e4439c866a"
+				"402f656a-c43a-4dec-8099-c5e4439c866a",
+				"7385db03-0d3c-4560-9192-ce43a0da59d8"
 			]
 		},
 		{
@@ -129,7 +130,8 @@
 				"4cedf12d-2d3b-413f-a337-85acaebb4e01",
 				"3a259a69-d68d-47b6-82d8-8e98d184e6f9",
 				"3ddaf881-8ca1-4c9d-b76b-2c7dc81998ef",
-				"d7bc729f-5541-4e3e-8fba-d50a028ac220"
+				"d7bc729f-5541-4e3e-8fba-d50a028ac220",
+				"1cb946a4-92a0-412e-9b77-3448e6cf41ac"
 			]
 		},
 		{
@@ -902,8 +904,22 @@
 		{
 			"uuid": "43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
 			"title": "Let Pcs get one hit in after gethit state.",
-			"description": "As is, Pcs get overwhelmed and immediately thrown back into get hit state after recovering. \nEither let them attack once immediately after leaving get hit state,\nor, do an invincibility thing for a little bit after recovering, like a Recovering state.",
+			"description": "As is, Pcs get overwhelmed and immediately thrown back into get hit state after recovering. \nEither let them attack once immediately after leaving get hit state,\nor, do an invincibility thing for a little bit after recovering, like a Recovering state. Could just add an \"invincible\" bool to PlayerCharacter and check it in GetHit().",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "7385db03-0d3c-4560-9192-ce43a0da59d8",
+			"title": "Have dead characters send out \"i'm dead\" signal, then anyone with them as a target connects to that signal.",
+			"description": "Instead of polling each frame for is target dead.",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "1cb946a4-92a0-412e-9b77-3448e6cf41ac",
+			"title": "Switching PC from movement to combat not working",
+			"description": "FIXED by using MovementTarget.Target.GlobalPosition instead of MovementTarget.TargetPosition for enemies. \nRelated problem: When setting a movement target for PC by clicking an enemy, the MovementTarget.TargetPosition is set to the enemy's current position so it's wrong once the enemy moves.\nMaybe just use target.GlobalPosition for enemies? \n",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

@@ -38,7 +38,7 @@ size = Vector3(0.2, 2, 28)
 
 [node name="TestCombatLevel" type="Node3D"]
 script = ExtResource("1_nfk2h")
-EnemiesToSpawn = 12
+EnemiesToSpawn = 14
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.897162, -0.274785, 0.345822, -0.436021, -0.425799, 0.792831, -0.0706071, -0.862084, -0.501822, 0, 0, 0)

@@ -15,11 +15,6 @@ namespace Lastdew
 
         public override void ProcessState(float delta)
         {
-            if (TargetDead())
-            {
-                ChangeState(EnemyStateNames.IDLE);
-                return;
-            }
             if (WithinRangeOfEnemy())
             {
                 ChangeState(EnemyStateNames.COMBAT);

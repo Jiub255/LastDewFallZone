@@ -12,7 +12,7 @@ namespace Lastdew
         /// <summary>
 		/// TODO: Get this from PC weapon/stats eventually.
 		/// </summary>
-		protected static float AttackRadius => 0.5f;
+		protected static float AttackRadius => 1f;
 
 		/// <summary>
 		/// Degrees per second

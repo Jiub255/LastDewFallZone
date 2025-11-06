@@ -77,7 +77,6 @@ namespace Lastdew
 				return false;
 			}
 			Injury = MAX_INJURY;
-			// TODO: Become incapacitated until healing at home base. Or die?
 			return true;
 		}
 		

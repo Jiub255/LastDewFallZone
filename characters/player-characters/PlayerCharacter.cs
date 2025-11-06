@@ -1,15 +1,37 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 namespace Lastdew
 {
 	public partial class PlayerCharacter : CharacterBody3D
 	{
 		public event Action OnEquipmentChanged;
+		public event Action OnDeath;
 		
-		public MovementTarget MovementTarget { get; set; }
-		public bool Incapacitated { get; set; }
+		private const float SIGHT_DISTANCE = 20f;
+		
+		private MovementTarget _movementTarget;
+
+		public MovementTarget MovementTarget
+		{
+			get => _movementTarget;
+			set
+			{
+				if (_movementTarget.Target is Enemy oldEnemy)
+				{
+					oldEnemy.OnDeath -= OnTargetDeath;
+				}
+				_movementTarget = value;
+				if (_movementTarget.Target is Enemy newEnemy)
+				{
+					//this.PrintDebug($"{Name}'s target set to {newEnemy.Name}");
+					newEnemy.OnDeath += OnTargetDeath;
+				}
+			}
+		}
+		public bool Incapacitated { get; private set; }
 		public new string Name { get; private set; }
 		public Texture2D Icon { get; private set; }
 		public PcHealth Health { get; private set; }
@@ -67,11 +89,8 @@ namespace Lastdew
 			StateMachine.ChangeState(PcStateNames.MOVEMENT);
 		}
 
-		/// <summary>
 		/// TODO: Make actual defense formula.
-		/// </summary>
-		/// <returns>true if pc incapacitated</returns>
-		public bool GetHit(Enemy attackingEnemy, int damage)
+		public void GetHit(Enemy attackingEnemy, int damage)
 		{
 			if (MovementTarget.Target is not Enemy)
 			{
@@ -81,13 +100,10 @@ namespace Lastdew
 			bool incapacitated = Health.TakeDamage(actualDamage);
 			//this.PrintDebug($"{GetRid()} took {damage} damage");
 			StateMachine.GetHit(incapacitated);
-			return incapacitated;
-		}
-		
-		// Called from animation method track
-		public void HitEnemy()
-		{
-			StateMachine.HitEnemy();
+			if (incapacitated)
+			{
+				OnDeath?.Invoke();
+			}
 		}
 		
 		public void Equip(Equipment equipment)
@@ -99,6 +115,11 @@ namespace Lastdew
 			if (Inventory.HasItem(equipment))
 			{
 				Inventory.RemoveItem(equipment);
+			}
+			else
+			{
+				GD.PushError($"{equipment.Name} not in inventory");
+				return;
 			}
 			Equipment oldEquipment = Equipment.Equip(equipment);
 			StatManager.CalculateStatModifiers(Equipment.Bonuses);
@@ -143,8 +164,10 @@ namespace Lastdew
 
 		public void DisablePc()
 		{
+			Incapacitated = true;
+			MovementTarget = new MovementTarget();
 			CollisionLayer = 0;
-			NavigationAgent.AvoidanceEnabled = false;
+			//NavigationAgent.AvoidanceEnabled = false;
 			// TODO: Let PcManager (or TeamData) know Pc is dead so it can deselect it if it's selected.
 		}
 		
@@ -164,6 +187,12 @@ namespace Lastdew
 				Equipment.Body.GetUid(),
 				Equipment.Feet.GetUid(),
 				Health.Injury);
+		}
+		
+		// Called from animation method track
+		private void HitEnemy()
+		{
+			StateMachine.HitEnemy();
 		}
 
         private void SetupPcData(string name)
@@ -195,6 +224,65 @@ namespace Lastdew
 					mesh.QueueFree();
                 }
             }
+        }
+
+		private void OnTargetDeath()
+		{
+			TryFindNearestEnemy();
+		}
+
+        private void TryFindNearestEnemy()
+        {
+	        Enemy nearest = FindNearestEnemy();
+	        
+	        if (nearest != null)
+	        {
+		        MovementTarget = new MovementTarget(nearest.GlobalPosition, nearest);
+		        StateMachine.ChangeState(PcStateNames.MOVEMENT);
+	        }
+	        else
+	        {
+		        MovementTarget = new MovementTarget();
+		        StateMachine.ChangeState(PcStateNames.IDLE);
+	        }
+        }
+		
+        private Enemy FindNearestEnemy()
+        {
+	        Array<Dictionary> sphereCastResults = SphereCast();
+
+	        Enemy closest = null;
+	        foreach (Dictionary dict in sphereCastResults)
+	        {
+		        CollisionObject3D collider = (CollisionObject3D)dict["collider"];
+		        if (collider is not Enemy enemy || enemy.Health <= 0)
+		        {
+			        continue;
+		        }
+		        if (closest == null || GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) <
+		            GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
+		        {
+			        closest = enemy;
+		        }
+	        }
+	        return closest;
+        }
+
+        private Array<Dictionary> SphereCast()
+        {
+	        PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+	        SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };
+	        PhysicsShapeQueryParameters3D query = new()
+	        {
+		        ShapeRid = sphereShape.GetRid(),
+		        CollideWithBodies = true,
+		        Transform = new Transform3D(Basis.Identity, GlobalPosition),
+		        Exclude = new Array<Rid>(new Rid[1] { GetRid() }),
+		        CollisionMask = 0b100
+	        };
+
+	        Array<Dictionary> results = spaceState.IntersectShape(query);
+	        return results;
         }
 	}
 }

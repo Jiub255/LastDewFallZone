@@ -17,18 +17,19 @@ namespace Lastdew
 				Dictionary<StatType, int> equipmentBonuses = new();
 				foreach (Equipment equipment in this)
 				{
-					if (equipment != null && equipment.EquipmentBonuses.Count > 0)
+					if (equipment == null || equipment.EquipmentBonuses.Count <= 0)
 					{
-						foreach (KeyValuePair<StatType, int> kvp in equipment.EquipmentBonuses)
+						continue;
+					}
+					foreach (KeyValuePair<StatType, int> kvp in equipment.EquipmentBonuses)
+					{
+						if (equipmentBonuses.ContainsKey(kvp.Key))
 						{
-						    if (equipmentBonuses.ContainsKey(kvp.Key))
-						    {
-						        equipmentBonuses[kvp.Key] += kvp.Value;
-						    }
-						    else
-						    {
-						        equipmentBonuses[kvp.Key] = kvp.Value;
-						    }
+							equipmentBonuses[kvp.Key] += kvp.Value;
+						}
+						else
+						{
+							equipmentBonuses[kvp.Key] = kvp.Value;
 						}
 					}
 				}

@@ -1,5 +1,6 @@
-
 using System.Collections.Generic;
+using Godot;
+using Godot.NativeInterop;
 
 namespace Lastdew
 {	
@@ -27,6 +28,7 @@ namespace Lastdew
 			}
 			else
 			{
+				GD.PushWarning("Movement target wasn't a loot container.");
 				ChangeState(PcStateNames.IDLE);
 			}
 		}

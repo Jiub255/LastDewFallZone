@@ -8,19 +8,14 @@ namespace Lastdew
 	public partial class Equipment : Item
 	{
 		[Export]
-		public EquipmentType Type { get; private set; }
+		public EquipmentType Type { get; private set; } = EquipmentType.HEAD;
+
 		[Export]
-		public Dictionary<StatType, int> EquipmentBonuses { get; private set; }
+		public Dictionary<StatType, int> EquipmentBonuses { get; private set; } = [];
+
 		[Export]
-		public Dictionary<StatType, int>  StatsNeededToEquip { get; private set; }
-		
-		public Equipment() : base()
-		{
-			Type = EquipmentType.HEAD;
-			EquipmentBonuses = [];
-			StatsNeededToEquip = [];
-		}
-		
+		public Dictionary<StatType, int>  StatsNeededToEquip { get; private set; } = [];
+
 		public override void OnClickCraftable()
 		{
 			throw new NotImplementedException();

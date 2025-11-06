@@ -15,30 +15,12 @@ namespace Lastdew
 		private Stat _scavenging = new(StatType.SCAVENGING, 1);
 		private int _pain;
 		
-		public int Attack
-		{
-			get => PainFormula(_attack.Value, _pain);
-		}
-		public int Defense
-		{
-			get => PainFormula(_defense.Value, _pain);
-		}
-		public int Engineering
-		{
-			get => PainFormula(_engineering.Value, _pain);
-		}
-		public int Farming
-		{
-			get => PainFormula(_farming.Value, _pain);
-		}
-		public int Medical
-		{
-			get => PainFormula(_medical.Value, _pain);
-		}
-		public int Scavenging
-		{
-			get => PainFormula(_scavenging.Value, _pain);
-		}
+		public int Attack => PainFormula(_attack.Value);
+		public int Defense => PainFormula(_defense.Value);
+		public int Engineering => PainFormula(_engineering.Value);
+		public int Farming => PainFormula(_farming.Value);
+		public int Medical => PainFormula(_medical.Value);
+		public int Scavenging => PainFormula(_scavenging.Value);
 
 		public void SetPain(int pain)
 		{
@@ -97,9 +79,9 @@ namespace Lastdew
 		}
 		
 		// Pain == 0 -> No effect. Pain == 100 -> Stat value halved. (for now at least)
-		private static int PainFormula(int statValue, int pain)
+		private int PainFormula(int statValue)
 		{
-		    return Mathf.RoundToInt(statValue * (200f - pain) / 200f);
+		    return Mathf.RoundToInt(statValue * (200f - _pain) / 200f);
 		}
 	}
 }

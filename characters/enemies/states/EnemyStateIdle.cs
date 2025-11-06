@@ -19,7 +19,7 @@ namespace Lastdew
 
 		public override void ProcessState(float delta)
 		{
-			CheckForTargetTimer += (float)delta;
+			CheckForTargetTimer += delta;
 			if (CheckForTargetTimer > TIME_BETWEEN_CHECKS)
 			{
 				CheckForTargetTimer = 0;
@@ -29,9 +29,9 @@ namespace Lastdew
 		
 		private void FindNearestPc()
 		{
-			Array<Dictionary> results = SphereCastForNearbyPcs();
+			Array<Dictionary> sphereCastResults = SphereCast();
 
-			PlayerCharacter[] pcs = results
+			PlayerCharacter[] pcs = sphereCastResults
 				.Where(d => (CollisionObject3D)d["collider"] is PlayerCharacter)
 				.Select(x => (PlayerCharacter)x["collider"])
 				.OrderBy(y => y.GlobalPosition.DistanceTo(Enemy.GlobalPosition))
@@ -48,7 +48,7 @@ namespace Lastdew
 			ChangeState(EnemyStateNames.MOVEMENT);
 		}
 
-		private Array<Dictionary> SphereCastForNearbyPcs()
+		private Array<Dictionary> SphereCast()
 		{
 			PhysicsDirectSpaceState3D spaceState = Enemy.GetWorld3D().DirectSpaceState;
 			SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };

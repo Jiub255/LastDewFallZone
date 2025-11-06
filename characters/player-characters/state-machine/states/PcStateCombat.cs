@@ -1,11 +1,9 @@
 using Godot;
-using Godot.Collections;
 
 namespace Lastdew
 {
 	public class PcStateCombat : PcState
 	{
-		private const float SIGHT_DISTANCE = 20f;
 		private PcCombatSubstate CurrentSubstate { get; set; }
 		private System.Collections.Generic.Dictionary<PcCombatSubstateNames, PcCombatSubstate> StatesByEnum { get; } = new();
 		
@@ -16,7 +14,7 @@ namespace Lastdew
 	
 		public override void EnterState()
 		{
-			if (Pc.MovementTarget.Target is Enemy enemy)
+			if (Pc.MovementTarget.Target is Enemy)
 			{
 				ChangeSubstate(PcCombatSubstateNames.WAITING);
 			}
@@ -28,23 +26,15 @@ namespace Lastdew
 
 		public override void ProcessSelected(float delta)
 		{
-			if (TargetDead())
-			{
-				// TODO: Look for new target instead. Or just do that in idle (unselected) state?
-				//ChangeState(PcStateNames.IDLE);
-				TryFindNearestEnemy();
-			}
+			bool pcIncapacitated = SharedProcess();
+			if (pcIncapacitated) return;
 			CurrentSubstate.ProcessSelected(delta);
 		}
-	
+
 		public override void ProcessUnselected(float delta)
 		{
-			if (TargetDead())
-			{
-				// TODO: Look for new target instead. Or just do that in idle (unselected) state?
-				//ChangeState(PcStateNames.IDLE);
-				TryFindNearestEnemy();
-			}
+			bool pcIncapacitated = SharedProcess();
+			if (pcIncapacitated) return;
 			CurrentSubstate.ProcessUnselected(delta);
 		}
 
@@ -69,22 +59,28 @@ namespace Lastdew
 				GD.PushWarning($"Not in attacking substate. Current substate: {CurrentSubstate.GetType()}");
 				return;
 			}
-			bool targetKilled = attackState.HitEnemy();
-			if (targetKilled)
-			{
-				TryFindNearestEnemy();
-			}
+			attackState.HitEnemy();
 		}
 
         public void GetHit(bool incapacitated)
 		{
 			if (incapacitated)
 			{
-				Pc.Incapacitated = true;
 				ChangeSubstate(PcCombatSubstateNames.INCAPACITATED);
 				return;
 			}
 			CurrentSubstate.GetHit();
+		}
+
+		/// <returns>true if Pc.Incapacitated</returns>
+		private bool SharedProcess()
+		{
+			if (Pc.Incapacitated)
+			{
+				return true;
+			}
+			ReapproachTargetIfOutOfRange();
+			return false;
 		}
 	
 		private void SetupSubstates(PlayerCharacter pc)
@@ -105,83 +101,22 @@ namespace Lastdew
 				state.OnChangeSubstate += ChangeSubstate;
 			}
 		}
-
-        private void TryFindNearestEnemy()
-        {
-	        Enemy nearest = null;
-	        if (Pc.MovementTarget.Target is Enemy enemy)
-	        {
-	            nearest = FindNearestEnemy(enemy);
-	        }
-	        else
-	        {
-		        nearest = FindNearestEnemy(null);
-	        }
-	        
-            if (nearest != null)
-            {
-	            Pc.MovementTarget = new MovementTarget(nearest.GlobalPosition, nearest);
-                ChangeState(PcStateNames.MOVEMENT);
-            }
-            else
-            {
-                ChangeState(PcStateNames.IDLE);
-            }
-        }
 		
 		private void ChangeSubstate(PcCombatSubstateNames substateName)
 		{
 			CurrentSubstate = StatesByEnum[substateName];
 			CurrentSubstate?.EnterState();
 		}
-		
-		private Enemy FindNearestEnemy(Enemy currentTarget)
-		{
-			Array<Dictionary> results = SphereCastForNearbyEnemies();
 
-			Enemy closest = null;
-			foreach (Dictionary dict in results)
+
+		private void ReapproachTargetIfOutOfRange()
+		{
+			//this.PrintDebug($"Distance: {Pc.GlobalPosition.DistanceTo(Pc.MovementTarget.Target.GlobalPosition)}");
+			if (Pc.GlobalPosition.DistanceTo(Pc.MovementTarget.Target.GlobalPosition) >
+			    AttackRadius * 1.5f)
 			{
-				CollisionObject3D collider = (CollisionObject3D)dict["collider"];
-				//this.PrintDebug($"Collider: {collider?.Name}");
-				// TODO: Why not allow currentTarget in finding closest target?
-				if (collider is not Enemy enemy || enemy == currentTarget)
-				{
-					continue;
-				}
-				if (closest == null || Pc.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) <
-				    Pc.GlobalPosition.DistanceSquaredTo(closest.GlobalPosition))
-				{
-					closest = enemy;
-				}
+				ChangeState(PcStateNames.MOVEMENT);
 			}
-			return closest;
-		}
-
-		private Array<Dictionary> SphereCastForNearbyEnemies()
-		{
-			PhysicsDirectSpaceState3D spaceState = Pc.GetWorld3D().DirectSpaceState;
-			SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };
-			PhysicsShapeQueryParameters3D query = new()
-			{
-				ShapeRid = sphereShape.GetRid(),
-				CollideWithBodies = true,
-				Transform = new Transform3D(Basis.Identity, Pc.GlobalPosition),
-				Exclude = new Array<Rid>(new Rid[1] { Pc.GetRid() }),
-				CollisionMask = 0b100
-			};
-
-			Array<Dictionary> result = spaceState.IntersectShape(query);
-			return result;
-		}
-
-		private bool TargetDead()
-		{
-			if (Pc.MovementTarget.Target is Enemy enemy)
-			{
-				return enemy.Health <= 0;
-			}
-			return false;
 		}
 	}
 }

@@ -9,33 +9,26 @@ namespace Lastdew
 	{
 		public event Action OnInventoryChanged;
 		
-		public InventoryController<CraftingMaterial> CraftingMaterials { get; }
-		public InventoryController<Equipment> Equipment { get; }
-		public InventoryController<UsableItem> UsableItems { get; }
-		
-		public InventoryManager()
-		{
-			CraftingMaterials = new InventoryController<CraftingMaterial>();
-			Equipment = new InventoryController<Equipment>();
-			UsableItems = new InventoryController<UsableItem>();
-		}
-		
+		public InventoryController<CraftingMaterial> CraftingMaterials { get; } = new();
+		public InventoryController<Equipment> Equipment { get; } = new();
+		public InventoryController<UsableItem> UsableItems { get; } = new();
+
 		public void AddItems(Item item, int amount)
 		{
-			if (item is CraftingMaterial craftingMaterial)
+			switch (item)
 			{
-				CraftingMaterials.AddItems(craftingMaterial, amount);
-				OnInventoryChanged?.Invoke();
-			}
-			else if (item is Equipment equipment)
-			{
-				Equipment.AddItems(equipment, amount);
-				OnInventoryChanged?.Invoke();
-			}
-			else if (item is UsableItem usableItem)
-			{
-				UsableItems.AddItems(usableItem, amount);
-				OnInventoryChanged?.Invoke();
+				case CraftingMaterial craftingMaterial:
+					CraftingMaterials.AddItems(craftingMaterial, amount);
+					OnInventoryChanged?.Invoke();
+					break;
+				case Equipment equipment:
+					Equipment.AddItems(equipment, amount);
+					OnInventoryChanged?.Invoke();
+					break;
+				case UsableItem usableItem:
+					UsableItems.AddItems(usableItem, amount);
+					OnInventoryChanged?.Invoke();
+					break;
 			}
 		}
 		
@@ -46,25 +39,31 @@ namespace Lastdew
 		
 		public void RemoveItems(Item item, int amount)
 		{
-			if (item is CraftingMaterial craftingMaterial)
+			switch (item)
 			{
-				if (CraftingMaterials.RemoveItems(craftingMaterial, amount))
+				case CraftingMaterial craftingMaterial:
 				{
-					OnInventoryChanged?.Invoke();
+					if (CraftingMaterials.RemoveItems(craftingMaterial, amount))
+					{
+						OnInventoryChanged?.Invoke();
+					}
+					break;
 				}
-			}
-			else if (item is Equipment equipment)
-			{
-				if (Equipment.RemoveItems(equipment, amount))
+				case Equipment equipment:
 				{
-					OnInventoryChanged?.Invoke();
+					if (Equipment.RemoveItems(equipment, amount))
+					{
+						OnInventoryChanged?.Invoke();
+					}
+					break;
 				}
-			}
-			else if (item is UsableItem usableItem)
-			{
-				if (UsableItems.RemoveItems(usableItem, amount))
+				case UsableItem usableItem:
 				{
-					OnInventoryChanged?.Invoke();
+					if (UsableItems.RemoveItems(usableItem, amount))
+					{
+						OnInventoryChanged?.Invoke();
+					}
+					break;
 				}
 			}
 		}
@@ -76,20 +75,13 @@ namespace Lastdew
 		
 		public bool HasItems(Item item, int amount)
 		{
-			if (item is CraftingMaterial craftingMaterial)
+			return item switch
 			{
-				return CraftingMaterials.HasItems(craftingMaterial, amount);
-			}
-			else if (item is Equipment equipment)
-			{
-				return Equipment.HasItems(equipment, amount);
-			}
-			else if (item is UsableItem usableItem)
-			{
-				return UsableItems.HasItems(usableItem, amount);
-			}
-			
-			return false;
+				CraftingMaterial craftingMaterial => CraftingMaterials.HasItems(craftingMaterial, amount),
+				Equipment equipment => Equipment.HasItems(equipment, amount),
+				UsableItem usableItem => UsableItems.HasItems(usableItem, amount),
+				_ => false
+			};
 		}
 		
 		public bool HasItem(Item item)
@@ -112,19 +104,13 @@ namespace Lastdew
 		{
 			get
 			{
-				if (item is CraftingMaterial material)
+				return item switch
 				{
-					return CraftingMaterials[material];
-				}
-				else if (item is Equipment equipment)
-				{
-					return Equipment[equipment];
-				}
-				else if (item is UsableItem usableItem)
-				{
-					return UsableItems[usableItem];
-				}
-				return 0;
+					CraftingMaterial material => CraftingMaterials[material],
+					Equipment equipment => Equipment[equipment],
+					UsableItem usableItem => UsableItems[usableItem],
+					_ => 0
+				};
 			}
 		}
 

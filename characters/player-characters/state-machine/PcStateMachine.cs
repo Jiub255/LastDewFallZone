@@ -37,7 +37,7 @@ namespace Lastdew
 	
 		public void ChangeState(PcStateNames stateName)
 		{
-			//this.PrintDebug($"Changing to {stateName}");
+			//this.PrintDebug($"Changing from {CurrentState.GetType()} to {stateName}");
 			CurrentState?.ExitState();
 			CurrentState = StatesByEnum[stateName];
 			CurrentState?.EnterState();
@@ -45,14 +45,12 @@ namespace Lastdew
 	
 		public void HitEnemy()
 		{
-			if (CurrentState is PcStateCombat combat)
-			{
-				combat.HitEnemy();
-			}
-			/* else
+			if (CurrentState is not PcStateCombat combat)
 			{
 				GD.PushWarning($"PC not in combat state. Current state is {CurrentState.GetType()}");
-			} */
+				return;
+			}
+			combat.HitEnemy();
 		}
 	
 		public void GetHit(bool incapacitated)

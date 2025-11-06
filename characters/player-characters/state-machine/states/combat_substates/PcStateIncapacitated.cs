@@ -8,7 +8,6 @@ namespace Lastdew
 		{
 			base.EnterState();
 
-			Pc.MovementTarget = new MovementTarget();
 			Pc.AnimStateMachine.Travel(DEATH_ANIM_NAME);
 			Pc.DisablePc();
 		}

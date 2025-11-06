@@ -52,32 +52,26 @@ namespace Lastdew
 				// Player Character
 				case 0b10:
 					OnClickedPc?.Invoke((PlayerCharacter)collider);
-					//this.PrintDebug($"Clicked pc");
 					break;
 				// Enemy
 				case 0b100:
 					Enemy enemy = (Enemy)collider;
 					MovementTarget movementTargetEnemy = new(enemy.Position, enemy);
 					OnClickedMoveTarget?.Invoke(movementTargetEnemy);
-					//this.PrintDebug($"Clicked enemy");
 					break;
 				// Loot
 				case 0b1000:
 					LootContainer lootContainer = (LootContainer)collider;
 					MovementTarget movementTargetLoot = new(lootContainer.LootingPosition, lootContainer);
 					OnClickedMoveTarget?.Invoke(movementTargetLoot);
-					//this.PrintDebug($"Clicked loot");
 					break;
 				// Ground
 				case 0b10000:
 					Vector3 collisionPoint = IsColliding() ? GetCollisionPoint() : Vector3.Zero;
 					MovementTarget movementTargetGround = new(collisionPoint);
 					OnClickedMoveTarget?.Invoke(movementTargetGround);
-					//this.PrintDebug($"Clicked ground at {collisionPoint}");
 					break;
-				default:
-                    break;
-            }
+			}
 		}
 	}
 }

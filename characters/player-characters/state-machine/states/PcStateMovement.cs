@@ -6,16 +6,16 @@ namespace Lastdew
 	{
 		private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
 		
-		// TODO: Get this info from pc stats (through PcStateContext) eventually? Or just have everyone move the same?
+		// TODO: Get this info from pc stats eventually? Or just have everyone move the same?
 		private float MaxSpeed { get; set; } = 7f;
 		private float Acceleration { get; set; } = 50f;
 		private Vector3 LastTargetPosition { get; set; }
 	
 		public PcStateMovement(PlayerCharacter pc) : base(pc)
 		{
-			pc.NavigationAgent.Connect(
-				NavigationAgent3D.SignalName.VelocityComputed,
-				Callable.From((Vector3 safeVelocity) => Move(safeVelocity)));
+			// pc.NavigationAgent.Connect(
+			// 	NavigationAgent3D.SignalName.VelocityComputed,
+			// 	Callable.From((Vector3 safeVelocity) => Move(safeVelocity)));
 		}
 	
 		public override void PhysicsProcessUnselected(float delta)
@@ -52,12 +52,7 @@ namespace Lastdew
 	
 		private void MovementProcess(float delta)
 		{
-			if (TargetDead())
-			{
-				ChangeState(PcStateNames.IDLE);
-			}
-			
-			if (DestinationReached())
+			if (WithinRangeOfTarget())
 			{
 				PcStateNames stateName;
 				switch (Pc.MovementTarget.Target)
@@ -83,13 +78,18 @@ namespace Lastdew
 			RecalculateTargetPositionIfTargetMovedEnough();
 			MoveAndRotate(delta);
 		}
-	
-		private bool DestinationReached()
+
+		private bool WithinRangeOfTarget()
 		{
-			bool navFinished = Pc.NavigationAgent.IsNavigationFinished();
-			return navFinished;
+			//this.PrintDebug($"Distance: {Pc.GlobalPosition.DistanceTo(Pc.MovementTarget.Target.GlobalPosition)}");
+			if (Pc.MovementTarget.Target is Enemy enemy)
+			{
+				return Pc.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) < AttackRadius * AttackRadius;
+			}
+
+			return Pc.GlobalPosition.DistanceSquaredTo(Pc.MovementTarget.TargetPosition) < AttackRadius * AttackRadius;
 		}
-	
+
 		private void Animate()
 		{
 			float blendAmount = Mathf.Clamp(Pc.Velocity.Length() / MaxSpeed, 0, 1);
@@ -122,15 +122,15 @@ namespace Lastdew
 		{
 			Pc.NavigationAgent.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
 			// Uncomment below for non nav-avoidance movement.
-			// Pc.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
-			// Pc.MoveAndSlide();
+			 Pc.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
+			 Pc.MoveAndSlide();
 		}
 
-		private void Move(Vector3 velocity)
-		{
-			Pc.Velocity = velocity;
-			Pc.MoveAndSlide();
-		}
+		// private void Move(Vector3 velocity)
+		// {
+		// 	Pc.Velocity = velocity;
+		// 	Pc.MoveAndSlide();
+		// }
 		
 		/// <summary>
         /// TODO: Is this necessary or does nav agent take care of the "attack radius" somehow?
@@ -139,15 +139,6 @@ namespace Lastdew
 		{
 			Vector3 direction = (Pc.GlobalPosition - enemyPosition).Normalized();
 			return enemyPosition + direction * AttackRadius;
-		}
-
-		private bool TargetDead()
-		{
-			if (Pc.MovementTarget.Target is Enemy enemy)
-			{
-				return enemy.Health <= 0;
-			}
-			return false;
 		}
 	}
 }

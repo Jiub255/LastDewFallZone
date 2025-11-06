@@ -25,8 +25,6 @@ namespace Lastdew
 			//ChangeSubstate(PcCombatSubstateNames.GETTING_HIT);
 		}
 		
-		// TODO: This still getting called from the AnimationTree signal, even if the pc died
-		// and is in incapacitated state. Might be fixed with Context.Incapacitated?
 		private void OnAnimationFinished(string animationName)
 		{
 			if (animationName == GETTING_HIT_ANIM_NAME && !Pc.Incapacitated)

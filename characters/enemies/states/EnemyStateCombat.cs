@@ -7,7 +7,7 @@ namespace Lastdew
         private const string MOVEMENT_BLEND_TREE_NAME = "movement_blend_tree";
         private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		private const float A_LITTLE_BIT = 1f;
-        private const float TIME_BETWEEN_ATTACKS = 2.5f;
+        private const float TIME_BETWEEN_ATTACKS = 2.3f;
         private float AttackTimer { get; set; }
 
         public override void EnterState()
@@ -17,11 +17,6 @@ namespace Lastdew
 
         public override void ProcessState(float delta)
         {
-            if (TargetDead())
-            {
-                ChangeState(EnemyStateNames.IDLE);
-                return;
-            }
             if (OutOfRangeOfEnemy())
             {
                 ChangeState(EnemyStateNames.MOVEMENT);
@@ -32,7 +27,8 @@ namespace Lastdew
             Enemy.RotateToward(Enemy.Target.Pc.GlobalPosition, Enemy.TURN_SPEED * delta);
 			
             AttackTimer -= delta;
-            // TODO: Make sure not in "get hit" animation before starting attack. Probably just introduce "GETTING_HIT" state.
+            // TODO: Make sure not in "get hit" animation before starting attack.
+            // Probably just introduce "GETTING_HIT" state.
             if (AttackTimer < 0)
             {
                 AttackTimer = TIME_BETWEEN_ATTACKS;

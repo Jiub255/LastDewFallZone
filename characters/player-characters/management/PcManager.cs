@@ -73,16 +73,17 @@ namespace Lastdew
 		
 		public void MoveTo(MovementTarget movementTarget)
 		{
-			if (TeamData.SelectedIndex != null)
+			if (TeamData.SelectedIndex == null)
 			{
-				PlayerCharacter selectedPc = TeamData.Pcs[(int)TeamData.SelectedIndex];
-				if (selectedPc.Incapacitated)
-				{
-					TeamData.SelectedIndex = null;
-					return;
-				}
-				selectedPc.MoveTo(movementTarget);
+				return;
 			}
+			PlayerCharacter selectedPc = TeamData.Pcs[(int)TeamData.SelectedIndex];
+			if (selectedPc.Incapacitated)
+			{
+				TeamData.SelectedIndex = null;
+				return;
+			}
+			selectedPc.MoveTo(movementTarget);
 		}
 		
 		public void SelectPc(PlayerCharacter pc)

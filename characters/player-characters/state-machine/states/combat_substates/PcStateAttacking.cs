@@ -39,16 +39,16 @@ namespace Lastdew
 			ChangeSubstate(PcCombatSubstateNames.GETTING_HIT);
 		}
 		
-		/// <returns>true if hit killed enemy</returns>
-		public bool HitEnemy()
+		public void HitEnemy()
 		{
-			if (Pc.MovementTarget.Target is Enemy enemy)
+			if (Pc.MovementTarget.Target is not Enemy enemy)
 			{
-				int attack = Pc.StatManager.Attack;
-	            //this.PrintDebug($"Attack: {attack}");
-	            return enemy.GetHit(attack, Pc);
+				GD.PushWarning($"Target is of type {Pc.MovementTarget.Target.GetType()}, not Enemy");
+				return;
 			}
-			return false;
+			int attack = Pc.StatManager.Attack;
+			enemy.GetHit(attack, Pc);
+			//this.PrintDebug("Enemy.GetHit() called.");
 		}
 		
 		private void OnAnimationFinished(string animationName)

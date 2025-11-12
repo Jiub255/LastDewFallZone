@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Lastdew
 {
-	public partial class TeamData
+	public class TeamData
 	{
 		public event Action OnPcsInstantiated;
 		public event Action OnMenuSelectedChanged;
@@ -41,7 +41,6 @@ namespace Lastdew
 		}
 		public List<PcSaveData> UnusedPcDatas { get; private set; } = [];
 
-		public TeamData() {}
 		
 		public void SelectPc(PlayerCharacter pc)
 		{

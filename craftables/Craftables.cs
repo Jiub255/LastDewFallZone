@@ -13,6 +13,7 @@ namespace Lastdew
 	[GlobalClass, Tool]
 	public partial class Craftables : Resource, IEnumerable
 	{
+		// TODO: Hard coded paths might break on export. Test it out or do something else.
 		private const string DIRECTORY = "res://craftables/";
 		private const string PATH = "res://craftables/craftables.tres";
 

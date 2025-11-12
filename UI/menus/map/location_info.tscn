@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddkl0i3g78lb3"]
+
+[ext_resource type="Script" uid="uid://sjp76ncbl8r2" path="res://UI/menus/map/LocationInfoUi.cs" id="1_vq7hb"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="2_v7wu5"]
+
+[node name="LocationInfo" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_vq7hb")
+
+[node name="PlaceName" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Location Name"
+horizontal_alignment = 1
+
+[node name="Image" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(354, 150)
+layout_mode = 2
+texture = ExtResource("2_v7wu5")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Description" type="Label" parent="ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Description of the location. Bhalk dlakjv oiasdj vawse lasidv iasdv aosije valsindmvlais asdf n dvoasinev lanslidvn asidnv. Not sure what info to put here yet.
+
+Loot?: Medical, Materials
+
+Enemies?: Strong"
+autowrap_mode = 3

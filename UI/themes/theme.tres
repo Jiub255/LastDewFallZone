@@ -1,0 +1,43 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://cu5c46h8yswqo"]
+
+[ext_resource type="StyleBox" uid="uid://srletqm0c2rs" path="res://UI/styleboxes/button/button_disabled_stylebox.tres" id="1_jvi1x"]
+[ext_resource type="StyleBox" uid="uid://kot647gsd5bp" path="res://UI/styleboxes/button/button_hover_stylebox.tres" id="2_q116n"]
+[ext_resource type="StyleBox" uid="uid://jvv81b8skdir" path="res://UI/styleboxes/button/button_normal_stylebox.tres" id="3_o02xr"]
+[ext_resource type="StyleBox" uid="uid://dpxpp0tmv4no7" path="res://UI/styleboxes/button/button_pressed_stylebox.tres" id="4_pgvvd"]
+[ext_resource type="StyleBox" uid="uid://dct4yny7oph3x" path="res://UI/styleboxes/panel_container/panel_container_stylebox.tres" id="5_b6eye"]
+[ext_resource type="StyleBox" uid="uid://d0m7wbqb6x7yh" path="res://UI/styleboxes/panel_container/panel_container_dark_stylebox.tres" id="6_ssooe"]
+[ext_resource type="StyleBox" path="res://UI/styleboxes/tab_container/tab_container_panel_stylebox.tres" id="7_mrill"]
+[ext_resource type="StyleBox" uid="uid://by7urwe4yycy1" path="res://UI/styleboxes/tab_container/tab_hover_stylebox.tres" id="8_cxwxt"]
+[ext_resource type="StyleBox" uid="uid://ba1j1q8f3tdio" path="res://UI/styleboxes/tab_container/tab_selected_stylebox.tres" id="9_efr1a"]
+[ext_resource type="StyleBox" uid="uid://bmwvy4f2equ6m" path="res://UI/styleboxes/tab_container/tab_unselected_stylebox.tres" id="10_fajij"]
+
+[resource]
+Button/font_sizes/font_size = 24
+Button/styles/disabled = ExtResource("1_jvi1x")
+Button/styles/hover = ExtResource("2_q116n")
+Button/styles/normal = ExtResource("3_o02xr")
+Button/styles/pressed = ExtResource("4_pgvvd")
+Label/font_sizes/font_size = 24
+LabelLarge/base_type = &"Label"
+LabelLarge/font_sizes/font_size = 42
+PanelContainer/styles/panel = ExtResource("5_b6eye")
+PanelContainerDark/base_type = &"PanelContainer"
+PanelContainerDark/styles/panel = ExtResource("6_ssooe")
+RichTextLabel/font_sizes/bold_font_size = 24
+RichTextLabel/font_sizes/bold_italics_font_size = 24
+RichTextLabel/font_sizes/italics_font_size = 24
+RichTextLabel/font_sizes/mono_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 24
+RichTextLabelLarge/base_type = &"RichTextLabel"
+RichTextLabelLarge/font_sizes/bold_font_size = 42
+RichTextLabelLarge/font_sizes/bold_italics_font_size = 42
+RichTextLabelLarge/font_sizes/italics_font_size = 42
+RichTextLabelLarge/font_sizes/mono_font_size = 42
+RichTextLabelLarge/font_sizes/normal_font_size = 42
+TabBar/font_sizes/font_size = 24
+TabBar/styles/tab_selected = ExtResource("3_o02xr")
+TabContainer/font_sizes/font_size = 24
+TabContainer/styles/panel = ExtResource("7_mrill")
+TabContainer/styles/tab_hovered = ExtResource("8_cxwxt")
+TabContainer/styles/tab_selected = ExtResource("9_efr1a")
+TabContainer/styles/tab_unselected = ExtResource("10_fajij")

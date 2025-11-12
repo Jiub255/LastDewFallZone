@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Lastdew
@@ -61,8 +62,6 @@ namespace Lastdew
 		private InnerGimbal InnerGimbal { get; set; }
 		private Zoomer Zoomer { get; set; }
 	
-		// TODO: Move all export vars from children and put here, then just pass them down in initialize methods.
-	
 		public override void _Ready()
 		{
 			base._Ready();
@@ -86,7 +85,7 @@ namespace Lastdew
 			TargetPosition = Position;
 			SetScreenSize();
 			GetTree().Root.Connect(
-				Window.SignalName.SizeChanged,
+				Viewport.SignalName.SizeChanged,
 				Callable.From(SetScreenSize));
 			SetMovementBasisVectors();
 		}
@@ -123,33 +122,34 @@ namespace Lastdew
         }
 
         public override void _Input(InputEvent @event)
-		{
-			base._Input(@event);
-			
-			if (@event is InputEventMouseMotion motionEvent)
-			{
-				if (Input.IsActionPressed(InputNames.CAMERA_ROTATE))
-				{
-					OuterGimbal.RotateHorizontal(motionEvent);
-					InnerGimbal.RotateVertical(motionEvent);
-				}
-				else if (Dragging)
-				{
-					MoveWithMouseDragFollow(motionEvent);
-				}
-			}
-			else if (@event is InputEventMouseButton mouseButtonEvent)
-			{
-				if (mouseButtonEvent.ButtonIndex == MouseButton.WheelUp)
-				{
-					Zoomer.ZoomIn();
-				}
-				else if (mouseButtonEvent.ButtonIndex == MouseButton.WheelDown)
-				{
-					Zoomer.ZoomOut();
-				}
-			}
-		}
+        {
+	        base._Input(@event);
+
+	        switch (@event)
+	        {
+		        case InputEventMouseMotion motionEvent when Input.IsActionPressed(InputNames.CAMERA_ROTATE):
+			        OuterGimbal.RotateHorizontal(motionEvent);
+			        InnerGimbal.RotateVertical(motionEvent);
+			        break;
+		        case InputEventMouseMotion motionEvent:
+			        if (Dragging)
+			        {
+				        MoveWithMouseDragFollow(motionEvent);
+			        }
+			        break;
+		        case InputEventMouseButton mouseButtonEvent:
+			        switch (mouseButtonEvent.ButtonIndex)
+			        {
+				        case MouseButton.WheelUp:
+					        Zoomer.ZoomIn();
+					        break;
+				        case MouseButton.WheelDown:
+					        Zoomer.ZoomOut();
+					        break;
+			        }
+			        break;
+	        }
+        }
 	
 		private void SetScreenSize()
 		{
@@ -203,7 +203,7 @@ namespace Lastdew
 			PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
 			// TODO: Cache camera in ready.
             Camera3D camera = GetNode<Camera3D>("%Camera3D");
-            int rayLength = 1000;
+            const int rayLength = 1000;
 
             Vector3 origin = camera.ProjectRayOrigin(screenPoint);
 			Vector3 end = origin + camera.ProjectRayNormal(screenPoint) * rayLength;
@@ -213,7 +213,7 @@ namespace Lastdew
 
             Godot.Collections.Dictionary result = spaceState.IntersectRay(query);
 			// TODO: Make this safer. Make sure it collided first.
-            return result.ContainsKey("position") ? (Vector3)result["position"] : Vector3.Zero;
+            return result.TryGetValue("position", out Variant worldPoint) ? (Vector3)worldPoint : Vector3.Zero;
         }
 		
 		/// <returns>true if mouse in edge scrolling zone.</returns>

@@ -10,21 +10,17 @@ namespace Lastdew
 		public Godot.Collections.Array<ItemTags> Tags { get; private set; }
 		[Export]
 		public Godot.Collections.Dictionary<Item, int> Loot { get; private set; }
-		[Export]
-		public float LootDuration { get; private set; }
+
+		[Export] public float LootDuration { get; private set; } = 1f;
 		public bool Empty { get; set; }
 		public bool BeingLooted { get; set; }
-		public Vector3 LootingPosition
-		{
-			get => LootingSpot.GlobalPosition;
-		}
-		private Node3D LootingSpot { get; set; }
+		public Vector3 LootingPosition { get; private set; }
 	
 		public override void _Ready()
 		{
 			base._Ready();
 			
-			LootingSpot = GetNode<Node3D>("LootingSpot");
+			LootingPosition = GetNode<Node3D>("%LootingPosition").GlobalPosition;
 		}
 	}
 }

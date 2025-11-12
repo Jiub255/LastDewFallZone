@@ -32,7 +32,7 @@ project/assembly_name="LastDew-FallZone"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/kanban_tasks/plugin.cfg", "res://addons/namespacer/plugin.cfg", "res://addons/resource_database_filler/plugin.cfg", "res://addons/resource_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/namespacer/plugin.cfg", "res://addons/resource_database_filler/plugin.cfg", "res://addons/resource_editor/plugin.cfg", "res://addons/terrain_3d/plugin.cfg", "res://addons/unidot_importer/plugin.cfg", "res://addons/vrm/plugin.cfg")
 
 [file_customization]
 
@@ -41,9 +41,9 @@ folder_colors={
 "res://addons/": "gray",
 "res://characters/": "pink",
 "res://craftables/": "red",
-"res://misc/": "orange",
-"res://save_system/": "yellow",
-"res://test/": "green",
+"res://game_objects/": "orange",
+"res://misc/": "yellow",
+"res://save_system/": "green",
 "res://unused_assets/": "blue",
 "res://world/": "purple"
 }
@@ -51,6 +51,8 @@ folder_colors={
 [gui]
 
 timers/tooltip_delay_sec=0.0
+theme/custom="uid://cu5c46h8yswqo"
+theme/custom_font="uid://dsadm3uwgmo1q"
 
 [input]
 
@@ -141,6 +143,11 @@ map_menu={
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="Loot"
 3d_physics/layer_5="Ground"
+
+[navigation]
+
+3d/default_cell_size=0.1
+3d/default_cell_height=0.1
 
 [rendering]
 

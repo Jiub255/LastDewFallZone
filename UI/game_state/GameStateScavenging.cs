@@ -16,11 +16,11 @@ namespace Lastdew
 
         public override void HandleInput(InputEvent @event)
         {
-            if (@event.IsActionPressed(InputNames.GAME_MENU))
+            /*if (@event.IsActionPressed(InputNames.GAME_MENU))
 			{
                 ToggleGameMenu();
 			}
-			else if (@event.IsActionPressed(InputNames.MAIN_MENU))
+			else */if (@event.IsActionPressed(InputNames.MAIN_MENU))
 			{
                 ToggleMainMenu();
 			}

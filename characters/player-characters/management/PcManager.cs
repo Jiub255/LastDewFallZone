@@ -97,6 +97,7 @@ namespace Lastdew
 		
 		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
+			this.PrintDebug($"PcManager.SpawnPcs() called");
 			ClearPcs();
 			int i = 0;
 			foreach (PcSaveData pcSaveData in pcSaveDatas)
@@ -113,7 +114,6 @@ namespace Lastdew
 			}
 			
 			TeamData.SendPcsInstantiatedSignal();
-			this.PrintDebug($"Spawn Pcs called");
 		}
 		
 		private void DeselectPc()

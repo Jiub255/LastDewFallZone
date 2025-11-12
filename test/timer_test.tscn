@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bymijhldtg3bl"]
-
-[ext_resource type="Script" uid="uid://v4sb0tvj4w7l" path="res://test/TimerTester.cs" id="1_0s4wa"]
-
-[node name="TimerTest" type="Node2D"]
-script = ExtResource("1_0s4wa")

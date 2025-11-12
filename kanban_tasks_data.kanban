@@ -44,16 +44,19 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "NEXT",
 			"tasks": [
-				"18aa9dce-2759-4551-81bb-5c681f7e1987",
 				"cd7d53a6-8ba3-41c8-855e-623615812278",
-				"147125ec-8a3a-486c-a4ef-c7f5b629144a"
+				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
+				"b160ad9c-efa6-432a-b68c-ea5625b16268"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"402f656a-c43a-4dec-8099-c5e4439c866a"
+				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
+				"402f656a-c43a-4dec-8099-c5e4439c866a",
+				"2a55064d-caa2-4475-8ead-e4d5c7db6466",
+				"18aa9dce-2759-4551-81bb-5c681f7e1987"
 			]
 		},
 		{
@@ -131,14 +134,16 @@
 				"3a259a69-d68d-47b6-82d8-8e98d184e6f9",
 				"3ddaf881-8ca1-4c9d-b76b-2c7dc81998ef",
 				"d7bc729f-5541-4e3e-8fba-d50a028ac220",
-				"1cb946a4-92a0-412e-9b77-3448e6cf41ac"
+				"1cb946a4-92a0-412e-9b77-3448e6cf41ac",
+				"a4d0e570-7ce5-42f3-b99b-054fc2f936e1",
+				"b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
+				"668f9df0-c1d7-4814-8809-bc08d8154352"
 			]
 		},
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"668f9df0-c1d7-4814-8809-bc08d8154352",
 				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d"
 			]
 		},
@@ -714,7 +719,7 @@
 		{
 			"uuid": "668f9df0-c1d7-4814-8809-bc08d8154352",
 			"title": "HUD adds new pc each time scene changes",
-			"description": "Just need to clear display before populating it probably. \nNot quite. Less buttons now, but still more than there should be. Not sure why yet. \nGetting rid of an extra Setup() call in Hud.Initialize helped, but still making a duplicate button when returning to base. \n\tWhy is Hud.Setup() being called twice when returning to base? SpawnPcs(), which is the only way to call Hud.Setup(), only gets called once. Is it something to do with the CallDeferreds messing things up?\n\tMaybe try keeping the PcButtons in a List, then deleting them from there instead of using GetChildren? Might fix the problem, even if Hud.Setup() is still getting double called. \nYup. Still calling Hud.Setup() twice, but not sure why. Seems to be fine now though with the above fix. Might have to come back to this later. ",
+			"description": "Just need to clear display before populating it probably. \nNot quite. Less buttons now, but still more than there should be. Not sure why yet. \nGetting rid of an extra Setup() call in Hud.Initialize helped, but still making a duplicate button when returning to base. \n\tWhy is Hud.Setup() being called twice when returning to base? SpawnPcs(), which is the only way to call Hud.Setup(), only gets called once. Is it something to do with the CallDeferreds messing things up?\n\tMaybe try keeping the PcButtons in a List, then deleting them from there instead of using GetChildren? Might fix the problem, even if Hud.Setup() is still getting double called. \nYup. Still calling Hud.Setup() twice, but not sure why. Seems to be fine now though with the above fix. Might have to come back to this later. \nSeems to be working fine now",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -833,7 +838,7 @@
 		{
 			"uuid": "34e912a0-057e-4b11-94de-32e8f8ee6ba0",
 			"title": "Make dead enemies into loot containers",
-			"description": "Just have them act like normal loot containers once they're dead.",
+			"description": "Just have them act like normal loot containers once they're dead.\nActually don't, could get too difficult with a bunch all stacked on each other. Maybe just auto loot? Or have enemies not have loot?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -918,6 +923,41 @@
 			"uuid": "1cb946a4-92a0-412e-9b77-3448e6cf41ac",
 			"title": "Switching PC from movement to combat not working",
 			"description": "FIXED by using MovementTarget.Target.GlobalPosition instead of MovementTarget.TargetPosition for enemies. \nRelated problem: When setting a movement target for PC by clicking an enemy, the MovementTarget.TargetPosition is set to the enemy's current position so it's wrong once the enemy moves.\nMaybe just use target.GlobalPosition for enemies? \n",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "2a55064d-caa2-4475-8ead-e4d5c7db6466",
+			"title": "Figure out Navigation parameters",
+			"description": "Nav region's cell_size and cell_height, and Nav agent's radius.\nNot sure if cell_height really matters, as long as all colliders are tall enough.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "b160ad9c-efa6-432a-b68c-ea5625b16268",
+			"title": "Implement exit zones for scavenging levels",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "a4d0e570-7ce5-42f3-b99b-054fc2f936e1",
+			"title": "New loot containers aren't responding to clicks.",
+			"description": "FIXED by setting the collision layers correctly.\nMight be the node structure being different than the test loot container? Not sure yet.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "5c609200-5adc-42bd-b483-0f7aa6ad75f6",
+			"title": "Draw out different menus/ui on paper to design them",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
+			"title": "Clicking Pcs HUD counts as a click in the world",
+			"description": "FIXED by putting GetViewport().SetInputAsHandled() in PcButton.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

@@ -97,7 +97,7 @@ namespace Lastdew
 		
 		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
-			this.PrintDebug($"PcManager.SpawnPcs() called");
+			//this.PrintDebug($"PcManager.SpawnPcs() called");
 			ClearPcs();
 			int i = 0;
 			foreach (PcSaveData pcSaveData in pcSaveDatas)
@@ -118,6 +118,11 @@ namespace Lastdew
 		
 		private void DeselectPc()
 		{
+			if (TeamData.SelectedIndex != null)
+			{
+				int index = (int)TeamData.SelectedIndex;
+				TeamData.Pcs[index].SetSelectedIndicator(false);
+			}
 			TeamData.SelectedIndex = null;
 		}
 

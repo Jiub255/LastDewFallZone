@@ -7,16 +7,11 @@ namespace Lastdew
 	public abstract partial class Item : Craftable
 	{
 		[Export]
-		public Rarity ItemRarity { get; private set; }
+		public Rarity ItemRarity { get; private set; } = Rarity.COMMON;
+
 		[Export]
-		public Array<ItemTags> Tags { get; private set; }
-	
-		public Item() : base()
-		{
-			ItemRarity = Rarity.COMMON;
-			Tags = [];
-		}
-	
+		public Array<ItemTags> Tags { get; private set; } = [];
+
 		/// <summary>
 		/// For when you click on the item in the inventory menu.
 		/// </summary>

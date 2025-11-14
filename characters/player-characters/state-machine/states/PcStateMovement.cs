@@ -121,19 +121,13 @@ namespace Lastdew
 		private void Accelerate(Vector3 targetVelocity, float accelerationAmount)
 		{
 			Pc.NavigationAgent.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
-			// Uncomment below for non nav-avoidance movement.
-			 Pc.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
-			 Pc.MoveAndSlide();
+			Pc.Velocity = Pc.Velocity.MoveToward(targetVelocity, accelerationAmount);
+			Pc.MoveAndSlide();
 		}
 
-		// private void Move(Vector3 velocity)
-		// {
-		// 	Pc.Velocity = velocity;
-		// 	Pc.MoveAndSlide();
-		// }
-		
 		/// <summary>
         /// TODO: Is this necessary or does nav agent take care of the "attack radius" somehow?
+        /// It will be necessary for ranged weapons at least, leave it in.
         /// </summary>
 		private Vector3 AttackPosition(Vector3 enemyPosition)
 		{

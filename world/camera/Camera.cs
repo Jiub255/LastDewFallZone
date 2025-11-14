@@ -161,8 +161,8 @@ namespace Lastdew
 		
 		private void SetMovementBasisVectors()
 		{
-			Forward = -OuterGimbal.Transform.Basis.Z;
-			Right = OuterGimbal.Transform.Basis.X;
+			Forward = -OuterGimbal.Basis.Z;
+			Right = OuterGimbal.Basis.X;
 	
 			// Project vectors onto the horizontal (xz) plane.
 			Forward = new Vector3(Forward.X, 0, Forward.Z);
@@ -187,13 +187,13 @@ namespace Lastdew
             Vector2 startpoint = endpoint - motionEvent.Relative;
             // Translate them to world space at whatever constant z-value. Use raycast?
             // Get the vector difference between the world space points.
-            Vector3 startPointWorld = ScreenToWorldPoint(startpoint);
-            Vector3 endPointWorld = ScreenToWorldPoint(endpoint);
-			if (startPointWorld == Vector3.Zero || endPointWorld == Vector3.Zero)
+            Vector3 startpointWorld = ScreenToWorldPoint(startpoint);
+            Vector3 endpointWorld = ScreenToWorldPoint(endpoint);
+			if (startpointWorld == Vector3.Zero || endpointWorld == Vector3.Zero)
 			{
                 return;
             }
-            Vector3 difference = startPointWorld - endPointWorld;
+            Vector3 difference = startpointWorld - endpointWorld;
             // Move the camera using the opposite vector.
             Position += difference;
         }

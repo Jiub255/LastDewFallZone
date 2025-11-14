@@ -7,9 +7,11 @@ namespace Lastdew
 	public abstract partial class Craftable : Resource
 	{
 		[Export]
-		public string Name { get; private set; }
+		public string Name { get; private set; } = "";
+
 		[Export]
-		public string Description { get; private set; }
+		public string Description { get; private set; } = "";
+
 		[Export]
 		public Texture2D Icon { get; private set; }
 
@@ -20,34 +22,23 @@ namespace Lastdew
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Dictionary<long, int> RecipeCosts { get; private set; }
-		
+		public Dictionary<long, int> RecipeCosts { get; private set; } = [];
+
 		/// <summary>
 		/// Stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Array<long> RequiredBuildings { get; private set; }
-		
+		public Array<long> RequiredBuildings { get; private set; } = [];
+
 		/// <summary>
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Dictionary<long, int> ScrapResults { get; private set; }
+		public Dictionary<long, int> ScrapResults { get; private set; } = [];
 
 		[Export]
-		public Dictionary<StatType, int> StatsNeededToCraft { get; private set; }
+		public Dictionary<StatType, int> StatsNeededToCraft { get; private set; } = [];
 
-		public Craftable() : base()
-		{
-			Name = "";
-			Description = "";
-			Icon = null;
-			RecipeCosts = [];
-			RequiredBuildings = [];
-			ScrapResults = [];
-			StatsNeededToCraft = [];
-		}
-		
 		/// <summary>
 		/// For when you click on the item in the crafting/building menu.
 		/// </summary>

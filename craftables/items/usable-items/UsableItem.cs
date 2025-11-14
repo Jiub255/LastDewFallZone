@@ -9,15 +9,10 @@ namespace Lastdew
 	{
 		[Export]
 		public bool Reusable { get; private set; }
+
 		[Export]
-		public Array<Effect> Effects { get; private set; }
-	
-		public UsableItem() : base()
-		{
-			Reusable = false;
-			Effects = [];
-		}
-	
+		public Array<Effect> Effects { get; private set; } = [];
+
 		public override void OnClickCraftable()
 		{
 			throw new NotImplementedException();

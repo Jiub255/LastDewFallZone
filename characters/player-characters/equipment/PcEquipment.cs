@@ -17,7 +17,7 @@ namespace Lastdew
 				Dictionary<StatType, int> equipmentBonuses = new();
 				foreach (Equipment equipment in this)
 				{
-					if (equipment == null || equipment.EquipmentBonuses.Count <= 0)
+					if (equipment == null || equipment.EquipmentBonuses.Count == 0)
 					{
 						continue;
 					}

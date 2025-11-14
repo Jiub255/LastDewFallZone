@@ -111,7 +111,9 @@
 				"5912eb5c-2c85-4855-84df-61b358aa083e",
 				"7385db03-0d3c-4560-9192-ce43a0da59d8",
 				"d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
-				"43aa14f9-20a4-4fbe-aaec-cffd2c7c7955"
+				"43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
+				"1dd34408-ff72-4b11-a37c-91fef3827e18",
+				"04003aba-42e8-4b2e-a52a-533f72b55ac3"
 			]
 		},
 		{
@@ -151,9 +153,7 @@
 			"uuid": "cb445b97-3f31-4e34-bb97-47dcecba7c8c",
 			"title": "TODO",
 			"tasks": [
-				"1dd34408-ff72-4b11-a37c-91fef3827e18",
 				"34e912a0-057e-4b11-94de-32e8f8ee6ba0",
-				"04003aba-42e8-4b2e-a52a-533f72b55ac3",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
@@ -167,7 +167,8 @@
 				"736f3cd4-0e90-4a80-a00f-326e61a820fe",
 				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
-				"f9a1fa27-c374-43fe-a710-b10e4168a046"
+				"f9a1fa27-c374-43fe-a710-b10e4168a046",
+				"66e4ae30-0330-4cea-babb-74aab3314288"
 			]
 		}
 	],
@@ -754,7 +755,7 @@
 		{
 			"uuid": "1dd34408-ff72-4b11-a37c-91fef3827e18",
 			"title": "Make plain Node top level class \"Game\"",
-			"description": "Have World (minus UIManager) as a child, and UiManager. Apparently it's not good to have controls as children of node3ds. Would have to rework World.cs too. Might look into it more first. ",
+			"description": "Have World (minus UIManager) as a child, and UiManager. Apparently it's not good to have controls as children of node3ds. Would have to rework World.cs too. Might look into it more first. \nBe easier to just change World from Node3D to Node, Level (Node3D) gets instantiated from there anyway and world has no need to be Node3D.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -959,6 +960,13 @@
 			"title": "Clicking Pcs HUD counts as a click in the world",
 			"description": "FIXED by putting GetViewport().SetInputAsHandled() in PcButton.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "66e4ae30-0330-4cea-babb-74aab3314288",
+			"title": "Keep stats of everything the player does",
+			"description": "Enemies (of each type) killed\nContainers looted\nTime spent scavenging/at base/whatever else\nItems crafted/scrapped\nBuildings built\nBullets fired\nPCs killed\n",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

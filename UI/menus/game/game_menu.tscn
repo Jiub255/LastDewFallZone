@@ -9,16 +9,12 @@
 [ext_resource type="Script" uid="uid://nlili2t5sfqm" path="res://UI/menus/game/character/EquipmentButton.cs" id="6_qutin"]
 [ext_resource type="Script" uid="uid://bcgcytk1ootfk" path="res://UI/menus/game/crafting/CraftingTab.cs" id="8_2uyxp"]
 [ext_resource type="Texture2D" uid="uid://c8uv451fraiei" path="res://craftables/icons/icon_leg_armor_blank.png" id="8_vwjle"]
+[ext_resource type="StyleBox" uid="uid://6pwl7dlcpabi" path="res://UI/themes/styleboxes/panel_container/panel_container_wood_stylebox.tres" id="9_emk6a"]
 [ext_resource type="Script" uid="uid://dcqypmfdgyh0w" path="res://UI/menus/game/crafting/SelectedCraftableDisplay.cs" id="9_wfr7w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ylxq8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_emk6a"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6fso"]
-bg_color = Color(0.173929, 0.272571, 0.195601, 1)
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
 
 [node name="GameMenu" type="CanvasLayer"]
 script = ExtResource("1_wwb6i")
@@ -36,10 +32,11 @@ theme_override_constants/margin_bottom = 20
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
-current_tab = 0
+current_tab = 1
 
 [node name="Character" type="PanelContainer" parent="MarginContainer/TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ylxq8")
 script = ExtResource("2_vlrjn")
@@ -211,7 +208,6 @@ text = "Drop"
 
 [node name="Crafting" type="PanelContainer" parent="MarginContainer/TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_emk6a")
 script = ExtResource("8_2uyxp")
@@ -231,7 +227,7 @@ theme_override_constants/separation = 20
 [node name="CraftablesTabs" type="TabContainer" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_f6fso")
+theme_override_styles/panel = ExtResource("9_emk6a")
 current_tab = 0
 
 [node name="All" type="Control" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dnkgovt2ggm05"]
 
-[ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://world/World.cs" id="1_6au83"]
+[ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://world/Game.cs" id="1_6au83"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://world/camera/camera.tscn" id="2_k2vof"]
 [ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://characters/player-characters/management/PcManager.cs" id="3_hxspc"]
 [ext_resource type="Script" uid="uid://dfydmocx5fr4" path="res://UI/UiManager.cs" id="4_xp01x"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://cqpu56xet75gu" path="res://UI/menus/build/BuildMenu.cs" id="9_wj5j6"]
 [ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/menus/map/map_menu.tscn" id="10_k7cns"]
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node"]
 script = ExtResource("1_6au83")
 CombatTesting = true
 NumberOfPcs = 3

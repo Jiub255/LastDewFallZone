@@ -22,7 +22,7 @@ namespace Lastdew
 		public StatType Type { get; set; }
 		public int Value { get; private set; }
 	
-		private List<int> Modifiers { get; } = new();
+		private List<int> Modifiers { get; } = [];
 		
 		public Stat(StatType type, int baseValue)
 		{

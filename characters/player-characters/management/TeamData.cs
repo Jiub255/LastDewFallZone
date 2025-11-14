@@ -52,6 +52,7 @@ namespace Lastdew
 			}
 			else
 			{
+				TurnOnPcSelectedIndicator(pc);
 				SelectedIndex = pcIndex;
 			}
 		}
@@ -79,6 +80,20 @@ namespace Lastdew
 		public void SendPcsInstantiatedSignal()
 		{
 			OnPcsInstantiated?.Invoke();
+		}
+
+		private void TurnOnPcSelectedIndicator(PlayerCharacter pc)
+		{
+			ClearIndicators();
+			pc.SetSelectedIndicator(true);
+		}
+
+		private void ClearIndicators()
+		{
+			foreach (PlayerCharacter pc in _pcs)
+			{
+				pc.SetSelectedIndicator(false);
+			}
 		}
 	}
 }

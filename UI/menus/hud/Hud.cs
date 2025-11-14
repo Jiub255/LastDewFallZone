@@ -44,16 +44,20 @@ namespace Lastdew
 
 		private void Setup()
         {
-	        this.PrintDebug("Hud.Setup() called");
+	        //this.PrintDebug("Hud.Setup() called");
             ClearPcButtons();
             foreach (PlayerCharacter pc in TeamData.Pcs)
             {
 				this.PrintDebug($"Setting up PcButton for {pc.Name}");
                 PcButton pcButton = PcButtonScene.Instantiate() as PcButton;
-                ButtonParent.CallDeferred(HBoxContainer.MethodName.AddChild, pcButton);
+                if (pcButton == null)
+                {
+	                continue;
+                }
+                ButtonParent.CallDeferred(Node.MethodName.AddChild, pcButton);
                 pcButton.CallDeferred(PcButton.MethodName.Setup, pc);
-				pcButton.OnSelectPc += TeamData.SelectPc;
-				PcButtons.Add(pcButton);
+                pcButton.OnSelectPc += TeamData.SelectPc;
+                PcButtons.Add(pcButton);
             }
         }
 

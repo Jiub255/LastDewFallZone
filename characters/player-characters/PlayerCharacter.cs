@@ -33,7 +33,7 @@ namespace Lastdew
 		}
 		public bool Incapacitated { get; private set; }
 		public bool Invulnerable { get; set; }
-		private float InvulnerabilityDuration { get; } = 1f;
+		private static float InvulnerabilityDuration => 1f;
 		private float InvulnerabilityTimer { get; set; }
 		public new string Name { get; private set; }
 		public Texture2D Icon { get; private set; }
@@ -46,12 +46,14 @@ namespace Lastdew
 		
 		private PcStateMachine StateMachine { get; set; }
 		private InventoryManager Inventory { get; set; }
+		private MeshInstance3D SelectedIndicator { get; set; }
 		
 		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
 			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
 			PcAnimationTree = GetNode<AnimationTree>("%AnimationTree");
 			AnimStateMachine = (AnimationNodeStateMachinePlayback)PcAnimationTree.Get("parameters/playback");
+			SelectedIndicator = GetNode<MeshInstance3D>("%SelectedIndicator");
 			
 			StateMachine = new PcStateMachine(this);
 			Health = new PcHealth(saveData);
@@ -196,6 +198,11 @@ namespace Lastdew
 				Equipment.Feet.GetUid(),
 				Health.Injury);
 		}
+
+        public void SetSelectedIndicator(bool on)
+        {
+	        SelectedIndicator.Visible = on;
+        }
 		
 		// Called from animation method track
 		private void HitEnemy()

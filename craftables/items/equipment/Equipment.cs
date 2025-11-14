@@ -14,7 +14,7 @@ namespace Lastdew
 		public Dictionary<StatType, int> EquipmentBonuses { get; private set; } = [];
 
 		[Export]
-		public Dictionary<StatType, int>  StatsNeededToEquip { get; private set; } = [];
+		public Dictionary<StatType, int> StatsNeededToEquip { get; private set; } = [];
 
 		public override void OnClickCraftable()
 		{

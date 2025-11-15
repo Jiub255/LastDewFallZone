@@ -5,6 +5,8 @@ namespace Lastdew
 {
 	public partial class PcManager : Node3D
 	{
+		private const float SPACE_BETWEEN_PCS = 1.5f;
+		
 		private TeamData TeamData { get; set; }
 		private PackedScene PcScene { get; set; }
 		
@@ -106,8 +108,8 @@ namespace Lastdew
 				// Just keep their mesh enums as "stats"? Or have each PcData as an unchanging resource? Probably that.
 				PlayerCharacter pc = (PlayerCharacter)PcScene.Instantiate();
 				CallDeferred(Node.MethodName.AddChild, pc);
-				// TODO: Add a spawn location for pcs.
-				pc.Position += Vector3.Right * i * 3;
+				// TODO: Add a spawn location for pcs. Probably do a whole different system for spawning pcs eventually.
+				pc.Position += Vector3.Right * SPACE_BETWEEN_PCS * i;
 				i++;
 				pc.Initialize(inventoryManager, pcSaveData);
 				TeamData.AddPc(pc);

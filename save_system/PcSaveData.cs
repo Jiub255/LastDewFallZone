@@ -1,58 +1,30 @@
 namespace Lastdew
 {
-	public class PcSaveData
+	public class PcSaveData(
+		PcData data,
+		long head = 0,
+		long weapon = 0,
+		long body = 0,
+		long feet = 0,
+		int injury = 0)
 	{
-		// TODO: How to id pc? Use index from allPcs? Or just use a name?
-		// Figure out later after character models have been chosen, just load the test pcs for now.
-		// Or maybe just replace string Name with PcData (which has name, icon, meshes, etc.)
-		public string Name { get; set; }
-		
+		public PcData PcData { get; set; } = data;
+
 		// Equipment
-		public long Head { get; set; }
-		public long Weapon { get; set; }
-		public long Body { get; set; }
-		public long Feet { get; set; }
-		
+		public long Head { get; set; } = head;
+		public long Weapon { get; set; } = weapon;
+		public long Body { get; set; } = body;
+		public long Feet { get; set; } = feet;
+
 		// Stats
-		public int Injury { get; set; }
-		
-		/// <summary>
-		/// TODO: Make this the default starter character for a new game. 
-		/// </summary>
-		public PcSaveData()
-		{
-			// TODO: Just the default for testing. Eventually will change.
-			Name = "James";
-		}
-		
-		/// <summary>
-		/// TODO: Change constructor parameters to match the properties of this class.
-		/// Like in SaveData. Might be the problem.
-		/// </summary>
-		public PcSaveData(
-			string name,
-			long head,
-			long weapon,
-			long body,
-			long feet,
-			int injury)
-		{
-			Name = name;
-			Head = head;
-			Weapon = weapon;
-			Body = body;
-			Feet = feet;
-			Injury = injury;
-		}
-		
-		public PcSaveData(PlayerCharacter pc)
-		{
-			Name = pc.Name;
-			Head = pc.Equipment.Head?.GetUid() ?? 0;
-			Weapon = pc.Equipment.Weapon?.GetUid() ?? 0;
-			Body = pc.Equipment.Body?.GetUid() ?? 0;
-            Feet = pc.Equipment.Feet?.GetUid() ?? 0;
-			Injury = pc.Health.Injury;
-		}
+		public int Injury { get; set; } = injury;
+
+		public PcSaveData(PlayerCharacter pc) : this(
+			pc.Data,
+			pc.Equipment.Head?.GetUid() ?? 0,
+			pc.Equipment.Weapon?.GetUid() ?? 0,
+			pc.Equipment.Body?.GetUid() ?? 0,
+			pc.Equipment.Feet?.GetUid() ?? 0,
+			pc.Health.Injury) {}
 	}
 }

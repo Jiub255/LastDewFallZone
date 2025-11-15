@@ -8,8 +8,8 @@ namespace Lastdew
 	{
 		private int _index;
 		
-		public Button Previous { get; set; }
-		public Button Next { get; set; }
+		public Button Previous { get; private set; }
+		public Button Next { get; private set; }
 	
 		private RichTextLabel NameLabel { get; set; }
 		private TextureRect CharacterIcon { get; set; }
@@ -36,8 +36,8 @@ namespace Lastdew
 		public void SetupDisplay(int index)
 		{
 			PlayerCharacter pc = UnselectedPcs[index];
-			NameLabel.Text = pc.Name;
-			CharacterIcon.Texture = pc.Icon;
+			NameLabel.Text = pc.Data.Name;
+			CharacterIcon.Texture = pc.Data.Icon;
 			SetupStatsLabel(pc);
 		}
 

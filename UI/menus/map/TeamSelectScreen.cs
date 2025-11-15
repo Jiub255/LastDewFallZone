@@ -25,8 +25,8 @@ namespace Lastdew
 		private VBoxContainer PcDisplayParent { get; set; }
 		private CharacterSelector CharacterSelector { get; set; }
 		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(UiDs.PC_DISPLAY);
-		private List<PlayerCharacter> UnselectedPcs { get; set; } = new List<PlayerCharacter>();
-		private List<PlayerCharacter> SelectedPcs { get; set; } = new List<PlayerCharacter>();
+		private List<PlayerCharacter> UnselectedPcs { get; set; } = [];
+		private List<PlayerCharacter> SelectedPcs { get; set; } = [];
 		private int Index
 		{
 		    get => _index;
@@ -92,23 +92,17 @@ namespace Lastdew
 		private PlayerCharacter SetupPcDisplay()
 		{
 			PcDisplay pcDisplay = (PcDisplay)PcDisplayScene.Instantiate();
-			PcDisplayParent.CallDeferred(VBoxContainer.MethodName.AddChild, pcDisplay);
+			PcDisplayParent.CallDeferred(Node.MethodName.AddChild, pcDisplay);
 			PlayerCharacter pc = UnselectedPcs[Index];
-			pcDisplay.Initialize(pc.Icon, pc.Name);
+			pcDisplay.Initialize(pc.Data.Icon, pc.Data.Name);
 			return pc;
 		}
 
 		private void StartScavenging()
 		{
-			List<PcSaveData> selectedPcDatas = new();
-			foreach (PlayerCharacter pc in SelectedPcs)
+			List<PcSaveData> selectedPcDatas = SelectedPcs.Select(pc => new PcSaveData(pc)).ToList();
+			foreach (PcSaveData pcData in UnselectedPcs.Select(pc => new PcSaveData(pc)))
 			{
-				PcSaveData pcData = new(pc);
-				selectedPcDatas.Add(pcData);
-			}
-			foreach (PlayerCharacter pc in UnselectedPcs)
-			{
-				PcSaveData pcData = new(pc);
 				TeamData.UnusedPcDatas.Clear();
 				TeamData.UnusedPcDatas.Add(pcData);
 			}

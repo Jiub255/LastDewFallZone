@@ -32,6 +32,7 @@
 				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
 				"16b4dbab-1c67-4a4b-af3a-be1d31a17467",
 				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
+				"befefae9-a581-496a-80e6-17680ab0df5d",
 				"844550fe-e567-461c-9da6-129cb0ef35fc",
 				"2d06c068-737d-437a-b839-676244c60b7d",
 				"43e7a2a8-de3c-4c98-b01a-927022b66792",
@@ -46,14 +47,14 @@
 			"tasks": [
 				"cd7d53a6-8ba3-41c8-855e-623615812278",
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
-				"b160ad9c-efa6-432a-b68c-ea5625b16268"
+				"b160ad9c-efa6-432a-b68c-ea5625b16268",
+				"31f7804f-979d-4e67-9d76-db0049a9350a"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"567ce454-968a-44d7-98ac-59e2277756ec",
 				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
 				"2a55064d-caa2-4475-8ead-e4d5c7db6466",
@@ -114,7 +115,8 @@
 				"d1e41ccd-8ae3-4011-bb75-55ff0123fe66",
 				"43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
 				"1dd34408-ff72-4b11-a37c-91fef3827e18",
-				"04003aba-42e8-4b2e-a52a-533f72b55ac3"
+				"04003aba-42e8-4b2e-a52a-533f72b55ac3",
+				"567ce454-968a-44d7-98ac-59e2277756ec"
 			]
 		},
 		{
@@ -139,7 +141,6 @@
 				"d7bc729f-5541-4e3e-8fba-d50a028ac220",
 				"1cb946a4-92a0-412e-9b77-3448e6cf41ac",
 				"a4d0e570-7ce5-42f3-b99b-054fc2f936e1",
-				"b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
 				"668f9df0-c1d7-4814-8809-bc08d8154352"
 			]
 		},
@@ -147,13 +148,18 @@
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d"
+				"b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
+				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
+				"db4207f5-25f4-47f4-a9ef-2a048932b022",
+				"c04e7892-3435-4848-9db8-aef6259850d4",
+				"def412da-a96d-4d8c-93ab-7cf5778e9957"
 			]
 		},
 		{
 			"uuid": "cb445b97-3f31-4e34-bb97-47dcecba7c8c",
 			"title": "TODO",
 			"tasks": [
+				"d6684381-c224-494f-a6dc-600f0bca7389",
 				"34e912a0-057e-4b11-94de-32e8f8ee6ba0",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
@@ -162,6 +168,7 @@
 				"bc28b844-8360-4095-b52b-105b42061993",
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
+				"ae82aa6a-c65e-458f-b388-c50a3c6ddce3",
 				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
 				"e8dca1d4-a660-4b76-9812-c0e9b0bc7ea3",
@@ -169,7 +176,8 @@
 				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
-				"66e4ae30-0330-4cea-babb-74aab3314288"
+				"66e4ae30-0330-4cea-babb-74aab3314288",
+				"8fa1389a-f844-4fc4-9632-112e10ca6d36"
 			]
 		}
 	],
@@ -379,7 +387,7 @@
 		{
 			"uuid": "4057ff66-af0f-496c-983d-8abfe7ddf0b3",
 			"title": "How to organize data?",
-			"description": "PCs, in menu and in game.\n\tNeed selected PC to be selected when menu opens.\n\tBut if you change PCs in menu, still have original PC selected in game.\n\tSo selecting PC in game changes the selected menu PC, but not the other way around.\n\tBut how to hold the data? Kinda like MissionTeamData?\n\t\tHave a separate resource containing paths to every pc. Maybe use a string/path dict.\n\t\tHave a game data class that holds references to all your current PCs.\n\t\t\tHas WorldSelected and MenuSelected PCs.\n\t\t\tSave/load just an array of int IDs, then instantiate and keep a list of references to the actual PCs.\n\t\t\tCould maybe put mission team data here?\n\tHave a resource that holds all possible pcs? Have each PcData have the packed scene, name, icon, etc. \n\nCraftables -> Items/Buildings\n\tProbably just doing resources, and using the resource tables addon.\n\tWas gonna try to use a database. Might do it later, not sure yet.\n\tAlso, maybe crafting materials can just inherit craftable since they don't have an \"item\" function.\n",
+			"description": "PCs, in menu and in game.\n\tNeed selected PC to be selected when menu opens.\n\tBut if you change PCs in menu, still have original PC selected in game.\n\tSo selecting PC in game changes the selected menu PC, but not the other way around.\n\tHolding data in a \"TeamData\" class that gets passed to whoever needs it. \n\tIt has a list of all your pcs, index of the seleced one (if any, index is a nullable int), index of the menu selected pc (index is int, always one selected in menu)\n\t \n\tHave a resource that holds all possible pcs? Have each PcData have the packed scene/uid, name, icon, etc. \n\nCraftables -> Items/Buildings\n\tProbably just doing resources, and using the resource tables addon.\n\tWas gonna try to use a database. Might do it later, not sure yet.\n\tAlso, maybe crafting materials can just inherit craftable since they don't have an \"item\" function.\n",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -819,7 +827,7 @@
 		{
 			"uuid": "cd7d53a6-8ba3-41c8-855e-623615812278",
 			"title": "Fill out HUD",
-			"description": "Have character buttons, the different menu buttons, whatever else. ",
+			"description": "Have character buttons, the different menu buttons, whatever else. \nHave separate HUDs for home base and scavenging.\nHome base:\n\tChar menu\n\tCraft menu\n\tBuild menu\n\tGo scavenging\n\tResource bars?\n\tMorale\n\tPCs/health? Or just have that info in the char menu?\n\nScavenging:\n\tPC selector buttons with pain/injury\n\tReturn home button\n\tPopups for loot collected\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -959,7 +967,7 @@
 		{
 			"uuid": "b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
 			"title": "Clicking Pcs HUD counts as a click in the world",
-			"description": "FIXED by putting GetViewport().SetInputAsHandled() in PcButton.",
+			"description": "Below fix didn't actually work. Not sure why yet.\nFIXED by putting GetViewport().SetInputAsHandled() in PcButton.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -975,6 +983,62 @@
 			"title": "Keep models/materials/textures together with prefabs",
 			"description": "Currently only bringing out the prefabs from the unused assets folder, which isn't tracked by git. Need to bring out the corresponding materials/models/textures along with the prefab into the game objects folder. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "ae82aa6a-c65e-458f-b388-c50a3c6ddce3",
+			"title": "Have little icon popups for each item you loot",
+			"description": "Small and quick and off to the side. Could even log them all if you want to look at everything you've gathered so far. Could help with deciding whether or not to leave early.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "befefae9-a581-496a-80e6-17680ab0df5d",
+			"title": "Building System",
+			"description": "Will buildings take time to be built? Or just instantaneous?\nThe wait time seems kinda pay to win, probably instant.\nThe real challenge is getting enough materials to build the building, adding a wait time wont make anything more fun.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "8fa1389a-f844-4fc4-9632-112e10ca6d36",
+			"title": "Have double clicking PC HUD button center camera on them",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "db4207f5-25f4-47f4-a9ef-2a048932b022",
+			"title": "Team select screen issues",
+			"description": "Need to delete pc from selectable list when you choose one. Also empty list when all are chosen.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "31f7804f-979d-4e67-9d76-db0049a9350a",
+			"title": "Figure out PcData situation",
+			"description": "Are the PcSaveDatas necessary to start a new game?\nHow exactly is it all going to be set up/saved?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "c04e7892-3435-4848-9db8-aef6259850d4",
+			"title": "Coming back from scavenging makes any pc you didn't bring disappear. ",
+			"description": "Should probably keep the scavenging team mission data separate from TeamData.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "d6684381-c224-494f-a6dc-600f0bca7389",
+			"title": "Can TeamData and PcManager be combined?",
+			"description": "",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "def412da-a96d-4d8c-93ab-7cf5778e9957",
+			"title": "Need different MenuSelectedIndex for scavenging maybe",
+			"description": "Causing index errors, I think from having a higher menu selected index, then going scavenging with a smaller team than that index so it throws an index out of bounds exception.\nMight help with splitting Mission team data from TeamData.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

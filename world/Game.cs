@@ -22,7 +22,13 @@ namespace Lastdew
         [Export]
         private int NumberOfPcs { get; set; } = 1;
         private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
-        private List<PcSaveData> DefaultPcList { get; }= [];
+        private List<PcSaveData> DefaultPcList { get; } = [];
+		private List<PcData> DefaultPcDatas { get; }= [
+			GD.Load<PcData>("uid://bqd6uonxmwcas"),
+			GD.Load<PcData>("uid://cvscwbigsi3w3"),
+			GD.Load<PcData>("uid://cyk852026vmce"),
+			GD.Load<PcData>("uid://hiyhdi8pggjm"),
+		];
 
 #endregion
 
@@ -43,7 +49,7 @@ namespace Lastdew
 
 			for (int i = 0; i < NumberOfPcs; i++)
 			{
-                DefaultPcList.Add(new PcSaveData());
+                DefaultPcList.Add(new PcSaveData(DefaultPcDatas[i % DefaultPcDatas.Count]));
             }
 
 			SubscribeToEvents();

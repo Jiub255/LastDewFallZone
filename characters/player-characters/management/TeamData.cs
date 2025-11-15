@@ -61,7 +61,7 @@ namespace Lastdew
 		public List<PcSaveData> GatherSaveData()
 		{
 			List<PcSaveData> pcSaveDatas = [];
-			pcSaveDatas.AddRange(_pcs.Select(pc => pc.GetSaveData()));
+			pcSaveDatas.AddRange(_pcs.Select(pc => new PcSaveData(pc)));
 			return pcSaveDatas;
 		}
 		

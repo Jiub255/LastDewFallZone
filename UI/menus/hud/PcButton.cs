@@ -22,21 +22,32 @@ namespace Lastdew
 			PainBar = GetNode<ProgressBar>("%PainBar");
 			InjuryBar = GetNode<ProgressBar>("%InjuryBar");
 			
-			Pressed += SelectPc;
+			//Pressed += SelectPc;
 		}
 		
 		public override void _ExitTree()
 		{
 			base._ExitTree();
 			
-			Pressed -= SelectPc;
+			//Pressed -= SelectPc;
 			Pc.Health.OnHealthChanged -= SetHealthBars;
 		}
-		
+
+		public override void _GuiInput(InputEvent @event)
+		{
+			base._GuiInput(@event);
+
+			if (@event.IsLeftClick())
+			{
+				SelectPc();
+			}
+		}
+
+		// Called in a "call deferred" from another script (HUD). Still needs to be public?
 		public void Setup(PlayerCharacter pc)
 		{
-			PcIcon.Texture = pc.Icon;
-			PcName.Text = pc.Name;
+			PcIcon.Texture = pc.Data.Icon;
+			PcName.Text = pc.Data.Name;
 			Pc = pc;
 			
 			SetHealthBars();

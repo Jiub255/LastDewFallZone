@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -6,55 +5,63 @@ namespace Lastdew
 {	
 	public static class Extensions
 	{
-		private static readonly int Padding = 70;
-		
+		private const int PADDING = 70;
+
 		/// <summary>
 		/// Prints the type and name of the object that sent message.
 		/// </summary>
 		public static void PrintDebug(this object obj, string message)
 		{
-			if (obj is Resource resource)
+			switch (obj)
 			{
-				string type = resource.GetType().Name;
-				if (resource.GetType().BaseType != typeof(RefCounted))
+				case null:
+					return;
+				case Resource resource:
 				{
-					type += $" : {resource.GetType().BaseType.Name}";
+					string type = resource.GetType().Name;
+					if (resource.GetType().BaseType != typeof(RefCounted))
+					{
+						type += $" : {resource.GetType().BaseType?.Name}";
+					}
+					GD.Print($"Resource    |    {type}".PadRight(PADDING)
+					         + $" |    {message}");
+					break;
 				}
-				GD.Print($"Resource    |    {type}".PadRight(Padding)
-					+ $" |    {message}");
-			}
-			else if (obj is RefCounted refCounted)
-			{
-				string type = refCounted.GetType().Name;
-				GD.Print($"RefCounted  |    {type}".PadRight(Padding)
-					+ $" |    {message}");
-			}
-			else if (obj is Node node)
-			{
-				string name = node.Name;
-				if (node.GetType().BaseType != typeof(GodotObject))
+				case RefCounted refCounted:
 				{
-					name += $" : {node.GetType().BaseType.Name}";
+					string type = refCounted.GetType().Name;
+					GD.Print($"RefCounted  |    {type}".PadRight(PADDING)
+					         + $" |    {message}");
+					break;
 				}
-				GD.Print($"Node        |    {name}".PadRight(Padding)
-					+ $" |    {message}");
-			}
-			else
-			{
-				string type = obj.GetType().Name;
-				if (obj.GetType().BaseType != null)
+				case Node node:
 				{
-					type += $" : {obj.GetType().BaseType.Name}";
+					string name = node.Name;
+					if (node.GetType().BaseType != typeof(GodotObject))
+					{
+						name += $" : {node.GetType().BaseType?.Name}";
+					}
+					GD.Print($"Node        |    {name}".PadRight(PADDING)
+					         + $" |    {message}");
+					break;
 				}
-				GD.Print($"C# Object   |    {type}".PadRight(Padding)
-					+ $" |    {message}");
+				default:
+				{
+					string type = obj.GetType().Name;
+					if (obj.GetType().BaseType != null)
+					{
+						type += $" : {obj.GetType().BaseType?.Name}";
+					}
+					GD.Print($"C# Object   |    {type}".PadRight(PADDING)
+					         + $" |    {message}");
+					break;
+				}
 			}
 		}
 		
-		// TODO: Probably need to fix this, haven't tested it yet.
 		public static void RotateToward(this Node3D node3D, Vector3 lookTarget, float turnAmount)
 		{
-			lookTarget = new(
+			lookTarget = new Vector3(
 				lookTarget.X,
 				node3D.GlobalPosition.Y,
 				lookTarget.Z);
@@ -75,56 +82,32 @@ namespace Lastdew
 			float rotationAmount = Mathf.Min(Mathf.Abs(angleToTarget), turnAmount);
 			node3D.RotateObjectLocal(Vector3.Up, Mathf.DegToRad(rotationAmount * Mathf.Sign(angleToTarget)));
 		}
-		
+
 		public static string CommaFormatList(this string[] words)
 		{
-			if (words == null)
-			{
-				return "";
-			}
-			else if (words.Length == 0)
-			{
-				return "";
-			}
-			else if (words.Length == 1)
-			{
-				return words[0];
-			}
-			
+			System.Array.Reverse(words);
 			string formatted = "";
-			if (words.Length == 2)
+			string oxfordComma = words.Length > 2 ? "," : "";
+			for (int i = 0; i < words.Length; i++)
 			{
-				formatted = words[0] + " and " + words[1];
-			}
-			else
-			{
-				for (int i = 0; i < words.Length - 2; i++)
+				formatted = i switch
 				{
-					formatted += words[i] + ", ";
-				}
-				formatted += words[^2] + " and " + words[^1];
+					0 => words[i],
+					1 => words[i] + oxfordComma + " and " + formatted,
+					_ => words[i] + ", " + formatted
+				};
 			}
 			return formatted;
 		}
 		
 		public static bool IsLeftClick(this InputEvent @event)
 		{
-		    if (@event is InputEventMouseButton button && button.ButtonIndex == MouseButton.Left && button.Pressed)
-            {
-                return true;
-            }
-            return false;
+			return @event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true };
 		}
 		
 		public static long GetUid(this Resource resource)
 		{
-		    if (resource != null)
-		    {
-				long uid = ResourceLoader.GetResourceUid(resource.ResourcePath);
-				return uid;
-		    }
-			GD.PushWarning($"{resource.ResourceName} has no UID");
-			return -1;
+			return ResourceLoader.GetResourceUid(resource?.ResourcePath);
 		}
 		
 		public static Node[] GetChildrenRecursive(this Node node)

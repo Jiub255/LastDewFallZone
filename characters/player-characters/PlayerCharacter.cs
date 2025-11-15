@@ -10,6 +10,7 @@ namespace Lastdew
 		public event Action OnEquipmentChanged;
 		public event Action OnDeath;
 		
+		private const float INVULNERABILITY_DURATION = 1f;
 		private const float SIGHT_DISTANCE = 20f;
 		
 		private MovementTarget _movementTarget;
@@ -31,22 +32,20 @@ namespace Lastdew
 				}
 			}
 		}
-		public bool Incapacitated { get; private set; }
-		public bool Invulnerable { get; set; }
-		private static float InvulnerabilityDuration => 1f;
-		private float InvulnerabilityTimer { get; set; }
-		public new string Name { get; private set; }
-		public Texture2D Icon { get; private set; }
+		public PcData Data { get; set; }
 		public PcHealth Health { get; private set; }
 		public PcStatManager StatManager { get; private set; }
 		public PcEquipment Equipment { get; private set; }
 		public NavigationAgent3D NavigationAgent { get; private set; }
 		public AnimationTree PcAnimationTree { get; private set; }
 		public AnimationNodeStateMachinePlayback AnimStateMachine { get; private set; }
+		public bool Incapacitated { get; private set; }
+		public bool Invulnerable { get; set; }
 		
 		private PcStateMachine StateMachine { get; set; }
 		private InventoryManager Inventory { get; set; }
 		private MeshInstance3D SelectedIndicator { get; set; }
+		private float InvulnerabilityTimer { get; set; }
 		
 		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
@@ -61,7 +60,7 @@ namespace Lastdew
 			Equipment = new PcEquipment(saveData);
 			Inventory = inventoryManager;
 
-			SetupPcData(saveData.Name);
+			SetupPcData(saveData.PcData);
 
 			Health.OnHealthChanged += StatManager.SetPain;
 		}
@@ -188,17 +187,6 @@ namespace Lastdew
 			Health.OnHealthChanged -= StatManager.SetPain;
 		}
 		
-		public PcSaveData GetSaveData()
-		{
-			return new PcSaveData(
-				Name,
-				Equipment.Weapon.GetUid(),
-				Equipment.Head.GetUid(),
-				Equipment.Body.GetUid(),
-				Equipment.Feet.GetUid(),
-				Health.Injury);
-		}
-
         public void SetSelectedIndicator(bool on)
         {
 	        SelectedIndicator.Visible = on;
@@ -223,19 +211,16 @@ namespace Lastdew
 				return;
 			}
 			InvulnerabilityTimer += delta;
-			if (InvulnerabilityTimer >= InvulnerabilityDuration)
+			if (InvulnerabilityTimer >= INVULNERABILITY_DURATION)
 			{
 				InvulnerabilityTimer = 0;
 				Invulnerable = false;
 			}
 		}
 
-        private void SetupPcData(string name)
+        private void SetupPcData(PcData data)
         {
-			PcData data = Databases.PcDatas[name];
-			
-			Name = name;
-			Icon = data.Icon;
+			Data = data;
 			
 			Skeleton3D meshParent = GetNode<Skeleton3D>("%Skeleton3D");
 			List<MeshInstance3D> meshes = [];
@@ -247,11 +232,11 @@ namespace Lastdew
 					mesh.Hide();
                 }
             }
-			meshes[(int)data.HeadMesh * 4 - 1].Show();
-			meshes[(int)data.BodyMesh * 4 - 2].Show();
-			meshes[(int)data.LegsMesh * 4 - 3].Show();
-			meshes[(int)data.FeetMesh * 4 - 4].Show();
-			// TODO: Kinda hacky, could do better. Doesn't matter. Just doing this to free up some memory why not.
+			meshes[(int)Data.HeadMesh * 4 - 1].Show();
+			meshes[(int)Data.BodyMesh * 4 - 2].Show();
+			meshes[(int)Data.LegsMesh * 4 - 3].Show();
+			meshes[(int)Data.FeetMesh * 4 - 4].Show();
+			
             foreach (Node node in meshParent.GetChildren())
             {
                 if (node is MeshInstance3D { Visible: false } mesh)

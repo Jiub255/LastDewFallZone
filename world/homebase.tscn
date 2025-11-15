@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://ffc0mkxnmvb2"]
 
-[ext_resource type="Script" uid="uid://cob2dhpgi67jn" path="res://world/Level.cs" id="1_iy0f7"]
-[ext_resource type="Material" uid="uid://wnux2tpo35ln" path="res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res" id="2_6tb00"]
-[ext_resource type="PackedScene" uid="uid://dddxdv8rfhdqx" path="res://game_objects/campfire/Bonfire_01.prefab.scn" id="3_6em3l"]
-[ext_resource type="PackedScene" uid="uid://ct1khmv5poft2" path="res://game_objects/tent/Tent_A_01.prefab.scn" id="4_x6p1x"]
-[ext_resource type="PackedScene" uid="uid://cedx1qwq0577e" path="res://game_objects/birch/SM_Birch_03.prefab.scn" id="5_h1psl"]
-[ext_resource type="PackedScene" uid="uid://bsgiyuqxyr1dq" path="res://game_objects/aspen/SM_Aspen.prefab.scn" id="6_mxmp2"]
-[ext_resource type="PackedScene" uid="uid://dhc1bauurdp4l" path="res://game_objects/small_bush/SM_Bushes_03.prefab.scn" id="7_x6p1x"]
+[ext_resource type="Script" uid="uid://cob2dhpgi67jn" path="res://world/Level.cs" id="1_giee4"]
+[ext_resource type="Material" uid="uid://wnux2tpo35ln" path="res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res" id="2_gupvy"]
+[ext_resource type="PackedScene" uid="uid://dddxdv8rfhdqx" path="res://game_objects/campfire/Bonfire_01.prefab.scn" id="3_e3wgk"]
+[ext_resource type="PackedScene" uid="uid://ct1khmv5poft2" path="res://game_objects/tent/Tent_A_01.prefab.scn" id="4_ixuoh"]
+[ext_resource type="PackedScene" uid="uid://cedx1qwq0577e" path="res://game_objects/birch/SM_Birch_03.prefab.scn" id="5_w2bck"]
+[ext_resource type="PackedScene" uid="uid://bsgiyuqxyr1dq" path="res://game_objects/aspen/SM_Aspen.prefab.scn" id="6_dgcko"]
+[ext_resource type="PackedScene" uid="uid://dhc1bauurdp4l" path="res://game_objects/small_bush/SM_Bushes_03.prefab.scn" id="7_1hf08"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
 vertices = PackedVector3Array(-3.2, 0.258, -6.8, -3, 0.358, -6.8, -3.1, 0.358, -6.9, -3.3, 0.158, -6.9, -5.5, 0.158, -5.8, -5.3, 0.158, -6.1, -5, 0.158, -6.6, -3.3, 0.158, -24.9, -24.9, 0.158, -24.9, -24.9, 0.158, -5.3, -3.2, 0.358, -7.1, -3.2, 0.358, -7.2, -3.7, 0.158, -7, -5.2, 0.158, -5.9, -4.5, 0.158, -6.7, -3.7, 0.358, -7.2, -4.13333, 0.158, -7, -3.2, 0.158, -6.3, -5.5, 0.158, -5.3, -3.3, 0.158, -7.4, -2.8, 0.458, -6.7, -2.9, 0.358, -6.9, -2.9, 0.258, -7.1, -2.5, 0.158, -7.2, -0.6, 0.258, -7.3, -2.2, 0.258, -7.1, 0.200001, 0.158, -7.3, 0.1, 0.158, -24.9, -2.4, 0.158, -6, -2.1, 0.158, -5.4, -0.5, 0.158, -5.4, 1.8, 0.258, -7.4, 1.8, 0.358, -7.2, 2.2, 0.158, -7.2, 2.5, 0.158, -7.6, 0.5, 0.158, -7.3, 0.6, 0.158, -7.7, 2.8, 0.158, -7.5, 2.8, 0.158, -24.9, 0.800001, 0.158, -7.6, 0.800001, 0.158, -7.3, 4.1, 0.158, -7.1, 4.2, 0.158, -6.7, 4.5, 0.158, -6.5, 4.4, 0.158, -6.2, 4.7, 0.158, -5.6, 3.2, 0.158, -7.2, 24.9, 0.158, -5.7, 24.9, 0.158, -24.9, 1.9, 6.858, -7.7, 2.3, 6.758, -7.7, 2, 6.658, -7.9, 1.5, 6.658, -7.6, 1.8, 6.858, -7.2, 1.7, 6.658, -7.7, -4.3, 4.658, -7.2, -4.3, 4.658, -7, -3.8, 4.758, -7, -1.8, 6.858, -7.1, -1.7, 6.958, -6.9, -1.5, 6.858, -7.1, 2.6, 8.158, -7, 2.3, 8.158, -7.2, 2.5, 8.158, -6.9, 2.9, 8.058, -6.9, 2.9, 8.058, -7.1, -0.299999, 0.458, -7.1, -0.299999, 0.458, -5.1, -0.1, 0.758, -5.4, 1.4, 0.758, -7, 1.6, 0.558, -6.6, 1.6, 0.558, -7.1, -3, 11.958, -7, -3, 12.158, -6.7, -2.8, 11.958, -6.8, 1.1, 5.858, -6.7, 1.1, 5.858, -6.4, 1.4, 5.658, -6.4, 1.3, 5.758, -6.8, -2.7, 12.158, -6.5, -2.3, 12.058, -6.2, -2.4, 12.058, -6.7, 2.8, 8.158, -6.6, 3.2, 8.258, -6.5, 3.1, 8.258, -6.7, -3, 12.158, -6.4, -3, 12.158, -6.6, -3.2, 12.258, -6.6, -3.5, 12.158, -6.4, 3.5, 2.358, -5.8, 3.5, 2.458, -6, 3.2, 2.358, -5.9, 3.4, 2.158, -5.3, 3.7, 2.458, -6.5, 3.4, 2.458, -6.5, 3.3, 2.558, -6.2, 3.7, 2.258, -5.8, 3.8, 2.358, -6, 3.2, 2.558, -6.1, 3, 2.358, -6.1, 2.3, 2.258, -6.2, 2.3, 2.158, -5.7, 2.6, 2.158, -5.3, 1.6, 6.858, -6.1, 1.7, 6.858, -5.7, 2, 6.958, -6, 1.8, 6.758, -6.2, -4.8, 2.458, -5.5, -4.8, 2.358, -5.1, -4.7, 2.558, -5.3, -4.7, 2.058, -6, -4.7, 2.158, -5.8, -4.4, 2.258, -5.8, -3.6, 2.158, -5.9, -4.4, 2.558, -5.4, -4.4, 2.458, -5.6, -3.3, 2.158, -5.6, -4.1, 2.458, -5.3, -4.4, 2.158, -4.6, -3.6, 2.258, -4.6, -3.3, 2.158, -4.9, -4.4, 2.558, -5.1, -2.5, 0.458, -6, -2.8, 0.358, -5.9, -2.5, 0.358, -5.6, -2.3, 0.358, -5.6, -2.1, 0.258, -5.2, -2.7, 0.158, -4.5, -2.9, 0.158, -4, -2.3, 0.358, -5.3, -2.5, 0.158, -5.2, 2.5, 0.158, -2.5, 2, 0.158, -2.7, -4.3, 0.158, -3.7, -4.2, 0.158, 24.9, 2.5, 0.158, 24.9, 2.3, 0.158, -4.8, 1.8, 0.158, -5.3, 1.9, 0.258, -4.9, -2.7, 0.158, -5.6, -2.9, 0.158, -4.4, -0.6, 0.158, -4.9, 2.9, 0.158, -4.6, 2.1, 0.158, -3.5, 2.7, 0.158, -3.6, 0.800001, 0.158, -4.9, 0.800001, 0.158, -4.5, 0.6, 0.158, -4.4, 0.5, 0.158, -4.9, 1.9, 0.158, -3.1, 1.4, 0.758, -5.1, 1.6, 0.558, -5.1, 1.6, 0.558, -5.9, 1.4, 0.758, -6, -3, 11.958, -5.8, -3, 11.958, -5.6, -2.6, 11.858, -5.8, 2.6, 6.758, -5.7, 3, 6.658, -5.6, 2.9, 6.658, -5.9, 2.6, 6.658, -5.9, 3, 0.158, -3.4, 3.7, 0.158, -4.8, 2.8, 0.158, -2.5, 3.1, 0.158, -2.8, 24.9, 0.158, 24.9, -4.4, 7.058, -5.2, -4.4, 6.958, -5.6, -4.5, 7.058, -5.4, -4.8, 7.158, -5.5, 2.6, 6.558, -5.5, 2.6, 6.458, -5.3, 2.9, 6.258, -5.3, -4.8, 0.158, -3.8, -4.9, 0.158, -4.4, -5.2, 0.158, -4.6, -24.9, 0.158, 24.9, -2.6, 10.458, -4.9, -2.1, 10.158, -5, -2.3, 10.158, -5.3, -2.7, 10.358, -5.1, -4, 8.358, -4.7, -3.8, 8.458, -4.3, -3.6, 8.458, -4.4, -5.1, 7.858, -3.5, -5, 7.758, -3.3, -4.7, 7.958, -3.5, 2.3, 1.158, -3.2, 2.3, 1.158, -2.8, 2.7, 1.158, -2.8, 2.7, 1.158, -3.2)
@@ -23,7 +23,7 @@ size = Vector3(50, 1, 50)
 size = Vector3(50, 1, 50)
 
 [node name="HomeBase" type="Node3D"]
-script = ExtResource("1_iy0f7")
+script = ExtResource("1_giee4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.91706, -0.303663, -0.258437, 0, -0.64812, 0.761539, -0.398749, -0.698377, -0.594365, 0, 0, 0)
@@ -46,24 +46,24 @@ shape = SubResource("BoxShape3D_aqcaw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/NonInteractable/Ground"]
 mesh = SubResource("BoxMesh_tpwwi")
-surface_material_override/0 = ExtResource("2_6tb00")
+surface_material_override/0 = ExtResource("2_gupvy")
 
-[node name="Bonfire_01" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("3_6em3l")]
+[node name="Bonfire_01" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("3_e3wgk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.50914, 0, -3.02528)
 
-[node name="Tent_A_01" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("4_x6p1x")]
+[node name="Tent_A_01" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("4_ixuoh")]
 transform = Transform3D(0.57072, 0, 0, 0, 0.57072, 0, 0, 0, 0.57072, 0.673452, -9.53674e-07, -6.06905)
 
-[node name="SM_Birch_03" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("5_h1psl")]
+[node name="SM_Birch_03" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("5_w2bck")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.03263, -0.500001, -6.8475)
 
-[node name="SM_Aspen" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("6_mxmp2")]
+[node name="SM_Aspen" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("6_dgcko")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79852, -4.76837e-07, -6.29553)
 
-[node name="SM_Bushes_03" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("7_x6p1x")]
+[node name="SM_Bushes_03" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("7_1hf08")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98534, 0, -5.24811)
 
-[node name="SM_Bushes_04" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("7_x6p1x")]
+[node name="SM_Bushes_04" parent="NavigationRegion3D/NonInteractable" instance=ExtResource("7_1hf08")]
 transform = Transform3D(-0.743588, 0, -0.668638, 0, 1, 0, 0.668638, 0, -0.743588, 3.00099, 0, -5.95951)
 
 [node name="Buildings" type="Node3D" parent="NavigationRegion3D"]

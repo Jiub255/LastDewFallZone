@@ -44,8 +44,8 @@ namespace Lastdew
 		public void SetupDisplay()
 		{
 			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
-			NameLabel.Text = pc.Name;
-			CharacterIcon.Texture = pc.Icon;
+			NameLabel.Text = pc.Data.Name;
+			CharacterIcon.Texture = pc.Data.Icon;
 			SetupStatsLabel(pc);
 			pc.OnEquipmentChanged += SetupDisplay;
 		}

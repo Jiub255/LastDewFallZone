@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/looting/ScavengingLevel.cs" id="1_43o5v"]
 [ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://world/looting/loot_container_test.tscn" id="2_ocac3"]
 [ext_resource type="Texture2D" uid="uid://d1h0jkyo5scju" path="res://game_objects/textures/orange_brick_wall_14-1K/1K-brick_wall_14_baseColor.jpg" id="3_drjpm"]
-[ext_resource type="PackedScene" uid="uid://cs10eoe5dgah4" path="res://game_objects/loot_containers/SM_CARGO.prefab.scn" id="4_s1smk"]
-[ext_resource type="PackedScene" uid="uid://vaxigknqsdtu" path="res://game_objects/loot_containers/SM_Small_Wood_Box_Closed.prefab.scn" id="5_arutc"]
+[ext_resource type="PackedScene" uid="uid://cs10eoe5dgah4" path="res://game_objects/loot_containers/small_cargo/SM_CARGO.prefab.scn" id="4_s1smk"]
+[ext_resource type="PackedScene" uid="uid://vaxigknqsdtu" path="res://game_objects/loot_containers/small_wood_box/SM_Small_Wood_Box_Closed.prefab.scn" id="5_arutc"]
 [ext_resource type="Resource" uid="uid://ctk85wdoln0g6" path="res://craftables/items/equipment/armor.tres" id="7_e22i1"]
 [ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://characters/enemies/EnemySpawner.cs" id="10_o5blp"]
 

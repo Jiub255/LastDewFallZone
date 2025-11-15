@@ -53,6 +53,7 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
+				"567ce454-968a-44d7-98ac-59e2277756ec",
 				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
 				"2a55064d-caa2-4475-8ead-e4d5c7db6466",
@@ -966,6 +967,13 @@
 			"uuid": "66e4ae30-0330-4cea-babb-74aab3314288",
 			"title": "Keep stats of everything the player does",
 			"description": "Enemies (of each type) killed\nContainers looted\nTime spent scavenging/at base/whatever else\nItems crafted/scrapped\nBuildings built\nBullets fired\nPCs killed\n",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "567ce454-968a-44d7-98ac-59e2277756ec",
+			"title": "Keep models/materials/textures together with prefabs",
+			"description": "Currently only bringing out the prefabs from the unused assets folder, which isn't tracked by git. Need to bring out the corresponding materials/models/textures along with the prefab into the game objects folder. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

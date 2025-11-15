@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Lastdew
 {
@@ -60,10 +61,7 @@ namespace Lastdew
 		public List<PcSaveData> GatherSaveData()
 		{
 			List<PcSaveData> pcSaveDatas = [];
-			foreach (PlayerCharacter pc in _pcs)
-			{
-				pcSaveDatas.Add(pc.GetSaveData());
-			}
+			pcSaveDatas.AddRange(_pcs.Select(pc => pc.GetSaveData()));
 			return pcSaveDatas;
 		}
 		

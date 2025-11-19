@@ -43,8 +43,8 @@ namespace Lastdew
 
 		private void SetupStatsLabel(PlayerCharacter pc)
 		{
-			string statText =  $"Injury: {pc.Health.Injury}\n"
-			+ $"Pain: {pc.Health.Pain}\n"
+			string statText =  $"Injury: {pc.StatManager.Health.Injury}\n"
+			+ $"Pain: {pc.StatManager.Health.Pain}\n"
 			+ $"Attack: {pc.StatManager.Attack}\n"
 			+ $"Defense: {pc.StatManager.Defense}\n"
 			+ $"Engineering: {pc.StatManager.Engineering}\n"

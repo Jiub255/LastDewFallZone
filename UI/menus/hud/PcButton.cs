@@ -30,7 +30,7 @@ namespace Lastdew
 			base._ExitTree();
 			
 			//Pressed -= SelectPc;
-			Pc.Health.OnHealthChanged -= SetHealthBars;
+			Pc.StatManager.Health.OnHealthChanged -= SetHealthBars;
 		}
 
 		public override void _GuiInput(InputEvent @event)
@@ -52,7 +52,7 @@ namespace Lastdew
 			
 			SetHealthBars();
 			
-			Pc.Health.OnHealthChanged += SetHealthBars;
+			Pc.StatManager.Health.OnHealthChanged += SetHealthBars;
 		}
 		
 		private void SetHealthBars(int _)
@@ -62,8 +62,8 @@ namespace Lastdew
 		
 		public void SetHealthBars()
 		{
-			PainBar.Value = Pc.Health.Pain;
-			InjuryBar.Value = Pc.Health.Injury;
+			PainBar.Value = Pc.StatManager.Health.Pain;
+			InjuryBar.Value = Pc.StatManager.Health.Injury;
 		}
 		
 		private void SelectPc()

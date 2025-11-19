@@ -19,7 +19,7 @@ namespace Lastdew
 				OnBaseValueChanged?.Invoke();
 			}
 		}
-		public StatType Type { get; set; }
+		public StatType Type { get; }
 		public int Value { get; private set; }
 	
 		private List<int> Modifiers { get; } = [];

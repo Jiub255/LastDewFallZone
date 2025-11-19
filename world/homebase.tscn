@@ -27,6 +27,9 @@ script = ExtResource("1_giee4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.91706, -0.303663, -0.258437, 0, -0.64812, 0.761539, -0.398749, -0.698377, -0.594365, 0, 0, 0)
+light_energy = 5.0
+shadow_enabled = true
+shadow_opacity = 0.85
 
 [node name="SpawnLocation" type="Node3D" parent="."]
 unique_name_in_owner = true

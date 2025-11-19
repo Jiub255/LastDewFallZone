@@ -91,15 +91,15 @@ namespace Lastdew
 			Ui.MainMenu.ReturnToBase.Pressed -= ReturnToBase;
 		}
 
-		private void StartNewGame()
+		private async void StartNewGame()
 		{
-			HomeBase = SetupLevel(HomeBaseScene, DefaultPcList);
+			await SetupLevel(HomeBaseScene, DefaultPcList);
 			Ui.ChangeState(new GameStateHome());
 		}
 
 		private void StartCombatTest()
 		{
-			HomeBase = SetupLevel(CombatTestScene, DefaultPcList);
+			SetupLevel(CombatTestScene, DefaultPcList);
 			Ui.ChangeState(new GameStateHome());
 		}
 
@@ -112,7 +112,7 @@ namespace Lastdew
 		{
 			SaveData saveData = SaveSystem.Load();
 			LoadInventory(saveData.Inventory);
-			HomeBase = SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
+			SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
 			Ui.ChangeState(new GameStateHome());
 		}
 
@@ -125,16 +125,24 @@ namespace Lastdew
 			}
 		}
 
-        private Level SetupLevel(PackedScene levelScene, List<PcSaveData> pcSaveDatas)
+        private async System.Threading.Tasks.Task SetupLevel(PackedScene levelScene, List<PcSaveData> pcSaveDatas, bool scavenging = false)
 		{
 			Level level = (Level)levelScene.Instantiate();
 			CallDeferred(Node.MethodName.AddChild, level);
 			level.Initialize(TeamData);
 			// UI.Initialize has to be called after PcManager.SpawnPcs,
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
+			Ui.MainMenu.Close();
+			await PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			Ui.Initialize(TeamData, InventoryManager);
-			return level;
+			if (scavenging)
+			{
+				ScavengingLevel = (ScavengingLevel)level;
+			}
+			else
+			{
+				HomeBase = level;
+			}
 		}
         
         private void ExitToStartMenu()
@@ -152,7 +160,7 @@ namespace Lastdew
 		private void StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
 		{
 			RemoveChild(HomeBase);
-			ScavengingLevel = (ScavengingLevel)SetupLevel(scene, pcSaveDatas);
+			SetupLevel(scene, pcSaveDatas, true);
 			Ui.ChangeState(new GameStateScavenging());
 		}
         

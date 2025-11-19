@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PcData" load_steps=3 format=3 uid="uid://hiyhdi8pggjm"]
+
+[ext_resource type="Texture2D" uid="uid://cjsetpgbeadtw" path="res://characters/player-characters/management/pc_data/khrebin.png" id="1_8qq1m"]
+[ext_resource type="Script" uid="uid://pd0g5gnhmbt6" path="res://characters/player-characters/management/pc_data/PcData.cs" id="1_pffyi"]
+
+[resource]
+script = ExtResource("1_pffyi")
+Name = "Khrebin"
+Icon = ExtResource("1_8qq1m")
+Attack = 1
+Defense = 1
+Engineering = 1
+Farming = 1
+Medical = 1
+Scavenging = 1
+HeadMesh = 8
+BodyMesh = 8
+LegsMesh = 10
+FeetMesh = 9
+metadata/_custom_type_script = "uid://pd0g5gnhmbt6"

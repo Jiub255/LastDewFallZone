@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PcData" load_steps=3 format=3 uid="uid://bqd6uonxmwcas"]
+
+[ext_resource type="Texture2D" uid="uid://ck4xpsqtbjdya" path="res://characters/player-characters/management/pc_data/jaime.png" id="1_8llqs"]
+[ext_resource type="Script" uid="uid://pd0g5gnhmbt6" path="res://characters/player-characters/management/pc_data/PcData.cs" id="2_22x1x"]
+
+[resource]
+script = ExtResource("2_22x1x")
+Name = "Jaime"
+Icon = ExtResource("1_8llqs")
+Attack = 1
+Defense = 1
+Engineering = 1
+Farming = 1
+Medical = 1
+Scavenging = 1
+HeadMesh = 5
+BodyMesh = 3
+LegsMesh = 3
+FeetMesh = 5

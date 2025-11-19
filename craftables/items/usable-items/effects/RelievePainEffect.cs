@@ -19,7 +19,7 @@ namespace Lastdew
 
         public override void ApplyEffect(PlayerCharacter pc)
 		{
-			pc.Health.RelievePain(ReliefAmount, Duration);
+			pc.StatManager.Health.RelievePain(ReliefAmount, Duration);
 		}
 	}
 }

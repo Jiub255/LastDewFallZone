@@ -97,7 +97,7 @@ namespace Lastdew
 			TeamData.SelectPc(pc);
 		}
 		
-		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
+		public async System.Threading.Tasks.Task SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
 			//this.PrintDebug($"PcManager.SpawnPcs() called");
 			ClearPcs();
@@ -111,7 +111,7 @@ namespace Lastdew
 				// TODO: Add a spawn location for pcs. Probably do a whole different system for spawning pcs eventually.
 				pc.Position += Vector3.Right * SPACE_BETWEEN_PCS * i;
 				i++;
-				pc.Initialize(inventoryManager, pcSaveData);
+				await pc.Initialize(inventoryManager, pcSaveData);
 				TeamData.AddPc(pc);
 			}
 			

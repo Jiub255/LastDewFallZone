@@ -33,11 +33,7 @@ namespace Lastdew
 		{
 			get
 			{
-				int pain = Reliefs.Aggregate(_injury, (current, relief) => current - relief.Amount);
-				if (pain < 0)
-				{
-					pain = 0;
-				}
+				int pain = Math.Max(0, Reliefs.Aggregate(_injury, (current, relief) => current - relief.Amount));
 				return pain;
 			}
 		}
@@ -49,6 +45,8 @@ namespace Lastdew
         }
 		
 		private List<Relief> Reliefs { get; } = [];
+		
+		public PcHealth(){}
 		
 		public PcHealth(PcSaveData pcSaveData)
 		{
@@ -71,13 +69,8 @@ namespace Lastdew
 		/// <returns>true if Injury at max.</returns>
 		public bool TakeDamage(int damage)
 		{
-			Injury += damage;
-			if (Injury < MAX_INJURY)
-			{
-				return false;
-			}
-			Injury = MAX_INJURY;
-			return true;
+			Injury = Math.Min(Injury + damage, MAX_INJURY);
+			return Injury >= MAX_INJURY;
 		}
 		
 		public void RelievePain(int amount, float duration)

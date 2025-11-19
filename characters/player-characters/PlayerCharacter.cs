@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 
@@ -22,18 +23,18 @@ namespace Lastdew
 			{
 				if (_movementTarget.Target is Enemy oldEnemy)
 				{
-					oldEnemy.OnDeath -= OnTargetDeath;
+					oldEnemy.OnDeath -= TryFindNearestEnemy;
 				}
 				_movementTarget = value;
 				if (_movementTarget.Target is Enemy newEnemy)
 				{
 					//this.PrintDebug($"{Name}'s target set to {newEnemy.Name}");
-					newEnemy.OnDeath += OnTargetDeath;
+					newEnemy.OnDeath += TryFindNearestEnemy;
 				}
 			}
 		}
-		public PcData Data { get; set; }
-		public PcHealth Health { get; private set; }
+		[Export]
+		public PcData Data { get; private set; }
 		public PcStatManager StatManager { get; private set; }
 		public PcEquipment Equipment { get; private set; }
 		public NavigationAgent3D NavigationAgent { get; private set; }
@@ -47,7 +48,14 @@ namespace Lastdew
 		private MeshInstance3D SelectedIndicator { get; set; }
 		private float InvulnerabilityTimer { get; set; }
 		
-		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
+		// TODO: Initialize a new PC with just PcData, not PcSaveData.
+		// Maybe just immediately make a new PcSaveData when you get a new PC, so Initialize can still be used.
+		public void SetupNewPc(InventoryManager inventoryManager, PcData pcData)
+		{
+			
+		}
+		
+		public async Task Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
 			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
 			PcAnimationTree = GetNode<AnimationTree>("%AnimationTree");
@@ -55,14 +63,11 @@ namespace Lastdew
 			SelectedIndicator = GetNode<MeshInstance3D>("%SelectedIndicator");
 			
 			StateMachine = new PcStateMachine(this);
-			Health = new PcHealth(saveData);
-			StatManager = new PcStatManager();
+			StatManager = new PcStatManager(saveData);
 			Equipment = new PcEquipment(saveData);
 			Inventory = inventoryManager;
 
-			SetupPcData(saveData.PcData);
-
-			Health.OnHealthChanged += StatManager.SetPain;
+			await SetupPcData(saveData.PcData);
 		}
 
         public void ProcessUnselected(double delta)
@@ -107,7 +112,7 @@ namespace Lastdew
 			}
 			
 			int actualDamage = Mathf.Max(0, damage - StatManager.Defense);
-			bool incapacitated = Health.TakeDamage(actualDamage);
+			bool incapacitated = StatManager.Health.TakeDamage(actualDamage);
 			StateMachine.GetHit(incapacitated);
 			if (incapacitated)
 			{
@@ -183,8 +188,6 @@ namespace Lastdew
 		public void ExitTree()
 		{
 			StateMachine.ExitTree();
-			
-			Health.OnHealthChanged -= StatManager.SetPain;
 		}
 		
         public void SetSelectedIndicator(bool on)
@@ -200,7 +203,7 @@ namespace Lastdew
 
 		private void SharedProcess(double delta)
 		{
-			Health.ProcessRelief((float)delta);
+			StatManager.Health.ProcessRelief((float)delta);
 			TickInvulnerability((float)delta);
 		}
 
@@ -218,7 +221,7 @@ namespace Lastdew
 			}
 		}
 
-        private void SetupPcData(PcData data)
+        private async Task SetupPcData(PcData data)
         {
 			Data = data;
 			
@@ -244,12 +247,47 @@ namespace Lastdew
 					mesh.QueueFree();
                 }
             }
+            
+			//await GetMugshotIcon();
         }
 
-		private void OnTargetDeath()
-		{
-			TryFindNearestEnemy();
-		}
+		// TODO: Data.Icon never gets set.
+        private async Task GetMugshotIcon()
+        {
+	        Camera3D camera = GetNode<Camera3D>("%MugshotCamera");
+	        await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+	        await GetTree().ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+	        camera.Current = true;
+	        await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
+	        await GetTree().ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+	        
+	        Image screenshot = GetViewport().GetTexture().GetImage();
+	        //camera.Current = false;
+	        Image image = Image.CreateEmpty(648, 648, false, screenshot.GetFormat());
+	        image.BlitRect(
+		        screenshot,
+		        new Rect2I(252, 0, 648, 648),
+		        Vector2I.Zero);
+	        image.Resize(128, 128, Image.Interpolation.Trilinear);
+	        string path = $"res://characters/player-characters/management/pc_data/{Data.Name.ToSnakeCase()}.png";
+	        Error error = image.SavePng(path);
+	        this.PrintDebug($"image {image} saved to {path}");
+	        if (error != Error.Ok)
+	        {
+		        GD.PushError($"Error saving png: {error}");
+	        }
+
+	        System.Threading.Thread.Sleep(1000);
+	        
+	        Texture2D texture = GD.Load<Texture2D>(path);
+	        if (texture != null)
+	        {
+		        this.PrintDebug($"texture: {texture}");
+				Data.Icon = texture;
+	        }
+	        
+	        camera.QueueFree();
+        }
 
         private void TryFindNearestEnemy()
         {
@@ -266,7 +304,7 @@ namespace Lastdew
 		        StateMachine.ChangeState(PcStateNames.IDLE);
 	        }
         }
-		
+        
         private Enemy FindNearestEnemy()
         {
 	        Array<Dictionary> sphereCastResults = SphereCast();

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AllPcDatas" load_steps=7 format=3 uid="uid://dckb2dlhbg7ny"]
+
+[ext_resource type="Resource" uid="uid://cvscwbigsi3w3" path="res://characters/player-characters/management/pc_data/data_james.tres" id="1_1yexw"]
+[ext_resource type="Script" uid="uid://pd0g5gnhmbt6" path="res://characters/player-characters/management/pc_data/PcData.cs" id="1_ypy5j"]
+[ext_resource type="Resource" uid="uid://bqd6uonxmwcas" path="res://characters/player-characters/management/pc_data/data_jaime.tres" id="2_1e2lx"]
+[ext_resource type="Script" uid="uid://dhewr51voyfac" path="res://characters/player-characters/management/pc_data/AllPcDatas.cs" id="3_wotp3"]
+[ext_resource type="Resource" uid="uid://cyk852026vmce" path="res://characters/player-characters/management/pc_data/data_johmberly.tres" id="4_gucfe"]
+[ext_resource type="Resource" uid="uid://hiyhdi8pggjm" path="res://characters/player-characters/management/pc_data/data_khrebin.tres" id="5_76m34"]
+
+[resource]
+script = ExtResource("3_wotp3")
+PcDatas = Dictionary[String, ExtResource("1_ypy5j")]({
+"Jaime": ExtResource("2_1e2lx"),
+"James": ExtResource("1_1yexw"),
+"Johmberly": ExtResource("4_gucfe"),
+"Khrebin": ExtResource("5_76m34")
+})

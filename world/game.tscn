@@ -13,7 +13,7 @@
 
 [node name="Game" type="Node"]
 script = ExtResource("1_e8jue")
-NumberOfPcs = 6
+NumberOfPcs = 4
 
 [node name="CameraRig" parent="." instance=ExtResource("2_hliwg")]
 unique_name_in_owner = true

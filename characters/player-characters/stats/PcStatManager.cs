@@ -5,15 +5,17 @@ using System.Linq;
 
 namespace Lastdew
 {
+	// TODO: Put PcHealth here instead of PlayerCharacter for easier access to pain for stats? Might make sense.
 	public class PcStatManager : IEnumerable<Stat>
 	{
-		private Stat _attack = new(StatType.ATTACK, 1);
-		private Stat _defense = new(StatType.DEFENSE, 1);
-		private Stat _engineering = new(StatType.ENGINEERING, 1);
-		private Stat _farming = new(StatType.FARMING, 1);
-		private Stat _medical = new(StatType.MEDICAL, 1);
-		private Stat _scavenging = new(StatType.SCAVENGING, 1);
-		private int _pain;
+		private Stat _attack;
+		private Stat _defense;
+		private Stat _engineering;
+		private Stat _farming;
+		private Stat _medical;
+		private Stat _scavenging;
+
+		public PcHealth Health { get; }
 		
 		public int Attack => PainFormula(_attack.Value);
 		public int Defense => PainFormula(_defense.Value);
@@ -22,9 +24,46 @@ namespace Lastdew
 		public int Medical => PainFormula(_medical.Value);
 		public int Scavenging => PainFormula(_scavenging.Value);
 
-		public void SetPain(int pain)
+		public int AttackBaseValue
 		{
-			_pain = pain;
+			get => _attack.BaseValue;
+			set => _attack.BaseValue = value;
+		}
+		public int DefenseBaseValue
+		{
+			get => _defense.BaseValue;
+			set => _defense.BaseValue = value;
+		}
+		public int EngineeringBaseValue
+		{
+			get => _engineering.BaseValue;
+			set => _engineering.BaseValue = value;
+		}
+		public int FarmingBaseValue
+		{
+			get => _farming.BaseValue;
+			set => _farming.BaseValue = value;
+		}
+		public int MedicalBaseValue
+		{
+			get => _medical.BaseValue;
+			set => _medical.BaseValue = value;
+		}
+		public int ScavengingBaseValue
+		{
+			get => _scavenging.BaseValue;
+			set => _scavenging.BaseValue = value;
+		}
+
+		public PcStatManager(PcSaveData saveData)
+		{
+			_attack = new Stat(StatType.ATTACK, saveData.Attack);
+			_defense = new Stat(StatType.DEFENSE, saveData.Defense);
+			_engineering = new Stat(StatType.ENGINEERING, saveData.Engineering);
+			_farming = new Stat(StatType.FARMING, saveData.Farming);
+			_medical = new Stat(StatType.MEDICAL, saveData.Medical);
+			_scavenging = new Stat(StatType.SCAVENGING, saveData.Scavenging);
+			Health = new PcHealth(saveData);
 		}
 		
 		public void CalculateStatModifiers(Dictionary<StatType, int> equipmentBonuses)
@@ -81,7 +120,7 @@ namespace Lastdew
 		// Pain == 0 -> No effect. Pain == 100 -> Stat value halved. (for now at least)
 		private int PainFormula(int statValue)
 		{
-		    return Mathf.RoundToInt(statValue * (200f - _pain) / 200f);
+		    return Mathf.RoundToInt(statValue * (200f - Health.Pain) / 200f);
 		}
 	}
 }

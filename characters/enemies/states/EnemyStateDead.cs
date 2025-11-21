@@ -12,8 +12,6 @@ namespace Lastdew
 			Enemy.NavigationAgent.AvoidanceEnabled = false;
 		}
 
-		public override void ProcessState(float delta)
-		{
-		}
+		public override void ProcessState(float delta) {}
 	}
 }

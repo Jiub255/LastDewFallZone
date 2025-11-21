@@ -1,13 +1,9 @@
-using Godot;
-
 namespace Lastdew
 {
     public class EnemyStateCombat(Enemy enemy) : EnemyState(enemy)
     {
-        private const string MOVEMENT_BLEND_TREE_NAME = "movement_blend_tree";
         private const string ATTACK_ANIM_NAME = "CharacterArmature|Punch_Right";
 		private const float A_LITTLE_BIT = 1f;
-        private const float TIME_BETWEEN_ATTACKS = 2.3f;
         private float AttackTimer { get; set; }
 
         public override void EnterState()
@@ -20,18 +16,17 @@ namespace Lastdew
             if (OutOfRangeOfEnemy())
             {
                 ChangeState(EnemyStateNames.MOVEMENT);
-                Enemy.AnimStateMachine.Travel(MOVEMENT_BLEND_TREE_NAME);
                 return;
             }
 
-            Enemy.RotateToward(Enemy.Target.Pc.GlobalPosition, Enemy.TURN_SPEED * delta);
+            Enemy.RotateToward(Enemy.Target.Pc.GlobalPosition, Enemy.Data.TurnSpeed * delta);
 			
             AttackTimer -= delta;
             // TODO: Make sure not in "get hit" animation before starting attack.
             // Probably just introduce "GETTING_HIT" state.
             if (AttackTimer < 0)
             {
-                AttackTimer = TIME_BETWEEN_ATTACKS;
+                AttackTimer = Enemy.Data.TimeBetweenAttacks;
 				
                 // Attack animation (Calls Enemy.HitTarget() from animation track)
                 Enemy.AnimStateMachine.Travel(ATTACK_ANIM_NAME);

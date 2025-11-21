@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,9 +6,10 @@ using System.Linq;
 
 namespace Lastdew
 {
-	// TODO: Put PcHealth here instead of PlayerCharacter for easier access to pain for stats? Might make sense.
 	public class PcStatManager : IEnumerable<Stat>
 	{
+		private const int STAT_POINTS_GAINED_PER_LEVEL = 5;
+		
 		private Stat _attack;
 		private Stat _defense;
 		private Stat _engineering;
@@ -16,6 +18,7 @@ namespace Lastdew
 		private Stat _scavenging;
 
 		public PcHealth Health { get; }
+		public PcExperience Experience { get; }
 		
 		public int Attack => PainFormula(_attack.Value);
 		public int Defense => PainFormula(_defense.Value);
@@ -54,6 +57,9 @@ namespace Lastdew
 			get => _scavenging.BaseValue;
 			set => _scavenging.BaseValue = value;
 		}
+		
+		private int StatPointsToSpend { get; set; }
+		
 
 		public PcStatManager(PcSaveData saveData)
 		{
@@ -64,6 +70,14 @@ namespace Lastdew
 			_medical = new Stat(StatType.MEDICAL, saveData.Medical);
 			_scavenging = new Stat(StatType.SCAVENGING, saveData.Scavenging);
 			Health = new PcHealth(saveData);
+			Experience = new PcExperience(saveData);
+
+			Experience.OnLevelUp += LevelUp;
+		}
+
+		public void ExitTree()
+		{
+			Experience.OnLevelUp -= LevelUp;
 		}
 		
 		public void CalculateStatModifiers(Dictionary<StatType, int> equipmentBonuses)
@@ -121,6 +135,13 @@ namespace Lastdew
 		private int PainFormula(int statValue)
 		{
 		    return Mathf.RoundToInt(statValue * (200f - Health.Pain) / 200f);
+		}
+
+		private void LevelUp()
+		{
+			// TODO: Make level up menu, launch it from here somehow?
+			StatPointsToSpend += STAT_POINTS_GAINED_PER_LEVEL;
+			this.PrintDebug($"Level up to {Experience.Level}, Experience: {Experience.Experience}");
 		}
 	}
 }

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bdctf5mvk7bgb"]
+
+[ext_resource type="Script" uid="uid://blh0fur4b1phg" path="res://characters/enemies/data/EnemyData.cs" id="1_5txxw"]
+[ext_resource type="Resource" uid="uid://7jo3uy4gbavf" path="res://craftables/items/crafting-materials/wood.tres" id="1_7kriq"]
+
+[resource]
+script = ExtResource("1_5txxw")
+EnemyType = "Test Enemy"
+MaxSpeed = 5
+Acceleration = 35
+TurnSpeed = 360
+Attack = 1
+TimeBetweenAttacks = 2.3
+MaxHealth = 3
+Defense = 0
+SightDistance = 20.0
+Experience = 3
+Loot = Dictionary[Object, int]({
+null: 0,
+ExtResource("1_7kriq"): 2
+})
+metadata/_custom_type_script = "uid://blh0fur4b1phg"

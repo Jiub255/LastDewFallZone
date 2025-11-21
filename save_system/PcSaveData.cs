@@ -7,12 +7,13 @@ namespace Lastdew
 		long body = 0,
 		long feet = 0,
 		int injury = 0,
-		int attack = 0,
-		int defense = 0,
-		int engineering = 0,
-		int farming = 0,
-		int medical = 0,
-		int scavenging = 0)
+		int experience = 0,
+		int attack = 1,
+		int defense = 1,
+		int engineering = 1,
+		int farming = 1,
+		int medical = 1,
+		int scavenging = 1)
 	{
 		public PcData PcData { get; } = data;
 
@@ -24,6 +25,7 @@ namespace Lastdew
 
 		// Stats
 		public int Injury { get; } = injury;
+		public int Experience { get; } = experience;
 		public int Attack { get; } = attack;
 		public int Defense { get; } = defense;
 		public int Engineering { get; } = engineering;
@@ -38,6 +40,7 @@ namespace Lastdew
 			pc.Equipment.Body?.GetUid() ?? 0,
 			pc.Equipment.Feet?.GetUid() ?? 0,
 			pc.StatManager.Health.Injury,
+			pc.StatManager.Experience.Experience,
 			pc.StatManager.AttackBaseValue,
 			pc.StatManager.DefenseBaseValue,
 			pc.StatManager.EngineeringBaseValue,

@@ -9,11 +9,11 @@ namespace Lastdew
 		
 		private EnemyTarget _target;
 		
-		public const float TURN_SPEED = 360f;
 		private const string GETTING_HIT_ANIM_NAME = "CharacterArmature|HitRecieve_2";
 		private const string BLEND_AMOUNT_PATH = "parameters/movement_blend_tree/idle_move/blend_amount";
-		// TODO: Make EnemyData resource and get attack, speed, etc. from that.
-        private const int ATTACK = 10;
+		
+        [Export]
+		public EnemyData Data { get; private set; }
 
         public EnemyTarget Target
         {
@@ -26,10 +26,10 @@ namespace Lastdew
 	        }
         }
 
+        public int Health { get; private set; }
         public Vector3 LastTargetPosition { get; set; }
         public NavigationAgent3D NavigationAgent { get; private set; }
 		public AnimationNodeStateMachinePlayback AnimStateMachine { get; private set; }
-        public int Health { get; private set; } = 5;
 
         private EnemyStateMachine StateMachine { get; set; }
 		private AnimationTree EnemyAnimationTree { get; set; }
@@ -43,6 +43,8 @@ namespace Lastdew
 			EnemyAnimationTree = GetNode<AnimationTree>("%AnimationTree");
 	        
 			StateMachine = new EnemyStateMachine(this);
+			
+			Health = Data.MaxHealth;
 		}
 		
 		public override void _Process(double delta)
@@ -64,18 +66,21 @@ namespace Lastdew
             EnemyAnimationTree.Set(BLEND_AMOUNT_PATH, blendAmount);
 		}
 		
-		public void GetHit(int damage, PlayerCharacter attackingPc)
+		/// <returns>true if hit killed enemy</returns>
+		public bool GetHit(int damage, PlayerCharacter attackingPc)
 		{
-			Health -= damage;
+			int actualDamage = Math.Max(0, damage - Data.Defense);
+			Health -= actualDamage;
             if (Health <= 0)
 			{
 				Health = 0;
 				Die();
-				return;
+				return true;
 			}
 			AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
             
-			//this.PrintDebug($"{Name} getting hit by {attackingPc.Name}");
+			this.PrintDebug($"{Data.EnemyType} {Name} getting hit by {attackingPc.Name} for {actualDamage} damage.\n" +
+			                $"Health: {Health}");
 			
 			// TODO: Have Enemy switch targets when hit? Maybe have a chance it happens?
 			// Also, change to combat state?
@@ -83,12 +88,14 @@ namespace Lastdew
 			// Target = new EnemyTarget(
 			// 	attackingPc,
 			// 	Vector3.Forward.Rotated(Vector3.Up, GD.Randf() * Mathf.Tau));
+			
+			return false;
 		}
 
 		// Called from animation method track
 		private void HitTarget()
 		{
-			Target?.Pc.GetHit(this, ATTACK);
+			Target?.Pc.GetHit(this, Data.Attack);
 		}
 
 		private void ChangeToIdleState()

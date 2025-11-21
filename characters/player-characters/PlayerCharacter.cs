@@ -112,6 +112,9 @@ namespace Lastdew
 			}
 			
 			int actualDamage = Mathf.Max(0, damage - StatManager.Defense);
+			this.PrintDebug($"{Data.Name} hit by {attackingEnemy.Data.EnemyType} " +
+			                $"{attackingEnemy.Name} for {actualDamage} damage.\n" +
+			                $"Injury: {StatManager.Health.Injury}");
 			bool incapacitated = StatManager.Health.TakeDamage(actualDamage);
 			StateMachine.GetHit(incapacitated);
 			if (incapacitated)
@@ -188,6 +191,7 @@ namespace Lastdew
 		public void ExitTree()
 		{
 			StateMachine.ExitTree();
+			StatManager.ExitTree();
 		}
 		
         public void SetSelectedIndicator(bool on)
@@ -313,7 +317,7 @@ namespace Lastdew
 	        foreach (Dictionary dict in sphereCastResults)
 	        {
 		        CollisionObject3D collider = (CollisionObject3D)dict["collider"];
-		        if (collider is not Enemy enemy || enemy.Health <= 0)
+		        if (collider is not Enemy { Health: > 0 } enemy)
 		        {
 			        continue;
 		        }

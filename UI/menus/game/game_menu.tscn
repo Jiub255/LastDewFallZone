@@ -32,11 +32,10 @@ theme_override_constants/margin_bottom = 20
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 
 [node name="Character" type="PanelContainer" parent="MarginContainer/TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ylxq8")
 script = ExtResource("2_vlrjn")
@@ -208,6 +207,7 @@ text = "Drop"
 
 [node name="Crafting" type="PanelContainer" parent="MarginContainer/TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_emk6a")
 script = ExtResource("8_2uyxp")

@@ -47,7 +47,11 @@ namespace Lastdew
 				return;
 			}
 			int attack = Pc.StatManager.Attack;
-			enemy.GetHit(attack, Pc);
+			bool killedEnemy = enemy.GetHit(attack, Pc);
+			if (killedEnemy)
+			{
+				Pc.StatManager.Experience.GainExperience(enemy.Data.Experience);
+			}
 			//this.PrintDebug("Enemy.GetHit() called.");
 		}
 		

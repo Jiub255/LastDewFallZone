@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -7,8 +6,7 @@ namespace Lastdew
 {
 	public class EnemyStateIdle(Enemy enemy) : EnemyState(enemy)
 	{
-		private const float SIGHT_DISTANCE = 20f;
-		private const float TIME_BETWEEN_CHECKS = 1f;
+		private const float TIME_BETWEEN_CHECKS = 0.25f;
 		private float CheckForTargetTimer { get; set; }
 		
 		public override void EnterState()
@@ -51,7 +49,7 @@ namespace Lastdew
 		private Array<Dictionary> SphereCast()
 		{
 			PhysicsDirectSpaceState3D spaceState = Enemy.GetWorld3D().DirectSpaceState;
-			SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };
+			SphereShape3D sphereShape = new() { Radius = Enemy.Data.SightDistance };
 			PhysicsShapeQueryParameters3D query = new()
 			{
 				ShapeRid = sphereShape.GetRid(),
@@ -61,8 +59,8 @@ namespace Lastdew
 				CollisionMask = 0b10
 			};
 
-			Array<Dictionary> result = spaceState.IntersectShape(query);
-			return result;
+			Array<Dictionary> results = spaceState.IntersectShape(query);
+			return results;
 		}
 	}
 }

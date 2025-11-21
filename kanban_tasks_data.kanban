@@ -48,7 +48,8 @@
 				"cd7d53a6-8ba3-41c8-855e-623615812278",
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
-				"31f7804f-979d-4e67-9d76-db0049a9350a"
+				"31f7804f-979d-4e67-9d76-db0049a9350a",
+				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be"
 			]
 		},
 		{
@@ -56,9 +57,11 @@
 			"title": "DOING",
 			"tasks": [
 				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
+				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
 				"2a55064d-caa2-4475-8ead-e4d5c7db6466",
-				"18aa9dce-2759-4551-81bb-5c681f7e1987"
+				"18aa9dce-2759-4551-81bb-5c681f7e1987",
+				"a4948b53-c369-4892-a02a-68bc54a20e7b"
 			]
 		},
 		{
@@ -116,7 +119,8 @@
 				"43aa14f9-20a4-4fbe-aaec-cffd2c7c7955",
 				"1dd34408-ff72-4b11-a37c-91fef3827e18",
 				"04003aba-42e8-4b2e-a52a-533f72b55ac3",
-				"567ce454-968a-44d7-98ac-59e2277756ec"
+				"567ce454-968a-44d7-98ac-59e2277756ec",
+				"d6684381-c224-494f-a6dc-600f0bca7389"
 			]
 		},
 		{
@@ -159,11 +163,9 @@
 			"uuid": "cb445b97-3f31-4e34-bb97-47dcecba7c8c",
 			"title": "TODO",
 			"tasks": [
-				"d6684381-c224-494f-a6dc-600f0bca7389",
 				"34e912a0-057e-4b11-94de-32e8f8ee6ba0",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
-				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"bc28b844-8360-4095-b52b-105b42061993",
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
@@ -568,7 +570,7 @@
 		{
 			"uuid": "9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
 			"title": "Experience/Leveling system",
-			"description": "Not sure how to implement it yet. Get experience for doing anything? Probably yeah.\nCombat, looting, building, crafting, healing someone (medical), collecting/making resources.\nChoose what stats get raised, classic exp/level style? Or like Morrowind, where using the stat increases it? Or something different?\nCould maybe just do a shared team exp, and anything anyone does adds to it.\n\tThen when it levels, everyone levels up.\n\tCould be tedious to level a bunch of pcs at once though. Also, how do they level?\nHow to level pcs?\n\tAutomatically/randomly?\n\tOr manually, using some skill point system?\n\tCould mix the two, have it so you can rank each pc's stats 1 - 6 (or however many). Then just apply whatever amount of points to each according to their rank. Then you could control their leveling, but still auto level a large team. Maybe each pc comes with their rankings randomized and you can change them to suit your needs if you want.",
+			"description": "Not sure how to implement it yet. Get experience for doing anything? Probably yeah.\nCombat, looting, building, crafting, healing someone (medical), collecting/making resources.\nChoose what stats get raised, classic exp/level style? Or like Morrowind, where using the stat increases it? Or something different?\nCould maybe just do a shared team exp, and anything anyone does adds to it.\n\tThen when it levels, everyone levels up.\n\tCould be tedious to level a bunch of pcs at once though. Also, how do they level?\nHow to level pcs?\n\tAutomatically/randomly?\n\tOr manually, using some skill point system?\n\tCould mix the two, have it so you can rank each pc's stats 1 - 6 (or however many). Then just apply whatever amount of points to each according to their rank. Then you could control their leveling, but still auto level a large team. Maybe each pc comes with their rankings randomized and you can change them to suit your needs if you want.\nFor now, just gonna give exp to the pc that does the thing. I guess just give the exp for killing enemies to whoever delivers the final blow. Or do it based on damage/percent of total life taken? \nHave exp number popups every time someone gets exp.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1030,7 +1032,7 @@
 		{
 			"uuid": "d6684381-c224-494f-a6dc-600f0bca7389",
 			"title": "Can TeamData and PcManager be combined?",
-			"description": "",
+			"description": "Probably not since TeamData gets passed to the UI and the PcManager.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -1039,6 +1041,20 @@
 			"title": "Need different MenuSelectedIndex for scavenging maybe",
 			"description": "Causing index errors, I think from having a higher menu selected index, then going scavenging with a smaller team than that index so it throws an index out of bounds exception.\nMight help with splitting Mission team data from TeamData.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "a4948b53-c369-4892-a02a-68bc54a20e7b",
+			"title": "Make EnemyData class",
+			"description": "Holds attack, defense, speed?, exp, loot?, sight range, etc",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
+			"title": "Have health bars above enemies",
+			"description": "Maybe do damage amount popups too?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

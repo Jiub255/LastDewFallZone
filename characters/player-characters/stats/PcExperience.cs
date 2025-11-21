@@ -4,6 +4,7 @@ namespace Lastdew
 {
 	public class PcExperience
 	{
+		public event Action<string> OnExperienceGained;
 		public event Action OnLevelUp;
 
 		public int Experience { get; private set; }
@@ -24,6 +25,7 @@ namespace Lastdew
 			{
 				LevelUp();
 			}
+			OnExperienceGained?.Invoke($"{experienceGained} xp");
 			this.PrintDebug($"Gained {experienceGained} experience, total: {Experience}, level: {Level}");
 		}
 

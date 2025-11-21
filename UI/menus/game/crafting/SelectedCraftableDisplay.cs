@@ -13,7 +13,7 @@ namespace Lastdew
 		private Button CraftButton { get; set; }
 		private Craftables Craftables { get; set; }
 		private InventoryManager Inventory { get; set; }
-		private PackedScene RecipeCostScene { get; set; } = GD.Load<PackedScene>(UiDs.RECIPE_COST_DISPLAY);
+		private PackedScene RecipeCostScene { get; set; } = GD.Load<PackedScene>(Uids.RECIPE_COST_DISPLAY);
 
 		public override void _Ready()
 		{

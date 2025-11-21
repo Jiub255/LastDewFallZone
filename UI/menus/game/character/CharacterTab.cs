@@ -8,7 +8,7 @@ namespace Lastdew
 		private InventoryManager InventoryManager { get; set; }
 		private GridContainer ItemsGrid { get; set; }
 		private SelectedItemPanel SelectedItemPanel { get; set; }
-		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>(UiDs.ITEM_BUTTON);
+		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>(Uids.ITEM_BUTTON);
 		private CharacterDisplay CharacterDisplay { get; set; }
 		private EquipmentDisplay EquipmentDisplay { get; set; }
 		private List<ItemButton> Buttons { get; } = [];

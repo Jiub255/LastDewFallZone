@@ -71,6 +71,7 @@ namespace Lastdew
 			{
 				Pc.CollectLoot(kvp.Key, kvp.Value);
 			}
+			Pc.StatManager.Experience.GainExperience(LootContainer.Experience);
 			LootContainer.Empty = true;
 		}
 	}

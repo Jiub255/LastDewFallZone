@@ -4,7 +4,7 @@ namespace Lastdew
 	{
 		public override void EnterState()
 		{
-			pc.MovementTarget = new MovementTarget();
+			Pc.MovementTarget = new MovementTarget();
 		}
 		public override void ExitState() {}
 		public override void PhysicsProcessSelected(float delta) {}

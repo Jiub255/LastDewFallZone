@@ -47,6 +47,7 @@ namespace Lastdew
 		private InventoryManager Inventory { get; set; }
 		private MeshInstance3D SelectedIndicator { get; set; }
 		private float InvulnerabilityTimer { get; set; }
+		private PackedScene NumberPopupScene { get; } = GD.Load<PackedScene>(Uids.NUMBER_POPUP);
 		
 		// TODO: Initialize a new PC with just PcData, not PcSaveData.
 		// Maybe just immediately make a new PcSaveData when you get a new PC, so Initialize can still be used.
@@ -55,7 +56,7 @@ namespace Lastdew
 			
 		}
 		
-		public async Task Initialize(InventoryManager inventoryManager, PcSaveData saveData)
+		public /*async Task*/ void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
 			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
 			PcAnimationTree = GetNode<AnimationTree>("%AnimationTree");
@@ -67,7 +68,9 @@ namespace Lastdew
 			Equipment = new PcEquipment(saveData);
 			Inventory = inventoryManager;
 
-			await SetupPcData(saveData.PcData);
+			StatManager.Experience.OnExperienceGained += ShowPopup;
+
+			/*await */SetupPcData(saveData.PcData);
 		}
 
         public void ProcessUnselected(double delta)
@@ -190,6 +193,8 @@ namespace Lastdew
 		
 		public void ExitTree()
 		{
+			StatManager.Experience.OnExperienceGained -= ShowPopup;
+			
 			StateMachine.ExitTree();
 			StatManager.ExitTree();
 		}
@@ -225,7 +230,7 @@ namespace Lastdew
 			}
 		}
 
-        private async Task SetupPcData(PcData data)
+        private /*async Task*/ void SetupPcData(PcData data)
         {
 			Data = data;
 			
@@ -345,6 +350,13 @@ namespace Lastdew
 
 	        Array<Dictionary> results = spaceState.IntersectShape(query);
 	        return results;
+        }
+
+        private void ShowPopup(string text)
+        {
+	        NumberPopup3d popup = (NumberPopup3d)NumberPopupScene.Instantiate();
+	        CallDeferred(Node.MethodName.AddChild, popup);
+	        popup.CallDeferred(NumberPopup3d.MethodName.Show, text);
         }
 	}
 }

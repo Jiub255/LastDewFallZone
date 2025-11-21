@@ -9,6 +9,7 @@ namespace Lastdew
 		public GameMenu GameMenu { get; private set; }
 		public BuildMenu BuildMenu { get; private set; }
 		public MapMenu MapMenu { get; private set; }
+		
 		private bool AnyMenuOpen { get; set; }
 		private GameState CurrentState { get; set; }
 		

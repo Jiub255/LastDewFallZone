@@ -17,19 +17,19 @@ namespace Lastdew
         private AcceptDialog AcceptDialog { get; set; }
         private VBoxContainer Column1 { get; set; }
         private VBoxContainer Column2 { get; set; }
-        private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(UiDs.STATS_TO_CRAFT_EDITOR);
-        private PackedScene RecipeCostsScene { get; } = GD.Load<PackedScene>(UiDs.RECIPE_COSTS_EDITOR);
-        private PackedScene RequiredBuildingsScene { get; } = GD.Load<PackedScene>(UiDs.REQUIRED_BUILDINGS_EDITOR);
-        private PackedScene ScrapResultsScene { get; } = GD.Load<PackedScene>(UiDs.SCRAP_RESULTS_EDITOR);
-        private PackedScene RarityEditorScene { get; } = GD.Load<PackedScene>(UiDs.RARITY_EDITOR);
-        private PackedScene TagsEditorScene { get; } = GD.Load<PackedScene>(UiDs.TAGS_EDITOR);
-        private PackedScene ReusableEditorScene { get; } = GD.Load<PackedScene>(UiDs.REUSABLE_EDITOR);
-        private PackedScene EquipmentBonusesScene { get; } = GD.Load<PackedScene>(UiDs.EQUIPMENT_BONUSES_EDITOR);
-        private PackedScene EquipmentTypeScene { get; } = GD.Load<PackedScene>(UiDs.EQUIPMENT_TYPE_EDITOR);
-        private PackedScene StatsToEquipScene { get; } = GD.Load<PackedScene>(UiDs.STATS_TO_EQUIP_EDITOR);
-        private PackedScene BuildingTypeScene { get; } = GD.Load<PackedScene>(UiDs.BUILDING_TYPE_EDITOR);
-        private PackedScene SceneUidScene { get; } = GD.Load<PackedScene>(UiDs.SCENE_UID_EDITOR);
-        private PackedScene EffectsScene { get; } = GD.Load<PackedScene>(UiDs.EFFECTS_EDITOR);
+        private PackedScene StatsToCraftScene { get; } = GD.Load<PackedScene>(Uids.STATS_TO_CRAFT_EDITOR);
+        private PackedScene RecipeCostsScene { get; } = GD.Load<PackedScene>(Uids.RECIPE_COSTS_EDITOR);
+        private PackedScene RequiredBuildingsScene { get; } = GD.Load<PackedScene>(Uids.REQUIRED_BUILDINGS_EDITOR);
+        private PackedScene ScrapResultsScene { get; } = GD.Load<PackedScene>(Uids.SCRAP_RESULTS_EDITOR);
+        private PackedScene RarityEditorScene { get; } = GD.Load<PackedScene>(Uids.RARITY_EDITOR);
+        private PackedScene TagsEditorScene { get; } = GD.Load<PackedScene>(Uids.TAGS_EDITOR);
+        private PackedScene ReusableEditorScene { get; } = GD.Load<PackedScene>(Uids.REUSABLE_EDITOR);
+        private PackedScene EquipmentBonusesScene { get; } = GD.Load<PackedScene>(Uids.EQUIPMENT_BONUSES_EDITOR);
+        private PackedScene EquipmentTypeScene { get; } = GD.Load<PackedScene>(Uids.EQUIPMENT_TYPE_EDITOR);
+        private PackedScene StatsToEquipScene { get; } = GD.Load<PackedScene>(Uids.STATS_TO_EQUIP_EDITOR);
+        private PackedScene BuildingTypeScene { get; } = GD.Load<PackedScene>(Uids.BUILDING_TYPE_EDITOR);
+        private PackedScene SceneUidScene { get; } = GD.Load<PackedScene>(Uids.SCENE_UID_EDITOR);
+        private PackedScene EffectsScene { get; } = GD.Load<PackedScene>(Uids.EFFECTS_EDITOR);
 
 
         public override void _Ready()

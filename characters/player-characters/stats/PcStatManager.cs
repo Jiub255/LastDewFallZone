@@ -10,12 +10,12 @@ namespace Lastdew
 	{
 		private const int STAT_POINTS_GAINED_PER_LEVEL = 5;
 		
-		private Stat _attack;
-		private Stat _defense;
-		private Stat _engineering;
-		private Stat _farming;
-		private Stat _medical;
-		private Stat _scavenging;
+		private readonly Stat _attack;
+		private readonly Stat _defense;
+		private readonly Stat _engineering;
+		private readonly Stat _farming;
+		private readonly Stat _medical;
+		private readonly Stat _scavenging;
 
 		public PcHealth Health { get; }
 		public PcExperience Experience { get; }

@@ -24,7 +24,7 @@ namespace Lastdew
 		private Button StartButton { get; set; }
 		private VBoxContainer PcDisplayParent { get; set; }
 		private CharacterSelector CharacterSelector { get; set; }
-		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(UiDs.PC_DISPLAY);
+		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(Uids.PC_DISPLAY);
 		private List<PlayerCharacter> UnselectedPcs { get; set; } = [];
 		private List<PlayerCharacter> SelectedPcs { get; set; } = [];
 		private int Index

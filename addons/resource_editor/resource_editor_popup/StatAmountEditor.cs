@@ -27,7 +27,7 @@ namespace Lastdew
         
         private SpinBox SpinBox { get; set; }
         private MenuButton MenuButton { get; set; }
-        private PopupMenu PopupMenu { get; set; }
+        private Godot.PopupMenu PopupMenu { get; set; }
         private Button DeleteButton { get; set; }
 
         public override void _Ready()

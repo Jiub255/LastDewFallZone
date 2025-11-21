@@ -7,7 +7,7 @@ namespace Lastdew
 		private const float TIME_BETWEEN_SPAWNS = 2f;
 		private int EnemiesToSpawn { get; set; }
 		private float Timer { get; set; }
-		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(UiDs.TEST_ENEMY);
+		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(Uids.TEST_ENEMY);
 		
 		public void Initialize(int enemiesToSpawn)
 		{

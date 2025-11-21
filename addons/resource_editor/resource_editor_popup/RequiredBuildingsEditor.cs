@@ -9,7 +9,7 @@ namespace Lastdew
 	{
         private HBoxContainer Parent { get; set; }
         private Button Add { get; set; }
-        private PackedScene BuildingEditScene { get; } = GD.Load<PackedScene>(UiDs.BUILDING_EDITOR);
+        private PackedScene BuildingEditScene { get; } = GD.Load<PackedScene>(Uids.BUILDING_EDITOR);
         private Array<long> Buildings
         {
             get

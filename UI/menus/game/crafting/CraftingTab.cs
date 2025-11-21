@@ -9,7 +9,7 @@ namespace Lastdew
 		private GridContainer UsablesGrid { get; set; }
 		private GridContainer MaterialsGrid { get; set; }
 		private SelectedCraftableDisplay SelectedDisplay { get; set; }
-		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(UiDs.CRAFTABLE_BUTTON);
+		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(Uids.CRAFTABLE_BUTTON);
 
 		public override void _Ready()
 		{

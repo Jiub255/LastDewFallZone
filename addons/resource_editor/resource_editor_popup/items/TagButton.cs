@@ -25,7 +25,7 @@ namespace Lastdew
         
         private Button DeleteButton { get; set; }
         private MenuButton MenuButton { get; set; }
-        private PopupMenu PopupMenu { get; set; }
+        private Godot.PopupMenu PopupMenu { get; set; }
 
         public override void _Ready()
         {

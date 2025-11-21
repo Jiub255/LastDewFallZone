@@ -14,7 +14,7 @@ namespace Lastdew
             {
                 Craftables.Add(craftable);
             }
-            CraftableDisplayScene = GD.Load<PackedScene>(UiDs.USABLE_ITEM_DISPLAY);
+            CraftableDisplayScene = GD.Load<PackedScene>(Uids.USABLE_ITEM_DISPLAY);
         }
         
         protected override void CreateNewCraftable()

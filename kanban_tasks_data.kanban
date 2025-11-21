@@ -57,7 +57,6 @@
 			"title": "DOING",
 			"tasks": [
 				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
-				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
 				"2a55064d-caa2-4475-8ead-e4d5c7db6466",
 				"18aa9dce-2759-4551-81bb-5c681f7e1987"
@@ -121,7 +120,9 @@
 				"567ce454-968a-44d7-98ac-59e2277756ec",
 				"d6684381-c224-494f-a6dc-600f0bca7389",
 				"387e69e2-2724-434d-b4a8-4c7468a2957b",
-				"a4948b53-c369-4892-a02a-68bc54a20e7b"
+				"a4948b53-c369-4892-a02a-68bc54a20e7b",
+				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
+				"006b7dbc-50f5-463d-9707-32116da84eba"
 			]
 		},
 		{
@@ -146,18 +147,21 @@
 				"d7bc729f-5541-4e3e-8fba-d50a028ac220",
 				"1cb946a4-92a0-412e-9b77-3448e6cf41ac",
 				"a4d0e570-7ce5-42f3-b99b-054fc2f936e1",
-				"668f9df0-c1d7-4814-8809-bc08d8154352"
+				"668f9df0-c1d7-4814-8809-bc08d8154352",
+				"db4207f5-25f4-47f4-a9ef-2a048932b022",
+				"c04e7892-3435-4848-9db8-aef6259850d4",
+				"def412da-a96d-4d8c-93ab-7cf5778e9957",
+				"b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
+				"74a5479b-8536-4423-ab87-0302482f6a6a"
 			]
 		},
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
 				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
-				"db4207f5-25f4-47f4-a9ef-2a048932b022",
-				"c04e7892-3435-4848-9db8-aef6259850d4",
-				"def412da-a96d-4d8c-93ab-7cf5778e9957"
+				"d9eab95c-ae57-499e-8487-d18a9e257242",
+				"3b068224-1183-474c-ae22-d1cafb3fab4c"
 			]
 		},
 		{
@@ -970,7 +974,7 @@
 		{
 			"uuid": "b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
 			"title": "Clicking Pcs HUD counts as a click in the world",
-			"description": "Below fix didn't actually work. Not sure why yet.\nFIXED by putting GetViewport().SetInputAsHandled() in PcButton.",
+			"description": "FIXED by putting GetViewport().SetInputAsHandled() in PcButton, using _UnhandledInput for game world events, and making sure every control node has mouse filter to ignore or pass unless it need to be stop.\nUiManager node was the one with mouse filter stop, so nothing was getting past it. ",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -1040,7 +1044,7 @@
 		{
 			"uuid": "def412da-a96d-4d8c-93ab-7cf5778e9957",
 			"title": "Need different MenuSelectedIndex for scavenging maybe",
-			"description": "Causing index errors, I think from having a higher menu selected index, then going scavenging with a smaller team than that index so it throws an index out of bounds exception.\nMight help with splitting Mission team data from TeamData.",
+			"description": "FIXED by setting TeamData.MenuSelectedIndex to 0 from PcManager.SpawnPcs(). Also set TeamData.SelectedIndex to null.\nCausing index errors, I think from having a higher menu selected index, then going scavenging with a smaller team than that index so it throws an index out of bounds exception.\nMight help with splitting Mission team data from TeamData.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -1063,6 +1067,34 @@
 			"title": "Separate out CharacterBody3D from PlayerCharacter,  make it a child instead.",
 			"description": "Actually don't, it messes up ClickHandler being able to send the whole PlayerCharacter object through its event.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "006b7dbc-50f5-463d-9707-32116da84eba",
+			"title": "Make it so camera dragging doesn't unselect pc",
+			"description": "Only unselect if you press and release the RMB without moving the mouse.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "74a5479b-8536-4423-ab87-0302482f6a6a",
+			"title": "Can't open any menus from home base scene",
+			"description": "FIXED by changing _GuiInput() to _Input in UiManager.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "d9eab95c-ae57-499e-8487-d18a9e257242",
+			"title": "Game menu character selection broken",
+			"description": "Also throwing a bunch of errors when you close the menu, might be related.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "3b068224-1183-474c-ae22-d1cafb3fab4c",
+			"title": "Map menu not clickable",
+			"description": "",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

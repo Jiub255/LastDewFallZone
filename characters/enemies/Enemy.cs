@@ -79,8 +79,8 @@ namespace Lastdew
 			}
 			AnimStateMachine.Travel(GETTING_HIT_ANIM_NAME);
             
-			this.PrintDebug($"{Data.EnemyType} {Name} getting hit by {attackingPc.Name} for {actualDamage} damage.\n" +
-			                $"Health: {Health}");
+			// this.PrintDebug($"{Data.EnemyType} {Name} getting hit by {attackingPc.Name} for {actualDamage} damage.\n" +
+			//                 $"Health: {Health}");
 			
 			// TODO: Have Enemy switch targets when hit? Maybe have a chance it happens?
 			// Also, change to combat state?

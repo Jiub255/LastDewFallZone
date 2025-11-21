@@ -8,7 +8,6 @@ namespace Lastdew
 {
 	public class TeamData
 	{
-		public event Action OnPcsInstantiated;
 		public event Action OnMenuSelectedChanged;
 		
 		private readonly List<PlayerCharacter> _pcs = [];
@@ -73,11 +72,6 @@ namespace Lastdew
 		public void ClearPcs()
 		{
 			_pcs.Clear();
-		}
-		
-		public void SendPcsInstantiatedSignal()
-		{
-			OnPcsInstantiated?.Invoke();
 		}
 
 		private void TurnOnPcSelectedIndicator(PlayerCharacter pc)

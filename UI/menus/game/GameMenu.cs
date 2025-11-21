@@ -33,8 +33,8 @@ namespace Lastdew
 		public override void Close()
 		{
 			base.Close();
-			
-			if (TeamData.SelectedIndex != null)
+
+			if (TeamData?.SelectedIndex != null)
 			{
 				TeamData.MenuSelectedIndex = (int)TeamData.SelectedIndex;
 			}

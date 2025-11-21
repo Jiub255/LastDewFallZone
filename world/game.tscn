@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvqh38ovds5vf"]
+[gd_scene load_steps=12 format=3 uid="uid://dvqh38ovds5vf"]
 
 [ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://world/Game.cs" id="1_e8jue"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://world/camera/camera.tscn" id="2_hliwg"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://6n0ajh50ivs0" path="res://UI/menus/build/build_menu.tscn" id="8_peygw"]
 [ext_resource type="Script" uid="uid://cqpu56xet75gu" path="res://UI/menus/build/BuildMenu.cs" id="9_lclbi"]
 [ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/menus/map/map_menu.tscn" id="10_km2cl"]
+[ext_resource type="Environment" uid="uid://demmrxsekmoyp" path="res://world/environment.tres" id="11_hliwg"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_e8jue")
@@ -34,6 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("4_d65k2")
 
 [node name="MainMenu" parent="UiManager" instance=ExtResource("5_fuoxl")]
@@ -58,3 +60,6 @@ script = ExtResource("9_lclbi")
 [node name="MapMenu" parent="UiManager" instance=ExtResource("10_km2cl")]
 unique_name_in_owner = true
 visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("11_hliwg")

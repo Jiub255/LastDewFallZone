@@ -12,12 +12,6 @@ namespace Lastdew
 		private Label NameLabel { get; set; }
 		private Button RemoveButton { get; set; }
 
-		public override void _Ready()
-		{
-			base._Ready();
-			
-		}
-
 		public override void _ExitTree()
 		{
 			base._ExitTree();
@@ -30,14 +24,14 @@ namespace Lastdew
 			Icon = GetNode<TextureRect>("%Icon");
 			NameLabel = GetNode<Label>("%Name");
 			RemoveButton = GetNode<Button>("%RemoveButton");
-
 			RemoveButton.Pressed += RemovePc;
+			
 			if (pc == null)
 			{
 				GD.PushError("PlayerCharacter is null");
 				return;
 			}
-			this.PrintDebug($"PC: {pc.Data.Name}");
+			
 			Pc = pc;
 			Icon.Texture = pc.Data.Icon;
 			NameLabel.Text = pc.Data.Name;

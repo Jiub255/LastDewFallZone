@@ -121,9 +121,9 @@ namespace Lastdew
             }	
         }
 
-        public override void _Input(InputEvent @event)
+        public override void _UnhandledInput(InputEvent @event)
         {
-	        base._Input(@event);
+	        base._UnhandledInput(@event);
 
 	        switch (@event)
 	        {

@@ -17,10 +17,6 @@ namespace Lastdew
 		{
 			base._Ready();
 			
-			PcIcon = GetNode<TextureRect>("%Icon");
-			PcName = GetNode<RichTextLabel>("%Name");
-			PainBar = GetNode<ProgressBar>("%PainBar");
-			InjuryBar = GetNode<ProgressBar>("%InjuryBar");
 			
 			//Pressed += SelectPc;
 		}
@@ -40,12 +36,18 @@ namespace Lastdew
 			if (@event.IsLeftClick())
 			{
 				SelectPc();
+				GetViewport().SetInputAsHandled();
 			}
 		}
 
 		// Called in a "call deferred" from another script (HUD). Still needs to be public?
 		public void Setup(PlayerCharacter pc)
 		{
+			PcIcon = GetNode<TextureRect>("%Icon");
+			PcName = GetNode<RichTextLabel>("%Name");
+			PainBar = GetNode<ProgressBar>("%PainBar");
+			InjuryBar = GetNode<ProgressBar>("%InjuryBar");
+			
 			PcIcon.Texture = pc.Data.Icon;
 			PcName.Text = pc.Data.Name;
 			Pc = pc;
@@ -68,7 +70,6 @@ namespace Lastdew
 		
 		private void SelectPc()
 		{
-			GetViewport().SetInputAsHandled();
 			OnSelectPc?.Invoke(Pc);
 		}
 	}

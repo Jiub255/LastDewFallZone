@@ -37,6 +37,7 @@ current_tab = 0
 [node name="Character" type="PanelContainer" parent="MarginContainer/TabContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ylxq8")
 script = ExtResource("2_vlrjn")
 metadata/_tab_index = 0
@@ -79,6 +80,7 @@ text = "Next"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"RichTextLabelLarge"
 bbcode_enabled = true
 text = "[center]James[/center]"
@@ -94,6 +96,7 @@ expand_mode = 5
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 text = "Level: 2
 Attack: 5
 Defense: 3
@@ -146,6 +149,7 @@ layout_mode = 2
 
 [node name="ItemsPanel" type="PanelContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/ItemsPanel"]
 layout_mode = 2
@@ -168,6 +172,7 @@ columns = 7
 [node name="SelectedItemPanel" type="PanelContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 1
 script = ExtResource("5_fxjof")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel"]
@@ -189,6 +194,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Character/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -209,6 +215,7 @@ text = "Drop"
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_emk6a")
 script = ExtResource("8_2uyxp")
 metadata/_tab_index = 1
@@ -232,6 +239,7 @@ current_tab = 0
 
 [node name="All" type="Control" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs"]
 layout_mode = 2
+mouse_filter = 1
 metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs/All"]
@@ -253,6 +261,7 @@ layout_mode = 2
 [node name="Equipment" type="Control" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs"]
 visible = false
 layout_mode = 2
+mouse_filter = 1
 metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs/Equipment"]
@@ -274,6 +283,7 @@ layout_mode = 2
 [node name="Usable Items" type="Control" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs"]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 metadata/_tab_index = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs/Usable Items"]
@@ -295,6 +305,7 @@ layout_mode = 2
 [node name="Crafting Materials" type="Control" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs"]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 metadata/_tab_index = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/CraftablesTabs/Crafting Materials"]
@@ -317,6 +328,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 script = ExtResource("9_wfr7w")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Crafting/MarginContainer/HBoxContainer/SelectedCraftableDisplay"]

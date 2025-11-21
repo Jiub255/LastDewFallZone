@@ -5,11 +5,6 @@ using Godot;
 
 namespace Lastdew
 {
-	/// <summary>
-	/// TODO: Add RemoveFromTeam() method,
-	/// deal with UnselectedPcs getting emptied by adding to team,
-	/// disable start button until SelectedPcs is non-empty.
-	/// </summary>
 	public partial class TeamSelectScreen : MarginContainer
 	{
 		public event Action<PackedScene, List<PcSaveData>> OnStartPressed;
@@ -132,7 +127,6 @@ namespace Lastdew
 			PcDisplay pcDisplay = (PcDisplay)PcDisplayScene.Instantiate();
 			PcDisplayParent.CallDeferred(Node.MethodName.AddChild, pcDisplay);
 			PlayerCharacter pc = UnselectedPcs[Index];
-			this.PrintDebug($"Index: {Index}, Pc: {pc.Data.Name}");
 			pcDisplay.Initialize(pc);
 			pcDisplay.OnRemovePc += RemoveFromTeam;
 			return pc;
@@ -141,9 +135,9 @@ namespace Lastdew
 		private void StartScavenging()
 		{
 			List<PcSaveData> selectedPcDatas = SelectedPcs.Select(pc => new PcSaveData(pc)).ToList();
+			TeamData.UnusedPcDatas.Clear(); 
 			foreach (PcSaveData pcData in UnselectedPcs.Select(pc => new PcSaveData(pc)))
 			{
-				TeamData.UnusedPcDatas.Clear();
 				TeamData.UnusedPcDatas.Add(pcData);
 			}
 			OnStartPressed?.Invoke(LocationData.Scene, selectedPcDatas);

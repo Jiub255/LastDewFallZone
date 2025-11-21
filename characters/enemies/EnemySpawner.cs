@@ -3,17 +3,24 @@ using Godot;
 namespace Lastdew
 {
 	public partial class EnemySpawner : Node3D
-	{	
-		private const float TIME_BETWEEN_SPAWNS = 2f;
-		private int EnemiesToSpawn { get; set; }
+	{
+		[Export]
+		private float TimeBetweenSpawns { get; set; } = 5f;
+		[Export]
+		private double StartDelay { get; set; } = 5f;
+		[Export]
+		private int EnemiesToSpawn { get; set; } = 1;
 		private float Timer { get; set; }
 		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(Uids.TEST_ENEMY);
-		
-		public void Initialize(int enemiesToSpawn)
-		{
-			EnemiesToSpawn = enemiesToSpawn;
-		}
 
+		public override void _Ready()
+		{
+			base._Ready();
+			
+			// So that enemy spawning starts immediately after the start delay.
+			Timer = TimeBetweenSpawns;
+		}
+		
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
@@ -22,8 +29,15 @@ namespace Lastdew
 			{
 				return;
 			}
+
+			StartDelay -= delta;
+			if (StartDelay > 0)
+			{
+				return;
+			}
+			
 			Timer += (float)delta;
-			if (Timer > TIME_BETWEEN_SPAWNS)
+			if (Timer > TimeBetweenSpawns)
 			{
 				Timer = 0;
 				SpawnEnemy();

@@ -109,9 +109,9 @@ namespace Lastdew
 			}
 			
 			int actualDamage = Mathf.Max(0, damage - StatManager.Defense);
-			this.PrintDebug($"{Data.Name} hit by {attackingEnemy.Data.EnemyType} " +
-			                $"{attackingEnemy.Name} for {actualDamage} damage.\n" +
-			                $"Injury: {StatManager.Health.Injury}");
+			// this.PrintDebug($"{Data.Name} hit by {attackingEnemy.Data.EnemyType} " +
+			//                 $"{attackingEnemy.Name} for {actualDamage} damage.\n" +
+			//                 $"Injury: {StatManager.Health.Injury}");
 			bool incapacitated = StatManager.Health.TakeDamage(actualDamage);
 			StateMachine.GetHit(incapacitated);
 			if (incapacitated)
@@ -159,10 +159,10 @@ namespace Lastdew
 		
 		public void UseItem(UsableItem item)
 		{
-			this.PrintDebug($"Using {item.Name}, effects: {item.Effects.Count}");
+			//this.PrintDebug($"Using {item.Name}, effects: {item.Effects.Count}");
 			foreach (Effect effect in item.Effects)
 			{
-				this.PrintDebug($"Effect: {effect}");
+				//this.PrintDebug($"Effect: {effect}");
 				effect.ApplyEffect(this);
 			}
 			if (!item.Reusable)

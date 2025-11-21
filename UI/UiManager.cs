@@ -21,6 +21,11 @@ namespace Lastdew
 			BuildMenu = GetNode<BuildMenu>("%BuildMenu");
 			MapMenu = GetNode<MapMenu>("%MapMenu");
 
+			CloseMenu(Hud);
+			CloseMenu(GameMenu);
+			CloseMenu(BuildMenu);
+			CloseMenu(MapMenu);
+
 			ChangeState(new GameStateStart());			
 		}
 
@@ -36,6 +41,8 @@ namespace Lastdew
 
         public override void _Input(InputEvent @event)
 		{
+			//this.PrintDebug($"Input event: {@event}");
+			
 			base._Input(@event);
 			
 			if (AnyMenuOpen && @event.IsActionPressed(InputNames.EXIT_MENU))
@@ -53,8 +60,8 @@ namespace Lastdew
 			GameMenu.Initialize(teamData, inventoryManager);
 			MapMenu.Initialize(teamData);
 
-			MainMenu.Close();
-			Hud.Open();
+			CloseMenu(MainMenu);
+			OpenMenu(Hud);
 			
 			GetTree().Paused = false;
 		}
@@ -68,7 +75,6 @@ namespace Lastdew
 			CurrentState = gameState;
 			SubscribeState(gameState);
 			CurrentState.EnterState(MainMenu);
-			this.PrintDebug($"Entering {gameState.GetType()}");
         }
 		
 		private void Toggle(Menu menu)
@@ -83,9 +89,8 @@ namespace Lastdew
 				{
 					CloseAllMenus();
 				}
-				menu.Open();
-				Hud.Close();
-				AnyMenuOpen = true;
+				CloseMenu(Hud);
+				OpenMenu(menu);
 				GetTree().Paused = true;
 			}
 		}
@@ -110,14 +115,27 @@ namespace Lastdew
 			Toggle(BuildMenu);
 		}
 
+		private void OpenMenu(Menu menu)
+		{
+			AddChild(menu);
+			menu.Open();
+			AnyMenuOpen = true;
+		}
+
+		private void CloseMenu(Menu menu)
+		{
+			menu.Close();
+			RemoveChild(menu);
+		}
+
 		private void CloseAllMenus()
 		{
-			GameMenu.Close();
-			BuildMenu.Close();
-			MapMenu.Close();
-			MainMenu.Close();
+			CloseMenu(GameMenu);
+			CloseMenu(BuildMenu);
+			CloseMenu(MapMenu);
+			CloseMenu(MainMenu);
 			
-			Hud.Open();
+			OpenMenu(Hud);
 			
 			AnyMenuOpen = false;
 			GetTree().Paused = false;

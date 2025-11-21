@@ -20,12 +20,12 @@ namespace Lastdew
 			Viewport = GetViewport();
 			Camera = Viewport.GetCamera3D();
 		}
-	
-		public override void _Process(double delta)
+
+		public override void _UnhandledInput(InputEvent @event)
 		{
-			base._Process(delta);
-			
-			if (Input.IsActionJustPressed(InputNames.SELECT))
+			base._UnhandledInput(@event);
+
+			if (@event.IsLeftClick())
 			{
 				GodotObject collisionObject = RaycastFromMouse(Viewport.GetMousePosition());
 				if (collisionObject != null)
@@ -34,7 +34,7 @@ namespace Lastdew
 				}
 			}
 		}
-	
+
 		private GodotObject RaycastFromMouse(Vector2 mousePosition)
 		{
 			Vector3 rayEnd = ToLocal(Camera.ProjectRayNormal(mousePosition) * RayLength);

@@ -31,6 +31,10 @@ namespace Lastdew
 			
 			Previous.Pressed -= PreviousPc;
 			Next.Pressed -= NextPc;
+			if (TeamData == null)
+			{
+				return;
+			}
 			TeamData.OnMenuSelectedChanged -= SetupDisplay;
 		}
 

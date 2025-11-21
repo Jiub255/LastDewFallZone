@@ -50,7 +50,11 @@ namespace Lastdew
 					button.OnPressed -= SelectedItemPanel.SetItem;
 				}
 			}
-			
+
+			if (InventoryManager == null)
+			{
+				return;
+			}			
 			InventoryManager.OnInventoryChanged -= PopulateInventoryUi;
 			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.SetupDisplay;
 			

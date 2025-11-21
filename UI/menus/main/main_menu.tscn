@@ -19,6 +19,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
 layout_mode = 2
@@ -28,6 +29,7 @@ theme_override_constants/separation = 12
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"RichTextLabelLarge"
 text = "Last Dew: Fall Zone"
 fit_content = true
@@ -81,12 +83,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background"]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background/PanelContainer"]
 layout_mode = 2

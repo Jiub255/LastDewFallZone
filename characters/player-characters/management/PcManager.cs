@@ -6,12 +6,17 @@ namespace Lastdew
 	public partial class PcManager : Node3D
 	{
 		private const float SPACE_BETWEEN_PCS = 1.5f;
-		
+		private const float MOUSE_MOVEMENT_THRESHOLD = 10f;
+
 		private TeamData TeamData { get; set; }
 		private PackedScene PcScene { get; set; }
-		
-		public void Initialize(TeamData teamData)
+		private Viewport Viewport { get; set; }
+		private bool DeselectHeld { get; set; }
+		private Vector2 StartingMousePosition { get; set; }
+
+	public void Initialize(TeamData teamData)
 		{
+			Viewport = GetViewport();
 			TeamData = teamData;
 			PcScene = GD.Load<PackedScene>(Uids.PC_BASE);
 		}
@@ -24,6 +29,7 @@ namespace Lastdew
 			{
 				return;
 			}
+			
 			for (int i = 0; i < TeamData.Pcs.Count; i++)
 			{
 				if (i == TeamData.SelectedIndex)
@@ -38,7 +44,17 @@ namespace Lastdew
 
 			if (Input.IsActionJustPressed(InputNames.DESELECT))
 			{
-				DeselectPc();
+				DeselectHeld = true;
+				StartingMousePosition = Viewport.GetMousePosition();
+			}
+
+			if (Input.IsActionJustReleased(InputNames.DESELECT))
+			{
+				DeselectHeld = false;
+				if (Viewport.GetMousePosition().DistanceTo(StartingMousePosition) < MOUSE_MOVEMENT_THRESHOLD)
+				{
+					DeselectPc();
+				}
 			}
 		}
 	
@@ -99,13 +115,10 @@ namespace Lastdew
 		
 		public /*async System.Threading.Tasks.Task*/ void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
-			//this.PrintDebug($"PcManager.SpawnPcs() called");
 			ClearPcs();
 			int i = 0;
 			foreach (PcSaveData pcSaveData in pcSaveDatas)
 			{
-				// TODO: How to work in the PcData with this part and saving/loading?
-				// Just keep their mesh enums as "stats"? Or have each PcData as an unchanging resource? Probably that.
 				PlayerCharacter pc = (PlayerCharacter)PcScene.Instantiate();
 				CallDeferred(Node.MethodName.AddChild, pc);
 				// TODO: Add a spawn location for pcs. Probably do a whole different system for spawning pcs eventually.
@@ -114,8 +127,9 @@ namespace Lastdew
 				/*await */pc.Initialize(inventoryManager, pcSaveData);
 				TeamData.AddPc(pc);
 			}
-			
-			TeamData.SendPcsInstantiatedSignal();
+
+			TeamData.SelectedIndex = null;
+			TeamData.MenuSelectedIndex = 0;
 		}
 		
 		private void DeselectPc()

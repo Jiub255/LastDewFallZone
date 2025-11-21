@@ -6,10 +6,7 @@ namespace Lastdew
 {
 	public partial class EquipmentDisplay : VBoxContainer
 	{
-		public List<Button> Buttons
-		{
-			get => ButtonsByType.Values.ToList<Button>();
-		}
+		public List<Button> Buttons => ButtonsByType.Values.ToList<Button>();
 		private TeamData TeamData { get; set; }
 		private Dictionary<EquipmentType, EquipmentButton> ButtonsByType { get; set; } = new();
 		private PlayerCharacter Pc { get; set; }
@@ -45,6 +42,11 @@ namespace Lastdew
 			foreach (EquipmentButton button in ButtonsByType.Values)
 			{
 				button.OnPressed -= Unequip;
+			}
+
+			if (TeamData == null)
+			{
+				return;
 			}
 			TeamData.OnMenuSelectedChanged -= SetNewPc;
 		}

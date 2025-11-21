@@ -173,6 +173,7 @@ namespace Lastdew
 			List<PcSaveData> pcSaveDatas = [];
 			pcSaveDatas.AddRange(TeamData.Pcs.Select(pc => new PcSaveData(pc)));
 			pcSaveDatas.AddRange(TeamData.UnusedPcDatas);
+			TeamData.UnusedPcDatas.Clear();
 			
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			Ui.Initialize(TeamData, InventoryManager);

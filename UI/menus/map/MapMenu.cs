@@ -35,7 +35,7 @@ namespace Lastdew
 		{
 			base.Close();
 			
-			if (TeamData.SelectedIndex != null)
+			if (TeamData?.SelectedIndex != null)
 			{
 				TeamData.MenuSelectedIndex = (int)TeamData.SelectedIndex;
 			}

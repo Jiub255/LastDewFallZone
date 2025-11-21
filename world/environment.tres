@@ -1,0 +1,14 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://demmrxsekmoyp"]
+
+[ext_resource type="Texture2D" uid="uid://bcw5gowhnwgnl" path="res://world/horn-koppe_spring_4k.exr" id="1_gnrip"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ndok2"]
+panorama = ExtResource("1_gnrip")
+energy_multiplier = 7.0
+
+[sub_resource type="Sky" id="Sky_xrodk"]
+sky_material = SubResource("PanoramaSkyMaterial_ndok2")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_xrodk")

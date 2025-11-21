@@ -32,26 +32,12 @@ namespace Lastdew
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			TeamData.OnPcsInstantiated += Setup;
-		}
-
-		public override void _ExitTree()
-		{
-			base._ExitTree();
-			
-			TeamData.OnPcsInstantiated -= Setup;
-		}
-
-		private void Setup()
-        {
-	        //this.PrintDebug("Hud.Setup() called");
             ClearPcButtons();
             foreach (PlayerCharacter pc in TeamData.Pcs)
             {
-				this.PrintDebug($"Setting up PcButton for {pc.Name}");
-                PcButton pcButton = PcButtonScene.Instantiate() as PcButton;
-                if (pcButton == null)
+	            if (PcButtonScene.Instantiate() is not PcButton pcButton)
                 {
+	                GD.PushError("PcButton scene did not instantiate correctly.");
 	                continue;
                 }
                 ButtonParent.CallDeferred(Node.MethodName.AddChild, pcButton);
@@ -59,13 +45,12 @@ namespace Lastdew
                 pcButton.OnSelectPc += TeamData.SelectPc;
                 PcButtons.Add(pcButton);
             }
-        }
+		}
 
         private void ClearPcButtons()
         {
 			foreach (PcButton pcButton in PcButtons)
 			{
-				this.PrintDebug($"Deleting PcButton");
 				pcButton.OnSelectPc -= TeamData.SelectPc;
 				pcButton.QueueFree();
 			}

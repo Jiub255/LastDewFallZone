@@ -49,8 +49,7 @@
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"31f7804f-979d-4e67-9d76-db0049a9350a",
-				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
-				"387e69e2-2724-434d-b4a8-4c7468a2957b"
+				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be"
 			]
 		},
 		{
@@ -121,6 +120,7 @@
 				"04003aba-42e8-4b2e-a52a-533f72b55ac3",
 				"567ce454-968a-44d7-98ac-59e2277756ec",
 				"d6684381-c224-494f-a6dc-600f0bca7389",
+				"387e69e2-2724-434d-b4a8-4c7468a2957b",
 				"a4948b53-c369-4892-a02a-68bc54a20e7b"
 			]
 		},
@@ -1061,7 +1061,7 @@
 		{
 			"uuid": "387e69e2-2724-434d-b4a8-4c7468a2957b",
 			"title": "Separate out CharacterBody3D from PlayerCharacter,  make it a child instead.",
-			"description": "",
+			"description": "Actually don't, it messes up ClickHandler being able to send the whole PlayerCharacter object through its event.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

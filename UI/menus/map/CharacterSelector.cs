@@ -41,6 +41,25 @@ namespace Lastdew
 			SetupStatsLabel(pc);
 		}
 
+		public void Disable()
+		{
+			NameLabel.Text = "";
+			CharacterIcon.Texture = null;
+			StatsLabel.Text = "";
+			Previous.Disabled = true;
+			Next.Disabled = true;
+			Previous.Visible = false;
+			Next.Visible = false;
+		}
+
+		public void Enable()
+		{
+			Previous.Disabled = false;
+			Next.Disabled = false;
+			Previous.Visible = true;
+			Next.Visible = true;
+		}
+
 		private void SetupStatsLabel(PlayerCharacter pc)
 		{
 			string statText =  $"Injury: {pc.StatManager.Health.Injury}\n"

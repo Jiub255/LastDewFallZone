@@ -87,6 +87,44 @@ namespace Lastdew
 			PlayerCharacter pc = SetupPcDisplay();
 			SelectedPcs.Add(pc);
 			UnselectedPcs.Remove(pc);
+			StartButton.Disabled = false;
+			if (UnselectedPcs.Count == 0)
+			{
+				CharacterSelector.Disable();
+				AddButton.Disabled = true;
+				AddButton.Visible = false;
+			}
+			else
+			{
+				// Doing this to avoid setting index below zero because the setter has a method that
+				// needs a valid index.
+				int index = Index - 1;
+				if (index < 0)
+				{
+					index = UnselectedPcs.Count - 1;
+				}
+				Index = index;
+			}
+		}
+
+		private void RemoveFromTeam(PcDisplay display)
+		{
+			SelectedPcs.Remove(display.Pc);
+			UnselectedPcs.Add(display.Pc);
+			display.OnRemovePc -= RemoveFromTeam;
+			display.QueueFree();
+			if (UnselectedPcs.Count == 1)
+			{
+				Index = 0;
+				AddButton.Disabled = false;
+				AddButton.Visible = true;
+				CharacterSelector.Enable();
+			}
+
+			if (SelectedPcs.Count == 0)
+			{
+				StartButton.Disabled = true;
+			}
 		}
 
 		private PlayerCharacter SetupPcDisplay()
@@ -94,7 +132,9 @@ namespace Lastdew
 			PcDisplay pcDisplay = (PcDisplay)PcDisplayScene.Instantiate();
 			PcDisplayParent.CallDeferred(Node.MethodName.AddChild, pcDisplay);
 			PlayerCharacter pc = UnselectedPcs[Index];
-			pcDisplay.Initialize(pc.Data.Icon, pc.Data.Name);
+			this.PrintDebug($"Index: {Index}, Pc: {pc.Data.Name}");
+			pcDisplay.Initialize(pc);
+			pcDisplay.OnRemovePc += RemoveFromTeam;
 			return pc;
 		}
 

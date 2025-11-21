@@ -49,12 +49,6 @@ namespace Lastdew
 		private float InvulnerabilityTimer { get; set; }
 		private PackedScene NumberPopupScene { get; } = GD.Load<PackedScene>(Uids.NUMBER_POPUP);
 		
-		// TODO: Initialize a new PC with just PcData, not PcSaveData.
-		// Maybe just immediately make a new PcSaveData when you get a new PC, so Initialize can still be used.
-		public void SetupNewPc(InventoryManager inventoryManager, PcData pcData)
-		{
-			
-		}
 		
 		public /*async Task*/ void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{

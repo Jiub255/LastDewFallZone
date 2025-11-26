@@ -14,25 +14,25 @@ namespace Lastdew
             mainMenu.Exit.InStartMenu = false;
         }
 
-        public override void HandleInput(InputEvent @event)
+        public override void ProcessState()
         {
-            if (@event.IsActionPressed(InputNames.GAME_MENU))
-			{
-                ToggleGameMenu();
-			}
-			else if (@event.IsActionPressed(InputNames.MAIN_MENU))
-			{
-                ToggleMainMenu();
-			}
-			else if (@event.IsActionPressed(InputNames.BUILD_MENU))
-			{
-                ToggleBuildMenu();
-			}
-			else if (@event.IsActionPressed(InputNames.MAP_MENU))
-			{
-				this.PrintDebug($"Map menu pressed");
-                ToggleMapMenu();
-			}
+	        if (Input.IsActionJustReleased(InputNames.GAME_MENU))
+	        {
+		        ToggleGameMenu();
+	        }
+	        else if (Input.IsActionJustReleased(InputNames.MAIN_MENU))
+	        {
+		        ToggleMainMenu();
+	        }
+	        else if (Input.IsActionJustReleased(InputNames.BUILD_MENU))
+	        {
+		        ToggleBuildMenu();
+	        }
+	        else if (Input.IsActionJustReleased(InputNames.MAP_MENU))
+	        {
+		        this.PrintDebug($"Map menu pressed");
+		        ToggleMapMenu();
+	        }
         }
     }
 }

@@ -14,6 +14,6 @@ namespace Lastdew
             mainMenu.Exit.InStartMenu = true;
         }
 
-        public override void HandleInput(InputEvent @event) {}
+        public override void ProcessState() {}
     }
 }

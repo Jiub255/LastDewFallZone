@@ -10,8 +10,8 @@ namespace Lastdew
 		public BuildMenu BuildMenu { get; private set; }
 		public MapMenu MapMenu { get; private set; }
 		
-		private bool AnyMenuOpen { get; set; }
 		private GameState CurrentState { get; set; }
+		private bool AnyMenuOpen { get; set; }
 		
 		public override void _Ready()
 		{
@@ -39,20 +39,18 @@ namespace Lastdew
             }
         }
 
-        public override void _Input(InputEvent @event)
-		{
-			//this.PrintDebug($"Input event: {@event}");
-			
-			base._Input(@event);
-			
-			if (AnyMenuOpen && @event.IsActionPressed(InputNames.EXIT_MENU))
-			{
-				CloseAllMenus();
-				return;
-			}
+        public override void _Process(double delta)
+        {
+	        base._Process(delta);
 
-			CurrentState.HandleInput(@event);
-		}
+	        if (AnyMenuOpen && Input.IsActionJustReleased(InputNames.EXIT_MENU))
+	        {
+		        CloseAllMenus();
+		        return;
+	        }
+	        
+	        CurrentState.ProcessState();
+        }
 		
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
@@ -62,6 +60,7 @@ namespace Lastdew
 
 			CloseMenu(MainMenu);
 			OpenMenu(Hud);
+			AnyMenuOpen = false;
 			
 			GetTree().Paused = false;
 		}
@@ -85,13 +84,8 @@ namespace Lastdew
 			}
 			else
 			{
-				if (AnyMenuOpen)
-				{
-					CloseAllMenus();
-				}
-				CloseMenu(Hud);
+				CloseAllMenus(false);
 				OpenMenu(menu);
-				GetTree().Paused = true;
 			}
 		}
 
@@ -117,25 +111,47 @@ namespace Lastdew
 
 		private void OpenMenu(Menu menu)
 		{
-			AddChild(menu);
+			if (menu.Visible)
+			{
+				return;
+			}
+			
 			menu.Open();
+			
+			if (menu == Hud)
+			{
+				return;
+			}
+			
 			AnyMenuOpen = true;
+			GetTree().Paused = true;
 		}
 
-		private void CloseMenu(Menu menu)
+		private static void CloseMenu(Menu menu)
 		{
+			if (!menu.Visible)
+			{
+				return;
+			}
+
 			menu.Close();
-			RemoveChild(menu);
 		}
 
-		private void CloseAllMenus()
+		private void CloseAllMenus(bool exceptHud = true)
 		{
 			CloseMenu(GameMenu);
 			CloseMenu(BuildMenu);
 			CloseMenu(MapMenu);
 			CloseMenu(MainMenu);
-			
-			OpenMenu(Hud);
+
+			if (exceptHud)
+			{
+				OpenMenu(Hud);
+			}
+			else
+			{
+				CloseMenu(Hud);
+			}
 			
 			AnyMenuOpen = false;
 			GetTree().Paused = false;

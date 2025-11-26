@@ -54,6 +54,7 @@ namespace Lastdew
 				pcButton.OnSelectPc -= TeamData.SelectPc;
 				pcButton.QueueFree();
 			}
+			PcButtons.Clear();
         }
     }
 }

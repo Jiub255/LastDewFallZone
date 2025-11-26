@@ -23,7 +23,18 @@ namespace Lastdew
 
 			Previous.Pressed += PreviousPc;
 			Next.Pressed += NextPc;
+			this.PrintDebug("CharacterDisplay ready");
 		}
+
+		// public override void _EnterTree()
+		// {
+		// 	base._EnterTree();
+		// 	
+		// 	
+		// 	Previous.Pressed += PreviousPc;
+		// 	Next.Pressed += NextPc;
+		// 	this.PrintDebug("CharacterDisplay enter tree");
+		// }
 
 		public override void _ExitTree()
 		{
@@ -36,6 +47,7 @@ namespace Lastdew
 				return;
 			}
 			TeamData.OnMenuSelectedChanged -= SetupDisplay;
+			this.PrintDebug("CharacterDisplay exit tree");
 		}
 
 		public void Initialize(TeamData teamData)

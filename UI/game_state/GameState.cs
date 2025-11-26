@@ -11,7 +11,7 @@ namespace Lastdew
         public event Action OnToggleMap;
 
         public abstract void EnterState(MainMenu mainMenu);
-        public abstract void HandleInput(InputEvent @event);
+        public abstract void ProcessState();
         
         protected void ToggleMainMenu()
         {

@@ -14,16 +14,12 @@ namespace Lastdew
             mainMenu.Exit.InStartMenu = false;
         }
 
-        public override void HandleInput(InputEvent @event)
+        public override void ProcessState()
         {
-            /*if (@event.IsActionPressed(InputNames.GAME_MENU))
-			{
-                ToggleGameMenu();
-			}
-			else */if (@event.IsActionPressed(InputNames.MAIN_MENU))
-			{
+            if (Input.IsActionJustReleased(InputNames.MAIN_MENU))
+            {
                 ToggleMainMenu();
-			}
+            }
         }
     }
 }

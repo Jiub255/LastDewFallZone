@@ -20,12 +20,9 @@ namespace Lastdew
 		{
 			base._GuiInput(@event);
 			
-			if (!ButtonDown && @event is InputEventMouseButton mouseButton)
+			if (!ButtonDown && @event.IsLeftClick())
 			{
-				if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
-				{
-					ButtonDown = true;
-				}
+				ButtonDown = true;
 			}
 			
 			if (ButtonDown && @event is InputEventMouseMotion mouseMotion)

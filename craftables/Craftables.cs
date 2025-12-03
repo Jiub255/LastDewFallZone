@@ -20,13 +20,16 @@ namespace Lastdew
 		// TODO: 1. Is Export necessary to save the dicts with the resource?
 		// and 2. Can it be done with C# dictionaries? Esp. if export not needed.
 		[Export]
-		public Godot.Collections.Dictionary<long, Building> Buildings { get; set; }
+		public Godot.Collections.Dictionary<long, Building> Buildings { get; set; } = [];
+
 		[Export]
-		public Godot.Collections.Dictionary<long, CraftingMaterial> CraftingMaterials { get; set; }
+		public Godot.Collections.Dictionary<long, CraftingMaterial> CraftingMaterials { get; set; } = [];
+
 		[Export]
-		public Godot.Collections.Dictionary<long, Equipment> Equipments { get; set;}
+		public Godot.Collections.Dictionary<long, Equipment> Equipments { get; set;} = [];
+
 		[Export]
-		public Godot.Collections.Dictionary<long, UsableItem> UsableItems { get; set; }
+		public Godot.Collections.Dictionary<long, UsableItem> UsableItems { get; set; } = [];
 
 		public int Count => Buildings.Count + CraftingMaterials.Count + Equipments.Count + UsableItems.Count;
 
@@ -52,14 +55,6 @@ namespace Lastdew
 				}
 				return null;
 			}
-		}
-
-		public Craftables() : base()
-		{
-			Buildings = [];
-			CraftingMaterials = [];
-			Equipments = [];
-			UsableItems = [];
 		}
 
 		public void PopulateDictionaries()

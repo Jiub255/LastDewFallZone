@@ -60,7 +60,7 @@ namespace Lastdew
 			AudioPlayer = (AudioStreamPlaybackPolyphonic)audioStreamPlayer.GetStreamPlayback();
 		}
 		
-		public /*async Task*/ void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
+		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
 			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
 			PcAnimationTree = GetNode<AnimationTree>("%AnimationTree");
@@ -74,7 +74,7 @@ namespace Lastdew
 
 			StatManager.Experience.OnExperienceGained += ShowPopup;
 
-			/*await */SetupPcData(saveData.PcData);
+			SetupPcData(saveData.PcData);
 		}
 
         public void ProcessUnselected(double delta)
@@ -237,7 +237,7 @@ namespace Lastdew
 			}
 		}
 
-        private /*async Task*/ void SetupPcData(PcData data)
+        private void SetupPcData(PcData data)
         {
 			Data = data;
 			
@@ -263,46 +263,6 @@ namespace Lastdew
 					mesh.QueueFree();
                 }
             }
-            
-			//await GetMugshotIcon();
-        }
-
-		// TODO: Data.Icon never gets set.
-        private async Task GetMugshotIcon()
-        {
-	        Camera3D camera = GetNode<Camera3D>("%MugshotCamera");
-	        await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
-	        await GetTree().ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-	        camera.Current = true;
-	        await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
-	        await GetTree().ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-	        
-	        Image screenshot = GetViewport().GetTexture().GetImage();
-	        //camera.Current = false;
-	        Image image = Image.CreateEmpty(648, 648, false, screenshot.GetFormat());
-	        image.BlitRect(
-		        screenshot,
-		        new Rect2I(252, 0, 648, 648),
-		        Vector2I.Zero);
-	        image.Resize(128, 128, Image.Interpolation.Trilinear);
-	        string path = $"res://characters/player-characters/management/pc_data/{Data.Name.ToSnakeCase()}.png";
-	        Error error = image.SavePng(path);
-	        this.PrintDebug($"image {image} saved to {path}");
-	        if (error != Error.Ok)
-	        {
-		        GD.PushError($"Error saving png: {error}");
-	        }
-
-	        System.Threading.Thread.Sleep(1000);
-	        
-	        Texture2D texture = GD.Load<Texture2D>(path);
-	        if (texture != null)
-	        {
-		        this.PrintDebug($"texture: {texture}");
-				Data.Icon = texture;
-	        }
-	        
-	        camera.QueueFree();
         }
 
         private void TryFindNearestEnemy()

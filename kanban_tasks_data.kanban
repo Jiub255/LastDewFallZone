@@ -528,7 +528,7 @@
 		{
 			"uuid": "bc28b844-8360-4095-b52b-105b42061993",
 			"title": "SFX/Music",
-			"description": "AudioManager? How to handle audio?",
+			"description": "AudioManager? How to handle audio?\nHaving sounds originate from where they were made, no global audio manager stuff. \nCamera is the default listener so hears close stuff better.\nMight have one audio manager for UI sfx, menus can signal to it maybe? Or probably easier to just pass down the polyphonic playback to the menus.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},

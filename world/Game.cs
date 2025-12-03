@@ -91,9 +91,9 @@ namespace Lastdew
 			Ui.MainMenu.ReturnToBase.Pressed -= ReturnToBase;
 		}
 
-		private /*async */void StartNewGame()
+		private void StartNewGame()
 		{
-			/*await */SetupLevel(HomeBaseScene, DefaultPcList);
+			SetupLevel(HomeBaseScene, DefaultPcList);
 			Ui.ChangeState(new GameStateHome());
 		}
 
@@ -125,14 +125,14 @@ namespace Lastdew
 			}
 		}
 
-        private /*async System.Threading.Tasks.Task*/ void SetupLevel(PackedScene levelScene, List<PcSaveData> pcSaveDatas, bool scavenging = false)
+        private void SetupLevel(PackedScene levelScene, List<PcSaveData> pcSaveDatas, bool scavenging = false)
 		{
 			Level level = (Level)levelScene.Instantiate();
 			CallDeferred(Node.MethodName.AddChild, level);
 			level.Initialize(TeamData);
 			// UI.Initialize has to be called after PcManager.SpawnPcs,
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			/*await */PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
+			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			Ui.Initialize(TeamData, InventoryManager);
 			if (scavenging)
 			{

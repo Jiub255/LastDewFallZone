@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
 using Godot;
 
 namespace Lastdew
 {	
 	[GlobalClass, Tool]
-	public partial class AllPcDatas : Resource
+	public partial class AllPcDatas : Resource, IEnumerable
 	{
 		private const string DIRECTORY = "res://characters/player-characters/management/pc_datas/";
 		private const string PATH = "res://characters/player-characters/management/pc_datas/all_pc_datas.tres";
@@ -63,6 +65,11 @@ namespace Lastdew
 				}
 			}
 			dirAccess.ListDirEnd();
+		}
+
+		public IEnumerator GetEnumerator()
+		{
+			return PcDatas.Values.GetEnumerator();
 		}
 	}
 }

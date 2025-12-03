@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu4b48wxsdqy2"]
+
+[ext_resource type="Script" uid="uid://8dgvnw7h78fr" path="res://misc/mugshot_maker/MugshotCamera.cs" id="1_xeeuk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bxe68"]
+albedo_color = Color(5.77569e-07, 0.82182, 0.968741, 1)
+emission_enabled = true
+emission = Color(0.219447, 0.743463, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jw7gv"]
+material = SubResource("StandardMaterial3D_bxe68")
+size = Vector3(4.47, 4.26, 1)
+
+[node name="MugshotCamera" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_xeeuk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.923244, -0.0715269, -0.377498, -0.384215, -0.171875, -0.907104, 2.98023e-08, 0.982519, -0.186164, -0.090486, -0.388329, 1.59025)
+cull_mask = 1
+current = true
+
+[node name="MugshotBackground" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, -7.45058e-09, -5.96046e-08, 0, 1, 5.96046e-08, 0, 5.96046e-08, 1, -0.0862963, -0.382678, -2.01966)
+mesh = SubResource("BoxMesh_jw7gv")
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(0.94201, 0.0594603, 0.330276, -0.0542991, 0.998216, -0.0248393, -0.331164, 0.00546525, 0.943558, -0.000271507, 0.00354302, -0.00133508)
+light_energy = 1.5

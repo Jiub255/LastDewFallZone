@@ -38,8 +38,9 @@ enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://a
 
 folder_colors={
 "res://UI/": "teal",
-"res://addons/": "gray",
-"res://characters/": "pink",
+"res://addons/": "teal",
+"res://audio/": "blue",
+"res://characters/": "purple",
 "res://craftables/": "red",
 "res://game_objects/": "orange",
 "res://misc/": "yellow",

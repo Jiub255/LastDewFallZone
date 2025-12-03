@@ -9,7 +9,7 @@ namespace Lastdew
 		private const float MOUSE_MOVEMENT_THRESHOLD = 10f;
 
 		private TeamData TeamData { get; set; }
-		private PackedScene PcScene { get; set; }
+		private PackedScene PcScene { get; } = GD.Load<PackedScene>(Uids.PC_BASE);
 		private Viewport Viewport { get; set; }
 		private bool DeselectHeld { get; set; }
 		private Vector2 StartingMousePosition { get; set; }
@@ -18,7 +18,6 @@ namespace Lastdew
 		{
 			Viewport = GetViewport();
 			TeamData = teamData;
-			PcScene = GD.Load<PackedScene>(Uids.PC_BASE);
 		}
 		
 		public override void _Process(double delta)
@@ -113,7 +112,7 @@ namespace Lastdew
 			TeamData.SelectPc(pc);
 		}
 		
-		public /*async System.Threading.Tasks.Task*/ void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
+		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
 			ClearPcs();
 			int i = 0;
@@ -124,7 +123,7 @@ namespace Lastdew
 				// TODO: Add a spawn location for pcs. Probably do a whole different system for spawning pcs eventually.
 				pc.Position += Vector3.Right * SPACE_BETWEEN_PCS * i;
 				i++;
-				/*await */pc.Initialize(inventoryManager, pcSaveData);
+				pc.Initialize(inventoryManager, pcSaveData);
 				TeamData.AddPc(pc);
 			}
 

@@ -44,5 +44,8 @@ namespace Lastdew
 		public const string SCENE_UID_EDITOR = "uid://btk0kqeonlxca";
 		public const string EFFECT_BUTTON = "uid://ei5w0vmmup2l";
 		public const string EFFECTS_EDITOR = "uid://bqv2hwt4exeol";
+		
+		// Other
+		public const string MUGSHOT_CAMERA = "uid://cu4b48wxsdqy2";
     }
 }

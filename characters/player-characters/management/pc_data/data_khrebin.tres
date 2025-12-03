@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="PcData" load_steps=3 format=3 uid="uid://hiyhdi8pggjm"]
+[gd_resource type="Resource" script_class="PcData" load_steps=3 format=3 uid="uid://bxv41b1s8i58r"]
 
-[ext_resource type="Texture2D" uid="uid://cjsetpgbeadtw" path="res://characters/player-characters/management/pc_data/khrebin.png" id="1_8qq1m"]
+[ext_resource type="Texture2D" uid="uid://b7p6tyx7h7g15" path="res://characters/player-characters/management/pc_data/khrebin.png" id="1_8qq1m"]
 [ext_resource type="Script" uid="uid://pd0g5gnhmbt6" path="res://characters/player-characters/management/pc_data/PcData.cs" id="1_pffyi"]
 
 [resource]

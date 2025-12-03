@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://70100gbn8uag"]
+
+[ext_resource type="Script" uid="uid://brqnftx8253ci" path="res://misc/mugshot_maker/Mugshooter.cs" id="1_qeb1u"]
+
+[node name="Mugshooter" type="Node3D"]
+physics_interpolation_mode = 2
+script = ExtResource("1_qeb1u")

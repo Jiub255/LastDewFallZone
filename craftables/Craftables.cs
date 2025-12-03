@@ -131,8 +131,6 @@ namespace Lastdew
 						case UsableItem usableItem:
 							UsableItems[uid] = usableItem;
 							break;
-						default:
-							break;
 					}
 				}
 			}
@@ -173,7 +171,7 @@ namespace Lastdew
 
 		public void Testprint()
 		{
-			this.PrintDebug($"Craftables count {this.Count}");
+			this.PrintDebug($"Craftables count {Count}");
 			foreach (KeyValuePair<long, Craftable> kvp in this)
 			{
 				this.PrintDebug($"Craftable: {kvp}");

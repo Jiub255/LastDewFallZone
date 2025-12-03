@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 namespace Lastdew
@@ -7,47 +6,8 @@ namespace Lastdew
 	{
 		public ClickHandler ClickHandler { get; private set; }
 		
-		[Export(PropertyHint.Range, "5, 50, 1")]
-		private float MovementSpeed { get; set; } = 50f;
-		
-		[ExportGroup("Keyboard Movement")]
-		[Export(PropertyHint.Range, "5, 50, 1")]
-		private float MovementSensitivity { get; set; } = 15f;
-
-        [ExportGroup("Edge Scrolling")]
-        [Export]
-        private bool EdgeScrollingEnabled { get; set; } = false;
-        [Export(PropertyHint.Range, "5, 50, 1")]
-		private float ScrollSpeed { get; set; } = 15f;
-		[Export(PropertyHint.Range, "0, 50, 0.1")]
-		private float ScrollZoneThicknessPct { get; set; } = 10f;
-		
-		[ExportGroup("Mouse Dragging")]
-		[Export(PropertyHint.Range, "0.05, 5, 0.05")]
-		private float DragSpeed { get; set; } = 0.35f;
-		
-		[ExportGroup("Rotation")]
-		[Export(PropertyHint.Range, "0, 30, 1")]
-		private float RotationMinX { get; set; } = 15f;
-		[Export(PropertyHint.Range, "60, 90, 1")]
-		private float RotationMaxX { get; set; } = 75f;
-		// TODO: Convert these rotation speeds from radians per pixel or whatever to something that makes more sense.
-		[Export(PropertyHint.Range, "0.0001, 0.1, 0.0001")]
-		private float RotationSpeedX { get; set; } = 0.005f;
-		[Export(PropertyHint.Range, "0.0001, 0.1, 0.0001")]
-		private float RotationSpeedY { get; set; } = 0.005f;
-		
-		[ExportGroup("Zoom")]
-		[Export(PropertyHint.Range, "0, 100, 0.001")]
-		private float ZoomSensitivity { get; set; } = 1f;
-		[Export(PropertyHint.Range, "0, 100, 0.001")]
-		private float ZoomSpeed { get; set; } = 10f;
-		[Export(PropertyHint.Range, "0, 15, 0.1")]
-		private float ZoomMinDistance { get; set; } = 10f;
-		[Export(PropertyHint.Range, "16, 255, 0.1")]
-		private float ZoomMaxDistance { get; set; } = 50f;
-		[Export(PropertyHint.Range, "5, 35, 0.1")]
-		private float ZoomDefaultDistance { get; set; } = 15f;
+		[Export]
+		private CameraSettings Settings { get; set; }
 		
 		private Vector3 Forward { get; set; }
 		private Vector3 Right { get; set;}
@@ -72,14 +32,14 @@ namespace Lastdew
 			InnerGimbal = GetNode<InnerGimbal>("%InnerGimbal");
 			Zoomer = GetNode<Zoomer>("%Zoomer");
 	
-			OuterGimbal.Initialize(RotationSpeedY);
-			InnerGimbal.Initialize(RotationMinX, RotationMaxX, RotationSpeedX);
+			OuterGimbal.Initialize(Settings.RotationSpeedY);
+			InnerGimbal.Initialize(Settings.RotationMinX, Settings.RotationMaxX, Settings.RotationSpeedX);
 			Zoomer.Initialize(
-				ZoomSensitivity,
-				ZoomSpeed,
-				ZoomMinDistance,
-				ZoomMaxDistance,
-				ZoomDefaultDistance
+				Settings.ZoomSensitivity,
+				Settings.ZoomSpeed,
+				Settings.ZoomMinDistance,
+				Settings.ZoomMaxDistance,
+				Settings.ZoomDefaultDistance
 			);
 	
 			TargetPosition = Position;
@@ -113,7 +73,7 @@ namespace Lastdew
 
             if (!Dragging)
             {
-				if (!EdgeScrollingEnabled || !MoveTargetPositionWithEdgeScroll((float)delta))
+				if (!Settings.EdgeScrollingEnabled || !MoveTargetPositionWithEdgeScroll((float)delta))
                 {
 					MoveTargetPositionWithKeyboard((float)delta);
 				}
@@ -156,7 +116,7 @@ namespace Lastdew
 			Vector2 screenSize = Viewport.GetVisibleRect().Size;
 			ScreenWidth = screenSize.X;
 			ScreenHeight = screenSize.Y;
-			EdgeDistance = ScreenHeight * (ScrollZoneThicknessPct / 100f);
+			EdgeDistance = ScreenHeight * (Settings.ScrollZoneThicknessPct / 100f);
 		}
 		
 		private void SetMovementBasisVectors()
@@ -244,7 +204,7 @@ namespace Lastdew
 			{
 				Vector3 movement = (Forward * mouseMovement.Y) + (Right * mouseMovement.X);
 				movement = movement.Normalized();
-				TargetPosition = Position + (movement * ScrollSpeed * delta);
+				TargetPosition = Position + (movement * Settings.ScrollSpeed * delta);
 				return true;
 			}
 			return false;
@@ -256,12 +216,12 @@ namespace Lastdew
 			float y = Input.GetAxis(InputNames.CAMERA_BACKWARD, InputNames.CAMERA_FORWARD);
 			Vector3 movement = (Forward * y) + (Right * x);
 			movement = movement.Normalized();
-			TargetPosition = Position + (movement * MovementSensitivity * delta);
+			TargetPosition = Position + (movement * Settings.MovementSensitivity * delta);
 		}
 
         private void MoveCamera(double delta)
         {
-            Position = Position.MoveToward(TargetPosition, MovementSpeed * (float)delta);
+            Position = Position.MoveToward(TargetPosition, Settings.MovementSpeed * (float)delta);
         }
 	}
 }

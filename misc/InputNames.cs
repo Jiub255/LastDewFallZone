@@ -1,3 +1,5 @@
+using Godot;
+
 namespace Lastdew
 {	public static class InputNames
 	{

@@ -132,7 +132,6 @@ namespace Lastdew
 			level.Initialize(TeamData);
 			// UI.Initialize has to be called after PcManager.SpawnPcs,
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			Ui.MainMenu.Close();
 			/*await */PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			Ui.Initialize(TeamData, InventoryManager);
 			if (scavenging)

@@ -48,7 +48,17 @@ namespace Lastdew
 		private MeshInstance3D SelectedIndicator { get; set; }
 		private float InvulnerabilityTimer { get; set; }
 		private PackedScene NumberPopupScene { get; } = GD.Load<PackedScene>(Uids.NUMBER_POPUP);
-		
+		private AudioStreamPlaybackPolyphonic AudioPlayer { get; set; }
+		private AudioStreamMP3 Punch1 { get; } = GD.Load<AudioStreamMP3>(Sfx.PUNCH_1);
+		private AudioStreamMP3 Death1 { get; } = GD.Load<AudioStreamMP3>(Sfx.DEATH_1);
+
+
+		public override void _Ready()
+		{
+			AudioStreamPlayer3D audioStreamPlayer = GetNode<AudioStreamPlayer3D>("%AudioStreamPlayer3D");
+			audioStreamPlayer.Play();
+			AudioPlayer = (AudioStreamPlaybackPolyphonic)audioStreamPlayer.GetStreamPlayback();
+		}
 		
 		public /*async Task*/ void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
 		{
@@ -114,8 +124,10 @@ namespace Lastdew
 			//                 $"Injury: {StatManager.Health.Injury}");
 			bool incapacitated = StatManager.Health.TakeDamage(actualDamage);
 			StateMachine.GetHit(incapacitated);
+
 			if (incapacitated)
 			{
+				AudioPlayer.PlayStream(Death1);
 				OnDeath?.Invoke();
 			}
 		}
@@ -201,6 +213,7 @@ namespace Lastdew
 		// Called from animation method track
 		private void HitEnemy()
 		{
+			AudioPlayer.PlayStream(Punch1);
 			StateMachine.HitEnemy();
 		}
 

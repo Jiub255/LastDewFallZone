@@ -56,10 +56,7 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
-				"402f656a-c43a-4dec-8099-c5e4439c866a",
-				"2a55064d-caa2-4475-8ead-e4d5c7db6466",
-				"18aa9dce-2759-4551-81bb-5c681f7e1987"
+				"bc28b844-8360-4095-b52b-105b42061993"
 			]
 		},
 		{
@@ -122,7 +119,10 @@
 				"387e69e2-2724-434d-b4a8-4c7468a2957b",
 				"a4948b53-c369-4892-a02a-68bc54a20e7b",
 				"9e527e64-bc24-4d0b-a732-e8b74d0dba6d",
-				"006b7dbc-50f5-463d-9707-32116da84eba"
+				"006b7dbc-50f5-463d-9707-32116da84eba",
+				"402f656a-c43a-4dec-8099-c5e4439c866a",
+				"18aa9dce-2759-4551-81bb-5c681f7e1987",
+				"2a55064d-caa2-4475-8ead-e4d5c7db6466"
 			]
 		},
 		{
@@ -152,7 +152,9 @@
 				"c04e7892-3435-4848-9db8-aef6259850d4",
 				"def412da-a96d-4d8c-93ab-7cf5778e9957",
 				"b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
-				"74a5479b-8536-4423-ab87-0302482f6a6a"
+				"74a5479b-8536-4423-ab87-0302482f6a6a",
+				"d9eab95c-ae57-499e-8487-d18a9e257242",
+				"3b068224-1183-474c-ae22-d1cafb3fab4c"
 			]
 		},
 		{
@@ -160,8 +162,7 @@
 			"title": "BUGS",
 			"tasks": [
 				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
-				"d9eab95c-ae57-499e-8487-d18a9e257242",
-				"3b068224-1183-474c-ae22-d1cafb3fab4c"
+				"8efb0faa-9ea3-41a4-ada1-d988734878c6"
 			]
 		},
 		{
@@ -169,11 +170,12 @@
 			"title": "TODO",
 			"tasks": [
 				"34e912a0-057e-4b11-94de-32e8f8ee6ba0",
+				"f0b1dadf-b33d-48ca-bb2d-e14b9bf8fcb2",
 				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
-				"bc28b844-8360-4095-b52b-105b42061993",
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
+				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"ae82aa6a-c65e-458f-b388-c50a3c6ddce3",
 				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
@@ -352,7 +354,7 @@
 		{
 			"uuid": "d1adddcc-8d19-4763-94e7-4180fac8440c",
 			"title": "Morale",
-			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\nMaybe? Have it easier to increase when low, and harder when high. Like, finding a single book would be a huge morale boost if it's all you have, but not too big a deal if you already have a library. \n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\t\tQOL items: Books, Plants/decorations, games, musical instruments\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs, negatively or positively.\n",
+			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\nMaybe? Have it easier to increase when low, and harder when high. Like, finding a single book would be a huge morale boost if it's all you have, but not too big a deal if you already have a library. \n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\t\tQOL items: Books, Plants/decorations, games, musical instruments\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs, negatively or positively\n\tOdds of new survivors joining your base\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -645,7 +647,7 @@
 		{
 			"uuid": "69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 			"title": "Food/Water system",
-			"description": "Should do after building system is set up, and some sort of food and water producing buildings have been made.\nEach PC requires x food/day",
+			"description": "Should do after building system is set up, and some sort of food and water producing buildings have been made.\nEach PC requires x food/day. But how is the day/night system gonna work?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -855,7 +857,7 @@
 		{
 			"uuid": "34e912a0-057e-4b11-94de-32e8f8ee6ba0",
 			"title": "Make dead enemies into loot containers",
-			"description": "Just have them act like normal loot containers once they're dead.\nActually don't, could get too difficult with a bunch all stacked on each other. Maybe just auto loot? Or have enemies not have loot?",
+			"description": "Just have them act like normal loot containers once they're dead.\nActually don't, could get too difficult with a bunch all stacked on each other. Maybe just auto loot? Or have enemies not have loot?\nTry to have realistic loot on enemies. Maybe like cloth, and occasionally usable equipment/weapons?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1058,7 +1060,7 @@
 		{
 			"uuid": "0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
 			"title": "Have health bars above enemies",
-			"description": "Maybe do damage amount popups too?",
+			"description": "Maybe do damage amount popups too?\nPut pain/injury bars above pcs instead of on HUD?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1086,14 +1088,28 @@
 		{
 			"uuid": "d9eab95c-ae57-499e-8487-d18a9e257242",
 			"title": "Game menu character selection broken",
-			"description": "Also throwing a bunch of errors when you close the menu, might be related.",
+			"description": "FIXED by using show/hide instead of removing/adding menus to scene tree.\nAlso throwing a bunch of errors when you close the menu, might be related.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
 		{
 			"uuid": "3b068224-1183-474c-ae22-d1cafb3fab4c",
 			"title": "Map menu not clickable",
-			"description": "",
+			"description": "FIXED by using show/hide instead of removing/adding menus to scene tree.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "f0b1dadf-b33d-48ca-bb2d-e14b9bf8fcb2",
+			"title": "Day/night system?",
+			"description": "Could affect food/water use per pc per day, and maybe building times? Might just do insta-build with buildings, waiting seems kinda pay-to-win.\nAnd maybe new survivors have a certain chance of showing up to your base each day, depending on morale?\nMaybe do days kinda like stardew?\nOr just have game time go by at whatever speed consistently, except when scavenging? ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "8efb0faa-9ea3-41a4-ada1-d988734878c6",
+			"title": "Resource editor broken",
+			"description": "Not sure what changed, just doesn't work anymore.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

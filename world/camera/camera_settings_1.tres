@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CameraSettings" load_steps=2 format=3 uid="uid://bdqqodworewig"]
+
+[ext_resource type="Script" uid="uid://cfbqvq7j0gu85" path="res://world/camera/CameraSettings.cs" id="1_d4sne"]
+
+[resource]
+script = ExtResource("1_d4sne")
+MovementSpeed = 50.0
+MovementSensitivity = 15.0
+EdgeScrollingEnabled = false
+ScrollSpeed = 15.0
+ScrollZoneThicknessPct = 10.0
+RotationMinX = 5.0
+RotationMaxX = 90.0
+RotationSpeedX = 0.0041
+RotationSpeedY = 0.0041
+ZoomSensitivity = 1.0
+ZoomSpeed = 20.0
+ZoomMinDistance = 2.0
+ZoomMaxDistance = 50.0
+ZoomDefaultDistance = 7.0
+metadata/_custom_type_script = "uid://cfbqvq7j0gu85"

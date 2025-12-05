@@ -34,9 +34,18 @@ namespace Lastdew
         private EnemyStateMachine StateMachine { get; set; }
 		private AnimationTree EnemyAnimationTree { get; set; }
 
+		private AudioStreamPlaybackPolyphonic AudioPlayback { get; set; }
+		private AudioStream Punch1 { get; } = GD.Load<AudioStream>(Sfx.PUNCH_1);
+		private AudioStream Death1 { get; } = GD.Load<AudioStream>(Sfx.DEATH_1);
+
+
 		public override void _Ready()
 		{
 			base._Ready();
+			
+			AudioStreamPlayer3D audioStreamPlayer = GetNode<AudioStreamPlayer3D>("%AudioStreamPlayer3D");
+			audioStreamPlayer.Play();
+			AudioPlayback = (AudioStreamPlaybackPolyphonic)audioStreamPlayer.GetStreamPlayback();
 
 			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
 			AnimStateMachine = (AnimationNodeStateMachinePlayback)GetNode<AnimationTree>("%AnimationTree").Get("parameters/playback");
@@ -95,6 +104,7 @@ namespace Lastdew
 		// Called from animation method track
 		private void HitTarget()
 		{
+			AudioPlayback.PlayStream(Punch1);
 			Target?.Pc.GetHit(this, Data.Attack);
 		}
 
@@ -108,6 +118,7 @@ namespace Lastdew
 
 		private void Die()
 		{
+			AudioPlayback.PlayStream(Death1);
 			StateMachine.ChangeState(EnemyStateNames.DEAD);
 			OnDeath?.Invoke();
 		}

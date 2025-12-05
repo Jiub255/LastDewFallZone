@@ -3,25 +3,25 @@ using System;
 
 namespace Lastdew
 {
-	public partial class ExitButton : Button
+	public partial class ExitButton : SfxButton
 	{
 		public event Action OnToStartMenu;
 
 		public bool InStartMenu { get; set; } = true;
 		
 		private CanvasLayer ExitPopup { get; set; }
-		private Button ToStartMenu { get; set; }
-		private Button ToDesktop { get; set; }
-		private Button Cancel { get; set; }
+		private SfxButton ToStartMenu { get; set; }
+		private SfxButton ToDesktop { get; set; }
+		private SfxButton Cancel { get; set; }
 
         public override void _Ready()
         {
             base._Ready();
             
 			ExitPopup = GetNode<CanvasLayer>("%ExitPopup");
-			ToStartMenu = GetNode<Button>("%ToStartMenu");
-			ToDesktop = GetNode<Button>("%ToDesktop");
-			Cancel = GetNode<Button>("%Cancel");
+			ToStartMenu = GetNode<SfxButton>("%ToStartMenu");
+			ToDesktop = GetNode<SfxButton>("%ToDesktop");
+			Cancel = GetNode<SfxButton>("%Cancel");
 
 			ExitPopup.Hide();
 

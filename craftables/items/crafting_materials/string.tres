@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CraftingMaterial" load_steps=3 format=3 uid="uid://dy00grwgvhfe7"]
+
+[ext_resource type="Texture2D" uid="uid://bxu1xxwm6pg2x" path="res://craftables/items/crafting_materials/icon_string.png" id="1_ohdvu"]
+[ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting_materials/CraftingMaterial.cs" id="2_r8gr0"]
+
+[resource]
+script = ExtResource("2_r8gr0")
+Reusable = false
+ItemRarity = 0
+Tags = Array[int]([])
+Name = "String"
+Description = "Ties things"
+Icon = ExtResource("1_ohdvu")
+RecipeCosts = Dictionary[int, int]({
+4826455120709384933: 1
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})

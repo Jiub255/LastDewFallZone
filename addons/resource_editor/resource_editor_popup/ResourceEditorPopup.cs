@@ -143,9 +143,6 @@ namespace Lastdew
                     Column2.AddChild(effectsEditor);
                     effectsEditor.Setup(usableItem.Effects);
                     break;
-                    
-                default:
-                    break;
             }
         }
         
@@ -177,7 +174,7 @@ namespace Lastdew
                 switch (Craftable)
                 {
                     case CraftingMaterial:
-                        string materialPath = $"res://craftables/items/crafting-materials/{Craftable.Name.ToSnakeCase()}.tres";
+                        string materialPath = $"res://craftables/items/crafting_materials/{Craftable.Name.ToSnakeCase()}.tres";
                         bool craftingMaterialSaved = TrySaveCraftable(materialPath, Databases.Craftables.CraftingMaterials);
                         if (!craftingMaterialSaved)
                         {
@@ -193,7 +190,7 @@ namespace Lastdew
                         }
                         break;
                     case UsableItem:
-                        string usableItemPath = $"res://craftables/items/usable-items/{Craftable.Name.ToSnakeCase()}.tres";
+                        string usableItemPath = $"res://craftables/items/usable_items/{Craftable.Name.ToSnakeCase()}.tres";
                         bool usableItemSaved = TrySaveCraftable(usableItemPath, Databases.Craftables.UsableItems);
                         if (!usableItemSaved)
                         {
@@ -207,8 +204,6 @@ namespace Lastdew
                         {
                             return;
                         }
-                        break;
-                    default:
                         break;
                 }
             }
@@ -241,24 +236,24 @@ namespace Lastdew
             }
         }
 
-        private bool TrySaveCraftable<[MustBeVariant] T>(string materialPath, Godot.Collections.Dictionary<long, T> database) where T : Craftable
+        private bool TrySaveCraftable<[MustBeVariant] T>(string craftablePath, Godot.Collections.Dictionary<long, T> database) where T : Craftable
         {
-            if (ResourceLoader.Exists(materialPath))
+            if (ResourceLoader.Exists(craftablePath))
             {
                 AcceptDialog.DialogText = "Craftable Name already taken.";
                 AcceptDialog.Show();
-                GD.PushError($"Resource already exists at {materialPath}");
+                GD.PushError($"Resource already exists at {craftablePath}");
                 return false;
             }
-            Error error = ResourceSaver.Save(Craftable, materialPath);
+            Error error = ResourceSaver.Save(Craftable, craftablePath);
             if (error == Error.Ok)
             {
-                Craftable = ResourceLoader.Load<T>(materialPath);
+                Craftable = ResourceLoader.Load<T>(craftablePath);
                 database[Craftable.GetUid()] = (T)Craftable;
             }
             else
             {
-                GD.PushError($"Craftable {Craftable.Name} save failed at {materialPath}. {error}");
+                GD.PushError($"Craftable {Craftable.Name} save failed at {craftablePath}. Error: {error}");
                 return false;
             }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dct2ycvtaaxft"]
+[gd_scene load_steps=8 format=3 uid="uid://dct2ycvtaaxft"]
 
 [ext_resource type="Script" uid="uid://c55rp5xhx7xdx" path="res://UI/menus/map/MapScreen.cs" id="1_o3nxy"]
 [ext_resource type="Script" uid="uid://csogh7ctti250" path="res://UI/menus/map/MapScroll.cs" id="2_721ga"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b42o3j4m70oy7" path="res://UI/menus/map/location_button.tscn" id="4_fsvth"]
 [ext_resource type="Resource" uid="uid://c7sm0cx1vlq2u" path="res://UI/menus/map/test_location_data.tres" id="5_joa7o"]
 [ext_resource type="PackedScene" uid="uid://ddkl0i3g78lb3" path="res://UI/menus/map/location_info.tscn" id="6_b5ur0"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="7_a4wjs"]
 
 [node name="MapScreen" type="MarginContainer"]
 anchors_preset = 15
@@ -63,3 +64,5 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 text = "Select Team"
+script = ExtResource("7_a4wjs")
+metadata/_custom_type_script = "uid://b5sycom274m8x"

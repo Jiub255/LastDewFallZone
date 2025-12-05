@@ -10,7 +10,7 @@ namespace Lastdew
 		public PlayerCharacter Pc { get; private set; }
 		private TextureRect Icon { get; set; }
 		private Label NameLabel { get; set; }
-		private Button RemoveButton { get; set; }
+		private SfxButton RemoveButton { get; set; }
 
 		public override void _ExitTree()
 		{
@@ -23,7 +23,7 @@ namespace Lastdew
 		{
 			Icon = GetNode<TextureRect>("%Icon");
 			NameLabel = GetNode<Label>("%Name");
-			RemoveButton = GetNode<Button>("%RemoveButton");
+			RemoveButton = GetNode<SfxButton>("%RemoveButton");
 			RemoveButton.Pressed += RemovePc;
 			
 			if (pc == null)

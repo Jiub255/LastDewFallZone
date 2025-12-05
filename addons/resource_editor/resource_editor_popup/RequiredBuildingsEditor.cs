@@ -10,13 +10,7 @@ namespace Lastdew
         private HBoxContainer Parent { get; set; }
         private Button Add { get; set; }
         private PackedScene BuildingEditScene { get; } = GD.Load<PackedScene>(Uids.BUILDING_EDITOR);
-        private Array<long> Buildings
-        {
-            get
-            {
-                return GatherBuildings();
-            }
-        }
+        private Array<long> Buildings => GatherBuildings();
 
         public override void _Ready()
         {
@@ -51,8 +45,7 @@ namespace Lastdew
         
         private Array<long> GatherBuildings()
         {
-            Array<long> buildings;
-            buildings = [];
+            Array<long> buildings = [];
             foreach (Node node in Parent.GetChildren())
             {
                 if (node is BuildingEditor buildingEdit)

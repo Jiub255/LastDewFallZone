@@ -8,8 +8,8 @@ namespace Lastdew
 	{
 		private int _index;
 		
-		public Button Previous { get; private set; }
-		public Button Next { get; private set; }
+		public SfxButton Previous { get; private set; }
+		public SfxButton Next { get; private set; }
 	
 		private RichTextLabel NameLabel { get; set; }
 		private TextureRect CharacterIcon { get; set; }
@@ -23,8 +23,8 @@ namespace Lastdew
 			NameLabel = GetNode<RichTextLabel>("%NameLabel");
 			CharacterIcon = GetNode<TextureRect>("%CharacterIcon");
 			StatsLabel = GetNode<RichTextLabel>("%StatsLabel");
-			Previous = GetNode<Button>("%PreviousButton");
-			Next = GetNode<Button>("%NextButton");
+			Previous = GetNode<SfxButton>("%PreviousButton");
+			Next = GetNode<SfxButton>("%NextButton");
 		}
 
 		public void Initialize(List<PlayerCharacter> unselectedPcs)

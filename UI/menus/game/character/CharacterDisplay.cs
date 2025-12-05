@@ -8,8 +8,8 @@ namespace Lastdew
 		private TextureRect CharacterIcon { get; set; }
 		private RichTextLabel StatsLabel { get; set; }
 		private TeamData TeamData { get; set; }
-		private Button Previous { get; set; }
-		private Button Next { get; set; }
+		private SfxButton Previous { get; set; }
+		private SfxButton Next { get; set; }
 
 		public override void _Ready()
 		{
@@ -18,8 +18,8 @@ namespace Lastdew
 			NameLabel = GetNode<RichTextLabel>("%NameLabel");
 			CharacterIcon = GetNode<TextureRect>("%CharacterIcon");
 			StatsLabel = GetNode<RichTextLabel>("%StatsLabel");
-			Previous = GetNode<Button>("%PreviousButton");
-			Next = GetNode<Button>("%NextButton");
+			Previous = GetNode<SfxButton>("%PreviousButton");
+			Next = GetNode<SfxButton>("%NextButton");
 
 			Previous.Pressed += PreviousPc;
 			Next.Pressed += NextPc;

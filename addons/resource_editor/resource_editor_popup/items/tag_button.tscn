@@ -9,6 +9,7 @@ script = ExtResource("1_tj3ga")
 
 [node name="MenuButton" type="MenuButton" parent="."]
 unique_name_in_owner = true
+self_modulate = Color(0.783523, 0.783523, 0.783523, 1)
 layout_mode = 2
 text = "WPN"
 alignment = 0
@@ -27,11 +28,12 @@ popup/item_4/id = 4
 
 [node name="Delete" type="Button" parent="MenuButton"]
 unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.388235)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -8.0
-offset_bottom = 8.0
+offset_left = -32.0
+offset_bottom = 32.0
 grow_horizontal = 0
 icon = ExtResource("2_xtxl5")

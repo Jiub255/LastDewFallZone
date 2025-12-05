@@ -57,7 +57,7 @@ namespace Lastdew
         {
             base._GuiInput(@event);
             
-            if (@event is InputEventMouseButton button && button.ButtonIndex == MouseButton.Left)
+            if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left } button)
             {
                 if (button.Pressed)
                 {

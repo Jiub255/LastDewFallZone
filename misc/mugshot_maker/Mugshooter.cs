@@ -30,6 +30,7 @@ namespace Lastdew
 			MugshotCamera camera = (MugshotCamera)MugshotCameraScene.Instantiate();
 			pc.CallDeferred(Node.MethodName.AddChild, camera);
 			
+			// TODO: Not sure if both of these are necessary.
 			await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
 			await GetTree().ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
@@ -66,12 +67,15 @@ namespace Lastdew
 
 		private static void SetIcon(PlayerCharacter pc, string path)
 		{
+			// TODO: Might not work unless SaveImage() overwrites an already existing png.
+			// So just running the scene twice should work. 
 			Texture2D texture = GD.Load<Texture2D>(path);
 			if (texture == null)
 			{
 				return;
 			}
 			pc.Data.Icon = texture;
+			// TODO: Does this somehow change the PcData UID?
 			ResourceSaver.Save(pc.Data);
 		}
 	}

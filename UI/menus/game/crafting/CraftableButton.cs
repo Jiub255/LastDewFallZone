@@ -3,7 +3,7 @@ using System;
 
 namespace Lastdew
 {
-	public partial class CraftableButton : Button
+	public partial class CraftableButton : SfxButton
 	{
 		public event Action<Item> OnPressed;
 			

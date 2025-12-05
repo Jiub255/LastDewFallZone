@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://8b0531d6h835"]
+[gd_scene load_steps=4 format=3 uid="uid://8b0531d6h835"]
 
 [ext_resource type="Script" uid="uid://c50u6v7i30d50" path="res://UI/menus/map/PcDisplay.cs" id="1_2ilfa"]
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="2_i05fj"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="3_200b0"]
 
 [node name="PcDisplay" type="HBoxContainer"]
 theme_override_constants/separation = 15
@@ -26,3 +27,5 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 text = "Remove"
+script = ExtResource("3_200b0")
+metadata/_custom_type_script = "uid://b5sycom274m8x"

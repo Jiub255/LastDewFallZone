@@ -18,6 +18,8 @@ resources_spreadsheet_view/clip_headers=false
 resources_spreadsheet_view/dupe_arrays=true
 resources_spreadsheet_view/context_menu_on_leftclick=false
 resources_spreadsheet_view/fold_docks=false
+resources_spreadsheet_view/resource_cell_label_mode=1
+resources_spreadsheet_view/freeze_first_column=true
 
 [application]
 

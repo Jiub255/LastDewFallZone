@@ -15,8 +15,8 @@ namespace Lastdew
 		private LocationData LocationData { get; set; }
 		
 		private LocationInfoUi LocationInfo { get; set; }
-		private Button AddButton { get; set; }
-		private Button StartButton { get; set; }
+		private SfxButton AddButton { get; set; }
+		private SfxButton StartButton { get; set; }
 		private VBoxContainer PcDisplayParent { get; set; }
 		private CharacterSelector CharacterSelector { get; set; }
 		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(Uids.PC_DISPLAY);
@@ -37,8 +37,8 @@ namespace Lastdew
 			base._Ready();
 			
 			LocationInfo = GetNode<LocationInfoUi>("%LocationInfo");
-			AddButton = GetNode<Button>("%AddButton");
-			StartButton = GetNode<Button>("%StartButton");
+			AddButton = GetNode<SfxButton>("%AddButton");
+			StartButton = GetNode<SfxButton>("%StartButton");
 			PcDisplayParent = GetNode<VBoxContainer>("%PcDisplayParent");
 			CharacterSelector = GetNode<CharacterSelector>("%CharacterSelector");
 

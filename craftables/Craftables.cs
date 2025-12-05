@@ -4,11 +4,14 @@ using System.Collections.Generic;
 
 // TODO: Is this class even necessary or useful? Could just Load(uid) any resource at this point.
 // Does this just act like a preload and/or centralized location for the craftables?
+// Might just be useful for the custom resource editor, maybe just don't include it in the build?
+// TODO: Separate out the populate dictionaries stuff into its own class, let this just be a database,
+// assuming it's even necessary.
 namespace Lastdew
 {
 	/// <summary>
 	/// Tool script that runs through the craftables directory and adds each craftable to the 
-	/// appropriate dictionary(string, Craftable subtype)
+	/// appropriate dictionary(long UID, Craftable subtype)
 	/// </summary>
 	[GlobalClass, Tool]
 	public partial class Craftables : Resource, IEnumerable
@@ -94,7 +97,7 @@ namespace Lastdew
 			{
 				if (dirAccess.CurrentIsDir())
 				{
-					if (fileName == "." || fileName == "..")
+					if (fileName is "." or "..")
 					{
 						continue;
 					}
@@ -132,6 +135,15 @@ namespace Lastdew
 			dirAccess.ListDirEnd();
 		}
 
+		public void Testprint()
+		{
+			this.PrintDebug($"Craftables count {Count}");
+			foreach (KeyValuePair<long, Craftable> kvp in this)
+			{
+				this.PrintDebug($"Craftable: {kvp}");
+			}
+		}
+
 		public IEnumerator GetEnumerator()
 		{
 			foreach (KeyValuePair<long, Building> kvp in Buildings)
@@ -163,14 +175,5 @@ namespace Lastdew
                 _ => false,
             };
         }
-
-		public void Testprint()
-		{
-			this.PrintDebug($"Craftables count {Count}");
-			foreach (KeyValuePair<long, Craftable> kvp in this)
-			{
-				this.PrintDebug($"Craftable: {kvp}");
-			}
-		}
 	}
 }

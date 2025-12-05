@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://world/Game.cs" id="1_e8jue"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://world/camera/camera.tscn" id="2_hliwg"]
-[ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://characters/player-characters/management/PcManager.cs" id="3_av0ep"]
+[ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://characters/player_characters/management/PcManager.cs" id="3_av0ep"]
 [ext_resource type="Script" uid="uid://dfydmocx5fr4" path="res://UI/UiManager.cs" id="4_d65k2"]
 [ext_resource type="PackedScene" uid="uid://c7w0406ngl5dr" path="res://UI/menus/main/main_menu.tscn" id="5_fuoxl"]
 [ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://UI/menus/hud/hud.tscn" id="6_ehfc1"]
@@ -63,3 +63,7 @@ visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("11_hliwg")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3

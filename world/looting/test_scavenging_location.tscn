@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://4g1wsvcfefhh"]
+[gd_scene load_steps=14 format=3 uid="uid://4g1wsvcfefhh"]
 
 [ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/looting/ScavengingLevel.cs" id="1_43o5v"]
+[ext_resource type="AudioStream" uid="uid://ee0lg4u3oayt" path="res://audio/music/zapsplat/music_biiansu_enter_the_forest_013.mp3" id="2_5v2e2"]
 [ext_resource type="PackedScene" uid="uid://x2gtjq08dbsc" path="res://world/looting/loot_container_test.tscn" id="2_ocac3"]
 [ext_resource type="PackedScene" uid="uid://cw2shv7anpm4g" path="res://game_objects/walls/small_brick_wall/SM_Wall_Brick_Lvl_1.prefab.scn" id="3_q1c7d"]
 [ext_resource type="PackedScene" uid="uid://d0uh848wde47x" path="res://game_objects/walls/small_brick_wall_door/SM_Wall_Brick_With_Door_Lvl_1.prefab.scn" id="4_5v2e2"]
@@ -28,6 +29,7 @@ size = Vector3(50, 1, 50)
 
 [node name="TestScavengingLocation" type="Node3D"]
 script = ExtResource("1_43o5v")
+Song = ExtResource("2_5v2e2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.897162, -0.274785, 0.345822, -0.436021, -0.425799, 0.792831, -0.0706071, -0.862084, -0.501822, 0, 0, 0)

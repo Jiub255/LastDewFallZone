@@ -10,13 +10,7 @@ namespace Lastdew
         private HBoxContainer Parent { get; set; }
         private Button Add { get; set; }
         private PackedScene TagButtonScene { get; } = GD.Load<PackedScene>(Uids.TAG_BUTTON);
-        private Array<ItemTags> Tags
-        {
-            get
-            {
-                return GatherTags();
-            }
-        }
+        private Array<ItemTags> Tags => GatherTags();
 
         public override void _Ready()
         {
@@ -58,8 +52,7 @@ namespace Lastdew
 
         private Array<ItemTags> GatherTags()
         {
-            Array<ItemTags> tags;
-            tags = [];
+            Array<ItemTags> tags = [];
             foreach (Node node in Parent.GetChildren())
             {
                 if (node is TagButton tagButton)

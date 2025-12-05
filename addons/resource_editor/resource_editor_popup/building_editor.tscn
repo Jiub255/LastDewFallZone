@@ -15,6 +15,7 @@ expand_icon = true
 
 [node name="Delete" type="Button" parent="ChooseBuilding"]
 unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

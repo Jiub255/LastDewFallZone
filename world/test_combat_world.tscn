@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://world/Game.cs" id="1_6au83"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://world/camera/camera.tscn" id="2_k2vof"]
-[ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://characters/player-characters/management/PcManager.cs" id="3_hxspc"]
+[ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://characters/player_characters/management/PcManager.cs" id="3_hxspc"]
 [ext_resource type="Script" uid="uid://dfydmocx5fr4" path="res://UI/UiManager.cs" id="4_xp01x"]
 [ext_resource type="PackedScene" uid="uid://c7w0406ngl5dr" path="res://UI/menus/main/main_menu.tscn" id="5_il6i6"]
 [ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://UI/menus/hud/hud.tscn" id="6_avgwu"]

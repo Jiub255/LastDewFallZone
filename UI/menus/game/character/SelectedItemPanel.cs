@@ -8,8 +8,8 @@ namespace Lastdew
 		public ItemButton ItemButton { get; private set; }
 		public TextureRect ItemDisplay { get; private set; }
 		public RichTextLabel Description { get; private set; }
-		public Button UseEquip { get; private set; }
-		public Button Drop { get; private set; }
+		public SfxButton UseEquip { get; private set; }
+		public SfxButton Drop { get; private set; }
 		private TeamData TeamData { get; set; }
 	
 		public override void _Ready()
@@ -18,8 +18,8 @@ namespace Lastdew
 	
 			ItemDisplay = GetNode<TextureRect>("%ItemIcon");
 			Description = GetNode<RichTextLabel>("%DescriptionLabel");
-			UseEquip = GetNode<Button>("%UseEquipButton");
-			Drop = GetNode<Button>("%DropButton");
+			UseEquip = GetNode<SfxButton>("%UseEquipButton");
+			Drop = GetNode<SfxButton>("%DropButton");
 	
 			UseEquip.Pressed += UseOrEquipItem;
 			Drop.Pressed += DropItem;

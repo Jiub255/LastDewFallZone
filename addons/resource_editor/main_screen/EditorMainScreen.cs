@@ -60,6 +60,7 @@ namespace Lastdew
         
         private void OpenPopup(Craftable craftable)
         {
+            this.PrintDebug($"Opening {craftable.Name}");
             ResourceEditorPopup.Show();
             ResourceEditorPopup.Setup(craftable);
         }

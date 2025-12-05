@@ -3,29 +3,37 @@ using Godot;
 
 namespace Lastdew
 {
-	public partial class PcButton : Button
+	public partial class PcButton : SfxButton
 	{
 		public event Action<PlayerCharacter> OnSelectPc;
 	
+		private const float PRESS_PITCH = 0.8f;
+		private const float VOLUME = -10f;
+		
 		private TextureRect PcIcon { get; set; }
 		private RichTextLabel PcName { get; set; }
 		private ProgressBar PainBar { get; set; }
 		private ProgressBar InjuryBar { get; set; }
 		private PlayerCharacter Pc { get; set; }
 
+		private AudioStreamPlayer AudioStreamPlayer { get; } = new();
+		private AudioStream Click { get; } = GD.Load<AudioStream>(Sfx.CLICK_3);
+
+		
 		public override void _Ready()
 		{
 			base._Ready();
-			
-			
-			//Pressed += SelectPc;
+	        
+			CallDeferred(Node.MethodName.AddChild, AudioStreamPlayer);
+			AudioStreamPlayer.Stream = Click;
+			AudioStreamPlayer.VolumeDb = VOLUME;
+			AudioStreamPlayer.PitchScale = PRESS_PITCH;
 		}
 		
 		public override void _ExitTree()
 		{
 			base._ExitTree();
 			
-			//Pressed -= SelectPc;
 			Pc.StatManager.Health.OnHealthChanged -= SetHealthBars;
 		}
 
@@ -35,6 +43,7 @@ namespace Lastdew
 
 			if (@event.IsLeftClick())
 			{
+				AudioStreamPlayer.Play();
 				SelectPc();
 				GetViewport().SetInputAsHandled();
 			}

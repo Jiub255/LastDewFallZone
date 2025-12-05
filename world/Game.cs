@@ -14,8 +14,10 @@ namespace Lastdew
         private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>(Uids.HOME_BASE);
         private Level HomeBase { get; set; }
         private ScavengingLevel ScavengingLevel { get; set; }
+        private AudioStreamPlayer MusicPlayer { get; set; }
+        private AudioStreamMP3 StartMenuSong { get; } = GD.Load<AudioStreamMP3>(Music.RELOAD_AND_REASSESS);
 
-#region TESTING STUFF
+        #region TESTING STUFF
 
         [Export]
         private bool CombatTesting { get; set; }
@@ -23,11 +25,20 @@ namespace Lastdew
         private int NumberOfPcs { get; set; } = 1;
         private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
         private List<PcSaveData> DefaultPcList { get; } = [];
+        // TODO: Why did the UIDs change? 
 		private List<PcData> DefaultPcDatas { get; }= [
-			GD.Load<PcData>("uid://bqd6uonxmwcas"),
-			GD.Load<PcData>("uid://cvscwbigsi3w3"),
-			GD.Load<PcData>("uid://cyk852026vmce"),
-			GD.Load<PcData>("uid://hiyhdi8pggjm"),
+			// GD.Load<PcData>("uid://bqd6uonxmwcas"),
+			// GD.Load<PcData>("uid://cvscwbigsi3w3"),
+			// GD.Load<PcData>("uid://cyk852026vmce"),
+			// GD.Load<PcData>("uid://hiyhdi8pggjm"),
+			// GD.Load<PcData>("uid://bps8f2vb6ve3d"),
+			// GD.Load<PcData>("uid://b8ybhu3f6hhjx"),
+			// GD.Load<PcData>("uid://ddsesm5yv0rp5"),
+			// GD.Load<PcData>("uid://bxv41b1s8i58r"),
+			GD.Load<PcData>("uid://cw434qg6iibq6"),
+			GD.Load<PcData>("uid://b2npp0iygiu6r"),
+			GD.Load<PcData>("uid://cx4hf0cghja30"),
+			GD.Load<PcData>("uid://fam17cuu6hvg"),
 		];
 
 #endregion
@@ -42,6 +53,10 @@ namespace Lastdew
 			Ui = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
 			InventoryManager = new InventoryManager();
+			
+			MusicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
+			MusicPlayer.Stream = StartMenuSong;
+			MusicPlayer.Play();
 			
 			PcManager.Initialize(TeamData);
 
@@ -130,10 +145,15 @@ namespace Lastdew
 			Level level = (Level)levelScene.Instantiate();
 			CallDeferred(Node.MethodName.AddChild, level);
 			level.Initialize(TeamData);
+			
 			// UI.Initialize has to be called after PcManager.SpawnPcs,
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			Ui.Initialize(TeamData, InventoryManager);
+			
+			MusicPlayer.Stream = level.Song;
+			MusicPlayer.Play();
+			
 			if (scavenging)
 			{
 				ScavengingLevel = (ScavengingLevel)level;

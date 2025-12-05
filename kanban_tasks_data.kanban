@@ -45,18 +45,21 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "NEXT",
 			"tasks": [
-				"cd7d53a6-8ba3-41c8-855e-623615812278",
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
+				"cd7d53a6-8ba3-41c8-855e-623615812278",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"31f7804f-979d-4e67-9d76-db0049a9350a",
-				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be"
+				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
+				"1ad94904-95a3-4636-902c-f95b2f58937c"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"bc28b844-8360-4095-b52b-105b42061993"
+				"34a187a4-4e2d-441c-8425-a906b835ea1e",
+				"bc28b844-8360-4095-b52b-105b42061993",
+				"38bf52b0-1964-4055-9107-571f4e87d49a"
 			]
 		},
 		{
@@ -154,15 +157,16 @@
 				"b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
 				"74a5479b-8536-4423-ab87-0302482f6a6a",
 				"d9eab95c-ae57-499e-8487-d18a9e257242",
-				"3b068224-1183-474c-ae22-d1cafb3fab4c"
+				"3b068224-1183-474c-ae22-d1cafb3fab4c",
+				"8efb0faa-9ea3-41a4-ada1-d988734878c6",
+				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d"
 			]
 		},
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
-				"8efb0faa-9ea3-41a4-ada1-d988734878c6"
+				"8c8729bd-b42c-4305-b2e8-dca50b070672"
 			]
 		},
 		{
@@ -186,7 +190,9 @@
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
 				"66e4ae30-0330-4cea-babb-74aab3314288",
-				"8fa1389a-f844-4fc4-9632-112e10ca6d36"
+				"8fa1389a-f844-4fc4-9632-112e10ca6d36",
+				"a49b3863-066b-4537-8678-4c9706709283",
+				"214fa122-5f85-4d1c-8dec-27c303c9b928"
 			]
 		}
 	],
@@ -374,8 +380,8 @@
 		},
 		{
 			"uuid": "ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
-			"title": "How to handle movement and states?",
-			"description": "Instead of having Movement State as is, could have just three states: Movement/Blank, Looting, Combat.\nThen each state can have an \"Approaching\" bool, and handle the navigation there. But then what about animation? Have to use the same code three times.\nNot sure how to handle this.\nKeep going as is for now, until combat gets implemented.\n\nWent with:\n4 states: Idle, movement, looting, combat.\nmovement state gets MovementTarget custom class with target, target position, and target type enum (ground, loot, enemy)\n\tmovement state uses this to know which state to transition true once navigation is finished.\nEnterState now takes an object target. Either null for ground clicks, LootContainer for loot, or Enemy for enemies. ",
+			"title": "Movement and state machine",
+			"description": "4 states: Idle, movement, looting, combat.\nPlayerCharacter gets MovementTarget custom class with target, target position\n\tmovement state uses this to know which state to transition true once navigation is finished.\nCombat state runs substates: Waiting, GettingHit, Attacking, Incapacitated.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -410,14 +416,14 @@
 		{
 			"uuid": "df44855f-0478-45ba-8998-406d91aa1eb7",
 			"title": "Resource types",
-			"description": "-Characters\n\t-Player Characters\n\t-Enemies\n-Recipes (Things you can craft, maybe call them craftables or something better than recipe)\n\t-Items\n\t\t-Crafting Materials\n\t\t-Equipment\n\t\t-Usable Items\n\t-Buildings\n\t\t-Production\n\t\t-Defense\n\t\t-Medical\n\t\t-Etc.\n",
+			"description": "-Character Data\n\t-Player Characters\n\t-Enemies\n-Craftables\n\t-Items\n\t\t-Crafting Materials\n\t\t-Equipment\n\t\t-Usable Items\n\t-Buildings\n\t\t-Production\n\t\t-Defense\n\t\t-Medical\n\t\t-Etc.\n",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
 		{
 			"uuid": "83757feb-77db-46c7-a1ac-e076ea02903b",
 			"title": "Stats",
-			"description": "-Physical?\n\t-Attack/Strength\n\t-Defense/Toughness or constitution\n-Engineering\n-Farming\n-Medical\n-Scavenging\n-Speed?\n-Stealth?\n-Weapon categories? (eg. melee, one handed guns, two handed guns, whatever categories)\n-Charisma/speech? For the leader adding morale, or talking to other pcs/bases? Maybe.\n\n\nShould Attack/Defense be separate? Or derived from equipment only? Unlike the rest, which can be increased  naturally.\nOr could have a physical strength/endurance stat that determines a bonus to attack and defense.\n",
+			"description": "-Physical?\n\t-Attack/Strength\n\t-Defense/Toughness or constitution\n-Engineering\n-Farming\n-Medical\n-Scavenging\n-Speed?\n-Stealth?\n-Weapon categories? (eg. melee, one handed guns, two handed guns, whatever categories)\n-Charisma/speech? For the leader adding morale, or talking to other pcs/bases? Maybe.\n\nShould Attack/Defense be separate? Or derived from equipment only? Unlike the rest, which can be increased  naturally.\nOr could have a physical strength/endurance stat that determines a bonus to attack and defense.\n\nMight have base stats like str, def, speed, etc. that affect things everyone does, like combat and looting.\nAnd then have a bunch of skills, like farming, engineering, medical, cooking, art, etc. that affect more specific things. Like engineering skill affects what kinds of things you can build, farming affects food production, medical affects healing speed, etc. Could go with each pc having a \"job\" from before the incident, like carpenters or scientists or farmers or whatever. Could have a whole bunch of jobs, could be fun.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -528,7 +534,7 @@
 		{
 			"uuid": "bc28b844-8360-4095-b52b-105b42061993",
 			"title": "SFX/Music",
-			"description": "AudioManager? How to handle audio?\nHaving sounds originate from where they were made, no global audio manager stuff. \nCamera is the default listener so hears close stuff better.\nMight have one audio manager for UI sfx, menus can signal to it maybe? Or probably easier to just pass down the polyphonic playback to the menus.",
+			"description": "Having game world sounds originate from where they were made, no global audio manager stuff. \nCamera is the default listener so hears close stuff better.\n\nGoing to just extend Button and other UI classes that should make sounds, and just add the sound functionality there. Then just replace all Buttons, etc with SfxButton, SfxEtc. Results in easier code, doubt all the AudioStreamPlayers will waste too much space.\n\nFor music, just playing from a player in Game.cs, and each level has its own export AudioStreamMp3 Song property.\nWant to have separate music for some menus maybe, at least for the start menu.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -829,7 +835,7 @@
 		{
 			"uuid": "2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
 			"title": "Resource Editor inconsistently adding to database",
-			"description": "Sometimes it doesn't seem to add new craftables to the Craftables database after they're created and saved.\nHave to use the \"populate craftables\" editor button afterwards.",
+			"description": "FIXED by fixing the hard-coded paths. Had recently changed - to _ in some folders. Seems to work fine now.\nSometimes it doesn't seem to add new craftables to the Craftables database after they're created and saved.\nHave to use the \"populate craftables\" editor button afterwards.\nNow it's getting a \"CantOpen\" error while trying to use ResourceSaver.Save() in ResourceEditorPopup. The craftable exists at this point, not sure what's happening.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -1109,8 +1115,50 @@
 		{
 			"uuid": "8efb0faa-9ea3-41a4-ada1-d988734878c6",
 			"title": "Resource editor broken",
-			"description": "Not sure what changed, just doesn't work anymore.",
+			"description": "FIXED by turning it off and on again in project settings. I think. Works now except for not being able to save new resources.\nNot sure what changed, just doesn't work anymore.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "34a187a4-4e2d-441c-8425-a906b835ea1e",
+			"title": "Make level transitions cleaner/better.",
+			"description": "Get rid of the HomeBase reference and all that, and just load each level the same way, using SetupLevel().\nOr maybe have a go scavenging and a return to base method.\nAlso, add a fade in/out thing. Or something other than a hard cut.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "38bf52b0-1964-4055-9107-571f4e87d49a",
+			"title": "Figure out how to deal with craftables/pcdatas",
+			"description": "Is the (long UID, Craftable craftable) dictionary necessary? Can just use GD.Load(uid). But even on craftables, which hold uids for other craftables (required materials, etc.)?\nIt's used so that craftable resources don't have to hold references to a bunch of other craftables, they just store a long UID, then look up the craftable in the database. Also used in the custom resource editor.\n\nBasically is it better to keep all craftables in a dict in memory, or just load them in as needed? Probably fine to just load them in, unless it's noticeably slow. Especially if gonna have hundreds of craftables.\nAlso, UIDs might not be stable in actual builds, not 100% sure about how this works. I think the build keeps a UID cache so it can locate resources from UIDs, but you can't get the UID from the resource at runtime. Might not matter in this case. \nCould just write a script that goes through all the craftables folders and auto creates a static class full of \"public const string CRAFTABLE_NAME = [craftable uid]\". Then loading any resource is easily done using GD.Load(uid). \nCurrently using the Craftables resource for the resource editor.\nReally depends on how the craftables need to be accessed.\nIf need to have them all/iterate over them, the current system, or even just an array, could work.\nFor getting them by name, the static class works well. Better than a <string, Craftable> dict, except can't iterate. But will they ever need to be retrieved by name? Or is it all either random loot, or items stored by uid in inventory?\nLoot will be random, based on item tags/rarity, so it'll need access to the whole database, along with those two properties at least. Or maybe just have a list of long uids, grouped by item tag and rarity. Then the loot container can just choose from whatever categories and then load the actual resources from those uids. Easy enough to create a script to do that. Just put each subcategory into its own array, like common medical, rare combat, etc. Can deal with duplicates from multiple tags too. \nOr could just load up the whole database, then populate each loot container in the world using that, but only store the uids. Only needed once on new game. Or could maybe do before each scavenging run? Depends on how big the database gets. ",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
+			"steps": []
+		},
+		{
+			"uuid": "a49b3863-066b-4537-8678-4c9706709283",
+			"title": "Make game/window resizeable",
+			"description": "And make the UI/HUD react to sizes gracefully.\nMake separate layouts for ultrawide, standard, small, etc?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "8c8729bd-b42c-4305-b2e8-dca50b070672",
+			"title": "Resource editor buttons showing up small",
+			"description": "The item tag and required buildings, probably others too, are showing up small in the editor. Not sure why yet.\nAlso might be same color as background/invisible.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "1ad94904-95a3-4636-902c-f95b2f58937c",
+			"title": "Ranged combat",
+			"description": "Have each weapon have a range, and then have the PC stop when they're in range and start attacking. Need a shooting animation for guns.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "214fa122-5f85-4d1c-8dec-27c303c9b928",
+			"title": "Make level up UI",
+			"description": "Could just add some plus buttons to the char menu if they have skill points to spend. Depends on exactly how leveling up will work.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

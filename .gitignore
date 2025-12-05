@@ -6,11 +6,11 @@ android/
 .import/
 export.cfg
 export_presets.cfg
-/addons/kanban_tasks/
-/addons/Godot-MToon-Shader/
-/addons/unidot_importer/
-/addons/vrm/
-/addons/terrain_3d/
+/addons/
+!/addons/namespacer/
+!/addons/resource_database_filler/
+!/addons/resource_editor/
+!/addons/uidsfiller/
 /unused_assets/
 
 # Imported translations (automatically generated from CSV files)

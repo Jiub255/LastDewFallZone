@@ -8,6 +8,6 @@ namespace Lastdew
 		public const string DEATH_2 = "uid://bc2f41mi4nsf4";
 		
 		// UI
-		public const string CLICK_1 = "uid://coyhlv2ha34e1";
+		public const string CLICK_3 = "uid://dl3ne1fo2ldnd";
 	}
 }

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://bdctf5mvk7bgb"]
 
 [ext_resource type="Script" uid="uid://blh0fur4b1phg" path="res://characters/enemies/data/EnemyData.cs" id="1_5txxw"]
-[ext_resource type="Resource" uid="uid://7jo3uy4gbavf" path="res://craftables/items/crafting-materials/wood.tres" id="1_7kriq"]
+[ext_resource type="Resource" uid="uid://7jo3uy4gbavf" path="res://craftables/items/crafting_materials/wood.tres" id="1_7kriq"]
 
 [resource]
 script = ExtResource("1_5txxw")

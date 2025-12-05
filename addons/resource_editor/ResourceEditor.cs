@@ -20,10 +20,7 @@ namespace Lastdew
 
         public override void _ExitTree()
         {
-            if (MainScreenInstance != null)
-            {
-                MainScreenInstance.QueueFree();
-            }
+            MainScreenInstance?.QueueFree();
         }
 
         public override bool _HasMainScreen()

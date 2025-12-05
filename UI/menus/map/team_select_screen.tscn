@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://4jja8qhc2te7"]
+[gd_scene load_steps=6 format=3 uid="uid://4jja8qhc2te7"]
 
 [ext_resource type="Script" uid="uid://d4718j5uv726" path="res://UI/menus/map/TeamSelectScreen.cs" id="1_nqtx1"]
 [ext_resource type="Script" uid="uid://d0whb3wa40goc" path="res://UI/menus/map/CharacterSelector.cs" id="2_dp6u0"]
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="3_6yykp"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="3_ipj1p"]
 [ext_resource type="PackedScene" uid="uid://ddkl0i3g78lb3" path="res://UI/menus/map/location_info.tscn" id="5_h6bda"]
 
 [node name="TeamSelectScreen" type="MarginContainer"]
@@ -48,6 +49,8 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Previous"
+script = ExtResource("3_ipj1p")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="NextButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector/HBoxContainer"]
 unique_name_in_owner = true
@@ -55,6 +58,8 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Next"
+script = ExtResource("3_ipj1p")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="NameLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
 unique_name_in_owner = true
@@ -89,6 +94,8 @@ Pain: 14"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Add To Team"
+script = ExtResource("3_ipj1p")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="TeamDisplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -119,3 +126,5 @@ custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 disabled = true
 text = "Start Scavenging"
+script = ExtResource("3_ipj1p")
+metadata/_custom_type_script = "uid://b5sycom274m8x"

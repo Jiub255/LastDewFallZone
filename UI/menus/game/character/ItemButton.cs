@@ -3,7 +3,7 @@ using Godot;
 
 namespace Lastdew
 {	
-	public partial class ItemButton : Button
+	public partial class ItemButton : SfxButton
 	{
 		public event Action<ItemButton> OnPressed;
 		

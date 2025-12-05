@@ -6,13 +6,30 @@ namespace Lastdew
 	public partial class LocationButton : Control
 	{
 		public event Action<LocationData> OnPressed;
+
+		private const float PRESS_PITCH = 0.8f;
+		private const float RELEASE_PITCH = 1.1f;
+		private const float VOLUME = -10f;
 		
 		[Export]
 		public LocationData Data { get; set; }
 		
+		private AudioStreamPlayer AudioStreamPlayer { get; } = new();
+		private AudioStream Click { get; } = GD.Load<AudioStream>(Sfx.CLICK_3);
+		
 		private bool ButtonDown { get; set; }
 		private bool Moved { get; set; }
-
+		
+		
+		public override void _Ready()
+		{
+			base._Ready();
+	        
+			CallDeferred(Node.MethodName.AddChild, AudioStreamPlayer);
+			AudioStreamPlayer.Stream = Click;
+		    AudioStreamPlayer.VolumeDb = VOLUME;
+		}
+		
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
@@ -26,6 +43,7 @@ namespace Lastdew
 				}
 				else
 				{
+					PlayClickSound(RELEASE_PITCH);
 					OnPressed?.Invoke(Data);
 				}
 			}
@@ -39,6 +57,7 @@ namespace Lastdew
 			{
 				if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 				{
+					PlayClickSound(PRESS_PITCH);
 					ButtonDown = true;
 				}
 			}
@@ -47,6 +66,12 @@ namespace Lastdew
 			{
 				Moved = true;
 			}
+		}
+		
+		private void PlayClickSound(float pitch)
+		{
+			AudioStreamPlayer.PitchScale = pitch;
+			AudioStreamPlayer.Play();
 		}
 	}
 }

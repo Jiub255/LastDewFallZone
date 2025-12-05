@@ -10,7 +10,7 @@ namespace Lastdew
 		private Label ItemName { get; set; }
 		private Label Description { get; set; }
 		private VBoxContainer RecipeCosts { get; set; }
-		private Button CraftButton { get; set; }
+		private SfxButton CraftButton { get; set; }
 		private Craftables Craftables { get; set; }
 		private InventoryManager Inventory { get; set; }
 		private PackedScene RecipeCostScene { get; set; } = GD.Load<PackedScene>(Uids.RECIPE_COST_DISPLAY);
@@ -23,7 +23,7 @@ namespace Lastdew
 			ItemName = GetNode<Label>("%Name");
 			Description = GetNode<Label>("%Description");
 			RecipeCosts = GetNode<VBoxContainer>("%RecipeCosts");
-			CraftButton = GetNode<Button>("%CraftButton");
+			CraftButton = GetNode<SfxButton>("%CraftButton");
 
 			CraftButton.Pressed += Craft;
 		}

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7w0406ngl5dr"]
+[gd_scene load_steps=4 format=3 uid="uid://c7w0406ngl5dr"]
 
 [ext_resource type="Script" uid="uid://cykw3kych5n6v" path="res://UI/menus/main/MainMenu.cs" id="1_iggh1"]
 [ext_resource type="Script" uid="uid://v1lggq6oy527" path="res://UI/menus/main/ExitButton.cs" id="2_ci0dg"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="2_s8540"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_iggh1")
@@ -39,31 +40,43 @@ autowrap_mode = 0
 unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="SaveGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Save Game"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="ReturnToBase" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Return To Base"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="LoadGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Load Game"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="NewGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "New Game"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="Options" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Options"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="Exit" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -109,13 +122,19 @@ theme_override_constants/separation = 15
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit To Start Menu"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="ToDesktop" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit To Desktop"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="Cancel" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/Exit/ExitPopup/Background/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cancel"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"

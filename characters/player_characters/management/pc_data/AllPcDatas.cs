@@ -7,8 +7,8 @@ namespace Lastdew
 	[GlobalClass, Tool]
 	public partial class AllPcDatas : Resource, IEnumerable
 	{
-		private const string DIRECTORY = "res://characters/player-characters/management/pc_datas/";
-		private const string PATH = "res://characters/player-characters/management/pc_datas/all_pc_datas.tres";
+		private const string DIRECTORY = "res://characters/player_characters/management/pc_datas/";
+		private const string PATH = "res://characters/player_characters/management/pc_datas/all_pc_datas.tres";
         
 		[Export]
 		public Godot.Collections.Dictionary<string, PcData> PcDatas { get; set; } = new();

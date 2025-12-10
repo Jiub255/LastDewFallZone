@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dh8qmjetlrm2d"]
 
-[ext_resource type="Script" uid="uid://bcgcytk1ootfk" path="res://UI/menus/game/crafting/CraftingMenu.cs" id="1_a3pt8"]
+[ext_resource type="Script" uid="uid://bcgcytk1ootfk" path="res://UI/menus/crafting/CraftingMenu.cs" id="1_a3pt8"]
 [ext_resource type="StyleBox" uid="uid://6pwl7dlcpabi" path="res://UI/themes/styleboxes/panel_container/panel_container_wood_stylebox.tres" id="2_a2rau"]
-[ext_resource type="Script" uid="uid://dcqypmfdgyh0w" path="res://UI/menus/game/crafting/SelectedCraftableDisplay.cs" id="3_1u5cd"]
+[ext_resource type="Script" uid="uid://dcqypmfdgyh0w" path="res://UI/menus/crafting/SelectedCraftableDisplay.cs" id="3_1u5cd"]
 [ext_resource type="Texture2D" uid="uid://c8uv451fraiei" path="res://craftables/icons/icon_leg_armor_blank.png" id="4_ji5ws"]
 [ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="5_gkioe"]
 

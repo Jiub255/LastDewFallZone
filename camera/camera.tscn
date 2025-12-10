@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://4q4t3oj7cg4i"]
 
-[ext_resource type="Script" uid="uid://ca3qplbbowdsi" path="res://world/camera/Camera.cs" id="1_1njid"]
-[ext_resource type="Script" uid="uid://cu3a4o5hlgxw0" path="res://world/camera/OuterGimbal.cs" id="2_o35ac"]
-[ext_resource type="Resource" uid="uid://bdqqodworewig" path="res://world/camera/camera_settings_1.tres" id="2_sp6r1"]
-[ext_resource type="Script" uid="uid://bq28nvppnei47" path="res://world/camera/InnerGimbal.cs" id="3_xgk6n"]
-[ext_resource type="Script" uid="uid://dhj8o0t6o1utn" path="res://world/camera/Zoomer.cs" id="4_pyb5o"]
-[ext_resource type="Script" uid="uid://b304p383rvfet" path="res://world/camera/ClickHandler.cs" id="5_46j64"]
+[ext_resource type="Script" uid="uid://ca3qplbbowdsi" path="res://camera/Camera.cs" id="1_1njid"]
+[ext_resource type="Script" uid="uid://cu3a4o5hlgxw0" path="res://camera/OuterGimbal.cs" id="2_o35ac"]
+[ext_resource type="Resource" uid="uid://bdqqodworewig" path="res://camera/camera_settings_1.tres" id="2_sp6r1"]
+[ext_resource type="Script" uid="uid://bq28nvppnei47" path="res://camera/InnerGimbal.cs" id="3_xgk6n"]
+[ext_resource type="Script" uid="uid://dhj8o0t6o1utn" path="res://camera/Zoomer.cs" id="4_pyb5o"]
+[ext_resource type="Script" uid="uid://b304p383rvfet" path="res://camera/ClickHandler.cs" id="5_46j64"]
 
 [node name="CameraRig" type="Node3D"]
 script = ExtResource("1_1njid")

@@ -39,16 +39,18 @@ enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://a
 [file_customization]
 
 folder_colors={
-"res://UI/": "teal",
+"res://UI/": "purple",
 "res://addons/": "teal",
 "res://audio/": "blue",
-"res://characters/": "purple",
-"res://craftables/": "red",
-"res://game_objects/": "orange",
-"res://misc/": "yellow",
-"res://save_system/": "green",
-"res://unused_assets/": "blue",
-"res://world/": "purple"
+"res://camera/": "purple",
+"res://characters/": "red",
+"res://craftables/": "orange",
+"res://game_objects/": "yellow",
+"res://inventory/": "green",
+"res://misc/": "teal",
+"res://save_system/": "blue",
+"res://unused_assets/": "red",
+"res://world/": "orange"
 }
 
 [filesystem]

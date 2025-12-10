@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CameraSettings" load_steps=2 format=3 uid="uid://bdqqodworewig"]
 
-[ext_resource type="Script" uid="uid://cfbqvq7j0gu85" path="res://world/camera/CameraSettings.cs" id="1_d4sne"]
+[ext_resource type="Script" uid="uid://cfbqvq7j0gu85" path="res://camera/CameraSettings.cs" id="1_d4sne"]
 
 [resource]
 script = ExtResource("1_d4sne")
@@ -13,9 +13,9 @@ RotationMinX = 5.0
 RotationMaxX = 90.0
 RotationSpeedX = 0.0041
 RotationSpeedY = 0.0041
-ZoomSensitivity = 1.0
-ZoomSpeed = 30.0
-ZoomMinDistance = 2.0
+ZoomSensitivity = 2.035
+ZoomSpeed = 50.515
+ZoomMinDistance = 1.5
 ZoomMaxDistance = 50.0
 ZoomDefaultDistance = 7.0
 metadata/_custom_type_script = "uid://cfbqvq7j0gu85"

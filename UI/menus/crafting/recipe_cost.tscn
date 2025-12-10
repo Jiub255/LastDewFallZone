@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cq20celiux8e4"]
 
-[ext_resource type="Script" uid="uid://cay7rsmo8s8ya" path="res://UI/menus/game/crafting/RecipeCostUi.cs" id="1_6sv67"]
+[ext_resource type="Script" uid="uid://cay7rsmo8s8ya" path="res://UI/menus/crafting/RecipeCostUi.cs" id="1_6sv67"]
 
 [node name="RecipeCost" type="HBoxContainer"]
 offset_right = 74.0

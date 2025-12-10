@@ -11,7 +11,8 @@ namespace Lastdew
 		public const string CAMERA_RIGHT = "camera_right";
 		public const string SELECT = "select";
 		public const string DESELECT = "deselect";
-		public const string GAME_MENU = "game_menu";
+		public const string CHARACTER_MENU = "character_menu";
+		public const string CRAFTING_MENU = "crafting_menu";
 		public const string EXIT_MENU = "exit_menu";
 		public const string MAIN_MENU = "main_menu";
 		public const string BUILD_MENU = "build_menu";

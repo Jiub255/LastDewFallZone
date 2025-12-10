@@ -41,7 +41,7 @@ namespace Lastdew
 		}
 		public List<PcSaveData> UnusedPcDatas { get; private set; } = [];
 
-		
+
 		public void SelectPc(PlayerCharacter pc)
 		{
 			int pcIndex = Pcs.IndexOf(pc);

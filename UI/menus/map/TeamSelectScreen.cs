@@ -14,7 +14,7 @@ namespace Lastdew
 		private TeamData TeamData { get; set; }
 		private LocationData LocationData { get; set; }
 		
-		private LocationInfoUi LocationInfo { get; set; }
+		private LocationInfoUi LocationInfoUi { get; set; }
 		private SfxButton AddButton { get; set; }
 		private SfxButton StartButton { get; set; }
 		private VBoxContainer PcDisplayParent { get; set; }
@@ -36,7 +36,7 @@ namespace Lastdew
 		{
 			base._Ready();
 			
-			LocationInfo = GetNode<LocationInfoUi>("%LocationInfo");
+			LocationInfoUi = GetNode<LocationInfoUi>("%LocationInfo");
 			AddButton = GetNode<SfxButton>("%AddButton");
 			StartButton = GetNode<SfxButton>("%StartButton");
 			PcDisplayParent = GetNode<VBoxContainer>("%PcDisplayParent");
@@ -69,7 +69,7 @@ namespace Lastdew
 			SelectedPcs.Clear();
 			
 			LocationData = locationData;
-			LocationInfo.Setup(
+			LocationInfoUi.Setup(
 				locationData.Name,
 				locationData.Image,
 				locationData.Description);
@@ -91,14 +91,7 @@ namespace Lastdew
 			}
 			else
 			{
-				// Doing this to avoid setting index below zero because the setter has a method that
-				// needs a valid index.
-				int index = Index - 1;
-				if (index < 0)
-				{
-					index = UnselectedPcs.Count - 1;
-				}
-				Index = index;
+				Index = (Index + UnselectedPcs.Count - 1) % UnselectedPcs.Count;
 			}
 		}
 

@@ -6,7 +6,8 @@ namespace Lastdew
 	{
 		public MainMenu MainMenu { get; private set; }
 		public Hud Hud { get; private set; }
-		public GameMenu GameMenu { get; private set; }
+		public CharacterMenu CharacterMenu { get; private set; }
+		public CraftingMenu CraftingMenu { get; private set; }
 		public BuildMenu BuildMenu { get; private set; }
 		public MapMenu MapMenu { get; private set; }
 		
@@ -17,12 +18,14 @@ namespace Lastdew
 		{
 			MainMenu = GetNode<MainMenu>("%MainMenu");
 			Hud = GetNode<Hud>("%HUD");
-			GameMenu = GetNode<GameMenu>("%GameMenu");
+			CharacterMenu = GetNode<CharacterMenu>("%CharacterMenu");
+			CraftingMenu = GetNode<CraftingMenu>("%CraftingMenu");
 			BuildMenu = GetNode<BuildMenu>("%BuildMenu");
 			MapMenu = GetNode<MapMenu>("%MapMenu");
 
 			CloseMenu(Hud);
-			CloseMenu(GameMenu);
+			CloseMenu(CharacterMenu);
+			CloseMenu(CraftingMenu);
 			CloseMenu(BuildMenu);
 			CloseMenu(MapMenu);
 
@@ -55,7 +58,8 @@ namespace Lastdew
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
 			Hud.Initialize(teamData);
-			GameMenu.Initialize(teamData, inventoryManager);
+			CharacterMenu.Initialize(teamData, inventoryManager);
+			CraftingMenu.Initialize(inventoryManager);
 			MapMenu.Initialize(teamData);
 
 			CloseMenu(MainMenu);
@@ -94,9 +98,14 @@ namespace Lastdew
 			Toggle(MainMenu);
 		}
 
-		private void ToggleGameMenu()
+		private void ToggleCraftingMenu()
 		{
-			Toggle(GameMenu);
+			Toggle(CraftingMenu);
+		}
+
+		private void ToggleCharacterMenu()
+		{
+			Toggle(CharacterMenu);
 		}
 
 		private void ToggleMapMenu()
@@ -139,7 +148,8 @@ namespace Lastdew
 
 		private void CloseAllMenus(bool exceptHud = true)
 		{
-			CloseMenu(GameMenu);
+			CloseMenu(CharacterMenu);
+			CloseMenu(CraftingMenu);
 			CloseMenu(BuildMenu);
 			CloseMenu(MapMenu);
 			CloseMenu(MainMenu);
@@ -160,7 +170,8 @@ namespace Lastdew
         private void SubscribeState(GameState state)
         {
 			state.OnToggleMain += ToggleMainMenu;
-			state.OnToggleGame += ToggleGameMenu;
+			state.OnToggleCharacter += ToggleCharacterMenu;
+			state.OnToggleCrafting += ToggleCraftingMenu;
 			state.OnToggleBuild += ToggleBuildMenu;
 			state.OnToggleMap += ToggleMapMenu;
         }
@@ -168,7 +179,8 @@ namespace Lastdew
         private void UnsubscribeState(GameState state)
         {
 	        state.OnToggleMain -= ToggleMainMenu;
-	        state.OnToggleGame -= ToggleGameMenu;
+	        state.OnToggleCharacter -= ToggleCharacterMenu;
+	        state.OnToggleCrafting -= ToggleCraftingMenu;
 	        state.OnToggleBuild -= ToggleBuildMenu;
 	        state.OnToggleMap -= ToggleMapMenu;
         }

@@ -1,0 +1,208 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8phmlcc56yeu"]
+
+[ext_resource type="Script" uid="uid://cch7gj0xxyn4d" path="res://UI/menus/game/character/CharacterMenu.cs" id="1_r2q2j"]
+[ext_resource type="Script" uid="uid://cud7b2pso0mxq" path="res://UI/menus/game/character/CharacterDisplay.cs" id="2_h5oi0"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="3_pdtdd"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="4_squsx"]
+[ext_resource type="Script" uid="uid://bymdl1wnu4jd6" path="res://UI/menus/game/character/EquipmentDisplay.cs" id="5_2w534"]
+[ext_resource type="Script" uid="uid://nlili2t5sfqm" path="res://UI/menus/game/character/EquipmentButton.cs" id="6_ur32d"]
+[ext_resource type="Script" uid="uid://cva1octdfmlvj" path="res://UI/menus/game/character/SelectedItemPanel.cs" id="7_v73ro"]
+
+[node name="CharacterMenu" type="CanvasLayer"]
+script = ExtResource("1_r2q2j")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_type_variation = &"PanelContainerDark"
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CharacterDisplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+script = ExtResource("2_h5oi0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/CharacterDisplay"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="PreviousButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/CharacterDisplay/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Previous"
+script = ExtResource("3_pdtdd")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="NextButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/CharacterDisplay/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Next"
+script = ExtResource("3_pdtdd")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="NameLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/CharacterDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"RichTextLabelLarge"
+bbcode_enabled = true
+text = "[center]James[/center]"
+fit_content = true
+
+[node name="CharacterIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/CharacterDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_squsx")
+expand_mode = 5
+
+[node name="StatsLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/CharacterDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+text = "Level: 2
+Attack: 5
+Defense: 3
+Speed: 5
+Looting: 7
+Injury: 32
+Pain: 14"
+
+[node name="EquipmentDisplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+script = ExtResource("5_2w534")
+
+[node name="HeadButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_ur32d")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="WeaponButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_ur32d")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="BodyButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_ur32d")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="FeetButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EquipmentDisplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_ur32d")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="ItemsVBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ItemsPanel" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/ItemsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/ItemsPanel/MarginContainer"]
+custom_minimum_size = Vector2(696, 304)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="ItemsGrid" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/ItemsPanel/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(696, 296)
+layout_mode = 2
+columns = 7
+
+[node name="SelectedItemPanel" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("7_v73ro")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel"]
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(209, 209)
+layout_mode = 2
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UseEquipButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_pdtdd")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="DropButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Drop"
+script = ExtResource("3_pdtdd")
+metadata/_custom_type_script = "uid://b5sycom274m8x"

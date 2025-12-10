@@ -25,7 +25,7 @@ namespace Lastdew
         private int NumberOfPcs { get; set; } = 1;
         private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
         private List<PcSaveData> DefaultPcList { get; } = [];
-        // TODO: Why did the UIDs change? 
+        // TODO: Why did the UIDs change? From saving the PcData resources during runtime in the Mugshotter?
 		private List<PcData> DefaultPcDatas { get; }= [
 			// GD.Load<PcData>("uid://bqd6uonxmwcas"),
 			// GD.Load<PcData>("uid://cvscwbigsi3w3"),

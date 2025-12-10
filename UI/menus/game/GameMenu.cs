@@ -4,30 +4,30 @@ namespace Lastdew
 {	
 	public partial class GameMenu : Menu
 	{
-		private CharacterTab CharacterTab { get; set; }
-		private CraftingTab CraftingTab { get; set; }
+		private CharacterMenu CharacterMenu { get; set; }
+		private CraftingMenu CraftingMenu { get; set; }
 		private TeamData TeamData { get; set; }
 	
 		public override void _Ready()
 		{
 			base._Ready();
 			
-			CharacterTab = GetNode<CharacterTab>("%Character");
-			CraftingTab = GetNode<CraftingTab>("%Crafting");
+			CharacterMenu = GetNode<CharacterMenu>("%Character");
+			CraftingMenu = GetNode<CraftingMenu>("%Crafting");
 		}
 		
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
 			TeamData = teamData;
-			CharacterTab.Initialize(teamData, inventoryManager);
-			CraftingTab.Initialize(inventoryManager);
+			CharacterMenu.Initialize(teamData, inventoryManager);
+			CraftingMenu.Initialize(inventoryManager);
 		}
 		
 		public override void Open()
 		{
 			base.Open();
 			
-			CharacterTab.RefreshDisplay();
+			CharacterMenu.RefreshDisplay();
 		}
 		
 		public override void Close()

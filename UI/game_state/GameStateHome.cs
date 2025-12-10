@@ -16,9 +16,13 @@ namespace Lastdew
 
         public override void ProcessState()
         {
-	        if (Input.IsActionJustReleased(InputNames.GAME_MENU))
+	        if (Input.IsActionJustReleased(InputNames.CHARACTER_MENU))
 	        {
-		        ToggleGameMenu();
+		        ToggleCharacterMenu();
+	        }
+	        if (Input.IsActionJustReleased(InputNames.CRAFTING_MENU))
+	        {
+		        ToggleCraftingMenu();
 	        }
 	        else if (Input.IsActionJustReleased(InputNames.MAIN_MENU))
 	        {

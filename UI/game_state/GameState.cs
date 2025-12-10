@@ -6,7 +6,8 @@ namespace Lastdew
     public abstract class GameState
     {
         public event Action OnToggleMain;
-        public event Action OnToggleGame;
+        public event Action OnToggleCharacter;
+        public event Action OnToggleCrafting;
         public event Action OnToggleBuild;
         public event Action OnToggleMap;
 
@@ -18,9 +19,14 @@ namespace Lastdew
             OnToggleMain?.Invoke();
         }
         
-        protected void ToggleGameMenu()
+        protected void ToggleCharacterMenu()
         {
-            OnToggleGame?.Invoke();
+            OnToggleCharacter?.Invoke();
+        }
+        
+        protected void ToggleCraftingMenu()
+        {
+            OnToggleCrafting?.Invoke();
         }
         
         protected void ToggleBuildMenu()

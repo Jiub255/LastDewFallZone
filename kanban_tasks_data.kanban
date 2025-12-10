@@ -45,7 +45,6 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "NEXT",
 			"tasks": [
-				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
 				"cd7d53a6-8ba3-41c8-855e-623615812278",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"31f7804f-979d-4e67-9d76-db0049a9350a",
@@ -125,7 +124,8 @@
 				"006b7dbc-50f5-463d-9707-32116da84eba",
 				"402f656a-c43a-4dec-8099-c5e4439c866a",
 				"18aa9dce-2759-4551-81bb-5c681f7e1987",
-				"2a55064d-caa2-4475-8ead-e4d5c7db6466"
+				"2a55064d-caa2-4475-8ead-e4d5c7db6466",
+				"147125ec-8a3a-486c-a4ef-c7f5b629144a"
 			]
 		},
 		{
@@ -192,7 +192,8 @@
 				"66e4ae30-0330-4cea-babb-74aab3314288",
 				"8fa1389a-f844-4fc4-9632-112e10ca6d36",
 				"a49b3863-066b-4537-8678-4c9706709283",
-				"214fa122-5f85-4d1c-8dec-27c303c9b928"
+				"214fa122-5f85-4d1c-8dec-27c303c9b928",
+				"0e82596b-3f97-42e0-b018-06d7658cd4d3"
 			]
 		}
 	],
@@ -1158,6 +1159,13 @@
 			"uuid": "214fa122-5f85-4d1c-8dec-27c303c9b928",
 			"title": "Make level up UI",
 			"description": "Could just add some plus buttons to the char menu if they have skill points to spend. Depends on exactly how leveling up will work.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "0e82596b-3f97-42e0-b018-06d7658cd4d3",
+			"title": "Medical system",
+			"description": "How to heal PCs? \nUse medical items like bandages and medicine to just heal some amount of injury in general?\nOr have like splints for broken bones, bandages for cuts, etc?\nAlso how will medical skill play into it? Healing rate depends on highest medical skill of your pcs?\nWill healing take time or be instant?\nMaybe just have it so medical items just heal x injury in general, act instantly, and their strength is affected by your highest medical skill and any medical tools/buildings you have.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

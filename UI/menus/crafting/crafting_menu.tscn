@@ -35,6 +35,7 @@ theme_override_constants/separation = 20
 [node name="CraftablesTabs" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
 theme_override_styles/panel = ExtResource("2_a2rau")
 current_tab = 0
 
@@ -58,6 +59,9 @@ theme_override_constants/margin_bottom = 15
 [node name="AllGrid" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer/CraftablesTabs/All/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/h_separation = 34
+theme_override_constants/v_separation = 34
+columns = 7
 
 [node name="Equipment" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/CraftablesTabs"]
 visible = false
@@ -80,6 +84,9 @@ theme_override_constants/margin_bottom = 15
 [node name="EquipmentGrid" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer/CraftablesTabs/Equipment/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/h_separation = 34
+theme_override_constants/v_separation = 34
+columns = 7
 
 [node name="Usable Items" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/CraftablesTabs"]
 visible = false
@@ -102,6 +109,9 @@ theme_override_constants/margin_bottom = 15
 [node name="UsablesGrid" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer/CraftablesTabs/Usable Items/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/h_separation = 34
+theme_override_constants/v_separation = 34
+columns = 7
 
 [node name="Crafting Materials" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/CraftablesTabs"]
 visible = false
@@ -124,11 +134,15 @@ theme_override_constants/margin_bottom = 15
 [node name="MaterialsGrid" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer/CraftablesTabs/Crafting Materials/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/h_separation = 34
+theme_override_constants/v_separation = 34
+columns = 7
 
 [node name="SelectedCraftableDisplay" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 mouse_filter = 2
 script = ExtResource("3_1u5cd")
 
@@ -146,11 +160,17 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 34
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/AspectRatioContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
@@ -159,12 +179,16 @@ texture = ExtResource("4_ji5ws")
 [node name="Name" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Craftable's Name Here"
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_type_variation = &"LabelLarge"
+text = "Craftable Name"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 
 [node name="Description" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
@@ -175,9 +199,18 @@ size_flags_vertical = 0
 text = "Description here. Hdakdnmv lasdvkaso asindvalsid vaosjasdkva sl;kvna l;sidvn asildnv a;isdnv al;sidnv ;alsidnv ;alisdnv a;lsidnv a;lsidnvalsidvh asdnvalisdnv a;lsindv .alisndv ;alisndv"
 autowrap_mode = 3
 
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelMedium"
+text = "Recipe Cost"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="RecipeCosts" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/SelectedCraftableDisplay/MarginContainer/VBoxContainer"]
 layout_mode = 2

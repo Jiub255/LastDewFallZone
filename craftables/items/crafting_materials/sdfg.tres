@@ -11,7 +11,9 @@ Tags = Array[int]([4, 3])
 Name = "sdfg"
 Description = "sdfggsd"
 Icon = ExtResource("1_38abl")
-RecipeCosts = Dictionary[int, int]({})
+RecipeCosts = Dictionary[int, int]({
+231828703336004085: 1
+})
 RequiredBuildings = Array[int]([])
 ScrapResults = Dictionary[int, int]({
 8896933309009772036: 1

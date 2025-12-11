@@ -28,6 +28,12 @@ run/main_scene="uid://dvqh38ovds5vf"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://craftables/icons/icon.svg"
 
+[display]
+
+window/size/viewport_width=3440
+window/size/viewport_height=1440
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="LastDew-FallZone"
@@ -60,7 +66,7 @@ import/blender/enabled=false
 [gui]
 
 timers/tooltip_delay_sec=0.0
-theme/custom="uid://cu5c46h8yswqo"
+theme/custom="uid://dr1s3y8kp8d7"
 theme/custom_font="uid://dsadm3uwgmo1q"
 
 [input]

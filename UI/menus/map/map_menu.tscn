@@ -9,7 +9,11 @@ script = ExtResource("1_4t7p4")
 
 [node name="MapScreen" parent="." instance=ExtResource("2_kx73s")]
 unique_name_in_owner = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TeamSelectScreen" parent="." instance=ExtResource("3_eovdf")]
 unique_name_in_owner = true
 visible = false
+size_flags_horizontal = 3
+size_flags_vertical = 3

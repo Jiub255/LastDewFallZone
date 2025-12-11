@@ -32,9 +32,11 @@ theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CharacterDisplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
@@ -93,54 +95,84 @@ Looting: 7
 Injury: 32
 Pain: 14"
 
-[node name="EquipmentDisplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="EquipmentDisplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 10
 script = ExtResource("5_2w534")
 
-[node name="HeadButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EquipmentDisplay"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer/EquipmentDisplay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HeadButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer/EquipmentDisplay/AspectRatioContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+expand_icon = true
 script = ExtResource("6_ur32d")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
 
-[node name="WeaponButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EquipmentDisplay"]
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer/EquipmentDisplay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WeaponButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer/EquipmentDisplay/AspectRatioContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+expand_icon = true
 script = ExtResource("6_ur32d")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
 
-[node name="BodyButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EquipmentDisplay"]
+[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer/EquipmentDisplay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BodyButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer/EquipmentDisplay/AspectRatioContainer3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+expand_icon = true
 script = ExtResource("6_ur32d")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
 
-[node name="FeetButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EquipmentDisplay"]
+[node name="AspectRatioContainer4" type="AspectRatioContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer/EquipmentDisplay"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FeetButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/MarginContainer/EquipmentDisplay/AspectRatioContainer4"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+expand_icon = true
 script = ExtResource("6_ur32d")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="ItemsVBox" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_constants/separation = 20
 
 [node name="ItemsPanel" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/ItemsPanel"]
@@ -159,11 +191,14 @@ horizontal_scroll_mode = 0
 unique_name_in_owner = true
 custom_minimum_size = Vector2(696, 296)
 layout_mode = 2
-columns = 7
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 10
 
 [node name="SelectedItemPanel" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("7_v73ro")
 
@@ -172,7 +207,7 @@ layout_mode = 2
 
 [node name="ItemIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(209, 209)
+custom_minimum_size = Vector2(345, 345)
 layout_mode = 2
 expand_mode = 3
 
@@ -191,6 +226,11 @@ mouse_filter = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 1
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="UseEquipButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -199,6 +239,10 @@ size_flags_horizontal = 3
 script = ExtResource("3_pdtdd")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
 
+[node name="Control2" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="DropButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -206,3 +250,7 @@ size_flags_horizontal = 3
 text = "Drop"
 script = ExtResource("3_pdtdd")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="Control3" type="Control" parent="PanelContainer/MarginContainer/HBoxContainer/ItemsVBox/SelectedItemPanel/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

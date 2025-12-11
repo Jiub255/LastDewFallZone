@@ -16,7 +16,7 @@ namespace Lastdew
 		private bool _recentlyClicked;
 		
 		private TextureRect PcIcon { get; set; }
-		private RichTextLabel PcName { get; set; }
+		private Label PcName { get; set; }
 		private ProgressBar PainBar { get; set; }
 		private ProgressBar InjuryBar { get; set; }
 		private PlayerCharacter Pc { get; set; }
@@ -86,12 +86,13 @@ namespace Lastdew
 		public void Setup(PlayerCharacter pc)
 		{
 			PcIcon = GetNode<TextureRect>("%Icon");
-			PcName = GetNode<RichTextLabel>("%Name");
+			PcName = GetNode<Label>("%Name");
 			PainBar = GetNode<ProgressBar>("%PainBar");
 			InjuryBar = GetNode<ProgressBar>("%InjuryBar");
 			
 			PcIcon.Texture = pc.Data.Icon;
 			PcName.Text = pc.Data.Name;
+			//TooltipText = pc.Data.Name;
 			Pc = pc;
 			
 			SetHealthBars();

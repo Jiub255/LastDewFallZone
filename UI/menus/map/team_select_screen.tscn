@@ -37,6 +37,7 @@ theme_override_constants/separation = 20
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("2_dp6u0")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
@@ -66,22 +67,27 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 mouse_filter = 2
+theme_type_variation = &"RichTextLabelLarge"
 bbcode_enabled = true
 text = "[center]James[/center]"
 fit_content = true
 
-[node name="CharacterIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CharacterIcon" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector/AspectRatioContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("3_6yykp")
-expand_mode = 5
+stretch_mode = 4
 
 [node name="StatsLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/HBoxContainer/CharacterSelector"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 mouse_filter = 1
-theme_override_font_sizes/normal_font_size = 18
 text = "Level: 2
 Attack: 5
 Defense: 3
@@ -97,24 +103,49 @@ text = "Add To Team"
 script = ExtResource("3_ipj1p")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
 
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+color = Color(1, 1, 1, 0.309804)
+
 [node name="TeamDisplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 20
+size_flags_stretch_ratio = 3.0
+theme_override_constants/separation = 35
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/TeamDisplay"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_type_variation = &"LabelLarge"
 text = "Scavenging Team"
 horizontal_alignment = 1
 
 [node name="PcDisplayParent" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/TeamDisplay"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 20
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="ColorRect2" type="ColorRect" parent="PanelContainer/MarginContainer/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+color = Color(1, 1, 1, 0.309804)
 
 [node name="LocationInfo" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 
 [node name="LocationInfo" parent="PanelContainer/MarginContainer/HBoxContainer/LocationInfo" instance=ExtResource("5_h6bda")]
 unique_name_in_owner = true

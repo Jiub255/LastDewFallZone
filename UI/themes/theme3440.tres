@@ -1,0 +1,47 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://dr1s3y8kp8d7"]
+
+[ext_resource type="StyleBox" uid="uid://srletqm0c2rs" path="res://UI/themes/styleboxes/button/button_disabled_stylebox.tres" id="1_4rybs"]
+[ext_resource type="StyleBox" uid="uid://kot647gsd5bp" path="res://UI/themes/styleboxes/button/button_hover_stylebox.tres" id="2_td32s"]
+[ext_resource type="StyleBox" uid="uid://jvv81b8skdir" path="res://UI/themes/styleboxes/button/button_normal_stylebox.tres" id="3_jnwjo"]
+[ext_resource type="StyleBox" uid="uid://dpxpp0tmv4no7" path="res://UI/themes/styleboxes/button/button_pressed_stylebox.tres" id="4_w341s"]
+[ext_resource type="StyleBox" uid="uid://6pwl7dlcpabi" path="res://UI/themes/styleboxes/panel_container/panel_container_wood_stylebox.tres" id="5_2nq6i"]
+[ext_resource type="StyleBox" uid="uid://d0m7wbqb6x7yh" path="res://UI/themes/styleboxes/panel_container/panel_container_dark_stylebox.tres" id="6_8mqgk"]
+[ext_resource type="StyleBox" uid="uid://cirqau700yjk6" path="res://UI/themes/styleboxes/tab_container/tab_container_panel_stylebox.tres" id="7_7v6k6"]
+[ext_resource type="StyleBox" uid="uid://by7urwe4yycy1" path="res://UI/themes/styleboxes/tab_container/tab_hover_stylebox.tres" id="8_qrw1s"]
+[ext_resource type="StyleBox" uid="uid://ba1j1q8f3tdio" path="res://UI/themes/styleboxes/tab_container/tab_selected_stylebox.tres" id="9_p818r"]
+[ext_resource type="StyleBox" uid="uid://bmwvy4f2equ6m" path="res://UI/themes/styleboxes/tab_container/tab_unselected_stylebox.tres" id="10_1aaf3"]
+
+[resource]
+Button/font_sizes/font_size = 56
+Button/styles/disabled = ExtResource("1_4rybs")
+Button/styles/hover = ExtResource("2_td32s")
+Button/styles/normal = ExtResource("3_jnwjo")
+Button/styles/pressed = ExtResource("4_w341s")
+Label/font_sizes/font_size = 56
+LabelLarge/base_type = &"Label"
+LabelLarge/font_sizes/font_size = 98
+LabelMedium/base_type = &"Label"
+LabelMedium/font_sizes/font_size = 75
+LabelSmall/base_type = &"Label"
+LabelSmall/font_sizes/font_size = 28
+PanelContainer/styles/panel = ExtResource("5_2nq6i")
+PanelContainerDark/base_type = &"PanelContainer"
+PanelContainerDark/styles/panel = ExtResource("6_8mqgk")
+RichTextLabel/font_sizes/bold_font_size = 56
+RichTextLabel/font_sizes/bold_italics_font_size = 56
+RichTextLabel/font_sizes/italics_font_size = 56
+RichTextLabel/font_sizes/mono_font_size = 56
+RichTextLabel/font_sizes/normal_font_size = 56
+RichTextLabelLarge/base_type = &"RichTextLabel"
+RichTextLabelLarge/font_sizes/bold_font_size = 98
+RichTextLabelLarge/font_sizes/bold_italics_font_size = 98
+RichTextLabelLarge/font_sizes/italics_font_size = 98
+RichTextLabelLarge/font_sizes/mono_font_size = 98
+RichTextLabelLarge/font_sizes/normal_font_size = 98
+TabBar/font_sizes/font_size = 56
+TabBar/styles/tab_selected = ExtResource("3_jnwjo")
+TabContainer/font_sizes/font_size = 56
+TabContainer/styles/panel = ExtResource("7_7v6k6")
+TabContainer/styles/tab_hovered = ExtResource("8_qrw1s")
+TabContainer/styles/tab_selected = ExtResource("9_p818r")
+TabContainer/styles/tab_unselected = ExtResource("10_1aaf3")

@@ -10,8 +10,9 @@ metadata/_custom_type_script = "uid://cay7rsmo8s8ya"
 
 [node name="Icon" type="TextureRect" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
+stretch_mode = 4
 
 [node name="Name" type="Label" parent="."]
 unique_name_in_owner = true

@@ -3,6 +3,6 @@
 [ext_resource type="Script" uid="uid://1rlvra55yk8g" path="res://UI/menus/crafting/CraftableButton.cs" id="1_xkcbo"]
 
 [node name="CraftableButton" type="Button"]
-custom_minimum_size = Vector2(96, 96)
+custom_minimum_size = Vector2(255, 255)
 expand_icon = true
 script = ExtResource("1_xkcbo")

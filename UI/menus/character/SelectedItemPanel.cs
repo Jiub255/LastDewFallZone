@@ -38,14 +38,12 @@ namespace Lastdew
 			Description.Text = itemButton.Item.Description;
 			UseEquip.Visible = true;
 			Drop.Visible = true;
-			if (itemButton.Item is UsableItem)
+			UseEquip.Text = itemButton.Item switch
 			{
-				UseEquip.Text = "Use";
-			}
-			else if (itemButton.Item is Equipment)
-			{
-				UseEquip.Text = "Equip";
-			}
+				UsableItem => "Use",
+				Equipment => "Equip",
+				_ => UseEquip.Text
+			};
 		}
 		
 		public void ClearItem()

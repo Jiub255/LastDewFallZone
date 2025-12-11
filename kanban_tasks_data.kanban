@@ -47,7 +47,8 @@
 			"tasks": [
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"31f7804f-979d-4e67-9d76-db0049a9350a",
-				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be"
+				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
+				"66e4ae30-0330-4cea-babb-74aab3314288"
 			]
 		},
 		{
@@ -128,7 +129,8 @@
 				"38bf52b0-1964-4055-9107-571f4e87d49a",
 				"ae82aa6a-c65e-458f-b388-c50a3c6ddce3",
 				"cd7d53a6-8ba3-41c8-855e-623615812278",
-				"8fa1389a-f844-4fc4-9632-112e10ca6d36"
+				"8fa1389a-f844-4fc4-9632-112e10ca6d36",
+				"a49b3863-066b-4537-8678-4c9706709283"
 			]
 		},
 		{
@@ -190,8 +192,6 @@
 				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
-				"66e4ae30-0330-4cea-babb-74aab3314288",
-				"a49b3863-066b-4537-8678-4c9706709283",
 				"214fa122-5f85-4d1c-8dec-27c303c9b928",
 				"0e82596b-3f97-42e0-b018-06d7658cd4d3"
 			]
@@ -1137,7 +1137,7 @@
 		{
 			"uuid": "a49b3863-066b-4537-8678-4c9706709283",
 			"title": "Make game/window resizeable",
-			"description": "And make the UI/HUD react to sizes gracefully.\nMake separate layouts for ultrawide, standard, small, etc?",
+			"description": "And make the UI/HUD react to sizes gracefully.\nMake separate layouts for ultrawide, standard, small, etc?\nUse anchors better to make menus scale correctly. Then make a few themes, and switch between them depending on the window size.\nBigger fonts for bigger sizes, not sure what else to change. \nAlso check screen resolution when starting and apply the theme that fits that size.\nNeed to find a way to resize item buttons and team select pc buttons to fit the screen size. Could just do it through code, when checking for window size changes.\nSet up a signal that informs about window size changes, then resize buttons that get instantiated based off that? Also need to change number of columns in the item grid to fit.\nUI elements to resize:\n\tItemButton\n\tRecipeCostUi\n\tCraftableButton\n\tPcDisplay\n\tPc/Menu buttons on HUD?\n\nActually might not need to do all that. Just make everything fit in 3440, then it scales down nicely.\nJust need to fine tune some UI element's sizes (the UI elements to resize from above, especially PcButtons and menu buttons in HUD) and should be good to go.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},

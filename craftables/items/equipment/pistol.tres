@@ -7,20 +7,20 @@
 script = ExtResource("3_1hwkl")
 Type = 3
 EquipmentBonuses = Dictionary[int, int]({
-3: 8
+0: 2
 })
 StatsNeededToEquip = Dictionary[int, int]({
-0: 1,
-2: 18,
-3: 13,
-5: 6
+0: 1
 })
 ItemRarity = 3
 Tags = Array[int]([2, 0])
 Name = "Pistol"
 Description = "That was definitely a gunshot"
 Icon = ExtResource("1_sr5s8")
-RecipeCosts = Dictionary[int, int]({})
+RecipeCosts = Dictionary[int, int]({
+2265523525199636055: 1,
+5170883165870291646: 1
+})
 RequiredBuildings = Array[int]([])
 ScrapResults = Dictionary[int, int]({})
 StatsNeededToCraft = Dictionary[int, int]({})

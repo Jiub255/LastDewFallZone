@@ -47,11 +47,13 @@ namespace Lastdew
 				data.Name,
 				data.Image,
 				data.Description);
+			SelectTeamButton.Disabled = false;
 		}
 		
 		private void ClearLocationInfo()
 		{
 			LocationInfo.Setup("", null, "");
+			SelectTeamButton.Disabled = true;
 		}
 	}
 }

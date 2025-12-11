@@ -73,6 +73,7 @@ namespace Lastdew
 			Equipment = new PcEquipment(saveData);
 			Inventory = inventoryManager;
 
+			StatManager.CalculateStatModifiers(Equipment.Bonuses);
 			StatManager.Experience.OnExperienceGained += ShowPopup;
 
 			SetupPcData(saveData.PcDataUid);

@@ -11,7 +11,9 @@ Tags = Array[int]([])
 Name = "Wool"
 Description = "Get it from a sheep."
 Icon = ExtResource("1_0o7br")
-RecipeCosts = Dictionary[int, int]({})
+RecipeCosts = Dictionary[int, int]({
+5170883165870291646: 1
+})
 RequiredBuildings = Array[int]([2503720807621627471])
 ScrapResults = Dictionary[int, int]({})
 StatsNeededToCraft = Dictionary[int, int]({})

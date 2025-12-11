@@ -6,7 +6,9 @@
 [resource]
 script = ExtResource("1_8ycmd")
 Type = 1
-EquipmentBonuses = Dictionary[int, int]({})
+EquipmentBonuses = Dictionary[int, int]({
+1: 2
+})
 StatsNeededToEquip = Dictionary[int, int]({
 0: 1
 })
@@ -15,7 +17,9 @@ Tags = Array[int]([3])
 Name = "Armor"
 Description = "Gate"
 Icon = ExtResource("1_0pd63")
-RecipeCosts = Dictionary[int, int]({})
+RecipeCosts = Dictionary[int, int]({
+5170883165870291646: 3
+})
 RequiredBuildings = Array[int]([])
 ScrapResults = Dictionary[int, int]({})
 StatsNeededToCraft = Dictionary[int, int]({})

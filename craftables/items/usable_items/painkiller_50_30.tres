@@ -14,7 +14,9 @@ Tags = Array[int]([1])
 Name = "Painkiller"
 Description = "Relieve 50 pain for 30 seconds."
 Icon = ExtResource("1_sornl")
-RecipeCosts = Dictionary[int, int]({})
+RecipeCosts = Dictionary[int, int]({
+1921528341258088331: 1
+})
 RequiredBuildings = Array[int]([])
 ScrapResults = Dictionary[int, int]({})
 StatsNeededToCraft = Dictionary[int, int]({})

@@ -4,7 +4,8 @@ using Godot;
 namespace Lastdew
 {
 	public partial class CharacterMenu : Menu
-	{	
+	{
+		private TeamData TeamData { get; set; }
 		private InventoryManager InventoryManager { get; set; }
 		private GridContainer ItemsGrid { get; set; }
 		private SelectedItemPanel SelectedItemPanel { get; set; }
@@ -31,6 +32,7 @@ namespace Lastdew
 	
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
 		{
+			TeamData = teamData;
 			InventoryManager = inventoryManager;
 			CharacterDisplay.Initialize(teamData);
 			SelectedItemPanel.Initialize(teamData);
@@ -42,63 +44,56 @@ namespace Lastdew
 		public override void _ExitTree()
 		{
 			base._ExitTree();
-			
-			foreach (Node child in ItemsGrid.GetChildren())
-			{
-				if (child is ItemButton button)
-				{
-					button.OnPressed -= SelectedItemPanel.SetItem;
-				}
-			}
 
-			if (InventoryManager == null)
+			UnsubscribeFromEvents();
+		}
+
+		public override void Close()
+		{
+			base.Close();
+
+			if (TeamData.SelectedIndex != null)
 			{
-				return;
-			}			
-			InventoryManager.OnInventoryChanged -= PopulateInventoryUi;
-			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.SetupDisplay;
-			
-			foreach(Button button in EquipmentDisplay.Buttons)
-			{
-				button.Pressed -= CharacterDisplay.SetupDisplay;
+				TeamData.MenuSelectedIndex = (int)TeamData.SelectedIndex;
 			}
 		}
-	
-		public void RefreshDisplay()
-		{
-			PopulateInventoryUi();
-			CharacterDisplay.SetupDisplay();
-		}
-	
+
 		private void PopulateInventoryUi()
 		{
-			for (int i = Buttons.Count - 1; i >= 0; i--)
+			ClearButtons();
+			SetupButtons();
+			SetSelectedItem();
+		}
+
+		private void ClearButtons()
+		{
+			foreach (ItemButton itemButton in Buttons)
 			{
-				ItemButton button = Buttons[i];
-				button.OnPressed -= SelectedItemPanel.SetItem;
-				Buttons.RemoveAt(i);
-				button.QueueFree();
+				RemoveButton(itemButton);
 			}
-			
+
+			Buttons.Clear();
+		}
+	
+		private void RemoveButton(ItemButton button)
+		{
+			button.OnPressed -= SelectedItemPanel.SetItem;
+			button.QueueFree();
+		}
+
+		private void SetupButtons()
+		{
 			foreach (KeyValuePair<UsableItem, int> item in InventoryManager.UsableItems)
 			{
 				SetupButton(item.Key, item.Value);
 			}
+
 			foreach (KeyValuePair<Equipment, int> equipment in InventoryManager.Equipment)
 			{
 				SetupButton(equipment.Key, equipment.Value);
 			}
-			
-			if (Buttons.Count > 0)
-			{
-				SelectedItemPanel.CallDeferred(SelectedItemPanel.MethodName.SetItem, Buttons[0]);
-			}
-			else
-			{
-				SelectedItemPanel.ClearItem();
-			}
 		}
-	
+
 		// TODO: Add a color parameter here to tint similar types of items the same color?
 		// Or could go by rarity?
 		private void SetupButton(Item item, int amount)
@@ -109,11 +104,39 @@ namespace Lastdew
 			button.OnPressed += SelectedItemPanel.SetItem;
 			Buttons.Add(button);
 		}
-	
-		private void RemoveButton(ItemButton button)
+
+		private void SetSelectedItem()
 		{
-			button.OnPressed -= SelectedItemPanel.SetItem;
-			button.QueueFree();
+			if (Buttons.Count > 0)
+			{
+				SelectedItemPanel.CallDeferred(SelectedItemPanel.MethodName.SetItem, Buttons[0]);
+			}
+			else
+			{
+				SelectedItemPanel.ClearItem();
+			}
+		}
+
+		private void UnsubscribeFromEvents()
+		{
+			foreach (Node child in ItemsGrid.GetChildren())
+			{
+				if (child is ItemButton button)
+				{
+					button.OnPressed -= SelectedItemPanel.SetItem;
+				}
+			}
+			
+			foreach(Button button in EquipmentDisplay.Buttons)
+			{
+				button.Pressed -= CharacterDisplay.SetupDisplay;
+			}
+
+			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.SetupDisplay;
+			if (InventoryManager != null)
+			{
+				InventoryManager.OnInventoryChanged -= PopulateInventoryUi;
+			}
 		}
 	}
 }

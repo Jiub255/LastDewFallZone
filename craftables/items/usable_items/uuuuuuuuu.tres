@@ -1,18 +1,21 @@
-[gd_resource type="Resource" script_class="UsableItem" load_steps=3 format=3 uid="uid://ybve325sah4y"]
+[gd_resource type="Resource" script_class="UsableItem" load_steps=4 format=3 uid="uid://ybve325sah4y"]
 
 [ext_resource type="Script" uid="uid://d2k7fseog6yq2" path="res://craftables/items/usable_items/UsableItem.cs" id="1_d62t3"]
 [ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://craftables/icons/icon_water.png" id="1_jogvb"]
+[ext_resource type="Script" uid="uid://bi02ojo6l0h1j" path="res://craftables/items/usable_items/effects/Effect.cs" id="1_op5ug"]
 
 [resource]
 script = ExtResource("1_d62t3")
 Reusable = false
-Effects = []
+Effects = Array[ExtResource("1_op5ug")]([])
 ItemRarity = 0
 Tags = Array[int]([1])
 Name = "uuuuuuuuu"
 Description = ""
 Icon = ExtResource("1_jogvb")
-RecipeCosts = Dictionary[int, int]({})
+RecipeCosts = Dictionary[int, int]({
+8896933309009772036: 1
+})
 RequiredBuildings = Array[int]([])
 ScrapResults = Dictionary[int, int]({})
 StatsNeededToCraft = Dictionary[int, int]({})

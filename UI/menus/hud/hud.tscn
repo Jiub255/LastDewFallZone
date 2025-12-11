@@ -19,6 +19,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -52,8 +54,9 @@ size_flags_vertical = 8
 
 [node name="Build" type="Button" parent="MarginContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+tooltip_text = "Build Menu"
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_bmggi")
@@ -66,8 +69,9 @@ metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="Craft" type="Button" parent="MarginContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+tooltip_text = "Crafting Menu"
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_bmggi")
@@ -80,8 +84,9 @@ metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="Character" type="Button" parent="MarginContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+tooltip_text = "Character Menu"
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_bmggi")
@@ -94,8 +99,9 @@ metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="Map" type="Button" parent="MarginContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+tooltip_text = "Choose Scavenging Location"
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_bmggi")
@@ -108,8 +114,9 @@ metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="Main" type="Button" parent="MarginContainer/MenuButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(75, 75)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+tooltip_text = "Main Menu"
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_bmggi")

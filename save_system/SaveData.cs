@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Godot;
+using Godot.NativeInterop;
 
 namespace Lastdew
 {
@@ -11,5 +13,19 @@ namespace Lastdew
 	{		
 		public Dictionary<long, int> Inventory { get; init; } = inventory;
 		public List<PcSaveData> PcSaveDatas { get; init; } = pcSaveDatas;
+
+		public void PrintData()
+		{
+			GD.Print("Inventory\n");
+			foreach (KeyValuePair<long, int> kvp in Inventory)
+			{
+				GD.Print($"key: {kvp.Key}, value: {kvp.Value}\n");
+			}
+
+			foreach (PcSaveData saveData in PcSaveDatas)
+			{
+				saveData.PrintData();
+			}
+		}
 	}
 }

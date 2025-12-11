@@ -113,9 +113,10 @@ namespace Lastdew
 		private async Task Load()
 		{
 			SaveData saveData = SaveSystem.Load();
-			LoadInventory(saveData.Inventory);
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
 			await SetupLevel(homeBaseScene, saveData.PcSaveDatas);
+			// LoadInventory needs to be called after SetupLevel so the inventory UI (CharacterMenu) can initialize first.
+			LoadInventory(saveData.Inventory);
 			Ui.ChangeState(new GameStateHome());
 		}
 

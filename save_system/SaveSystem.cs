@@ -11,7 +11,7 @@ namespace Lastdew
 		public static void Save(InventoryManager inventoryManager, TeamData teamData)
 		{
 			SaveData saveData = GatherSaveData(inventoryManager, teamData);
-
+			saveData.PrintData();
 			string jsonString = JsonSerializer.Serialize(saveData);
 
 			using FileAccess saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);

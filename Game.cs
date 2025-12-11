@@ -1,6 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Lastdew
 {
@@ -11,37 +12,20 @@ namespace Lastdew
         private UiManager Ui { get; set; }
         private InventoryManager InventoryManager { get; set; }
         private TeamData TeamData { get; set; }
-        private PackedScene HomeBaseScene { get; } = GD.Load<PackedScene>(Uids.HOME_BASE);
-        private Level HomeBase { get; set; }
-        private ScavengingLevel ScavengingLevel { get; set; }
+        private Level CurrentLevel { get; set; }
+        private Fader Fader { get; set; }
         private AudioStreamPlayer MusicPlayer { get; set; }
         private AudioStreamMP3 StartMenuSong { get; } = GD.Load<AudioStreamMP3>(Music.RELOAD_AND_REASSESS);
-
+        
         #region TESTING STUFF
 
         [Export]
         private bool CombatTesting { get; set; }
         [Export]
         private int NumberOfPcs { get; set; } = 1;
-        private PackedScene CombatTestScene { get; } = GD.Load<PackedScene>("uid://dr032kqvigccx");
         private List<PcSaveData> DefaultPcList { get; } = [];
-        // TODO: Why did the UIDs change? From saving the PcData resources during runtime in the Mugshotter?
-		private List<PcData> DefaultPcDatas { get; }= [
-			// GD.Load<PcData>("uid://bqd6uonxmwcas"),
-			// GD.Load<PcData>("uid://cvscwbigsi3w3"),
-			// GD.Load<PcData>("uid://cyk852026vmce"),
-			// GD.Load<PcData>("uid://hiyhdi8pggjm"),
-			// GD.Load<PcData>("uid://bps8f2vb6ve3d"),
-			// GD.Load<PcData>("uid://b8ybhu3f6hhjx"),
-			// GD.Load<PcData>("uid://ddsesm5yv0rp5"),
-			// GD.Load<PcData>("uid://bxv41b1s8i58r"),
-			GD.Load<PcData>("uid://cw434qg6iibq6"),
-			GD.Load<PcData>("uid://b2npp0iygiu6r"),
-			GD.Load<PcData>("uid://cx4hf0cghja30"),
-			GD.Load<PcData>("uid://fam17cuu6hvg"),
-		];
 
-#endregion
+        #endregion
 
         public override void _Ready()
 		{
@@ -53,6 +37,7 @@ namespace Lastdew
 			Ui = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
 			InventoryManager = new InventoryManager();
+			Fader = GetNode<Fader>("%Fader");
 			
 			MusicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
 			MusicPlayer.Stream = StartMenuSong;
@@ -62,10 +47,10 @@ namespace Lastdew
 
 			GetTree().Paused = true;
 
-			for (int i = 0; i < NumberOfPcs; i++)
+			foreach (PcData data in Databases.PcDatas.PcDatas.Values)
 			{
-                DefaultPcList.Add(new PcSaveData(DefaultPcDatas[i % DefaultPcDatas.Count]));
-            }
+				DefaultPcList.Add(new PcSaveData(data.GetUid()));
+			}
 
 			SubscribeToEvents();
 
@@ -91,7 +76,7 @@ namespace Lastdew
 			Ui.MainMenu.OnLoadGame += Load;
 			Ui.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging += StartScavenging;
-			Ui.MainMenu.ReturnToBase.Pressed += ReturnToBase;
+			Ui.MainMenu.OnReturnToBase += ReturnToBase;
 		}
 
         private void UnsubscribeFromEvents()
@@ -103,18 +88,20 @@ namespace Lastdew
 			Ui.MainMenu.OnLoadGame -= Load;
 			Ui.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging -= StartScavenging;
-			Ui.MainMenu.ReturnToBase.Pressed -= ReturnToBase;
+			Ui.MainMenu.OnReturnToBase -= ReturnToBase;
 		}
 
-		private void StartNewGame()
+		private async Task StartNewGame()
 		{
-			SetupLevel(HomeBaseScene, DefaultPcList);
+			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
+			await SetupLevel(homeBaseScene, DefaultPcList);
 			Ui.ChangeState(new GameStateHome());
 		}
 
-		private void StartCombatTest()
+		private async Task StartCombatTest()
 		{
-			SetupLevel(CombatTestScene, DefaultPcList);
+			PackedScene combatTestScene = GD.Load<PackedScene>("uid://dr032kqvigccx");
+			await SetupLevel(combatTestScene, DefaultPcList);
 			Ui.ChangeState(new GameStateHome());
 		}
 
@@ -123,11 +110,12 @@ namespace Lastdew
 			SaveSystem.Save(InventoryManager, TeamData);
 		}
 
-		private void Load()
+		private async Task Load()
 		{
 			SaveData saveData = SaveSystem.Load();
 			LoadInventory(saveData.Inventory);
-			SetupLevel(HomeBaseScene, saveData.PcSaveDatas);
+			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
+			await SetupLevel(homeBaseScene, saveData.PcSaveDatas);
 			Ui.ChangeState(new GameStateHome());
 		}
 
@@ -140,62 +128,52 @@ namespace Lastdew
 			}
 		}
 
-        private void SetupLevel(PackedScene levelScene, List<PcSaveData> pcSaveDatas, bool scavenging = false)
+        private async Task SetupLevel(PackedScene levelScene, List<PcSaveData> pcSaveDatas)
 		{
-			Level level = (Level)levelScene.Instantiate();
-			CallDeferred(Node.MethodName.AddChild, level);
-			level.Initialize(TeamData);
+			Fader.FadeOut();
+			await ToSignal(Fader, Fader.SignalName.OnFadeOut);
+			
+			CurrentLevel?.QueueFree();
+			
+			CurrentLevel = (Level)levelScene.Instantiate();
+			CallDeferred(Node.MethodName.AddChild, CurrentLevel);
+			CurrentLevel.Initialize(TeamData);
 			
 			// UI.Initialize has to be called after PcManager.SpawnPcs,
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
 			Ui.Initialize(TeamData, InventoryManager);
 			
-			MusicPlayer.Stream = level.Song;
+			MusicPlayer.Stream = CurrentLevel.Song;
 			MusicPlayer.Play();
 			
-			if (scavenging)
-			{
-				ScavengingLevel = (ScavengingLevel)level;
-			}
-			else
-			{
-				HomeBase = level;
-			}
+			Fader.FadeIn();
 		}
         
         private void ExitToStartMenu()
         {
-			foreach (Node node in GetChildren())
-			{
-				if (node is Level oldLevel)
-				{
-					oldLevel.QueueFree();
-				}
-			}
+			CurrentLevel?.QueueFree();
+			MusicPlayer.Stream = StartMenuSong;
+			MusicPlayer.Play();
 			Ui.ChangeState(new GameStateStart());
         }
 
-		private void StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
+		private async Task StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
 		{
-			RemoveChild(HomeBase);
-			SetupLevel(scene, pcSaveDatas, true);
+			await SetupLevel(scene, pcSaveDatas);
 			Ui.ChangeState(new GameStateScavenging());
 		}
         
-        private void ReturnToBase()
+        private async Task ReturnToBase()
         {
-			ScavengingLevel?.QueueFree();
-			AddChild(HomeBase);
-			
-			// Spawn returning pcs from sent PcDatas, and the rest from saved PcDatas.
+			// Spawn returning pcs from sent Pcs, and the rest from saved PcSaveDatas.
 			List<PcSaveData> pcSaveDatas = [];
 			pcSaveDatas.AddRange(TeamData.Pcs.Select(pc => new PcSaveData(pc)));
 			pcSaveDatas.AddRange(TeamData.UnusedPcDatas);
 			TeamData.UnusedPcDatas.Clear();
 			
-			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
-			Ui.Initialize(TeamData, InventoryManager);
+			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
+			await SetupLevel(homeBaseScene, pcSaveDatas);
 			Ui.ChangeState(new GameStateHome());
         }
 	}

@@ -1,17 +1,19 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 namespace Lastdew
 {
 	public partial class MainMenu : Menu
 	{
-		public event Action OnNewGame;
+		public event Func<Task> OnNewGame;
 		public event Action OnSaveGame;
-		public event Action OnLoadGame;
+		public event Func<Task> OnLoadGame;
+		public event Func<Task> OnReturnToBase;
 		
 		public SfxButton Continue { get; private set; }
 		public SfxButton SaveGame { get; private set;}
-		public SfxButton ReturnToBase { get; private set;}
+		public SfxButton ReturnToBaseButton { get; private set;}
 		public SfxButton LoadGame { get; private set;}
 		public SfxButton NewGame { get; private set; }
 		public SfxButton Options { get; private set; }
@@ -21,7 +23,7 @@ namespace Lastdew
 		{
 			Continue = GetNode<SfxButton>("%Continue");
 			SaveGame = GetNode<SfxButton>("%SaveGame");
-			ReturnToBase = GetNode<SfxButton>("%ReturnToBase");
+			ReturnToBaseButton = GetNode<SfxButton>("%ReturnToBase");
 			LoadGame = GetNode<SfxButton>("%LoadGame");
 			NewGame = GetNode<SfxButton>("%NewGame");
 			Options = GetNode<SfxButton>("%Options");
@@ -30,6 +32,7 @@ namespace Lastdew
 			NewGame.Pressed += StartNewGame;
 			SaveGame.Pressed += Save;
 			LoadGame.Pressed += Load;
+			ReturnToBaseButton.Pressed += ReturnToBase;
 		}
 
 		public override void _ExitTree()
@@ -39,6 +42,7 @@ namespace Lastdew
 			NewGame.Pressed -= StartNewGame;
 			SaveGame.Pressed -= Save;
 			LoadGame.Pressed -= Load;
+			ReturnToBaseButton.Pressed -= ReturnToBase;
 		}
 
 		private void StartNewGame()
@@ -54,6 +58,11 @@ namespace Lastdew
 		private void Load()
 		{
 			OnLoadGame?.Invoke();
+		}
+
+		private void ReturnToBase()
+		{
+			OnReturnToBase?.Invoke();
 		}
 	}
 }

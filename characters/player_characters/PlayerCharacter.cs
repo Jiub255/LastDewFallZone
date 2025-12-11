@@ -74,7 +74,7 @@ namespace Lastdew
 
 			StatManager.Experience.OnExperienceGained += ShowPopup;
 
-			SetupPcData(saveData.PcData);
+			SetupPcData(saveData.PcDataUid);
 		}
 
         public void ProcessUnselected(double delta)
@@ -237,9 +237,9 @@ namespace Lastdew
 			}
 		}
 
-        private void SetupPcData(PcData data)
+        private void SetupPcData(long dataUid)
         {
-			Data = data;
+			Data = GD.Load<PcData>(ResourceUid.IdToText(dataUid));
 			
 			Skeleton3D meshParent = GetNode<Skeleton3D>("%Skeleton3D");
 			List<MeshInstance3D> meshes = [];

@@ -33,5 +33,13 @@ namespace Lastdew
 		public MeshType LegsMesh { get; set; } = MeshType.ADVENTURER;
 		[Export]
 		public MeshType FeetMesh { get; set; } = MeshType.ADVENTURER;
+
+		public void PrintData()
+		{
+			GD.Print($"Name: {Name}\n");
+			GD.Print($"Icon: {Icon}\n");
+			GD.Print($"Starting Attack: {Attack}\n");
+			GD.Print($"HeadMesh: {HeadMesh}\n");
+		}
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvqh38ovds5vf"]
+[gd_scene load_steps=14 format=3 uid="uid://dvqh38ovds5vf"]
 
 [ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://Game.cs" id="1_e8jue"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://camera/camera.tscn" id="2_hliwg"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dh8qmjetlrm2d" path="res://UI/menus/crafting/crafting_menu.tscn" id="10_d65k2"]
 [ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/menus/map/map_menu.tscn" id="10_km2cl"]
 [ext_resource type="Environment" uid="uid://demmrxsekmoyp" path="res://world/environment.tres" id="11_hliwg"]
+[ext_resource type="PackedScene" uid="uid://dgnkps730uihc" path="res://UI/fader/fader.tscn" id="13_lc2xo"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_e8jue")
@@ -55,9 +56,11 @@ script = ExtResource("9_lclbi")
 
 [node name="CharacterMenu" parent="UiManager" instance=ExtResource("9_av0ep")]
 unique_name_in_owner = true
+visible = false
 
 [node name="CraftingMenu" parent="UiManager" instance=ExtResource("10_d65k2")]
 unique_name_in_owner = true
+visible = false
 
 [node name="MapMenu" parent="UiManager" instance=ExtResource("10_km2cl")]
 unique_name_in_owner = true
@@ -69,3 +72,8 @@ environment = ExtResource("11_hliwg")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
+
+[node name="Fader" parent="." instance=ExtResource("13_lc2xo")]
+unique_name_in_owner = true
+process_mode = 3
+layer = 23

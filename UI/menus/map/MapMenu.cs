@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 namespace Lastdew
 {
 	public partial class MapMenu : Menu
 	{
-		public event Action<PackedScene, List<PcSaveData>> OnStartScavenging;
+		public event Func<PackedScene, List<PcSaveData>, Task> OnStartScavenging;
 		
 		private TeamData TeamData { get; set; }
 		private MapScreen MapScreen { get; set; }

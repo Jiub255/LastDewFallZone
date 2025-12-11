@@ -21,7 +21,7 @@ namespace Lastdew
 		private CharacterSelector CharacterSelector { get; set; }
 		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(Uids.PC_DISPLAY);
 		private List<PlayerCharacter> UnselectedPcs { get; set; } = [];
-		private List<PlayerCharacter> SelectedPcs { get; set; } = [];
+		private List<PlayerCharacter> SelectedPcs { get; } = [];
 		private int Index
 		{
 		    get => _index;

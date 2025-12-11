@@ -8,7 +8,7 @@ namespace Lastdew
         {
             mainMenu.Continue.Hide();
             mainMenu.SaveGame.Show();
-            mainMenu.ReturnToBase.Hide();
+            mainMenu.ReturnToBaseButton.Hide();
             mainMenu.LoadGame.Show();
             mainMenu.NewGame.Hide();
             mainMenu.Exit.InStartMenu = false;

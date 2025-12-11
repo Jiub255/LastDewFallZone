@@ -7,19 +7,22 @@ namespace Lastdew
 	{
 		private TeamData TeamData { get; set; }
 		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(Uids.PC_BUTTON);
-		private HBoxContainer ButtonParent { get; set; }
+		private HBoxContainer PcButtonParent { get; set; }
+		private PackedScene LootedItemDisplayScene { get; set; } = (PackedScene)GD.Load(Uids.LOOTED_ITEM_DISPLAY);
+		private VBoxContainer LootedItemsParent { get; set; }
 		private List<PcButton> PcButtons { get; set; } = [];
 	
 		public override void _Ready()
 		{
 			base._Ready();
 			
-			ButtonParent = GetNode<HBoxContainer>("%HBoxContainer");
+			PcButtonParent = GetNode<HBoxContainer>("%PcButtonParent");
+			LootedItemsParent = GetNode<VBoxContainer>("%LootedItemsParent");
 		}
 		
 		public override void Open()
 		{
-			foreach (Node node in ButtonParent.GetChildren())
+			foreach (Node node in PcButtonParent.GetChildren())
 			{
 				if (node is PcButton button)
 				{
@@ -40,11 +43,18 @@ namespace Lastdew
 	                GD.PushError("PcButton scene did not instantiate correctly.");
 	                continue;
                 }
-                ButtonParent.CallDeferred(Node.MethodName.AddChild, pcButton);
+                PcButtonParent.CallDeferred(Node.MethodName.AddChild, pcButton);
                 pcButton.CallDeferred(PcButton.MethodName.Setup, pc);
                 pcButton.OnSelectPc += TeamData.SelectPc;
                 PcButtons.Add(pcButton);
             }
+		}
+
+		public void ShowLootedItems(Item item, int amount)
+		{
+			LootedItemDisplay itemDisplay = (LootedItemDisplay)LootedItemDisplayScene.Instantiate();
+			LootedItemsParent.CallDeferred(Node.MethodName.AddChild, itemDisplay);
+			itemDisplay.CallDeferred(LootedItemDisplay.MethodName.Setup, item, amount);
 		}
 
         private void ClearPcButtons()

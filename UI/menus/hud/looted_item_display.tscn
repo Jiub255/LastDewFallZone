@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgnjc7virkw7o"]
+
+[ext_resource type="Script" uid="uid://cmh3svrgpigji" path="res://UI/menus/hud/LootedItemDisplay.cs" id="1_gnbw5"]
+[ext_resource type="Texture2D" uid="uid://yf5l7e24sw2q" path="res://craftables/items/usable_items/icon_painkillers_blank.png" id="2_85aph"]
+
+[sub_resource type="Animation" id="Animation_gnbw5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_85aph"]
+resource_name = "main"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3ju2"]
+_data = {
+&"RESET": SubResource("Animation_gnbw5"),
+&"main": SubResource("Animation_85aph")
+}
+
+[node name="LootedItemDisplay" type="HBoxContainer"]
+script = ExtResource("1_gnbw5")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_85aph")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Item Name"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_w3ju2")
+}

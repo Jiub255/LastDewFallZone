@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -5,6 +6,8 @@ namespace Lastdew
 {
 	public partial class PcManager : Node3D
 	{
+		public event Action<Item, int> OnLooted;
+		
 		private const float SPACE_BETWEEN_PCS = 1.5f;
 		private const float MOUSE_MOVEMENT_THRESHOLD = 10f;
 
@@ -124,6 +127,7 @@ namespace Lastdew
 				pc.Position += Vector3.Right * SPACE_BETWEEN_PCS * i;
 				i++;
 				pc.Initialize(inventoryManager, pcSaveData);
+				pc.OnLooted += InvokeOnLooted;
 				TeamData.AddPc(pc);
 			}
 
@@ -147,10 +151,16 @@ namespace Lastdew
 			{
 				if (node is PlayerCharacter pc)
 				{
+					pc.OnLooted -= InvokeOnLooted;
 					pc.QueueFree();
 				}
 			}
 			TeamData.ClearPcs();
+		}
+
+		private void InvokeOnLooted(Item item, int amount)
+		{
+			OnLooted?.Invoke(item, amount);
 		}
 	}
 }

@@ -77,6 +77,7 @@ namespace Lastdew
 			Ui.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging += StartScavenging;
 			Ui.MainMenu.OnReturnToBase += ReturnToBase;
+			PcManager.OnLooted += Ui.Hud.ShowLootedItems;
 		}
 
         private void UnsubscribeFromEvents()
@@ -89,6 +90,7 @@ namespace Lastdew
 			Ui.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging -= StartScavenging;
 			Ui.MainMenu.OnReturnToBase -= ReturnToBase;
+			PcManager.OnLooted -= Ui.Hud.ShowLootedItems;
 		}
 
 		private async Task StartNewGame()

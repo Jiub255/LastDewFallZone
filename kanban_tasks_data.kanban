@@ -56,8 +56,7 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"bc28b844-8360-4095-b52b-105b42061993",
-				"38bf52b0-1964-4055-9107-571f4e87d49a"
+				"ae82aa6a-c65e-458f-b388-c50a3c6ddce3"
 			]
 		},
 		{
@@ -125,7 +124,9 @@
 				"18aa9dce-2759-4551-81bb-5c681f7e1987",
 				"2a55064d-caa2-4475-8ead-e4d5c7db6466",
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
-				"34a187a4-4e2d-441c-8425-a906b835ea1e"
+				"34a187a4-4e2d-441c-8425-a906b835ea1e",
+				"bc28b844-8360-4095-b52b-105b42061993",
+				"38bf52b0-1964-4055-9107-571f4e87d49a"
 			]
 		},
 		{
@@ -181,7 +182,6 @@
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
 				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
-				"ae82aa6a-c65e-458f-b388-c50a3c6ddce3",
 				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
 				"e8dca1d4-a660-4b76-9812-c0e9b0bc7ea3",
@@ -1130,7 +1130,7 @@
 		{
 			"uuid": "38bf52b0-1964-4055-9107-571f4e87d49a",
 			"title": "Figure out how to deal with craftables/pcdatas",
-			"description": "Is the (long UID, Craftable craftable) dictionary necessary? Can just use GD.Load(uid). But even on craftables, which hold uids for other craftables (required materials, etc.)?\nIt's used so that craftable resources don't have to hold references to a bunch of other craftables, they just store a long UID, then look up the craftable in the database. Also used in the custom resource editor.\n\nBasically is it better to keep all craftables in a dict in memory, or just load them in as needed? Probably fine to just load them in, unless it's noticeably slow. Especially if gonna have hundreds of craftables.\nAlso, UIDs might not be stable in actual builds, not 100% sure about how this works. I think the build keeps a UID cache so it can locate resources from UIDs, but you can't get the UID from the resource at runtime. Might not matter in this case. \nCould just write a script that goes through all the craftables folders and auto creates a static class full of \"public const string CRAFTABLE_NAME = [craftable uid]\". Then loading any resource is easily done using GD.Load(uid). \nCurrently using the Craftables resource for the resource editor.\nReally depends on how the craftables need to be accessed.\nIf need to have them all/iterate over them, the current system, or even just an array, could work.\nFor getting them by name, the static class works well. Better than a <string, Craftable> dict, except can't iterate. But will they ever need to be retrieved by name? Or is it all either random loot, or items stored by uid in inventory?\nLoot will be random, based on item tags/rarity, so it'll need access to the whole database, along with those two properties at least. Or maybe just have a list of long uids, grouped by item tag and rarity. Then the loot container can just choose from whatever categories and then load the actual resources from those uids. Easy enough to create a script to do that. Just put each subcategory into its own array, like common medical, rare combat, etc. Can deal with duplicates from multiple tags too. \nOr could just load up the whole database, then populate each loot container in the world using that, but only store the uids. Only needed once on new game. Or could maybe do before each scavenging run? Depends on how big the database gets. ",
+			"description": "Is the (long UID, Craftable craftable) dictionary necessary? Can just use GD.Load(uid). But even on craftables, which hold uids for other craftables (required materials, etc.)?\nIt's used so that craftable resources don't have to hold references to a bunch of other craftables, they just store a long UID, then look up the craftable in the database. Also used in the custom resource editor.\n\nBasically is it better to keep all craftables in a dict in memory, or just load them in as needed? Probably fine to just load them in, unless it's noticeably slow. Especially if gonna have hundreds of craftables.\nAlso, UIDs might not be stable in actual builds, not 100% sure about how this works. I think the build keeps a UID cache so it can locate resources from UIDs, but you can't get the UID from the resource at runtime. Might not matter in this case. \nCould just write a script that goes through all the craftables folders and auto creates a static class full of \"public const string CRAFTABLE_NAME = [craftable uid]\". Then loading any resource is easily done using GD.Load(uid). \nCurrently using the Craftables resource for the resource editor.\nReally depends on how the craftables need to be accessed.\nIf need to have them all/iterate over them, the current system, or even just an array, could work.\nFor getting them by name, the static class works well. Better than a <string, Craftable> dict, except can't iterate. But will they ever need to be retrieved by name? Or is it all either random loot, or items stored by uid in inventory?\nLoot will be random, based on item tags/rarity, so it'll need access to the whole database, along with those two properties at least. Or maybe just have a list of long uids, grouped by item tag and rarity. Then the loot container can just choose from whatever categories and then load the actual resources from those uids. Easy enough to create a script to do that. Just put each subcategory into its own array, like common medical, rare combat, etc. Can deal with duplicates from multiple tags too. \nOr could just load up the whole database, then populate each loot container in the world using that, but only store the uids. Only needed once on new game. Or could maybe do before each scavenging run? Depends on how big the database gets. \n\nFor now, keeping the database for the resource editor, and probably for random loot too. If it becomes too big in memory then we'll figure something out. Might make it only load up while populating random loot containers, either once for the whole city on new game, or just each time you go scavenging. Might keep it in memory at home base too, to know what can be crafted/built.",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		},

@@ -110,6 +110,19 @@ namespace Lastdew
 			        break;
 	        }
         }
+
+        public void CenterOnPc(PlayerCharacter pc)
+        {
+	        TargetPosition = new Vector3(
+		        pc.GlobalPosition.X,
+		        TargetPosition.Y,
+		        pc.GlobalPosition.Z);
+	        Zoomer.ResetZoom();
+	        InnerGimbal.RotationDegrees = new Vector3(
+		        -30,
+		        RotationDegrees.Y,
+		        RotationDegrees.Z);
+        }
 	
 		private void SetScreenSize()
 		{
@@ -154,7 +167,8 @@ namespace Lastdew
                 return;
             }
             Vector3 difference = startpointWorld - endpointWorld;
-            // Move the camera using the opposite vector.
+            // Move the camera (and target position) using the opposite vector.
+            TargetPosition += difference;
             Position += difference;
         }
 
@@ -204,7 +218,7 @@ namespace Lastdew
 			{
 				Vector3 movement = (Forward * mouseMovement.Y) + (Right * mouseMovement.X);
 				movement = movement.Normalized();
-				TargetPosition = Position + (movement * Settings.ScrollSpeed * delta);
+				TargetPosition += movement * Settings.ScrollSpeed * delta;
 				return true;
 			}
 			return false;
@@ -216,7 +230,7 @@ namespace Lastdew
 			float y = Input.GetAxis(InputNames.CAMERA_BACKWARD, InputNames.CAMERA_FORWARD);
 			Vector3 movement = (Forward * y) + (Right * x);
 			movement = movement.Normalized();
-			TargetPosition = Position + (movement * Settings.MovementSensitivity * delta);
+			TargetPosition += movement * Settings.MovementSensitivity * delta;
 		}
 
         private void MoveCamera(double delta)

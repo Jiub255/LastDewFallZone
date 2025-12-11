@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cch7gj0xxyn4d" path="res://UI/menus/character/CharacterMenu.cs" id="1_r2q2j"]
 [ext_resource type="Script" uid="uid://cud7b2pso0mxq" path="res://UI/menus/character/CharacterDisplay.cs" id="2_h5oi0"]
-[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="3_pdtdd"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/menus/SfxButton.cs" id="3_pdtdd"]
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="4_squsx"]
 [ext_resource type="Script" uid="uid://bymdl1wnu4jd6" path="res://UI/menus/character/EquipmentDisplay.cs" id="5_2w534"]
 [ext_resource type="Script" uid="uid://nlili2t5sfqm" path="res://UI/menus/character/EquipmentButton.cs" id="6_ur32d"]

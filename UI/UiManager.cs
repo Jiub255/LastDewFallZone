@@ -23,6 +23,8 @@ namespace Lastdew
 			BuildMenu = GetNode<BuildMenu>("%BuildMenu");
 			MapMenu = GetNode<MapMenu>("%MapMenu");
 
+			ConnectHudButtons();
+
 			CloseMenu(Hud);
 			CloseMenu(CharacterMenu);
 			CloseMenu(CraftingMenu);
@@ -36,6 +38,7 @@ namespace Lastdew
         {
             base._ExitTree();
             
+			DisconnectHudButtons();
             if (CurrentState != null)
             {
                 UnsubscribeState(CurrentState);
@@ -77,7 +80,7 @@ namespace Lastdew
 			}
 			CurrentState = gameState;
 			SubscribeState(gameState);
-			CurrentState.EnterState(MainMenu);
+			CurrentState.EnterState(this);
         }
 		
 		private void Toggle(Menu menu)
@@ -183,6 +186,24 @@ namespace Lastdew
 	        state.OnToggleCrafting -= ToggleCraftingMenu;
 	        state.OnToggleBuild -= ToggleBuildMenu;
 	        state.OnToggleMap -= ToggleMapMenu;
+        }
+
+        private void ConnectHudButtons()
+        {
+	        Hud.Build.Pressed += ToggleBuildMenu;
+	        Hud.Craft.Pressed += ToggleCraftingMenu;
+	        Hud.Character.Pressed += ToggleCharacterMenu;
+	        Hud.Map.Pressed += ToggleMapMenu;
+	        Hud.Main.Pressed += ToggleMainMenu;
+        }
+        
+        private void DisconnectHudButtons()
+        {
+	        Hud.Build.Pressed -= ToggleBuildMenu;
+	        Hud.Craft.Pressed -= ToggleCraftingMenu;
+	        Hud.Character.Pressed -= ToggleCharacterMenu;
+	        Hud.Map.Pressed -= ToggleMapMenu;
+	        Hud.Main.Pressed -= ToggleMainMenu;
         }
 	}
 }

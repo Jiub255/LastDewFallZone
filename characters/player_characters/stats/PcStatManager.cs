@@ -141,7 +141,7 @@ namespace Lastdew
 		{
 			// TODO: Make level up menu, launch it from here somehow?
 			StatPointsToSpend += STAT_POINTS_GAINED_PER_LEVEL;
-			this.PrintDebug($"Level up to {Experience.Level}, Experience: {Experience.Experience}");
+			//this.PrintDebug($"Level up to {Experience.Level}, Experience: {Experience.Experience}");
 		}
 	}
 }

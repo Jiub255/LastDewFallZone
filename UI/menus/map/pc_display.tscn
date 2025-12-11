@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c50u6v7i30d50" path="res://UI/menus/map/PcDisplay.cs" id="1_2ilfa"]
 [ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="2_i05fj"]
-[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="3_200b0"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/menus/SfxButton.cs" id="3_200b0"]
 
 [node name="PcDisplay" type="HBoxContainer"]
 theme_override_constants/separation = 15

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -5,12 +6,19 @@ namespace Lastdew
 {
 	public partial class Hud : Menu
 	{
+		public event Action<PlayerCharacter> OnCenterOnPc;
+		
 		private TeamData TeamData { get; set; }
 		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(Uids.PC_BUTTON);
 		private HBoxContainer PcButtonParent { get; set; }
 		private PackedScene LootedItemDisplayScene { get; set; } = (PackedScene)GD.Load(Uids.LOOTED_ITEM_DISPLAY);
 		private VBoxContainer LootedItemsParent { get; set; }
 		private List<PcButton> PcButtons { get; set; } = [];
+		public SfxButton Build { get; private set; }
+		public SfxButton Craft { get; private set; }
+		public SfxButton Character { get; private set; }
+		public SfxButton Map { get; private set; }
+		public SfxButton Main { get; private set; }
 	
 		public override void _Ready()
 		{
@@ -18,6 +26,11 @@ namespace Lastdew
 			
 			PcButtonParent = GetNode<HBoxContainer>("%PcButtonParent");
 			LootedItemsParent = GetNode<VBoxContainer>("%LootedItemsParent");
+			Build = GetNode<SfxButton>("%Build");
+			Craft = GetNode<SfxButton>("%Craft");
+			Character = GetNode<SfxButton>("%Character");
+			Map = GetNode<SfxButton>("%Map");
+			Main = GetNode<SfxButton>("%Main");
 		}
 		
 		public override void Open()
@@ -46,6 +59,7 @@ namespace Lastdew
                 PcButtonParent.CallDeferred(Node.MethodName.AddChild, pcButton);
                 pcButton.CallDeferred(PcButton.MethodName.Setup, pc);
                 pcButton.OnSelectPc += TeamData.SelectPc;
+                pcButton.OnCenterOnPc += CenterOnPc;
                 PcButtons.Add(pcButton);
             }
 		}
@@ -62,9 +76,15 @@ namespace Lastdew
 			foreach (PcButton pcButton in PcButtons)
 			{
 				pcButton.OnSelectPc -= TeamData.SelectPc;
+                pcButton.OnCenterOnPc -= CenterOnPc;
 				pcButton.QueueFree();
 			}
 			PcButtons.Clear();
+        }
+
+        private void CenterOnPc(PlayerCharacter pc)
+        {
+	        OnCenterOnPc?.Invoke(pc);
         }
     }
 }

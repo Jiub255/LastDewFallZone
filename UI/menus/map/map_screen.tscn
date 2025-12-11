@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b42o3j4m70oy7" path="res://UI/menus/map/location_button.tscn" id="4_fsvth"]
 [ext_resource type="Resource" uid="uid://c7sm0cx1vlq2u" path="res://UI/menus/map/test_location_data.tres" id="5_joa7o"]
 [ext_resource type="PackedScene" uid="uid://ddkl0i3g78lb3" path="res://UI/menus/map/location_info.tscn" id="6_b5ur0"]
-[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="7_a4wjs"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/menus/SfxButton.cs" id="7_a4wjs"]
 
 [node name="MapScreen" type="MarginContainer"]
 anchors_preset = 15

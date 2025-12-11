@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://6pwl7dlcpabi" path="res://UI/themes/styleboxes/panel_container/panel_container_wood_stylebox.tres" id="2_a2rau"]
 [ext_resource type="Script" uid="uid://dcqypmfdgyh0w" path="res://UI/menus/crafting/SelectedCraftableDisplay.cs" id="3_1u5cd"]
 [ext_resource type="Texture2D" uid="uid://c8uv451fraiei" path="res://craftables/icons/icon_leg_armor_blank.png" id="4_ji5ws"]
-[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="5_gkioe"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/menus/SfxButton.cs" id="5_gkioe"]
 
 [node name="CraftingMenu" type="CanvasLayer"]
 script = ExtResource("1_a3pt8")

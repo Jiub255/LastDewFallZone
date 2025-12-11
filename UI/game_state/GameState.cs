@@ -11,7 +11,7 @@ namespace Lastdew
         public event Action OnToggleBuild;
         public event Action OnToggleMap;
 
-        public abstract void EnterState(MainMenu mainMenu);
+        public abstract void EnterState(UiManager uiManager);
         public abstract void ProcessState();
         
         protected void ToggleMainMenu()

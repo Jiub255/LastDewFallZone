@@ -35,8 +35,12 @@ namespace Lastdew
 			Vector3 targetPosition = new(Position.X, Position.Y, ZoomLevel);
 			Position = Position.MoveToward(targetPosition, ZoomSpeed * (float)delta);
 		}
+
+		public void ResetZoom()
+		{
+			ZoomLevel = ZoomDefaultDistance;
+		}
 		
-		// TODO: Call these from _Input in Camera.
 		public void ZoomIn()
 		{
 			ZoomLevel -= ZoomSensitivity;

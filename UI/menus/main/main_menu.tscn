@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cykw3kych5n6v" path="res://UI/menus/main/MainMenu.cs" id="1_iggh1"]
 [ext_resource type="Script" uid="uid://v1lggq6oy527" path="res://UI/menus/main/ExitButton.cs" id="2_ci0dg"]
-[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/SfxButton.cs" id="2_s8540"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/menus/SfxButton.cs" id="2_s8540"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_iggh1")

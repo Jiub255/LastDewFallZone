@@ -3,12 +3,17 @@ using Godot;
 
 namespace Lastdew
 {
-	public partial class PcButton : SfxButton
+	public partial class PcButton : Control
 	{
 		public event Action<PlayerCharacter> OnSelectPc;
+		public event Action<PlayerCharacter> OnCenterOnPc;
 	
 		private const float PRESS_PITCH = 0.8f;
 		private const float VOLUME = -10f;
+		private const double DOUBLE_CLICK_TIME = 0.5d;
+
+		private double _timer;
+		private bool _recentlyClicked;
 		
 		private TextureRect PcIcon { get; set; }
 		private RichTextLabel PcName { get; set; }
@@ -29,6 +34,23 @@ namespace Lastdew
 			AudioStreamPlayer.VolumeDb = VOLUME;
 			AudioStreamPlayer.PitchScale = PRESS_PITCH;
 		}
+
+		public override void _Process(double delta)
+		{
+			base._Process(delta);
+
+			if (!_recentlyClicked)
+			{
+				return;
+			}
+			
+			_timer += delta;
+			if (_timer >= DOUBLE_CLICK_TIME)
+			{
+				_recentlyClicked = false;
+				_timer = 0;
+			}
+		}
 		
 		public override void _ExitTree()
 		{
@@ -44,7 +66,18 @@ namespace Lastdew
 			if (@event.IsLeftClick())
 			{
 				AudioStreamPlayer.Play();
-				SelectPc();
+				if (_recentlyClicked)
+				{
+					// TODO: Center camera on PC.
+					OnCenterOnPc?.Invoke(Pc);
+					_recentlyClicked = false;
+					_timer = 0;
+				}
+				else
+				{
+					OnSelectPc?.Invoke(Pc);
+					_recentlyClicked = true;
+				}
 				GetViewport().SetInputAsHandled();
 			}
 		}
@@ -75,11 +108,6 @@ namespace Lastdew
 		{
 			PainBar.Value = Pc.StatManager.Health.Pain;
 			InjuryBar.Value = Pc.StatManager.Health.Injury;
-		}
-		
-		private void SelectPc()
-		{
-			OnSelectPc?.Invoke(Pc);
 		}
 	}
 }

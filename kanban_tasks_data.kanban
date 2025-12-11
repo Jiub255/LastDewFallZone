@@ -29,6 +29,7 @@
 				"841db010-8366-48bb-8111-d5aa9e7ce5c4",
 				"df44855f-0478-45ba-8998-406d91aa1eb7",
 				"83757feb-77db-46c7-a1ac-e076ea02903b",
+				"aab8ef9e-9ad4-478f-90fc-f61ab483b97d",
 				"ff4b9258-d6e7-4cbd-b877-2f9c1529cc25",
 				"16b4dbab-1c67-4a4b-af3a-be1d31a17467",
 				"4057ff66-af0f-496c-983d-8abfe7ddf0b3",
@@ -36,7 +37,6 @@
 				"844550fe-e567-461c-9da6-129cb0ef35fc",
 				"2d06c068-737d-437a-b839-676244c60b7d",
 				"43e7a2a8-de3c-4c98-b01a-927022b66792",
-				"aab8ef9e-9ad4-478f-90fc-f61ab483b97d",
 				"cad890ca-25b5-420b-a491-59a849cad2b3",
 				"b35faef0-d1f8-43ec-bd5f-6f4cc79545ea"
 			]
@@ -45,18 +45,17 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "NEXT",
 			"tasks": [
-				"cd7d53a6-8ba3-41c8-855e-623615812278",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"31f7804f-979d-4e67-9d76-db0049a9350a",
-				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
-				"1ad94904-95a3-4636-902c-f95b2f58937c"
+				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"ae82aa6a-c65e-458f-b388-c50a3c6ddce3"
+				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
+				"1ad94904-95a3-4636-902c-f95b2f58937c"
 			]
 		},
 		{
@@ -126,7 +125,10 @@
 				"147125ec-8a3a-486c-a4ef-c7f5b629144a",
 				"34a187a4-4e2d-441c-8425-a906b835ea1e",
 				"bc28b844-8360-4095-b52b-105b42061993",
-				"38bf52b0-1964-4055-9107-571f4e87d49a"
+				"38bf52b0-1964-4055-9107-571f4e87d49a",
+				"ae82aa6a-c65e-458f-b388-c50a3c6ddce3",
+				"cd7d53a6-8ba3-41c8-855e-623615812278",
+				"8fa1389a-f844-4fc4-9632-112e10ca6d36"
 			]
 		},
 		{
@@ -176,7 +178,6 @@
 			"tasks": [
 				"34e912a0-057e-4b11-94de-32e8f8ee6ba0",
 				"f0b1dadf-b33d-48ca-bb2d-e14b9bf8fcb2",
-				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
@@ -190,7 +191,6 @@
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
 				"66e4ae30-0330-4cea-babb-74aab3314288",
-				"8fa1389a-f844-4fc4-9632-112e10ca6d36",
 				"a49b3863-066b-4537-8678-4c9706709283",
 				"214fa122-5f85-4d1c-8dec-27c303c9b928",
 				"0e82596b-3f97-42e0-b018-06d7658cd4d3"
@@ -299,7 +299,7 @@
 		{
 			"uuid": "66ed35a6-82b7-4c74-8b08-8995b1900c04",
 			"title": "Building Manager",
-			"description": "",
+			"description": "Have build menu show all buildings that you have the required buildings/tools/stats for. \nShow the ones you have the required materials for, then the rest grayed out at the end.\nKeep a list of all buildings that have been built, for the required buildings part of craftables. \nSome buildings will have special effects, like food/water production, or maybe storage? Plus defensive buildings will be their own thing. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -661,7 +661,7 @@
 		{
 			"uuid": "aab8ef9e-9ad4-478f-90fc-f61ab483b97d",
 			"title": "Classes/jobs?",
-			"description": "Have classes like LSDZ?\nCould have a big list of jobs for random pcs to have, with starting stats/rankings.\nCould also have certain special abilities or bonuses for certain jobs.\n\tEngineer joins team and you get new recipes\n\tMedic/doctor joins and you can use medical buildings/equipment and heal much better/faster\n\tChef joins and you get a morale bonus from your food stash\n\tEx-military joins and they have ridiculous str/con stats and some great starting equipment\n\tFarmer joins and your food production buildings/fields get a production boost\n\tTeacher joins and your team gains exp a little faster\n\tCarpenter joins and your team's building speed goes up a little bit\n\tMusician joins, has low stats, but gives a constant morale boost\n\tEtc.. could go nuts with this.\nJobs seem funner than just having a few classes like LSDZ. ",
+			"description": "Have classes like LSDZ?\nCould have a big list of jobs for random pcs to have, with starting stats/rankings.\nCould also have certain special abilities or bonuses for certain jobs.\n\tEngineer joins team and you get new recipes\n\tMedic/doctor joins and you can use medical buildings/equipment and heal much better/faster\n\tChef joins and you get a morale bonus from your food stash\n\tEx-military joins and they have ridiculous str/con stats and some great starting equipment\n\tFarmer joins and your food production buildings/fields get a production boost\n\tTeacher joins and your team gains exp a little faster\n\tCarpenter joins and your team's building costs go down a little bit\n\tMusician joins, has low stats, but gives a constant morale boost\n\tEtc.. could go nuts with this.\n\tThe job bonus could increase with level too.\nJobs seem funner than just having a few classes like LSDZ. ",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -1150,8 +1150,8 @@
 		},
 		{
 			"uuid": "1ad94904-95a3-4636-902c-f95b2f58937c",
-			"title": "Ranged combat",
-			"description": "Have each weapon have a range, and then have the PC stop when they're in range and start attacking. Need a shooting animation for guns.",
+			"title": "Ranged/melee weapon combat",
+			"description": "Have each weapon have a range, and then have the PC stop when they're in range and start attacking. Need a shooting animation for guns, and a slash or hit animation for blades and blunt weapons.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},

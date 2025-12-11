@@ -4,14 +4,20 @@ namespace Lastdew
 {
     public class GameStateHome : GameState
     {
-	    public override void EnterState(MainMenu mainMenu)
+	    public override void EnterState(UiManager uiManager)
         {
-            mainMenu.Continue.Hide();
-            mainMenu.SaveGame.Show();
-            mainMenu.ReturnToBaseButton.Hide();
-            mainMenu.LoadGame.Show();
-            mainMenu.NewGame.Hide();
-            mainMenu.Exit.InStartMenu = false;
+            uiManager.MainMenu.Continue.Hide();
+            uiManager.MainMenu.SaveGame.Show();
+            uiManager.MainMenu.ReturnToBaseButton.Hide();
+            uiManager.MainMenu.LoadGame.Show();
+            uiManager.MainMenu.NewGame.Hide();
+            uiManager.MainMenu.Exit.InStartMenu = false;
+
+            uiManager.Hud.Build.Show();
+            uiManager.Hud.Craft.Show();
+            uiManager.Hud.Character.Show();
+            uiManager.Hud.Map.Show();
+            uiManager.Hud.Main.Show();
         }
 
         public override void ProcessState()

@@ -20,13 +20,13 @@ namespace Lastdew
 		public void GainExperience(int experienceGained)
 		{
 			Experience += experienceGained;
-			int levelsGained = LevelFromExperience2(Experience) - Level;
+			int levelsGained = LevelFromExperience(Experience) - Level;
 			for (int i = 0; i < levelsGained; i++)
 			{
 				LevelUp();
 			}
 			OnExperienceGained?.Invoke($"{experienceGained} xp");
-			this.PrintDebug($"Gained {experienceGained} experience, total: {Experience}, level: {Level}");
+			//this.PrintDebug($"Gained {experienceGained} experience, total: {Experience}, level: {Level}");
 		}
 
 		private void LevelUp()
@@ -43,10 +43,10 @@ namespace Lastdew
 		// 12		4
 		// 27		5
 		// 48		6
-		private static int LevelFromExperience(int exp)
-		{
-			return (int)Math.Floor(MathF.Sqrt(exp / 3f)) + 1;
-		}
+		// private static int LevelFromExperience(int exp)
+		// {
+		// 	return (int)Math.Floor(MathF.Sqrt(exp / 3f)) + 1;
+		// }
 
 		// 5 * (level - 1)^2 = exp  =>  level = sqrt(exp / 5) + 1
 		// Shifting it up a level so 0 exp -> lvl 1.
@@ -56,7 +56,7 @@ namespace Lastdew
 		// 20		4
 		// 45		5
 		// 80		6
-		private static int LevelFromExperience2(int exp)
+		private static int LevelFromExperience(int exp)
 		{
 			return (int)Math.Floor(MathF.Sqrt(exp / 5f)) + 1;
 		}

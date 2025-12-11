@@ -77,7 +77,7 @@ namespace Lastdew
 		{
 			Reliefs.Add(new Relief(amount, duration));
 			OnHealthChanged?.Invoke(Pain);
-			this.PrintDebug($"Injury: {Injury}, Pain: {Pain}");
+			//this.PrintDebug($"Injury: {Injury}, Pain: {Pain}");
 		}
 	}
 }

@@ -7,6 +7,7 @@ namespace Lastdew
 {
     public partial class Game : Node
     {
+	    private Camera Camera { get; set; }
         private ClickHandler ClickHandler { get; set; }
         private PcManager PcManager { get; set; }
         private UiManager Ui { get; set; }
@@ -31,8 +32,8 @@ namespace Lastdew
 		{
 			base._Ready();
 
-			Camera camera = GetNode<Camera>("%CameraRig");
-			ClickHandler = camera.ClickHandler;
+			Camera = GetNode<Camera>("%CameraRig");
+			ClickHandler = Camera.ClickHandler;
 			PcManager = GetNode<PcManager>("%PcManager");
 			Ui = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
@@ -78,6 +79,7 @@ namespace Lastdew
 			Ui.MapMenu.OnStartScavenging += StartScavenging;
 			Ui.MainMenu.OnReturnToBase += ReturnToBase;
 			PcManager.OnLooted += Ui.Hud.ShowLootedItems;
+			Ui.Hud.OnCenterOnPc += Camera.CenterOnPc;
 		}
 
         private void UnsubscribeFromEvents()
@@ -91,6 +93,7 @@ namespace Lastdew
 			Ui.MapMenu.OnStartScavenging -= StartScavenging;
 			Ui.MainMenu.OnReturnToBase -= ReturnToBase;
 			PcManager.OnLooted -= Ui.Hud.ShowLootedItems;
+			Ui.Hud.OnCenterOnPc -= Camera.CenterOnPc;
 		}
 
 		private async Task StartNewGame()

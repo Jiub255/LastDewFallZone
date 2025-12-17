@@ -14,5 +14,6 @@ namespace Lastdew
 		[Export] public WeaponType WeaponType { get; private set; } = WeaponType.MELEE;
 		[Export] public float Range { get; private set; } = 1f;
 		[Export] public float TimeBetweenAttacks { get; private set; } = 1f;
+		[Export] public AudioStream AttackSound { get; private set; }
 	}
 }

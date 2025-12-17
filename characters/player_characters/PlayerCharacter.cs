@@ -232,7 +232,8 @@ namespace Lastdew
 		// Called from animation method track
 		private void HitEnemy()
 		{
-			AudioPlayback.PlayStream(Punch1);
+			AudioStream attackSound = Equipment.Weapon?.AttackSound ?? Punch1;
+			AudioPlayback.PlayStream(attackSound);
 			StateMachine.HitEnemy();
 		}
 

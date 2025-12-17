@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://bnv0csj13agmx"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://bnv0csj13agmx"]
 
 [ext_resource type="Texture2D" uid="uid://c53xh75pl5e48" path="res://craftables/items/equipment/weapons/icon_pistol.png" id="1_4vi5e"]
+[ext_resource type="AudioStream" uid="uid://dkv2ns2ri7r1x" path="res://audio/sfx/pixabay/single-gunshot-54-40780.mp3" id="1_dp0gf"]
 [ext_resource type="Script" uid="uid://o16u5so768h6" path="res://craftables/items/equipment/weapons/Weapon.cs" id="1_upqxh"]
 
 [resource]
@@ -8,6 +9,7 @@ script = ExtResource("1_upqxh")
 WeaponType = 1
 Range = 8.0
 TimeBetweenAttacks = 3.0
+AttackSound = ExtResource("1_dp0gf")
 EquipmentType = 3
 EquipmentBonuses = Dictionary[int, int]({
 0: 3

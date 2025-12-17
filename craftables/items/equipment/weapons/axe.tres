@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cc3w14nirw5mh"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://cc3w14nirw5mh"]
 
 [ext_resource type="Texture2D" uid="uid://cewwas5a0akx4" path="res://craftables/items/equipment/weapons/icon_axe.png" id="1_jknik"]
 [ext_resource type="Script" uid="uid://o16u5so768h6" path="res://craftables/items/equipment/weapons/Weapon.cs" id="1_mq5uh"]
+[ext_resource type="AudioStream" uid="uid://obkmi7jgr8v3" path="res://audio/sfx/pixabay/axe-slash-1-106748.mp3" id="1_up0gk"]
 
 [resource]
 script = ExtResource("1_mq5uh")
 WeaponType = 0
 Range = 2.0
 TimeBetweenAttacks = 2.0
+AttackSound = ExtResource("1_up0gk")
 EquipmentType = 3
 EquipmentBonuses = Dictionary[int, int]({
 0: 2

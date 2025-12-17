@@ -128,9 +128,11 @@
 				"38bf52b0-1964-4055-9107-571f4e87d49a",
 				"ae82aa6a-c65e-458f-b388-c50a3c6ddce3",
 				"cd7d53a6-8ba3-41c8-855e-623615812278",
+				"34e912a0-057e-4b11-94de-32e8f8ee6ba0",
 				"8fa1389a-f844-4fc4-9632-112e10ca6d36",
 				"a49b3863-066b-4537-8678-4c9706709283",
-				"1ad94904-95a3-4636-902c-f95b2f58937c"
+				"1ad94904-95a3-4636-902c-f95b2f58937c",
+				"39f70893-7bf3-49cc-897d-94f26e2ed5a2"
 			]
 		},
 		{
@@ -178,7 +180,6 @@
 			"uuid": "cb445b97-3f31-4e34-bb97-47dcecba7c8c",
 			"title": "TODO",
 			"tasks": [
-				"34e912a0-057e-4b11-94de-32e8f8ee6ba0",
 				"f0b1dadf-b33d-48ca-bb2d-e14b9bf8fcb2",
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
@@ -193,7 +194,8 @@
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
 				"214fa122-5f85-4d1c-8dec-27c303c9b928",
-				"0e82596b-3f97-42e0-b018-06d7658cd4d3"
+				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
+				"684d0e69-4a6f-4978-8b41-63031ec66b19"
 			]
 		}
 	],
@@ -863,8 +865,8 @@
 		},
 		{
 			"uuid": "34e912a0-057e-4b11-94de-32e8f8ee6ba0",
-			"title": "Make dead enemies into loot containers",
-			"description": "Just have them act like normal loot containers once they're dead.\nActually don't, could get too difficult with a bunch all stacked on each other. Maybe just auto loot? Or have enemies not have loot?\nTry to have realistic loot on enemies. Maybe like cloth, and occasionally usable equipment/weapons?",
+			"title": "Make dead enemies give loot",
+			"description": "Try to have realistic loot on enemies. Maybe like cloth, and occasionally usable equipment/weapons?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1166,6 +1168,20 @@
 			"uuid": "0e82596b-3f97-42e0-b018-06d7658cd4d3",
 			"title": "Medical system",
 			"description": "How to heal PCs? \nUse medical items like bandages and medicine to just heal some amount of injury in general?\nOr have like splints for broken bones, bandages for cuts, etc?\nAlso how will medical skill play into it? Healing rate depends on highest medical skill of your pcs?\nWill healing take time or be instant?\nMaybe just have it so medical items just heal x injury in general, act instantly, and their strength is affected by your highest medical skill and any medical tools/buildings you have.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "684d0e69-4a6f-4978-8b41-63031ec66b19",
+			"title": "Add Weapon class properties to resource editor",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "39f70893-7bf3-49cc-897d-94f26e2ed5a2",
+			"title": "Add sfx property to weapons",
+			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

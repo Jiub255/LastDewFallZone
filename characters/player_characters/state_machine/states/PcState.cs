@@ -9,10 +9,6 @@ namespace Lastdew
         protected PlayerCharacter Pc { get; private set; } = pc;
         protected static string BlendAmountPath => "parameters/movement_blend_tree/idle_move/blend_amount";
 
-        /// <summary>
-		/// TODO: Get this from PC weapon/stats eventually.
-		/// </summary>
-		protected static float AttackRadius => 1f;
 
 		/// <summary>
 		/// Degrees per second
@@ -29,6 +25,11 @@ namespace Lastdew
 		protected void ChangeState(PcStateNames stateName)
 		{
 			OnChangeState?.Invoke(stateName);
+		}
+
+		protected float AttackRadius()
+		{
+			return Pc.Equipment.Weapon?.Range ?? 1f;
 		}
 	}
 }

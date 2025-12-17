@@ -903,6 +903,20 @@ tracks/63/path = NodePath("CharacterArmature/Skeleton3D:Pinky4.R")
 tracks/63/interp = 1
 tracks/63/loop_wrap = true
 tracks/63/keys = PackedFloat32Array(0, 1, -0.529398, 0.0520214, 0.036422, 0.845993, 0.0333333, 1, -0.529928, 0.0530497, 0.0368827, 0.845578, 0.0666667, 1, -0.53152, 0.0561502, 0.0382714, 0.844316, 0.1, 1, -0.534112, 0.0612333, 0.0405478, 0.842218, 0.133333, 1, -0.537533, 0.0680047, 0.0435794, 0.839365, 0.166667, 1, -0.541487, 0.0759266, 0.0471248, 0.835946, 0.2, 1, -0.545588, 0.0842535, 0.05085, 0.832255, 0.233333, 1, -0.549428, 0.0921586, 0.0543851, 0.82866, 0.266667, 1, -0.552663, 0.0989025, 0.0573999, 0.825523, 0.3, 1, -0.555062, 0.103957, 0.0596589, 0.823128, 0.333333, 1, -0.556514, 0.107037, 0.061035, 0.821651, 0.366667, 1, -0.556993, 0.108058, 0.0614911, 0.821158, 0.4, 1, -0.555803, 0.105528, 0.0603607, 0.822376, 0.433333, 1, -0.552248, 0.0980329, 0.0570112, 0.825931, 0.466667, 1, -0.546729, 0.0865905, 0.0518952, 0.831202, 0.5, 1, -0.540325, 0.0735864, 0.0460776, 0.836965, 0.533333, 1, -0.534556, 0.0621072, 0.0409391, 0.841853, 0.566667, 1, -0.530709, 0.0545694, 0.0375634, 0.844961, 0.6, 1, -0.529398, 0.0520214, 0.036422, 0.845993)
+tracks/64/type = "method"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath(".")
+tracks/64/interp = 1
+tracks/64/loop_wrap = true
+tracks/64/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"HitEnemy"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_f73ir"]
 resource_name = "CharacterArmature|HitRecieve"
@@ -7244,7 +7258,7 @@ tracks/64/path = NodePath(".")
 tracks/64/interp = 1
 tracks/64/loop_wrap = true
 tracks/64/keys = {
-"times": PackedFloat32Array(0.466667),
+"times": PackedFloat32Array(0.566667),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -10420,6 +10434,20 @@ tracks/63/path = NodePath("CharacterArmature/Skeleton3D:Pinky4.R")
 tracks/63/interp = 1
 tracks/63/loop_wrap = true
 tracks/63/keys = PackedFloat32Array(0, 1, -0.874262, 0.042289, -0.000567671, 0.483608)
+tracks/64/type = "method"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath(".")
+tracks/64/interp = 1
+tracks/64/loop_wrap = true
+tracks/64/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"HitEnemy"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_h4rew"]
 resource_name = "CharacterArmature|Walk"

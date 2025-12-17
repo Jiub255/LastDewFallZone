@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdp8xdp2id34b"]
-
-[ext_resource type="Script" uid="uid://v2ejpi3xtvmt" path="res://misc/test/TestTaskDoer2.cs" id="1_e7lr1"]
-
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_e7lr1")

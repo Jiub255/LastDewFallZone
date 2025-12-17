@@ -55,8 +55,8 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
-				"1ad94904-95a3-4636-902c-f95b2f58937c"
+				"1ad94904-95a3-4636-902c-f95b2f58937c",
+				"66ed35a6-82b7-4c74-8b08-8995b1900c04"
 			]
 		},
 		{
@@ -507,7 +507,7 @@
 		{
 			"uuid": "844550fe-e567-461c-9da6-129cb0ef35fc",
 			"title": "Home Bases",
-			"description": "Maybe have different home bases to choose from instead of a boring blank one like in LSDZ.\nCould have a few starter bases to choose from. Like an old warehouse, a more tucked away naturey one, whatever.\nCould also maybe switch bases later to something better you find? Like a prison or something more secure?",
+			"description": "Maybe have different home bases to choose from instead of a boring blank one like in LSDZ.\nCould have a few starter bases to choose from. Like an old warehouse, a more tucked away naturey one, whatever.\nCould also maybe switch bases later to something better you find? Like a prison or something more secure?\nCould have potential new bases be extra hard scavenging runs to clear out, but if you can kill everyone you can upgrade to the new place. Will have all your old buildings, you just need to set them up.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -1151,7 +1151,7 @@
 		{
 			"uuid": "1ad94904-95a3-4636-902c-f95b2f58937c",
 			"title": "Ranged/melee weapon combat",
-			"description": "Have each weapon have a range, and then have the PC stop when they're in range and start attacking. Need a shooting animation for guns, and a slash or hit animation for blades and blunt weapons.",
+			"description": "Have each weapon have a range, and then have the PC stop when they're in range and start attacking. Need a shooting animation for guns, and a slash or hit animation for blades and blunt weapons.\nAdded a sceneUid property to Equipment, it's the uid of the 3d model for the equipment, to put on the character in game. Works decent so far with weapons.\nHow to tell PC which animation to use for attack? \nMight extend Equipment with Weapon class, and have it hold a weapon type enum (melee, gun, etc). Then do whatever animation based off that.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},

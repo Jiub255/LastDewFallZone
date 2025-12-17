@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 namespace Lastdew
@@ -117,6 +118,7 @@ namespace Lastdew
 		
 		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
+			this.PrintDebug("Spawning pcs");
 			ClearPcs();
 			int i = 0;
 			foreach (PcSaveData pcSaveData in pcSaveDatas)
@@ -133,19 +135,10 @@ namespace Lastdew
 
 			TeamData.SelectedIndex = null;
 			TeamData.MenuSelectedIndex = 0;
-		}
-		
-		private void DeselectPc()
-		{
-			if (TeamData.SelectedIndex != null)
-			{
-				int index = (int)TeamData.SelectedIndex;
-				TeamData.Pcs[index].SetSelectedIndicator(false);
-			}
-			TeamData.SelectedIndex = null;
+			this.PrintDebug("Done spawning pcs");
 		}
 
-		private void ClearPcs()
+		public void ClearPcs()
 		{
 			foreach (Node node in GetChildren())
 			{
@@ -156,6 +149,16 @@ namespace Lastdew
 				}
 			}
 			TeamData.ClearPcs();
+		}
+		
+		private void DeselectPc()
+		{
+			if (TeamData.SelectedIndex != null)
+			{
+				int index = (int)TeamData.SelectedIndex;
+				TeamData.Pcs[index].SetSelectedIndicator(false);
+			}
+			TeamData.SelectedIndex = null;
 		}
 
 		private void InvokeOnLooted(Item item, int amount)

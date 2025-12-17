@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
@@ -29,7 +30,6 @@ namespace Lastdew
 				_movementTarget = value;
 				if (_movementTarget.Target is Enemy newEnemy)
 				{
-					//this.PrintDebug($"{Name}'s target set to {newEnemy.Name}");
 					newEnemy.OnDeath += TryFindNearestEnemy;
 				}
 			}
@@ -47,6 +47,7 @@ namespace Lastdew
 		private PcStateMachine StateMachine { get; set; }
 		private InventoryManager Inventory { get; set; }
 		private MeshInstance3D SelectedIndicator { get; set; }
+		private Node3D WeaponSlot { get; set; }
 		private float InvulnerabilityTimer { get; set; }
 		private PackedScene NumberPopupScene { get; } = GD.Load<PackedScene>(Uids.NUMBER_POPUP);
 		private AudioStreamPlaybackPolyphonic AudioPlayback { get; set; }
@@ -67,11 +68,18 @@ namespace Lastdew
 			PcAnimationTree = GetNode<AnimationTree>("%AnimationTree");
 			AnimStateMachine = (AnimationNodeStateMachinePlayback)PcAnimationTree.Get("parameters/playback");
 			SelectedIndicator = GetNode<MeshInstance3D>("%SelectedIndicator");
+			WeaponSlot = GetNode<Node3D>("%WeaponSlot");
 			
 			StateMachine = new PcStateMachine(this);
 			StatManager = new PcStatManager(saveData);
 			Equipment = new PcEquipment(saveData);
+			
 			Inventory = inventoryManager;
+
+			if (Equipment.Weapon != null)
+			{
+				EquipWeaponModel(Equipment.Weapon.SceneUid);
+			}
 
 			StatManager.CalculateStatModifiers(Equipment.Bonuses);
 			StatManager.Experience.OnExperienceGained += ShowPopup;
@@ -79,7 +87,7 @@ namespace Lastdew
 			SetupPcData(saveData.PcDataUid);
 		}
 
-        public void ProcessUnselected(double delta)
+		public void ProcessUnselected(double delta)
         {
 	        StateMachine?.ProcessStateUnselected((float)delta);
 	        SharedProcess(delta);
@@ -107,7 +115,7 @@ namespace Lastdew
 			StateMachine.ChangeState(PcStateNames.MOVEMENT);
 		}
 
-		/// TODO: Make actual defense formula.
+		// TODO: Make actual defense formula.
 		public void GetHit(Enemy attackingEnemy, int damage)
 		{
 			if (MovementTarget.Target is not Enemy)
@@ -151,6 +159,10 @@ namespace Lastdew
 			}
 			Equipment oldEquipment = Equipment.Equip(equipment);
 			StatManager.CalculateStatModifiers(Equipment.Bonuses);
+			if (equipment.Type == EquipmentType.WEAPON)
+			{
+				EquipWeaponModel(equipment.SceneUid);
+			}
 			if (oldEquipment != null)
 			{
 				Inventory.AddItem(oldEquipment);
@@ -165,6 +177,10 @@ namespace Lastdew
 		{
 			Equipment oldEquipment = Equipment.Unequip(equipmentType);
 			StatManager.CalculateStatModifiers(Equipment.Bonuses);
+			if (equipmentType == EquipmentType.WEAPON && WeaponSlot.GetChildCount() > 0 )
+			{
+				WeaponSlot.GetChild(0).QueueFree();
+			}
 			if (oldEquipment != null)
 			{
 				Inventory.AddItem(oldEquipment);
@@ -240,6 +256,13 @@ namespace Lastdew
 			}
 		}
 
+		private void EquipWeaponModel(string sceneUid)
+		{
+			PackedScene weaponScene = GD.Load<PackedScene>(sceneUid);
+			Node3D weaponInstance = (Node3D)weaponScene.Instantiate();
+			WeaponSlot.CallDeferred(Node.MethodName.AddChild, weaponInstance);
+		}
+
         private void SetupPcData(long dataUid)
         {
 			Data = GD.Load<PcData>(ResourceUid.IdToText(dataUid));
@@ -258,14 +281,11 @@ namespace Lastdew
 			meshes[(int)Data.BodyMesh * 4 - 2].Show();
 			meshes[(int)Data.LegsMesh * 4 - 3].Show();
 			meshes[(int)Data.FeetMesh * 4 - 4].Show();
-			
-            foreach (Node node in meshParent.GetChildren())
-            {
-                if (node is MeshInstance3D { Visible: false } mesh)
-                {
-					mesh.QueueFree();
-                }
-            }
+
+			foreach (MeshInstance3D mesh in meshes.Where(mesh => !mesh.Visible))
+			{
+				mesh.QueueFree();
+			}
         }
 
         private void TryFindNearestEnemy()

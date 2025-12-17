@@ -158,6 +158,7 @@ namespace Lastdew
         
         private void ExitToStartMenu()
         {
+	        PcManager.ClearPcs();
 			CurrentLevel?.QueueFree();
 			MusicPlayer.Stream = StartMenuSong;
 			MusicPlayer.Play();

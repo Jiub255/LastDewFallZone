@@ -84,10 +84,10 @@ namespace Lastdew
 			//this.PrintDebug($"Distance: {Pc.GlobalPosition.DistanceTo(Pc.MovementTarget.Target.GlobalPosition)}");
 			if (Pc.MovementTarget.Target is Enemy enemy)
 			{
-				return Pc.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) < AttackRadius * AttackRadius;
+				return Pc.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) < AttackRadius() * AttackRadius();
 			}
 
-			return Pc.GlobalPosition.DistanceSquaredTo(Pc.MovementTarget.TargetPosition) < AttackRadius * AttackRadius;
+			return Pc.GlobalPosition.DistanceSquaredTo(Pc.MovementTarget.TargetPosition) < AttackRadius() * AttackRadius();
 		}
 
 		private void Animate()
@@ -132,7 +132,7 @@ namespace Lastdew
 		private Vector3 AttackPosition(Vector3 enemyPosition)
 		{
 			Vector3 direction = (Pc.GlobalPosition - enemyPosition).Normalized();
-			return enemyPosition + direction * AttackRadius;
+			return enemyPosition + direction * AttackRadius();
 		}
 	}
 }

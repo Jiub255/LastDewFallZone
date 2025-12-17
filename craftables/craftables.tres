@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Craftables" load_steps=19 format=3 uid="uid://71lhgtyj3vnx"]
+[gd_resource type="Resource" script_class="Craftables" load_steps=20 format=3 uid="uid://71lhgtyj3vnx"]
 
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_f1bwi"]
 [ext_resource type="Script" uid="uid://cdksnkutkwfx2" path="res://craftables/Craftables.cs" id="1_u67xb"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://bfcafkdja2gu1" path="res://craftables/items/equipment/helmet.tres" id="10_3ya1e"]
 [ext_resource type="Resource" uid="uid://ybve325sah4y" path="res://craftables/items/usable_items/uuuuuuuuu.tres" id="11_nstv5"]
 [ext_resource type="Resource" uid="uid://da588em7oo06t" path="res://craftables/items/usable_items/painkiller_50_30.tres" id="12_rqomc"]
+[ext_resource type="Resource" uid="uid://c1rfw04emhd1s" path="res://craftables/items/equipment/axe.tres" id="13_rqomc"]
 [ext_resource type="Resource" uid="uid://bjxqwpu03fbil" path="res://craftables/items/usable_items/sdfgsdf7676fg.tres" id="14_01mmw"]
 
 [resource]
@@ -35,7 +36,8 @@ CraftingMaterials = Dictionary[int, ExtResource("9_rqomc")]({
 Equipments = Dictionary[int, ExtResource("2_taw0v")]({
 1404041514687685708: ExtResource("9_f1bwi"),
 2741503116638809362: ExtResource("10_3ya1e"),
-6129131569427307495: ExtResource("4_inbtb")
+6129131569427307495: ExtResource("4_inbtb"),
+6633189954304939210: ExtResource("13_rqomc")
 })
 UsableItems = Dictionary[int, ExtResource("4_eg58c")]({
 1687880338841201454: ExtResource("11_nstv5"),

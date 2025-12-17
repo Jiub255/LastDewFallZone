@@ -42,6 +42,7 @@ TabBar/font_sizes/font_size = 56
 TabBar/styles/tab_selected = ExtResource("3_jnwjo")
 TabContainer/font_sizes/font_size = 56
 TabContainer/styles/panel = ExtResource("7_7v6k6")
+TabContainer/styles/tab_focus = ExtResource("9_p818r")
 TabContainer/styles/tab_hovered = ExtResource("8_qrw1s")
 TabContainer/styles/tab_selected = ExtResource("9_p818r")
 TabContainer/styles/tab_unselected = ExtResource("10_1aaf3")

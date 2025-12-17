@@ -14,7 +14,11 @@ namespace Lastdew
 		/// </summary>
 		protected float TurnSpeed { get; set; } = 360f;
 
-        public virtual void EnterState()
+		public virtual void EnterState()
+		{
+		}
+		
+		public virtual void ExitState()
 		{
 		}
 

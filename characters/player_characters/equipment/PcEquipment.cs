@@ -10,6 +10,8 @@ namespace Lastdew
 		public Equipment Weapon { get; private set; }
 		public Equipment Body { get; private set; }
 		public Equipment Feet { get; private set; }
+		// TODO: Add and remove bonuses from this dictionary as you equip and unequip, instead of calculating
+		// from scratch every get. Might not be necessary, and could be a little less easy/safe though.
 		public Dictionary<StatType, int> Bonuses
 		{
 			get

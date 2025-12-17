@@ -1,6 +1,44 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=22 format=3 uid="uid://cytfbshgnxbyw"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=32 format=3 uid="uid://cytfbshgnxbyw"]
 
 [ext_resource type="Curve" uid="uid://cff2k47fja7h" path="res://characters/player_characters/smooth_curve.tres" id="1_jbxk4"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m76il"]
+animation = &"CharacterArmature|Gun_Shoot"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nm5jl"]
+animation = &"CharacterArmature|Punch_Right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fkxbm"]
+animation = &"CharacterArmature|Sword_Slash"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s80h4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jkmeo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_homjw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pmjqe"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4g0hc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qdbo"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m3mpq"]
+state_machine_type = 1
+states/CharacterArmature|Gun_Shoot/node = SubResource("AnimationNodeAnimation_m76il")
+states/CharacterArmature|Gun_Shoot/position = Vector2(537, -18)
+states/CharacterArmature|Punch_Right/node = SubResource("AnimationNodeAnimation_nm5jl")
+states/CharacterArmature|Punch_Right/position = Vector2(547, 100)
+states/CharacterArmature|Sword_Slash/node = SubResource("AnimationNodeAnimation_fkxbm")
+states/CharacterArmature|Sword_Slash/position = Vector2(547, 216)
+transitions = ["Start", "CharacterArmature|Gun_Shoot", SubResource("AnimationNodeStateMachineTransition_s80h4"), "Start", "CharacterArmature|Punch_Right", SubResource("AnimationNodeStateMachineTransition_jkmeo"), "Start", "CharacterArmature|Sword_Slash", SubResource("AnimationNodeStateMachineTransition_homjw"), "CharacterArmature|Gun_Shoot", "End", SubResource("AnimationNodeStateMachineTransition_pmjqe"), "CharacterArmature|Punch_Right", "End", SubResource("AnimationNodeStateMachineTransition_4g0hc"), "CharacterArmature|Sword_Slash", "End", SubResource("AnimationNodeStateMachineTransition_0qdbo")]
+graph_offset = Vector2(-227, -132)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gui52"]
 animation = &"CharacterArmature|Death"
@@ -55,33 +93,35 @@ xfade_curve = ExtResource("1_jbxk4")
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qtej1"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_snpex"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_41fle"]
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l5jk0"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0poms"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_slt5e"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kntfq"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m76il"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nm5jl"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fkxbm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m3mpq"]
+
 [resource]
+states/AttackStateMachine/node = SubResource("AnimationNodeStateMachine_m3mpq")
+states/AttackStateMachine/position = Vector2(704, -81)
 states/CharacterArmature|Death/node = SubResource("AnimationNodeAnimation_gui52")
 states/CharacterArmature|Death/position = Vector2(952, 94)
 states/CharacterArmature|HitRecieve/node = SubResource("AnimationNodeAnimation_r5poh")
-states/CharacterArmature|HitRecieve/position = Vector2(714, 188)
+states/CharacterArmature|HitRecieve/position = Vector2(704, 264)
 states/CharacterArmature|Loot/node = SubResource("AnimationNodeAnimation_5yt3q")
-states/CharacterArmature|Loot/position = Vector2(482, 264)
+states/CharacterArmature|Loot/position = Vector2(307, 264)
 states/CharacterArmature|Punch_Right/node = SubResource("AnimationNodeAnimation_352fy")
-states/CharacterArmature|Punch_Right/position = Vector2(714, -4)
-states/End/position = Vector2(1260, 100)
+states/CharacterArmature|Punch_Right/position = Vector2(200, -81)
+states/End/position = Vector2(1264, 94)
 states/movement_blend_tree/node = SubResource("AnimationNodeBlendTree_dtgwf")
 states/movement_blend_tree/position = Vector2(482, 100)
-transitions = ["Start", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_2bfu7"), "movement_blend_tree", "CharacterArmature|Loot", SubResource("AnimationNodeStateMachineTransition_od3xi"), "CharacterArmature|Loot", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_l8clj"), "movement_blend_tree", "CharacterArmature|HitRecieve", SubResource("AnimationNodeStateMachineTransition_qtej1"), "movement_blend_tree", "CharacterArmature|Punch_Right", SubResource("AnimationNodeStateMachineTransition_snpex"), "CharacterArmature|Punch_Right", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_41fle"), "CharacterArmature|HitRecieve", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_l5jk0"), "CharacterArmature|Punch_Right", "CharacterArmature|HitRecieve", SubResource("AnimationNodeStateMachineTransition_0poms"), "CharacterArmature|Punch_Right", "CharacterArmature|Death", SubResource("AnimationNodeStateMachineTransition_slt5e"), "movement_blend_tree", "CharacterArmature|Death", SubResource("AnimationNodeStateMachineTransition_kntfq")]
-graph_offset = Vector2(-103, -46)
+transitions = ["Start", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_2bfu7"), "movement_blend_tree", "CharacterArmature|Loot", SubResource("AnimationNodeStateMachineTransition_od3xi"), "CharacterArmature|Loot", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_l8clj"), "movement_blend_tree", "CharacterArmature|HitRecieve", SubResource("AnimationNodeStateMachineTransition_qtej1"), "CharacterArmature|HitRecieve", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_l5jk0"), "movement_blend_tree", "CharacterArmature|Death", SubResource("AnimationNodeStateMachineTransition_kntfq"), "movement_blend_tree", "AttackStateMachine", SubResource("AnimationNodeStateMachineTransition_m76il"), "AttackStateMachine", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_nm5jl"), "AttackStateMachine", "CharacterArmature|Death", SubResource("AnimationNodeStateMachineTransition_fkxbm"), "AttackStateMachine", "CharacterArmature|HitRecieve", SubResource("AnimationNodeStateMachineTransition_m3mpq")]
+graph_offset = Vector2(-1, -127)

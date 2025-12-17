@@ -104,6 +104,7 @@ namespace Lastdew
 		
 		private void ChangeSubstate(PcCombatSubstateNames substateName)
 		{
+			CurrentSubstate?.ExitState();
 			CurrentSubstate = StatesByEnum[substateName];
 			CurrentSubstate?.EnterState();
 		}
@@ -113,7 +114,7 @@ namespace Lastdew
 		{
 			//this.PrintDebug($"Distance: {Pc.GlobalPosition.DistanceTo(Pc.MovementTarget.Target.GlobalPosition)}");
 			if (Pc.GlobalPosition.DistanceTo(Pc.MovementTarget.Target.GlobalPosition) >
-			    AttackRadius * 1.5f)
+			    AttackRadius() * 1.5f)
 			{
 				ChangeState(PcStateNames.MOVEMENT);
 			}

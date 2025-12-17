@@ -8,8 +8,8 @@
 script = ExtResource("2_6ls1n")
 Reusable = false
 Effects = Array[ExtResource("1_u47ai")]([])
-ItemRarity = 0
-Tags = Array[int]([])
+ItemRarity = 2
+Tags = Array[int]([1])
 Name = "sdfgsdf7676fg"
 Description = ""
 Icon = ExtResource("1_y4hw5")

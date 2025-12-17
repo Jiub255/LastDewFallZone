@@ -67,9 +67,9 @@ namespace Lastdew
 	
 		private void GimmeTheLoot()
 		{
-			foreach (KeyValuePair<Item, int> kvp in LootContainer.Loot)
+			foreach (Item item in LootContainer.Loot)
 			{
-				Pc.CollectLoot(kvp.Key, kvp.Value);
+				Pc.CollectLoot(item);
 			}
 			Pc.StatManager.Experience.GainExperience(LootContainer.Experience);
 			LootContainer.Empty = true;

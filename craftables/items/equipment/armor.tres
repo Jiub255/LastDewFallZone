@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_8ycmd")
-Type = 1
+EquipmentType = 0
 EquipmentBonuses = Dictionary[int, int]({
 1: 2
 })
@@ -13,11 +13,8 @@ StatsNeededToEquip = Dictionary[int, int]({
 0: 1
 })
 SceneUid = ""
-WeaponType = 0
-Range = 1.0
-TimeBetweenAttacks = 1.0
 ItemRarity = 0
-Tags = Array[int]([3])
+Tags = Array[int]([0, 3])
 Name = "Armor"
 Description = "Gate"
 Icon = ExtResource("1_0pd63")

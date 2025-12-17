@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("2_r8gr0")
 Reusable = false
-ItemRarity = 0
-Tags = Array[int]([])
+ItemRarity = 2
+Tags = Array[int]([4])
 Name = "String"
 Description = "Ties things"
 Icon = ExtResource("1_ohdvu")

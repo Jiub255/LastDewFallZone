@@ -132,7 +132,8 @@
 				"8fa1389a-f844-4fc4-9632-112e10ca6d36",
 				"a49b3863-066b-4537-8678-4c9706709283",
 				"1ad94904-95a3-4636-902c-f95b2f58937c",
-				"39f70893-7bf3-49cc-897d-94f26e2ed5a2"
+				"39f70893-7bf3-49cc-897d-94f26e2ed5a2",
+				"65d71ccf-319b-48db-82b8-2d24105e2194"
 			]
 		},
 		{
@@ -1181,6 +1182,13 @@
 		{
 			"uuid": "39f70893-7bf3-49cc-897d-94f26e2ed5a2",
 			"title": "Add sfx property to weapons",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "65d71ccf-319b-48db-82b8-2d24105e2194",
+			"title": "Auto populate loot containers using item tags and rarity",
 			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []

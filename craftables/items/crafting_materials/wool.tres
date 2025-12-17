@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("2_8n258")
 Reusable = false
-ItemRarity = 0
-Tags = Array[int]([])
+ItemRarity = 1
+Tags = Array[int]([4])
 Name = "Wool"
 Description = "Get it from a sheep."
 Icon = ExtResource("1_0o7br")

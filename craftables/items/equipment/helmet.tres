@@ -5,16 +5,13 @@
 
 [resource]
 script = ExtResource("2_ltk62")
-Type = 0
+EquipmentType = 0
 EquipmentBonuses = Dictionary[int, int]({
 1: 1
 })
 StatsNeededToEquip = Dictionary[int, int]({})
 SceneUid = ""
-WeaponType = 0
-Range = 1.0
-TimeBetweenAttacks = 1.0
-ItemRarity = 0
+ItemRarity = 3
 Tags = Array[int]([0, 3])
 Name = "Helmet"
 Description = "Head covering for protection."

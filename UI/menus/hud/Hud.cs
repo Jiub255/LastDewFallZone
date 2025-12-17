@@ -64,11 +64,11 @@ namespace Lastdew
             }
 		}
 
-		public void ShowLootedItems(Item item, int amount)
+		public void ShowLootedItems(Item item)
 		{
 			LootedItemDisplay itemDisplay = (LootedItemDisplay)LootedItemDisplayScene.Instantiate();
 			LootedItemsParent.CallDeferred(Node.MethodName.AddChild, itemDisplay);
-			itemDisplay.CallDeferred(LootedItemDisplay.MethodName.Setup, item, amount);
+			itemDisplay.CallDeferred(LootedItemDisplay.MethodName.Setup, item);
 		}
 
         private void ClearPcButtons()

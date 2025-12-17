@@ -8,7 +8,7 @@ namespace Lastdew
 
 		private AnimationPlayer _animationPlayer;
 
-		public void Setup(Item item, int amount)
+		public void Setup(Item item)
 		{
 			_animationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
 			TextureRect icon = GetNode<TextureRect>("%Icon");
@@ -18,7 +18,7 @@ namespace Lastdew
 			_animationPlayer.Play(MAIN);
 			
 			icon.Texture = item.Icon;
-			label.Text = $"{amount} {item.Name}";
+			label.Text = item.Name;
 		}
 
 		private void OnAnimationFinished(StringName animationName)

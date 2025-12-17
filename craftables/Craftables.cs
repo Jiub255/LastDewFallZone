@@ -1,6 +1,7 @@
 using Godot;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 // TODO: Is this class even necessary or useful? Could just Load(uid) any resource at this point.
 // Does this just act like a preload and/or centralized location for the craftables?
@@ -27,6 +28,18 @@ namespace Lastdew
 
 		[Export]
 		public Godot.Collections.Dictionary<long, UsableItem> UsableItems { get; set; } = [];
+
+		public Item[] Items
+		{
+			get
+			{
+				List<Item> items = [];
+				items.AddRange(CraftingMaterials.Values);
+				items.AddRange(Equipments.Values);
+				items.AddRange(UsableItems.Values);
+				return items.ToArray();
+			}
+		}
 
 		public int Count => Buildings.Count + CraftingMaterials.Count + Equipments.Count + UsableItems.Count;
 

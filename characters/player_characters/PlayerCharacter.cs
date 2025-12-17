@@ -10,7 +10,7 @@ namespace Lastdew
 	public partial class PlayerCharacter : CharacterBody3D
 	{
 		public event Action OnEquipmentChanged;
-		public event Action<Item, int> OnLooted;
+		public event Action<Item> OnLooted;
 		public event Action OnDeath;
 		
 		private const float INVULNERABILITY_DURATION = 1f;
@@ -201,10 +201,10 @@ namespace Lastdew
 			}
 		}
 
-		public void CollectLoot(Item item, int amount)
+		public void CollectLoot(Item item)
 		{
-			Inventory.AddItems(item, amount);
-			OnLooted?.Invoke(item, amount);
+			Inventory.AddItem(item);
+			OnLooted?.Invoke(item);
 		}
 
 		public void DisablePc()

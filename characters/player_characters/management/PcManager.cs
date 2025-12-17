@@ -7,7 +7,7 @@ namespace Lastdew
 {
 	public partial class PcManager : Node3D
 	{
-		public event Action<Item, int> OnLooted;
+		public event Action<Item> OnLooted;
 		
 		private const float SPACE_BETWEEN_PCS = 1.5f;
 		private const float MOUSE_MOVEMENT_THRESHOLD = 10f;
@@ -118,7 +118,6 @@ namespace Lastdew
 		
 		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
 		{
-			this.PrintDebug("Spawning pcs");
 			ClearPcs();
 			int i = 0;
 			foreach (PcSaveData pcSaveData in pcSaveDatas)
@@ -135,7 +134,6 @@ namespace Lastdew
 
 			TeamData.SelectedIndex = null;
 			TeamData.MenuSelectedIndex = 0;
-			this.PrintDebug("Done spawning pcs");
 		}
 
 		public void ClearPcs()
@@ -161,9 +159,9 @@ namespace Lastdew
 			TeamData.SelectedIndex = null;
 		}
 
-		private void InvokeOnLooted(Item item, int amount)
+		private void InvokeOnLooted(Item item)
 		{
-			OnLooted?.Invoke(item, amount);
+			OnLooted?.Invoke(item);
 		}
 	}
 }

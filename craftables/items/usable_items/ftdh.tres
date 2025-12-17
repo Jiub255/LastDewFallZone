@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UsableItem" load_steps=4 format=3 uid="uid://bql6xfri675nh"]
+
+[ext_resource type="Script" uid="uid://bi02ojo6l0h1j" path="res://craftables/items/usable_items/effects/Effect.cs" id="1_v6ynu"]
+[ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://craftables/icons/icon_water.png" id="2_r4meo"]
+[ext_resource type="Script" uid="uid://d2k7fseog6yq2" path="res://craftables/items/usable_items/UsableItem.cs" id="3_t33xl"]
+
+[resource]
+script = ExtResource("3_t33xl")
+Reusable = false
+Effects = Array[ExtResource("1_v6ynu")]([])
+ItemRarity = 3
+Tags = Array[int]([1])
+Name = "uniquemedical"
+Description = "dfth"
+Icon = ExtResource("2_r4meo")
+RecipeCosts = Dictionary[int, int]({
+231828703336004085: 1
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})

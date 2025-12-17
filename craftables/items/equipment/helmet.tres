@@ -13,6 +13,7 @@ StatsNeededToEquip = Dictionary[int, int]({})
 SceneUid = ""
 WeaponType = 0
 Range = 1.0
+TimeBetweenAttacks = 1.0
 ItemRarity = 0
 Tags = Array[int]([0, 3])
 Name = "Helmet"

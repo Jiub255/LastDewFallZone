@@ -7,7 +7,7 @@ namespace Lastdew
 	public partial class Building : Craftable
 	{
 		[Export]
-		public BuildingType Type { get; private set; } = BuildingType.CRAFTING;
+		public BuildingType BuildingType { get; private set; } = BuildingType.CRAFTING;
 
 		// TODO: Use long instead, and have a PackedScene export variable that sets the long Uid
 		// in its setter? Like LocationData resource.

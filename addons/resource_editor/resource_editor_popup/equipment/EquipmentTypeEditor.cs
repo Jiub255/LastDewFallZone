@@ -10,7 +10,7 @@ namespace Lastdew
         {
             if (craftable is Equipment equipment)
             {
-                equipment.Set(Equipment.PropertyName.Type, (int)Enum);
+                equipment.Set(Equipment.PropertyName.EquipmentType, (int)Enum);
             }
         }
     }

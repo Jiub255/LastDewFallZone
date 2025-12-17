@@ -12,6 +12,10 @@ EquipmentBonuses = Dictionary[int, int]({
 StatsNeededToEquip = Dictionary[int, int]({
 0: 1
 })
+SceneUid = ""
+WeaponType = 0
+Range = 1.0
+TimeBetweenAttacks = 1.0
 ItemRarity = 0
 Tags = Array[int]([3])
 Name = "Armor"

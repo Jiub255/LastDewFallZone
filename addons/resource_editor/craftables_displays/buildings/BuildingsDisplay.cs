@@ -22,7 +22,7 @@ namespace Lastdew
             base.Setup(craftable);
             
             Building building = craftable as Building;
-            Type.Text = building.Type.ToString();
+            Type.Text = building.BuildingType.ToString();
             Scene.Text = building.SceneUid;
             Scene.TooltipText = building.SceneUid;
         }

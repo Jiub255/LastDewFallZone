@@ -10,7 +10,7 @@ namespace Lastdew
         {
             if (craftable is Building building)
             {
-                building.Set(Building.PropertyName.Type, (int)Enum);
+                building.Set(Building.PropertyName.BuildingType, (int)Enum);
             }
         }
     }

@@ -107,7 +107,7 @@ namespace Lastdew
                 case Building building:
                     BuildingTypeEditor buildingTypeEditor = (BuildingTypeEditor)BuildingTypeScene.Instantiate();
                     Column1.AddChild(buildingTypeEditor);
-                    buildingTypeEditor.Setup(building.Type);
+                    buildingTypeEditor.Setup(building.BuildingType);
 
                     SceneUidEditor sceneUidEditor = (SceneUidEditor)SceneUidScene.Instantiate();
                     Column2.AddChild(sceneUidEditor);
@@ -123,7 +123,7 @@ namespace Lastdew
                 case Equipment equipment:
                     EquipmentTypeEditor equipmentTypeEditor = (EquipmentTypeEditor)EquipmentTypeScene.Instantiate();
                     Column1.AddChild(equipmentTypeEditor);
-                    equipmentTypeEditor.Setup(equipment.Type);
+                    equipmentTypeEditor.Setup(equipment.EquipmentType);
 
                     EquipmentBonusesEditor equipmentBonusesEditor = (EquipmentBonusesEditor)EquipmentBonusesScene.Instantiate();
                     Column2.AddChild(equipmentBonusesEditor);

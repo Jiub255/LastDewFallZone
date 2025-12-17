@@ -5,6 +5,7 @@ namespace Lastdew
 	public class PcStateMovement : PcState
 	{
 		private const float RECALCULATION_DISTANCE_SQUARED = 0.25f;
+		private const float INTERACTION_DISTANCE_SQUARED = 0.25f;
 		
 		// TODO: Get this info from pc stats eventually? Or just have everyone move the same?
 		private float MaxSpeed { get; set; } = 7f;
@@ -87,7 +88,7 @@ namespace Lastdew
 				return Pc.GlobalPosition.DistanceSquaredTo(enemy.GlobalPosition) < AttackRadius() * AttackRadius();
 			}
 
-			return Pc.GlobalPosition.DistanceSquaredTo(Pc.MovementTarget.TargetPosition) < AttackRadius() * AttackRadius();
+			return Pc.GlobalPosition.DistanceSquaredTo(Pc.MovementTarget.TargetPosition) < INTERACTION_DISTANCE_SQUARED;
 		}
 
 		private void Animate()
@@ -98,14 +99,17 @@ namespace Lastdew
 		
 		private void RecalculateTargetPositionIfTargetMovedEnough()
 		{
-			if (Pc.MovementTarget.Target is Enemy enemy)
+			if (Pc.MovementTarget.Target is not Enemy enemy)
 			{
-				Vector3 attackPosition = AttackPosition(enemy.GlobalPosition);
-				if (attackPosition.DistanceSquaredTo(LastTargetPosition) > RECALCULATION_DISTANCE_SQUARED)
-				{
-					Pc.NavigationAgent.TargetPosition = attackPosition;
-					LastTargetPosition = attackPosition;
-				}
+				return;
+			}
+			Vector3 attackPosition = AttackPosition(enemy.GlobalPosition);
+			bool targetMovedEnough = 
+				attackPosition.DistanceSquaredTo(LastTargetPosition) > RECALCULATION_DISTANCE_SQUARED;
+			if (targetMovedEnough)
+			{
+				Pc.NavigationAgent.TargetPosition = attackPosition;
+				LastTargetPosition = attackPosition;
 			}
 		}
 	
@@ -125,10 +129,6 @@ namespace Lastdew
 			Pc.MoveAndSlide();
 		}
 
-		/// <summary>
-        /// TODO: Is this necessary or does nav agent take care of the "attack radius" somehow?
-        /// It will be necessary for ranged weapons at least, leave it in.
-        /// </summary>
 		private Vector3 AttackPosition(Vector3 enemyPosition)
 		{
 			Vector3 direction = (Pc.GlobalPosition - enemyPosition).Normalized();

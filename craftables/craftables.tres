@@ -11,13 +11,13 @@
 [ext_resource type="Resource" uid="uid://ca08aml6vt64h" path="res://craftables/items/crafting_materials/wool.tres" id="5_f1bwi"]
 [ext_resource type="Resource" uid="uid://cfw2xp7h3qpko" path="res://craftables/items/crafting_materials/metal.tres" id="6_01mmw"]
 [ext_resource type="Resource" uid="uid://dy00grwgvhfe7" path="res://craftables/items/crafting_materials/string.tres" id="7_nstv5"]
-[ext_resource type="Resource" uid="uid://uaemgs7vnwb1" path="res://craftables/items/equipment/pistol.tres" id="9_f1bwi"]
 [ext_resource type="Resource" uid="uid://2m2j5pdr2b84" path="res://craftables/items/crafting_materials/sdfg.tres" id="9_nstv5"]
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting_materials/CraftingMaterial.cs" id="9_rqomc"]
 [ext_resource type="Resource" uid="uid://bfcafkdja2gu1" path="res://craftables/items/equipment/helmet.tres" id="10_3ya1e"]
 [ext_resource type="Resource" uid="uid://ybve325sah4y" path="res://craftables/items/usable_items/uuuuuuuuu.tres" id="11_nstv5"]
+[ext_resource type="Resource" uid="uid://bnv0csj13agmx" path="res://craftables/items/equipment/weapons/pistol.tres" id="12_jowtw"]
 [ext_resource type="Resource" uid="uid://da588em7oo06t" path="res://craftables/items/usable_items/painkiller_50_30.tres" id="12_rqomc"]
-[ext_resource type="Resource" uid="uid://c1rfw04emhd1s" path="res://craftables/items/equipment/axe.tres" id="13_rqomc"]
+[ext_resource type="Resource" uid="uid://cc3w14nirw5mh" path="res://craftables/items/equipment/weapons/axe.tres" id="13_i2fbg"]
 [ext_resource type="Resource" uid="uid://bjxqwpu03fbil" path="res://craftables/items/usable_items/sdfgsdf7676fg.tres" id="14_01mmw"]
 
 [resource]
@@ -34,10 +34,10 @@ CraftingMaterials = Dictionary[int, ExtResource("9_rqomc")]({
 8896933309009772036: ExtResource("7_nstv5")
 })
 Equipments = Dictionary[int, ExtResource("2_taw0v")]({
-1404041514687685708: ExtResource("9_f1bwi"),
 2741503116638809362: ExtResource("10_3ya1e"),
-6129131569427307495: ExtResource("4_inbtb"),
-6633189954304939210: ExtResource("13_rqomc")
+3343750040772036871: ExtResource("12_jowtw"),
+4972405379905042583: ExtResource("13_i2fbg"),
+6129131569427307495: ExtResource("4_inbtb")
 })
 UsableItems = Dictionary[int, ExtResource("4_eg58c")]({
 1687880338841201454: ExtResource("11_nstv5"),

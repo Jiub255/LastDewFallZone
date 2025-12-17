@@ -2,6 +2,8 @@ namespace Lastdew
 {
 	public class PcStateWaiting(PlayerCharacter pc) : PcCombatSubstate(pc)
 	{
+		private const float UNARMED_TIME_BETWEEN_ATTACKS = 1f;
+		
         public override void ProcessSelected(float delta)
 		{
 			base.ProcessSelected(delta);
@@ -27,7 +29,7 @@ namespace Lastdew
 			
 			if (Timer < 0)
 			{
-				Timer = TimeBetweenAttacks;
+				Timer = Pc.Equipment.Weapon?.TimeBetweenAttacks ?? UNARMED_TIME_BETWEEN_ATTACKS;
 				Attack();
 			}
 		}

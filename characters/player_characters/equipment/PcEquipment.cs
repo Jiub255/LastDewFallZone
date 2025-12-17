@@ -7,7 +7,7 @@ namespace Lastdew
 	public class PcEquipment : IEnumerable<Equipment>
 	{
 		public Equipment Head { get; private set; }
-		public Equipment Weapon { get; private set; }
+		public Weapon Weapon { get; private set; }
 		public Equipment Body { get; private set; }
 		public Equipment Feet { get; private set; }
 		// TODO: Add and remove bonuses from this dictionary as you equip and unequip, instead of calculating
@@ -64,7 +64,7 @@ namespace Lastdew
 		public Equipment Equip(Equipment equipment)
 		{
 			Equipment previous;
-			switch (equipment.Type)
+			switch (equipment.EquipmentType)
 			{
 				case EquipmentType.HEAD:
 					previous = Head;
@@ -72,7 +72,7 @@ namespace Lastdew
 					break;
 				case EquipmentType.WEAPON:
 					previous = Weapon;
-					Weapon = equipment;
+					Weapon = (Weapon)equipment;
 					break;
 				case EquipmentType.BODY:
 					previous = Body;
@@ -84,7 +84,7 @@ namespace Lastdew
 					break;
 				default:
 					previous = null;
-					GD.PushWarning($"No equipment slot for type {equipment.Type}");
+					GD.PushWarning($"No equipment slot for type {equipment.EquipmentType}");
 					break;
 			}
 			return previous;

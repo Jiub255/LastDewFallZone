@@ -159,7 +159,7 @@ namespace Lastdew
 			}
 			Equipment oldEquipment = Equipment.Equip(equipment);
 			StatManager.CalculateStatModifiers(Equipment.Bonuses);
-			if (equipment.Type == EquipmentType.WEAPON)
+			if (equipment.EquipmentType == EquipmentType.WEAPON)
 			{
 				EquipWeaponModel(equipment.SceneUid);
 			}

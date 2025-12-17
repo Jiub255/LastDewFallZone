@@ -24,7 +24,7 @@ namespace Lastdew
             base.Setup(craftable);
 
             Equipment equipment = craftable as Equipment;
-            Type.Text = equipment.Type.ToString();
+            Type.Text = equipment.EquipmentType.ToString();
             EquipmentBonuses.Setup(equipment.EquipmentBonuses);
             StatsNeededToEquip.Setup(equipment.StatsNeededToEquip);
         }

@@ -7,12 +7,11 @@ namespace Lastdew
 		public event Action<PcCombatSubstateNames> OnChangeSubstate;
 
         protected PlayerCharacter Pc { get; } = pc;
-		protected static float TimeBetweenAttacks => 1f;
 		protected float Timer { get; set; }
 		/// <summary>
 		/// Degrees per second
 		/// </summary>
-		protected float TurnSpeed { get; set; } = 360f;
+		protected static float TurnSpeed => 360f;
 
 		public virtual void EnterState()
 		{

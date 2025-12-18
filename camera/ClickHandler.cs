@@ -6,7 +6,7 @@ namespace Lastdew
 	public partial class ClickHandler : RayCast3D
 	{
 		[Signal]
-		public delegate void OnPlacedBuildingEventHandler();
+		public delegate void OnPlacedBuildingEventHandler(Building building);
 		public event Action<PlayerCharacter> OnClickedPc;
 		public event Action<MovementTarget> OnClickedMoveTarget;
 
@@ -23,7 +23,8 @@ namespace Lastdew
 		private delegate void HandleClickDelegate();
 		private HandleClickDelegate _handleClickDelegate;
 		private bool _buildMode;
-		public Building3D Building { get; set; }
+		public Building3D Building3D { get; set; }
+		public Building Building { get; set; }
 
 		public bool BuildMode
 		{
@@ -40,7 +41,7 @@ namespace Lastdew
 				{
 					_handleClickDelegate = HandleClick;
 					CollisionMask = 0b11110; // Ground, Loot, Enemy, PC
-					Building?.QueueFree();
+					Building3D?.QueueFree();
 				}
 			}
 		}
@@ -56,7 +57,7 @@ namespace Lastdew
 
 		public override void _PhysicsProcess(double delta)
 		{
-			if (!BuildMode || Building == null || !Building.IsInsideTree())
+			if (!BuildMode || Building3D == null || !Building3D.IsInsideTree())
 			{
 				return;
 			}
@@ -69,7 +70,7 @@ namespace Lastdew
 			}
 
 			Vector3 position = GetCollisionPoint();
-			Building.GlobalPosition = position;
+			Building3D.GlobalPosition = position;
 			// TODO: Force physics update or something?
 		}
 
@@ -87,11 +88,11 @@ namespace Lastdew
 		{
 			if (Input.IsActionPressed(InputNames.ROTATE_CLOCKWISE))
 			{
-				Building.RotateY(-Mathf.DegToRad(ROTATION_SPEED * (float)delta));
+				Building3D.RotateY(-Mathf.DegToRad(ROTATION_SPEED * (float)delta));
 			}
 			if (Input.IsActionPressed(InputNames.ROTATE_COUNTER_CLOCKWISE))
 			{
-				Building.RotateY(Mathf.DegToRad(ROTATION_SPEED * (float)delta));
+				Building3D.RotateY(Mathf.DegToRad(ROTATION_SPEED * (float)delta));
 			}
 		}
 	
@@ -141,16 +142,15 @@ namespace Lastdew
 
 		private void HandleClickBuild()
 		{
-			if (Building == null || Building.Overlapping)
+			if (Building3D == null || Building3D.Overlapping)
 			{
 				return;
 			}
 			
-			Building.MeshInstance.QueueFree();
-			Building.ProcessMode = ProcessModeEnum.Inherit;
-			Building = null;
+			Building3D.SetBuilding();
+			Building3D = null;
 			// TODO: Rebake Navmesh
-			EmitSignal(SignalName.OnPlacedBuilding);
+			EmitSignal(SignalName.OnPlacedBuilding, Building);
 		}
 	}
 }

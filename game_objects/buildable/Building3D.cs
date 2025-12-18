@@ -8,20 +8,10 @@ namespace Lastdew
 		
 		private bool _overlapping;
 		
-		public MeshInstance3D MeshInstance { get; private set; }
+		private MeshInstance3D MeshInstance { get; set; }
 		private Color OkColor { get; set; } = Colors.Green;
 		private Color NoColor { get; set; } = Colors.Red;
 		private BoxShape3D BoxShape { get; set; }
-
-		public override void _Ready()
-		{
-			ProcessMode = ProcessModeEnum.Always;
-			MeshInstance = GetNode<MeshInstance3D>("%MeshInstance3D");
-			
-			CollisionShape3D collisionShape = GetNode<CollisionShape3D>("%CollisionShape3D");
-			// TODO: Just assuming box collision shapes for buildings for now.
-			Setup((BoxShape3D)collisionShape.Shape);
-		}
 		
 		public bool Overlapping
 		{
@@ -38,15 +28,29 @@ namespace Lastdew
 			}
 		}
 
+		public override void _Ready()
+		{
+			ProcessMode = ProcessModeEnum.Always;
+			MeshInstance = GetNode<MeshInstance3D>("%MeshInstance3D");
+			
+			Setup();
+		}
+
 		public override void _PhysicsProcess(double delta)
 		{
 			base._Process(delta);
 			Overlapping = IsOverlapping();
 		}
 
-		private void Setup(BoxShape3D shape)
+		public void SetBuilding()
 		{
-			SetupCastShape(shape);
+			MeshInstance.QueueFree();
+			ProcessMode = ProcessModeEnum.Inherit;
+		}
+
+		private void Setup()
+		{
+			SetupCastShape();
 			SetupIndicatorMesh();
 			SetColor(!IsOverlapping());
 		}
@@ -56,8 +60,11 @@ namespace Lastdew
 			return this.ShapeCast3D(BoxShape, 0b1).Count > 1;
 		}
 
-		private void SetupCastShape(BoxShape3D shape)
+		private void SetupCastShape()
 		{
+			CollisionShape3D collisionShape = GetNode<CollisionShape3D>("%CollisionShape3D");
+			// TODO: Just assuming box collision shapes for buildings for now.
+			BoxShape3D shape = (BoxShape3D)collisionShape.Shape;
 			BoxShape3D biggerShape = (BoxShape3D)shape.Duplicate();
 			biggerShape.Size = new Vector3(
 				shape.Size.X + RADIUS_INCREASE * 2,

@@ -9,7 +9,7 @@ namespace Lastdew
 		public AudioStreamMP3 Song { get; private set; }
 		private Node3D SpawnLocation { get; set; }
 		
-		// TODO: Separate these into subclass Homebase : Level?
+		// TODO: Separate these into subclass HomeBase : Level?
 		public NavigationRegion3D NavMesh { get; private set; }
 		private Node3D Buildings { get; set; }
 		

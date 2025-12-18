@@ -13,11 +13,9 @@ Icon = ExtResource("1_cwc26")
 RecipeCosts = Dictionary[int, int]({
 2265523525199636055: 1
 })
-RequiredBuildings = Array[int]([])
+RequiredBuildings = Array[int]([8802685217392130823])
 ScrapResults = Dictionary[int, int]({
 2265523525199636055: 1
 })
-StatsNeededToCraft = Dictionary[int, int]({
-2: 2
-})
+StatsNeededToCraft = Dictionary[int, int]({})
 metadata/_custom_type_script = "uid://dvt86qfllpnlr"

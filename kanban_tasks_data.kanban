@@ -306,7 +306,7 @@
 		{
 			"uuid": "66ed35a6-82b7-4c74-8b08-8995b1900c04",
 			"title": "Building Manager",
-			"description": "Have build menu show all buildings that you have the required buildings/tools/stats for. \nShow the ones you have the required materials for, then the rest grayed out at the end.\nKeep a list of all buildings that have been built, for the required buildings part of craftables. \nSome buildings will have special effects, like food/water production, or maybe storage? Plus defensive buildings will be their own thing. \n\nClick on a building that can be built in the side panel, and it puts an instance of it on the map that follows your mouse. You can rotate it with q/e or something. \nHow to deal with PCs in the way? Just transport them away if they are in the way of a placed building?\nCamera works normally, click to place the building. It will be outlined in red or something if it can't be placed somewhere.\nOnce placed, add the building to some building manager thing to keep track of what you have built. Also rebuild navmesh.",
+			"description": "Have build menu show all buildings that you have the required buildings/tools/stats for. \nShow the ones you have the required materials for, then the rest grayed out at the end.\nKeep a list of all buildings that have been built, for the required buildings part of craftables. \nSome buildings will have special effects, like food/water production, or maybe storage? Plus defensive buildings will be their own thing. \n\nClick on a building that can be built in the side panel, and it puts an instance of it on the map that follows your mouse. You can rotate it with q/e or something. \nHow to deal with PCs in the way? Just transport them away if they are in the way of a placed building?\nCamera works normally, click to place the building. It will be outlined in red or something if it can't be placed somewhere.\nOnce placed, add the building to some building manager thing to keep track of what you have built. Also rebuild navmesh.\n\nNeed to keep track of which buildings are built, for Craftable.RequiredBuildings.\nAlso need to integrate buildings into save system. Could just loop through the buildings node in homebase and track the buildings and their transforms.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1165,7 +1165,7 @@
 		{
 			"uuid": "214fa122-5f85-4d1c-8dec-27c303c9b928",
 			"title": "Make level up UI",
-			"description": "Could just add some plus buttons to the char menu if they have skill points to spend. Depends on exactly how leveling up will work.",
+			"description": "Could just add some plus buttons to the char menu if they have skill points to spend. Depends on exactly how leveling up will work.\nShould be easy using TeamData to get the Pc stats and hook it up to the character menu.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},

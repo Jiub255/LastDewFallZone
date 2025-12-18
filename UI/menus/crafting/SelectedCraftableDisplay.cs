@@ -65,9 +65,14 @@ namespace Lastdew
 
 		private void Craft()
 		{
-			foreach (KeyValuePair<long, int> kvp in Item.RecipeCosts)
+			foreach ((long uid, int amount) in Item.RecipeCosts)
 			{
-				Inventory.RemoveItems((Item)Databases.Craftables[kvp.Key], kvp.Value);
+				CraftingMaterial material = Databases.Craftables.CraftingMaterials[uid];
+				if (material.Reusable)
+				{
+					continue;
+				}
+				Inventory.RemoveItems(material, amount);
 			}
 			Inventory.AddItem(Item);
 			SetItem(Item);

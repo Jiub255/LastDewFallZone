@@ -13,11 +13,6 @@ namespace Lastdew
 		[Export]
 		public Array<Effect> Effects { get; private set; } = [];
 
-		public override void OnClickCraftable()
-		{
-			throw new NotImplementedException();
-		}
-	
 		public override void OnClickItem(PlayerCharacter pc)
 		{
 			pc.UseItem(this);

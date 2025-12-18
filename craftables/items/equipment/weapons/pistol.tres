@@ -25,7 +25,7 @@ RecipeCosts = Dictionary[int, int]({
 2265523525199636055: 1,
 5170883165870291646: 1
 })
-RequiredBuildings = Array[int]([])
+RequiredBuildings = Array[int]([8802685217392130823])
 ScrapResults = Dictionary[int, int]({})
 StatsNeededToCraft = Dictionary[int, int]({})
 metadata/_custom_type_script = "uid://o16u5so768h6"

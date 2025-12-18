@@ -13,10 +13,5 @@ namespace Lastdew
 		// in its setter? Like LocationData resource.
 		[Export]
 		public string SceneUid { get; private set; }
-
-		public override void OnClickCraftable()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

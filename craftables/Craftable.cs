@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -22,7 +24,7 @@ namespace Lastdew
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Dictionary<long, int> RecipeCosts { get; private set; } = [];
+		public Godot.Collections.Dictionary<long, int> RecipeCosts { get; private set; } = [];
 
 		/// <summary>
 		/// Stored as resource UID. Use Craftables resource to get the actual resource.
@@ -34,14 +36,23 @@ namespace Lastdew
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Dictionary<long, int> ScrapResults { get; private set; } = [];
+		public Godot.Collections.Dictionary<long, int> ScrapResults { get; private set; } = [];
 
 		[Export]
-		public Dictionary<StatType, int> StatsNeededToCraft { get; private set; } = [];
+		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; } = [];
 
-		/// <summary>
-		/// For when you click on the item in the crafting/building menu.
-		/// </summary>
-		public abstract void OnClickCraftable();
+
+		public bool HasEnoughMaterialsToBuild(InventoryManager items)
+		{
+			return RecipeCosts
+				.All((kvp) => items[Databases.Craftables.CraftingMaterials[kvp.Key]] >= kvp.Value);
+		}
+
+		public bool HasRequiredBuildings(List<Building> buildings)
+		{
+			return RequiredBuildings.
+				Select(uid => Databases.Craftables.Buildings[uid]).
+				All(buildings.Contains);
+		}
 	}
 }

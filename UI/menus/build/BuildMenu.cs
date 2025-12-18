@@ -15,11 +15,13 @@ namespace Lastdew
 		private Label Description { get; set; }
 		private Camera Camera { get; set; }
 		private SfxButton BuildButton { get; set; }
+		private List<Building> Buildings { get; set; }
 		
-		public void Initialize(InventoryManager inventory, Camera camera)
+		public void Initialize(InventoryManager inventory, Camera camera, List<Building> buildings)
 		{
 			Inventory = inventory;
 			Camera = camera;
+			Buildings = buildings;
 			Buttons = GetNode<GridContainer>("%Buttons");
 			Description = GetNode<Label>("%Description");
 			BuildButton = GetNode<SfxButton>("%Build");
@@ -54,7 +56,11 @@ namespace Lastdew
 			List<Building> unbuildables = [];
 			foreach (Building building in Databases.Craftables.Buildings.Values)
 			{
-				if (HasEnoughMaterialsToBuild(building))
+				// TODO: Or just do early continue with HasRequiredBuildings() and not show them at all?
+				
+				//if (!building.HasRequiredBuildings(Buildings)) continue;
+				if (building.HasEnoughMaterialsToBuild(Inventory) && 
+				    building.HasRequiredBuildings(Buildings))
 				{
 					SetupButton(building);
 				}
@@ -66,7 +72,8 @@ namespace Lastdew
 
 			foreach (Building building in unbuildables)
 			{
-				SetupButton(building, true);
+				// TODO: Make the unbuildable buttons look gray.
+				SetupButton(building);
 			}
 		}
 
@@ -81,26 +88,11 @@ namespace Lastdew
 			}
 		}
 
-		private bool HasEnoughMaterialsToBuild(Building building)
-		{
-			foreach ((long uid, int amount) in building.RecipeCosts)
-			{
-				CraftingMaterial material = Databases.Craftables.CraftingMaterials[uid];
-				if (Inventory[material] < amount)
-				{
-					return false;
-				}
-			}
-			return true;
-		}
-
-		private void SetupButton(Building building, bool disabled = false)
+		private void SetupButton(Building building)
 		{
 			BuildingButton button = (BuildingButton)ButtonScene.Instantiate();
 			button.Setup(building);
 			Buttons.CallDeferred(Node.MethodName.AddChild, button);
-			button.Disabled = disabled;
-			button.OnPressed += SetBuilding;
 			button.Connect(
 				BuildingButton.SignalName.OnPressed,
 				Callable.From<Building>(SetBuilding));
@@ -110,7 +102,7 @@ namespace Lastdew
 		{
 			CurrentBuilding = building;
 			Description.Text = FormatDescription(building);
-			BuildButton.Disabled = false;
+			BuildButton.Disabled = !building.HasRequiredBuildings(Buildings);
 		}
 
 		private void BuildInstance()
@@ -121,9 +113,10 @@ namespace Lastdew
 			}
 
 			PackedScene buildingScene = GD.Load<PackedScene>(CurrentBuilding.SceneUid);
-			Building3D building = (Building3D)buildingScene.Instantiate();
-			Camera.ClickHandler.Building = building;
-			EmitSignal(SignalName.OnBuild, building);
+			Building3D building3D = (Building3D)buildingScene.Instantiate();
+			Camera.ClickHandler.Building3D = building3D;
+			Camera.ClickHandler.Building = CurrentBuilding;
+			EmitSignal(SignalName.OnBuild, building3D);
 		}
 
 		private static string FormatDescription(Building building)

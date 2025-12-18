@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -10,6 +11,7 @@ namespace Lastdew
 		private GridContainer MaterialsGrid { get; set; }
 		private SelectedCraftableDisplay SelectedDisplay { get; set; }
 		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(Uids.CRAFTABLE_BUTTON);
+		private List<Building> Buildings { get; set; }
 
 		public override void _Ready()
 		{
@@ -32,12 +34,20 @@ namespace Lastdew
 			UnsubscribeButtons(MaterialsGrid);
 		}
 		
-		public void Initialize(InventoryManager inventory)
+		public void Initialize(InventoryManager inventory, List<Building> buildings)
 		{
+			Buildings = buildings;
 			PopulateUi();
 			SelectedDisplay.Initialize(inventory);
 		}
-		
+
+		public override void Open()
+		{
+			base.Open();
+			
+			PopulateUi();
+		}
+
 		private void PopulateUi()
 		{
 			ClearGrids();
@@ -63,6 +73,9 @@ namespace Lastdew
 
 		private void AddButtonToGrid(Item item, GridContainer grid)
 		{
+			// TODO: Not sure what to do with items that don't have the required buildings yet.
+			
+			if (!item.HasRequiredBuildings(Buildings)) return;
 			if (item.RecipeCosts.Count == 0)
 			{
 				return;

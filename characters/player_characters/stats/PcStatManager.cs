@@ -92,17 +92,6 @@ namespace Lastdew
 			}
 		}
 		
-		public bool MeetsRequirements(Equipment equipment)
-		{
-			bool requirementsMet = true;
-			foreach (KeyValuePair<StatType, int> kvp in equipment.StatsNeededToEquip
-				         .Where(kvp => GetStatByType(kvp.Key)?.Value < kvp.Value))
-			{
-				requirementsMet = false;
-			}
-			return requirementsMet;
-		}
-	
 		public IEnumerator<Stat> GetEnumerator()
 		{
 			yield return _attack;
@@ -118,7 +107,7 @@ namespace Lastdew
 			return GetEnumerator();
 		}
 		
-		private Stat GetStatByType(StatType type)
+		public Stat GetStatByType(StatType type)
 		{
 			foreach (Stat stat in this)
 			{
@@ -140,6 +129,8 @@ namespace Lastdew
 		private void LevelUp()
 		{
 			// TODO: Make level up menu, launch it from here somehow?
+			// Or just have the ability to add skill points whenever there's point to spend.
+			// Just use TeamData (while at home) to get PC's stats and hook it up to the CharacterMenu.
 			StatPointsToSpend += STAT_POINTS_GAINED_PER_LEVEL;
 			//this.PrintDebug($"Level up to {Experience.Level}, Experience: {Experience.Experience}");
 		}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -58,13 +59,17 @@ namespace Lastdew
 	        CurrentState.ProcessState();
         }
 		
-		public void Initialize(TeamData teamData, InventoryManager inventoryManager, Camera camera)
+		public void Initialize(
+			TeamData teamData, 
+			InventoryManager inventoryManager, 
+			Camera camera,
+			List<Building> buildings)
 		{
 			Hud.Initialize(teamData);
 			CharacterMenu.Initialize(teamData, inventoryManager);
-			CraftingMenu.Initialize(inventoryManager);
+			CraftingMenu.Initialize(inventoryManager, buildings);
 			MapMenu.Initialize(teamData);
-			BuildMenu.Initialize(inventoryManager, camera);
+			BuildMenu.Initialize(inventoryManager, camera, buildings);
 
 			CloseMenu(MainMenu);
 			OpenMenu(Hud);

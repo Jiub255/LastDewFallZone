@@ -12,6 +12,7 @@ namespace Lastdew
         private PcManager PcManager { get; set; }
         private UiManager Ui { get; set; }
         private InventoryManager InventoryManager { get; set; }
+        private List<Building> Buildings { get; } = [];
         private TeamData TeamData { get; set; }
         private Level CurrentLevel { get; set; }
         private Fader Fader { get; set; }
@@ -86,7 +87,10 @@ namespace Lastdew
 				Callable.From<Node3D>((building) => CurrentLevel.AddBuilding(building)));
 			Camera.ClickHandler.Connect(
 				ClickHandler.SignalName.OnPlacedBuilding,
-				Callable.From(() => CurrentLevel.NavMesh.BakeNavigationMesh()));
+				Callable.From<Building>((_) => CurrentLevel.NavMesh.BakeNavigationMesh()));
+			Camera.ClickHandler.Connect(
+				ClickHandler.SignalName.OnPlacedBuilding,
+				Callable.From<Building>((building) => Buildings.Add(building)));
 		}
 
         private void UnsubscribeFromEvents()
@@ -158,7 +162,7 @@ namespace Lastdew
 			// UI.Initialize() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
-			Ui.Initialize(TeamData, InventoryManager, Camera);
+			Ui.Initialize(TeamData, InventoryManager, Camera, Buildings);
 			
 			MusicPlayer.Stream = CurrentLevel.Song;
 			MusicPlayer.Play();

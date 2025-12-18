@@ -59,6 +59,9 @@ namespace Lastdew
 	        CurrentState.ProcessState();
         }
 		
+        /// <summary>
+        /// Only called once in beginning
+        /// </summary>
 		public void Initialize(
 			TeamData teamData, 
 			InventoryManager inventoryManager, 
@@ -70,7 +73,18 @@ namespace Lastdew
 			CraftingMenu.Initialize(inventoryManager, buildings);
 			MapMenu.Initialize(teamData);
 			BuildMenu.Initialize(inventoryManager, camera, buildings);
+		}
 
+        /// <summary>
+        /// Called each time from Game.SetupLevel().
+        /// </summary>
+		public void Setup()
+		{
+			Hud.Setup();
+			CharacterMenu.Setup();
+			CraftingMenu.Setup();
+			BuildMenu.Setup();
+			
 			CloseMenu(MainMenu);
 			OpenMenu(Hud);
 			AnyMenuOpen = false;

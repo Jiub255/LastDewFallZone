@@ -5,27 +5,18 @@ namespace Lastdew
 {
 	public partial class CraftableButton : SfxButton
 	{
-		public event Action<Item> OnPressed;
+		[Signal]
+		public delegate void OnPressedEventHandler(Item item);
 			
 		public Item Item { get; private set; }
-	
-		public override void _ExitTree()
-		{
-			base._ExitTree();
-			
-			Pressed -= PressButton;
-		}
-	
+		
 		public void Initialize(Item item)
 		{
 			Item = item;
 			Icon = item.Icon;
-			Pressed += PressButton;
-		}
-		
-		private void PressButton()
-		{
-			OnPressed?.Invoke(Item);
+			Connect(
+				BaseButton.SignalName.Pressed,
+				Callable.From(() => EmitSignal(SignalName.OnPressed, Item)));
 		}
 	}
 }

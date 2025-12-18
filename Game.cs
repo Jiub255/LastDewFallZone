@@ -111,6 +111,7 @@ namespace Lastdew
 		private async Task StartNewGame()
 		{
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
+			Ui.Initialize(TeamData, InventoryManager, Camera, []);
 			await SetupLevel(homeBaseScene, DefaultPcList, Buildings);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -118,6 +119,7 @@ namespace Lastdew
 		private async Task StartCombatTest()
 		{
 			PackedScene combatTestScene = GD.Load<PackedScene>("uid://dr032kqvigccx");
+			Ui.Initialize(TeamData, InventoryManager, Camera, []);
 			await SetupLevel(combatTestScene, DefaultPcList, []);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -132,6 +134,7 @@ namespace Lastdew
 			SaveData saveData = SaveSystem.Load();
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
 			Buildings = saveData.BuildingDatas;
+			Ui.Initialize(TeamData, InventoryManager, Camera, Buildings);
 			// LoadInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
 			// can initialize first. It doesn't need to be called before, since it sends an empty InventoryManager,
 			// and then LoadInventory just fills that object with items, so everyone who had it passed to them has
@@ -154,8 +157,7 @@ namespace Lastdew
 	        PackedScene levelScene,
 	        List<PcSaveData> pcSaveDatas,
 	        List<BuildingSaveData> buildingSaveDatas,
-	        bool scavengingLevel = false,
-	        bool firstTime = true)
+	        bool scavengingLevel = false)
 		{
 			Fader.FadeOut();
 			await ToSignal(Fader, Fader.SignalName.OnFadeOut);
@@ -167,13 +169,11 @@ namespace Lastdew
 			CurrentLevel.Initialize(buildingSaveDatas, scavengingLevel);
 			
 			
-			// UI.Initialize() has to be called after PcManager.SpawnPcs(),
+			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
-			//if (firstTime)
-			{
-				Ui.Initialize(TeamData, InventoryManager, Camera, Buildings);
-			}
+			Ui.Setup();
+			
 			
 			MusicPlayer.Stream = CurrentLevel.Song;
 			MusicPlayer.Play();
@@ -192,7 +192,7 @@ namespace Lastdew
 
 		private async Task StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
 		{
-			await SetupLevel(scene, pcSaveDatas, [], true, false);
+			await SetupLevel(scene, pcSaveDatas, [], true);
 			Ui.ChangeState(new GameStateScavenging());
 		}
         
@@ -205,7 +205,7 @@ namespace Lastdew
 			TeamData.UnusedPcDatas.Clear();
 			
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			await SetupLevel(homeBaseScene, pcSaveDatas, Buildings, false, false);
+			await SetupLevel(homeBaseScene, pcSaveDatas, Buildings);
 			Ui.ChangeState(new GameStateHome());
         }
 

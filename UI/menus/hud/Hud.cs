@@ -68,6 +68,10 @@ namespace Lastdew
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
+		}
+
+		public void Setup()
+		{
             ClearPcButtons();
             foreach (PlayerCharacter pc in TeamData.Pcs)
             {

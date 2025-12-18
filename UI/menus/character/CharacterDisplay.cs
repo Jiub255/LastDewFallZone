@@ -35,23 +35,22 @@ namespace Lastdew
 			{
 				return;
 			}
-			TeamData.OnMenuSelectedChanged -= SetupDisplay;
+			TeamData.OnMenuSelectedChanged -= Setup;
 		}
 
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			teamData.OnMenuSelectedChanged += SetupDisplay;
-			SetupDisplay();
+			teamData.OnMenuSelectedChanged += Setup;
 		}
 
-		public void SetupDisplay()
+		public void Setup()
 		{
 			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
 			NameLabel.Text = pc.Data.Name;
 			CharacterIcon.Texture = pc.Data.Icon;
 			SetupStatsLabel(pc);
-			pc.OnEquipmentChanged += SetupDisplay;
+			pc.OnEquipmentChanged += Setup;
 		}
 
 		private void SetupStatsLabel(PlayerCharacter pc)
@@ -71,7 +70,7 @@ namespace Lastdew
 		private void PreviousPc()
 		{
 			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
-			pc.OnEquipmentChanged -= SetupDisplay;
+			pc.OnEquipmentChanged -= Setup;
 			if (TeamData.MenuSelectedIndex == 0)
 			{
 				TeamData.MenuSelectedIndex = TeamData.Pcs.Count - 1;
@@ -85,7 +84,7 @@ namespace Lastdew
 		private void NextPc()
 		{
 			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
-			pc.OnEquipmentChanged -= SetupDisplay;
+			pc.OnEquipmentChanged -= Setup;
 			if (TeamData.MenuSelectedIndex == TeamData.Pcs.Count - 1)
 			{
 				TeamData.MenuSelectedIndex = 0;

@@ -16,36 +16,19 @@ namespace Lastdew
 		private Camera Camera { get; set; }
 		private SfxButton BuildButton { get; set; }
 		private List<BuildingSaveData> Buildings { get; set; }
-		
-		public void Initialize(InventoryManager inventory, Camera camera, List<BuildingSaveData> buildings)
-		{
-			Inventory = inventory;
-			Camera = camera;
-			Buildings = buildings;
-			Buttons = GetNode<GridContainer>("%Buttons");
-			Description = GetNode<Label>("%Description");
-			BuildButton = GetNode<SfxButton>("%Build");
-			if (!BuildButton.IsConnected(
-				    BaseButton.SignalName.Pressed,
-				    Callable.From(BuildInstance)))
-			{
-				BuildButton.Connect(
-					BaseButton.SignalName.Pressed,
-					Callable.From(BuildInstance));
-			}
-			BuildButton.Disabled = true;
 
-			// TODO: Change to a godot signal
-			Inventory.OnInventoryChanged += SetupButtons;
+		public override void _ExitTree()
+		{
+			base._ExitTree();
 			
-			SetupButtons();
+			Inventory.OnInventoryChanged -= Setup;
 		}
 
 		public override void Open()
 		{
 			base.Open();
 			
-			SetupButtons();
+			Setup();
 			Camera.ProcessMode = ProcessModeEnum.Always;
 			Camera.ClickHandler.BuildMode = true;
 		}
@@ -57,9 +40,37 @@ namespace Lastdew
 			Camera.ProcessMode = ProcessModeEnum.Inherit;
 			Camera.ClickHandler.BuildMode = false;
 		}
-
-		private void SetupButtons()
+		
+		public void Initialize(InventoryManager inventory, Camera camera, List<BuildingSaveData> buildings)
 		{
+			Inventory = inventory;
+			Camera = camera;
+			Buildings = buildings;
+			Buttons = GetNode<GridContainer>("%Buttons");
+			Description = GetNode<Label>("%Description");
+			BuildButton = GetNode<SfxButton>("%Build");
+			
+			
+			// Hacky fix to double subscribing/connecting.
+			// TODO: Separate initialize (first time only) from setup (each time) on UiManager.
+			// if (!BuildButton.IsConnected(
+			// 	    BaseButton.SignalName.Pressed,
+			// 	    Callable.From(BuildInstance)))
+			
+			
+			{
+				BuildButton.Connect(
+					BaseButton.SignalName.Pressed,
+					Callable.From(BuildInstance));
+				Inventory.OnInventoryChanged += Setup;
+			}
+		}
+
+		public void Setup()
+		{
+			// TODO: Not 100% sure this should be here.
+			BuildButton.Disabled = true;
+			
 			ClearButtons();
 			List<Building> unbuildables = [];
 			foreach (Building building in Databases.Craftables.Buildings.Values)

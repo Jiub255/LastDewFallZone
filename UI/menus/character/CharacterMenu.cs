@@ -23,10 +23,10 @@ namespace Lastdew
 			CharacterDisplay = GetNode<CharacterDisplay>("%CharacterDisplay");
 			EquipmentDisplay = GetNode<EquipmentDisplay>("%EquipmentDisplay");
 
-			SelectedItemPanel.UseEquip.Pressed += CharacterDisplay.SetupDisplay;
+			SelectedItemPanel.UseEquip.Pressed += CharacterDisplay.Setup;
 			foreach(Button button in EquipmentDisplay.Buttons)
 			{
-				button.Pressed += CharacterDisplay.SetupDisplay;
+				button.Pressed += CharacterDisplay.Setup;
 			}
 		}
 	
@@ -34,11 +34,19 @@ namespace Lastdew
 		{
 			TeamData = teamData;
 			InventoryManager = inventoryManager;
+			
+			// mixed setup/init in these initialize methods
 			CharacterDisplay.Initialize(teamData);
 			SelectedItemPanel.Initialize(teamData);
 			EquipmentDisplay.Initialize(teamData);
 
 			InventoryManager.OnInventoryChanged += PopulateInventoryUi;
+		}
+
+		public void Setup()
+		{
+			CharacterDisplay.Setup();
+			EquipmentDisplay.Setup();
 		}
 	
 		public override void _ExitTree()
@@ -129,10 +137,10 @@ namespace Lastdew
 			
 			foreach(Button button in EquipmentDisplay.Buttons)
 			{
-				button.Pressed -= CharacterDisplay.SetupDisplay;
+				button.Pressed -= CharacterDisplay.Setup;
 			}
 
-			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.SetupDisplay;
+			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.Setup;
 			if (InventoryManager != null)
 			{
 				InventoryManager.OnInventoryChanged -= PopulateInventoryUi;

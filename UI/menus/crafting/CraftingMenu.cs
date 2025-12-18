@@ -12,6 +12,7 @@ namespace Lastdew
 		private SelectedCraftableDisplay SelectedDisplay { get; set; }
 		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(Uids.CRAFTABLE_BUTTON);
 		private List<BuildingSaveData> Buildings { get; set; }
+		private InventoryManager Inventory { get; set; }
 
 		public override void _Ready()
 		{
@@ -28,29 +29,26 @@ namespace Lastdew
 		{
 			base._ExitTree();
 			
-			UnsubscribeButtons(AllGrid);
-			UnsubscribeButtons(EquipmentGrid);
-			UnsubscribeButtons(UsablesGrid);
-			UnsubscribeButtons(MaterialsGrid);
-		}
-		
-		public void Initialize(InventoryManager inventory, List<BuildingSaveData> buildings)
-		{
-			Buildings = buildings;
-			PopulateUi();
-			SelectedDisplay.Initialize(inventory);
-			// TODO: Change to a signal. Also, does this work without keeping a reference here? Probably.
-			inventory.OnInventoryChanged += PopulateUi;
+			Inventory.OnInventoryChanged -= Setup;
 		}
 
 		public override void Open()
 		{
 			base.Open();
 			
-			PopulateUi();
+			Setup();
+		}
+		
+		public void Initialize(InventoryManager inventory, List<BuildingSaveData> buildings)
+		{
+			Buildings = buildings;
+			SelectedDisplay.Initialize(inventory);
+			Inventory = inventory;
+			
+			Inventory.OnInventoryChanged += Setup;
 		}
 
-		private void PopulateUi()
+		public void Setup()
 		{
 			ClearGrids();
 			foreach (Equipment equipment in Databases.Craftables.Equipments.Values)
@@ -85,18 +83,9 @@ namespace Lastdew
 			CraftableButton button = (CraftableButton)ButtonScene.Instantiate();
 			grid.CallDeferred(Node.MethodName.AddChild, button);
 			button.Initialize(item);
-			button.OnPressed += SelectedDisplay.SetItem;
-		}
-
-		private void UnsubscribeButtons(GridContainer grid)
-		{
-			foreach (Node node in grid.GetChildren())
-			{
-				if (node is CraftableButton button)
-				{
-					button.OnPressed -= SelectedDisplay.SetItem;
-				}
-			}
+			Connect(
+				CraftableButton.SignalName.OnPressed,
+				Callable.From<Item>(SelectedDisplay.SetItem));
 		}
 
 		private void ClearGrids()

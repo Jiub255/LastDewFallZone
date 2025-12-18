@@ -30,8 +30,12 @@ namespace Lastdew
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			Pc = teamData.Pcs[teamData.MenuSelectedIndex];
 			TeamData.OnMenuSelectedChanged += SetNewPc;
+		}
+
+		public void Setup()
+		{
+			Pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
 			SetNewPc();
 		}
 

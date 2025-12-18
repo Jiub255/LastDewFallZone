@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://dxoc6683hsgmx"]
+
+[ext_resource type="Texture2D" uid="uid://bcqjtvteiews5" path="res://craftables/items/crafting_materials/icon_metal.png" id="1_khuwj"]
+[ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="2_b73mb"]
+
+[resource]
+script = ExtResource("2_b73mb")
+BuildingType = 0
+SceneUid = "uid://tjtuuycd33bp"
+Name = "Workbench"
+Description = "Craft basic stuff"
+Icon = ExtResource("1_khuwj")
+RecipeCosts = Dictionary[int, int]({
+2265523525199636055: 1,
+5170883165870291646: 1
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})

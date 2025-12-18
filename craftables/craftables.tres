@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="Craftables" load_steps=21 format=3 uid="uid://71lhgtyj3vnx"]
+[gd_resource type="Resource" script_class="Craftables" load_steps=22 format=3 uid="uid://71lhgtyj3vnx"]
 
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_f1bwi"]
 [ext_resource type="Script" uid="uid://cdksnkutkwfx2" path="res://craftables/Craftables.cs" id="1_u67xb"]
+[ext_resource type="Resource" uid="uid://dxoc6683hsgmx" path="res://craftables/buildings/workbench.tres" id="2_i2fbg"]
 [ext_resource type="Resource" uid="uid://bbw26e1wuuv0j" path="res://craftables/buildings/test_building.tres" id="2_inbtb"]
 [ext_resource type="Script" uid="uid://k0j5nuaqbpjc" path="res://craftables/items/equipment/Equipment.cs" id="2_taw0v"]
 [ext_resource type="Resource" uid="uid://dkkgjyi55etp" path="res://craftables/items/crafting_materials/cloth.tres" id="4_3ipo4"]
@@ -24,7 +25,8 @@
 [resource]
 script = ExtResource("1_u67xb")
 Buildings = Dictionary[int, ExtResource("1_f1bwi")]({
-2503720807621627471: ExtResource("2_inbtb")
+2503720807621627471: ExtResource("2_inbtb"),
+8802685217392130823: ExtResource("2_i2fbg")
 })
 CraftingMaterials = Dictionary[int, ExtResource("9_rqomc")]({
 231828703336004085: ExtResource("4_3ipo4"),

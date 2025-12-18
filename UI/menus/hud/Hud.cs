@@ -8,18 +8,21 @@ namespace Lastdew
 	{
 		public event Action<PlayerCharacter> OnCenterOnPc;
 		
+		public SfxButton Build { get; private set; }
+		public SfxButton Craft { get; private set; }
+		public SfxButton Character { get; private set; }
+		public SfxButton Map { get; private set; }
+		public SfxButton Main { get; private set; }
 		private TeamData TeamData { get; set; }
 		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(Uids.PC_BUTTON);
 		private HBoxContainer PcButtonParent { get; set; }
 		private PackedScene LootedItemDisplayScene { get; set; } = (PackedScene)GD.Load(Uids.LOOTED_ITEM_DISPLAY);
 		private VBoxContainer LootedItemsParent { get; set; }
 		private List<PcButton> PcButtons { get; set; } = [];
-		public SfxButton Build { get; private set; }
-		public SfxButton Craft { get; private set; }
-		public SfxButton Character { get; private set; }
-		public SfxButton Map { get; private set; }
-		public SfxButton Main { get; private set; }
-	
+		private Queue<Item> LootedItems { get; } = new();
+		private static float TimeBetweenItemShowings => 0.2f;
+		private double Timer { get; set; }
+
 		public override void _Ready()
 		{
 			base._Ready();
@@ -32,7 +35,24 @@ namespace Lastdew
 			Map = GetNode<SfxButton>("%Map");
 			Main = GetNode<SfxButton>("%Main");
 		}
-		
+
+		public override void _Process(double delta)
+		{
+			base._Process(delta);
+
+			if (LootedItems.Count <= 0)
+			{
+				return;
+			}
+			
+			Timer += delta;
+			if (Timer > TimeBetweenItemShowings)
+			{
+				Timer = 0;
+				ShowNextLootedItem();
+			}
+		}
+
 		public override void Open()
 		{
 			foreach (Node node in PcButtonParent.GetChildren())
@@ -64,8 +84,14 @@ namespace Lastdew
             }
 		}
 
-		public void ShowLootedItems(Item item)
+		public void AddToQueue(Item item)
 		{
+			LootedItems.Enqueue(item);
+		}
+
+		private void ShowNextLootedItem()
+		{
+			Item item = LootedItems.Dequeue();
 			LootedItemDisplay itemDisplay = (LootedItemDisplay)LootedItemDisplayScene.Instantiate();
 			LootedItemsParent.CallDeferred(Node.MethodName.AddChild, itemDisplay);
 			itemDisplay.CallDeferred(LootedItemDisplay.MethodName.Setup, item);

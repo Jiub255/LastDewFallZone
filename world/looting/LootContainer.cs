@@ -58,11 +58,11 @@ namespace Lastdew
 			_rares.Clear();
 			_uniques.Clear();
 
-			GD.Print($"Items added to loot container {Name}");
-			foreach (Item item in Loot)
-			{
-				GD.Print($"{item.ItemRarity} {item.Name}");
-			}
+			// GD.Print($"Items added to loot container {Name}");
+			// foreach (Item item in Loot)
+			// {
+			// 	GD.Print($"{item.ItemRarity} {item.Name}");
+			// }
 		}
 
 		private void GatherItems()
@@ -80,12 +80,12 @@ namespace Lastdew
 				.Where(item => item.Tags.Any(itemTag => Tags.Contains(itemTag)))
 				.Where(item => item.ItemRarity == rarity));
 			
-			GD.Print($"\n{rarity} items\n");
-			foreach (Item item in items)
-			{
-				GD.Print(item.Name);
-			}
-			GD.Print("\n");
+			// GD.Print($"\n{rarity} items\n");
+			// foreach (Item item in items)
+			// {
+			// 	GD.Print(item.Name);
+			// }
+			// GD.Print("\n");
 			
 			return items;
 		}

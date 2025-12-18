@@ -9,9 +9,20 @@ namespace Lastdew
 		public AudioStreamMP3 Song { get; private set; }
 		private Node3D SpawnLocation { get; set; }
 		
-		public virtual void Initialize(TeamData teamData)
+		// TODO: Separate these into subclass Homebase : Level?
+		public NavigationRegion3D NavMesh { get; private set; }
+		private Node3D Buildings { get; set; }
+		
+		public void Initialize()
 		{
 			SpawnLocation = GetNode<Node3D>("%SpawnLocation");
+			Buildings = GetNode<Node3D>("%Buildings");
+			NavMesh = GetNode<NavigationRegion3D>("%NavigationRegion3D");
+		}
+
+		public void AddBuilding(Node3D building)
+		{
+			Buildings.CallDeferred(Node.MethodName.AddChild, building);
 		}
 	}
 }

@@ -27,6 +27,7 @@ unique_name_in_owner = true
 script = ExtResource("2_cvlbe")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+unique_name_in_owner = true
 navigation_mesh = SubResource("NavigationMesh_o3abj")
 
 [node name="NonInteractable" type="Node3D" parent="NavigationRegion3D"]

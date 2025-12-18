@@ -58,12 +58,13 @@ namespace Lastdew
 	        CurrentState.ProcessState();
         }
 		
-		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
+		public void Initialize(TeamData teamData, InventoryManager inventoryManager, Camera camera)
 		{
 			Hud.Initialize(teamData);
 			CharacterMenu.Initialize(teamData, inventoryManager);
 			CraftingMenu.Initialize(inventoryManager);
 			MapMenu.Initialize(teamData);
+			BuildMenu.Initialize(inventoryManager, camera);
 
 			CloseMenu(MainMenu);
 			OpenMenu(Hud);

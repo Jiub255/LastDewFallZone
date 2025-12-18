@@ -15,6 +15,7 @@ namespace Lastdew
 		{
 			Experience = saveData.Experience;
 			Level = LevelFromExperience(Experience);
+			//PrintLevels();
 		}
 		
 		public void GainExperience(int experienceGained)
@@ -47,7 +48,8 @@ namespace Lastdew
 		// {
 		// 	return (int)Math.Floor(MathF.Sqrt(exp / 3f)) + 1;
 		// }
-
+		
+		
 		// 5 * (level - 1)^2 = exp  =>  level = sqrt(exp / 5) + 1
 		// Shifting it up a level so 0 exp -> lvl 1.
 		// exp		lvl
@@ -60,5 +62,14 @@ namespace Lastdew
 		{
 			return (int)Math.Floor(MathF.Sqrt(exp / 5f)) + 1;
 		}
+
+		// private void PrintLevels()
+		// {
+		// 	Godot.GD.Print("Level     Experience");
+		// 	for (int i = 1; i < 101; i++)
+		// 	{
+		// 		Godot.GD.Print($"{i}         {5 * (i - 1) * (i - 1)}");
+		// 	}
+		// }
 	}
 }

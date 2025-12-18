@@ -14,8 +14,6 @@ collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_b5trt")
 Tags = Array[int]([0])
-MinimumItemAmount = 50
-MaximumItemAmount = 54
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_qb4yi")

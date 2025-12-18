@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Lastdew
 {	public static class InputNames
 	{
@@ -17,5 +15,7 @@ namespace Lastdew
 		public const string MAIN_MENU = "main_menu";
 		public const string BUILD_MENU = "build_menu";
 		public const string MAP_MENU = "map_menu";
+		public const string ROTATE_CLOCKWISE = "rotate_clockwise";
+		public const string ROTATE_COUNTER_CLOCKWISE = "rotate_counter_clockwise";
 	}
 }

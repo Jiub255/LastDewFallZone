@@ -48,7 +48,9 @@
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"31f7804f-979d-4e67-9d76-db0049a9350a",
 				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
-				"66e4ae30-0330-4cea-babb-74aab3314288"
+				"66e4ae30-0330-4cea-babb-74aab3314288",
+				"8072d314-17fe-4500-b377-2417801e123b",
+				"08d16a6c-21ec-47e7-a4ba-7ada6b86cf25"
 			]
 		},
 		{
@@ -167,7 +169,9 @@
 				"d9eab95c-ae57-499e-8487-d18a9e257242",
 				"3b068224-1183-474c-ae22-d1cafb3fab4c",
 				"8efb0faa-9ea3-41a4-ada1-d988734878c6",
-				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d"
+				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
+				"b48a33e5-4293-4fc9-a22f-10ad0fb735d0",
+				"2bc7f9cf-7a0e-48cb-b4af-6884baf71dfc"
 			]
 		},
 		{
@@ -302,7 +306,7 @@
 		{
 			"uuid": "66ed35a6-82b7-4c74-8b08-8995b1900c04",
 			"title": "Building Manager",
-			"description": "Have build menu show all buildings that you have the required buildings/tools/stats for. \nShow the ones you have the required materials for, then the rest grayed out at the end.\nKeep a list of all buildings that have been built, for the required buildings part of craftables. \nSome buildings will have special effects, like food/water production, or maybe storage? Plus defensive buildings will be their own thing. ",
+			"description": "Have build menu show all buildings that you have the required buildings/tools/stats for. \nShow the ones you have the required materials for, then the rest grayed out at the end.\nKeep a list of all buildings that have been built, for the required buildings part of craftables. \nSome buildings will have special effects, like food/water production, or maybe storage? Plus defensive buildings will be their own thing. \n\nClick on a building that can be built in the side panel, and it puts an instance of it on the map that follows your mouse. You can rotate it with q/e or something. \nHow to deal with PCs in the way? Just transport them away if they are in the way of a placed building?\nCamera works normally, click to place the building. It will be outlined in red or something if it can't be placed somewhere.\nOnce placed, add the building to some building manager thing to keep track of what you have built. Also rebuild navmesh.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1191,6 +1195,34 @@
 			"title": "Auto populate loot containers using item tags and rarity",
 			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "8072d314-17fe-4500-b377-2417801e123b",
+			"title": "Use Godot signals instead of C# events",
+			"description": "Trying to unsubscribe from events in ExitTree() doesn't work for anything involving children, since they have all already exited the tree. And a lot of events involve connecting to child nodes. \nPlus, godot handles disconnection automatically, so less to worry about. Hopefully this will avoid memory leaks. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "08d16a6c-21ec-47e7-a4ba-7ada6b86cf25",
+			"title": "Connect Craftable.StatsNeededToCraft to crafting/building systems",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "2bc7f9cf-7a0e-48cb-b4af-6884baf71dfc",
+			"title": "ShapeCast doesn't rotate with PlacementIndicator",
+			"description": "FIXED by setting Building3D.ProcessMode to always. Setting it back to inherit once placed, at least for now. ",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "b48a33e5-4293-4fc9-a22f-10ad0fb735d0",
+			"title": "All PlacementIndicators are sharing the same mesh?",
+			"description": "FIXED by getting rid of the indicator when it's placed.\nColors of all are changing at the same time.\nNeed to just get rid of the indicator when it's placed.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

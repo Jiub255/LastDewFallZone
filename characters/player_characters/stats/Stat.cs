@@ -36,11 +36,11 @@ namespace Lastdew
 			CalculateValue();
 		}
 		
-		public void RemoveModifier(int modifier)
-		{
-			Modifiers.Remove(modifier);
-			CalculateValue();
-		}
+		// public void RemoveModifier(int modifier)
+		// {
+		// 	Modifiers.Remove(modifier);
+		// 	CalculateValue();
+		// }
 		
 		public void ClearModifiers()
 		{

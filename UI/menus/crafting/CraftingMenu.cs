@@ -35,7 +35,7 @@ namespace Lastdew
 		public void Initialize(InventoryManager inventory)
 		{
 			PopulateUi();
-			SelectedDisplay.Initialize(Databases.Craftables, inventory);
+			SelectedDisplay.Initialize(inventory);
 		}
 		
 		private void PopulateUi()

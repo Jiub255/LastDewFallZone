@@ -5,13 +5,45 @@ namespace Lastdew
 {	
 	public partial class ClickHandler : RayCast3D
 	{
+		[Signal]
+		public delegate void OnPlacedBuildingEventHandler();
 		public event Action<PlayerCharacter> OnClickedPc;
 		public event Action<MovementTarget> OnClickedMoveTarget;
+
+		/// <summary>
+		/// Degrees/second
+		/// </summary>
+		private const float ROTATION_SPEED = 90;
 		
 		// TODO: Base this off of zoom distance?
 		private static float RayLength => 2000;
 		private Viewport Viewport { get; set; }
 		private Camera3D Camera { get; set; }
+
+		private delegate void HandleClickDelegate();
+		private HandleClickDelegate _handleClickDelegate;
+		private bool _buildMode;
+		public Building3D Building { get; set; }
+
+		public bool BuildMode
+		{
+			get => _buildMode;
+			set
+			{
+				_buildMode = value;
+				if (_buildMode)
+				{
+					_handleClickDelegate = HandleClickBuild;
+					CollisionMask = 0b10000; // Ground
+				}
+				else
+				{
+					_handleClickDelegate = HandleClick;
+					CollisionMask = 0b11110; // Ground, Loot, Enemy, PC
+					Building?.QueueFree();
+				}
+			}
+		}
 	
 		public override void _Ready()
 		{
@@ -19,6 +51,26 @@ namespace Lastdew
 	
 			Viewport = GetViewport();
 			Camera = Viewport.GetCamera3D();
+			_handleClickDelegate = HandleClick;
+		}
+
+		public override void _PhysicsProcess(double delta)
+		{
+			if (!BuildMode || Building == null || !Building.IsInsideTree())
+			{
+				return;
+			}
+
+			RotateBuilding(delta);
+			RaycastFromMouse();
+			if (!IsColliding())
+			{
+				return;
+			}
+
+			Vector3 position = GetCollisionPoint();
+			Building.GlobalPosition = position;
+			// TODO: Force physics update or something?
 		}
 
 		public override void _UnhandledInput(InputEvent @event)
@@ -27,26 +79,31 @@ namespace Lastdew
 
 			if (@event.IsLeftClick())
 			{
-				GodotObject collisionObject = RaycastFromMouse(Viewport.GetMousePosition());
-				if (collisionObject != null)
-				{
-					HandleClick((CollisionObject3D)collisionObject);
-				}
+				_handleClickDelegate?.Invoke();
 			}
 		}
 
-		private GodotObject RaycastFromMouse(Vector2 mousePosition)
+		private void RotateBuilding(double delta)
 		{
-			Vector3 rayEnd = ToLocal(Camera.ProjectRayNormal(mousePosition) * RayLength);
-			TargetPosition = rayEnd;
-			ForceRaycastUpdate();
-			return GetCollider();
+			if (Input.IsActionPressed(InputNames.ROTATE_CLOCKWISE))
+			{
+				Building.RotateY(-Mathf.DegToRad(ROTATION_SPEED * (float)delta));
+			}
+			if (Input.IsActionPressed(InputNames.ROTATE_COUNTER_CLOCKWISE))
+			{
+				Building.RotateY(Mathf.DegToRad(ROTATION_SPEED * (float)delta));
+			}
 		}
 	
-		private void HandleClick(CollisionObject3D collider)
+		private void HandleClick()
 		{
-			uint layerIndex = collider.CollisionLayer;
+			GodotObject godotObject = RaycastFromMouse();
+			if (godotObject is not CollisionObject3D collider)
+			{
+				return;
+			}
 			
+			uint layerIndex = collider.CollisionLayer;
 			switch (layerIndex)
 			{
 				// Player Character
@@ -72,6 +129,28 @@ namespace Lastdew
 					OnClickedMoveTarget?.Invoke(movementTargetGround);
 					break;
 			}
+		}
+
+		private GodotObject RaycastFromMouse()
+		{
+			Vector3 rayEnd = ToLocal(Camera.ProjectRayNormal(Viewport.GetMousePosition()) * RayLength);
+			TargetPosition = rayEnd;
+			ForceRaycastUpdate();
+			return GetCollider();
+		}
+
+		private void HandleClickBuild()
+		{
+			if (Building == null || Building.Overlapping)
+			{
+				return;
+			}
+			
+			Building.MeshInstance.QueueFree();
+			Building.ProcessMode = ProcessModeEnum.Inherit;
+			Building = null;
+			// TODO: Rebake Navmesh
+			EmitSignal(SignalName.OnPlacedBuilding);
 		}
 	}
 }

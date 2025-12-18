@@ -37,6 +37,7 @@ shadow_opacity = 0.85
 unique_name_in_owner = true
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+unique_name_in_owner = true
 navigation_mesh = SubResource("NavigationMesh_o3abj")
 
 [node name="NonInteractable" type="Node3D" parent="NavigationRegion3D"]
@@ -72,3 +73,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98534, 0, -5.24811)
 transform = Transform3D(-0.743588, 0, -0.668638, 0, 1, 0, 0.668638, 0, -0.743588, 3.00099, 0, -5.95951)
 
 [node name="Buildings" type="Node3D" parent="NavigationRegion3D"]
+unique_name_in_owner = true

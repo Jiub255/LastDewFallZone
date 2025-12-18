@@ -78,8 +78,15 @@ namespace Lastdew
 			Ui.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging += StartScavenging;
 			Ui.MainMenu.OnReturnToBase += ReturnToBase;
-			PcManager.OnLooted += Ui.Hud.ShowLootedItems;
+			PcManager.OnLooted += Ui.Hud.AddToQueue;
 			Ui.Hud.OnCenterOnPc += Camera.CenterOnPc;
+
+			Ui.BuildMenu.Connect(
+				BuildMenu.SignalName.OnBuild,
+				Callable.From<Node3D>((building) => CurrentLevel.AddBuilding(building)));
+			Camera.ClickHandler.Connect(
+				ClickHandler.SignalName.OnPlacedBuilding,
+				Callable.From(() => CurrentLevel.NavMesh.BakeNavigationMesh()));
 		}
 
         private void UnsubscribeFromEvents()
@@ -92,7 +99,7 @@ namespace Lastdew
 			Ui.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging -= StartScavenging;
 			Ui.MainMenu.OnReturnToBase -= ReturnToBase;
-			PcManager.OnLooted -= Ui.Hud.ShowLootedItems;
+			PcManager.OnLooted -= Ui.Hud.AddToQueue;
 			Ui.Hud.OnCenterOnPc -= Camera.CenterOnPc;
 		}
 
@@ -119,8 +126,11 @@ namespace Lastdew
 		{
 			SaveData saveData = SaveSystem.Load();
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
+			// LoadInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
+			// can initialize first. It doesn't need to be called before, since it sends an empty InventoryManager,
+			// and then LoadInventory just fills that object with items, so everyone who had it passed to them has
+			// the correct inventory.
 			await SetupLevel(homeBaseScene, saveData.PcSaveDatas);
-			// LoadInventory needs to be called after SetupLevel so the inventory UI (CharacterMenu) can initialize first.
 			LoadInventory(saveData.Inventory);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -143,12 +153,12 @@ namespace Lastdew
 			
 			CurrentLevel = (Level)levelScene.Instantiate();
 			CallDeferred(Node.MethodName.AddChild, CurrentLevel);
-			CurrentLevel.Initialize(TeamData);
+			CurrentLevel.Initialize();
 			
-			// UI.Initialize has to be called after PcManager.SpawnPcs,
+			// UI.Initialize() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
-			Ui.Initialize(TeamData, InventoryManager);
+			Ui.Initialize(TeamData, InventoryManager, Camera);
 			
 			MusicPlayer.Stream = CurrentLevel.Song;
 			MusicPlayer.Play();

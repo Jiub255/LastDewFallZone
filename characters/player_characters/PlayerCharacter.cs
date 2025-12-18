@@ -307,7 +307,8 @@ namespace Lastdew
         
         private Enemy FindNearestEnemy()
         {
-	        Array<Dictionary> sphereCastResults = SphereCast();
+	        SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };
+	        Array<Dictionary> sphereCastResults = this.ShapeCast3D(sphereShape, 0b100);
 
 	        Enemy closest = null;
 	        foreach (Dictionary dict in sphereCastResults)
@@ -324,23 +325,6 @@ namespace Lastdew
 		        }
 	        }
 	        return closest;
-        }
-
-        private Array<Dictionary> SphereCast()
-        {
-	        PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
-	        SphereShape3D sphereShape = new() { Radius = SIGHT_DISTANCE };
-	        PhysicsShapeQueryParameters3D query = new()
-	        {
-		        ShapeRid = sphereShape.GetRid(),
-		        CollideWithBodies = true,
-		        Transform = new Transform3D(Basis.Identity, GlobalPosition),
-		        Exclude = new Array<Rid>(new Rid[1] { GetRid() }),
-		        CollisionMask = 0b100
-	        };
-
-	        Array<Dictionary> results = spaceState.IntersectShape(query);
-	        return results;
         }
 
         private void ShowPopup(string text)

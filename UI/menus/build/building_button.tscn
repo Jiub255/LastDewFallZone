@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://exarpec3215x"]
+
+[ext_resource type="Texture2D" uid="uid://bg33n32q78vqt" path="res://craftables/buildings/icon_building_blank.png" id="1_bfhek"]
+[ext_resource type="Script" uid="uid://cenmlfbtvjfgs" path="res://UI/menus/build/BuildingButton.cs" id="2_ex2dj"]
+
+[node name="BuildingButton" type="Button"]
+custom_minimum_size = Vector2(270, 270)
+icon = ExtResource("1_bfhek")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_ex2dj")
+metadata/_custom_type_script = "uid://b5sycom274m8x"

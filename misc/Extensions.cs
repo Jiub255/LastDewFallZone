@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 namespace Lastdew
 {	
@@ -131,6 +132,37 @@ namespace Lastdew
 			text = text.ToLower();
 			string[] words = text.Split(" ");
 			return words.Join("_");
+		}
+
+		public static Array<Dictionary> ShapeCast3D(this Node3D node, Shape3D shape, uint mask)
+		{
+			PhysicsDirectSpaceState3D spaceState = node.GetWorld3D().DirectSpaceState;
+			PhysicsShapeQueryParameters3D query = new()
+			{
+				Shape = shape,
+				CollideWithBodies = true,
+				Transform = new Transform3D(node.Basis, node.GlobalPosition),
+				CollisionMask = mask
+			};
+
+			Array<Dictionary> results = spaceState.IntersectShape(query);
+			return results;
+		}
+
+		public static Array<Dictionary> ShapeCast3D(this CollisionObject3D collisionObject, Shape3D shape, uint mask)
+		{
+			PhysicsDirectSpaceState3D spaceState = collisionObject.GetWorld3D().DirectSpaceState;
+			PhysicsShapeQueryParameters3D query = new()
+			{
+				Shape = shape,
+				CollideWithBodies = true,
+				Transform = new Transform3D(Basis.Identity, collisionObject.GlobalPosition),
+		        Exclude = new Array<Rid>(new Rid[1] { collisionObject.GetRid() }),
+				CollisionMask = mask
+			};
+
+			Array<Dictionary> results = spaceState.IntersectShape(query);
+			return results;
 		}
 	}
 }

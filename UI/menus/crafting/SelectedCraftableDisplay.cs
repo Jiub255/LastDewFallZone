@@ -4,14 +4,13 @@ using System.Collections.Generic;
 namespace Lastdew
 {
 	public partial class SelectedCraftableDisplay : PanelContainer
-	{	
+	{
 		private Item Item { get; set; }
 		private TextureRect Icon { get; set; }
 		private Label ItemName { get; set; }
 		private Label Description { get; set; }
 		private VBoxContainer RecipeCosts { get; set; }
 		private SfxButton CraftButton { get; set; }
-		private Craftables Craftables { get; set; }
 		private InventoryManager Inventory { get; set; }
 		private PackedScene RecipeCostScene { get; set; } = GD.Load<PackedScene>(Uids.RECIPE_COST_DISPLAY);
 
@@ -35,9 +34,8 @@ namespace Lastdew
 			CraftButton.Pressed -= Craft;
 		}
 
-		public void Initialize(Craftables craftables, InventoryManager inventory)
+		public void Initialize(InventoryManager inventory)
 		{
-			Craftables = craftables;
 			Inventory = inventory;
 		}
 
@@ -64,12 +62,12 @@ namespace Lastdew
 				}
 			}
 		}
-		
-		public void Craft()
+
+		private void Craft()
 		{
 			foreach (KeyValuePair<long, int> kvp in Item.RecipeCosts)
 			{
-				Inventory.RemoveItems((Item)Craftables[kvp.Key], kvp.Value);
+				Inventory.RemoveItems((Item)Databases.Craftables[kvp.Key], kvp.Value);
 			}
 			Inventory.AddItem(Item);
 			SetItem(Item);
@@ -81,7 +79,7 @@ namespace Lastdew
 			RecipeCostUi recipeCost = (RecipeCostUi)RecipeCostScene.Instantiate();
 			RecipeCosts.CallDeferred(Node.MethodName.AddChild, recipeCost);
 			
-			CraftingMaterial material = (CraftingMaterial)Craftables[kvp.Key];
+			CraftingMaterial material = (CraftingMaterial)Databases.Craftables[kvp.Key];
 			int amountOwned = Inventory[material];
 			int amountRequired = kvp.Value;
 			

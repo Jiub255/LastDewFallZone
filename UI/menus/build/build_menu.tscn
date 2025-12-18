@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://6n0ajh50ivs0"]
+[gd_scene load_steps=3 format=3 uid="uid://6n0ajh50ivs0"]
+
+[ext_resource type="PackedScene" uid="uid://exarpec3215x" path="res://UI/menus/build/building_button.tscn" id="1_2816q"]
+[ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/menus/SfxButton.cs" id="2_yf100"]
 
 [node name="BuildMenu" type="CanvasLayer"]
 
@@ -29,13 +32,50 @@ theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
-text = "Build"
+theme_type_variation = &"LabelMedium"
+text = "Building"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+horizontal_scroll_mode = 0
+
+[node name="Buttons" type="GridContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="BuildingButton" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Buttons" instance=ExtResource("1_2816q")]
+layout_mode = 2
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Description" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Build" type="Button" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Build"
+script = ExtResource("2_yf100")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
 
 [node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2

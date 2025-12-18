@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg33n32q78vqt"
-path="res://.godot/imported/icon_building_blank.png-18d4ff26f27e50700e1ef2b07a876519.ctex"
+path="res://.godot/imported/icon_building_blank.png-fc960be4aaa132682114994bac92f67f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://craftables/icons/icon_building_blank.png"
-dest_files=["res://.godot/imported/icon_building_blank.png-18d4ff26f27e50700e1ef2b07a876519.ctex"]
+source_file="res://craftables/buildings/icon_building_blank.png"
+dest_files=["res://.godot/imported/icon_building_blank.png-fc960be4aaa132682114994bac92f67f.ctex"]
 
 [params]
 

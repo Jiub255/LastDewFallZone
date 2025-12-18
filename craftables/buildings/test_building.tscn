@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpvyox8j34ruc"]
+[gd_scene load_steps=5 format=3 uid="uid://dpvyox8j34ruc"]
+
+[ext_resource type="Script" uid="uid://2eudmbqbfyjm" path="res://game_objects/buildable/Building3D.cs" id="1_0a6ko"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6qyy1"]
 size = Vector3(4, 3, 5)
@@ -10,6 +12,7 @@ albedo_color = Color(0.196975, 0.140346, 0.0482659, 1)
 size = Vector3(4, 3, 5)
 
 [node name="TestBuilding" type="Node3D"]
+script = ExtResource("1_0a6ko")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -20,5 +23,6 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_0a6ko")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_h0v7v")

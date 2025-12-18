@@ -11,7 +11,7 @@ namespace Lastdew
 		private GridContainer MaterialsGrid { get; set; }
 		private SelectedCraftableDisplay SelectedDisplay { get; set; }
 		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(Uids.CRAFTABLE_BUTTON);
-		private List<Building> Buildings { get; set; }
+		private List<BuildingSaveData> Buildings { get; set; }
 
 		public override void _Ready()
 		{
@@ -34,11 +34,13 @@ namespace Lastdew
 			UnsubscribeButtons(MaterialsGrid);
 		}
 		
-		public void Initialize(InventoryManager inventory, List<Building> buildings)
+		public void Initialize(InventoryManager inventory, List<BuildingSaveData> buildings)
 		{
 			Buildings = buildings;
 			PopulateUi();
 			SelectedDisplay.Initialize(inventory);
+			// TODO: Change to a signal. Also, does this work without keeping a reference here? Probably.
+			inventory.OnInventoryChanged += PopulateUi;
 		}
 
 		public override void Open()

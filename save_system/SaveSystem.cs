@@ -8,10 +8,16 @@ namespace Lastdew
 	{
 		private const string SAVE_PATH = "user://savegame.save";
 		
-		public static void Save(InventoryManager inventoryManager, TeamData teamData)
+		public static void Save(
+			InventoryManager inventoryManager,
+			TeamData teamData,
+			List<BuildingSaveData> buildingDatas)
 		{
-			SaveData saveData = GatherSaveData(inventoryManager, teamData);
+			SaveData saveData = GatherSaveData(inventoryManager, teamData, buildingDatas);
+			
+			GD.Print("Saving");
 			saveData.PrintData();
+			
 			string jsonString = JsonSerializer.Serialize(saveData);
 
 			using FileAccess saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);
@@ -33,6 +39,10 @@ namespace Lastdew
 			try
 			{
 				SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonString);
+				
+				GD.Print("Loaded");
+				saveData.PrintData();
+				
 				return saveData;
 			}
 			catch (System.Exception ex)
@@ -42,11 +52,14 @@ namespace Lastdew
 			}
 		}
 
-		private static SaveData GatherSaveData(InventoryManager inventoryManager, TeamData teamData)
+		private static SaveData GatherSaveData(
+			InventoryManager inventoryManager,
+			TeamData teamData,
+			List<BuildingSaveData> buildingDatas)
 		{
 			Dictionary<long, int> inventory = inventoryManager.GatherSaveData();
 			List<PcSaveData> pcSaveDatas = teamData.GatherSaveData();
-			return new SaveData(inventory, pcSaveDatas);;
+			return new SaveData(inventory, pcSaveDatas, buildingDatas);;
 		}
 	}
 }

@@ -5,8 +5,9 @@ namespace Lastdew
 {	
 	public partial class ClickHandler : RayCast3D
 	{
-		[Signal]
-		public delegate void OnPlacedBuildingEventHandler(Building building);
+		public event Action<BuildingSaveData> OnPlacedBuilding;
+		// [Signal]
+		// public delegate void OnPlacedBuildingEventHandler(BuildingSaveData buildingSaveData);
 		public event Action<PlayerCharacter> OnClickedPc;
 		public event Action<MovementTarget> OnClickedMoveTarget;
 
@@ -71,7 +72,6 @@ namespace Lastdew
 
 			Vector3 position = GetCollisionPoint();
 			Building3D.GlobalPosition = position;
-			// TODO: Force physics update or something?
 		}
 
 		public override void _UnhandledInput(InputEvent @event)
@@ -148,9 +148,10 @@ namespace Lastdew
 			}
 			
 			Building3D.SetBuilding();
+			BuildingSaveData data = new(Building.GetUid(), Building3D.Transform);
+			//EmitSignal(SignalName.OnPlacedBuilding, data);
+			OnPlacedBuilding?.Invoke(data);
 			Building3D = null;
-			// TODO: Rebake Navmesh
-			EmitSignal(SignalName.OnPlacedBuilding, Building);
 		}
 	}
 }

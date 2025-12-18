@@ -171,7 +171,8 @@
 				"8efb0faa-9ea3-41a4-ada1-d988734878c6",
 				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
 				"b48a33e5-4293-4fc9-a22f-10ad0fb735d0",
-				"2bc7f9cf-7a0e-48cb-b4af-6884baf71dfc"
+				"2bc7f9cf-7a0e-48cb-b4af-6884baf71dfc",
+				"7ba5e7e5-74bf-40d3-aaa1-96f36c3a39ae"
 			]
 		},
 		{
@@ -1222,6 +1223,13 @@
 			"uuid": "b48a33e5-4293-4fc9-a22f-10ad0fb735d0",
 			"title": "All PlacementIndicators are sharing the same mesh?",
 			"description": "FIXED by getting rid of the indicator when it's placed.\nColors of all are changing at the same time.\nNeed to just get rid of the indicator when it's placed.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "7ba5e7e5-74bf-40d3-aaa1-96f36c3a39ae",
+			"title": "Loading bug",
+			"description": "FIXED by changing Level.NavMesh.BakeNavigationMesh() to a CallDeferred.\nAfter loading (caused by the new building save system?), pcs can't move. \nBut if you go scavenging they can move, and if you come back, then build a workbench, they can move at home too. \nProbably a bunch of bugs working together. Need to clean up build system for sure.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

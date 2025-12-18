@@ -6,7 +6,7 @@ namespace Lastdew
 	public partial class BuildMenu : Menu
 	{
 		[Signal]
-		public delegate void OnBuildEventHandler(Node3D building);
+		public delegate void OnBuildEventHandler(Building3D building);
 		
 		private Building CurrentBuilding { get; set; }
 		private InventoryManager Inventory { get; set; }
@@ -15,9 +15,9 @@ namespace Lastdew
 		private Label Description { get; set; }
 		private Camera Camera { get; set; }
 		private SfxButton BuildButton { get; set; }
-		private List<Building> Buildings { get; set; }
+		private List<BuildingSaveData> Buildings { get; set; }
 		
-		public void Initialize(InventoryManager inventory, Camera camera, List<Building> buildings)
+		public void Initialize(InventoryManager inventory, Camera camera, List<BuildingSaveData> buildings)
 		{
 			Inventory = inventory;
 			Camera = camera;
@@ -25,10 +25,18 @@ namespace Lastdew
 			Buttons = GetNode<GridContainer>("%Buttons");
 			Description = GetNode<Label>("%Description");
 			BuildButton = GetNode<SfxButton>("%Build");
-			BuildButton.Connect(
-				BaseButton.SignalName.Pressed,
-				Callable.From(BuildInstance));
+			if (!BuildButton.IsConnected(
+				    BaseButton.SignalName.Pressed,
+				    Callable.From(BuildInstance)))
+			{
+				BuildButton.Connect(
+					BaseButton.SignalName.Pressed,
+					Callable.From(BuildInstance));
+			}
 			BuildButton.Disabled = true;
+
+			// TODO: Change to a godot signal
+			Inventory.OnInventoryChanged += SetupButtons;
 			
 			SetupButtons();
 		}
@@ -72,8 +80,7 @@ namespace Lastdew
 
 			foreach (Building building in unbuildables)
 			{
-				// TODO: Make the unbuildable buttons look gray.
-				SetupButton(building);
+				SetupButton(building, true);
 			}
 		}
 
@@ -88,7 +95,7 @@ namespace Lastdew
 			}
 		}
 
-		private void SetupButton(Building building)
+		private void SetupButton(Building building, bool gray = false)
 		{
 			BuildingButton button = (BuildingButton)ButtonScene.Instantiate();
 			button.Setup(building);
@@ -96,13 +103,15 @@ namespace Lastdew
 			button.Connect(
 				BuildingButton.SignalName.OnPressed,
 				Callable.From<Building>(SetBuilding));
+			button.SetColor(gray);
 		}
 		
 		private void SetBuilding(Building building)
 		{
 			CurrentBuilding = building;
 			Description.Text = FormatDescription(building);
-			BuildButton.Disabled = !building.HasRequiredBuildings(Buildings);
+			BuildButton.Disabled = !building.HasRequiredBuildings(Buildings) ||
+			                       !building.HasEnoughMaterialsToBuild(Inventory);
 		}
 
 		private void BuildInstance()

@@ -48,11 +48,25 @@ namespace Lastdew
 				.All((kvp) => items[Databases.Craftables.CraftingMaterials[kvp.Key]] >= kvp.Value);
 		}
 
-		public bool HasRequiredBuildings(List<Building> buildings)
+		public bool HasRequiredBuildings(List<BuildingSaveData> buildings)
 		{
 			return RequiredBuildings.
-				Select(uid => Databases.Craftables.Buildings[uid]).
-				All(buildings.Contains);
+				All(buildings
+					.Select((data) => data.BuildingUid)
+					.Contains);
+		}
+
+		public void Purchase(InventoryManager items)
+		{
+			foreach ((long uid, int amount) in RecipeCosts)
+			{
+				CraftingMaterial material = Databases.Craftables.CraftingMaterials[uid];
+				if (material.Reusable)
+				{
+					continue;
+				}
+				items.RemoveItems(material, amount);
+			}
 		}
 	}
 }

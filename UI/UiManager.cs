@@ -63,7 +63,7 @@ namespace Lastdew
 			TeamData teamData, 
 			InventoryManager inventoryManager, 
 			Camera camera,
-			List<Building> buildings)
+			List<BuildingSaveData> buildings)
 		{
 			Hud.Initialize(teamData);
 			CharacterMenu.Initialize(teamData, inventoryManager);

@@ -30,5 +30,5 @@ fov = 63.4
 [node name="ClickHandler" type="RayCast3D" parent="OuterGimbal/InnerGimbal/Zoomer/Camera3D"]
 unique_name_in_owner = true
 collision_mask = 30
-debug_shape_custom_color = Color(1, 1, 1, 0.0431373)
+debug_shape_custom_color = Color(1, 1, 1, 0)
 script = ExtResource("5_46j64")

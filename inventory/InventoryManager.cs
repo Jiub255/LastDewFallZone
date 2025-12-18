@@ -47,6 +47,10 @@ namespace Lastdew
 					{
 						OnInventoryChanged?.Invoke();
 					}
+					else
+					{
+						GD.PushError($"Not enough in inventory to remove {amount} {craftingMaterial}");
+					}
 					break;
 				}
 				case Equipment equipment:
@@ -55,6 +59,10 @@ namespace Lastdew
 					{
 						OnInventoryChanged?.Invoke();
 					}
+					else
+					{
+						GD.PushError($"Not enough in inventory to remove {amount} {equipment}");
+					}
 					break;
 				}
 				case UsableItem usableItem:
@@ -62,6 +70,10 @@ namespace Lastdew
 					if (UsableItems.RemoveItems(usableItem, amount))
 					{
 						OnInventoryChanged?.Invoke();
+					}
+					else
+					{
+						GD.PushError($"Not enough in inventory to remove {amount} {usableItem}");
 					}
 					break;
 				}

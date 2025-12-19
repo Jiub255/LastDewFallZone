@@ -21,27 +21,19 @@ namespace Lastdew
 			Previous = GetNode<SfxButton>("%PreviousButton");
 			Next = GetNode<SfxButton>("%NextButton");
 
-			Previous.Pressed += PreviousPc;
-			Next.Pressed += NextPc;
+			Previous.Connect(BaseButton.SignalName.Pressed, Callable.From(PreviousPc));
+			Next.Connect(BaseButton.SignalName.Pressed, Callable.From(NextPc));
 		}
 
-		public override void _ExitTree()
+		public void ConnectSignals(TeamData teamData)
 		{
-			base._ExitTree();
-			
-			Previous.Pressed -= PreviousPc;
-			Next.Pressed -= NextPc;
-			if (TeamData == null)
-			{
-				return;
-			}
-			TeamData.OnMenuSelectedChanged -= Setup;
+			teamData.Connect(TeamData.SignalName.OnMenuSelectedChanged,
+				Callable.From(Setup));
 		}
 
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			teamData.OnMenuSelectedChanged += Setup;
 		}
 
 		public void Setup()
@@ -71,6 +63,7 @@ namespace Lastdew
 		{
 			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
 			pc.OnEquipmentChanged -= Setup;
+			// MenuSelectedIndex setter emits a signal that calls Setup() on the new PC.
 			if (TeamData.MenuSelectedIndex == 0)
 			{
 				TeamData.MenuSelectedIndex = TeamData.Pcs.Count - 1;
@@ -85,6 +78,7 @@ namespace Lastdew
 		{
 			PlayerCharacter pc = TeamData.Pcs[TeamData.MenuSelectedIndex];
 			pc.OnEquipmentChanged -= Setup;
+			// MenuSelectedIndex setter emits a signal that calls Setup() on the new PC.
 			if (TeamData.MenuSelectedIndex == TeamData.Pcs.Count - 1)
 			{
 				TeamData.MenuSelectedIndex = 0;

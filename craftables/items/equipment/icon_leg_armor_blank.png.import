@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8uv451fraiei"
-path="res://.godot/imported/icon_leg_armor_blank.png-2ff158e331af52f8a2ec1d7ccd23a754.ctex"
+path="res://.godot/imported/icon_leg_armor_blank.png-8197efa31d3afd37e63420b72c9f2521.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://craftables/icons/icon_leg_armor_blank.png"
-dest_files=["res://.godot/imported/icon_leg_armor_blank.png-2ff158e331af52f8a2ec1d7ccd23a754.ctex"]
+source_file="res://craftables/items/equipment/icon_leg_armor_blank.png"
+dest_files=["res://.godot/imported/icon_leg_armor_blank.png-8197efa31d3afd37e63420b72c9f2521.ctex"]
 
 [params]
 

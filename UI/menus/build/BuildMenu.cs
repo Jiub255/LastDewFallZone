@@ -11,18 +11,12 @@ namespace Lastdew
 		private Building CurrentBuilding { get; set; }
 		private InventoryManager Inventory { get; set; }
 		private static PackedScene ButtonScene => GD.Load<PackedScene>(Uids.BUILDING_BUTTON);
-		private GridContainer Buttons { get; set; }
+		private GridContainer ButtonParent { get; set; }
+		private List<BuildingButton> Buttons { get; } = [];
 		private Label Description { get; set; }
 		private Camera Camera { get; set; }
 		private SfxButton BuildButton { get; set; }
-		private List<BuildingSaveData> Buildings { get; set; }
-
-		public override void _ExitTree()
-		{
-			base._ExitTree();
-			
-			Inventory.OnInventoryChanged -= Setup;
-		}
+		private List<BuildingData> Buildings { get; set; }
 
 		public override void Open()
 		{
@@ -40,46 +34,38 @@ namespace Lastdew
 			Camera.ProcessMode = ProcessModeEnum.Inherit;
 			Camera.ClickHandler.BuildMode = false;
 		}
+
+		public void ConnectSignals(InventoryManager inventory)
+		{
+			BuildButton = GetNode<SfxButton>("%Build");
+			BuildButton.Connect(
+				BaseButton.SignalName.Pressed,
+				Callable.From(BuildInstance));
+			inventory.Connect(
+				InventoryManager.SignalName.OnInventoryChanged,
+				Callable.From(Setup));
+		}
 		
-		public void Initialize(InventoryManager inventory, Camera camera, List<BuildingSaveData> buildings)
+		public void Initialize(InventoryManager inventory, Camera camera, List<BuildingData> buildings)
 		{
 			Inventory = inventory;
 			Camera = camera;
 			Buildings = buildings;
-			Buttons = GetNode<GridContainer>("%Buttons");
+			ButtonParent = GetNode<GridContainer>("%Buttons");
 			Description = GetNode<Label>("%Description");
-			BuildButton = GetNode<SfxButton>("%Build");
 			
-			
-			// Hacky fix to double subscribing/connecting.
-			// TODO: Separate initialize (first time only) from setup (each time) on UiManager.
-			// if (!BuildButton.IsConnected(
-			// 	    BaseButton.SignalName.Pressed,
-			// 	    Callable.From(BuildInstance)))
-			
-			
-			{
-				BuildButton.Connect(
-					BaseButton.SignalName.Pressed,
-					Callable.From(BuildInstance));
-				Inventory.OnInventoryChanged += Setup;
-			}
 		}
 
 		public void Setup()
 		{
-			// TODO: Not 100% sure this should be here.
 			BuildButton.Disabled = true;
 			
 			ClearButtons();
 			List<Building> unbuildables = [];
 			foreach (Building building in Databases.Craftables.Buildings.Values)
 			{
-				// TODO: Or just do early continue with HasRequiredBuildings() and not show them at all?
-				
-				//if (!building.HasRequiredBuildings(Buildings)) continue;
-				if (building.HasEnoughMaterialsToBuild(Inventory) && 
-				    building.HasRequiredBuildings(Buildings))
+				if (!building.HasRequiredBuildings(Buildings)) continue;
+				if (building.HasEnoughMaterialsToBuild(Inventory))
 				{
 					SetupButton(building);
 				}
@@ -97,24 +83,23 @@ namespace Lastdew
 
 		private void ClearButtons()
 		{
-			foreach (Node child in Buttons.GetChildren())
+			foreach (BuildingButton button in Buttons)
 			{
-				if (child is BuildingButton button)
-				{
-					button.QueueFree();
-				}
+				button.QueueFree();
 			}
+			Buttons.Clear();
 		}
 
 		private void SetupButton(Building building, bool gray = false)
 		{
 			BuildingButton button = (BuildingButton)ButtonScene.Instantiate();
 			button.Setup(building);
-			Buttons.CallDeferred(Node.MethodName.AddChild, button);
+			ButtonParent.CallDeferred(Node.MethodName.AddChild, button);
 			button.Connect(
 				BuildingButton.SignalName.OnPressed,
 				Callable.From<Building>(SetBuilding));
 			button.SetColor(gray);
+			Buttons.Add(button);
 		}
 		
 		private void SetBuilding(Building building)

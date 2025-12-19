@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_8ycmd")
-EquipmentType = 0
+EquipmentType = 1
 EquipmentBonuses = Dictionary[int, int]({
 1: 2
 })

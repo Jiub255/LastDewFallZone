@@ -25,7 +25,7 @@ namespace Lastdew
 		private int Index
 		{
 		    get => _index;
-		    set 
+		    set
 		    {
 				_index = value;
 				CharacterSelector.SetupDisplay(value);
@@ -42,30 +42,24 @@ namespace Lastdew
 			PcDisplayParent = GetNode<VBoxContainer>("%PcDisplayParent");
 			CharacterSelector = GetNode<CharacterSelector>("%CharacterSelector");
 
-			AddButton.Pressed += AddPcToTeam;
-			StartButton.Pressed += StartScavenging;
-			CharacterSelector.Previous.Pressed += PreviousPc;
-			CharacterSelector.Next.Pressed += NextPc;
+			AddButton.Connect(BaseButton.SignalName.Pressed, Callable.From(AddPcToTeam));
+			StartButton.Connect(BaseButton.SignalName.Pressed, Callable.From(StartScavenging));
+			CharacterSelector.Previous.Connect(BaseButton.SignalName.Pressed, Callable.From(PreviousPc));
+			CharacterSelector.Next.Connect(BaseButton.SignalName.Pressed, Callable.From(NextPc));
 		}
 
-		public override void _ExitTree()
-		{
-			base._ExitTree();
-			
-			AddButton.Pressed -= AddPcToTeam;
-			StartButton.Pressed -= StartScavenging;
-			CharacterSelector.Previous.Pressed -= PreviousPc;
-			CharacterSelector.Next.Pressed -= NextPc;}
-
-		public void Setup(TeamData teamData, LocationData locationData)
+		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			
+		}
+
+		public void Setup(LocationData locationData)
+		{
 			foreach (Node node in PcDisplayParent.GetChildren())
 			{
 				node.QueueFree();
 			}
-			UnselectedPcs = teamData.Pcs.ToList();
+			UnselectedPcs = TeamData.Pcs.ToList();
 			SelectedPcs.Clear();
 			
 			LocationData = locationData;

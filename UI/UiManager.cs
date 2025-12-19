@@ -58,6 +58,13 @@ namespace Lastdew
 	        
 	        CurrentState.ProcessState();
         }
+
+        public void ConnectSignals(TeamData teamData, InventoryManager inventoryManager)
+        {
+	        BuildMenu.ConnectSignals(inventoryManager);
+	        CraftingMenu.ConnectSignals(inventoryManager);
+	        CharacterMenu.ConnectSignals(teamData, inventoryManager);
+        }
 		
         /// <summary>
         /// Only called once in beginning
@@ -66,7 +73,7 @@ namespace Lastdew
 			TeamData teamData, 
 			InventoryManager inventoryManager, 
 			Camera camera,
-			List<BuildingSaveData> buildings)
+			List<BuildingData> buildings)
 		{
 			Hud.Initialize(teamData);
 			CharacterMenu.Initialize(teamData, inventoryManager);

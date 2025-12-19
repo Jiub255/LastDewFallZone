@@ -23,11 +23,21 @@ namespace Lastdew
 			CharacterDisplay = GetNode<CharacterDisplay>("%CharacterDisplay");
 			EquipmentDisplay = GetNode<EquipmentDisplay>("%EquipmentDisplay");
 
-			SelectedItemPanel.UseEquip.Pressed += CharacterDisplay.Setup;
+			SelectedItemPanel.UseEquip.Connect(
+				BaseButton.SignalName.Pressed,
+				Callable.From(CharacterDisplay.Setup));
 			foreach(Button button in EquipmentDisplay.Buttons)
 			{
-				button.Pressed += CharacterDisplay.Setup;
+				button.Connect(BaseButton.SignalName.Pressed, Callable.From(CharacterDisplay.Setup));
 			}
+		}
+
+		public void ConnectSignals(TeamData teamData, InventoryManager inventory)
+		{
+			inventory.Connect(InventoryManager.SignalName.OnInventoryChanged,
+				Callable.From(PopulateInventoryUi));
+			CharacterDisplay.ConnectSignals(teamData);
+			EquipmentDisplay.ConnectSignals(teamData);
 		}
 	
 		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
@@ -40,7 +50,6 @@ namespace Lastdew
 			SelectedItemPanel.Initialize(teamData);
 			EquipmentDisplay.Initialize(teamData);
 
-			InventoryManager.OnInventoryChanged += PopulateInventoryUi;
 		}
 
 		public void Setup()
@@ -49,13 +58,6 @@ namespace Lastdew
 			EquipmentDisplay.Setup();
 		}
 	
-		public override void _ExitTree()
-		{
-			base._ExitTree();
-
-			UnsubscribeFromEvents();
-		}
-
 		public override void Close()
 		{
 			base.Close();
@@ -77,18 +79,12 @@ namespace Lastdew
 		{
 			foreach (ItemButton itemButton in Buttons)
 			{
-				RemoveButton(itemButton);
+				itemButton.QueueFree();
 			}
 
 			Buttons.Clear();
 		}
 	
-		private void RemoveButton(ItemButton button)
-		{
-			button.OnPressed -= SelectedItemPanel.SetItem;
-			button.QueueFree();
-		}
-
 		private void SetupButtons()
 		{
 			foreach (KeyValuePair<UsableItem, int> item in InventoryManager.UsableItems)
@@ -109,7 +105,7 @@ namespace Lastdew
 			ItemButton button = (ItemButton)ItemButtonScene.Instantiate();
 			ItemsGrid.CallDeferred(Node.MethodName.AddChild, button);
 			button.CallDeferred(ItemButton.MethodName.Initialize, item, amount);
-			button.OnPressed += SelectedItemPanel.SetItem;
+			button.Connect(ItemButton.SignalName.OnPressed, Callable.From<ItemButton>(SelectedItemPanel.SetItem));
 			Buttons.Add(button);
 		}
 
@@ -122,28 +118,6 @@ namespace Lastdew
 			else
 			{
 				SelectedItemPanel.ClearItem();
-			}
-		}
-
-		private void UnsubscribeFromEvents()
-		{
-			foreach (Node child in ItemsGrid.GetChildren())
-			{
-				if (child is ItemButton button)
-				{
-					button.OnPressed -= SelectedItemPanel.SetItem;
-				}
-			}
-			
-			foreach(Button button in EquipmentDisplay.Buttons)
-			{
-				button.Pressed -= CharacterDisplay.Setup;
-			}
-
-			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.Setup;
-			if (InventoryManager != null)
-			{
-				InventoryManager.OnInventoryChanged -= PopulateInventoryUi;
 			}
 		}
 	}

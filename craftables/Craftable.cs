@@ -48,7 +48,7 @@ namespace Lastdew
 				.All((kvp) => items[Databases.Craftables.CraftingMaterials[kvp.Key]] >= kvp.Value);
 		}
 
-		public bool HasRequiredBuildings(List<BuildingSaveData> buildings)
+		public bool HasRequiredBuildings(List<BuildingData> buildings)
 		{
 			return RequiredBuildings.
 				All(buildings

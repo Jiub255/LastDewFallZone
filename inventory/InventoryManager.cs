@@ -1,13 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
 {
-	public class InventoryManager : IEnumerable<KeyValuePair<Item, int>>
+	public partial class InventoryManager : RefCounted, IEnumerable<KeyValuePair<Item, int>>
 	{
-		public event Action OnInventoryChanged;
+		[Signal]
+		public delegate void OnInventoryChangedEventHandler();
+		//public event Action OnInventoryChanged;
 		
 		public InventoryController<CraftingMaterial> CraftingMaterials { get; } = new();
 		public InventoryController<Equipment> Equipment { get; } = new();
@@ -19,15 +20,18 @@ namespace Lastdew
 			{
 				case CraftingMaterial craftingMaterial:
 					CraftingMaterials.AddItems(craftingMaterial, amount);
-					OnInventoryChanged?.Invoke();
+					//OnInventoryChanged?.Invoke();
+					EmitSignal(SignalName.OnInventoryChanged);
 					break;
 				case Equipment equipment:
 					Equipment.AddItems(equipment, amount);
-					OnInventoryChanged?.Invoke();
+					//OnInventoryChanged?.Invoke();
+					EmitSignal(SignalName.OnInventoryChanged);
 					break;
 				case UsableItem usableItem:
 					UsableItems.AddItems(usableItem, amount);
-					OnInventoryChanged?.Invoke();
+					//OnInventoryChanged?.Invoke();
+					EmitSignal(SignalName.OnInventoryChanged);
 					break;
 			}
 		}
@@ -45,7 +49,8 @@ namespace Lastdew
 				{
 					if (CraftingMaterials.RemoveItems(craftingMaterial, amount))
 					{
-						OnInventoryChanged?.Invoke();
+						//OnInventoryChanged?.Invoke();
+						EmitSignal(SignalName.OnInventoryChanged);
 					}
 					else
 					{
@@ -57,7 +62,8 @@ namespace Lastdew
 				{
 					if (Equipment.RemoveItems(equipment, amount))
 					{
-						OnInventoryChanged?.Invoke();
+						//OnInventoryChanged?.Invoke();
+						EmitSignal(SignalName.OnInventoryChanged);
 					}
 					else
 					{
@@ -69,7 +75,8 @@ namespace Lastdew
 				{
 					if (UsableItems.RemoveItems(usableItem, amount))
 					{
-						OnInventoryChanged?.Invoke();
+						//OnInventoryChanged?.Invoke();
+						EmitSignal(SignalName.OnInventoryChanged);
 					}
 					else
 					{

@@ -1,23 +1,35 @@
 using System.Text.Json.Serialization;
-using Godot;
 
 namespace Lastdew
 {
-	[method: JsonConstructor]
-	public class BuildingSaveData(long buildingUid, (float, float, float) position, float rotation)
+	public class BuildingSaveData
 	{
-		public long BuildingUid { get; } = buildingUid;
-		public (float, float, float) Position { get; } = position;
-		public float Rotation { get; } = rotation;
+		public long BuildingUid { get; }
+		public float X { get; }
+		public float Y { get; }
+		public float Z { get; }
+		public float Rotation { get; }
+		
+		public BuildingSaveData(){}
 
-		public BuildingSaveData(long buildingUid, Transform3D transform)
-			: this(buildingUid, (transform.Origin.X, transform.Origin.Y, transform.Origin.Z), transform.Basis.GetEuler().Y)
+		public BuildingSaveData(BuildingData data)
 		{
+			BuildingUid = data.BuildingUid;
+			X = data.Position.X;
+			Y = data.Position.Y;
+			Z = data.Position.Z;
+			Rotation = data.Rotation;
 		}
 
-		public void PrintData()
+		[method: JsonConstructor]
+		public BuildingSaveData(long buildingUid,
+			float x, float y, float z, float rotation)
 		{
-			GD.Print($"UID: {BuildingUid},  Position: {Position},   Rotation: {Rotation}");
+			BuildingUid = buildingUid;
+			X = x;
+			Y = y;
+			Z = z;
+			Rotation = rotation;
 		}
 	}
 }

@@ -4,7 +4,9 @@ using Godot;
 namespace Lastdew
 {
 	// Constructor only takes parameters that correspond to properties in this class, needed for Json serializer?
-	public class SaveData(Dictionary<long, int> inventory, List<PcSaveData> pcSaveDatas, List<BuildingSaveData> buildingDatas)
+	public class SaveData(Dictionary<long, int> inventory,
+		List<PcSaveData> pcSaveDatas,
+		List<BuildingSaveData> buildingDatas)
 	{		
 		public Dictionary<long, int> Inventory { get; init; } = inventory;
 		public List<PcSaveData> PcSaveDatas { get; init; } = pcSaveDatas;
@@ -25,7 +27,9 @@ namespace Lastdew
 
 			foreach (BuildingSaveData buildingData in BuildingDatas)
 			{
-				buildingData.PrintData();
+				GD.Print($"UID: {buildingData.BuildingUid}, " +
+				         $"Position: ({buildingData.X}, {buildingData.Y}, {buildingData.Z}), " +
+				         $"Rotation: {buildingData.Rotation}\n");
 			}
 		}
 	}

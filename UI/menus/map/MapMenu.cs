@@ -47,12 +47,13 @@ namespace Lastdew
 		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
+			TeamSelectScreen.Initialize(teamData);
 		}
 
 		private void OpenTeamSelectMenu()
 		{
 			MapScreen.Hide();
-			TeamSelectScreen.Setup(TeamData, MapScreen.LocationData);
+			TeamSelectScreen.Setup(MapScreen.LocationData);
 		}
 		
 		private void StartScavenging(PackedScene scene, List<PcSaveData> pcs)

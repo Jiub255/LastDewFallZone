@@ -6,9 +6,10 @@ using System.Linq;
 
 namespace Lastdew
 {
-	public class TeamData
+	public partial class TeamData : RefCounted
 	{
-		public event Action OnMenuSelectedChanged;
+		[Signal]
+		public delegate void OnMenuSelectedChangedEventHandler();
 		
 		private readonly List<PlayerCharacter> _pcs = [];
 		private int? _selectedIndex;
@@ -36,7 +37,7 @@ namespace Lastdew
 			set
 			{
 				_menuSelectedIndex = value;
-				OnMenuSelectedChanged?.Invoke();
+				EmitSignal(SignalName.OnMenuSelectedChanged);
 			}
 		}
 		public List<PcSaveData> UnusedPcDatas { get; private set; } = [];

@@ -5,9 +5,9 @@ namespace Lastdew
 {	
 	public partial class ClickHandler : RayCast3D
 	{
-		public event Action<BuildingSaveData> OnPlacedBuilding;
-		// [Signal]
-		// public delegate void OnPlacedBuildingEventHandler(BuildingSaveData buildingSaveData);
+		//public event Action<BuildingData> OnPlacedBuilding;
+		[Signal]
+		public delegate void OnPlacedBuildingEventHandler(BuildingData buildingData);
 		public event Action<PlayerCharacter> OnClickedPc;
 		public event Action<MovementTarget> OnClickedMoveTarget;
 
@@ -148,9 +148,9 @@ namespace Lastdew
 			}
 			
 			Building3D.SetBuilding();
-			BuildingSaveData data = new(Building.GetUid(), Building3D.Transform);
-			//EmitSignal(SignalName.OnPlacedBuilding, data);
-			OnPlacedBuilding?.Invoke(data);
+			BuildingData data = new(Building.GetUid(), Building3D.Transform);
+			EmitSignal(SignalName.OnPlacedBuilding, data);
+			//OnPlacedBuilding?.Invoke(data);
 			Building3D = null;
 		}
 	}

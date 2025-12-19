@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace Lastdew
@@ -11,14 +12,14 @@ namespace Lastdew
 		public static void Save(
 			InventoryManager inventoryManager,
 			TeamData teamData,
-			List<BuildingSaveData> buildingDatas)
+			List<BuildingData> buildingDatas)
 		{
 			SaveData saveData = GatherSaveData(inventoryManager, teamData, buildingDatas);
 			
 			GD.Print("Saving");
 			saveData.PrintData();
 			
-			string jsonString = JsonSerializer.Serialize(saveData);
+			string jsonString = JsonSerializer.Serialize(saveData, new JsonSerializerOptions() { IncludeFields = true });
 
 			using FileAccess saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);
 			saveFile.StoreLine(jsonString);
@@ -38,6 +39,7 @@ namespace Lastdew
 			
 			try
 			{
+				// TODO: Problem is here, its getting saved to file just fine.
 				SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonString);
 				
 				GD.Print("Loaded");
@@ -52,14 +54,36 @@ namespace Lastdew
 			}
 		}
 
+		public static List<BuildingData> ConvertToBuildingDatas(
+			List<BuildingSaveData> datas)
+		{
+			List<BuildingData> result = [];
+			foreach (BuildingSaveData data in datas)
+			{
+				result.Add(new BuildingData(data));
+			}
+			return result;
+		}
+
 		private static SaveData GatherSaveData(
 			InventoryManager inventoryManager,
 			TeamData teamData,
-			List<BuildingSaveData> buildingDatas)
+			List<BuildingData> buildingDatas)
 		{
 			Dictionary<long, int> inventory = inventoryManager.GatherSaveData();
 			List<PcSaveData> pcSaveDatas = teamData.GatherSaveData();
-			return new SaveData(inventory, pcSaveDatas, buildingDatas);;
+			return new SaveData(inventory, pcSaveDatas, ConvertFromBuildingDatas(buildingDatas));;
+		}
+
+		private static List<BuildingSaveData> ConvertFromBuildingDatas(
+			List<BuildingData> buildingDatas)
+		{
+			List<BuildingSaveData> result = [];
+			foreach (BuildingData data in buildingDatas)
+			{
+				result.Add(new BuildingSaveData(data));
+			}
+			return result;
 		}
 	}
 }

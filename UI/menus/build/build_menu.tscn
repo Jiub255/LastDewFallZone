@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://6n0ajh50ivs0"]
+[gd_scene load_steps=2 format=3 uid="uid://6n0ajh50ivs0"]
 
-[ext_resource type="PackedScene" uid="uid://exarpec3215x" path="res://UI/menus/build/building_button.tscn" id="1_2816q"]
 [ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/menus/SfxButton.cs" id="2_yf100"]
 
 [node name="BuildMenu" type="CanvasLayer"]
@@ -55,9 +54,6 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 3
-
-[node name="BuildingButton" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Buttons" instance=ExtResource("1_2816q")]
-layout_mode = 2
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

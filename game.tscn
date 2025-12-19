@@ -3,14 +3,14 @@
 [ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://Game.cs" id="1_e8jue"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://camera/camera.tscn" id="2_hliwg"]
 [ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://characters/player_characters/management/PcManager.cs" id="3_av0ep"]
-[ext_resource type="Script" uid="uid://dfydmocx5fr4" path="res://UI/UiManager.cs" id="4_d65k2"]
-[ext_resource type="PackedScene" uid="uid://c7w0406ngl5dr" path="res://UI/menus/main/main_menu.tscn" id="5_fuoxl"]
-[ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://UI/menus/hud/hud.tscn" id="6_ehfc1"]
-[ext_resource type="PackedScene" uid="uid://6n0ajh50ivs0" path="res://UI/menus/build/build_menu.tscn" id="8_peygw"]
-[ext_resource type="PackedScene" uid="uid://b8phmlcc56yeu" path="res://UI/menus/character/character_menu.tscn" id="9_av0ep"]
-[ext_resource type="Script" uid="uid://cqpu56xet75gu" path="res://UI/menus/build/BuildMenu.cs" id="9_lclbi"]
-[ext_resource type="PackedScene" uid="uid://dh8qmjetlrm2d" path="res://UI/menus/crafting/crafting_menu.tscn" id="10_d65k2"]
-[ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/menus/map/map_menu.tscn" id="10_km2cl"]
+[ext_resource type="Script" uid="uid://dfydmocx5fr4" path="res://UI/UiManager.cs" id="4_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://c7w0406ngl5dr" path="res://UI/menus/main/main_menu.tscn" id="5_215e1"]
+[ext_resource type="PackedScene" uid="uid://jlnwj0thfhrf" path="res://UI/menus/hud/hud.tscn" id="6_7sc4i"]
+[ext_resource type="PackedScene" uid="uid://6n0ajh50ivs0" path="res://UI/menus/build/build_menu.tscn" id="7_80cx4"]
+[ext_resource type="Script" uid="uid://cqpu56xet75gu" path="res://UI/menus/build/BuildMenu.cs" id="8_e8heu"]
+[ext_resource type="PackedScene" uid="uid://b8phmlcc56yeu" path="res://UI/menus/character/character_menu.tscn" id="9_rvswv"]
+[ext_resource type="PackedScene" uid="uid://dh8qmjetlrm2d" path="res://UI/menus/crafting/crafting_menu.tscn" id="10_boyg6"]
+[ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/menus/map/map_menu.tscn" id="11_e36ub"]
 [ext_resource type="Environment" uid="uid://demmrxsekmoyp" path="res://world/environment.tres" id="11_hliwg"]
 [ext_resource type="PackedScene" uid="uid://dgnkps730uihc" path="res://UI/fader/fader.tscn" id="13_lc2xo"]
 
@@ -38,31 +38,31 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
-script = ExtResource("4_d65k2")
+script = ExtResource("4_lc2xo")
 
-[node name="MainMenu" parent="UiManager" instance=ExtResource("5_fuoxl")]
+[node name="MainMenu" parent="UiManager" instance=ExtResource("5_215e1")]
 unique_name_in_owner = true
 process_mode = 3
 
-[node name="HUD" parent="UiManager" instance=ExtResource("6_ehfc1")]
+[node name="HUD" parent="UiManager" instance=ExtResource("6_7sc4i")]
 unique_name_in_owner = true
 process_mode = 1
 visible = false
 
-[node name="BuildMenu" parent="UiManager" instance=ExtResource("8_peygw")]
+[node name="BuildMenu" parent="UiManager" instance=ExtResource("7_80cx4")]
 unique_name_in_owner = true
 visible = false
-script = ExtResource("9_lclbi")
+script = ExtResource("8_e8heu")
 
-[node name="CharacterMenu" parent="UiManager" instance=ExtResource("9_av0ep")]
-unique_name_in_owner = true
-visible = false
-
-[node name="CraftingMenu" parent="UiManager" instance=ExtResource("10_d65k2")]
+[node name="CharacterMenu" parent="UiManager" instance=ExtResource("9_rvswv")]
 unique_name_in_owner = true
 visible = false
 
-[node name="MapMenu" parent="UiManager" instance=ExtResource("10_km2cl")]
+[node name="CraftingMenu" parent="UiManager" instance=ExtResource("10_boyg6")]
+unique_name_in_owner = true
+visible = false
+
+[node name="MapMenu" parent="UiManager" instance=ExtResource("11_e36ub")]
 unique_name_in_owner = true
 visible = false
 

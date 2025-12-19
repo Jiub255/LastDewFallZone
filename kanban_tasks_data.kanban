@@ -49,7 +49,6 @@
 				"31f7804f-979d-4e67-9d76-db0049a9350a",
 				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
 				"66e4ae30-0330-4cea-babb-74aab3314288",
-				"8072d314-17fe-4500-b377-2417801e123b",
 				"08d16a6c-21ec-47e7-a4ba-7ada6b86cf25"
 			]
 		},
@@ -57,7 +56,8 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"66ed35a6-82b7-4c74-8b08-8995b1900c04"
+				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
+				"8072d314-17fe-4500-b377-2417801e123b"
 			]
 		},
 		{
@@ -135,7 +135,8 @@
 				"a49b3863-066b-4537-8678-4c9706709283",
 				"1ad94904-95a3-4636-902c-f95b2f58937c",
 				"39f70893-7bf3-49cc-897d-94f26e2ed5a2",
-				"65d71ccf-319b-48db-82b8-2d24105e2194"
+				"65d71ccf-319b-48db-82b8-2d24105e2194",
+				"0ed546e7-5fc5-4bbc-a424-a0e633149ca0"
 			]
 		},
 		{
@@ -172,14 +173,17 @@
 				"2a4c8d6a-9455-42b8-bc72-2dbcb4743d1d",
 				"b48a33e5-4293-4fc9-a22f-10ad0fb735d0",
 				"2bc7f9cf-7a0e-48cb-b4af-6884baf71dfc",
-				"7ba5e7e5-74bf-40d3-aaa1-96f36c3a39ae"
+				"7ba5e7e5-74bf-40d3-aaa1-96f36c3a39ae",
+				"d98416df-4541-4af7-9ef7-c68f9945263e",
+				"222d537e-4518-49ad-ab18-d77514631a14"
 			]
 		},
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"8c8729bd-b42c-4305-b2e8-dca50b070672"
+				"8c8729bd-b42c-4305-b2e8-dca50b070672",
+				"6325288b-1526-4b3f-a1f2-c196a4183edc"
 			]
 		},
 		{
@@ -1201,7 +1205,7 @@
 		{
 			"uuid": "8072d314-17fe-4500-b377-2417801e123b",
 			"title": "Use Godot signals instead of C# events",
-			"description": "Trying to unsubscribe from events in ExitTree() doesn't work for anything involving children, since they have all already exited the tree. And a lot of events involve connecting to child nodes. \nPlus, godot handles disconnection automatically, so less to worry about. Hopefully this will avoid memory leaks. ",
+			"description": "Trying to unsubscribe from events in ExitTree() doesn't work for anything involving children, since they have all already exited the tree. And a lot of events involve connecting to child nodes. \nPlus, godot handles disconnection automatically, so less to worry about. Hopefully this will avoid memory leaks. \nCan't be done from non-variant classes or with non-variant parameters. Can inherit from RefCounted to make a plain c# class into a variant, but then the standard JSON serialization doesn't work.\nMight just learn to serialize Variants in the save system to allow for more signals instead of events.\nProblem is sending signals from c# classes that already inherit some other c# thing, like IEnumberable<T>. Then can't just inherit RefCounted. There's probably some workaround. \nNevermind, IEnumerable is an interface so I can inherit both RefCounted and IEnumerable. Not sure if there's other c# classes I've inherited that could cause problems.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1230,6 +1234,34 @@
 			"uuid": "7ba5e7e5-74bf-40d3-aaa1-96f36c3a39ae",
 			"title": "Loading bug",
 			"description": "FIXED by changing Level.NavMesh.BakeNavigationMesh() to a CallDeferred.\nAfter loading (caused by the new building save system?), pcs can't move. \nBut if you go scavenging they can move, and if you come back, then build a workbench, they can move at home too. \nProbably a bunch of bugs working together. Need to clean up build system for sure.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "0ed546e7-5fc5-4bbc-a424-a0e633149ca0",
+			"title": "Serialize RefCounteds in SaveSystem",
+			"description": "BuildingSaveData, InventoryManager, TeamData, etc.\nMaybe PcSaveData? No reason to make it RefCounted if not dealing with signals I guess.\n\nMight not need to. The only class that inherits RefCounted is InventoryManager (only one that needs to send signals) and it already gets put into a c# dict<long, int> before serialization so it's fine.\nThe other ones are all just using plain c# stuff that serializes fine.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "d98416df-4541-4af7-9ef7-c68f9945263e",
+			"title": "Build/Craft menus doubling their displays after making something",
+			"description": "FIXED by keeping a list of buttons to delete. \nSomething to do with connecting to the InventoryChanged signal maybe?\nInventoryManager emits OnChanged for the removing of each item/amount, and for the adding of whatever was crafted. So makes sense it's sending out multiple signals.\nBut the setup methods should be clearing the old buttons before adding new ones. Why aren't they?\nIt's because the clear buttons methods rely on searching children, but they haven't been added to the tree yet because of call deferred.\nShould just keep a list of buttons instead to delete. ",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "222d537e-4518-49ad-ab18-d77514631a14",
+			"title": "New buildings not getting added to Game.Buildings",
+			"description": "FIXED by passing Buildings instead of [] in Game.StartNewGame() -> Ui.Initialize().\nAlso added parameterless constructor to BuildingData so Godot could initialize it? Not sure if necessary but it can't hurt.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "6325288b-1526-4b3f-a1f2-c196a4183edc",
+			"title": "Game breaks when saving, quitting to start menu, then loading again",
+			"description": "Getting \"signal already connected\" errors. Not sure what else is happening.\nMight need to shut things down better on quit to start menu.\nI think it's from running Ui.Initialize again. How to fix that?\nCould do checks before each signal connection.\nOr could queue free and reinstantiate UiManager at exit/start.\n\nCould separate ConnectSignal out from Initialize, and call that in ready. Tried that, didn't help. Got rid of the already connected signal errors though.\nStepping through it in debug, looks like the problem happens right after the await fade out part of Game.SetupLevel().\nI don't see what could be causing a problem here though. CurrentLevel?.QueueFree()? Instantiating the new one? No idea.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

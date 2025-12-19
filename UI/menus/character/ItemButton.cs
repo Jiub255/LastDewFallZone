@@ -5,7 +5,8 @@ namespace Lastdew
 {	
 	public partial class ItemButton : SfxButton
 	{
-		public event Action<ItemButton> OnPressed;
+		[Signal]
+		public delegate void OnPressedEventHandler(ItemButton itemButton);
 		
 		public Item Item { get; private set; }
 		public int Amount { get; set; }
@@ -19,25 +20,14 @@ namespace Lastdew
 			AmountLabel = GetNode<Label>("%Label");
 		}
 	
-		public override void _ExitTree()
-		{
-			base._ExitTree();
-			
-			Pressed -= PressButton;
-		}
-	
+		// CallDeferred from CharacterMenu.SetupButton().
 		public void Initialize(Item item, int amount)
 		{
 			Item = item;
 			Amount = amount;
 			Icon = item.Icon;
 			AmountLabel.Text = amount.ToString();
-			Pressed += PressButton;
-		}
-		
-		private void PressButton()
-		{
-			OnPressed?.Invoke(this);
+			Connect(BaseButton.SignalName.Pressed, Callable.From(() => EmitSignal(SignalName.OnPressed, this)));
 		}
 	}
 }

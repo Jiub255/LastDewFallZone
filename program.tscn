@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cksq1a2wxrts0"]
+
+[ext_resource type="Script" uid="uid://ceifwmfo0rr83" path="res://Program.cs" id="1_bm06t"]
+
+[node name="Program" type="Node"]
+process_mode = 3
+script = ExtResource("1_bm06t")

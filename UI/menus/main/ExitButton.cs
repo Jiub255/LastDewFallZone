@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 namespace Lastdew
 {
 	public partial class ExitButton : SfxButton
 	{
-		public event Action OnToStartMenu;
+		//public event Action OnToStartMenu;
+		public event Func<Task> OnToStartMenu;
 
 		public bool InStartMenu { get; set; } = true;
 		

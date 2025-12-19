@@ -2,6 +2,8 @@ namespace Lastdew
 {
     public static class Uids
     {
+	    public const string GAME = "uid://dvqh38ovds5vf";
+	    
 		// Resource Databases
 		public const string CRAFTABLES = "uid://71lhgtyj3vnx";
 		public const string ALL_PC_DATAS = "uid://dckb2dlhbg7ny";

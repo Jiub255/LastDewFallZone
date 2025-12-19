@@ -10,12 +10,12 @@ namespace Lastdew
 	    private Camera Camera { get; set; }
         private ClickHandler ClickHandler { get; set; }
         private PcManager PcManager { get; set; }
-        private UiManager Ui { get; set; }
+        public UiManager Ui { get; private set; }
         private InventoryManager InventoryManager { get; set; }
         private List<BuildingData> Buildings { get; set; } = [];
         private TeamData TeamData { get; set; }
         private Level CurrentLevel { get; set; }
-        private Fader Fader { get; set; }
+        public Fader Fader { get; private set; }
         private AudioStreamPlayer MusicPlayer { get; set; }
         private AudioStreamMP3 StartMenuSong { get; } = GD.Load<AudioStreamMP3>(Music.RELOAD_AND_REASSESS);
         
@@ -45,6 +45,7 @@ namespace Lastdew
 			MusicPlayer.Stream = StartMenuSong;
 			MusicPlayer.Play();
 			
+			// TODO: These should be run again in StartNewGame() and Load(), since 
 			PcManager.Initialize(TeamData);
 			Ui.ConnectSignals(TeamData, InventoryManager);
 
@@ -77,7 +78,7 @@ namespace Lastdew
 			Ui.MainMenu.OnNewGame += StartNewGame;
 			Ui.MainMenu.OnSaveGame += Save;
 			Ui.MainMenu.OnLoadGame += Load;
-			Ui.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
+		//	Ui.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging += StartScavenging;
 			Ui.MainMenu.OnReturnToBase += ReturnToBase;
 			PcManager.OnLooted += Ui.Hud.AddToQueue;
@@ -99,7 +100,7 @@ namespace Lastdew
 			Ui.MainMenu.OnNewGame -= StartNewGame;
 			Ui.MainMenu.OnSaveGame -= Save;
 			Ui.MainMenu.OnLoadGame -= Load;
-			Ui.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
+			//Ui.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging -= StartScavenging;
 			Ui.MainMenu.OnReturnToBase -= ReturnToBase;
 			PcManager.OnLooted -= Ui.Hud.AddToQueue;
@@ -164,7 +165,8 @@ namespace Lastdew
 			await ToSignal(Fader, Fader.SignalName.OnFadeOut);
 			
 			CurrentLevel?.QueueFree();
-			
+			// TODO: Something going wrong here when starting, then quitting to menu, then starting again.
+			// Freezes here.
 			CurrentLevel = (Level)levelScene.Instantiate();
 			CallDeferred(Node.MethodName.AddChild, CurrentLevel);
 			CurrentLevel.Initialize(buildingSaveDatas, scavengingLevel);

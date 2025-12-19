@@ -46,18 +46,18 @@
 			"title": "NEXT",
 			"tasks": [
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
-				"31f7804f-979d-4e67-9d76-db0049a9350a",
 				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
 				"66e4ae30-0330-4cea-babb-74aab3314288",
-				"08d16a6c-21ec-47e7-a4ba-7ada6b86cf25"
+				"08d16a6c-21ec-47e7-a4ba-7ada6b86cf25",
+				"1ec06165-4ae1-479b-9497-b5e0e2a0f7bb"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
-				"8072d314-17fe-4500-b377-2417801e123b"
+				"4fdb6e6b-7ea2-4e17-815a-ead2ebb35ab5",
+				"fe8039ee-236a-4f62-babb-9a9913f3b71a"
 			]
 		},
 		{
@@ -136,7 +136,11 @@
 				"1ad94904-95a3-4636-902c-f95b2f58937c",
 				"39f70893-7bf3-49cc-897d-94f26e2ed5a2",
 				"65d71ccf-319b-48db-82b8-2d24105e2194",
-				"0ed546e7-5fc5-4bbc-a424-a0e633149ca0"
+				"0ed546e7-5fc5-4bbc-a424-a0e633149ca0",
+				"66ed35a6-82b7-4c74-8b08-8995b1900c04",
+				"31f7804f-979d-4e67-9d76-db0049a9350a",
+				"8072d314-17fe-4500-b377-2417801e123b",
+				"8cb27695-e34e-49c0-8e52-310ad9ebebf3"
 			]
 		},
 		{
@@ -1205,14 +1209,14 @@
 		{
 			"uuid": "8072d314-17fe-4500-b377-2417801e123b",
 			"title": "Use Godot signals instead of C# events",
-			"description": "Trying to unsubscribe from events in ExitTree() doesn't work for anything involving children, since they have all already exited the tree. And a lot of events involve connecting to child nodes. \nPlus, godot handles disconnection automatically, so less to worry about. Hopefully this will avoid memory leaks. \nCan't be done from non-variant classes or with non-variant parameters. Can inherit from RefCounted to make a plain c# class into a variant, but then the standard JSON serialization doesn't work.\nMight just learn to serialize Variants in the save system to allow for more signals instead of events.\nProblem is sending signals from c# classes that already inherit some other c# thing, like IEnumberable<T>. Then can't just inherit RefCounted. There's probably some workaround. \nNevermind, IEnumerable is an interface so I can inherit both RefCounted and IEnumerable. Not sure if there's other c# classes I've inherited that could cause problems.",
+			"description": "Actually, I don't think this is necessary at all. When ExitTree is called, all children have left the tree, but are (possibly?) still in memory. Depends on if queuefree goes up or down the tree I guess. Might be okay to just use c# events and go back to the old save system. Maybe just use signals for when its hard to unsubscribe properly. \n\nTrying to unsubscribe from events in ExitTree() doesn't work for anything involving children, since they have all already exited the tree. And a lot of events involve connecting to child nodes. \nPlus, godot handles disconnection automatically, so less to worry about. Hopefully this will avoid memory leaks. \nCan't be done from non-variant classes or with non-variant parameters. Can inherit from RefCounted to make a plain c# class into a variant, but then the standard JSON serialization doesn't work.\nMight just learn to serialize Variants in the save system to allow for more signals instead of events.\nProblem is sending signals from c# classes that already inherit some other c# thing, like IEnumberable<T>. Then can't just inherit RefCounted. There's probably some workaround. \nNevermind, IEnumerable is an interface so I can inherit both RefCounted and IEnumerable. Not sure if there's other c# classes I've inherited that could cause problems.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
 		{
 			"uuid": "08d16a6c-21ec-47e7-a4ba-7ada6b86cf25",
 			"title": "Connect Craftable.StatsNeededToCraft to crafting/building systems",
-			"description": "",
+			"description": "How will it work? The maximum of each stat from the pcs? Or additive? \nAnd natural base stat or with equipment? I guess with equipment because otherwise why have stat boosts.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1263,6 +1267,34 @@
 			"title": "Game breaks when saving, quitting to start menu, then loading again",
 			"description": "Getting \"signal already connected\" errors. Not sure what else is happening.\nMight need to shut things down better on quit to start menu.\nI think it's from running Ui.Initialize again. How to fix that?\nCould do checks before each signal connection.\nOr could queue free and reinstantiate UiManager at exit/start.\n\nCould separate ConnectSignal out from Initialize, and call that in ready. Tried that, didn't help. Got rid of the already connected signal errors though.\nStepping through it in debug, looks like the problem happens right after the await fade out part of Game.SetupLevel().\nI don't see what could be causing a problem here though. CurrentLevel?.QueueFree()? Instantiating the new one? No idea.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "1ec06165-4ae1-479b-9497-b5e0e2a0f7bb",
+			"title": "Make much bigger, better looking map",
+			"description": "Even just grab one online as a placeholder for now.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "4fdb6e6b-7ea2-4e17-815a-ead2ebb35ab5",
+			"title": "Put BuildingData in Inventory?",
+			"description": "",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "8cb27695-e34e-49c0-8e52-310ad9ebebf3",
+			"title": "Clean up Game.cs ready/intialization stuff",
+			"description": "Need to figure out exactly what needs to be done in ready, in StartNewGame, and in Load. And make sure ExitToStartMenu does what it should. \nMight be easier to destroy everything and reload when exiting to menu.\nDid that, made a highest level Program class that just instantiates Game, connects to the ExitToStartMenu signal, and queue frees, then reinstantiates Game on that signal.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "fe8039ee-236a-4f62-babb-9a9913f3b71a",
+			"title": "Split ClickHandler into two subclasses, one for normal, one for building",
+			"description": "Control them through Camera, using unhandled input and process. Keep common stuff in ClickHandler base class. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

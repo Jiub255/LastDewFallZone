@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpvyox8j34ruc"]
+[gd_scene load_steps=7 format=3 uid="uid://dpvyox8j34ruc"]
 
 [ext_resource type="Script" uid="uid://2eudmbqbfyjm" path="res://game_objects/buildable/Building3D.cs" id="1_0a6ko"]
 
@@ -10,6 +10,11 @@ albedo_color = Color(0.196975, 0.140346, 0.0482659, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h0v7v"]
 size = Vector3(4, 3, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0v7v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0a6ko"]
+material = SubResource("StandardMaterial3D_h0v7v")
 
 [node name="TestBuilding" type="Node3D"]
 script = ExtResource("1_0a6ko")
@@ -26,3 +31,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0a6ko")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_h0v7v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+mesh = SubResource("BoxMesh_0a6ko")

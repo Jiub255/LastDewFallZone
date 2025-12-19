@@ -40,7 +40,6 @@ namespace Lastdew
 	        }
 	        else if (Input.IsActionJustReleased(InputNames.MAP_MENU))
 	        {
-		        this.PrintDebug($"Map menu pressed");
 		        ToggleMapMenu();
 	        }
         }

@@ -12,11 +12,11 @@ Name = "Metal"
 Description = "Made from supernovas."
 Icon = ExtResource("1_pol43")
 RecipeCosts = Dictionary[int, int]({
-5170883165870291646: 3
+8896933309009772036: 1
 })
-RequiredBuildings = Array[int]([2503720807621627471])
+RequiredBuildings = Array[int]([])
 ScrapResults = Dictionary[int, int]({})
 StatsNeededToCraft = Dictionary[int, int]({
-2: 1
+2: 2
 })
 metadata/_custom_type_script = "uid://qdbtt4hu4417"

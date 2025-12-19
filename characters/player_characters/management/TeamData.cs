@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -74,6 +74,34 @@ namespace Lastdew
 		public void ClearPcs()
 		{
 			_pcs.Clear();
+		}
+
+		public Dictionary<StatType, int> MaximumStats
+		{
+			get
+			{
+				Dictionary<StatType, int> maxStats = new()
+				{
+					{ StatType.ATTACK, 0 },
+					{ StatType.DEFENSE, 0 },
+					{ StatType.ENGINEERING, 0 },
+					{ StatType.FARMING, 0 },
+					{ StatType.MEDICAL, 0 },
+					{ StatType.SCAVENGING, 0 }
+				};
+			
+				foreach (PlayerCharacter pc in _pcs)
+				{
+					foreach (StatType statType in maxStats.Keys)
+					{
+						if (pc.StatManager.GetStatByType(statType).Value > maxStats[statType])
+						{
+							maxStats[statType] = pc.StatManager.GetStatByType(statType).Value;
+						}
+					}
+				}
+				return maxStats;
+			}
 		}
 
 		private void TurnOnPcSelectedIndicator(PlayerCharacter pc)

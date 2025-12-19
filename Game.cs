@@ -48,7 +48,7 @@ namespace Lastdew
 
 			foreach (PcData data in Databases.PcDatas.PcDatas.Values)
 			{
-				DefaultPcList.Add(new PcSaveData(data.GetUid()));
+				DefaultPcList.Add(new PcSaveData(data));
 			}
 
 			SubscribeToEvents();

@@ -73,9 +73,9 @@ namespace Lastdew
 		{
 			Hud.Initialize(teamData);
 			CharacterMenu.Initialize(teamData);
-			CraftingMenu.Initialize(teamData.Inventory);
+			CraftingMenu.Initialize(teamData);
 			MapMenu.Initialize(teamData);
-			BuildMenu.Initialize(teamData.Inventory, camera);
+			BuildMenu.Initialize(teamData, camera);
 		}
 
         /// <summary>

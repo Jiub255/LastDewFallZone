@@ -22,7 +22,7 @@ namespace Lastdew
 			pc.Equip(this);
 		}
 
-		public bool MeetsStatRequirements(PcStatManager stats)
+		public bool HasStatsToEquip(PcStatManager stats)
 		{
 			return StatsNeededToEquip
 				.All((kvp) => stats.GetStatByType(kvp.Key).Value >= kvp.Value);

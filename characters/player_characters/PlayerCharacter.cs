@@ -144,7 +144,7 @@ namespace Lastdew
 		
 		public void Equip(Equipment equipment)
 		{
-			if (!equipment.MeetsStatRequirements(StatManager))
+			if (!equipment.HasStatsToEquip(StatManager))
 			{
 				return;
 			}

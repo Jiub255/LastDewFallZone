@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Godot.Collections;
 
 namespace Lastdew
 {
@@ -30,7 +29,7 @@ namespace Lastdew
 		/// Stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Array<long> RequiredBuildings { get; private set; } = [];
+		public Godot.Collections.Array<long> RequiredBuildings { get; private set; } = [];
 
 		/// <summary>
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
@@ -54,6 +53,18 @@ namespace Lastdew
 				All(buildings
 					.Select((data) => data.BuildingUid)
 					.Contains);
+		}
+
+		public bool HasStatsToCraft(Dictionary<StatType, int> maxStats)
+		{
+			foreach ((StatType type, int value) in StatsNeededToCraft)
+			{
+				if (maxStats[type] < value)
+				{
+					return false;
+				}
+			}
+			return true;
 		}
 
 		public void Purchase(InventoryManager items)

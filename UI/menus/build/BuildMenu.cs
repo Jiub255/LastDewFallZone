@@ -9,7 +9,7 @@ namespace Lastdew
 		public delegate void OnBuildEventHandler(Building3D building);
 		
 		private Building CurrentBuilding { get; set; }
-		private InventoryManager Inventory { get; set; }
+		private TeamData TeamData { get; set; }
 		private static PackedScene ButtonScene => GD.Load<PackedScene>(Uids.BUILDING_BUTTON);
 		private GridContainer ButtonParent { get; set; }
 		private List<BuildingButton> Buttons { get; } = [];
@@ -45,9 +45,9 @@ namespace Lastdew
 				Callable.From(Setup));
 		}
 		
-		public void Initialize(InventoryManager inventory, Camera camera)
+		public void Initialize(TeamData teamData, Camera camera)
 		{
-			Inventory = inventory;
+			TeamData = teamData;
 			Camera = camera;
 			ButtonParent = GetNode<GridContainer>("%Buttons");
 			Description = GetNode<Label>("%Description");
@@ -62,8 +62,13 @@ namespace Lastdew
 			List<Building> unbuildables = [];
 			foreach (Building building in Databases.Craftables.Buildings.Values)
 			{
-				if (!building.HasRequiredBuildings(Inventory.Buildings)) continue;
-				if (building.HasEnoughMaterialsToBuild(Inventory))
+				if (!building.HasRequiredBuildings(TeamData.Inventory.Buildings) ||
+				    !building.HasStatsToCraft(TeamData.MaximumStats))
+				{
+					continue;
+				}
+				
+				if (building.HasEnoughMaterialsToBuild(TeamData.Inventory))
 				{
 					SetupButton(building);
 				}
@@ -104,8 +109,7 @@ namespace Lastdew
 		{
 			CurrentBuilding = building;
 			Description.Text = FormatDescription(building);
-			BuildButton.Disabled = !building.HasRequiredBuildings(Inventory.Buildings) ||
-			                       !building.HasEnoughMaterialsToBuild(Inventory);
+			BuildButton.Disabled = !building.HasEnoughMaterialsToBuild(TeamData.Inventory);
 		}
 
 		private void BuildInstance()

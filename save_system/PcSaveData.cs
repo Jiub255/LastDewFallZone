@@ -52,6 +52,22 @@ namespace Lastdew
 			pc.StatManager.MedicalBaseValue,
 			pc.StatManager.ScavengingBaseValue) {}
 
+		public PcSaveData(PcData data) : this(
+			data.GetUid(),
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			data.Attack,
+			data.Defense,
+			data.Engineering,
+			data.Farming,
+			data.Medical,
+			data.Scavenging
+			) {}
+
 		public void PrintData()
 		{
 			//PcDataUid.PrintData();

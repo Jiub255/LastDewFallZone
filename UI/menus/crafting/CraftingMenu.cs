@@ -12,7 +12,7 @@ namespace Lastdew
 		private SelectedCraftableDisplay SelectedDisplay { get; set; }
 		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(Uids.CRAFTABLE_BUTTON);
 		private List<CraftableButton> Buttons { get; } = [];
-		private InventoryManager Inventory { get; set; }
+		private TeamData TeamData { get; set; }
 
 		public override void _Ready()
 		{
@@ -39,10 +39,10 @@ namespace Lastdew
 				Callable.From(Setup));
 		}
 		
-		public void Initialize(InventoryManager inventory)
+		public void Initialize(TeamData teamData)
 		{
-			Inventory = inventory;
-			SelectedDisplay.Initialize(inventory);
+			TeamData = teamData;
+			SelectedDisplay.Initialize(teamData.Inventory);
 		}
 
 		public void Setup()
@@ -70,7 +70,9 @@ namespace Lastdew
 
 		private void AddButtonToGrid(Item item, GridContainer grid)
 		{
-			if (item.RecipeCosts.Count == 0 || !item.HasRequiredBuildings(Inventory.Buildings))
+			if (item.RecipeCosts.Count == 0 ||
+			    !item.HasRequiredBuildings(TeamData.Inventory.Buildings) ||
+			    !item.HasStatsToCraft(TeamData.MaximumStats))
 			{
 				return;
 			}

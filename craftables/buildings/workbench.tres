@@ -16,4 +16,6 @@ RecipeCosts = Dictionary[int, int]({
 })
 RequiredBuildings = Array[int]([])
 ScrapResults = Dictionary[int, int]({})
-StatsNeededToCraft = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({
+2: 2
+})

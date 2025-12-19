@@ -9,11 +9,9 @@ namespace Lastdew
 	{
 		private const string SAVE_PATH = "user://savegame.save";
 		
-		public static void Save(
-			InventoryManager inventoryManager,
-			TeamData teamData)
+		public static void Save(TeamData teamData)
 		{
-			SaveData saveData = GatherSaveData(inventoryManager, teamData);
+			SaveData saveData = GatherSaveData(teamData);
 			
 			GD.Print("Saving");
 			saveData.PrintData();
@@ -64,13 +62,11 @@ namespace Lastdew
 			return result;
 		}
 
-		private static SaveData GatherSaveData(
-			InventoryManager inventoryManager,
-			TeamData teamData)
+		private static SaveData GatherSaveData(TeamData teamData)
 		{
-			Dictionary<long, int> inventory = inventoryManager.GatherSaveData();
+			Dictionary<long, int> inventory = teamData.Inventory.GatherSaveData();
 			List<PcSaveData> pcSaveDatas = teamData.GatherSaveData();
-			return new SaveData(inventory, pcSaveDatas, ConvertFromBuildingDatas(inventoryManager.Buildings));;
+			return new SaveData(inventory, pcSaveDatas, ConvertFromBuildingDatas(teamData.Inventory.Buildings));;
 		}
 
 		private static List<BuildingSaveData> ConvertFromBuildingDatas(

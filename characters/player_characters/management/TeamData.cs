@@ -41,7 +41,8 @@ namespace Lastdew
 			}
 		}
 		public List<PcSaveData> UnusedPcDatas { get; private set; } = [];
-
+		public InventoryManager Inventory { get; } = new();
+		
 
 		public void SelectPc(PlayerCharacter pc)
 		{

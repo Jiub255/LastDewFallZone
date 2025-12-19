@@ -10,7 +10,6 @@ namespace Lastdew
 	    private Camera Camera { get; set; }
         private PcManager PcManager { get; set; }
         public UiManager Ui { get; private set; }
-        private InventoryManager InventoryManager { get; set; }
         private TeamData TeamData { get; set; }
         private Level CurrentLevel { get; set; }
         public Fader Fader { get; private set; }
@@ -35,7 +34,6 @@ namespace Lastdew
 			PcManager = GetNode<PcManager>("%PcManager");
 			Ui = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
-			InventoryManager = new InventoryManager();
 			Fader = GetNode<Fader>("%Fader");
 			
 			MusicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
@@ -44,7 +42,7 @@ namespace Lastdew
 			
 			// TODO: These should be run again in StartNewGame() and Load(), since 
 			PcManager.Initialize(TeamData);
-			Ui.ConnectSignals(TeamData, InventoryManager);
+			Ui.ConnectSignals(TeamData);
 
 			GetTree().Paused = true;
 
@@ -110,33 +108,33 @@ namespace Lastdew
 		private async Task StartNewGame()
 		{
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			Ui.Initialize(TeamData, InventoryManager, Camera);
-			await SetupLevel(homeBaseScene, DefaultPcList, InventoryManager.Buildings);
+			Ui.Initialize(TeamData, Camera);
+			await SetupLevel(homeBaseScene, DefaultPcList, TeamData.Inventory.Buildings);
 			Ui.ChangeState(new GameStateHome());
 		}
 
 		private async Task StartCombatTest()
 		{
 			PackedScene combatTestScene = GD.Load<PackedScene>("uid://dr032kqvigccx");
-			Ui.Initialize(TeamData, InventoryManager, Camera);
+			Ui.Initialize(TeamData, Camera);
 			await SetupLevel(combatTestScene, DefaultPcList, []);
 			Ui.ChangeState(new GameStateHome());
 		}
 
 		private void Save()
 		{
-			SaveSystem.Save(InventoryManager, TeamData);
+			SaveSystem.Save(TeamData);
 		}
 
 		private async Task Load()
 		{
 			SaveData saveData = SaveSystem.Load();
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			InventoryManager.Buildings = SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas);
-			Ui.Initialize(TeamData, InventoryManager, Camera);
+			TeamData.Inventory.Buildings = SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas);
+			Ui.Initialize(TeamData, Camera);
 			// LoadInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
 			// can initialize first.
-			await SetupLevel(homeBaseScene, saveData.PcSaveDatas, InventoryManager.Buildings);
+			await SetupLevel(homeBaseScene, saveData.PcSaveDatas, TeamData.Inventory.Buildings);
 			FillInventory(saveData.Inventory);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -146,7 +144,7 @@ namespace Lastdew
 			Craftables craftables = Databases.Craftables;
 			foreach (KeyValuePair<long, int> kvp in inventory)
 			{
-				InventoryManager.AddItems((Item)craftables[kvp.Key], kvp.Value);
+				TeamData.Inventory.AddItems((Item)craftables[kvp.Key], kvp.Value);
 			}
 		}
 
@@ -169,7 +167,7 @@ namespace Lastdew
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			PcManager.SpawnPcs(InventoryManager, pcSaveDatas);
+			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas);
 			Ui.Setup();
 			
 			
@@ -203,17 +201,17 @@ namespace Lastdew
 			TeamData.UnusedPcDatas.Clear();
 			
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			await SetupLevel(homeBaseScene, pcSaveDatas, InventoryManager.Buildings);
+			await SetupLevel(homeBaseScene, pcSaveDatas, TeamData.Inventory.Buildings);
 			Ui.ChangeState(new GameStateHome());
         }
 
         private void PlaceBuilding(BuildingData data)
         {
-	        InventoryManager.Buildings.Add(data);
+	        TeamData.Inventory.Buildings.Add(data);
 			CurrentLevel.NavMesh.BakeNavigationMesh();
 	        
 	        Building building = Databases.Craftables.Buildings[data.BuildingUid];
-	        building.Purchase(InventoryManager);
+	        building.Purchase(TeamData.Inventory);
         }
 	}
 }

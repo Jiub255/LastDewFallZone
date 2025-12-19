@@ -18,7 +18,7 @@ namespace Lastdew
 		private bool DeselectHeld { get; set; }
 		private Vector2 StartingMousePosition { get; set; }
 
-	public void Initialize(TeamData teamData)
+		public void Initialize(TeamData teamData)
 		{
 			Viewport = GetViewport();
 			TeamData = teamData;

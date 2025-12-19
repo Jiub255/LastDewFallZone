@@ -59,23 +59,23 @@ namespace Lastdew
 	        CurrentState.ProcessState();
         }
 
-        public void ConnectSignals(TeamData teamData, InventoryManager inventoryManager)
+        public void ConnectSignals(TeamData teamData)
         {
-	        BuildMenu.ConnectSignals(inventoryManager);
-	        CraftingMenu.ConnectSignals(inventoryManager);
-	        CharacterMenu.ConnectSignals(teamData, inventoryManager);
+	        BuildMenu.ConnectSignals(teamData.Inventory);
+	        CraftingMenu.ConnectSignals(teamData.Inventory);
+	        CharacterMenu.ConnectSignals(teamData);
         }
 		
         /// <summary>
         /// Only called once in beginning
         /// </summary>
-		public void Initialize(TeamData teamData, InventoryManager inventoryManager, Camera camera)
+		public void Initialize(TeamData teamData, Camera camera)
 		{
 			Hud.Initialize(teamData);
-			CharacterMenu.Initialize(teamData, inventoryManager);
-			CraftingMenu.Initialize(inventoryManager);
+			CharacterMenu.Initialize(teamData);
+			CraftingMenu.Initialize(teamData.Inventory);
 			MapMenu.Initialize(teamData);
-			BuildMenu.Initialize(inventoryManager, camera);
+			BuildMenu.Initialize(teamData.Inventory, camera);
 		}
 
         /// <summary>

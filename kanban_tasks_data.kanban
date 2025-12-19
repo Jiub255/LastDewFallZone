@@ -140,7 +140,8 @@
 				"8072d314-17fe-4500-b377-2417801e123b",
 				"8cb27695-e34e-49c0-8e52-310ad9ebebf3",
 				"fe8039ee-236a-4f62-babb-9a9913f3b71a",
-				"4fdb6e6b-7ea2-4e17-815a-ead2ebb35ab5"
+				"4fdb6e6b-7ea2-4e17-815a-ead2ebb35ab5",
+				"e0fc65db-39bf-4570-926b-0759f5e6d83a"
 			]
 		},
 		{
@@ -1216,7 +1217,7 @@
 		{
 			"uuid": "08d16a6c-21ec-47e7-a4ba-7ada6b86cf25",
 			"title": "Connect Craftable.StatsNeededToCraft to crafting/building systems",
-			"description": "How will it work? The maximum of each stat from the pcs? Or additive? \nAnd natural base stat or with equipment? I guess with equipment because otherwise why have stat boosts.",
+			"description": "How will it work? The maximum of each stat from the pcs? Or additive? \nAnd natural base stat or with equipment? I guess with equipment because otherwise why have stat boosts.\nGonna make a method on TeamData that returns the highest of each stat in a dict.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1295,6 +1296,13 @@
 			"title": "Split ClickHandler into two subclasses, one for normal, one for building",
 			"description": "Control them through Camera, using unhandled input and process. Keep common stuff in ClickHandler base class. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "e0fc65db-39bf-4570-926b-0759f5e6d83a",
+			"title": "Put inventory in TeamData?",
+			"description": "Both are things related to the whole team, and they both get saved and passed around a lot. Might make things cleaner.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

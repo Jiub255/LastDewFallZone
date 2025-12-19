@@ -6,7 +6,6 @@ namespace Lastdew
 	public partial class CharacterMenu : Menu
 	{
 		private TeamData TeamData { get; set; }
-		private InventoryManager InventoryManager { get; set; }
 		private GridContainer ItemsGrid { get; set; }
 		private SelectedItemPanel SelectedItemPanel { get; set; }
 		private PackedScene ItemButtonScene { get; set; } = GD.Load<PackedScene>(Uids.ITEM_BUTTON);
@@ -32,18 +31,17 @@ namespace Lastdew
 			}
 		}
 
-		public void ConnectSignals(TeamData teamData, InventoryManager inventory)
+		public void ConnectSignals(TeamData teamData)
 		{
-			inventory.Connect(InventoryManager.SignalName.OnInventoryChanged,
+			teamData.Inventory.Connect(InventoryManager.SignalName.OnInventoryChanged,
 				Callable.From(PopulateInventoryUi));
 			CharacterDisplay.ConnectSignals(teamData);
 			EquipmentDisplay.ConnectSignals(teamData);
 		}
 	
-		public void Initialize(TeamData teamData, InventoryManager inventoryManager)
+		public void Initialize(TeamData teamData)
 		{
 			TeamData = teamData;
-			InventoryManager = inventoryManager;
 			
 			// mixed setup/init in these initialize methods
 			CharacterDisplay.Initialize(teamData);
@@ -87,12 +85,12 @@ namespace Lastdew
 	
 		private void SetupButtons()
 		{
-			foreach (KeyValuePair<UsableItem, int> item in InventoryManager.UsableItems)
+			foreach (KeyValuePair<UsableItem, int> item in TeamData.Inventory.UsableItems)
 			{
 				SetupButton(item.Key, item.Value);
 			}
 
-			foreach (KeyValuePair<Equipment, int> equipment in InventoryManager.Equipment)
+			foreach (KeyValuePair<Equipment, int> equipment in TeamData.Inventory.Equipment)
 			{
 				SetupButton(equipment.Key, equipment.Value);
 			}

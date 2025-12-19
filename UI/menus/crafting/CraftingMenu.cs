@@ -41,8 +41,8 @@ namespace Lastdew
 		
 		public void Initialize(InventoryManager inventory)
 		{
-			SelectedDisplay.Initialize(inventory);
 			Inventory = inventory;
+			SelectedDisplay.Initialize(inventory);
 		}
 
 		public void Setup()
@@ -70,10 +70,6 @@ namespace Lastdew
 
 		private void AddButtonToGrid(Item item, GridContainer grid)
 		{
-			// TODO: Not sure what to do with items that don't have the required buildings yet.
-			// Probably just don't show them. Can show items you have the buildings/stats for, grayed
-			// out if you don't have enough materials. Same for build menu.
-			
 			if (item.RecipeCosts.Count == 0 || !item.HasRequiredBuildings(Inventory.Buildings))
 			{
 				return;

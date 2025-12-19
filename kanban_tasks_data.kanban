@@ -179,15 +179,15 @@
 				"2bc7f9cf-7a0e-48cb-b4af-6884baf71dfc",
 				"7ba5e7e5-74bf-40d3-aaa1-96f36c3a39ae",
 				"d98416df-4541-4af7-9ef7-c68f9945263e",
-				"222d537e-4518-49ad-ab18-d77514631a14"
+				"222d537e-4518-49ad-ab18-d77514631a14",
+				"6325288b-1526-4b3f-a1f2-c196a4183edc"
 			]
 		},
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"8c8729bd-b42c-4305-b2e8-dca50b070672",
-				"6325288b-1526-4b3f-a1f2-c196a4183edc"
+				"8c8729bd-b42c-4305-b2e8-dca50b070672"
 			]
 		},
 		{
@@ -1265,7 +1265,7 @@
 		{
 			"uuid": "6325288b-1526-4b3f-a1f2-c196a4183edc",
 			"title": "Game breaks when saving, quitting to start menu, then loading again",
-			"description": "Getting \"signal already connected\" errors. Not sure what else is happening.\nMight need to shut things down better on quit to start menu.\nI think it's from running Ui.Initialize again. How to fix that?\nCould do checks before each signal connection.\nOr could queue free and reinstantiate UiManager at exit/start.\n\nCould separate ConnectSignal out from Initialize, and call that in ready. Tried that, didn't help. Got rid of the already connected signal errors though.\nStepping through it in debug, looks like the problem happens right after the await fade out part of Game.SetupLevel().\nI don't see what could be causing a problem here though. CurrentLevel?.QueueFree()? Instantiating the new one? No idea.",
+			"description": "FIXED by making top level Program class that deletes then reinstantiates Game on pushing quit to menu.\n\nGetting \"signal already connected\" errors. Not sure what else is happening.\nMight need to shut things down better on quit to start menu.\nI think it's from running Ui.Initialize again. How to fix that?\nCould do checks before each signal connection.\nOr could queue free and reinstantiate UiManager at exit/start.\n\nCould separate ConnectSignal out from Initialize, and call that in ready. Tried that, didn't help. Got rid of the already connected signal errors though.\nStepping through it in debug, looks like the problem happens right after the await fade out part of Game.SetupLevel().\nI don't see what could be causing a problem here though. CurrentLevel?.QueueFree()? Instantiating the new one? No idea.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},

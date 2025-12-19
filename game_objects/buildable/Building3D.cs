@@ -6,6 +6,7 @@ namespace Lastdew
 	{
 		private const float RADIUS_INCREASE = 1f;
 		
+		private bool _done;
 		private bool _overlapping;
 		
 		private MeshInstance3D MeshInstance { get; set; }
@@ -30,6 +31,12 @@ namespace Lastdew
 
 		public override void _Ready()
 		{
+			if (!HasNode("%MeshInstance3D"))
+			{
+				_done = true;
+				return;
+			}
+			
 			ProcessMode = ProcessModeEnum.Always;
 			MeshInstance = GetNode<MeshInstance3D>("%MeshInstance3D");
 			
@@ -38,6 +45,8 @@ namespace Lastdew
 
 		public override void _PhysicsProcess(double delta)
 		{
+			if (_done) return;
+			
 			base._Process(delta);
 			Overlapping = IsOverlapping();
 		}
@@ -46,6 +55,7 @@ namespace Lastdew
 		{
 			MeshInstance.QueueFree();
 			ProcessMode = ProcessModeEnum.Inherit;
+			_done = true;
 		}
 
 		private void Setup()

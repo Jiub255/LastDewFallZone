@@ -47,16 +47,15 @@
 			"tasks": [
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
-				"66e4ae30-0330-4cea-babb-74aab3314288",
-				"08d16a6c-21ec-47e7-a4ba-7ada6b86cf25",
-				"1ec06165-4ae1-479b-9497-b5e0e2a0f7bb"
+				"66e4ae30-0330-4cea-babb-74aab3314288"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"4fdb6e6b-7ea2-4e17-815a-ead2ebb35ab5"
+				"08d16a6c-21ec-47e7-a4ba-7ada6b86cf25",
+				"1ec06165-4ae1-479b-9497-b5e0e2a0f7bb"
 			]
 		},
 		{
@@ -140,7 +139,8 @@
 				"31f7804f-979d-4e67-9d76-db0049a9350a",
 				"8072d314-17fe-4500-b377-2417801e123b",
 				"8cb27695-e34e-49c0-8e52-310ad9ebebf3",
-				"fe8039ee-236a-4f62-babb-9a9913f3b71a"
+				"fe8039ee-236a-4f62-babb-9a9913f3b71a",
+				"4fdb6e6b-7ea2-4e17-815a-ead2ebb35ab5"
 			]
 		},
 		{

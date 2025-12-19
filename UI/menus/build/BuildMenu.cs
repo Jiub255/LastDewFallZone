@@ -16,7 +16,6 @@ namespace Lastdew
 		private Label Description { get; set; }
 		private Camera Camera { get; set; }
 		private SfxButton BuildButton { get; set; }
-		private List<BuildingData> Buildings { get; set; }
 
 		public override void Open()
 		{
@@ -46,11 +45,10 @@ namespace Lastdew
 				Callable.From(Setup));
 		}
 		
-		public void Initialize(InventoryManager inventory, Camera camera, List<BuildingData> buildings)
+		public void Initialize(InventoryManager inventory, Camera camera)
 		{
 			Inventory = inventory;
 			Camera = camera;
-			Buildings = buildings;
 			ButtonParent = GetNode<GridContainer>("%Buttons");
 			Description = GetNode<Label>("%Description");
 			
@@ -64,7 +62,7 @@ namespace Lastdew
 			List<Building> unbuildables = [];
 			foreach (Building building in Databases.Craftables.Buildings.Values)
 			{
-				if (!building.HasRequiredBuildings(Buildings)) continue;
+				if (!building.HasRequiredBuildings(Inventory.Buildings)) continue;
 				if (building.HasEnoughMaterialsToBuild(Inventory))
 				{
 					SetupButton(building);
@@ -106,7 +104,7 @@ namespace Lastdew
 		{
 			CurrentBuilding = building;
 			Description.Text = FormatDescription(building);
-			BuildButton.Disabled = !building.HasRequiredBuildings(Buildings) ||
+			BuildButton.Disabled = !building.HasRequiredBuildings(Inventory.Buildings) ||
 			                       !building.HasEnoughMaterialsToBuild(Inventory);
 		}
 

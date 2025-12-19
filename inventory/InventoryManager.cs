@@ -13,6 +13,8 @@ namespace Lastdew
 		public InventoryController<CraftingMaterial> CraftingMaterials { get; } = new();
 		public InventoryController<Equipment> Equipment { get; } = new();
 		public InventoryController<UsableItem> UsableItems { get; } = new();
+        public List<BuildingData> Buildings { get; set; } = [];
+		
 
 		public void AddItems(Item item, int amount)
 		{

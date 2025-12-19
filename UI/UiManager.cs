@@ -69,17 +69,13 @@ namespace Lastdew
         /// <summary>
         /// Only called once in beginning
         /// </summary>
-		public void Initialize(
-			TeamData teamData, 
-			InventoryManager inventoryManager, 
-			Camera camera,
-			List<BuildingData> buildings)
+		public void Initialize(TeamData teamData, InventoryManager inventoryManager, Camera camera)
 		{
 			Hud.Initialize(teamData);
 			CharacterMenu.Initialize(teamData, inventoryManager);
-			CraftingMenu.Initialize(inventoryManager, buildings);
+			CraftingMenu.Initialize(inventoryManager);
 			MapMenu.Initialize(teamData);
-			BuildMenu.Initialize(inventoryManager, camera, buildings);
+			BuildMenu.Initialize(inventoryManager, camera);
 		}
 
         /// <summary>

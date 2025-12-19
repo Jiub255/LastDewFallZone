@@ -10,7 +10,15 @@ namespace Lastdew
 		private Camera3D Camera { get; set; }
 	
 		public abstract void PhysicsProcess(double delta);
-		public abstract void UnhandledInput(InputEvent @event);
+		protected abstract void HandleClick();
+
+		public void UnhandledInput(InputEvent @event)
+		{
+			if (@event.IsLeftClick())
+			{
+				HandleClick();
+			}
+		}
 		
 		public override void _Ready()
 		{

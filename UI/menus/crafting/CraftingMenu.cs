@@ -12,7 +12,6 @@ namespace Lastdew
 		private SelectedCraftableDisplay SelectedDisplay { get; set; }
 		private PackedScene ButtonScene { get; } = GD.Load<PackedScene>(Uids.CRAFTABLE_BUTTON);
 		private List<CraftableButton> Buttons { get; } = [];
-		private List<BuildingData> Buildings { get; set; }
 		private InventoryManager Inventory { get; set; }
 
 		public override void _Ready()
@@ -40,9 +39,8 @@ namespace Lastdew
 				Callable.From(Setup));
 		}
 		
-		public void Initialize(InventoryManager inventory, List<BuildingData> buildings)
+		public void Initialize(InventoryManager inventory)
 		{
-			Buildings = buildings;
 			SelectedDisplay.Initialize(inventory);
 			Inventory = inventory;
 		}
@@ -76,7 +74,7 @@ namespace Lastdew
 			// Probably just don't show them. Can show items you have the buildings/stats for, grayed
 			// out if you don't have enough materials. Same for build menu.
 			
-			if (item.RecipeCosts.Count == 0 || !item.HasRequiredBuildings(Buildings))
+			if (item.RecipeCosts.Count == 0 || !item.HasRequiredBuildings(Inventory.Buildings))
 			{
 				return;
 			}

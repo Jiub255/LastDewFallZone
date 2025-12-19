@@ -9,16 +9,8 @@ namespace Lastdew
 		public event Action<MovementTarget> OnClickedMoveTarget;
 
 		public override void PhysicsProcess(double delta) {}
-		
-		public override void UnhandledInput(InputEvent @event)
-		{
-			if (@event.IsLeftClick())
-			{
-				HandleClick();
-			}
-		}
 
-		private void HandleClick()
+		protected override void HandleClick()
 		{
 			GodotObject godotObject = RaycastFromMouse();
 			if (godotObject is not CollisionObject3D collider)

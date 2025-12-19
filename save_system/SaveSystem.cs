@@ -11,10 +11,9 @@ namespace Lastdew
 		
 		public static void Save(
 			InventoryManager inventoryManager,
-			TeamData teamData,
-			List<BuildingData> buildingDatas)
+			TeamData teamData)
 		{
-			SaveData saveData = GatherSaveData(inventoryManager, teamData, buildingDatas);
+			SaveData saveData = GatherSaveData(inventoryManager, teamData);
 			
 			GD.Print("Saving");
 			saveData.PrintData();
@@ -67,12 +66,11 @@ namespace Lastdew
 
 		private static SaveData GatherSaveData(
 			InventoryManager inventoryManager,
-			TeamData teamData,
-			List<BuildingData> buildingDatas)
+			TeamData teamData)
 		{
 			Dictionary<long, int> inventory = inventoryManager.GatherSaveData();
 			List<PcSaveData> pcSaveDatas = teamData.GatherSaveData();
-			return new SaveData(inventory, pcSaveDatas, ConvertFromBuildingDatas(buildingDatas));;
+			return new SaveData(inventory, pcSaveDatas, ConvertFromBuildingDatas(inventoryManager.Buildings));;
 		}
 
 		private static List<BuildingSaveData> ConvertFromBuildingDatas(

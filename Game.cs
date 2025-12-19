@@ -11,7 +11,6 @@ namespace Lastdew
         private PcManager PcManager { get; set; }
         public UiManager Ui { get; private set; }
         private InventoryManager InventoryManager { get; set; }
-        private List<BuildingData> Buildings { get; set; } = [];
         private TeamData TeamData { get; set; }
         private Level CurrentLevel { get; set; }
         public Fader Fader { get; private set; }
@@ -111,40 +110,38 @@ namespace Lastdew
 		private async Task StartNewGame()
 		{
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			Ui.Initialize(TeamData, InventoryManager, Camera, Buildings);
-			await SetupLevel(homeBaseScene, DefaultPcList, Buildings);
+			Ui.Initialize(TeamData, InventoryManager, Camera);
+			await SetupLevel(homeBaseScene, DefaultPcList, InventoryManager.Buildings);
 			Ui.ChangeState(new GameStateHome());
 		}
 
 		private async Task StartCombatTest()
 		{
 			PackedScene combatTestScene = GD.Load<PackedScene>("uid://dr032kqvigccx");
-			Ui.Initialize(TeamData, InventoryManager, Camera, []);
+			Ui.Initialize(TeamData, InventoryManager, Camera);
 			await SetupLevel(combatTestScene, DefaultPcList, []);
 			Ui.ChangeState(new GameStateHome());
 		}
 
 		private void Save()
 		{
-			SaveSystem.Save(InventoryManager, TeamData, Buildings);
+			SaveSystem.Save(InventoryManager, TeamData);
 		}
 
 		private async Task Load()
 		{
 			SaveData saveData = SaveSystem.Load();
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			Buildings = SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas);
-			Ui.Initialize(TeamData, InventoryManager, Camera, Buildings);
+			InventoryManager.Buildings = SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas);
+			Ui.Initialize(TeamData, InventoryManager, Camera);
 			// LoadInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
-			// can initialize first. It doesn't need to be called before, since it sends an empty InventoryManager,
-			// and then LoadInventory just fills that object with items, so everyone who had it passed to them has
-			// the correct inventory.
-			await SetupLevel(homeBaseScene, saveData.PcSaveDatas, Buildings);
-			LoadInventory(saveData.Inventory);
+			// can initialize first.
+			await SetupLevel(homeBaseScene, saveData.PcSaveDatas, InventoryManager.Buildings);
+			FillInventory(saveData.Inventory);
 			Ui.ChangeState(new GameStateHome());
 		}
 
-		private void LoadInventory(Dictionary<long, int> inventory)
+		private void FillInventory(Dictionary<long, int> inventory)
 		{
 			Craftables craftables = Databases.Craftables;
 			foreach (KeyValuePair<long, int> kvp in inventory)
@@ -206,13 +203,13 @@ namespace Lastdew
 			TeamData.UnusedPcDatas.Clear();
 			
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			await SetupLevel(homeBaseScene, pcSaveDatas, Buildings);
+			await SetupLevel(homeBaseScene, pcSaveDatas, InventoryManager.Buildings);
 			Ui.ChangeState(new GameStateHome());
         }
 
         private void PlaceBuilding(BuildingData data)
         {
-	        Buildings.Add(data);
+	        InventoryManager.Buildings.Add(data);
 			CurrentLevel.NavMesh.BakeNavigationMesh();
 	        
 	        Building building = Databases.Craftables.Buildings[data.BuildingUid];

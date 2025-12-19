@@ -29,6 +29,10 @@ namespace Lastdew
 
 		public void Initialize(List<PlayerCharacter> unselectedPcs)
 		{
+			if (unselectedPcs.Count > 0)
+			{
+				Enable();
+			}
 			UnselectedPcs = unselectedPcs;
 			SetupDisplay(0);
 		}

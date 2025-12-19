@@ -83,7 +83,7 @@ namespace Lastdew
 			CraftableButton button = (CraftableButton)ButtonScene.Instantiate();
 			grid.CallDeferred(Node.MethodName.AddChild, button);
 			button.Initialize(item);
-			Connect(
+			button.Connect(
 				CraftableButton.SignalName.OnPressed,
 				Callable.From<Item>(SelectedDisplay.SetItem));
 		}

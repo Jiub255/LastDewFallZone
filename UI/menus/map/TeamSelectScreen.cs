@@ -74,6 +74,8 @@ namespace Lastdew
 				locationData.Image,
 				locationData.Description);
 			CharacterSelector.Initialize(UnselectedPcs);
+			AddButton.Disabled = false;
+			AddButton.Visible = true;
 			Show();
 		}
 

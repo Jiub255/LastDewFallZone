@@ -46,15 +46,17 @@
 			"title": "NEXT",
 			"tasks": [
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
-				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
-				"66e4ae30-0330-4cea-babb-74aab3314288"
+				"66e4ae30-0330-4cea-babb-74aab3314288",
+				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
+				"214fa122-5f85-4d1c-8dec-27c303c9b928"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"1ec06165-4ae1-479b-9497-b5e0e2a0f7bb"
+				"f0b1dadf-b33d-48ca-bb2d-e14b9bf8fcb2",
+				"69b8fcbf-8b21-4392-b567-ba2f58b7512f"
 			]
 		},
 		{
@@ -141,7 +143,8 @@
 				"fe8039ee-236a-4f62-babb-9a9913f3b71a",
 				"4fdb6e6b-7ea2-4e17-815a-ead2ebb35ab5",
 				"e0fc65db-39bf-4570-926b-0759f5e6d83a",
-				"08d16a6c-21ec-47e7-a4ba-7ada6b86cf25"
+				"08d16a6c-21ec-47e7-a4ba-7ada6b86cf25",
+				"1ec06165-4ae1-479b-9497-b5e0e2a0f7bb"
 			]
 		},
 		{
@@ -195,11 +198,11 @@
 			"uuid": "cb445b97-3f31-4e34-bb97-47dcecba7c8c",
 			"title": "TODO",
 			"tasks": [
-				"f0b1dadf-b33d-48ca-bb2d-e14b9bf8fcb2",
-				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
+				"684d0e69-4a6f-4978-8b41-63031ec66b19",
 				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
+				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
 				"083e4a4b-3d7a-48f5-820b-fe7a9b5afe3c",
@@ -208,9 +211,7 @@
 				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
-				"214fa122-5f85-4d1c-8dec-27c303c9b928",
-				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
-				"684d0e69-4a6f-4978-8b41-63031ec66b19"
+				"fd1829f1-cd5c-4463-8a31-88502fe3de44"
 			]
 		}
 	],
@@ -1302,6 +1303,13 @@
 			"uuid": "e0fc65db-39bf-4570-926b-0759f5e6d83a",
 			"title": "Put inventory in TeamData?",
 			"description": "Both are things related to the whole team, and they both get saved and passed around a lot. Might make things cleaner.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "fd1829f1-cd5c-4463-8a31-88502fe3de44",
+			"title": "Link up to OpenMaps and procedurally do the rest",
+			"description": "Have buildings filled in randomly with whatever theme/loot using procedural generation. Keep the building the same shape and size though. With enough business data, could even make fitting loot/decorations for each.\nNot realistic probably, but it'd be cool.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}

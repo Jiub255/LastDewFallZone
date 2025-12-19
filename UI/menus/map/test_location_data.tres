@@ -8,9 +8,11 @@
 script = ExtResource("1_4juxv")
 Name = "Test Location"
 Image = ExtResource("1_gp8w7")
-Description = "Test Description. LBkvjas;lasd asdvj a;lsdjv ;asjdv ;alsjdv ;alksdv;alskjdv;asjd vsadvjlsdjvklsjdv slkdv.
-
-James: James
-
-Jaime: Also James"
+Description = "Test Description. dot/modules/mono/glue/GodotSharp/GodotSharp/Core/NativeInterop/ExceptionUtils.cs:113 - System.NullReferenceException: Object reference not set to an instance of an object.
+  ERROR:    at Lastdew.MaterialAmountEditor.set_CraftingMaterial(Int64 value) in /home/mike/godot/projects/lastdew-fallzone/addons/resource_editor/resource_editor_popup/MaterialAmountEditor.cs:line 20
+  ERROR:    at Lastdew.MaterialAmountEditor.RestoreGodotObjectData(GodotSerializationInfo info) in /home/mike/godot/projects/lastdew-fallzone/.godot/mono/temp/obj/Debug/Godot.SourceGenerators/Godot.SourceGenerators.ScriptSerializationGenerator/Lastdew.MaterialAmountEditor_ScriptSerialization.generated.cs:line 26
+  ERROR:    at Godot.Bridge.CSharpInstanceBridge.DeserializeState(IntPtr godotObjectGCHandle, godot_dictionary* propertiesState, godot_dictionary* signalEventsState) in /root/godot/modules/mono/glue/GodotSharp/GodotSharp/Core/Bridge/CSharpInstanceBridge.cs:line 255
+  ERROR: /root/godot/modules/mono/glue/GodotSharp/GodotSharp/Core/NativeInterop/ExceptionUtils.cs:113 - System.NullReferenceException: Object reference not set to an instance of an object.
+  ERROR:    at Lastdew.MaterialAmountEditor.set_CraftingMaterial(Int64 value) in /home/mike/godot/projects/lastdew-fallzone/addons/resource_editor/resource_editor_popup/MaterialAmountEditor.cs:line 20
+  ERROR:    at Lastdew.MaterialAmountEditor.RestoreGodotObjectData(GodotSerializationInfo info) in /home/mike/godot/projects/lastdew-fallzone/.godot/mono/temp/obj/Debug/Godot.SourceGenerators/Godot.SourceGenerators.ScriptSerializationGenerator/Lastdew.MaterialAmountEditor_ScriptSerialization.genera"
 Scene = ExtResource("2_n505e")

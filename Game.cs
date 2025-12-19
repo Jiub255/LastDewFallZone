@@ -40,7 +40,6 @@ namespace Lastdew
 			MusicPlayer.Stream = StartMenuSong;
 			MusicPlayer.Play();
 			
-			// TODO: These should be run again in StartNewGame() and Load(), since 
 			PcManager.Initialize(TeamData);
 			Ui.ConnectSignals(TeamData);
 
@@ -73,7 +72,6 @@ namespace Lastdew
 			Ui.MainMenu.OnNewGame += StartNewGame;
 			Ui.MainMenu.OnSaveGame += Save;
 			Ui.MainMenu.OnLoadGame += Load;
-		//	Ui.MainMenu.Exit.OnToStartMenu += ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging += StartScavenging;
 			Ui.MainMenu.OnReturnToBase += ReturnToBase;
 			PcManager.OnLooted += Ui.Hud.AddToQueue;
@@ -95,7 +93,6 @@ namespace Lastdew
 			Ui.MainMenu.OnNewGame -= StartNewGame;
 			Ui.MainMenu.OnSaveGame -= Save;
 			Ui.MainMenu.OnLoadGame -= Load;
-			//Ui.MainMenu.Exit.OnToStartMenu -= ExitToStartMenu;
 			Ui.MapMenu.OnStartScavenging -= StartScavenging;
 			Ui.MainMenu.OnReturnToBase -= ReturnToBase;
 			PcManager.OnLooted -= Ui.Hud.AddToQueue;
@@ -176,15 +173,6 @@ namespace Lastdew
 			
 			Fader.FadeIn();
 		}
-        
-        private void ExitToStartMenu()
-        {
-	        PcManager.ClearPcs();
-			CurrentLevel?.QueueFree();
-			MusicPlayer.Stream = StartMenuSong;
-			MusicPlayer.Play();
-			Ui.ChangeState(new GameStateStart());
-        }
 
 		private async Task StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
 		{

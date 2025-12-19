@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c55rp5xhx7xdx" path="res://UI/menus/map/MapScreen.cs" id="1_o3nxy"]
 [ext_resource type="Script" uid="uid://csogh7ctti250" path="res://UI/menus/map/MapScroll.cs" id="2_721ga"]
-[ext_resource type="Texture2D" uid="uid://cxjrba0cc3dhi" path="res://UI/menus/map/test_map.png" id="3_nemkn"]
+[ext_resource type="Texture2D" uid="uid://cd48sohpcuk1g" path="res://UI/menus/map/satellite_maps_top_section_6660.png" id="3_a4wjs"]
 [ext_resource type="PackedScene" uid="uid://b42o3j4m70oy7" path="res://UI/menus/map/location_button.tscn" id="4_fsvth"]
 [ext_resource type="Resource" uid="uid://c7sm0cx1vlq2u" path="res://UI/menus/map/test_location_data.tres" id="5_joa7o"]
 [ext_resource type="PackedScene" uid="uid://ddkl0i3g78lb3" path="res://UI/menus/map/location_info.tscn" id="6_b5ur0"]
@@ -46,10 +46,14 @@ script = ExtResource("2_721ga")
 [node name="Map" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/MapScroll"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("3_nemkn")
+texture = ExtResource("3_a4wjs")
 stretch_mode = 4
 
 [node name="LocationButton" parent="PanelContainer/MarginContainer/HBoxContainer/MapScroll/Map" instance=ExtResource("4_fsvth")]
+offset_left = 1220.0
+offset_top = 461.0
+offset_right = 1394.0
+offset_bottom = 631.0
 Data = ExtResource("5_joa7o")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]

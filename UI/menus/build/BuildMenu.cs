@@ -24,7 +24,7 @@ namespace Lastdew
 			
 			Setup();
 			Camera.ProcessMode = ProcessModeEnum.Always;
-			Camera.ClickHandler.BuildMode = true;
+			Camera.BuildMode = true;
 		}
 
 		public override void Close()
@@ -32,7 +32,7 @@ namespace Lastdew
 			base.Close();
 
 			Camera.ProcessMode = ProcessModeEnum.Inherit;
-			Camera.ClickHandler.BuildMode = false;
+			Camera.BuildMode = false;
 		}
 
 		public void ConnectSignals(InventoryManager inventory)
@@ -119,8 +119,8 @@ namespace Lastdew
 
 			PackedScene buildingScene = GD.Load<PackedScene>(CurrentBuilding.SceneUid);
 			Building3D building3D = (Building3D)buildingScene.Instantiate();
-			Camera.ClickHandler.Building3D = building3D;
-			Camera.ClickHandler.Building = CurrentBuilding;
+			Camera.ClickHandlerBuild.Building3D = building3D;
+			Camera.ClickHandlerBuild.Building = CurrentBuilding;
 			EmitSignal(SignalName.OnBuild, building3D);
 		}
 

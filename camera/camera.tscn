@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://4q4t3oj7cg4i"]
+[gd_scene load_steps=8 format=3 uid="uid://4q4t3oj7cg4i"]
 
 [ext_resource type="Script" uid="uid://ca3qplbbowdsi" path="res://camera/Camera.cs" id="1_1njid"]
 [ext_resource type="Script" uid="uid://cu3a4o5hlgxw0" path="res://camera/OuterGimbal.cs" id="2_o35ac"]
 [ext_resource type="Resource" uid="uid://bdqqodworewig" path="res://camera/camera_settings_1.tres" id="2_sp6r1"]
 [ext_resource type="Script" uid="uid://bq28nvppnei47" path="res://camera/InnerGimbal.cs" id="3_xgk6n"]
 [ext_resource type="Script" uid="uid://dhj8o0t6o1utn" path="res://camera/Zoomer.cs" id="4_pyb5o"]
-[ext_resource type="Script" uid="uid://b304p383rvfet" path="res://camera/ClickHandler.cs" id="5_46j64"]
+[ext_resource type="Script" uid="uid://dqpslg3qhb1x2" path="res://camera/ClickHandlerGame.cs" id="6_ynmg3"]
+[ext_resource type="Script" uid="uid://chmimv4qy34qt" path="res://camera/ClickHandlerBuild.cs" id="7_phk8e"]
 
 [node name="CameraRig" type="Node3D"]
 script = ExtResource("1_1njid")
@@ -27,8 +28,14 @@ script = ExtResource("4_pyb5o")
 unique_name_in_owner = true
 fov = 63.4
 
-[node name="ClickHandler" type="RayCast3D" parent="OuterGimbal/InnerGimbal/Zoomer/Camera3D"]
+[node name="ClickHandlerGame" type="RayCast3D" parent="OuterGimbal/InnerGimbal/Zoomer/Camera3D"]
 unique_name_in_owner = true
 collision_mask = 30
 debug_shape_custom_color = Color(1, 1, 1, 0)
-script = ExtResource("5_46j64")
+script = ExtResource("6_ynmg3")
+
+[node name="ClickHandlerBuild" type="RayCast3D" parent="OuterGimbal/InnerGimbal/Zoomer/Camera3D"]
+unique_name_in_owner = true
+collision_mask = 16
+debug_shape_custom_color = Color(1, 1, 1, 0)
+script = ExtResource("7_phk8e")

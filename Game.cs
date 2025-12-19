@@ -8,7 +8,6 @@ namespace Lastdew
     public partial class Game : Node
     {
 	    private Camera Camera { get; set; }
-        private ClickHandler ClickHandler { get; set; }
         private PcManager PcManager { get; set; }
         public UiManager Ui { get; private set; }
         private InventoryManager InventoryManager { get; set; }
@@ -34,7 +33,6 @@ namespace Lastdew
 			base._Ready();
 
 			Camera = GetNode<Camera>("%CameraRig");
-			ClickHandler = Camera.ClickHandler;
 			PcManager = GetNode<PcManager>("%PcManager");
 			Ui = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
@@ -73,8 +71,8 @@ namespace Lastdew
 
 		private void SubscribeToEvents()
 		{
-			ClickHandler.OnClickedPc += PcManager.SelectPc;
-			ClickHandler.OnClickedMoveTarget += PcManager.MoveTo;
+			Camera.ClickHandlerGame.OnClickedPc += PcManager.SelectPc;
+			Camera.ClickHandlerGame.OnClickedMoveTarget += PcManager.MoveTo;
 			Ui.MainMenu.OnNewGame += StartNewGame;
 			Ui.MainMenu.OnSaveGame += Save;
 			Ui.MainMenu.OnLoadGame += Load;
@@ -87,16 +85,16 @@ namespace Lastdew
 			Ui.BuildMenu.Connect(
 				BuildMenu.SignalName.OnBuild,
 				Callable.From<Building3D>((building) => CurrentLevel.AddBuilding(building)));
-			Camera.ClickHandler.Connect(
-				ClickHandler.SignalName.OnPlacedBuilding,
+			Camera.ClickHandlerBuild.Connect(
+				ClickHandlerBuild.SignalName.OnPlacedBuilding,
 				Callable.From<BuildingData>(PlaceBuilding));
 			//Camera.ClickHandler.OnPlacedBuilding += PlaceBuilding;
 		}
 
         private void UnsubscribeFromEvents()
 		{
-			ClickHandler.OnClickedPc -= PcManager.SelectPc;
-			ClickHandler.OnClickedMoveTarget -= PcManager.MoveTo;
+			Camera.ClickHandlerGame.OnClickedPc -= PcManager.SelectPc;
+			Camera.ClickHandlerGame.OnClickedMoveTarget -= PcManager.MoveTo;
 			Ui.MainMenu.OnNewGame -= StartNewGame;
 			Ui.MainMenu.OnSaveGame -= Save;
 			Ui.MainMenu.OnLoadGame -= Load;

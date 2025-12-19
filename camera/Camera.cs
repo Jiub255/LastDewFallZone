@@ -4,7 +4,30 @@ namespace Lastdew
 {	
 	public partial class Camera : Node3D
 	{
-		public ClickHandler ClickHandler { get; private set; }
+		private bool _buildMode;
+
+		public bool BuildMode
+		{
+			get => _buildMode;
+			set
+			{
+				_buildMode = value;
+				if (_buildMode)
+				{
+					CurrentClickHandler = ClickHandlerBuild;
+				}
+				else
+				{
+					ClickHandlerBuild.ExitMode();
+					CurrentClickHandler = ClickHandlerGame;
+				}
+			}
+		}
+
+
+		public ClickHandlerGame ClickHandlerGame { get; private set; }
+		public ClickHandlerBuild ClickHandlerBuild { get; private set; }
+		private ClickHandler CurrentClickHandler { get; set; }
 		
 		[Export]
 		private CameraSettings Settings { get; set; }
@@ -26,7 +49,9 @@ namespace Lastdew
 		{
 			base._Ready();
 	
-			ClickHandler = GetNode<ClickHandler>("%ClickHandler");
+			ClickHandlerGame = GetNode<ClickHandlerGame>("%ClickHandlerGame");
+			ClickHandlerBuild = GetNode<ClickHandlerBuild>("%ClickHandlerBuild");
+			CurrentClickHandler = ClickHandlerGame;
 			Viewport = GetViewport();
 			OuterGimbal = GetNode<OuterGimbal>("%OuterGimbal");
 			InnerGimbal = GetNode<InnerGimbal>("%InnerGimbal");
@@ -81,10 +106,19 @@ namespace Lastdew
             }	
         }
 
-        public override void _UnhandledInput(InputEvent @event)
+		public override void _PhysicsProcess(double delta)
+		{
+			base._PhysicsProcess(delta);
+			
+			CurrentClickHandler.PhysicsProcess(delta);
+		}
+
+		public override void _UnhandledInput(InputEvent @event)
         {
 	        base._UnhandledInput(@event);
 
+	        CurrentClickHandler.UnhandledInput(@event);
+	        
 	        switch (@event)
 	        {
 		        case InputEventMouseMotion motionEvent when Input.IsActionPressed(InputNames.CAMERA_ROTATE):

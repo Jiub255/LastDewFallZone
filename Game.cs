@@ -158,7 +158,7 @@ namespace Lastdew
 			// TODO: Something going wrong here when starting, then quitting to menu, then starting again.
 			// Freezes here.
 			CurrentLevel = (Level)levelScene.Instantiate();
-			CallDeferred(Node.MethodName.AddChild, CurrentLevel);
+			this.AddChildDeferred(CurrentLevel);
 			CurrentLevel.Initialize(buildingSaveDatas, scavengingLevel);
 			
 			

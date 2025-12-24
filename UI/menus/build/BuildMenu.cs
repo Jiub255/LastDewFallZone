@@ -97,7 +97,7 @@ namespace Lastdew
 		{
 			BuildingButton button = (BuildingButton)ButtonScene.Instantiate();
 			button.Setup(building);
-			ButtonParent.CallDeferred(Node.MethodName.AddChild, button);
+			ButtonParent.AddChildDeferred(button);
 			button.Connect(
 				BuildingButton.SignalName.OnPressed,
 				Callable.From<Building>(SetBuilding));

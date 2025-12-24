@@ -30,7 +30,7 @@ namespace Lastdew
 
 		public void AddBuilding(Building3D building)
 		{
-			Buildings.CallDeferred(Node.MethodName.AddChild, building);
+			Buildings.AddChildDeferred(building);
 		}
 
 		// TODO: Separate this into subclass HomeBase : Level?

@@ -114,7 +114,7 @@ namespace Lastdew
 		private PlayerCharacter SetupPcDisplay()
 		{
 			PcDisplay pcDisplay = (PcDisplay)PcDisplayScene.Instantiate();
-			PcDisplayParent.CallDeferred(Node.MethodName.AddChild, pcDisplay);
+			PcDisplayParent.AddChildDeferred(pcDisplay);
 			PlayerCharacter pc = UnselectedPcs[Index];
 			pcDisplay.Initialize(pc);
 			pcDisplay.OnRemovePc += RemoveFromTeam;

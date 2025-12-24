@@ -48,7 +48,7 @@ namespace Lastdew
 		{
 			EnemiesToSpawn--;
 			Enemy enemy = EnemyScene.Instantiate<Enemy>();
-			CallDeferred(Node.MethodName.AddChild, enemy);
+			this.AddChildDeferred(enemy);
 		}
 	}
 }

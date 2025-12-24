@@ -29,7 +29,7 @@ namespace Lastdew
 		{
 			base._Ready();
 	        
-			CallDeferred(Node.MethodName.AddChild, AudioStreamPlayer);
+			this.AddChildDeferred(AudioStreamPlayer);
 			AudioStreamPlayer.Stream = Click;
 			AudioStreamPlayer.VolumeDb = VOLUME;
 			AudioStreamPlayer.PitchScale = PRESS_PITCH;

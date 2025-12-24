@@ -82,7 +82,7 @@ namespace Lastdew
 		private bool SetupRecipeCostUi(KeyValuePair<long, int> kvp)
 		{
 			RecipeCostUi recipeCost = (RecipeCostUi)RecipeCostScene.Instantiate();
-			RecipeCosts.CallDeferred(Node.MethodName.AddChild, recipeCost);
+			RecipeCosts.AddChildDeferred(recipeCost);
 			
 			CraftingMaterial material = (CraftingMaterial)Databases.Craftables[kvp.Key];
 			int amountOwned = Inventory[material];

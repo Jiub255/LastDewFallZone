@@ -164,5 +164,10 @@ namespace Lastdew
 			Array<Dictionary> results = spaceState.IntersectShape(query);
 			return results;
 		}
+
+		public static void AddChildDeferred(this Node node, Node child)
+		{
+			node.CallDeferred(Node.MethodName.AddChild, child);
+		}
 	}
 }

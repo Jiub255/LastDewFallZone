@@ -123,7 +123,7 @@ namespace Lastdew
 			foreach (PcSaveData pcSaveData in pcSaveDatas)
 			{
 				PlayerCharacter pc = (PlayerCharacter)PcScene.Instantiate();
-				CallDeferred(Node.MethodName.AddChild, pc);
+				this.AddChildDeferred(pc);
 				// TODO: Add a spawn location for pcs. Probably do a whole different system for spawning pcs eventually.
 				pc.Position += Vector3.Right * SPACE_BETWEEN_PCS * i;
 				i++;

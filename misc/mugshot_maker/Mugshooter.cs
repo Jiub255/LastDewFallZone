@@ -19,7 +19,7 @@ namespace Lastdew
 			foreach (PcData pcData in Databases.PcDatas)
 			{
 				PlayerCharacter pc = (PlayerCharacter)PcScene.Instantiate();
-				CallDeferred(Node.MethodName.AddChild, pc);
+				this.AddChildDeferred(pc);
 				pc.Initialize(new InventoryManager(), new PcSaveData(pcData.GetUid()));
 				await GetMugshotIcon(pc);
 			}
@@ -28,7 +28,7 @@ namespace Lastdew
 		private async Task GetMugshotIcon(PlayerCharacter pc)
 		{
 			MugshotCamera camera = (MugshotCamera)MugshotCameraScene.Instantiate();
-			pc.CallDeferred(Node.MethodName.AddChild, camera);
+			pc.AddChildDeferred(camera);
 			
 			// TODO: Not sure if both of these are necessary.
 			await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);

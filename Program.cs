@@ -23,7 +23,7 @@ namespace Lastdew
 		{
 			PackedScene gameScene = GD.Load<PackedScene>(Uids.GAME);
 			Game = (Game)gameScene.Instantiate();
-			CallDeferred(Node.MethodName.AddChild, Game);
+			this.AddChildDeferred(Game);
 			CallDeferred(MethodName.Subscribe);
 		}
 
@@ -36,6 +36,7 @@ namespace Lastdew
 		{
 			Game.Ui.MainMenu.Exit.OnToStartMenu -= Reset;
 			Game.Fader.FadeOut();
+			
 			await ToSignal(Game.Fader, Fader.SignalName.OnFadeOut);
 			
 			Game?.QueueFree();

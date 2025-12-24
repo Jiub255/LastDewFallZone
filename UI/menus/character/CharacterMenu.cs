@@ -101,7 +101,7 @@ namespace Lastdew
 		private void SetupButton(Item item, int amount)
 		{
 			ItemButton button = (ItemButton)ItemButtonScene.Instantiate();
-			ItemsGrid.CallDeferred(Node.MethodName.AddChild, button);
+			ItemsGrid.AddChildDeferred(button);
 			button.CallDeferred(ItemButton.MethodName.Initialize, item, amount);
 			button.Connect(ItemButton.SignalName.OnPressed, Callable.From<ItemButton>(SelectedItemPanel.SetItem));
 			Buttons.Add(button);

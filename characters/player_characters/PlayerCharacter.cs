@@ -261,7 +261,7 @@ namespace Lastdew
 		{
 			PackedScene weaponScene = GD.Load<PackedScene>(sceneUid);
 			Node3D weaponInstance = (Node3D)weaponScene.Instantiate();
-			WeaponSlot.CallDeferred(Node.MethodName.AddChild, weaponInstance);
+			WeaponSlot.AddChildDeferred(weaponInstance);
 		}
 
         private void SetupPcData(long dataUid)
@@ -330,7 +330,7 @@ namespace Lastdew
         private void ShowPopup(string text)
         {
 	        NumberPopup3d popup = (NumberPopup3d)NumberPopupScene.Instantiate();
-	        CallDeferred(Node.MethodName.AddChild, popup);
+	        this.AddChildDeferred(popup);
 	        popup.CallDeferred(NumberPopup3d.MethodName.Show, text);
         }
 	}

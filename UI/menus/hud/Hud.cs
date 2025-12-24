@@ -80,7 +80,7 @@ namespace Lastdew
 	                GD.PushError("PcButton scene did not instantiate correctly.");
 	                continue;
                 }
-                PcButtonParent.CallDeferred(Node.MethodName.AddChild, pcButton);
+                PcButtonParent.AddChildDeferred(pcButton);
                 pcButton.CallDeferred(PcButton.MethodName.Setup, pc);
                 pcButton.OnSelectPc += TeamData.SelectPc;
                 pcButton.OnCenterOnPc += CenterOnPc;
@@ -97,7 +97,7 @@ namespace Lastdew
 		{
 			Item item = LootedItems.Dequeue();
 			LootedItemDisplay itemDisplay = (LootedItemDisplay)LootedItemDisplayScene.Instantiate();
-			LootedItemsParent.CallDeferred(Node.MethodName.AddChild, itemDisplay);
+			LootedItemsParent.AddChildDeferred(itemDisplay);
 			itemDisplay.CallDeferred(LootedItemDisplay.MethodName.Setup, item);
 		}
 

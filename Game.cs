@@ -7,14 +7,17 @@ namespace Lastdew
 {
     public partial class Game : Node
     {
+        public UiManager Ui { get; private set; }
+        public Fader Fader { get; private set; }
+        
 	    private Camera Camera { get; set; }
         private PcManager PcManager { get; set; }
-        public UiManager Ui { get; private set; }
         private TeamData TeamData { get; set; }
         private Level CurrentLevel { get; set; }
-        public Fader Fader { get; private set; }
         private AudioStreamPlayer MusicPlayer { get; set; }
         private AudioStreamMP3 StartMenuSong { get; } = GD.Load<AudioStreamMP3>(Music.RELOAD_AND_REASSESS);
+        private TimeManager TimeManager { get; set; }
+        
         
         #region TESTING STUFF
 
@@ -23,6 +26,8 @@ namespace Lastdew
         [Export]
         private int NumberOfPcs { get; set; } = 1;
         private List<PcSaveData> DefaultPcList { get; } = [];
+        [Export]
+        private float DayLengthInMinutes { get; set; } = 20f;
 
         #endregion
 
@@ -35,8 +40,9 @@ namespace Lastdew
 			Ui = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
 			Fader = GetNode<Fader>("%Fader");
-			
 			MusicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
+			TimeManager = new TimeManager(DayLengthInMinutes);
+			
 			MusicPlayer.Stream = StartMenuSong;
 			MusicPlayer.Play();
 			
@@ -56,6 +62,13 @@ namespace Lastdew
 			{
                 StartCombatTest();
             }
+		}
+
+		public override void _Process(double delta)
+		{
+			base._Process(delta);
+			
+			TimeManager?.Process((float)delta);
 		}
 
 		public override void _ExitTree()
@@ -102,7 +115,7 @@ namespace Lastdew
 		private async Task StartNewGame()
 		{
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			Ui.Initialize(TeamData, Camera);
+			Ui.Initialize(TeamData, Camera, TimeManager);
 			await SetupLevel(homeBaseScene, DefaultPcList, TeamData.Inventory.Buildings);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -110,7 +123,7 @@ namespace Lastdew
 		private async Task StartCombatTest()
 		{
 			PackedScene combatTestScene = GD.Load<PackedScene>("uid://dr032kqvigccx");
-			Ui.Initialize(TeamData, Camera);
+			Ui.Initialize(TeamData, Camera, TimeManager);
 			await SetupLevel(combatTestScene, DefaultPcList, []);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -125,7 +138,7 @@ namespace Lastdew
 			SaveData saveData = SaveSystem.Load();
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
 			TeamData.Inventory.Buildings = SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas);
-			Ui.Initialize(TeamData, Camera);
+			Ui.Initialize(TeamData, Camera, TimeManager);
 			// LoadInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
 			// can initialize first.
 			await SetupLevel(homeBaseScene, saveData.PcSaveDatas, TeamData.Inventory.Buildings);
@@ -159,10 +172,13 @@ namespace Lastdew
 				homeBase.Initialize(buildingSaveDatas);
 				Ui.BuildMenu.Connect(BuildMenu.SignalName.OnBuild,
 					Callable.From<Building3D>(building3D => homeBase.AddBuilding(building3D)));
+				TimeManager.Initialize(homeBase);
 			}
 			else
 			{
 				CurrentLevel.Initialize(buildingSaveDatas);
+				// TODO: Necessary to set TimeManager.HomeBase to null here?
+				// Or does the queue free take care of that?
 			}
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://jlnwj0thfhrf"]
+[gd_scene load_steps=10 format=3 uid="uid://jlnwj0thfhrf"]
 
 [ext_resource type="Script" uid="uid://dunm418v5lhid" path="res://UI/menus/hud/Hud.cs" id="1_asb0d"]
 [ext_resource type="Texture2D" uid="uid://clisgnymen51" path="res://UI/menus/hud/build.png" id="2_4dvhw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cbs5mpeeck511" path="res://UI/menus/hud/character.png" id="5_2fhsu"]
 [ext_resource type="Texture2D" uid="uid://bq4v1hv8062s6" path="res://UI/menus/hud/map.png" id="6_mvsff"]
 [ext_resource type="Texture2D" uid="uid://dpqf4xvsiyq8w" path="res://UI/menus/hud/main.png" id="7_qhrhg"]
+[ext_resource type="Script" uid="uid://borih5x4s3yjb" path="res://UI/menus/hud/Clock.cs" id="8_2fhsu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bmggi"]
 
@@ -126,3 +127,12 @@ icon = ExtResource("7_qhrhg")
 expand_icon = true
 script = ExtResource("3_qrh5t")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="Clock" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_type_variation = &"LabelLarge"
+text = "254"
+script = ExtResource("8_2fhsu")

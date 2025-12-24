@@ -5,6 +5,9 @@ namespace Lastdew
 {
 	public partial class HomeBase : Level
 	{
+		// 86400 seconds in a day => 2 * pi radians
+		private const float LIGHT_ROTATION_SPEED = Mathf.Pi / 43200;
+		
 		public NavigationRegion3D NavMesh { get; private set; }
 		private Node3D Buildings { get; set; }
 		private DirectionalLight3D Light { get; set; }
@@ -23,6 +26,12 @@ namespace Lastdew
 		public void AddBuilding(Building3D building)
 		{
 			Buildings.AddChildDeferred(building);
+		}
+
+		public void RotateLight(float timeInSeconds)
+		{
+			float x = (timeInSeconds * LIGHT_ROTATION_SPEED) + (Mathf.Pi / 2);
+			Light.Rotation = new Vector3(x, 0f, 0f);
 		}
 		
 		private void PlaceBuildings(List<BuildingData> buildingDatas)

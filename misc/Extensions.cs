@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
@@ -168,6 +169,13 @@ namespace Lastdew
 		public static void AddChildDeferred(this Node node, Node child)
 		{
 			node.CallDeferred(Node.MethodName.AddChild, child);
+		}
+
+		public static string SecondsToClockTime(this float seconds)
+		{
+			TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);
+			TimeOnly timeOnly = TimeOnly.FromTimeSpan(timeSpan);
+			return timeOnly.ToString();
 		}
 	}
 }

@@ -69,9 +69,9 @@ namespace Lastdew
         /// <summary>
         /// Only called once in beginning
         /// </summary>
-		public void Initialize(TeamData teamData, Camera camera)
+		public void Initialize(TeamData teamData, Camera camera, TimeManager timeManager)
 		{
-			Hud.Initialize(teamData);
+			Hud.Initialize(teamData, timeManager);
 			CharacterMenu.Initialize(teamData);
 			CraftingMenu.Initialize(teamData);
 			MapMenu.Initialize(teamData);

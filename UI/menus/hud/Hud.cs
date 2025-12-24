@@ -65,9 +65,11 @@ namespace Lastdew
 			base.Open();
 		}
 		
-		public void Initialize(TeamData teamData)
+		public void Initialize(TeamData teamData, TimeManager timeManager)
 		{
 			TeamData = teamData;
+			Clock clock = GetNode<Clock>("%Clock");
+			clock.Initialize(timeManager);
 		}
 
 		public void Setup()

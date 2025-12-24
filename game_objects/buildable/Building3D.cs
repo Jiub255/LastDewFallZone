@@ -41,11 +41,15 @@ namespace Lastdew
 			MeshInstance = GetNode<MeshInstance3D>("%MeshInstance3D");
 			
 			Setup();
+			Overlapping = IsOverlapping();
 		}
 
 		public override void _PhysicsProcess(double delta)
 		{
-			if (_done) return;
+			if (_done)
+			{
+				return;
+			}
 			
 			base._Process(delta);
 			Overlapping = IsOverlapping();
@@ -62,7 +66,8 @@ namespace Lastdew
 		{
 			SetupCastShape();
 			SetupIndicatorMesh();
-			SetColor(!IsOverlapping());
+			SetColor(true);
+		//	SetColor(!IsOverlapping());
 		}
 
 		private bool IsOverlapping()

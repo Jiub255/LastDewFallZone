@@ -114,11 +114,13 @@ namespace Lastdew
 
 		private void BuildInstance()
 		{
+			Camera.ClickHandlerBuild.Building3D?.QueueFree();
+			
 			if (CurrentBuilding == null)
 			{
 				return;
 			}
-
+			
 			PackedScene buildingScene = GD.Load<PackedScene>(CurrentBuilding.SceneUid);
 			Building3D building3D = (Building3D)buildingScene.Instantiate();
 			Camera.ClickHandlerBuild.Building3D = building3D;

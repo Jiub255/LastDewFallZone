@@ -56,7 +56,9 @@
 			"title": "DOING",
 			"tasks": [
 				"f0b1dadf-b33d-48ca-bb2d-e14b9bf8fcb2",
-				"69b8fcbf-8b21-4392-b567-ba2f58b7512f"
+				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
+				"e8b9c0fd-ef0b-43b3-9515-a357d21c0bc4",
+				"fb8bd137-94ab-4336-9dad-e3cc413d7b54"
 			]
 		},
 		{
@@ -184,7 +186,8 @@
 				"7ba5e7e5-74bf-40d3-aaa1-96f36c3a39ae",
 				"d98416df-4541-4af7-9ef7-c68f9945263e",
 				"222d537e-4518-49ad-ab18-d77514631a14",
-				"6325288b-1526-4b3f-a1f2-c196a4183edc"
+				"6325288b-1526-4b3f-a1f2-c196a4183edc",
+				"c9005d6e-bc7e-4ed9-a4b6-031a2efe62d2"
 			]
 		},
 		{
@@ -1311,6 +1314,27 @@
 			"title": "Link up to OpenMaps and procedurally do the rest",
 			"description": "Have buildings filled in randomly with whatever theme/loot using procedural generation. Keep the building the same shape and size though. With enough business data, could even make fitting loot/decorations for each.\nNot realistic probably, but it'd be cool.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "c9005d6e-bc7e-4ed9-a4b6-031a2efe62d2",
+			"title": "Clicking immediately after clicking build in build menu can cause buildings to overlap",
+			"description": "FIXED by freeing the building instance in the beginning of BuildMenu.BuildInstance(). The reference was getting replaced but the actual instance was still in the scene tree.\n\nProbably messes with the navmesh too.\nAlso, buildings placed like this don't get their indicator mesh instance queue freed. No idea why.\nIt's not a speed thing, it happens when you click the build button with a building instance already attached to the mouse. Probably just need to block the mouse input in the build menu",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "e8b9c0fd-ef0b-43b3-9515-a357d21c0bc4",
+			"title": "Change signals back to C# events",
+			"description": "Switching was a bad choice. Unsubscribing in ExitTree works fine, plus they work with all data types, plus better tracking in the IDE.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "fb8bd137-94ab-4336-9dad-e3cc413d7b54",
+			"title": "Volume sliders in the options menu",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

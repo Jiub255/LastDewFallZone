@@ -76,10 +76,7 @@ namespace Lastdew
 			Ui.MainMenu.OnReturnToBase += ReturnToBase;
 			PcManager.OnLooted += Ui.Hud.AddToQueue;
 			Ui.Hud.OnCenterOnPc += Camera.CenterOnPc;
-
-			Ui.BuildMenu.Connect(
-				BuildMenu.SignalName.OnBuild,
-				Callable.From<Building3D>((building) => CurrentLevel.AddBuilding(building)));
+			
 			Camera.ClickHandlerBuild.Connect(
 				ClickHandlerBuild.SignalName.OnPlacedBuilding,
 				Callable.From<BuildingData>(PlaceBuilding));
@@ -148,25 +145,30 @@ namespace Lastdew
         private async Task SetupLevel(
 	        PackedScene levelScene,
 	        List<PcSaveData> pcSaveDatas,
-	        List<BuildingData> buildingSaveDatas,
-	        bool scavengingLevel = false)
+	        List<BuildingData> buildingSaveDatas)
 		{
 			Fader.FadeOut();
 			await ToSignal(Fader, Fader.SignalName.OnFadeOut);
 			
 			CurrentLevel?.QueueFree();
-			// TODO: Something going wrong here when starting, then quitting to menu, then starting again.
-			// Freezes here.
 			CurrentLevel = (Level)levelScene.Instantiate();
 			this.AddChildDeferred(CurrentLevel);
-			CurrentLevel.Initialize(buildingSaveDatas, scavengingLevel);
-			
+
+			if (CurrentLevel is HomeBase homeBase)
+			{
+				homeBase.Initialize(buildingSaveDatas);
+				Ui.BuildMenu.Connect(BuildMenu.SignalName.OnBuild,
+					Callable.From<Building3D>(building3D => homeBase.AddBuilding(building3D)));
+			}
+			else
+			{
+				CurrentLevel.Initialize(buildingSaveDatas);
+			}
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
 			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas);
 			Ui.Setup();
-			
 			
 			MusicPlayer.Stream = CurrentLevel.Song;
 			MusicPlayer.Play();
@@ -176,7 +178,7 @@ namespace Lastdew
 
 		private async Task StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)
 		{
-			await SetupLevel(scene, pcSaveDatas, [], true);
+			await SetupLevel(scene, pcSaveDatas, []);
 			Ui.ChangeState(new GameStateScavenging());
 		}
         
@@ -196,7 +198,15 @@ namespace Lastdew
         private void PlaceBuilding(BuildingData data)
         {
 	        TeamData.Inventory.Buildings.Add(data);
-			CurrentLevel.NavMesh.BakeNavigationMesh();
+
+	        if (CurrentLevel is HomeBase homeBase)
+	        {
+				homeBase.NavMesh.BakeNavigationMesh();
+	        }
+	        else
+	        {
+		        GD.PushError("Can't place building outside of home base.");
+	        }
 	        
 	        Building building = Databases.Craftables.Buildings[data.BuildingUid];
 	        building.Purchase(TeamData.Inventory);

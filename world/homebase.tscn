@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://ffc0mkxnmvb2"]
 
-[ext_resource type="Script" uid="uid://cob2dhpgi67jn" path="res://world/Level.cs" id="1_giee4"]
+[ext_resource type="Script" uid="uid://demwy1hnjvfqv" path="res://world/HomeBase.cs" id="1_gupvy"]
 [ext_resource type="AudioStream" uid="uid://clf7roymkk4mt" path="res://audio/music/zapsplat/music_zapsplat_abandoned.mp3" id="2_e3wgk"]
 [ext_resource type="Material" uid="uid://wnux2tpo35ln" path="res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res" id="2_gupvy"]
 [ext_resource type="PackedScene" uid="uid://dddxdv8rfhdqx" path="res://game_objects/outdoor/campfire/Bonfire_01.prefab.scn" id="3_e3wgk"]
@@ -25,11 +25,12 @@ size = Vector3(50, 1, 50)
 size = Vector3(50, 1, 50)
 
 [node name="HomeBase" type="Node3D"]
-script = ExtResource("1_giee4")
+script = ExtResource("1_gupvy")
 Song = ExtResource("2_e3wgk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.91706, -0.303663, -0.258437, 0, -0.64812, 0.761539, -0.398749, -0.698377, -0.594365, 0, 0, 0)
+unique_name_in_owner = true
+transform = Transform3D(0.91706, -0.289721, -0.273976, -6.00671e-08, -0.687088, 0.726575, -0.398749, -0.666313, -0.630101, 0, 0, 0)
 light_energy = 2.0
 shadow_enabled = true
 shadow_opacity = 0.85

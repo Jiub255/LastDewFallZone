@@ -8,46 +8,12 @@ namespace Lastdew
 	{
 		[Export]
 		public AudioStreamMP3 Song { get; private set; }
+
 		private Node3D SpawnLocation { get; set; }
 		
-		// TODO: Separate these into subclass HomeBase : Level?
-		public NavigationRegion3D NavMesh { get; private set; }
-		private Node3D Buildings { get; set; }
-		
-		public void Initialize(List<BuildingData> buildingDatas, bool scavengingLevel = false)
+		public virtual void Initialize(List<BuildingData> buildingDatas)
 		{
 			SpawnLocation = GetNode<Node3D>("%SpawnLocation");
-
-			if (scavengingLevel)
-			{
-				return;
-			}
-			
-			Buildings = GetNode<Node3D>("%Buildings");
-			NavMesh = GetNode<NavigationRegion3D>("%NavigationRegion3D");
-			PlaceBuildings(buildingDatas);
-		}
-
-		public void AddBuilding(Building3D building)
-		{
-			Buildings.AddChildDeferred(building);
-		}
-
-		// TODO: Separate this into subclass HomeBase : Level?
-		private void PlaceBuildings(List<BuildingData> buildingDatas)
-		{
-			foreach (BuildingData data in buildingDatas)
-			{
-				Building building = Databases.Craftables.Buildings[data.BuildingUid];
-				PackedScene buildingScene = GD.Load<PackedScene>(building.SceneUid);
-				Building3D building3D = (Building3D)buildingScene.Instantiate();
-				AddBuilding(building3D);
-				building3D.Position = new Vector3(data.Position.X, data.Position.Y, data.Position.Z);
-				building3D.Rotation = new Vector3(0f, data.Rotation, 0f);
-				building3D.CallDeferred(Building3D.MethodName.SetBuilding);
-			}
-			
-			NavMesh.CallDeferred(NavigationRegion3D.MethodName.BakeNavigationMesh);
 		}
 	}
 }

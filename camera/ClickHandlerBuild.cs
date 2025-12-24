@@ -5,9 +5,7 @@ namespace Lastdew
 {
 	public partial class ClickHandlerBuild : ClickHandler
 	{
-		//public event Action<BuildingData> OnPlacedBuilding;
-		[Signal]
-		public delegate void OnPlacedBuildingEventHandler(BuildingData buildingData);
+		public event Action<BuildingData> OnPlacedBuilding;
 		
 		/// <summary>
 		/// Degrees/second
@@ -50,8 +48,7 @@ namespace Lastdew
 			
 			Building3D.SetBuilding();
 			BuildingData data = new(Building.GetUid(), Building3D.Transform);
-			EmitSignal(SignalName.OnPlacedBuilding, data);
-			//OnPlacedBuilding?.Invoke(data);
+			OnPlacedBuilding?.Invoke(data);
 			Building3D = null;
 		}
 

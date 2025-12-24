@@ -1,11 +1,10 @@
-using Godot;
+using System;
 
 namespace Lastdew
 {
 	public partial class EquipmentButton : SfxButton
 	{
-		[Signal]
-		public delegate void OnPressedEventHandler(EquipmentType equipmentType);
+		public event Action<EquipmentType> OnPressed;
 		
 		private Equipment _equipment;
 
@@ -24,8 +23,19 @@ namespace Lastdew
 		{
 			base._Ready();
 
-			Connect(BaseButton.SignalName.Pressed,
-				Callable.From(() => EmitSignal(SignalName.OnPressed, (int)Type)));
+			Pressed += InvokeOnPressed;
+		}
+
+		public override void _ExitTree()
+		{
+			base._ExitTree();
+			
+			Pressed -= InvokeOnPressed;
+		}
+
+		private void InvokeOnPressed()
+		{
+			OnPressed?.Invoke(Type);
 		}
 	}
 }

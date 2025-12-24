@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using System.Collections.Generic;
 
@@ -5,8 +6,7 @@ namespace Lastdew
 {
 	public partial class BuildMenu : Menu
 	{
-		[Signal]
-		public delegate void OnBuildEventHandler(Building3D building);
+		public event Action<Building3D> OnBuild;
 		
 		private Building CurrentBuilding { get; set; }
 		private TeamData TeamData { get; set; }
@@ -16,6 +16,7 @@ namespace Lastdew
 		private Label Description { get; set; }
 		private Camera Camera { get; set; }
 		private SfxButton BuildButton { get; set; }
+		private InventoryManager Inventory { get; set; }
 
 		public override void Open()
 		{
@@ -34,15 +35,22 @@ namespace Lastdew
 			Camera.BuildMode = false;
 		}
 
-		public void ConnectSignals(InventoryManager inventory)
+		public override void _ExitTree()
+		{
+			base._ExitTree();
+			
+			BuildButton.Pressed -= BuildInstance;
+			Inventory.OnInventoryChanged -= Setup;
+			ClearButtons();
+		}
+
+		public void SubscribeToEvents(InventoryManager inventory)
 		{
 			BuildButton = GetNode<SfxButton>("%Build");
-			BuildButton.Connect(
-				BaseButton.SignalName.Pressed,
-				Callable.From(BuildInstance));
-			inventory.Connect(
-				InventoryManager.SignalName.OnInventoryChanged,
-				Callable.From(Setup));
+			Inventory = inventory;
+			
+			BuildButton.Pressed += BuildInstance;
+			Inventory.OnInventoryChanged += Setup;
 		}
 		
 		public void Initialize(TeamData teamData, Camera camera)
@@ -88,6 +96,7 @@ namespace Lastdew
 		{
 			foreach (BuildingButton button in Buttons)
 			{
+				button.OnPressed -= SetBuilding;
 				button.QueueFree();
 			}
 			Buttons.Clear();
@@ -98,9 +107,7 @@ namespace Lastdew
 			BuildingButton button = (BuildingButton)ButtonScene.Instantiate();
 			button.Setup(building);
 			ButtonParent.AddChildDeferred(button);
-			button.Connect(
-				BuildingButton.SignalName.OnPressed,
-				Callable.From<Building>(SetBuilding));
+			button.OnPressed += SetBuilding;
 			button.SetColor(gray);
 			Buttons.Add(button);
 		}
@@ -125,7 +132,7 @@ namespace Lastdew
 			Building3D building3D = (Building3D)buildingScene.Instantiate();
 			Camera.ClickHandlerBuild.Building3D = building3D;
 			Camera.ClickHandlerBuild.Building = CurrentBuilding;
-			EmitSignal(SignalName.OnBuild, building3D);
+			OnBuild?.Invoke(building3D);
 		}
 
 		private static string FormatDescription(Building building)

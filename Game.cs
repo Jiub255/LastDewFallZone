@@ -47,7 +47,7 @@ namespace Lastdew
 			MusicPlayer.Play();
 			
 			PcManager.Initialize(TeamData);
-			Ui.ConnectSignals(TeamData);
+			Ui.SubscribeToEvents(TeamData);
 
 			GetTree().Paused = true;
 
@@ -90,10 +90,7 @@ namespace Lastdew
 			PcManager.OnLooted += Ui.Hud.AddToQueue;
 			Ui.Hud.OnCenterOnPc += Camera.CenterOnPc;
 			
-			Camera.ClickHandlerBuild.Connect(
-				ClickHandlerBuild.SignalName.OnPlacedBuilding,
-				Callable.From<BuildingData>(PlaceBuilding));
-			//Camera.ClickHandler.OnPlacedBuilding += PlaceBuilding;
+			Camera.ClickHandlerBuild.OnPlacedBuilding += PlaceBuilding;
 			TimeManager.OnNewDay += LoseFoodAndWater;
 		}
 
@@ -109,7 +106,7 @@ namespace Lastdew
 			PcManager.OnLooted -= Ui.Hud.AddToQueue;
 			Ui.Hud.OnCenterOnPc -= Camera.CenterOnPc;
 			
-			//Camera.ClickHandler.OnPlacedBuilding -= PlaceBuilding;
+			Camera.ClickHandlerBuild.OnPlacedBuilding -= PlaceBuilding;
 			TimeManager.OnNewDay -= LoseFoodAndWater;
 		}
 
@@ -164,6 +161,11 @@ namespace Lastdew
 			Fader.FadeOut();
 			await ToSignal(Fader, Fader.SignalName.OnFadeOut);
 			
+			if (CurrentLevel is HomeBase oldHomeBase)
+			{
+				Ui.BuildMenu.OnBuild -= oldHomeBase.AddBuilding;
+			}
+			
 			CurrentLevel?.QueueFree();
 			CurrentLevel = (Level)levelScene.Instantiate();
 			this.AddChildDeferred(CurrentLevel);
@@ -171,8 +173,7 @@ namespace Lastdew
 			if (CurrentLevel is HomeBase homeBase)
 			{
 				homeBase.Initialize(buildingSaveDatas);
-				Ui.BuildMenu.Connect(BuildMenu.SignalName.OnBuild,
-					Callable.From<Building3D>(building3D => homeBase.AddBuilding(building3D)));
+				Ui.BuildMenu.OnBuild += homeBase.AddBuilding;
 				TimeManager.Initialize(homeBase);
 			}
 			else

@@ -1,12 +1,10 @@
-using Godot;
 using System;
 
 namespace Lastdew
 {
 	public partial class CraftableButton : SfxButton
 	{
-		[Signal]
-		public delegate void OnPressedEventHandler(Item item);
+		public event Action<Item> OnPressed;
 			
 		public Item Item { get; private set; }
 		
@@ -14,9 +12,20 @@ namespace Lastdew
 		{
 			Item = item;
 			Icon = item.Icon;
-			Connect(
-				BaseButton.SignalName.Pressed,
-				Callable.From(() => EmitSignal(SignalName.OnPressed, Item)));
+
+			Pressed += InvokeOnPressed;
+		}
+
+		public override void _ExitTree()
+		{
+			base._ExitTree();
+			
+			Pressed -= InvokeOnPressed;
+		}
+
+		private void InvokeOnPressed()
+		{
+			OnPressed?.Invoke(Item);
 		}
 	}
 }

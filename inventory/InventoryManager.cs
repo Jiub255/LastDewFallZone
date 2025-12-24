@@ -5,11 +5,9 @@ using Godot;
 
 namespace Lastdew
 {
-	public partial class InventoryManager : RefCounted, IEnumerable<KeyValuePair<Item, int>>
+	public partial class InventoryManager : IEnumerable<KeyValuePair<Item, int>>
 	{
-		[Signal]
-		public delegate void OnInventoryChangedEventHandler();
-		//public event Action OnInventoryChanged;
+		public event Action OnInventoryChanged;
 		public event Action OnFoodChanged;
 		public event Action OnWaterChanged;
 		
@@ -56,18 +54,15 @@ namespace Lastdew
 			{
 				case CraftingMaterial craftingMaterial:
 					CraftingMaterials.AddItems(craftingMaterial, amount);
-					//OnInventoryChanged?.Invoke();
-					EmitSignal(SignalName.OnInventoryChanged);
+					OnInventoryChanged?.Invoke();
 					break;
 				case Equipment equipment:
 					Equipment.AddItems(equipment, amount);
-					//OnInventoryChanged?.Invoke();
-					EmitSignal(SignalName.OnInventoryChanged);
+					OnInventoryChanged?.Invoke();
 					break;
 				case UsableItem usableItem:
 					UsableItems.AddItems(usableItem, amount);
-					//OnInventoryChanged?.Invoke();
-					EmitSignal(SignalName.OnInventoryChanged);
+					OnInventoryChanged?.Invoke();
 					break;
 			}
 		}
@@ -85,8 +80,7 @@ namespace Lastdew
 				{
 					if (CraftingMaterials.RemoveItems(craftingMaterial, amount))
 					{
-						//OnInventoryChanged?.Invoke();
-						EmitSignal(SignalName.OnInventoryChanged);
+						OnInventoryChanged?.Invoke();
 					}
 					else
 					{
@@ -98,8 +92,7 @@ namespace Lastdew
 				{
 					if (Equipment.RemoveItems(equipment, amount))
 					{
-						//OnInventoryChanged?.Invoke();
-						EmitSignal(SignalName.OnInventoryChanged);
+						OnInventoryChanged?.Invoke();
 					}
 					else
 					{
@@ -111,8 +104,7 @@ namespace Lastdew
 				{
 					if (UsableItems.RemoveItems(usableItem, amount))
 					{
-						//OnInventoryChanged?.Invoke();
-						EmitSignal(SignalName.OnInventoryChanged);
+						OnInventoryChanged?.Invoke();
 					}
 					else
 					{

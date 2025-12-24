@@ -59,11 +59,11 @@ namespace Lastdew
 	        CurrentState.ProcessState();
         }
 
-        public void ConnectSignals(TeamData teamData)
+        public void SubscribeToEvents(TeamData teamData)
         {
-	        BuildMenu.ConnectSignals(teamData.Inventory);
-	        CraftingMenu.ConnectSignals(teamData.Inventory);
-	        CharacterMenu.ConnectSignals(teamData);
+	        BuildMenu.SubscribeToEvents(teamData.Inventory);
+	        CraftingMenu.SubscribeToEvents(teamData.Inventory);
+	        CharacterMenu.SubscribeToEvents(teamData);
         }
 		
         /// <summary>

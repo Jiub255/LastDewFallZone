@@ -32,11 +32,17 @@ namespace Lastdew
 			Setup();
 		}
 
-		public void ConnectSignals(InventoryManager inventory)
+		public override void _ExitTree()
 		{
-			inventory.Connect(
-				InventoryManager.SignalName.OnInventoryChanged,
-				Callable.From(Setup));
+			base._ExitTree();
+
+			TeamData.Inventory.OnInventoryChanged -= Setup;
+			ClearGrids();
+		}
+
+		public void SubscribeToEvents(InventoryManager inventory)
+		{
+			inventory.OnInventoryChanged += Setup;
 		}
 		
 		public void Initialize(TeamData teamData)
@@ -79,9 +85,7 @@ namespace Lastdew
 			CraftableButton button = (CraftableButton)ButtonScene.Instantiate();
 			grid.AddChildDeferred(button);
 			button.Initialize(item);
-			button.Connect(
-				CraftableButton.SignalName.OnPressed,
-				Callable.From<Item>(SelectedDisplay.SetItem));
+			button.OnPressed += SelectedDisplay.SetItem;
 			Buttons.Add(button);
 		}
 
@@ -89,6 +93,7 @@ namespace Lastdew
 		{
 			foreach (CraftableButton button in Buttons)
 			{
+				button.OnPressed -= SelectedDisplay.SetItem;
 				button.QueueFree();
 			}
 			Buttons.Clear();

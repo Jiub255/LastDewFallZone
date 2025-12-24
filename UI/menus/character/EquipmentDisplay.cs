@@ -23,15 +23,26 @@ namespace Lastdew
 			foreach (KeyValuePair<EquipmentType, EquipmentButton> kvp in ButtonsByType)
 			{
 				EquipmentButton button = kvp.Value;
-				button.Connect(EquipmentButton.SignalName.OnPressed, Callable.From<EquipmentType>(Unequip));
+				button.OnPressed += Unequip;
 				button.Type = kvp.Key;
 			}
 		}
 
-		public void ConnectSignals(TeamData teamData)
+		public override void _ExitTree()
 		{
-			teamData.Connect(TeamData.SignalName.OnMenuSelectedChanged,
-				Callable.From(SetNewPc));
+			base._ExitTree();
+
+			foreach (EquipmentButton button in ButtonsByType.Values)
+			{
+				button.OnPressed -= Unequip;
+			}
+
+			TeamData.OnMenuSelectedChanged -= SetNewPc;
+		}
+
+		public void SubscribeToEvents(TeamData teamData)
+		{
+			teamData.OnMenuSelectedChanged += SetNewPc;
 		}
 
 		public void Initialize(TeamData teamData)

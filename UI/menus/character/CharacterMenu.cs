@@ -12,6 +12,7 @@ namespace Lastdew
 		private CharacterDisplay CharacterDisplay { get; set; }
 		private EquipmentDisplay EquipmentDisplay { get; set; }
 		private List<ItemButton> Buttons { get; } = [];
+		private InventoryManager Inventory { get; set; }
 	
 		public override void _Ready()
 		{
@@ -22,21 +23,32 @@ namespace Lastdew
 			CharacterDisplay = GetNode<CharacterDisplay>("%CharacterDisplay");
 			EquipmentDisplay = GetNode<EquipmentDisplay>("%EquipmentDisplay");
 
-			SelectedItemPanel.UseEquip.Connect(
-				BaseButton.SignalName.Pressed,
-				Callable.From(CharacterDisplay.Setup));
+			SelectedItemPanel.UseEquip.Pressed += CharacterDisplay.Setup;
 			foreach(Button button in EquipmentDisplay.Buttons)
 			{
-				button.Connect(BaseButton.SignalName.Pressed, Callable.From(CharacterDisplay.Setup));
+				button.Pressed += CharacterDisplay.Setup;
 			}
 		}
 
-		public void ConnectSignals(TeamData teamData)
+		public override void _ExitTree()
 		{
-			teamData.Inventory.Connect(InventoryManager.SignalName.OnInventoryChanged,
-				Callable.From(PopulateInventoryUi));
-			CharacterDisplay.ConnectSignals(teamData);
-			EquipmentDisplay.ConnectSignals(teamData);
+			base._ExitTree();
+
+			Inventory.OnInventoryChanged -= PopulateInventoryUi;
+			SelectedItemPanel.UseEquip.Pressed -= CharacterDisplay.Setup;
+			foreach(Button button in EquipmentDisplay.Buttons)
+			{
+				button.Pressed -= CharacterDisplay.Setup;
+			}
+			ClearButtons();
+		}
+
+		public void SubscribeToEvents(TeamData teamData)
+		{
+			Inventory = teamData.Inventory;
+			Inventory.OnInventoryChanged += PopulateInventoryUi;
+			CharacterDisplay.SubscribeToEvents(teamData);
+			EquipmentDisplay.SubscribeToEvents(teamData);
 		}
 	
 		public void Initialize(TeamData teamData)
@@ -77,6 +89,7 @@ namespace Lastdew
 		{
 			foreach (ItemButton itemButton in Buttons)
 			{
+				itemButton.OnPressed += SelectedItemPanel.SetItem;
 				itemButton.QueueFree();
 			}
 
@@ -103,7 +116,7 @@ namespace Lastdew
 			ItemButton button = (ItemButton)ItemButtonScene.Instantiate();
 			ItemsGrid.AddChildDeferred(button);
 			button.CallDeferred(ItemButton.MethodName.Initialize, item, amount);
-			button.Connect(ItemButton.SignalName.OnPressed, Callable.From<ItemButton>(SelectedItemPanel.SetItem));
+			button.OnPressed += SelectedItemPanel.SetItem;
 			Buttons.Add(button);
 		}
 

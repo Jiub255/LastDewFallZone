@@ -1,7 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgnjc7virkw7o"]
+[gd_scene load_steps=8 format=3 uid="uid://dgnjc7virkw7o"]
 
 [ext_resource type="Script" uid="uid://cmh3svrgpigji" path="res://UI/menus/hud/LootedItemDisplay.cs" id="1_gnbw5"]
 [ext_resource type="Texture2D" uid="uid://yf5l7e24sw2q" path="res://craftables/items/usable_items/icon_painkillers_blank.png" id="2_85aph"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85aph"]
+bg_color = Color(0.267401, 0.539153, 0.333319, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnbw5"]
+bg_color = Color(0.201527, 0.201527, 0.201526, 1)
 
 [sub_resource type="Animation" id="Animation_gnbw5"]
 length = 0.001
@@ -43,14 +49,31 @@ _data = {
 [node name="LootedItemDisplay" type="HBoxContainer"]
 script = ExtResource("1_gnbw5")
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_85aph")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer2"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PanelContainer2/MarginContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("2_85aph")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gnbw5")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Item Name"

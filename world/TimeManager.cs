@@ -1,7 +1,11 @@
+using System;
+
 namespace Lastdew
 {
 	public class TimeManager(float dayLengthInMinutes)
 	{
+		public event Action OnNewDay;
+		
 		// Starting the game at noon -> 43200 seconds
 		private float _currentTime = 43200;
 
@@ -15,6 +19,7 @@ namespace Lastdew
 				if (_currentTime > 86400)
 				{
 					_currentTime -= 86400;
+					OnNewDay?.Invoke();
 				}
 			}
 		}

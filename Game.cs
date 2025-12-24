@@ -94,6 +94,7 @@ namespace Lastdew
 				ClickHandlerBuild.SignalName.OnPlacedBuilding,
 				Callable.From<BuildingData>(PlaceBuilding));
 			//Camera.ClickHandler.OnPlacedBuilding += PlaceBuilding;
+			TimeManager.OnNewDay += LoseFoodAndWater;
 		}
 
         private void UnsubscribeFromEvents()
@@ -108,8 +109,8 @@ namespace Lastdew
 			PcManager.OnLooted -= Ui.Hud.AddToQueue;
 			Ui.Hud.OnCenterOnPc -= Camera.CenterOnPc;
 			
-			
 			//Camera.ClickHandler.OnPlacedBuilding -= PlaceBuilding;
+			TimeManager.OnNewDay -= LoseFoodAndWater;
 		}
 
 		private async Task StartNewGame()
@@ -226,6 +227,13 @@ namespace Lastdew
 	        
 	        Building building = Databases.Craftables.Buildings[data.BuildingUid];
 	        building.Purchase(TeamData.Inventory);
+        }
+
+        private void LoseFoodAndWater()
+        {
+	        int numberOfPcs = TeamData.Pcs.Count;
+	        TeamData.Inventory.Food -= numberOfPcs;
+	        TeamData.Inventory.Water -= numberOfPcs;
         }
 	}
 }

@@ -18,10 +18,18 @@ namespace Lastdew
 		private HBoxContainer PcButtonParent { get; set; }
 		private PackedScene LootedItemDisplayScene { get; set; } = (PackedScene)GD.Load(Uids.LOOTED_ITEM_DISPLAY);
 		private VBoxContainer LootedItemsParent { get; set; }
+		private Label Food { get; set; }
+		private Label Water { get; set; }
 		private List<PcButton> PcButtons { get; set; } = [];
-		private Queue<Item> LootedItems { get; } = new();
+		private Queue<LootedItem> LootedItems { get; } = new();
 		private static float TimeBetweenItemShowings => 0.2f;
 		private double Timer { get; set; }
+
+		private struct LootedItem(Texture2D icon, string name)
+		{
+			public Texture2D Icon = icon;
+			public string Name = name;
+		}
 
 		public override void _Ready()
 		{
@@ -53,6 +61,14 @@ namespace Lastdew
 			}
 		}
 
+		public override void _ExitTree()
+		{
+			base._ExitTree();
+			
+			TeamData.Inventory.OnFoodChanged -= SetFood;
+			TeamData.Inventory.OnWaterChanged -= SetWater;
+		}
+
 		public override void Open()
 		{
 			foreach (Node node in PcButtonParent.GetChildren())
@@ -69,7 +85,14 @@ namespace Lastdew
 		{
 			TeamData = teamData;
 			Clock clock = GetNode<Clock>("%Clock");
+			Food = GetNode<Label>("%FoodAmount");
+			Water = GetNode<Label>("%WaterAmount");
+			
 			clock.Initialize(timeManager);
+			SetFood();
+			SetWater();
+			TeamData.Inventory.OnFoodChanged += SetFood;
+			TeamData.Inventory.OnWaterChanged += SetWater;
 		}
 
 		public void Setup()
@@ -90,17 +113,17 @@ namespace Lastdew
             }
 		}
 
-		public void AddToQueue(Item item)
+		public void AddToQueue(Texture2D icon, string name)
 		{
-			LootedItems.Enqueue(item);
+			LootedItems.Enqueue(new LootedItem(icon, name));
 		}
 
 		private void ShowNextLootedItem()
 		{
-			Item item = LootedItems.Dequeue();
+			LootedItem item = LootedItems.Dequeue();
 			LootedItemDisplay itemDisplay = (LootedItemDisplay)LootedItemDisplayScene.Instantiate();
 			LootedItemsParent.AddChildDeferred(itemDisplay);
-			itemDisplay.CallDeferred(LootedItemDisplay.MethodName.Setup, item);
+			itemDisplay.CallDeferred(LootedItemDisplay.MethodName.Setup, item.Icon, item.Name);
 		}
 
         private void ClearPcButtons()
@@ -117,6 +140,18 @@ namespace Lastdew
         private void CenterOnPc(PlayerCharacter pc)
         {
 	        OnCenterOnPc?.Invoke(pc);
+        }
+
+        private void SetFood()
+        {
+	      //  Food ??= GetNode<Label>("%FoodAmount");
+	        Food.Text = TeamData?.Inventory?.Food.ToString() ?? "0";
+        }
+
+        private void SetWater()
+        {
+	       // Water ??= GetNode<Label>("%WaterAmount");
+	        Water.Text = TeamData?.Inventory?.Water.ToString() ?? "0";
         }
     }
 }

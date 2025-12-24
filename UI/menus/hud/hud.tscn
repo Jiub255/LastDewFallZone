@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://jlnwj0thfhrf"]
+[gd_scene load_steps=12 format=3 uid="uid://jlnwj0thfhrf"]
 
 [ext_resource type="Script" uid="uid://dunm418v5lhid" path="res://UI/menus/hud/Hud.cs" id="1_asb0d"]
 [ext_resource type="Texture2D" uid="uid://clisgnymen51" path="res://UI/menus/hud/build.png" id="2_4dvhw"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bq4v1hv8062s6" path="res://UI/menus/hud/map.png" id="6_mvsff"]
 [ext_resource type="Texture2D" uid="uid://dpqf4xvsiyq8w" path="res://UI/menus/hud/main.png" id="7_qhrhg"]
 [ext_resource type="Script" uid="uid://borih5x4s3yjb" path="res://UI/menus/hud/Clock.cs" id="8_2fhsu"]
+[ext_resource type="Texture2D" uid="uid://lgytv07nml1y" path="res://UI/menus/hud/icon_food.png" id="8_qhrhg"]
+[ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://UI/menus/hud/icon_water.png" id="9_bmggi"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bmggi"]
 
@@ -28,14 +30,14 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+[node name="PcButtons" type="PanelContainer" parent="MarginContainer"]
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="PcButtonParent" type="HBoxContainer" parent="MarginContainer/PanelContainer"]
+[node name="PcButtonParent" type="HBoxContainer" parent="MarginContainer/PcButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -128,11 +130,60 @@ expand_icon = true
 script = ExtResource("3_qrh5t")
 metadata/_custom_type_script = "uid://b5sycom274m8x"
 
-[node name="Clock" type="Label" parent="MarginContainer"]
-unique_name_in_owner = true
+[node name="GeneralInfo" type="PanelContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GeneralInfo"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Food" type="HBoxContainer" parent="MarginContainer/GeneralInfo/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/GeneralInfo/HBoxContainer/Food"]
+layout_mode = 2
+texture = ExtResource("8_qhrhg")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="FoodAmount" type="Label" parent="MarginContainer/GeneralInfo/HBoxContainer/Food"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelMedium"
+text = "345"
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/GeneralInfo/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+color = Color(0.572988, 0.572988, 0.572988, 1)
+
+[node name="Water" type="HBoxContainer" parent="MarginContainer/GeneralInfo/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/GeneralInfo/HBoxContainer/Water"]
+layout_mode = 2
+texture = ExtResource("9_bmggi")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="WaterAmount" type="Label" parent="MarginContainer/GeneralInfo/HBoxContainer/Water"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelMedium"
+text = "654"
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/GeneralInfo/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+color = Color(0.572988, 0.572988, 0.572988, 1)
+
+[node name="Clock" type="Label" parent="MarginContainer/GeneralInfo/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 8
 theme_type_variation = &"LabelLarge"
-text = "254"
+text = "12:00 AM"
 script = ExtResource("8_2fhsu")

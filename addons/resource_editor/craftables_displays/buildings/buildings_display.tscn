@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dy8bv1ywkfe0y" path="res://addons/resource_editor/craftables_displays/buildings/BuildingsDisplay.cs" id="1_kfqvl"]
 [ext_resource type="StyleBox" uid="uid://bgfoxjlmrxnmp" path="res://addons/resource_editor/themes/craftable_display_style_box.tres" id="1_uc4qa"]
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="2_uc4qa"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://UI/icon.svg" id="2_uc4qa"]
 [ext_resource type="Script" uid="uid://c8ri58i2mwkme" path="res://addons/resource_editor/craftables_displays/StatsDisplay.cs" id="3_upnm2"]
 [ext_resource type="PackedScene" uid="uid://civrf6dvwrb6x" path="res://addons/resource_editor/craftables_displays/recipe_costs_display.tscn" id="4_slr2d"]
 [ext_resource type="PackedScene" uid="uid://yxir25fmejcd" path="res://addons/resource_editor/craftables_displays/required_buildings_display.tscn" id="5_c5t7n"]

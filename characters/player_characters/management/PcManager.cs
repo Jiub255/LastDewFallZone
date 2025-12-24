@@ -7,7 +7,7 @@ namespace Lastdew
 {
 	public partial class PcManager : Node3D
 	{
-		public event Action<Item> OnLooted;
+		public event Action<Texture2D, string> OnLooted;
 		
 		private const float SPACE_BETWEEN_PCS = 1.5f;
 		private const float MOUSE_MOVEMENT_THRESHOLD = 10f;
@@ -159,9 +159,9 @@ namespace Lastdew
 			TeamData.SelectedIndex = null;
 		}
 
-		private void InvokeOnLooted(Item item)
+		private void InvokeOnLooted(Texture2D icon, string name)
 		{
-			OnLooted?.Invoke(item);
+			OnLooted?.Invoke(icon, name);
 		}
 	}
 }

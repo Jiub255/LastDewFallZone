@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Godot;
@@ -9,14 +10,47 @@ namespace Lastdew
 		[Signal]
 		public delegate void OnInventoryChangedEventHandler();
 		//public event Action OnInventoryChanged;
+		public event Action OnFoodChanged;
+		public event Action OnWaterChanged;
 		
+		private int _food;
+		private int _water;
+
 		public InventoryController<CraftingMaterial> CraftingMaterials { get; } = new();
 		public InventoryController<Equipment> Equipment { get; } = new();
 		public InventoryController<UsableItem> UsableItems { get; } = new();
         public List<BuildingData> Buildings { get; set; } = [];
-		
 
-		public void AddItems(Item item, int amount)
+        public int Food
+        {
+	        get => _food;
+	        set
+	        {
+		        _food = value;
+				if (_food < 0)
+				{
+					_food = 0;
+				}
+				OnFoodChanged?.Invoke();
+	        }
+        }
+
+        public int Water
+        {
+	        get => _water;
+	        set
+	        {
+		        _water = value;
+				if (_water < 0)
+				{
+					_water = 0;
+				}
+				OnWaterChanged?.Invoke();
+	        }
+        }
+
+
+        public void AddItems(Item item, int amount)
 		{
 			switch (item)
 			{

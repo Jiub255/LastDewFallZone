@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="UsableItem" load_steps=4 format=3 uid="uid://ybve325sah4y"]
 
 [ext_resource type="Script" uid="uid://d2k7fseog6yq2" path="res://craftables/items/usable_items/UsableItem.cs" id="1_d62t3"]
-[ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://craftables/icons/icon_water.png" id="1_jogvb"]
+[ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://UI/menus/hud/icon_water.png" id="1_jogvb"]
 [ext_resource type="Script" uid="uid://bi02ojo6l0h1j" path="res://craftables/items/usable_items/effects/Effect.cs" id="1_op5ug"]
 
 [resource]

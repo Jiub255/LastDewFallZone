@@ -12,10 +12,8 @@ namespace Lastdew
 		private List<Item> _rares = [];
 		private List<Item> _uniques = [];
 		
-		// TODO: Do random loot based off rarity and tags eventually. Just hand filling item arrays for now.
-		[Export] public Godot.Collections.Array<ItemTags> Tags { get; private set; } = [ItemTags.CRAFTING];
-		//[Export]
-		public Godot.Collections.Array<Item> Loot { get; private set; } = [];
+		[Export]
+		public Godot.Collections.Array<ItemTags> Tags { get; private set; } = [ItemTags.CRAFTING];
 		[Export]
 		public float LootDuration { get; private set; } = 1f;
 		// TODO: Have experience tied to loot duration? And somehow have quality of items tied to it too?
@@ -26,7 +24,19 @@ namespace Lastdew
 		public int MinimumItemAmount { get; private set; } = 1;
 		[Export]
 		public int MaximumItemAmount { get; private set; } = 5;
+		[Export]
+		private int MinimumFood { get; set; }
+		[Export]
+		private int MaximumFood { get; set; }
+		[Export]
+		private int MinimumWater { get; set; }
+		[Export]
+		private int MaximumWater { get; set; }
+
 		
+		public Godot.Collections.Array<Item> Loot { get; private set; } = [];
+		public int Food { get; private set; }
+		public int Water { get; private set; }
 		public bool Empty { get; set; }
 		public bool BeingLooted { get; set; }
 		public Vector3 LootingPosition { get; private set; }
@@ -43,7 +53,7 @@ namespace Lastdew
 		{
 			Loot.Clear();
 			
-			GatherItems();
+			GatherItemsByRarity();
 
 			Random rng = new();
 			int numberOfItems = rng.Next(MinimumItemAmount, MaximumItemAmount + 1);
@@ -52,20 +62,17 @@ namespace Lastdew
 				ChooseRandomItem();
 			}
 			
-			// Not really necessary, just saving memory.
+			Food = rng.Next(MinimumFood, MaximumFood + 1);
+			Water = rng.Next(MinimumWater, MaximumWater + 1);
+			
+			// Not really necessary, just saving memory (?)
 			_commons.Clear();
 			_uncommons.Clear();
 			_rares.Clear();
 			_uniques.Clear();
-
-			// GD.Print($"Items added to loot container {Name}");
-			// foreach (Item item in Loot)
-			// {
-			// 	GD.Print($"{item.ItemRarity} {item.Name}");
-			// }
 		}
 
-		private void GatherItems()
+		private void GatherItemsByRarity()
 		{
 			_commons = GatherItemsOfRarity(Rarity.COMMON);
 			_uncommons = GatherItemsOfRarity(Rarity.UNCOMMON);
@@ -79,13 +86,6 @@ namespace Lastdew
 			items.AddRange(Databases.Craftables.Items
 				.Where(item => item.Tags.Any(itemTag => Tags.Contains(itemTag)))
 				.Where(item => item.ItemRarity == rarity));
-			
-			// GD.Print($"\n{rarity} items\n");
-			// foreach (Item item in items)
-			// {
-			// 	GD.Print(item.Name);
-			// }
-			// GD.Print("\n");
 			
 			return items;
 		}
@@ -110,6 +110,7 @@ namespace Lastdew
 					// Falldown to rare case
 					ChooseRandomItem(5);
 					break;
+				
 				// Rare
 				case < 15:
 					int rareIndex = rng.Next(0, _rares.Count);
@@ -121,6 +122,7 @@ namespace Lastdew
 					// Falldown to uncommon case
 					ChooseRandomItem(15);
 					break;
+				
 				// Uncommon
 				case < 30:
 					int uncommonIndex = rng.Next(0, _uncommons.Count);
@@ -132,6 +134,7 @@ namespace Lastdew
 					// Falldown to common case
 					ChooseRandomItem(30);
 					break;
+				
 				// Common
 				case < 100:
 					int commonIndex = rng.Next(0, _commons.Count);

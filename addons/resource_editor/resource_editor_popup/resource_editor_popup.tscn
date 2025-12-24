@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bptw12qdeseh" path="res://addons/resource_editor/resource_editor_popup/recipe_costs_editor.tscn" id="4_b6g7e"]
 [ext_resource type="PackedScene" uid="uid://dxtbey0a7pn2m" path="res://addons/resource_editor/resource_editor_popup/stats_to_craft_editor.tscn" id="4_uq640"]
 [ext_resource type="PackedScene" uid="uid://were1kh6e5is" path="res://addons/resource_editor/resource_editor_popup/items/rarity_editor.tscn" id="5_rbuq0"]
-[ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://craftables/icons/icon_water.png" id="6_ij1an"]
+[ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://UI/menus/hud/icon_water.png" id="6_ij1an"]
 [ext_resource type="PackedScene" uid="uid://duccv88mkvegx" path="res://addons/resource_editor/resource_editor_popup/crafting_materials/reusable_editor.tscn" id="6_uky00"]
 [ext_resource type="PackedScene" uid="uid://siyvsne6fc8a" path="res://addons/resource_editor/resource_editor_popup/required_buildings_editor.tscn" id="6_uq640"]
 [ext_resource type="PackedScene" uid="uid://dxs5r6evcoahk" path="res://addons/resource_editor/resource_editor_popup/scrap_results_editor.tscn" id="7_degfr"]

@@ -8,17 +8,18 @@ namespace Lastdew
 
 		private AnimationPlayer _animationPlayer;
 
-		public void Setup(Item item)
+
+		public void Setup(Texture2D icon, string name)
 		{
 			_animationPlayer = GetNode<AnimationPlayer>("%AnimationPlayer");
-			TextureRect icon = GetNode<TextureRect>("%Icon");
+			TextureRect iconUi = GetNode<TextureRect>("%Icon");
 			Label label = GetNode<Label>("%Label");
 
 			_animationPlayer.AnimationFinished += OnAnimationFinished;
 			_animationPlayer.Play(MAIN);
 			
-			icon.Texture = item.Icon;
-			label.Text = item.Name;
+			iconUi.Texture = icon;
+			label.Text = name;
 		}
 
 		private void OnAnimationFinished(StringName animationName)

@@ -83,3 +83,6 @@ unique_name_in_owner = true
 
 [node name="SM_CARGO" parent="NavigationRegion3D" instance=ExtResource("9_e3wgk")]
 transform = Transform3D(0.810359, 0, 0.585934, 0, 1, 0, -0.585934, 0, 0.810359, -8.54695, 0, 4.19572)
+
+[node name="SM_CARGO2" parent="NavigationRegion3D" instance=ExtResource("9_e3wgk")]
+transform = Transform3D(0.624398, 0, -0.781107, 0, 1, 0, 0.781107, 0, 0.624398, -13.6727, 0, 3.66373)

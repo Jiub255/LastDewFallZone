@@ -26,7 +26,7 @@ resources_spreadsheet_view/freeze_first_column=true
 config/name="LastDew:FallZone"
 run/main_scene="uid://cksq1a2wxrts0"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
-config/icon="res://craftables/icons/icon.svg"
+config/icon="res://UI/icon.svg"
 
 [display]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cu7k0yye0m81b"]
 
-[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://craftables/icons/icon.svg" id="1_ue2kx"]
+[ext_resource type="Texture2D" uid="uid://dnsq05qfoy463" path="res://UI/icon.svg" id="1_ue2kx"]
 [ext_resource type="Script" uid="uid://cw2f0ujbuxxqp" path="res://addons/resource_editor/craftables_displays/CraftableIcon.cs" id="2_ue2kx"]
 
 [node name="CraftableIcon" type="TextureRect"]

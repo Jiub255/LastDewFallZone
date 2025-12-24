@@ -17,6 +17,8 @@ namespace Lastdew
 		public const string NUMBER_POPUP = "uid://5e8hktnx771s";
 		public const string LOOTED_ITEM_DISPLAY = "uid://dgnjc7virkw7o";
 		public const string BUILDING_BUTTON = "uid://exarpec3215x";
+		public const string FOOD_ICON = "uid://lgytv07nml1y";
+		public const string WATER_ICON = "uid://bxqetgnj57uhx";
 		
 		// In-game non-UI
 		public const string HOME_BASE = "uid://ffc0mkxnmvb2";

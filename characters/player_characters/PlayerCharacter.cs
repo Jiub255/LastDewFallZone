@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 
@@ -10,7 +9,7 @@ namespace Lastdew
 	public partial class PlayerCharacter : CharacterBody3D
 	{
 		public event Action OnEquipmentChanged;
-		public event Action<Item> OnLooted;
+		public event Action<Texture2D, string> OnLooted;
 		public event Action OnDeath;
 		
 		private const float INVULNERABILITY_DURATION = 1f;
@@ -189,10 +188,8 @@ namespace Lastdew
 		
 		public void UseItem(UsableItem item)
 		{
-			//this.PrintDebug($"Using {item.Name}, effects: {item.Effects.Count}");
 			foreach (Effect effect in item.Effects)
 			{
-				//this.PrintDebug($"Effect: {effect}");
 				effect.ApplyEffect(this);
 			}
 			if (!item.Reusable)
@@ -201,10 +198,47 @@ namespace Lastdew
 			}
 		}
 
-		public void CollectLoot(Item item)
+		public void CollectLoot(LootContainer container)
 		{
-			Inventory.AddItem(item);
-			OnLooted?.Invoke(item);
+			System.Collections.Generic.Dictionary<Item, int> itemsAndAmounts = [];
+			foreach (Item item in container.Loot)
+			{
+				Inventory.AddItem(item);
+				if (itemsAndAmounts.TryGetValue(item, out int value))
+				{
+					itemsAndAmounts[item] = ++value;
+				}
+				else
+				{
+					itemsAndAmounts[item] = 1;
+				}
+			}
+
+			foreach (KeyValuePair<Item, int> itemsAndAmount in itemsAndAmounts)
+			{
+				OnLooted?.Invoke(itemsAndAmount.Key.Icon,
+					$"{itemsAndAmount.Value} {itemsAndAmount.Key.Name}");
+			}
+			
+			if (container.Food > 0)
+			{
+				OnLooted?.Invoke(
+					GD.Load<Texture2D>(Uids.FOOD_ICON),
+					$"{container.Food.ToString()} Food");
+			}
+			if (container.Food > 0)
+			{
+				OnLooted?.Invoke(
+					GD.Load<Texture2D>(Uids.WATER_ICON),
+					$"{container.Water.ToString()} Water");
+			}
+			
+			Inventory.Food += container.Food;
+			Inventory.Water += container.Water;
+			
+			StatManager.Experience.GainExperience(container.Experience);
+			
+			container.Empty = true;
 		}
 
 		public void DisablePc()

@@ -28,7 +28,7 @@ namespace Lastdew
 			}
 			else
 			{
-				GD.PushWarning("Movement target wasn't a loot container.");
+				GD.PushError("Movement target wasn't a loot container.");
 				ChangeState(PcStateNames.IDLE);
 			}
 		}
@@ -59,20 +59,9 @@ namespace Lastdew
 			Timer -= delta;
 			if (Timer < 0)
 			{
-				Timer = 0;
-				GimmeTheLoot();
+				Pc.CollectLoot(LootContainer);
 				ChangeState(PcStateNames.IDLE);
 			}
-		}
-	
-		private void GimmeTheLoot()
-		{
-			foreach (Item item in LootContainer.Loot)
-			{
-				Pc.CollectLoot(item);
-			}
-			Pc.StatManager.Experience.GainExperience(LootContainer.Experience);
-			LootContainer.Empty = true;
 		}
 	}
 }

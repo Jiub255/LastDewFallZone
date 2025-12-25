@@ -5,7 +5,8 @@ namespace Lastdew
     public class GameStateHome : GameState
     {
 	    public override void EnterState(UiManager uiManager)
-        {
+	    {
+		    uiManager.MainMenu.ReturnToGame.Show();
             uiManager.MainMenu.Continue.Hide();
             uiManager.MainMenu.SaveGame.Show();
             uiManager.MainMenu.LoadGame.Show();

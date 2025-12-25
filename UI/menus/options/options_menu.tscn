@@ -26,7 +26,7 @@ layout_mode = 2
 theme_override_constants/separation = 75
 
 [node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 255.755)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -40,6 +40,12 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="VolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls"]
+layout_mode = 2
+theme_type_variation = &"LabelMedium"
+text = "Volume Controls"
+horizontal_alignment = 1
+
 [node name="MainVolume" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls"]
 layout_mode = 2
 theme_override_constants/separation = 75
@@ -49,7 +55,8 @@ alignment = 1
 custom_minimum_size = Vector2(454, 0)
 layout_mode = 2
 theme_type_variation = &"LabelMedium"
-text = "Main Volume"
+text = "Main"
+horizontal_alignment = 1
 
 [node name="MainSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls/MainVolume"]
 unique_name_in_owner = true
@@ -96,10 +103,58 @@ alignment = 1
 custom_minimum_size = Vector2(454, 0)
 layout_mode = 2
 theme_type_variation = &"LabelMedium"
-text = "Sfx"
+text = "Sounds"
 horizontal_alignment = 1
 
 [node name="SfxSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls/SfxVolume"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.001
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="UiVolume" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls"]
+layout_mode = 2
+theme_override_constants/separation = 75
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls/UiVolume"]
+custom_minimum_size = Vector2(454, 0)
+layout_mode = 2
+theme_type_variation = &"LabelMedium"
+text = "UI"
+horizontal_alignment = 1
+
+[node name="UiSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls/UiVolume"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.001
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="CombatVolume" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls"]
+layout_mode = 2
+theme_override_constants/separation = 75
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls/CombatVolume"]
+custom_minimum_size = Vector2(454, 0)
+layout_mode = 2
+theme_type_variation = &"LabelMedium"
+text = "Combat"
+horizontal_alignment = 1
+
+[node name="CombatSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls/CombatVolume"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2

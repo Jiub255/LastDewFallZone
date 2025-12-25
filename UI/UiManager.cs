@@ -69,6 +69,7 @@ namespace Lastdew
 	        CharacterMenu.SubscribeToEvents(teamData);
 
 	        MainMenu.Options.Pressed += ToggleOptionsMenu;
+	        MainMenu.ReturnToGame.Pressed += ToggleMainMenu;
 	        OptionsMenu.Back.Pressed += ToggleMainMenu;
         }
 		
@@ -244,6 +245,7 @@ namespace Lastdew
         private void UnsubscribeFromEvents()
         {
 	        MainMenu.Options.Pressed -= ToggleOptionsMenu;
+	        MainMenu.ReturnToGame.Pressed -= ToggleMainMenu;
 	        OptionsMenu.Back.Pressed -= ToggleMainMenu;
         }
 	}

@@ -10,6 +10,7 @@ namespace Lastdew
 		public event Func<Task> OnNewGame;
 		public event Func<Task> OnLoadGame;
 		
+		public SfxButton ReturnToGame { get; private set; }
 		public SfxButton Continue { get; private set; }
 		public SfxButton SaveGame { get; private set;}
 		public SfxButton LoadGame { get; private set;}
@@ -19,6 +20,7 @@ namespace Lastdew
 		
 		public override void _Ready()
 		{
+			ReturnToGame = GetNode<SfxButton>("%ReturnToGame");
 			Continue = GetNode<SfxButton>("%Continue");
 			SaveGame = GetNode<SfxButton>("%SaveGame");
 			LoadGame = GetNode<SfxButton>("%LoadGame");

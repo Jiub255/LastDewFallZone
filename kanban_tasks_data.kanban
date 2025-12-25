@@ -152,7 +152,8 @@
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"a7736d0e-0934-46e7-b9ac-a395c067f8bc",
 				"e8b9c0fd-ef0b-43b3-9515-a357d21c0bc4",
-				"fb8bd137-94ab-4336-9dad-e3cc413d7b54"
+				"fb8bd137-94ab-4336-9dad-e3cc413d7b54",
+				"58375c30-f072-4b4e-9040-947f76b5ff92"
 			]
 		},
 		{
@@ -1398,6 +1399,13 @@
 			"uuid": "172e7e98-c6f5-4803-b224-8b4907bb3a22",
 			"title": "Make storyline",
 			"description": "Could do it similar to lsdz. Look more into that first.\nMaybe have each phase of the story unlock a new zone, so you can go farther out and get better stuff (with harder fights of course)\nCould have unique dialogs with your teammates for each phase in the story, kinda bg3 camp style.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "58375c30-f072-4b4e-9040-947f76b5ff92",
+			"title": "Make return to game button on main menu",
+			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

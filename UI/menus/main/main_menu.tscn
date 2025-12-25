@@ -38,6 +38,13 @@ text = "Last Dew: Fall Zone"
 fit_content = true
 autowrap_mode = 0
 
+[node name="ReturnToGame" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Return to Game"
+script = ExtResource("2_s8540")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
 [node name="Continue" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

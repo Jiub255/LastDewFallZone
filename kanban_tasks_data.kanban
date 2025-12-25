@@ -49,7 +49,8 @@
 				"214fa122-5f85-4d1c-8dec-27c303c9b928",
 				"7329598e-d6a5-4966-b3f8-1bc8e6065cca",
 				"aa9c66c4-df29-49c6-894b-e930ce28a545",
-				"e85eef6f-6e91-456c-a8e1-002988609629"
+				"e85eef6f-6e91-456c-a8e1-002988609629",
+				"b0fce1aa-855b-4ccc-86cd-10ce2eedef28"
 			]
 		},
 		{
@@ -193,15 +194,15 @@
 				"222d537e-4518-49ad-ab18-d77514631a14",
 				"6325288b-1526-4b3f-a1f2-c196a4183edc",
 				"c9005d6e-bc7e-4ed9-a4b6-031a2efe62d2",
-				"c929308b-9f19-4932-b4b2-7eb353e4d3ef"
+				"c929308b-9f19-4932-b4b2-7eb353e4d3ef",
+				"da216ecd-2812-4528-8f81-a15e3d1ad8a9"
 			]
 		},
 		{
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"8c8729bd-b42c-4305-b2e8-dca50b070672",
-				"da216ecd-2812-4528-8f81-a15e3d1ad8a9"
+				"8c8729bd-b42c-4305-b2e8-dca50b070672"
 			]
 		},
 		{
@@ -220,7 +221,8 @@
 				"4e480fd7-ac8e-4a6f-8730-2cede90597ca",
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
-				"fd1829f1-cd5c-4463-8a31-88502fe3de44"
+				"fd1829f1-cd5c-4463-8a31-88502fe3de44",
+				"172e7e98-c6f5-4803-b224-8b4907bb3a22"
 			]
 		}
 	],
@@ -1367,14 +1369,14 @@
 		{
 			"uuid": "da216ecd-2812-4528-8f81-a15e3d1ad8a9",
 			"title": "Export build is broken",
-			"description": "Freezes once you hit new game",
+			"description": "FIXED by changing project_settings/editor/export/convert_text_resources_to_binary to false. It was messing up UID database system.\nAlso by getting a few left behind textures out of unused_assets and putting them in the actual exported game files where they should have been. Just gotta be careful to grab all the textures/material for each prefab.\n\nFreezes once you hit new game\n\nMight have something to do with using UIDs to load resources. \n\nGetting these errors:\n\nLoading resource: res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res\nERROR: Cannot open file 'res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res'.\n   at: load (core/io/resource_format_binary.cpp:1225)\nFailed loading resource: res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res\nERROR: Failed loading resource: res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res. Make sure resources have been imported by opening the project in the editor at least once.\n   at: _load (core/io/resource_loader.cpp:343)\n\nERROR: Can't load dependency: 'res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res'.\n   at: parse_variant (core/io/resource_format_binary.cpp:459)\nERROR: Error when trying to parse Variant.\n   at: parse_variant (core/io/resource_format_binary.cpp:503)\nERROR: Error when trying to parse Variant.\n   at: parse_variant (core/io/resource_format_binary.cpp:490)\nFailed loading resource: res://.godot/exported/133200997/export-573786bf801453280fca3d13749a2c19-homebase.scn\nERROR: Failed loading resource: res://.godot/exported/133200997/export-573786bf801453280fca3d13749a2c19-homebase.scn. Make sure resources have been imported by opening the project in the editor at least once.\n   at: _load (core/io/resource_loader.cpp:343)\nERROR: Error loading resource: 'uid://ffc0mkxnmvb2'.\n   at: load (core/core_bind.cpp:76)\n\nThe homebase ground was using that NewLayer 1 asset from unused_assets. Moved it to world/terrain.\nThat helped? Less errors now, but very little actual info:\n\nERROR: Invalid UID.\n   at: get_id_path (core/io/resource_uid.cpp:154)\nLoading resource: \nFailed loading resource: \nERROR: No loader found for resource:  (expected type: )\n   at: _load (core/io/resource_loader.cpp:359)\nERROR: Error loading resource: 'uid://<invalid>'.\n   at: load (core/core_bind.cpp:76)",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
 		{
 			"uuid": "aa9c66c4-df29-49c6-894b-e930ce28a545",
 			"title": "Get more assets",
-			"description": "Either start going through the ones in unused_assets, or find some other stuff. Need much more content to start testing the game out proper.\nNeed:\n\tLoot containers\n\tStatic decorations for levels\n\tMore enemies\n\tAt least a few scavenging levels - maybe eventually do this procedurally?\n\tFill out homebase (just the starting state of it)\n\tMore buildings, with new abilities/bonuses\n\tMany more items - a lot more item tags too, want to have fine grained control over loot containers while still being random.\n\t\tHave stuff like Hospital, Police, Residential, etc. as well as types of items like Medical, Combat, etc.\n\t\tMight even do a separate location tag thing to go with item tags.",
+			"description": "Either start going through the ones in unused_assets, or find some other stuff. Need much more content to start testing the game out proper.\nNeed:\n\tLoot containers\n\tStatic decorations for levels\n\tMore enemies\n\tAt least a few scavenging levels - maybe eventually do this procedurally?\n\tFill out homebase (just the starting state of it)\n\tMore buildings, with new abilities/bonuses\n\tMany more items - a lot more item tags too, want to have fine grained control over loot containers while still being random.\n\t\tHave stuff like Hospital, Police, Residential, etc. as well as types of items like Medical, Combat, etc.\n\t\tMight even do a separate location tag thing to go with item tags.\n\t\nAlso, modify the Mugshotter to take icon photos of craftable assets, especially items. Could just save the png and no item resources so the UIDs don't get messed up.\n\nAlso, add lights to scenes. Experiment with different lightings/shaders.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1382,6 +1384,20 @@
 			"uuid": "e85eef6f-6e91-456c-a8e1-002988609629",
 			"title": "Rework UI",
 			"description": "Figure out how exactly to set it up. Needs to be some sort of inventory to see what all you have.\nStudy the lsdz system, improve on that. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "b0fce1aa-855b-4ccc-86cd-10ce2eedef28",
+			"title": "Make more audio buses for different types of sounds?",
+			"description": "Have like UI, combat, ambient noises, etc? All feeding into the Sfx bus, Music is its own thing.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "172e7e98-c6f5-4803-b224-8b4907bb3a22",
+			"title": "Make storyline",
+			"description": "Could do it similar to lsdz. Look more into that first.\nMaybe have each phase of the story unlock a new zone, so you can go farther out and get better stuff (with harder fights of course)\nCould have unique dialogs with your teammates for each phase in the story, kinda bg3 camp style.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://demwy1hnjvfqv" path="res://world/HomeBase.cs" id="1_gupvy"]
 [ext_resource type="AudioStream" uid="uid://clf7roymkk4mt" path="res://audio/music/zapsplat/music_zapsplat_abandoned.mp3" id="2_e3wgk"]
-[ext_resource type="Material" uid="uid://wnux2tpo35ln" path="res://unused_assets/Polygon-Mega Survival Forest/Textures/TerrainTextures/NewLayer 1.terrainlayer.res" id="2_gupvy"]
+[ext_resource type="Material" uid="uid://wnux2tpo35ln" path="res://world/terrain/NewLayer 1.terrainlayer.res" id="2_gupvy"]
 [ext_resource type="PackedScene" uid="uid://dddxdv8rfhdqx" path="res://game_objects/outdoor/campfire/Bonfire_01.prefab.scn" id="3_e3wgk"]
 [ext_resource type="PackedScene" uid="uid://ct1khmv5poft2" path="res://game_objects/outdoor/tent/Tent_A_01.prefab.scn" id="4_ixuoh"]
 [ext_resource type="PackedScene" uid="uid://cedx1qwq0577e" path="res://game_objects/outdoor/birch/SM_Birch_03.prefab.scn" id="5_w2bck"]

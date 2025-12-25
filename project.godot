@@ -42,6 +42,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="LastDew-FallZone"
 
+[editor]
+
+export/convert_text_resources_to_binary=false
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/namespacer/plugin.cfg", "res://addons/resource_database_filler/plugin.cfg", "res://addons/resource_editor/plugin.cfg", "res://addons/terrain_3d/plugin.cfg", "res://addons/unidot_importer/plugin.cfg", "res://addons/vrm/plugin.cfg")

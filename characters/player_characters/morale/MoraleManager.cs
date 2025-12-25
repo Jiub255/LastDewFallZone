@@ -26,7 +26,7 @@ namespace Lastdew
 		public MoraleManager(TeamData teamData)
 		{
 			_teamData = teamData;
-			// TODO: Subscribe to all the "changed" events from food, water, buildings, pcs injury,
+			// TODO: Subscribe to all the "changed" events from food, water, buildings,
 			// anything that affects morale.
 		}
 

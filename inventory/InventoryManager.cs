@@ -141,6 +141,8 @@ namespace Lastdew
 			Dictionary<long, int> inventory = new();
 			foreach (KeyValuePair<Item, int> item in this)
 			{
+				// TODO: This might not work on export. Might have to redo Craftables and PcDatas 
+				// to not use UIDs. Not sure.
 				long uid = ResourceLoader.GetResourceUid(item.Key.ResourcePath);
 				inventory[uid] = item.Value;
 			}

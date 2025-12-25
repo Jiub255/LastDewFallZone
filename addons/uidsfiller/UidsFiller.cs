@@ -1,10 +1,11 @@
+#if TOOLS
+
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Lastdew
 {
+	[Tool]
     public partial class UidsFiller : EditorPlugin
     {
 		private const string DIRECTORY = "res://";
@@ -114,3 +115,4 @@ namespace Lastdew
 		}
     }
 }
+#endif

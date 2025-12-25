@@ -67,7 +67,7 @@ namespace Lastdew
 			return true;
 		}
 
-		public void Purchase(InventoryManager items)
+		public void Purchase(InventoryManager inventory)
 		{
 			foreach ((long uid, int amount) in RecipeCosts)
 			{
@@ -76,7 +76,7 @@ namespace Lastdew
 				{
 					continue;
 				}
-				items.RemoveItems(material, amount);
+				inventory.RemoveItems(material, amount);
 			}
 		}
 	}

@@ -7,7 +7,7 @@ namespace Lastdew
 	/// No reason to have them so limited.
 	/// </summary>
 	[GlobalClass, Tool]
-	public partial class RelievePainEffect : Effect
+	public partial class RelievePain : Effect
 	{
 		[Export]
 		public int ReliefAmount { get; private set; }

@@ -69,6 +69,8 @@ namespace Lastdew
 			{
 				return;
 			}
+			// TODO: Pass TeamData in here. To get highest medical stat for heal injury item, etc.
+			// Can still get current menu selected PC from there.
 			ItemButton.Item.OnClickItem(TeamData.Pcs[TeamData.MenuSelectedIndex]);
 			ItemButton.Amount--;
 			if (ItemButton.Amount == 0)

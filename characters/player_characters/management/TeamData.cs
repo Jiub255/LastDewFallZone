@@ -39,6 +39,10 @@ namespace Lastdew
 				OnMenuSelectedChanged?.Invoke();
 			}
 		}
+		// TODO: Stop using this. Just move pcs from/to scene tree as needed when switching levels.
+		// That way can always access their data for morale, etc.
+		// Might be easier to just have a MoraleManager.Setup() method, and call it right after 
+		// PcManager.SpawnPcs() in Game.SetupLevel(). 
 		public List<PcSaveData> UnusedPcDatas { get; private set; } = [];
 		public InventoryManager Inventory { get; } = new();
 		

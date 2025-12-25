@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="UsableItem" load_steps=5 format=3 uid="uid://bd2tifuoxk3os"]
+
+[ext_resource type="Script" uid="uid://bi02ojo6l0h1j" path="res://craftables/items/usable_items/effects/Effect.cs" id="1_fpolu"]
+[ext_resource type="Texture2D" uid="uid://b74ul46fx48vy" path="res://craftables/items/crafting_materials/icon_cloth.png" id="2_0omue"]
+[ext_resource type="Resource" uid="uid://b654xmmh7c4t7" path="res://craftables/items/usable_items/effects/heal_injury_50.tres" id="2_7xlha"]
+[ext_resource type="Script" uid="uid://d2k7fseog6yq2" path="res://craftables/items/usable_items/UsableItem.cs" id="3_7xlha"]
+
+[resource]
+script = ExtResource("3_7xlha")
+Reusable = false
+Effects = Array[ExtResource("1_fpolu")]([ExtResource("2_7xlha")])
+ItemRarity = 1
+Tags = Array[int]([1])
+Name = "Bandage"
+Description = "Heal 50 injury"
+Icon = ExtResource("2_0omue")
+RecipeCosts = Dictionary[int, int]({
+231828703336004085: 2,
+8896933309009772036: 1
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({
+4: 1
+})

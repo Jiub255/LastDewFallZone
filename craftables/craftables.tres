@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Craftables" load_steps=22 format=3 uid="uid://71lhgtyj3vnx"]
+[gd_resource type="Resource" script_class="Craftables" load_steps=23 format=3 uid="uid://71lhgtyj3vnx"]
 
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_f1bwi"]
 [ext_resource type="Script" uid="uid://cdksnkutkwfx2" path="res://craftables/Craftables.cs" id="1_u67xb"]
@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://cc3w14nirw5mh" path="res://craftables/items/equipment/weapons/axe.tres" id="13_i2fbg"]
 [ext_resource type="Resource" uid="uid://bjxqwpu03fbil" path="res://craftables/items/usable_items/sdfgsdf7676fg.tres" id="14_01mmw"]
 [ext_resource type="Resource" uid="uid://bql6xfri675nh" path="res://craftables/items/usable_items/ftdh.tres" id="16_jowtw"]
+[ext_resource type="Resource" uid="uid://bd2tifuoxk3os" path="res://craftables/items/usable_items/bandage.tres" id="20_bnb0w"]
 
 [resource]
 script = ExtResource("1_u67xb")
@@ -44,6 +45,7 @@ Equipments = Dictionary[int, ExtResource("2_taw0v")]({
 })
 UsableItems = Dictionary[int, ExtResource("4_eg58c")]({
 1687880338841201454: ExtResource("11_nstv5"),
+2653893617360710750: ExtResource("20_bnb0w"),
 3066612544048779943: ExtResource("14_01mmw"),
 3534073926516478185: ExtResource("16_jowtw"),
 7223256205765527397: ExtResource("12_rqomc")

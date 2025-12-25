@@ -1,3 +1,5 @@
+#if TOOLS
+
 using Godot;
 
 namespace Lastdew
@@ -23,3 +25,4 @@ namespace Lastdew
         }
     }
 }
+#endif

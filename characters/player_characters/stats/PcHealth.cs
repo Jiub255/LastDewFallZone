@@ -72,6 +72,11 @@ namespace Lastdew
 			Injury = Math.Min(Injury + damage, MAX_INJURY);
 			return Injury >= MAX_INJURY;
 		}
+
+		public void HealInjury(int amount)
+		{
+			Injury = Math.Max(Injury - amount, 0);
+		}
 		
 		public void RelievePain(int amount, float duration)
 		{

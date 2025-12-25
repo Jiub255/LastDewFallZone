@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="HealInjury" load_steps=2 format=3 uid="uid://b654xmmh7c4t7"]
+
+[ext_resource type="Script" uid="uid://bbti1042uf5p2" path="res://craftables/items/usable_items/effects/HealInjury.cs" id="1_vu5ko"]
+
+[resource]
+script = ExtResource("1_vu5ko")
+HealAmount = 50
+metadata/_custom_type_script = "uid://bbti1042uf5p2"

@@ -48,15 +48,17 @@
 				"66e4ae30-0330-4cea-babb-74aab3314288",
 				"214fa122-5f85-4d1c-8dec-27c303c9b928",
 				"7329598e-d6a5-4966-b3f8-1bc8e6065cca",
-				"d1adddcc-8d19-4763-94e7-4180fac8440c"
+				"aa9c66c4-df29-49c6-894b-e930ce28a545",
+				"e85eef6f-6e91-456c-a8e1-002988609629"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
+				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
-				"0e82596b-3f97-42e0-b018-06d7658cd4d3"
+				"d1adddcc-8d19-4763-94e7-4180fac8440c"
 			]
 		},
 		{
@@ -198,7 +200,8 @@
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"8c8729bd-b42c-4305-b2e8-dca50b070672"
+				"8c8729bd-b42c-4305-b2e8-dca50b070672",
+				"da216ecd-2812-4528-8f81-a15e3d1ad8a9"
 			]
 		},
 		{
@@ -385,7 +388,7 @@
 		{
 			"uuid": "d1adddcc-8d19-4763-94e7-4180fac8440c",
 			"title": "Morale",
-			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\nMaybe? Have it easier to increase when low, and harder when high. Like, finding a single book would be a huge morale boost if it's all you have, but not too big a deal if you already have a library. \n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\t\tQOL items: Books, Plants/decorations, games, musical instruments\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs, negatively or positively\n\tOdds of new survivors joining your base\n",
+			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\nMaybe? Have it easier to increase when low, and harder when high. Like, finding a single book would be a huge morale boost if it's all you have, but not too big a deal if you already have a library. \n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\t\tQOL items: Books, Plants/decorations, games, musical instruments\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs, negatively or positively\n\tOdds of new survivors joining your base\n\nSo needs access to TeamData, which has Inventory, Pcs, and Buildings. \nCould put it in Game, or maybe just straight into TeamData.\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1189,7 +1192,7 @@
 		{
 			"uuid": "0e82596b-3f97-42e0-b018-06d7658cd4d3",
 			"title": "Medical system",
-			"description": "How to heal PCs? \nUse medical items like bandages and medicine to just heal some amount of injury in general?\nOr have like splints for broken bones, bandages for cuts, etc?\nAlso how will medical skill play into it? Healing rate depends on highest medical skill of your pcs?\nWill healing take time or be instant?\nMaybe just have it so medical items just heal x injury in general, act instantly, and their strength is affected by your highest medical skill and any medical tools/buildings you have.",
+			"description": "How to heal PCs? \nUse medical items like bandages and medicine to just heal some amount of injury in general?\nOr have like splints for broken bones, bandages for cuts, etc?\nAlso how will medical skill play into it? Healing rate depends on highest medical skill of your pcs?\nWill healing take time or be instant?\n\nJust have it so medical items just heal x injury in general, act instantly, and their strength is affected by your highest medical skill and any medical tools/buildings you have.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1359,6 +1362,27 @@
 			"title": "Combat not pausing when opening main menu in scavenging level",
 			"description": "FIXED by changing process mode from Inherit to Pausable in PlayerCharacter and Enemy. Program has it set to Always to everything was inheriting that.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "da216ecd-2812-4528-8f81-a15e3d1ad8a9",
+			"title": "Export build is broken",
+			"description": "Freezes once you hit new game",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "aa9c66c4-df29-49c6-894b-e930ce28a545",
+			"title": "Get more assets",
+			"description": "Either start going through the ones in unused_assets, or find some other stuff. Need much more content to start testing the game out proper.\nNeed:\n\tLoot containers\n\tStatic decorations for levels\n\tMore enemies\n\tAt least a few scavenging levels - maybe eventually do this procedurally?\n\tFill out homebase (just the starting state of it)\n\tMore buildings, with new abilities/bonuses\n\tMany more items - a lot more item tags too, want to have fine grained control over loot containers while still being random.\n\t\tHave stuff like Hospital, Police, Residential, etc. as well as types of items like Medical, Combat, etc.\n\t\tMight even do a separate location tag thing to go with item tags.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "e85eef6f-6e91-456c-a8e1-002988609629",
+			"title": "Rework UI",
+			"description": "Figure out how exactly to set it up. Needs to be some sort of inventory to see what all you have.\nStudy the lsdz system, improve on that. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}
 	],

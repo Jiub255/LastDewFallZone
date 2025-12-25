@@ -1,3 +1,5 @@
+#if TOOLS
+
 using System.Collections.Generic;
 using Godot;
 
@@ -192,3 +194,4 @@ namespace Lastdew
 
 	}
 }
+#endif

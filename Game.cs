@@ -45,6 +45,7 @@ namespace Lastdew
 			
 			MusicPlayer.Stream = StartMenuSong;
 			MusicPlayer.Play();
+			MusicPlayer.Bus = new StringName("Music");
 			
 			PcManager.Initialize(TeamData);
 			Ui.SubscribeToEvents(TeamData);
@@ -80,34 +81,38 @@ namespace Lastdew
 
 		private void SubscribeToEvents()
 		{
+			Camera.ClickHandlerBuild.OnPlacedBuilding += PlaceBuilding;
 			Camera.ClickHandlerGame.OnClickedPc += PcManager.SelectPc;
 			Camera.ClickHandlerGame.OnClickedMoveTarget += PcManager.MoveTo;
+			
+			PcManager.OnLooted += Ui.Hud.AddToQueue;
+			
+			TimeManager.OnNewDay += LoseFoodAndWater;
+			
+			Ui.Hud.OnCenterOnPc += Camera.CenterOnPc;
 			Ui.MainMenu.OnNewGame += StartNewGame;
 			Ui.MainMenu.OnSaveGame += Save;
 			Ui.MainMenu.OnLoadGame += Load;
-			Ui.MapMenu.OnStartScavenging += StartScavenging;
 			Ui.MainMenu.OnReturnToBase += ReturnToBase;
-			PcManager.OnLooted += Ui.Hud.AddToQueue;
-			Ui.Hud.OnCenterOnPc += Camera.CenterOnPc;
-			
-			Camera.ClickHandlerBuild.OnPlacedBuilding += PlaceBuilding;
-			TimeManager.OnNewDay += LoseFoodAndWater;
+			Ui.MapMenu.OnStartScavenging += StartScavenging;
 		}
 
         private void UnsubscribeFromEvents()
 		{
+			Camera.ClickHandlerBuild.OnPlacedBuilding -= PlaceBuilding;
 			Camera.ClickHandlerGame.OnClickedPc -= PcManager.SelectPc;
 			Camera.ClickHandlerGame.OnClickedMoveTarget -= PcManager.MoveTo;
+			
+			PcManager.OnLooted -= Ui.Hud.AddToQueue;
+			
+			TimeManager.OnNewDay -= LoseFoodAndWater;
+			
+			Ui.Hud.OnCenterOnPc -= Camera.CenterOnPc;
 			Ui.MainMenu.OnNewGame -= StartNewGame;
 			Ui.MainMenu.OnSaveGame -= Save;
 			Ui.MainMenu.OnLoadGame -= Load;
-			Ui.MapMenu.OnStartScavenging -= StartScavenging;
 			Ui.MainMenu.OnReturnToBase -= ReturnToBase;
-			PcManager.OnLooted -= Ui.Hud.AddToQueue;
-			Ui.Hud.OnCenterOnPc -= Camera.CenterOnPc;
-			
-			Camera.ClickHandlerBuild.OnPlacedBuilding -= PlaceBuilding;
-			TimeManager.OnNewDay -= LoseFoodAndWater;
+			Ui.MapMenu.OnStartScavenging -= StartScavenging;
 		}
 
 		private async Task StartNewGame()
@@ -174,13 +179,12 @@ namespace Lastdew
 			{
 				homeBase.Initialize(buildingSaveDatas);
 				Ui.BuildMenu.OnBuild += homeBase.AddBuilding;
-				TimeManager.Initialize(homeBase);
+				TimeManager.HomeBase = homeBase;
 			}
 			else
 			{
 				CurrentLevel.Initialize(buildingSaveDatas);
-				// TODO: Necessary to set TimeManager.HomeBase to null here?
-				// Or does the queue free take care of that?
+				TimeManager.HomeBase = null;
 			}
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),

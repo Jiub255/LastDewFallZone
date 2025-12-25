@@ -19,6 +19,7 @@ namespace Lastdew
 	        this.AddChildDeferred(AudioStreamPlayer);
 		    AudioStreamPlayer.Stream = Click;
 		    AudioStreamPlayer.VolumeDb = VOLUME;
+		    AudioStreamPlayer.Bus = new StringName("Sfx");
 
 		    ButtonDown += PlayPressSound;
 		    ButtonUp += PlayReleaseSound;

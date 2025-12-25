@@ -33,6 +33,7 @@ namespace Lastdew
 			AudioStreamPlayer.Stream = Click;
 			AudioStreamPlayer.VolumeDb = VOLUME;
 			AudioStreamPlayer.PitchScale = PRESS_PITCH;
+			AudioStreamPlayer.Bus = new StringName("Sfx");
 		}
 
 		public override void _Process(double delta)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvqh38ovds5vf"]
+[gd_scene load_steps=15 format=3 uid="uid://dvqh38ovds5vf"]
 
 [ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://Game.cs" id="1_e8jue"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://camera/camera.tscn" id="2_hliwg"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dh8qmjetlrm2d" path="res://UI/menus/crafting/crafting_menu.tscn" id="10_boyg6"]
 [ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/menus/map/map_menu.tscn" id="11_e36ub"]
 [ext_resource type="Environment" uid="uid://demmrxsekmoyp" path="res://world/environment.tres" id="11_hliwg"]
+[ext_resource type="PackedScene" uid="uid://bfsk62j0vmhd1" path="res://UI/menus/options/options_menu.tscn" id="12_215e1"]
 [ext_resource type="PackedScene" uid="uid://dgnkps730uihc" path="res://UI/fader/fader.tscn" id="13_lc2xo"]
 
 [node name="Game" type="Node"]
@@ -63,6 +64,10 @@ unique_name_in_owner = true
 visible = false
 
 [node name="MapMenu" parent="UiManager" instance=ExtResource("11_e36ub")]
+unique_name_in_owner = true
+visible = false
+
+[node name="OptionsMenu" parent="UiManager" instance=ExtResource("12_215e1")]
 unique_name_in_owner = true
 visible = false
 

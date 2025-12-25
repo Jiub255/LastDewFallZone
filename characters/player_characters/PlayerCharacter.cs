@@ -58,6 +58,7 @@ namespace Lastdew
 		{
 			AudioStreamPlayer3D audioStreamPlayer = GetNode<AudioStreamPlayer3D>("%AudioStreamPlayer3D");
 			audioStreamPlayer.Play();
+			audioStreamPlayer.Bus = new StringName("Sfx");
 			AudioPlayback = (AudioStreamPlaybackPolyphonic)audioStreamPlayer.GetStreamPlayback();
 		}
 		

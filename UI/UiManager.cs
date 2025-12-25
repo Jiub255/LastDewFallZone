@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -7,10 +6,11 @@ namespace Lastdew
 	{
 		public MainMenu MainMenu { get; private set; }
 		public Hud Hud { get; private set; }
-		public CharacterMenu CharacterMenu { get; private set; }
-		public CraftingMenu CraftingMenu { get; private set; }
 		public BuildMenu BuildMenu { get; private set; }
 		public MapMenu MapMenu { get; private set; }
+		private CharacterMenu CharacterMenu { get; set; }
+		private CraftingMenu CraftingMenu { get; set; }
+		private OptionsMenu OptionsMenu { get; set; }
 		
 		private GameState CurrentState { get; set; }
 		private bool AnyMenuOpen { get; set; }
@@ -23,6 +23,7 @@ namespace Lastdew
 			CraftingMenu = GetNode<CraftingMenu>("%CraftingMenu");
 			BuildMenu = GetNode<BuildMenu>("%BuildMenu");
 			MapMenu = GetNode<MapMenu>("%MapMenu");
+			OptionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
 
 			ConnectHudButtons();
 
@@ -31,6 +32,7 @@ namespace Lastdew
 			CloseMenu(CraftingMenu);
 			CloseMenu(BuildMenu);
 			CloseMenu(MapMenu);
+			CloseMenu(OptionsMenu);
 
 			ChangeState(new GameStateStart());			
 		}
@@ -44,6 +46,7 @@ namespace Lastdew
             {
                 UnsubscribeState(CurrentState);
             }
+            UnsubscribeFromEvents();
         }
 
         public override void _Process(double delta)
@@ -64,6 +67,9 @@ namespace Lastdew
 	        BuildMenu.SubscribeToEvents(teamData.Inventory);
 	        CraftingMenu.SubscribeToEvents(teamData.Inventory);
 	        CharacterMenu.SubscribeToEvents(teamData);
+
+	        MainMenu.Options.Pressed += ToggleOptionsMenu;
+	        OptionsMenu.Back.Pressed += ToggleMainMenu;
         }
 		
         /// <summary>
@@ -144,6 +150,11 @@ namespace Lastdew
 			Toggle(BuildMenu);
 		}
 
+		private void ToggleOptionsMenu()
+		{
+			Toggle(OptionsMenu);
+		}
+
 		private void OpenMenu(Menu menu)
 		{
 			if (menu.Visible)
@@ -174,11 +185,12 @@ namespace Lastdew
 
 		private void CloseAllMenus(bool exceptHud = true)
 		{
+			CloseMenu(BuildMenu);
 			CloseMenu(CharacterMenu);
 			CloseMenu(CraftingMenu);
-			CloseMenu(BuildMenu);
-			CloseMenu(MapMenu);
 			CloseMenu(MainMenu);
+			CloseMenu(MapMenu);
+			CloseMenu(OptionsMenu);
 
 			if (exceptHud)
 			{
@@ -227,6 +239,12 @@ namespace Lastdew
 	        Hud.Character.Pressed -= ToggleCharacterMenu;
 	        Hud.Map.Pressed -= ToggleMapMenu;
 	        Hud.Main.Pressed -= ToggleMainMenu;
+        }
+
+        private void UnsubscribeFromEvents()
+        {
+	        MainMenu.Options.Pressed -= ToggleOptionsMenu;
+	        OptionsMenu.Back.Pressed -= ToggleMainMenu;
         }
 	}
 }

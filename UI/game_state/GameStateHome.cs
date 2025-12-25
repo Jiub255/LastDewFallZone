@@ -11,6 +11,7 @@ namespace Lastdew
             uiManager.MainMenu.ReturnToBaseButton.Hide();
             uiManager.MainMenu.LoadGame.Show();
             uiManager.MainMenu.NewGame.Hide();
+            uiManager.MainMenu.Options.Show();
             uiManager.MainMenu.Exit.InStartMenu = false;
 
             uiManager.Hud.Build.Show();

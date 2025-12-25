@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Lastdew
 {
-	public partial class TeamData
+	public class TeamData
 	{
 		public event Action OnMenuSelectedChanged;
 		

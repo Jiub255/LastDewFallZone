@@ -28,6 +28,10 @@ run/main_scene="uid://cksq1a2wxrts0"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://UI/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
+
 [display]
 
 window/size/viewport_width=3440
@@ -188,4 +192,4 @@ jolt_physics_3d/simulation/areas_detect_static_bodies=true
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.303233, 0.303233, 0.303233, 1)

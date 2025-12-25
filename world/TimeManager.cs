@@ -29,12 +29,7 @@ namespace Lastdew
 		/// </summary>
 		private float TickRate => 24 * 60 / dayLengthInMinutes;
 
-		private HomeBase HomeBase { get; set; }
-
-		public void Initialize(HomeBase homeBase)
-		{
-			HomeBase = homeBase;
-		}
+		public HomeBase HomeBase { get; set; }
 		
 		public void Process(float delta)
 		{

@@ -5,7 +5,7 @@ using Godot;
 
 namespace Lastdew
 {
-	public partial class InventoryManager : IEnumerable<KeyValuePair<Item, int>>
+	public class InventoryManager : IEnumerable<KeyValuePair<Item, int>>
 	{
 		public event Action OnInventoryChanged;
 		public event Action OnFoodChanged;

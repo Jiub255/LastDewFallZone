@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://jlnwj0thfhrf"]
+[gd_scene load_steps=13 format=3 uid="uid://jlnwj0thfhrf"]
 
 [ext_resource type="Script" uid="uid://dunm418v5lhid" path="res://UI/menus/hud/Hud.cs" id="1_asb0d"]
 [ext_resource type="Texture2D" uid="uid://clisgnymen51" path="res://UI/menus/hud/build.png" id="2_4dvhw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bq4v1hv8062s6" path="res://UI/menus/hud/map.png" id="6_mvsff"]
 [ext_resource type="Texture2D" uid="uid://dpqf4xvsiyq8w" path="res://UI/menus/hud/main.png" id="7_qhrhg"]
 [ext_resource type="Script" uid="uid://borih5x4s3yjb" path="res://UI/menus/hud/Clock.cs" id="8_2fhsu"]
+[ext_resource type="Texture2D" uid="uid://c82qip3rv70nl" path="res://UI/menus/hud/return_home.png" id="8_bmggi"]
 [ext_resource type="Texture2D" uid="uid://lgytv07nml1y" path="res://UI/menus/hud/icon_food.png" id="8_qhrhg"]
 [ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://UI/menus/hud/icon_water.png" id="9_bmggi"]
 
@@ -126,6 +127,21 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_bmggi")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bmggi")
 icon = ExtResource("7_qhrhg")
+expand_icon = true
+script = ExtResource("3_qrh5t")
+metadata/_custom_type_script = "uid://b5sycom274m8x"
+
+[node name="ReturnHome" type="Button" parent="MarginContainer/MenuButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+tooltip_text = "Return To Base"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bmggi")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bmggi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bmggi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bmggi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bmggi")
+icon = ExtResource("8_bmggi")
 expand_icon = true
 script = ExtResource("3_qrh5t")
 metadata/_custom_type_script = "uid://b5sycom274m8x"

@@ -45,16 +45,19 @@
 			"uuid": "35398ea1-69e0-486b-bafd-d8ad72565c5f",
 			"title": "NEXT",
 			"tasks": [
-				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"66e4ae30-0330-4cea-babb-74aab3314288",
-				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
-				"214fa122-5f85-4d1c-8dec-27c303c9b928"
+				"214fa122-5f85-4d1c-8dec-27c303c9b928",
+				"7329598e-d6a5-4966-b3f8-1bc8e6065cca",
+				"d1adddcc-8d19-4763-94e7-4180fac8440c"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
-			"tasks": []
+			"tasks": [
+				"b160ad9c-efa6-432a-b68c-ea5625b16268",
+				"0e82596b-3f97-42e0-b018-06d7658cd4d3"
+			]
 		},
 		{
 			"uuid": "4aeb1722-9a02-459d-81af-f17bb7d9e014",
@@ -187,7 +190,8 @@
 				"d98416df-4541-4af7-9ef7-c68f9945263e",
 				"222d537e-4518-49ad-ab18-d77514631a14",
 				"6325288b-1526-4b3f-a1f2-c196a4183edc",
-				"c9005d6e-bc7e-4ed9-a4b6-031a2efe62d2"
+				"c9005d6e-bc7e-4ed9-a4b6-031a2efe62d2",
+				"c929308b-9f19-4932-b4b2-7eb353e4d3ef"
 			]
 		},
 		{
@@ -201,7 +205,6 @@
 			"uuid": "cb445b97-3f31-4e34-bb97-47dcecba7c8c",
 			"title": "TODO",
 			"tasks": [
-				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
 				"684d0e69-4a6f-4978-8b41-63031ec66b19",
 				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
@@ -983,7 +986,7 @@
 		{
 			"uuid": "b160ad9c-efa6-432a-b68c-ea5625b16268",
 			"title": "Implement exit zones for scavenging levels",
-			"description": "",
+			"description": "Also make a \"return to base\" HUD element instead of having it in the main menu.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1312,7 +1315,7 @@
 		{
 			"uuid": "fd1829f1-cd5c-4463-8a31-88502fe3de44",
 			"title": "Link up to OpenMaps and procedurally do the rest",
-			"description": "Have buildings filled in randomly with whatever theme/loot using procedural generation. Keep the building the same shape and size though. With enough business data, could even make fitting loot/decorations for each.\nNot realistic probably, but it'd be cool.",
+			"description": "Have buildings filled in randomly with whatever theme/loot using procedural generation. Keep the building the same shape and size though. With enough business data, could even make fitting loot/decorations for each.\nNot realistic probably, but it'd be cool.\nMight be doable with some basic guessing involved. Like you choose an area of open maps to be your base (obviously there's a size/zoom limit).\nThen based on building size, you could make them residences or malls or police stations, etc.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -1342,6 +1345,20 @@
 			"title": "Group looted item HUD popups together with amount",
 			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "7329598e-d6a5-4966-b3f8-1bc8e6065cca",
+			"title": "Make separate HUD for scavenging level?",
+			"description": "Or have a base hud, then add the home/scavenging specific elements to it when loading a level.\nCould maybe just put them under their own control nodes and disable/enable them as needed.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "c929308b-9f19-4932-b4b2-7eb353e4d3ef",
+			"title": "Combat not pausing when opening main menu in scavenging level",
+			"description": "FIXED by changing process mode from Inherit to Pausable in PlayerCharacter and Enemy. Program has it set to Always to everything was inheriting that.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

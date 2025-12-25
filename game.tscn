@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dgnkps730uihc" path="res://UI/fader/fader.tscn" id="13_lc2xo"]
 
 [node name="Game" type="Node"]
+process_mode = 1
 script = ExtResource("1_e8jue")
 NumberOfPcs = 4
 

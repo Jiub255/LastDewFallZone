@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 namespace Lastdew
@@ -7,12 +8,14 @@ namespace Lastdew
 	public partial class Hud : Menu
 	{
 		public event Action<PlayerCharacter> OnCenterOnPc;
+		public event Func<Task> OnReturnHome;
 		
 		public SfxButton Build { get; private set; }
 		public SfxButton Craft { get; private set; }
 		public SfxButton Character { get; private set; }
 		public SfxButton Map { get; private set; }
 		public SfxButton Main { get; private set; }
+		public SfxButton ReturnHome { get; private set;}
 		private TeamData TeamData { get; set; }
 		private PackedScene PcButtonScene { get; set; } = (PackedScene)GD.Load(Uids.PC_BUTTON);
 		private HBoxContainer PcButtonParent { get; set; }
@@ -20,15 +23,15 @@ namespace Lastdew
 		private VBoxContainer LootedItemsParent { get; set; }
 		private Label Food { get; set; }
 		private Label Water { get; set; }
-		private List<PcButton> PcButtons { get; set; } = [];
+		private List<PcButton> PcButtons { get; } = [];
 		private Queue<LootedItem> LootedItems { get; } = new();
 		private static float TimeBetweenItemShowings => 0.2f;
 		private double Timer { get; set; }
 
 		private struct LootedItem(Texture2D icon, string name)
 		{
-			public Texture2D Icon = icon;
-			public string Name = name;
+			public readonly Texture2D Icon = icon;
+			public readonly string Name = name;
 		}
 
 		public override void _Ready()
@@ -42,6 +45,8 @@ namespace Lastdew
 			Character = GetNode<SfxButton>("%Character");
 			Map = GetNode<SfxButton>("%Map");
 			Main = GetNode<SfxButton>("%Main");
+			ReturnHome = GetNode<SfxButton>("%ReturnHome");
+			ReturnHome.Pressed += ReturnToBase;
 		}
 
 		public override void _Process(double delta)
@@ -67,6 +72,7 @@ namespace Lastdew
 			
 			TeamData.Inventory.OnFoodChanged -= SetFood;
 			TeamData.Inventory.OnWaterChanged -= SetWater;
+			ReturnHome.Pressed -= ReturnToBase;
 		}
 
 		public override void Open()
@@ -152,6 +158,11 @@ namespace Lastdew
         {
 	       // Water ??= GetNode<Label>("%WaterAmount");
 	        Water.Text = TeamData?.Inventory?.Water.ToString() ?? "0";
+        }
+
+        private void ReturnToBase()
+        {
+	        OnReturnHome?.Invoke();
         }
     }
 }

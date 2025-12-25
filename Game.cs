@@ -90,10 +90,10 @@ namespace Lastdew
 			TimeManager.OnNewDay += LoseFoodAndWater;
 			
 			Ui.Hud.OnCenterOnPc += Camera.CenterOnPc;
+			Ui.Hud.OnReturnHome += ReturnHome;
 			Ui.MainMenu.OnNewGame += StartNewGame;
 			Ui.MainMenu.OnSaveGame += Save;
 			Ui.MainMenu.OnLoadGame += Load;
-			Ui.MainMenu.OnReturnToBase += ReturnToBase;
 			Ui.MapMenu.OnStartScavenging += StartScavenging;
 		}
 
@@ -108,10 +108,10 @@ namespace Lastdew
 			TimeManager.OnNewDay -= LoseFoodAndWater;
 			
 			Ui.Hud.OnCenterOnPc -= Camera.CenterOnPc;
+			Ui.Hud.OnReturnHome -= ReturnHome;
 			Ui.MainMenu.OnNewGame -= StartNewGame;
 			Ui.MainMenu.OnSaveGame -= Save;
 			Ui.MainMenu.OnLoadGame -= Load;
-			Ui.MainMenu.OnReturnToBase -= ReturnToBase;
 			Ui.MapMenu.OnStartScavenging -= StartScavenging;
 		}
 
@@ -203,8 +203,8 @@ namespace Lastdew
 			await SetupLevel(scene, pcSaveDatas, []);
 			Ui.ChangeState(new GameStateScavenging());
 		}
-        
-        private async Task ReturnToBase()
+		
+        private async Task ReturnHome()
         {
 			// Spawn returning pcs from sent Pcs, and the rest from saved PcSaveDatas.
 			List<PcSaveData> pcSaveDatas = [];

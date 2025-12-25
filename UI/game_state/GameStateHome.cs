@@ -8,7 +8,6 @@ namespace Lastdew
         {
             uiManager.MainMenu.Continue.Hide();
             uiManager.MainMenu.SaveGame.Show();
-            uiManager.MainMenu.ReturnToBaseButton.Hide();
             uiManager.MainMenu.LoadGame.Show();
             uiManager.MainMenu.NewGame.Hide();
             uiManager.MainMenu.Options.Show();
@@ -19,6 +18,7 @@ namespace Lastdew
             uiManager.Hud.Character.Show();
             uiManager.Hud.Map.Show();
             uiManager.Hud.Main.Show();
+            uiManager.Hud.ReturnHome.Hide();
         }
 
         public override void ProcessState()

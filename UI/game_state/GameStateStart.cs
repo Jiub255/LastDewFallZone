@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Lastdew
 {
     public class GameStateStart : GameState
@@ -8,7 +6,6 @@ namespace Lastdew
         {
             uiManager.MainMenu.Continue.Show();
             uiManager.MainMenu.SaveGame.Hide();
-            uiManager.MainMenu.ReturnToBaseButton.Hide();
             uiManager.MainMenu.LoadGame.Show();
             uiManager.MainMenu.NewGame.Show();
             uiManager.MainMenu.Options.Show();
@@ -18,7 +15,8 @@ namespace Lastdew
             uiManager.Hud.Craft.Hide();
             uiManager.Hud.Character.Hide();
             uiManager.Hud.Map.Hide();
-            uiManager.Hud.Main.Show();
+            uiManager.Hud.Main.Hide();
+            uiManager.Hud.ReturnHome.Hide();
         }
 
         public override void ProcessState() {}

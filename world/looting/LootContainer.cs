@@ -34,7 +34,7 @@ namespace Lastdew
 		private int MaximumWater { get; set; }
 
 		
-		public Godot.Collections.Array<Item> Loot { get; private set; } = [];
+		public Godot.Collections.Array<Item> Loot { get; } = [];
 		public int Food { get; private set; }
 		public int Water { get; private set; }
 		public bool Empty { get; set; }
@@ -82,12 +82,10 @@ namespace Lastdew
 
 		private List<Item> GatherItemsOfRarity(Rarity rarity)
 		{
-			List<Item> items = [];
-			items.AddRange(Databases.Craftables.Items
+			return Databases.Craftables.Items
 				.Where(item => item.Tags.Any(itemTag => Tags.Contains(itemTag)))
-				.Where(item => item.ItemRarity == rarity));
-			
-			return items;
+				.Where(item => item.Rarity == rarity)
+				.ToList();
 		}
 
 		private void ChooseRandomItem(int random = -1)
@@ -99,11 +97,10 @@ namespace Lastdew
 			}
 			switch (random)
 			{
-				// Unique
-				case < 5:
-					int uniqueIndex = rng.Next(0, _uniques.Count);
+				case < (int)Rarity.UNIQUE:
 					if (_uniques.Count > 0)
 					{
+						int uniqueIndex = rng.Next(0, _uniques.Count);
 						Loot.Add(_uniques[uniqueIndex]);
 						break;
 					}
@@ -111,11 +108,10 @@ namespace Lastdew
 					ChooseRandomItem(5);
 					break;
 				
-				// Rare
-				case < 15:
-					int rareIndex = rng.Next(0, _rares.Count);
+				case < (int)Rarity.RARE:
 					if (_rares.Count > 0)
 					{
+						int rareIndex = rng.Next(0, _rares.Count);
 						Loot.Add(_rares[rareIndex]);
 						break;
 					}
@@ -123,11 +119,10 @@ namespace Lastdew
 					ChooseRandomItem(15);
 					break;
 				
-				// Uncommon
-				case < 30:
-					int uncommonIndex = rng.Next(0, _uncommons.Count);
-					if (_uniques.Count > 0)
+				case < (int)Rarity.UNCOMMON:
+					if (_uncommons.Count > 0)
 					{
+						int uncommonIndex = rng.Next(0, _uncommons.Count);
 						Loot.Add(_uncommons[uncommonIndex]);
 						break;
 					}
@@ -135,11 +130,10 @@ namespace Lastdew
 					ChooseRandomItem(30);
 					break;
 				
-				// Common
-				case < 100:
-					int commonIndex = rng.Next(0, _commons.Count);
-					if (_uniques.Count > 0)
+				case < (int)Rarity.COMMON:
+					if (_commons.Count > 0)
 					{
+						int commonIndex = rng.Next(0, _commons.Count);
 						Loot.Add(_commons[commonIndex]);
 					}
 					else

@@ -51,18 +51,22 @@ namespace Lastdew
 				{
 					return building;
 				}
-				else if (CraftingMaterials.TryGetValue(uid, out CraftingMaterial material))
+
+				if (CraftingMaterials.TryGetValue(uid, out CraftingMaterial material))
 				{
 					return material;
 				}
-				else if (Equipments.TryGetValue(uid, out Equipment equipment))
+
+				if (Equipments.TryGetValue(uid, out Equipment equipment))
 				{
 					return equipment;
 				}
-				else if (UsableItems.TryGetValue(uid, out UsableItem item))
+
+				if (UsableItems.TryGetValue(uid, out UsableItem item))
 				{
 					return item;
 				}
+				
 				return null;
 			}
 		}

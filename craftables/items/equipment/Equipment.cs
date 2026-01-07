@@ -7,7 +7,22 @@ namespace Lastdew
 	[GlobalClass, Tool]
 	public partial class Equipment : Item
 	{
-		[Export] public virtual EquipmentType EquipmentType { get; protected set; } = EquipmentType.HEAD;
+		private EquipmentType _equipmentType = EquipmentType.HEAD;
+
+		[Export]
+		public virtual EquipmentType EquipmentType
+		{
+			get => _equipmentType;
+			protected set
+			{
+				if (value == EquipmentType.WEAPON)
+				{
+					GD.PushWarning($"Weapons must be Weapon type, not Equipment.");
+					return;
+				}
+				_equipmentType = value;
+			}
+		}
 
 		[Export] public Godot.Collections.Dictionary<StatType, int> EquipmentBonuses { get; private set; } = [];
 
@@ -17,15 +32,16 @@ namespace Lastdew
 		[Export] public string SceneUid { get; private set; }
 
 		
-		public override void OnClickItem(PlayerCharacter pc)
+		public override void OnClickItem(TeamData teamData)
 		{
+			PlayerCharacter pc = teamData.Pcs[teamData.MenuSelectedIndex];
 			pc.Equip(this);
 		}
 
 		public bool HasStatsToEquip(PcStatManager stats)
 		{
 			return StatsNeededToEquip
-				.All((kvp) => stats.GetStatByType(kvp.Key).Value >= kvp.Value);
+				.All(kvp => stats.GetStatByType(kvp.Key).Value >= kvp.Value);
 		}
 	}
 }

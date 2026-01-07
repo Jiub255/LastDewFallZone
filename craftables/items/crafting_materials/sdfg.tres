@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_joqs5")
 Reusable = true
-ItemRarity = 3
+Rarity = 5
 Tags = Array[int]([4, 3])
 Name = "sdfg"
 Description = "sdfggsd"

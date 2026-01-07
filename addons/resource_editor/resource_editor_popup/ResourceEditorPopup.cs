@@ -95,7 +95,7 @@ namespace Lastdew
             {
                 RarityEditor rarityEditor = (RarityEditor)RarityEditorScene.Instantiate();
                 Column1.AddChild(rarityEditor);
-                rarityEditor.Setup(item.ItemRarity);
+                rarityEditor.Setup(item.Rarity);
 
                 TagsEditor tagsEditor = (TagsEditor)TagsEditorScene.Instantiate();
                 Column2.AddChild(tagsEditor);

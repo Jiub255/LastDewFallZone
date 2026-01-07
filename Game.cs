@@ -175,21 +175,23 @@ namespace Lastdew
 			CurrentLevel = (Level)levelScene.Instantiate();
 			this.AddChildDeferred(CurrentLevel);
 
+			Vector3 spawnPosition;
 			if (CurrentLevel is HomeBase homeBase)
 			{
-				homeBase.Initialize(buildingSaveDatas);
+				spawnPosition = homeBase.Initialize();
+				homeBase.Setup(buildingSaveDatas);
 				Ui.BuildMenu.OnBuild += homeBase.AddBuilding;
 				TimeManager.HomeBase = homeBase;
 			}
 			else
 			{
-				CurrentLevel.Initialize(buildingSaveDatas);
+				spawnPosition = CurrentLevel.Initialize();
 				TimeManager.HomeBase = null;
 			}
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas);
+			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas, spawnPosition);
 			Ui.Setup();
 			
 			MusicPlayer.Stream = CurrentLevel.Song;

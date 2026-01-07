@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dct2ycvtaaxft"]
+[gd_scene load_steps=9 format=3 uid="uid://dct2ycvtaaxft"]
 
 [ext_resource type="Script" uid="uid://c55rp5xhx7xdx" path="res://UI/menus/map/MapScreen.cs" id="1_o3nxy"]
 [ext_resource type="Script" uid="uid://csogh7ctti250" path="res://UI/menus/map/MapScroll.cs" id="2_721ga"]
-[ext_resource type="Texture2D" uid="uid://cd48sohpcuk1g" path="res://UI/menus/map/satellite_maps_top_section_6660.png" id="3_a4wjs"]
+[ext_resource type="Texture2D" uid="uid://bihksne8kwkpa" path="res://unused_assets/map_images/lsdz_2.jpg" id="3_a4wjs"]
 [ext_resource type="PackedScene" uid="uid://b42o3j4m70oy7" path="res://UI/menus/map/location_button.tscn" id="4_fsvth"]
-[ext_resource type="Resource" uid="uid://c7sm0cx1vlq2u" path="res://UI/menus/map/test_location_data.tres" id="5_joa7o"]
+[ext_resource type="Resource" uid="uid://c7sm0cx1vlq2u" path="res://UI/menus/map/location_datas/test_location_data.tres" id="5_joa7o"]
+[ext_resource type="Resource" uid="uid://dgfsyupeopk1g" path="res://UI/menus/map/location_datas/hospital.tres" id="6_1c7jt"]
 [ext_resource type="PackedScene" uid="uid://ddkl0i3g78lb3" path="res://UI/menus/map/location_info.tscn" id="6_b5ur0"]
 [ext_resource type="Script" uid="uid://b5sycom274m8x" path="res://UI/menus/SfxButton.cs" id="7_a4wjs"]
 
@@ -39,22 +40,32 @@ theme_override_constants/separation = 20
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
+scroll_horizontal = 1050
+scroll_vertical = 330
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 script = ExtResource("2_721ga")
 
 [node name="Map" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/MapScroll"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(4000, 3000)
 layout_mode = 2
 texture = ExtResource("3_a4wjs")
-stretch_mode = 4
+expand_mode = 3
 
 [node name="LocationButton" parent="PanelContainer/MarginContainer/HBoxContainer/MapScroll/Map" instance=ExtResource("4_fsvth")]
-offset_left = 1220.0
-offset_top = 461.0
-offset_right = 1394.0
-offset_bottom = 631.0
+offset_left = 1604.0
+offset_top = 740.0
+offset_right = 1778.0
+offset_bottom = 910.0
 Data = ExtResource("5_joa7o")
+
+[node name="LocationButton2" parent="PanelContainer/MarginContainer/HBoxContainer/MapScroll/Map" instance=ExtResource("4_fsvth")]
+offset_left = 3034.0
+offset_top = 997.0
+offset_right = 3208.0
+offset_bottom = 1167.0
+Data = ExtResource("6_1c7jt")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2

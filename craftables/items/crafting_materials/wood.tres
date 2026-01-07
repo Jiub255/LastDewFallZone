@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_a5u7i")
 Reusable = false
-ItemRarity = 0
+Rarity = 100
 Tags = Array[int]([4])
 Name = "Wood"
 Description = "Made from trees. "

@@ -9,7 +9,7 @@
 script = ExtResource("3_7xlha")
 Reusable = false
 Effects = Array[ExtResource("1_fpolu")]([ExtResource("2_7xlha")])
-ItemRarity = 1
+Rarity = 3
 Tags = Array[int]([1])
 Name = "Bandage"
 Description = "Heal 50 injury"

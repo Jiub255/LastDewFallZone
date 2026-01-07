@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=32 format=3 uid="uid://cytfbshgnxbyw"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=31 format=3 uid="uid://cytfbshgnxbyw"]
 
 [ext_resource type="Curve" uid="uid://cff2k47fja7h" path="res://characters/player_characters/smooth_curve.tres" id="1_jbxk4"]
 
@@ -38,7 +38,7 @@ states/CharacterArmature|Punch_Right/position = Vector2(547, 100)
 states/CharacterArmature|Sword_Slash/node = SubResource("AnimationNodeAnimation_fkxbm")
 states/CharacterArmature|Sword_Slash/position = Vector2(547, 216)
 transitions = ["Start", "CharacterArmature|Gun_Shoot", SubResource("AnimationNodeStateMachineTransition_s80h4"), "Start", "CharacterArmature|Punch_Right", SubResource("AnimationNodeStateMachineTransition_jkmeo"), "Start", "CharacterArmature|Sword_Slash", SubResource("AnimationNodeStateMachineTransition_homjw"), "CharacterArmature|Gun_Shoot", "End", SubResource("AnimationNodeStateMachineTransition_pmjqe"), "CharacterArmature|Punch_Right", "End", SubResource("AnimationNodeStateMachineTransition_4g0hc"), "CharacterArmature|Sword_Slash", "End", SubResource("AnimationNodeStateMachineTransition_0qdbo")]
-graph_offset = Vector2(-227, -132)
+graph_offset = Vector2(-89, -58)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gui52"]
 animation = &"CharacterArmature|Death"
@@ -48,9 +48,6 @@ animation = &"CharacterArmature|HitRecieve"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5yt3q"]
 animation = &"CharacterArmature|Loot"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_352fy"]
-animation = &"CharacterArmature|Punch_Right"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sr0ep"]
 animation = &"CharacterArmature|Idle"
@@ -66,7 +63,7 @@ animation = &"CharacterArmature|Walk"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_1dqnw"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dtgwf"]
-graph_offset = Vector2(13.5182, 55.6572)
+graph_offset = Vector2(-10, 65)
 nodes/idle/node = SubResource("AnimationNodeAnimation_sr0ep")
 nodes/idle/position = Vector2(460, 40)
 nodes/idle_move/node = SubResource("AnimationNodeBlend2_67h8h")
@@ -118,10 +115,8 @@ states/CharacterArmature|HitRecieve/node = SubResource("AnimationNodeAnimation_r
 states/CharacterArmature|HitRecieve/position = Vector2(704, 264)
 states/CharacterArmature|Loot/node = SubResource("AnimationNodeAnimation_5yt3q")
 states/CharacterArmature|Loot/position = Vector2(307, 264)
-states/CharacterArmature|Punch_Right/node = SubResource("AnimationNodeAnimation_352fy")
-states/CharacterArmature|Punch_Right/position = Vector2(200, -81)
 states/End/position = Vector2(1264, 94)
 states/movement_blend_tree/node = SubResource("AnimationNodeBlendTree_dtgwf")
 states/movement_blend_tree/position = Vector2(482, 100)
 transitions = ["Start", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_2bfu7"), "movement_blend_tree", "CharacterArmature|Loot", SubResource("AnimationNodeStateMachineTransition_od3xi"), "CharacterArmature|Loot", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_l8clj"), "movement_blend_tree", "CharacterArmature|HitRecieve", SubResource("AnimationNodeStateMachineTransition_qtej1"), "CharacterArmature|HitRecieve", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_l5jk0"), "movement_blend_tree", "CharacterArmature|Death", SubResource("AnimationNodeStateMachineTransition_kntfq"), "movement_blend_tree", "AttackStateMachine", SubResource("AnimationNodeStateMachineTransition_m76il"), "AttackStateMachine", "movement_blend_tree", SubResource("AnimationNodeStateMachineTransition_nm5jl"), "AttackStateMachine", "CharacterArmature|Death", SubResource("AnimationNodeStateMachineTransition_fkxbm"), "AttackStateMachine", "CharacterArmature|HitRecieve", SubResource("AnimationNodeStateMachineTransition_m3mpq")]
-graph_offset = Vector2(-1, -127)
+graph_offset = Vector2(-219, -137)

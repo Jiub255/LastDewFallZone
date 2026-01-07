@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LocationData" load_steps=4 format=3 uid="uid://dgfsyupeopk1g"]
+
+[ext_resource type="Script" uid="uid://bk3eacsidu6o1" path="res://UI/menus/map/LocationData.cs" id="1_wb78i"]
+[ext_resource type="Texture2D" uid="uid://bg33n32q78vqt" path="res://craftables/buildings/icon_building_blank.png" id="1_xspkp"]
+[ext_resource type="PackedScene" uid="uid://hauatfgsn0tb" path="res://world/looting/hospital.tscn" id="2_02wsx"]
+
+[resource]
+script = ExtResource("1_wb78i")
+Name = "Valley General Hospital"
+Image = ExtResource("1_xspkp")
+Description = "Good place to find medical supplies."
+Scene = ExtResource("2_02wsx")
+metadata/_custom_type_script = "uid://bk3eacsidu6o1"

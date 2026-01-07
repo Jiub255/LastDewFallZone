@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_r8gr0")
 Reusable = false
-ItemRarity = 2
+Rarity = 30
 Tags = Array[int]([4])
 Name = "String"
 Description = "Ties things"

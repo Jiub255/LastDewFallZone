@@ -13,7 +13,7 @@ StatsNeededToEquip = Dictionary[int, int]({
 0: 1
 })
 SceneUid = ""
-ItemRarity = 0
+Rarity = 30
 Tags = Array[int]([0, 3])
 Name = "Armor"
 Description = "Gate"

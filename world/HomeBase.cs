@@ -12,10 +12,8 @@ namespace Lastdew
 		private Node3D Buildings { get; set; }
 		private DirectionalLight3D Light { get; set; }
 
-		public override void Initialize(List<BuildingData> buildingDatas)
+		public void Setup(List<BuildingData> buildingDatas)
 		{
-			base.Initialize(buildingDatas);
-			
 			Buildings = GetNode<Node3D>("%Buildings");
 			NavMesh = GetNode<NavigationRegion3D>("%NavigationRegion3D");
 			Light = GetNode<DirectionalLight3D>("%DirectionalLight3D");

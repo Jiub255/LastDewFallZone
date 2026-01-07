@@ -6,9 +6,9 @@ namespace Lastdew
 	// items will be. 
 	public enum Rarity
 	{
-		COMMON,
-		UNCOMMON,
-		RARE,
-		UNIQUE,
+		COMMON = 100, // 100 - 30 = 70% chance
+		UNCOMMON = 30, // 30 - 15 = 15% chance
+		RARE = 15, // 15 - 5 = 10% chance
+		UNIQUE = 5, // 5% chance
 	}
 }

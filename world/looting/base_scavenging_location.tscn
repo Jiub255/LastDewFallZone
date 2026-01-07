@@ -44,4 +44,4 @@ shape = SubResource("BoxShape3D_aqcaw")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/NonInteractable/Ground"]
 mesh = SubResource("BoxMesh_tpwwi")
 
-[node name="Buildings" type="Node3D" parent="NavigationRegion3D"]
+[node name="LootContainers" type="Node3D" parent="NavigationRegion3D"]

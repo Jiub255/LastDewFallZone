@@ -23,8 +23,8 @@ namespace Lastdew
             base.Setup(craftable);
             
             Item item = craftable as Item;
-            Rarity.Text = item.ItemRarity.ToString();
-            Rarity.TooltipText = item.ItemRarity.ToString();
+            Rarity.Text = item.Rarity.ToString();
+            Rarity.TooltipText = item.Rarity.ToString();
             List<string> tags = [];
             foreach (ItemTags tag in item.Tags)
             {

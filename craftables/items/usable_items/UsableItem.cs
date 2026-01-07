@@ -13,9 +13,10 @@ namespace Lastdew
 		[Export]
 		public Array<Effect> Effects { get; private set; } = [];
 
-		public override void OnClickItem(PlayerCharacter pc)
+		public override void OnClickItem(TeamData teamData)
 		{
-			pc.UseItem(this);
+			PlayerCharacter pc = teamData.Pcs[teamData.MenuSelectedIndex];
+			pc.UseItem(this, teamData);
 		}
 	}
 }

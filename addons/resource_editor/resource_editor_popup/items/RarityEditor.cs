@@ -10,7 +10,7 @@ namespace Lastdew
         {
             if (craftable is Item item)
             {
-                item.Set(Item.PropertyName.ItemRarity, (int)Enum);
+                item.Set(Item.PropertyName.Rarity, (int)Enum);
             }
         }
     }

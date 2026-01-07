@@ -49,8 +49,8 @@
 				"214fa122-5f85-4d1c-8dec-27c303c9b928",
 				"7329598e-d6a5-4966-b3f8-1bc8e6065cca",
 				"aa9c66c4-df29-49c6-894b-e930ce28a545",
-				"e85eef6f-6e91-456c-a8e1-002988609629",
-				"b0fce1aa-855b-4ccc-86cd-10ce2eedef28"
+				"155a9a28-65c0-4ef7-b229-597a8563a649",
+				"b7eed857-1101-44fe-a5ac-1715d7c459d4"
 			]
 		},
 		{
@@ -59,7 +59,8 @@
 			"tasks": [
 				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
-				"d1adddcc-8d19-4763-94e7-4180fac8440c"
+				"d1adddcc-8d19-4763-94e7-4180fac8440c",
+				"e85eef6f-6e91-456c-a8e1-002988609629"
 			]
 		},
 		{
@@ -153,6 +154,7 @@
 				"a7736d0e-0934-46e7-b9ac-a395c067f8bc",
 				"e8b9c0fd-ef0b-43b3-9515-a357d21c0bc4",
 				"fb8bd137-94ab-4336-9dad-e3cc413d7b54",
+				"b0fce1aa-855b-4ccc-86cd-10ce2eedef28",
 				"58375c30-f072-4b4e-9040-947f76b5ff92"
 			]
 		},
@@ -223,7 +225,11 @@
 				"3b194bff-f8fc-43e7-82c5-f34b2786cb0e",
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
 				"fd1829f1-cd5c-4463-8a31-88502fe3de44",
-				"172e7e98-c6f5-4803-b224-8b4907bb3a22"
+				"172e7e98-c6f5-4803-b224-8b4907bb3a22",
+				"497687f1-03dd-4997-9005-1a2908f5ef8a",
+				"20d0dac9-4194-4ded-b8d5-e28ecb194b72",
+				"08fb120b-8b0b-489f-a40c-130070bc2376",
+				"ab60d5e5-1a65-4ac4-9a65-224d3f5bb83a"
 			]
 		}
 	],
@@ -677,7 +683,7 @@
 		{
 			"uuid": "82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
 			"title": "Improve Save system",
-			"description": "Add backups in case of failures, like that one old Unity video.\nAdd autosave functionality\nAdd multiple save slots.\n\tUnlimited? Or only limited by your computer's storage space?\n\tOr just many slots, like 100?\n\tOr just like 5 - 10 \"player\" slots that each hold one person's game?\n\t\tSo each save overwrites the slot, including autosaves?\nGet continue button working.",
+			"description": "Add backups in case of failures, like that one old Unity video.\nAdd autosave functionality\nAdd multiple save slots.\n\tUnlimited? Or only limited by your computer's storage space?\n\tOr just many slots, like 100?\n\tOr just like 5 - 10 \"player\" slots that each hold one person's game?\n\t\tSo each save overwrites the slot, including autosaves?\nGet continue button working.\nPut warning when trying to quit/load with unsaved data.",
 			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		},
@@ -1407,6 +1413,48 @@
 			"title": "Make return to game button on main menu",
 			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "497687f1-03dd-4997-9005-1a2908f5ef8a",
+			"title": "Ammo",
+			"description": "Just have a bullets int in InventoryManager and spend one each time you shoot?",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "155a9a28-65c0-4ef7-b229-597a8563a649",
+			"title": "Work on unselected pc ai",
+			"description": "Have them attack when any enemy comes within range.\nAuto loot? But with combat prioritized?\nAuto move? Probably not.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "20d0dac9-4194-4ded-b8d5-e28ecb194b72",
+			"title": "Defensive buildings and raids",
+			"description": "This might take a while.\nNeed defensive buildings, enemy ai that's at least a bit different (with destructible buildings and stuff), and pc ai for defense.\nPlus maybe a building repair system of some sort? Not sure at all yet.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "b7eed857-1101-44fe-a5ac-1715d7c459d4",
+			"title": "Make a Mission Report ui for after scavenging missions.",
+			"description": "Have it show everything you got, and all the pcs' conditions. Exp gained, etc.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "08fb120b-8b0b-489f-a40c-130070bc2376",
+			"title": "Make buildings upgradable",
+			"description": "Not sure how to handle the assets part of it.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "ab60d5e5-1a65-4ac4-9a65-224d3f5bb83a",
+			"title": "Have a melee and a ranged slot on each pc",
+			"description": "You can switch between them during combat, assuming you have a ranged weapon equipped.\nMelee defaults to hand to hand if there's no weapon.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

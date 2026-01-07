@@ -67,7 +67,6 @@ namespace Lastdew
 			SetupCastShape();
 			SetupIndicatorMesh();
 			SetColor(true);
-		//	SetColor(!IsOverlapping());
 		}
 
 		private bool IsOverlapping()

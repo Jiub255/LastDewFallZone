@@ -17,8 +17,9 @@ namespace Lastdew
         public override string Description => $"Relieves {ReliefAmount} pain for {Duration}s";
         public override string Abbreviation => "R.P.";
 
-        public override void ApplyEffect(PlayerCharacter pc)
+        public override void ApplyEffect(TeamData teamData)
 		{
+			PlayerCharacter pc = teamData.Pcs[teamData.MenuSelectedIndex];
 			pc.StatManager.Health.RelievePain(ReliefAmount, Duration);
 		}
 	}

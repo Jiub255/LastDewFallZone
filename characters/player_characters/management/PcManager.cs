@@ -116,7 +116,7 @@ namespace Lastdew
 			TeamData.SelectPc(pc);
 		}
 		
-		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas)
+		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas, Vector3 spawnPosition)
 		{
 			ClearPcs();
 			int i = 0;
@@ -125,7 +125,7 @@ namespace Lastdew
 				PlayerCharacter pc = (PlayerCharacter)PcScene.Instantiate();
 				this.AddChildDeferred(pc);
 				// TODO: Add a spawn location for pcs. Probably do a whole different system for spawning pcs eventually.
-				pc.Position += Vector3.Right * SPACE_BETWEEN_PCS * i;
+				pc.Position = spawnPosition + Vector3.Right * SPACE_BETWEEN_PCS * i;
 				i++;
 				pc.Initialize(inventoryManager, pcSaveData);
 				pc.OnLooted += InvokeOnLooted;

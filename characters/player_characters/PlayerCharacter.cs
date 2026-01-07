@@ -187,11 +187,11 @@ namespace Lastdew
 			}
 		}
 		
-		public void UseItem(UsableItem item)
+		public void UseItem(UsableItem item, TeamData teamData)
 		{
 			foreach (Effect effect in item.Effects)
 			{
-				effect.ApplyEffect(this);
+				effect.ApplyEffect(teamData);
 			}
 			if (!item.Reusable)
 			{

@@ -8,7 +8,7 @@ namespace Lastdew
 		public override EquipmentType EquipmentType
 		{
 			get => EquipmentType.WEAPON;
-			protected set => base.EquipmentType = value;
+			protected set { }
 		}
 		// Used to find which animation to use for attack.
 		[Export] public WeaponType WeaponType { get; private set; } = WeaponType.MELEE;

@@ -13,13 +13,6 @@ namespace Lastdew
 		private float Timer { get; set; }
 		private PackedScene EnemyScene { get; } = GD.Load<PackedScene>(Uids.TEST_ENEMY);
 
-		public override void _Ready()
-		{
-			base._Ready();
-			
-			// So that enemy spawning starts immediately after the start delay.
-			Timer = TimeBetweenSpawns;
-		}
 		
 		public override void _Process(double delta)
 		{
@@ -36,10 +29,10 @@ namespace Lastdew
 				return;
 			}
 			
-			Timer += (float)delta;
-			if (Timer > TimeBetweenSpawns)
+			Timer -= (float)delta;
+			if (Timer < 0)
 			{
-				Timer = 0;
+				Timer = TimeBetweenSpawns;
 				SpawnEnemy();
 			}
 		}

@@ -8,7 +8,7 @@
 script = ExtResource("1_d62t3")
 Reusable = false
 Effects = Array[ExtResource("1_op5ug")]([])
-ItemRarity = 1
+Rarity = 15
 Tags = Array[int]([1])
 Name = "uuuuuuuuu"
 Description = ""

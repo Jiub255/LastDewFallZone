@@ -26,7 +26,7 @@ layout_mode = 2
 theme_override_constants/separation = 75
 
 [node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
 [node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -36,15 +36,15 @@ text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OptionsControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="VolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls"]
+[node name="VolumeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"LabelMedium"
 text = "Volume Controls"
 horizontal_alignment = 1
+
+[node name="OptionsControls" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="MainVolume" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/OptionsControls"]
 layout_mode = 2

@@ -55,7 +55,16 @@ namespace Lastdew
 
         private void ChangeType(long index)
         {
-            Enum = (T)System.Enum.ToObject(typeof(T), index);
+            // TODO: This only works with default values on the enum, since it's actually 
+            // just using the popup menu's indexes.
+            Array values = System.Enum.GetValues(typeof(T));
+            int value = 0;
+            if (values.Length > index)
+            {
+                value = (int)values.GetValue(index)!;
+            }
+
+            Enum = (T)System.Enum.ToObject(typeof(T), value);
         }
     }
 }

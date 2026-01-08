@@ -5,6 +5,9 @@ namespace Lastdew
 {
 	public partial class SelectedItemPanel : PanelContainer
 	{
+		private const string USE_TEXT = "Use";
+		private const string EQUIP_TEXT = "Equip";
+		
 		public ItemButton ItemButton { get; private set; }
 		public TextureRect ItemDisplay { get; private set; }
 		public RichTextLabel Description { get; private set; }
@@ -40,8 +43,8 @@ namespace Lastdew
 			Drop.Visible = true;
 			UseEquip.Text = itemButton.Item switch
 			{
-				UsableItem => "Use",
-				Equipment => "Equip",
+				UsableItem => USE_TEXT,
+				Equipment => EQUIP_TEXT,
 				_ => UseEquip.Text
 			};
 		}
@@ -69,11 +72,10 @@ namespace Lastdew
 			{
 				return;
 			}
-			// TODO: Pass TeamData in here. To get highest medical stat for heal injury item, etc.
-			// Can still get current menu selected PC from there.
-			ItemButton.Item.OnClickItem(TeamData);
+			
+			ItemButton.Item?.OnClickItem(TeamData);
 			ItemButton.Amount--;
-			if (ItemButton.Amount == 0)
+			if (ItemButton.Amount <= 0)
 			{
 				ClearItem();
 			}

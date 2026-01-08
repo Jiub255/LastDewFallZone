@@ -41,7 +41,12 @@ namespace Lastdew
 			TeamData = new TeamData();
 			Fader = GetNode<Fader>("%Fader");
 			MusicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
-			TimeManager = new TimeManager(DayLengthInMinutes);
+			
+			WorldEnvironment worldEnvironment = GetNode<WorldEnvironment>("%WorldEnvironment");
+			Environment environment = worldEnvironment.Environment;
+			Sky sky = environment.Sky;
+			ProceduralSkyMaterial skyMaterial = (ProceduralSkyMaterial)sky.SkyMaterial;
+			TimeManager = new TimeManager(DayLengthInMinutes, skyMaterial);
 			
 			MusicPlayer.Stream = StartMenuSong;
 			MusicPlayer.Play();

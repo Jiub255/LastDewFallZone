@@ -1,24 +1,9 @@
-[gd_resource type="Environment" load_steps=6 format=3 uid="uid://demmrxsekmoyp"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://demmrxsekmoyp"]
 
-[sub_resource type="Gradient" id="Gradient_ji722"]
-colors = PackedColorArray(0.222062, 0.350939, 0.485984, 1, 0.526731, 0.637613, 0.764207, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gnrip"]
-seed = 5
-frequency = 0.0139
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ji722"]
-seamless = true
-color_ramp = SubResource("Gradient_ji722")
-noise = SubResource("FastNoiseLite_gnrip")
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gnrip"]
-sky_top_color = Color(0.439607, 0.372094, 0.356949, 1)
-sky_horizon_color = Color(0.867852, 0.385903, 0, 1)
-sky_cover = SubResource("NoiseTexture2D_ji722")
+[ext_resource type="Material" uid="uid://fjqcr6dggyg" path="res://world/sky_material_apocalypse.tres" id="1_gnrip"]
 
 [sub_resource type="Sky" id="Sky_xrodk"]
-sky_material = SubResource("ProceduralSkyMaterial_gnrip")
+sky_material = ExtResource("1_gnrip")
 
 [resource]
 background_mode = 2

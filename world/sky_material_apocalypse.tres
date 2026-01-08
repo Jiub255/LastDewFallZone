@@ -1,0 +1,18 @@
+[gd_resource type="ProceduralSkyMaterial" load_steps=4 format=3 uid="uid://fjqcr6dggyg"]
+
+[sub_resource type="Gradient" id="Gradient_ji722"]
+colors = PackedColorArray(0.222062, 0.350939, 0.485984, 1, 0.526731, 0.637613, 0.764207, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gnrip"]
+seed = 5
+frequency = 0.0139
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ji722"]
+seamless = true
+color_ramp = SubResource("Gradient_ji722")
+noise = SubResource("FastNoiseLite_gnrip")
+
+[resource]
+sky_top_color = Color(0.439607, 0.372094, 0.356949, 1)
+sky_horizon_color = Color(0.867852, 0.385903, 0, 1)
+sky_cover = SubResource("NoiseTexture2D_ji722")

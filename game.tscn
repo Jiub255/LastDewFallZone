@@ -19,6 +19,7 @@
 process_mode = 1
 script = ExtResource("1_e8jue")
 NumberOfPcs = 4
+DayLengthInMinutes = 0.5
 
 [node name="CameraRig" parent="." instance=ExtResource("2_hliwg")]
 unique_name_in_owner = true
@@ -73,6 +74,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
 environment = ExtResource("11_hliwg")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

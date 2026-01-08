@@ -175,23 +175,26 @@ namespace Lastdew
 			CurrentLevel = (Level)levelScene.Instantiate();
 			this.AddChildDeferred(CurrentLevel);
 
-			Vector3 spawnPosition;
+			// Need to wait for ready to be called on newly added CurrentLevel so it can get the spawn points
+			await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+			
+			Vector3[] spawnPoints;
 			if (CurrentLevel is HomeBase homeBase)
 			{
-				spawnPosition = homeBase.Initialize();
+				spawnPoints = homeBase.Initialize();
 				homeBase.Setup(buildingSaveDatas);
 				Ui.BuildMenu.OnBuild += homeBase.AddBuilding;
 				TimeManager.HomeBase = homeBase;
 			}
 			else
 			{
-				spawnPosition = CurrentLevel.Initialize();
+				spawnPoints = CurrentLevel.Initialize();
 				TimeManager.HomeBase = null;
 			}
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas, spawnPosition);
+			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas, spawnPoints);
 			Ui.Setup();
 			
 			MusicPlayer.Stream = CurrentLevel.Song;
@@ -208,6 +211,11 @@ namespace Lastdew
 		
         private async Task ReturnHome()
         {
+	        if (CurrentLevel.PcsInExitZone < TeamData.Pcs.Count)
+	        {
+		        return;
+	        }
+	        
 			// Spawn returning pcs from sent Pcs, and the rest from saved PcSaveDatas.
 			List<PcSaveData> pcSaveDatas = [];
 			pcSaveDatas.AddRange(TeamData.Pcs.Select(pc => new PcSaveData(pc)));

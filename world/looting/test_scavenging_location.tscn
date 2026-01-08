@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://4g1wsvcfefhh"]
+[gd_scene load_steps=14 format=3 uid="uid://4g1wsvcfefhh"]
 
 [ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/looting/ScavengingLevel.cs" id="1_43o5v"]
 [ext_resource type="AudioStream" uid="uid://ee0lg4u3oayt" path="res://audio/music/zapsplat/music_biiansu_enter_the_forest_013.mp3" id="2_5v2e2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d0uh848wde47x" path="res://game_objects/walls/small_brick_wall_door/SM_Wall_Brick_With_Door_Lvl_1.prefab.scn" id="4_5v2e2"]
 [ext_resource type="PackedScene" uid="uid://cs10eoe5dgah4" path="res://game_objects/loot_containers/small_cargo/SM_CARGO.prefab.scn" id="4_s1smk"]
 [ext_resource type="PackedScene" uid="uid://vaxigknqsdtu" path="res://game_objects/loot_containers/small_wood_box/SM_Small_Wood_Box_Closed.prefab.scn" id="5_arutc"]
+[ext_resource type="PackedScene" uid="uid://b8ugu5owvanuy" path="res://world/entrance_exit.tscn" id="9_5v2e2"]
 [ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://characters/enemies/EnemySpawner.cs" id="10_o5blp"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
@@ -202,3 +203,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.43022, 0, -4.56525)
 
 [node name="LootContainerTest" parent="NavigationRegion3D/LootContainers" instance=ExtResource("2_ocac3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.491, 0.5, -4.378)
+
+[node name="EntranceExit" parent="." instance=ExtResource("9_5v2e2")]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.7948, 0, -2)

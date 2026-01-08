@@ -7,7 +7,9 @@ namespace Lastdew
 		public event Action OnNewDay;
 		
 		// Starting the game at noon -> 43200 seconds
-		private float _currentTime = 43200;
+		private const float GAME_START_TIME = 43200;
+		
+		private float _currentTime = GAME_START_TIME;
 
 		public float CurrentTime
 		{
@@ -15,7 +17,7 @@ namespace Lastdew
 			private set
 			{
 				_currentTime = value;
-				// Reset each day to avoid overflow
+				// Reset each day
 				if (_currentTime > 86400)
 				{
 					_currentTime -= 86400;
@@ -23,13 +25,10 @@ namespace Lastdew
 				}
 			}
 		}
-
-		/// <summary>
-		/// Game seconds elapsed per real world second
-		/// </summary>
-		private float TickRate => 24 * 60 / dayLengthInMinutes;
-
 		public HomeBase HomeBase { get; set; }
+		
+		// Game seconds elapsed per real world second
+		private float TickRate => 24 * 60 / dayLengthInMinutes;
 		
 		public void Process(float delta)
 		{

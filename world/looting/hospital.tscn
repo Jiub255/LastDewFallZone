@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://hauatfgsn0tb"]
+[gd_scene load_steps=24 format=3 uid="uid://hauatfgsn0tb"]
 
 [ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/looting/ScavengingLevel.cs" id="1_3bofd"]
 [ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://characters/enemies/EnemySpawner.cs" id="2_vxb7j"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://b68ib46fg754p" path="res://game_objects/loot_containers/shelf_wide/SM_Tool_Cabinet_01.prefab.scn" id="16_dkeku"]
 [ext_resource type="PackedScene" uid="uid://cs10eoe5dgah4" path="res://game_objects/loot_containers/small_cargo/SM_CARGO.prefab.scn" id="17_dkeku"]
 [ext_resource type="PackedScene" uid="uid://c65ln7n8dps32" path="res://game_objects/loot_containers/boxes_warehouse/SM_Box_Warehouse.prefab.scn" id="18_dsmyc"]
+[ext_resource type="PackedScene" uid="uid://b8ugu5owvanuy" path="res://world/entrance_exit.tscn" id="19_cs38m"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
 vertices = PackedVector3Array(-4.3, 0.5, -16.55, -4.55, 0.5, -17.3, -5.8, 0.5, -17.3, -6.05, 0.5, -16.55, -4.3, 0.5, -10.8, -8.8, 0.5, -16.55, -9.3, 0.5, -17.3, -9.3, 0.5, -9.3, -4.55, 0.5, -9.05, -2.55, 0.5, -10.8, -2.55, 0.5, -16.55, 2.45, 0.5, -11.55, 2.7, 0.5, -10.8, 3.7, 0.5, -10.8, 4.45, 0.5, -12.05, 5.45, 0.5, -12.05, 5.45, 0.5, -17.3, -0.55, 0.5, -10.8, -0.3, 0.5, -11.55, 0.45, 0.5, -16.55, 0.7, 0.5, -17.3, 8.45, 0.5, -14.05, 8.45, 0.5, -16.55, 7.45, 0.5, -16.55, 7.45, 0.5, -14.05, 6.7, 0.5, -13.8, 6.7, 0.5, -3.05, 9.45, 0.5, -2.8, 9.45, 0.5, -13.8, -7.55, 0.5, -2.8, -7.3, 0.5, -2.05, -6.55, 0.5, -2.05, -6.3, 0.5, -2.8, -9.3, 0.5, -2.8, -4.55, 0.5, -2.8, -1.55, 0.5, -2.8, -1.3, 0.5, -2.05, -0.55, 0.5, -2.05, -0.3, 0.5, -2.8, -2.05, 0.5, -4.8, -0.55, 0.5, -8.55, -0.8, 0.5, -9.3, -1.55, 0.5, -9.3, -1.8, 0.5, -8.55, 3.2, 0.5, -2.8, 2.95, 0.5, -4.55, 3.95, 0.5, -7.05, 3.95, 0.5, -8.8, 4.7, 0.5, -5.55, 5.45, 0.5, -4.8, 5.45, 0.5, -6.8, 3.7, 0.5, -5.55, -2.05, 0.5, -2.8, -3.3, 0.5, -8.55, -3.3, 0.5, -5.05, 6.45, 0.5, -1.3, 4.7, 0.5, -1.3, 4.45, 0.5, -0.549999, 5.2, 0.5, 4.7, 2.7, 0.5, -0.549999, 2.7, 0.5, 5.45, 9.45, 0.5, 4.95, -0.3, 0.5, -1.3, -1.55, 0.5, -1.3, -7.55, 0.5, -1.3, -6.3, 0.5, 7.45, -6.3, 0.5, -1.3, -0.0500002, 0.5, 7.45, 0.2, 0.5, 6.45, 1.7, 0.5, -0.549999, 1.45, 0.5, -1.3, 1.45, 0.5, 6.45, -9.3, 0.5, 7.95, -6.55, 0.5, 7.95, -9.3, 0.5, -1.3, 4.95, 1.25, 5.95, 4.7, 1.25, 6.7, 4.7, 1.25, 7.2, 8.7, 1.25, 7.45, 7.45, 1.25, 6.7, 8.7, 1.25, 6.7, 7.45, 1.25, 5.95, -4.3, 0.5, 9.45, -4.3, 0.5, 8.7, -6.3, 0.5, 8.7, -2.8, 0.5, 10.2, -8.3, 0.5, 16.2, -8.3, 0.5, 17.2, -2.8, 0.5, 17.2, -9.3, 0.5, 15.95, -0.3, 0.5, 9.45, -0.8, 0.5, 8.7, -1.05, 0.5, 9.7, 8.7, 0.5, 16.7, 9.45, 0.5, 16.45, 9.45, 0.5, 14.2, 8.45, 0.5, 13.95, 8.45, 0.5, 12.2, 9.45, 0.5, 11.95, 9.45, 0.5, 9.7, 8.7, 0.5, 17.2)
@@ -455,3 +456,7 @@ transform = Transform3D(-0.999864, 0, -0.0165101, 0, 1, 0, 0.0165101, 0, -0.9998
 
 [node name="SM_Box_Warehouse" parent="NavigationRegion3D/LootContainers" instance=ExtResource("18_dsmyc")]
 transform = Transform3D(-0.0154107, 0, 0.999881, 0, 1, 0, -0.999881, 0, -0.0154107, -9.43159, 0, 17.0052)
+
+[node name="EntranceExit" parent="." instance=ExtResource("19_cs38m")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 16)

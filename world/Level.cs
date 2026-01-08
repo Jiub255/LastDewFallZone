@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Godot;
 
 namespace Lastdew
@@ -9,12 +8,16 @@ namespace Lastdew
 		[Export]
 		public AudioStreamMP3 Song { get; private set; }
 
-		private Node3D SpawnLocation { get; set; }
+		public int PcsInExitZone => EntranceExit.PcCount;
+		private EntranceExit EntranceExit { get; set; }
 		
-		public Vector3 Initialize()
+		/// <summary>
+		/// Must be called after Level.Ready()
+		/// </summary>
+		public Vector3[] Initialize()
 		{
-			SpawnLocation = GetNode<Node3D>("%SpawnLocation");
-			return SpawnLocation.Position;
+			EntranceExit = GetNode<EntranceExit>("%EntranceExit");
+			return EntranceExit.SpawnPoints;
 		}
 	}
 }

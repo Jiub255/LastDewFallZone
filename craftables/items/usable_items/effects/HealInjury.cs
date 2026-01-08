@@ -22,6 +22,7 @@ namespace Lastdew
 			// How to work it into heal amount?
 			// Also, it should show the correct numbers while in inventory.
 			int highestMedical = teamData.MaximumStats[StatType.MEDICAL];
+			// 1x multiplier at 0 medical, 2x multiplier at max medical.
 			float multiplier = (float)highestMedical / MAX_STAT_AMOUNT + 1;
 			int finalAmount = (int)Math.Round(HealAmount * multiplier);
 			

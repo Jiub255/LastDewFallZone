@@ -7,6 +7,9 @@ namespace Lastdew
 {
     public partial class Game : Node
     {
+	    [Export]
+	    private ExperienceFormula Formula { get; set; }
+	    
         public UiManager Ui { get; private set; }
         public Fader Fader { get; private set; }
         
@@ -17,6 +20,7 @@ namespace Lastdew
         private AudioStreamPlayer MusicPlayer { get; set; }
         private AudioStreamMP3 StartMenuSong { get; } = GD.Load<AudioStreamMP3>(Music.RELOAD_AND_REASSESS);
         private TimeManager TimeManager { get; set; }
+        private MissionData MissionData { get; set; }
         
         
         #region TESTING STUFF
@@ -123,7 +127,7 @@ namespace Lastdew
 		private async Task StartNewGame()
 		{
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			Ui.Initialize(TeamData, Camera, TimeManager);
+			Ui.Initialize(TeamData, Camera, TimeManager, Formula);
 			await SetupLevel(homeBaseScene, DefaultPcList, TeamData.Inventory.Buildings);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -131,7 +135,7 @@ namespace Lastdew
 		private async Task StartCombatTest()
 		{
 			PackedScene combatTestScene = GD.Load<PackedScene>("uid://dr032kqvigccx");
-			Ui.Initialize(TeamData, Camera, TimeManager);
+			Ui.Initialize(TeamData, Camera, TimeManager, Formula);
 			await SetupLevel(combatTestScene, DefaultPcList, []);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -146,7 +150,7 @@ namespace Lastdew
 			SaveData saveData = SaveSystem.Load();
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
 			TeamData.Inventory.Buildings = SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas);
-			Ui.Initialize(TeamData, Camera, TimeManager);
+			Ui.Initialize(TeamData, Camera, TimeManager, Formula);
 			// LoadInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
 			// can initialize first.
 			await SetupLevel(homeBaseScene, saveData.PcSaveDatas, TeamData.Inventory.Buildings);
@@ -171,9 +175,32 @@ namespace Lastdew
 			Fader.FadeOut();
 			await ToSignal(Fader, Fader.SignalName.OnFadeOut);
 			
-			if (CurrentLevel is HomeBase oldHomeBase)
+			switch (CurrentLevel)
 			{
-				Ui.BuildMenu.OnBuild -= oldHomeBase.AddBuilding;
+				case HomeBase oldHomeBase:
+					Ui.BuildMenu.OnBuild -= oldHomeBase.AddBuilding;
+				
+					MissionData = new MissionData(TeamData.Pcs);
+					PcManager.OnLooted += MissionData.AddItems;
+					break;
+				
+				case ScavengingLevel:
+					Fader.Hide();
+					Ui.MissionSummaryMenu.Open();
+					Ui.MissionSummaryMenu.Setup(TeamData.Pcs, MissionData);
+				
+					// TODO: This might be the problem.
+					// Maybe can't await like this while still interacting with the game?
+					// What to do then? Split up this method?
+					await ToSignal(Ui.MissionSummaryMenu, MissionSummaryMenu.SignalName.DonePressed);
+
+					Fader.Show();
+					Ui.MissionSummaryMenu.Close();
+					PcManager.OnLooted -= MissionData.AddItems;
+					break;
+				
+				case null:
+					break;
 			}
 			
 			CurrentLevel?.QueueFree();
@@ -196,7 +223,11 @@ namespace Lastdew
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas, CurrentLevel.EntranceExit);
+			await PcManager.SpawnPcs(
+				TeamData.Inventory,
+				pcSaveDatas,
+				CurrentLevel.EntranceExit,
+				Formula);
 			// TODO: Center camera better. Maybe center it on the front of the EntranceExit at a specific angle.
 			Camera.CallDeferred(Camera.MethodName.CenterOnPc, TeamData.Pcs[0]);
 			Ui.Setup();

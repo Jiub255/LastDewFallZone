@@ -8,6 +8,7 @@ namespace Lastdew
 		public Hud Hud { get; private set; }
 		public BuildMenu BuildMenu { get; private set; }
 		public MapMenu MapMenu { get; private set; }
+		public MissionSummaryMenu MissionSummaryMenu { get; private set; }
 		private CharacterMenu CharacterMenu { get; set; }
 		private CraftingMenu CraftingMenu { get; set; }
 		private OptionsMenu OptionsMenu { get; set; }
@@ -24,6 +25,7 @@ namespace Lastdew
 			BuildMenu = GetNode<BuildMenu>("%BuildMenu");
 			MapMenu = GetNode<MapMenu>("%MapMenu");
 			OptionsMenu = GetNode<OptionsMenu>("%OptionsMenu");
+			MissionSummaryMenu = GetNode<MissionSummaryMenu>("%MissionSummaryMenu");
 
 			ConnectHudButtons();
 
@@ -33,6 +35,7 @@ namespace Lastdew
 			CloseMenu(BuildMenu);
 			CloseMenu(MapMenu);
 			CloseMenu(OptionsMenu);
+			CloseMenu(MissionSummaryMenu);
 
 			ChangeState(new GameStateStart());			
 		}
@@ -74,19 +77,23 @@ namespace Lastdew
         }
 		
         /// <summary>
-        /// Only called once in beginning
+        /// Only called once in beginning (either starting the game fresh or after pressing quit to main menu)
         /// </summary>
-		public void Initialize(TeamData teamData, Camera camera, TimeManager timeManager)
+		public void Initialize(TeamData teamData,
+	        Camera camera,
+	        TimeManager timeManager,
+	        ExperienceFormula formula)
 		{
 			Hud.Initialize(teamData, timeManager);
 			CharacterMenu.Initialize(teamData);
 			CraftingMenu.Initialize(teamData);
 			MapMenu.Initialize(teamData);
 			BuildMenu.Initialize(teamData, camera);
+			MissionSummaryMenu.Initialize(formula);
 		}
 
         /// <summary>
-        /// Called each time from Game.SetupLevel().
+        /// Called each time you switch levels from Game.SetupLevel().
         /// </summary>
 		public void Setup()
 		{

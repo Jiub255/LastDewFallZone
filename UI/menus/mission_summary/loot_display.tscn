@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjiwxo8i4io1"]
+
+[ext_resource type="Script" uid="uid://ybqjy0bery7p" path="res://UI/menus/mission_summary/LootDisplay.cs" id="1_ofm1f"]
+[ext_resource type="Texture2D" uid="uid://bcqjtvteiews5" path="res://craftables/items/crafting_materials/icon_metal.png" id="1_wlqw6"]
+
+[node name="LootedItemDisplay" type="PanelContainer"]
+self_modulate = Color(0.356693, 0.622957, 0.485214, 1)
+custom_minimum_size = Vector2(1000, 0)
+size_flags_horizontal = 4
+theme_type_variation = &"PanelContainerBlank"
+script = ExtResource("1_ofm1f")
+
+[node name="ItemHBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="ItemHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("1_wlqw6")
+expand_mode = 3
+
+[node name="Name" type="Label" parent="ItemHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "20 Metal"

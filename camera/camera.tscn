@@ -14,6 +14,7 @@ Settings = ExtResource("2_sp6r1")
 
 [node name="OuterGimbal" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 script = ExtResource("2_o35ac")
 
 [node name="InnerGimbal" type="Node3D" parent="OuterGimbal"]

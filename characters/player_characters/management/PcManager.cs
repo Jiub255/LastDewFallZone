@@ -116,7 +116,11 @@ namespace Lastdew
 			TeamData.SelectPc(pc);
 		}
 		
-		public void SpawnPcs(InventoryManager inventoryManager, List<PcSaveData> pcSaveDatas, EntranceExit entranceExit)
+		public async Task SpawnPcs(
+			InventoryManager inventoryManager,
+			List<PcSaveData> pcSaveDatas,
+			EntranceExit entranceExit,
+			ExperienceFormula formula)
 		{
 			ClearPcs();
 			int i = 0;
@@ -127,7 +131,9 @@ namespace Lastdew
 				pc.Position = entranceExit.SpawnPoints[i];
 				pc.Rotation = entranceExit.Rotation + new Vector3(0f, Mathf.Pi, 0f);
 				i++;
-				pc.Initialize(inventoryManager, pcSaveData);
+				// Wait a frame so that pc.Initialize() isn't called before pc.Ready()
+				await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+				pc.Initialize(inventoryManager, pcSaveData, formula);
 				pc.OnLooted += InvokeOnLooted;
 				TeamData.AddPc(pc);
 			}

@@ -60,18 +60,20 @@ namespace Lastdew
 			audioStreamPlayer.Play();
 			audioStreamPlayer.Bus = new StringName("Combat");
 			AudioPlayback = (AudioStreamPlaybackPolyphonic)audioStreamPlayer.GetStreamPlayback();
-		}
-		
-		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData)
-		{
 			NavigationAgent = GetNode<NavigationAgent3D>("%NavigationAgent3D");
 			PcAnimationTree = GetNode<AnimationTree>("%AnimationTree");
 			AnimStateMachine = (AnimationNodeStateMachinePlayback)PcAnimationTree.Get("parameters/playback");
 			SelectedIndicator = GetNode<MeshInstance3D>("%SelectedIndicator");
 			WeaponSlot = GetNode<Node3D>("%WeaponSlot");
-			
+		}
+		
+		public void Initialize(
+			InventoryManager inventoryManager,
+			PcSaveData saveData,
+			ExperienceFormula formula)
+		{
 			StateMachine = new PcStateMachine(this);
-			StatManager = new PcStatManager(saveData);
+			StatManager = new PcStatManager(saveData, formula);
 			Equipment = new PcEquipment(saveData);
 			
 			Inventory = inventoryManager;
@@ -215,10 +217,10 @@ namespace Lastdew
 				}
 			}
 
-			foreach (KeyValuePair<Item, int> itemsAndAmount in itemsAndAmounts)
+			foreach ((Item item, int amount) in itemsAndAmounts)
 			{
-				OnLooted?.Invoke(itemsAndAmount.Key.Icon,
-					$"{itemsAndAmount.Value} {itemsAndAmount.Key.Name}");
+				OnLooted?.Invoke(item.Icon,
+					$"{amount} {item.Name}");
 			}
 			
 			if (container.Food > 0)

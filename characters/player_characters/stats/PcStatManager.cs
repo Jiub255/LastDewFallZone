@@ -1,4 +1,3 @@
-using System;
 using Godot;
 using System.Collections;
 using System.Collections.Generic;
@@ -61,7 +60,7 @@ namespace Lastdew
 		private int StatPointsToSpend { get; set; }
 		
 
-		public PcStatManager(PcSaveData saveData)
+		public PcStatManager(PcSaveData saveData, ExperienceFormula formula)
 		{
 			_attack = new Stat(StatType.ATTACK, saveData.Attack);
 			_defense = new Stat(StatType.DEFENSE, saveData.Defense);
@@ -70,7 +69,7 @@ namespace Lastdew
 			_medical = new Stat(StatType.MEDICAL, saveData.Medical);
 			_scavenging = new Stat(StatType.SCAVENGING, saveData.Scavenging);
 			Health = new PcHealth(saveData);
-			Experience = new PcExperience(saveData);
+			Experience = new PcExperience(saveData, formula);
 
 			Experience.OnLevelUp += LevelUp;
 		}

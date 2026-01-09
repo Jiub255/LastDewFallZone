@@ -15,10 +15,12 @@ namespace Lastdew
 		public const string PC_BUTTON = "uid://cl3ga8e5ivvvy";
 		public const string PC_DISPLAY = "uid://8b0531d6h835";
 		public const string NUMBER_POPUP = "uid://5e8hktnx771s";
-		public const string LOOTED_ITEM_DISPLAY = "uid://dgnjc7virkw7o";
+		public const string LOOTED_ITEM_DISPLAY = "uid://dgnjc7virkw7o"; // for HUD
 		public const string BUILDING_BUTTON = "uid://exarpec3215x";
 		public const string FOOD_ICON = "uid://lgytv07nml1y";
 		public const string WATER_ICON = "uid://bxqetgnj57uhx";
+		public const string LOOT_DISPLAY = "uid://cjiwxo8i4io1"; // for Mission Summary Menu
+		public const string PC_INFO_DISPLAY = "uid://bjq6exhm7nyil";
 		
 		// In-game non-UI
 		public const string HOME_BASE = "uid://ffc0mkxnmvb2";

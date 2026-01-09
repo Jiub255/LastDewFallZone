@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://dr1s3y8kp8d7"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://dr1s3y8kp8d7"]
 
 [ext_resource type="StyleBox" uid="uid://srletqm0c2rs" path="res://UI/themes/styleboxes/button/button_disabled_stylebox.tres" id="1_4rybs"]
 [ext_resource type="StyleBox" uid="uid://kot647gsd5bp" path="res://UI/themes/styleboxes/button/button_hover_stylebox.tres" id="2_td32s"]
@@ -10,6 +10,9 @@
 [ext_resource type="StyleBox" uid="uid://by7urwe4yycy1" path="res://UI/themes/styleboxes/tab_container/tab_hover_stylebox.tres" id="8_qrw1s"]
 [ext_resource type="StyleBox" uid="uid://ba1j1q8f3tdio" path="res://UI/themes/styleboxes/tab_container/tab_selected_stylebox.tres" id="9_p818r"]
 [ext_resource type="StyleBox" uid="uid://bmwvy4f2equ6m" path="res://UI/themes/styleboxes/tab_container/tab_unselected_stylebox.tres" id="10_1aaf3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rybs"]
+bg_color = Color(1, 1, 1, 1)
 
 [resource]
 Button/font_sizes/font_size = 56
@@ -25,6 +28,8 @@ LabelMedium/font_sizes/font_size = 75
 LabelSmall/base_type = &"Label"
 LabelSmall/font_sizes/font_size = 28
 PanelContainer/styles/panel = ExtResource("5_2nq6i")
+PanelContainerBlank/base_type = &"PanelContainer"
+PanelContainerBlank/styles/panel = SubResource("StyleBoxFlat_4rybs")
 PanelContainerDark/base_type = &"PanelContainer"
 PanelContainerDark/styles/panel = ExtResource("6_8mqgk")
 RichTextLabel/font_sizes/bold_font_size = 56

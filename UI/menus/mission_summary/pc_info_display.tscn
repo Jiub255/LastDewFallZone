@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjq6exhm7nyil"]
+
+[ext_resource type="Texture2D" uid="uid://b2rhn4yqwwwoe" path="res://characters/player_characters/management/pc_data/jaime.png" id="1_n3v33"]
+[ext_resource type="Script" uid="uid://b31y7v8iocxr8" path="res://UI/menus/mission_summary/PcInfoDisplay.cs" id="1_trehx"]
+[ext_resource type="Script" uid="uid://dtgvojnhw7stv" path="res://UI/menus/mission_summary/AnimatedProgressBar.cs" id="2_gbn8a"]
+
+[node name="PcInfoDisplay" type="PanelContainer"]
+self_modulate = Color(0.437051, 0.342524, 0.309113, 1)
+size_flags_horizontal = 4
+theme_type_variation = &"PanelContainerBlank"
+script = ExtResource("1_trehx")
+
+[node name="PcHBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="PcHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("1_n3v33")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PcHBox"]
+custom_minimum_size = Vector2(555, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="PcHBox/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(555, 0)
+layout_mode = 2
+text = "Jaime"
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="PcHBox/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(555, 0)
+layout_mode = 2
+text = "Lvl.14"
+horizontal_alignment = 1
+
+[node name="ExpGained" type="VBoxContainer" parent="PcHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_gbn8a")
+
+[node name="ExpBar" type="ProgressBar" parent="PcHBox/ExpGained"]
+unique_name_in_owner = true
+modulate = Color(1.15514e-06, 0.548617, 0.673368, 1)
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+value = 30.0
+allow_greater = true
+show_percentage = false
+
+[node name="ExpLabel" type="Label" parent="PcHBox/ExpGained"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "300/1000 XP"
+horizontal_alignment = 1
+
+[node name="Injury" type="VBoxContainer" parent="PcHBox"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="PcHBox/Injury"]
+modulate = Color(0.967688, 0, 0.0712306, 1)
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+value = 20.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="PcHBox/Injury"]
+layout_mode = 2
+text = "20/100 Injury"
+horizontal_alignment = 1

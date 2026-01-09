@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ExperienceFormula" load_steps=2 format=3 uid="uid://cm145pop3m7tw"]
+
+[ext_resource type="Script" uid="uid://bk6m2t3bqrbq7" path="res://characters/player_characters/stats/ExperienceFormula.cs" id="1_ufobo"]
+
+[resource]
+script = ExtResource("1_ufobo")
+Multiplier = 5.0
+metadata/_custom_type_script = "uid://bk6m2t3bqrbq7"

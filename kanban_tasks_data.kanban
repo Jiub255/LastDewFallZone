@@ -54,17 +54,19 @@
 				"56f8bc93-566d-4254-a86c-612625830992",
 				"155a9a28-65c0-4ef7-b229-597a8563a649",
 				"f19453aa-2ba3-43c4-8668-eab495f4e879",
-				"af2b11b7-ebaf-4b18-a74f-7516e34bf776"
+				"af2b11b7-ebaf-4b18-a74f-7516e34bf776",
+				"8d494a48-e1a8-46f4-8715-36701104ba7a"
 			]
 		},
 		{
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
+				"b7eed857-1101-44fe-a5ac-1715d7c459d4",
 				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"e85eef6f-6e91-456c-a8e1-002988609629",
-				"b7eed857-1101-44fe-a5ac-1715d7c459d4"
+				"3c8dbb73-d01e-48b3-86ee-9885e1576fb6"
 			]
 		},
 		{
@@ -204,7 +206,8 @@
 				"6325288b-1526-4b3f-a1f2-c196a4183edc",
 				"c9005d6e-bc7e-4ed9-a4b6-031a2efe62d2",
 				"c929308b-9f19-4932-b4b2-7eb353e4d3ef",
-				"da216ecd-2812-4528-8f81-a15e3d1ad8a9"
+				"da216ecd-2812-4528-8f81-a15e3d1ad8a9",
+				"de0485c3-bef0-4d22-a8f1-180b2af2f535"
 			]
 		},
 		{
@@ -212,7 +215,8 @@
 			"title": "BUGS",
 			"tasks": [
 				"8c8729bd-b42c-4305-b2e8-dca50b070672",
-				"c954b6f0-cf7e-454e-a140-bc1f72ef1747"
+				"c954b6f0-cf7e-454e-a140-bc1f72ef1747",
+				"3d5e2a3c-cd27-44d6-8159-3cc6b23231ba"
 			]
 		},
 		{
@@ -1445,7 +1449,7 @@
 		{
 			"uuid": "b7eed857-1101-44fe-a5ac-1715d7c459d4",
 			"title": "Make a Mission Report ui for after scavenging missions.",
-			"description": "Have it show everything you got, and all the pcs' conditions. Exp gained, etc.",
+			"description": "Have it show everything you got, and all the pcs' conditions. Exp gained, etc.\nMake a MissionData class that stores all the data until you go back to base?\n\nOR, would it be easier to just put all items/exp from missions into a temporary storage,\nthen display all that stuff on the mission summary menu,\nthen add items to inv and apply all exp.?\nBut then you can't use items you just found. But that might be okay. No equip menu, only a few items usable in combat, like painkillers.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1503,6 +1507,34 @@
 			"title": "Pets? Especially dogs",
 			"description": "Could boost morale, help scavenge (find secrets?), and fight/defend base. Obviously immortal.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "8d494a48-e1a8-46f4-8715-36701104ba7a",
+			"title": "Separate crafting materials from equipment/usable items?",
+			"description": "Like they do in LSDZ. Since there will be potentially hundreds of each of the crafting materials in your inventory, but usually only a few at most of the other items. \nBut kinda want to have more than just a few types of building materials. Not just wood, metal, etc., but stuff like circuit boards for advanced electronics stuff, things you wont find hundreds of.\nProbably just keep it as is for now.\nFood, water, and ammo can be separate, since they do separate things. They're not crafting materials, usable items, or equipment really.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "de0485c3-bef0-4d22-a8f1-180b2af2f535",
+			"title": "Camera's center isn't centered",
+			"description": "FIXED by setting the OuterGimbal's y-position to -2\nMaybe offset the camera down a bit from the targetposition? When centering the camera on a pc, it looks like you're centered looking over their head.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "3c8dbb73-d01e-48b3-86ee-9885e1576fb6",
+			"title": "Do shared exp instead?",
+			"description": "How LSDZ does it I think.\nWould make it so no survivor becomes weak.\nMaybe have all earned exp shared, but each PC keeps track of their own total exp and level?",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
+			"steps": []
+		},
+		{
+			"uuid": "3d5e2a3c-cd27-44d6-8159-3cc6b23231ba",
+			"title": "Mission summary menu not working",
+			"description": "Might have to do with the await ToSignal MissionSummaryMenu.DonePressed in Game.SetupLevel.\nMaybe can't await like that and still interact with the game? Not sure how the async stuff works yet fully.\nMakes sense it wouldn't work, the Game.SetupLevel() method is just paused while it awaits, and since nothing is moving, you can't ever press the done button (or even see the menu).\nProbably gonna have to redo how this menu gets displayed. Not sure how yet.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}
 	],

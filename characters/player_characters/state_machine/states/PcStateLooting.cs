@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using Godot;
-using Godot.NativeInterop;
 
 namespace Lastdew
 {	

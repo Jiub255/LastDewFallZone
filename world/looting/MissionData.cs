@@ -23,15 +23,21 @@ namespace Lastdew
 			}
 		}
 		
-		public void AddItems(Texture2D icon, string amountAndName)
+		public void AddItems(Texture2D icon, string newAmountAndName)
 		{
-			if (ItemAmounts.ContainsKey(icon))
+			if (ItemAmounts.TryGetValue(icon, out string amountAndName))
 			{
-				ItemAmounts[icon] += amountAndName;
+				string[] newSeparated = newAmountAndName.Split(' ');
+				int newAmount = int.Parse(newSeparated[0]);
+				string name = newSeparated[1];
+				
+				string[] separated = amountAndName.Split(' ');
+				int amount = int.Parse(separated[0]);
+				ItemAmounts[icon] = $"{amount + newAmount} {name}";
 			}
 			else
 			{
-				ItemAmounts[icon] = amountAndName;
+				ItemAmounts[icon] = newAmountAndName;
 			}
 		}
 	}

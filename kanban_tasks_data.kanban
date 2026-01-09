@@ -207,7 +207,10 @@
 				"c9005d6e-bc7e-4ed9-a4b6-031a2efe62d2",
 				"c929308b-9f19-4932-b4b2-7eb353e4d3ef",
 				"da216ecd-2812-4528-8f81-a15e3d1ad8a9",
-				"de0485c3-bef0-4d22-a8f1-180b2af2f535"
+				"de0485c3-bef0-4d22-a8f1-180b2af2f535",
+				"3d5e2a3c-cd27-44d6-8159-3cc6b23231ba",
+				"31c4c768-0883-4d5e-9bbd-9693e39d6574",
+				"74c7e6fc-81ad-4dda-8590-24352ded853d"
 			]
 		},
 		{
@@ -216,7 +219,7 @@
 			"tasks": [
 				"8c8729bd-b42c-4305-b2e8-dca50b070672",
 				"c954b6f0-cf7e-454e-a140-bc1f72ef1747",
-				"3d5e2a3c-cd27-44d6-8159-3cc6b23231ba"
+				"6997505c-aaaf-4c4f-b205-3d8db6d51211"
 			]
 		},
 		{
@@ -1449,7 +1452,7 @@
 		{
 			"uuid": "b7eed857-1101-44fe-a5ac-1715d7c459d4",
 			"title": "Make a Mission Report ui for after scavenging missions.",
-			"description": "Have it show everything you got, and all the pcs' conditions. Exp gained, etc.\nMake a MissionData class that stores all the data until you go back to base?\n\nOR, would it be easier to just put all items/exp from missions into a temporary storage,\nthen display all that stuff on the mission summary menu,\nthen add items to inv and apply all exp.?\nBut then you can't use items you just found. But that might be okay. No equip menu, only a few items usable in combat, like painkillers.",
+			"description": "Have it show everything you got, and all the pcs' conditions. Exp gained, etc.\nMake a MissionData class that stores all the data until you go back to base?\n\nJust need to finish the injury part and clean up bugs.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1533,7 +1536,28 @@
 		{
 			"uuid": "3d5e2a3c-cd27-44d6-8159-3cc6b23231ba",
 			"title": "Mission summary menu not working",
-			"description": "Might have to do with the await ToSignal MissionSummaryMenu.DonePressed in Game.SetupLevel.\nMaybe can't await like that and still interact with the game? Not sure how the async stuff works yet fully.\nMakes sense it wouldn't work, the Game.SetupLevel() method is just paused while it awaits, and since nothing is moving, you can't ever press the done button (or even see the menu).\nProbably gonna have to redo how this menu gets displayed. Not sure how yet.",
+			"description": "FIXED by opening at end of Game.SetupLevel() and not using await stuff.\nMight have to do with the await ToSignal MissionSummaryMenu.DonePressed in Game.SetupLevel.\nMaybe can't await like that and still interact with the game? Not sure how the async stuff works yet fully.\nMakes sense it wouldn't work, the Game.SetupLevel() method is just paused while it awaits, and since nothing is moving, you can't ever press the done button (or even see the menu).\nProbably gonna have to redo how this menu gets displayed. Not sure how yet.\n\nProbably just open the menu at the end of SetupLevel if you're headed to home base.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "31c4c768-0883-4d5e-9bbd-9693e39d6574",
+			"title": "Menus not working from keyboard presses",
+			"description": "FIXED? No idea how or why.\n\nAfter looting and seeing the mission summary menu? Pretty sure its related, maybe something to do with how it's opened/closed without using Ui.Toggle()?",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "74c7e6fc-81ad-4dda-8590-24352ded853d",
+			"title": "Math error with exp/levels in AnimatedProgressBar",
+			"description": "FIXED by changing 'level - 2' to 'level - 1' and 'level - 1' to 'level' in ExperienceFormula.ExperienceRangeFromLevel(). Was calculating the level below's range.\nExp showing up as like 7/5 or 9/5 for pcs that gain exp. Probably just getting the wrong level's endpoints.\nMight just need to something simple like level - 1 instead of level somewhere.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "6997505c-aaaf-4c4f-b205-3d8db6d51211",
+			"title": "Mission summary menu displays all pcs even when some didn't go",
+			"description": "Probably something to do with grabbing them from TeamData in Game.SetupLevel().",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

@@ -1,4 +1,3 @@
-using System;
 using Godot;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,9 +9,9 @@ namespace Lastdew
 		[Signal]
 		public delegate void DonePressedEventHandler();
 		
-		public SfxButton DoneButton { get; private set; }
 		private VBoxContainer ItemDisplayParent { get; set; }
 		private VBoxContainer PcDisplayParent { get; set; }
+		private SfxButton DoneButton { get; set; }
 		private PackedScene LootDisplayScene { get; set; } = GD.Load<PackedScene>(Uids.LOOT_DISPLAY);
 		private PackedScene PcDisplayScene { get; set; } = GD.Load<PackedScene>(Uids.PC_INFO_DISPLAY);
 		private ExperienceFormula Formula { get; set; }
@@ -25,7 +24,7 @@ namespace Lastdew
 			PcDisplayParent = GetNode<VBoxContainer>("%PcDisplayParent");
 			DoneButton = GetNode<SfxButton>("%DoneButton");
 
-			DoneButton.Connect(BaseButton.SignalName.Pressed, Callable.From(EmitSignalDonePressed));
+			DoneButton.Connect(BaseButton.SignalName.Pressed, Callable.From(Close));
 		}
 
 		public void Initialize(ExperienceFormula formula)
@@ -72,8 +71,7 @@ namespace Lastdew
 				
 				PcInfoDisplay display = PcDisplayScene.Instantiate() as PcInfoDisplay;
 				PcDisplayParent.AddChildDeferred(display);
-				display?.CallDeferred(
-					PcInfoDisplay.MethodName.Setup,
+				display?.Setup(
 					pc,
 					Formula,
 					beginningExp,

@@ -10,22 +10,17 @@ namespace Lastdew
 		private Label LevelLabel { get; set; }
 		private AnimatedProgressBar ExpGained { get; set; }
 
-		public override void _Ready()
-		{
-			base._Ready();
-			
-			Icon = GetNode<TextureRect>("%Icon");
-			NameLabel = GetNode<Label>("%Name");
-			LevelLabel = GetNode<Label>("%Level");
-			ExpGained = GetNode<AnimatedProgressBar>("%ExpGained");
-		}
-
 		public void Setup(
 			PlayerCharacter pc,
 			ExperienceFormula formula,
 			int beginningExp,
 			int beginningInjury)
 		{
+			Icon = GetNode<TextureRect>("%Icon");
+			NameLabel = GetNode<Label>("%Name");
+			LevelLabel = GetNode<Label>("%Level");
+			ExpGained = GetNode<AnimatedProgressBar>("%ExpGained");
+			
 			Icon.Texture = pc.Data.Icon;
 			NameLabel.Text = pc.Data.Name;
 			LevelLabel.Text = $"Lvl. {pc.StatManager.Experience.Level}";

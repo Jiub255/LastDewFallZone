@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -174,36 +175,30 @@ namespace Lastdew
 		{
 			Fader.FadeOut();
 			await ToSignal(Fader, Fader.SignalName.OnFadeOut);
-			
-			switch (CurrentLevel)
-			{
-				case HomeBase oldHomeBase:
-					Ui.BuildMenu.OnBuild -= oldHomeBase.AddBuilding;
-				
-					MissionData = new MissionData(TeamData.Pcs);
-					PcManager.OnLooted += MissionData.AddItems;
-					break;
-				
-				case ScavengingLevel:
-					Fader.Hide();
-					Ui.MissionSummaryMenu.Open();
-					Ui.MissionSummaryMenu.Setup(TeamData.Pcs, MissionData);
-				
-					// TODO: This might be the problem.
-					// Maybe can't await like this while still interacting with the game?
-					// What to do then? Split up this method?
-					await ToSignal(Ui.MissionSummaryMenu, MissionSummaryMenu.SignalName.DonePressed);
 
-					Fader.Show();
-					Ui.MissionSummaryMenu.Close();
+			if (CurrentLevel is HomeBase oldHomeBase)
+			{
+				Ui.BuildMenu.OnBuild -= oldHomeBase.AddBuilding;
+
+				if (MissionData != null)
+				{
 					PcManager.OnLooted -= MissionData.AddItems;
-					break;
-				
-				case null:
-					break;
+				}
+				MissionData = new MissionData(TeamData.Pcs);
+				PcManager.OnLooted += MissionData.AddItems;
 			}
-			
-			CurrentLevel?.QueueFree();
+
+			bool firstTime = true;
+			// TODO: Hacky, do it better.
+			// Needed since pcs get wiped when level does.
+			ReadOnlyCollection<PlayerCharacter> pcs = new(new List<PlayerCharacter>());
+			if (CurrentLevel != null)
+			{
+				pcs = TeamData.Pcs;
+				CurrentLevel.QueueFree();
+				firstTime = false;
+			}
+
 			CurrentLevel = (Level)levelScene.Instantiate();
 			this.AddChildDeferred(CurrentLevel);
 
@@ -236,6 +231,13 @@ namespace Lastdew
 			MusicPlayer.Play();
 			
 			Fader.FadeIn();
+			
+			// TODO: Maybe pause game too?
+			if (CurrentLevel is HomeBase && !firstTime)
+			{
+				Ui.MissionSummaryMenu.Open();
+				Ui.MissionSummaryMenu.Setup(pcs, MissionData);
+			}
 		}
 
 		private async Task StartScavenging(PackedScene scene, List<PcSaveData> pcSaveDatas)

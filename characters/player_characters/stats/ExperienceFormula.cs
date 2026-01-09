@@ -17,8 +17,8 @@ namespace Lastdew
 
 		public (int startLevelExp, int nextLevelExp) ExperienceRangeFromLevel(int level)
 		{
-			int startLevelExp = Mathf.FloorToInt(Multiplier * (level - 2) * (level - 2));
-			int nextLevelExp = Mathf.FloorToInt(Multiplier * (level - 1) * (level - 1));
+			int startLevelExp = Mathf.FloorToInt(Multiplier * (level - 1) * (level - 1));
+			int nextLevelExp = Mathf.FloorToInt(Multiplier * level * level);
 			return (startLevelExp, nextLevelExp);
 		}
 	}

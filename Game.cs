@@ -28,6 +28,8 @@ namespace Lastdew
         private List<PcSaveData> DefaultPcList { get; } = [];
         [Export]
         private float DayLengthInMinutes { get; set; } = 20f;
+        [Export]
+        private float DayStartHour { get; set; } = 12f;
 
         #endregion
 
@@ -40,17 +42,15 @@ namespace Lastdew
 			Ui = GetNode<UiManager>("%UiManager");
 			TeamData = new TeamData();
 			Fader = GetNode<Fader>("%Fader");
+			
 			MusicPlayer = GetNode<AudioStreamPlayer>("%MusicPlayer");
-			
-			WorldEnvironment worldEnvironment = GetNode<WorldEnvironment>("%WorldEnvironment");
-			Environment environment = worldEnvironment.Environment;
-			Sky sky = environment.Sky;
-			ProceduralSkyMaterial skyMaterial = (ProceduralSkyMaterial)sky.SkyMaterial;
-			TimeManager = new TimeManager(DayLengthInMinutes, skyMaterial);
-			
 			MusicPlayer.Stream = StartMenuSong;
 			MusicPlayer.Play();
 			MusicPlayer.Bus = new StringName("Music");
+			
+			WorldEnvironment worldEnvironment = GetNode<WorldEnvironment>("%WorldEnvironment");
+			ProceduralSkyMaterial skyMaterial = worldEnvironment.Environment.Sky.SkyMaterial as ProceduralSkyMaterial;
+			TimeManager = new TimeManager(DayLengthInMinutes, DayStartHour, skyMaterial);
 			
 			PcManager.Initialize(TeamData);
 			Ui.SubscribeToEvents(TeamData);
@@ -180,26 +180,25 @@ namespace Lastdew
 			CurrentLevel = (Level)levelScene.Instantiate();
 			this.AddChildDeferred(CurrentLevel);
 
-			// Need to wait for ready to be called on newly added CurrentLevel so it can get the spawn points
+			// Need to wait for ready to be called on newly added CurrentLevel so it can get the entrance/exit
 			await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 			
-			Vector3[] spawnPoints;
 			if (CurrentLevel is HomeBase homeBase)
 			{
-				spawnPoints = homeBase.Initialize();
 				homeBase.Setup(buildingSaveDatas);
 				Ui.BuildMenu.OnBuild += homeBase.AddBuilding;
 				TimeManager.HomeBase = homeBase;
 			}
 			else
 			{
-				spawnPoints = CurrentLevel.Initialize();
 				TimeManager.HomeBase = null;
 			}
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas, spawnPoints);
+			PcManager.SpawnPcs(TeamData.Inventory, pcSaveDatas, CurrentLevel.EntranceExit);
+			// TODO: Center camera better. Maybe center it on the front of the EntranceExit at a specific angle.
+			Camera.CallDeferred(Camera.MethodName.CenterOnPc, TeamData.Pcs[0]);
 			Ui.Setup();
 			
 			MusicPlayer.Stream = CurrentLevel.Song;
@@ -216,7 +215,7 @@ namespace Lastdew
 		
         private async Task ReturnHome()
         {
-	        if (CurrentLevel.PcsInExitZone < TeamData.Pcs.Count)
+	        if (CurrentLevel.EntranceExit.PcCount < TeamData.Pcs.Count)
 	        {
 		        return;
 	        }

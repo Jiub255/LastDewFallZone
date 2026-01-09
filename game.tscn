@@ -19,7 +19,7 @@
 process_mode = 1
 script = ExtResource("1_e8jue")
 NumberOfPcs = 4
-DayLengthInMinutes = 0.5
+DayStartHour = 5.5
 
 [node name="CameraRig" parent="." instance=ExtResource("2_hliwg")]
 unique_name_in_owner = true

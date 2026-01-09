@@ -7,17 +7,11 @@ namespace Lastdew
 	{
 		[Export]
 		public AudioStreamMP3 Song { get; private set; }
+		public EntranceExit EntranceExit { get; private set; }
 
-		public int PcsInExitZone => EntranceExit.PcCount;
-		private EntranceExit EntranceExit { get; set; }
-		
-		/// <summary>
-		/// Must be called after Level.Ready()
-		/// </summary>
-		public Vector3[] Initialize()
+		public override void _Ready()
 		{
 			EntranceExit = GetNode<EntranceExit>("%EntranceExit");
-			return EntranceExit.SpawnPoints;
 		}
 	}
 }

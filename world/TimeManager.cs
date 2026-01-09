@@ -3,14 +3,14 @@ using Godot;
 
 namespace Lastdew
 {
-	public class TimeManager(float dayLengthInMinutes, ProceduralSkyMaterial skyMaterial)
+	public class TimeManager(float dayLengthInMinutes, float dayStartHour, ProceduralSkyMaterial skyMaterial)
 	{
 		public event Action OnNewDay;
 		
 		// Starting the game at noon -> 43200 seconds
-		private const float GAME_START_TIME = 43200;
+		//private const float GAME_START_TIME = 43200;
 		
-		private float _currentTime = GAME_START_TIME;
+		private float _currentTime = dayStartHour * 60 * 60; // Convert to seconds
 
 		public float CurrentTime
 		{

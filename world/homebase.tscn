@@ -93,7 +93,7 @@ transform = Transform3D(0.624398, 0, -0.781107, 0, 1, 0, 0.781107, 0, 0.624398, 
 
 [node name="EntranceExit" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.511383, 0, -0.859353, 0, 1, 0, 0.859353, 0, -0.511383, -6.23927, 0, -0.70913)
 script = ExtResource("10_ixuoh")
 
 [node name="PcDetector" type="Area3D" parent="EntranceExit"]

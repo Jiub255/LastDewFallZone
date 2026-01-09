@@ -46,14 +46,15 @@
 			"title": "NEXT",
 			"tasks": [
 				"66e4ae30-0330-4cea-babb-74aab3314288",
+				"497687f1-03dd-4997-9005-1a2908f5ef8a",
 				"2e5546f6-1483-4eec-8913-ba0d39c923e9",
 				"214fa122-5f85-4d1c-8dec-27c303c9b928",
 				"e8b9c0fd-ef0b-43b3-9515-a357d21c0bc4",
-				"7329598e-d6a5-4966-b3f8-1bc8e6065cca",
 				"aa9c66c4-df29-49c6-894b-e930ce28a545",
 				"56f8bc93-566d-4254-a86c-612625830992",
 				"155a9a28-65c0-4ef7-b229-597a8563a649",
-				"b7eed857-1101-44fe-a5ac-1715d7c459d4"
+				"f19453aa-2ba3-43c4-8668-eab495f4e879",
+				"af2b11b7-ebaf-4b18-a74f-7516e34bf776"
 			]
 		},
 		{
@@ -63,7 +64,7 @@
 				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"e85eef6f-6e91-456c-a8e1-002988609629",
-				"0104329f-6dc1-4edb-b529-ae4feb86f5c4"
+				"b7eed857-1101-44fe-a5ac-1715d7c459d4"
 			]
 		},
 		{
@@ -156,9 +157,11 @@
 				"69b8fcbf-8b21-4392-b567-ba2f58b7512f",
 				"a7736d0e-0934-46e7-b9ac-a395c067f8bc",
 				"fb8bd137-94ab-4336-9dad-e3cc413d7b54",
+				"7329598e-d6a5-4966-b3f8-1bc8e6065cca",
 				"b0fce1aa-855b-4ccc-86cd-10ce2eedef28",
 				"58375c30-f072-4b4e-9040-947f76b5ff92",
-				"b160ad9c-efa6-432a-b68c-ea5625b16268"
+				"b160ad9c-efa6-432a-b68c-ea5625b16268",
+				"0104329f-6dc1-4edb-b529-ae4feb86f5c4"
 			]
 		},
 		{
@@ -208,7 +211,8 @@
 			"uuid": "3071f079-a9b4-4847-aa51-c2e1412b8bcb",
 			"title": "BUGS",
 			"tasks": [
-				"8c8729bd-b42c-4305-b2e8-dca50b070672"
+				"8c8729bd-b42c-4305-b2e8-dca50b070672",
+				"c954b6f0-cf7e-454e-a140-bc1f72ef1747"
 			]
 		},
 		{
@@ -229,7 +233,6 @@
 				"f9a1fa27-c374-43fe-a710-b10e4168a046",
 				"fd1829f1-cd5c-4463-8a31-88502fe3de44",
 				"172e7e98-c6f5-4803-b224-8b4907bb3a22",
-				"497687f1-03dd-4997-9005-1a2908f5ef8a",
 				"20d0dac9-4194-4ded-b8d5-e28ecb194b72",
 				"08fb120b-8b0b-489f-a40c-130070bc2376",
 				"ab60d5e5-1a65-4ac4-9a65-224d3f5bb83a"
@@ -1330,7 +1333,7 @@
 		{
 			"uuid": "fd1829f1-cd5c-4463-8a31-88502fe3de44",
 			"title": "Link up to OpenMaps and procedurally do the rest",
-			"description": "Have buildings filled in randomly with whatever theme/loot using procedural generation. Keep the building the same shape and size though. With enough business data, could even make fitting loot/decorations for each.\nNot realistic probably, but it'd be cool.\nMight be doable with some basic guessing involved. Like you choose an area of open maps to be your base (obviously there's a size/zoom limit).\nThen based on building size, you could make them residences or malls or police stations, etc.",
+			"description": "Have buildings filled in randomly with whatever theme/loot using procedural generation. Keep the building the same shape and size though. With enough business data, could even make fitting loot/decorations for each.\nNot realistic probably, but it'd be cool.\nMight be doable with some basic guessing involved. Like you choose an area of open maps to be your base (obviously there's a size/zoom limit).\nThen based on building size, you could make them residences or malls or police stations, etc. Could put appropriate map icons over each building so it's not just blank rectangles.",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -1479,6 +1482,27 @@
 			"title": "Make level editor/asset placer",
 			"description": "Make a tool/plugin that makes it easier to create levels.\nCould just have each type of game object as a button in the bottom panel. Put tabs for different types/folders.\nThen just click on an item to instantiate it in the currently displayed scene. The rest as usual?",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "c954b6f0-cf7e-454e-a140-bc1f72ef1747",
+			"title": "SelectedItemPanel.UseOrEquipItem() is throwing an error sometimes",
+			"description": "Might be from having test usable items with no effects",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "f19453aa-2ba3-43c4-8668-eab495f4e879",
+			"title": "Make food/water production/storage buildings",
+			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "af2b11b7-ebaf-4b18-a74f-7516e34bf776",
+			"title": "Pets? Especially dogs",
+			"description": "Could boost morale, help scavenge (find secrets?), and fight/defend base. Obviously immortal.",
+			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		}
 	],

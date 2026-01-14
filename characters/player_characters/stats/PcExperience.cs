@@ -1,6 +1,4 @@
 using System;
-using System.Numerics;
-using Godot;
 
 namespace Lastdew
 {
@@ -11,7 +9,7 @@ namespace Lastdew
 
 		public int Experience { get; private set; }
 		public int Level { get; private set; }
-		private ExperienceFormula Formula { get; init; }
+		private ExperienceFormula Formula { get; }
 		
 
 		public PcExperience(PcSaveData saveData, ExperienceFormula formula)
@@ -20,7 +18,6 @@ namespace Lastdew
 			Formula = formula;
 			
 			Level = Formula.LevelFromExperience(Experience);
-			//PrintLevels();
 		}
 		
 		public void GainExperience(int experienceGained)
@@ -40,15 +37,5 @@ namespace Lastdew
 			Level++;
 			OnLevelUp?.Invoke();
 		}
-
-
-		// private void PrintLevels()
-		// {
-		// 	Godot.GD.Print("Level     Experience");
-		// 	for (int i = 1; i < 101; i++)
-		// 	{
-		// 		Godot.GD.Print($"{i}         {5 * (i - 1) * (i - 1)}");
-		// 	}
-		// }
 	}
 }

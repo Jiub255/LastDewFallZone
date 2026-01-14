@@ -14,7 +14,7 @@ TimeBetweenAttacks = 2.3
 MaxHealth = 4
 Defense = 0
 SightDistance = 20.0
-Experience = 3
+Experience = 6
 Loot = Dictionary[Object, int]({
 null: 0,
 ExtResource("1_7kriq"): 2

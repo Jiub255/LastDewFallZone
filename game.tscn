@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dvqh38ovds5vf"]
 
 [ext_resource type="Script" uid="uid://hvbc2yvp8ktl" path="res://Game.cs" id="1_e8jue"]
-[ext_resource type="Resource" uid="uid://cm145pop3m7tw" path="res://characters/player_characters/stats/5x_exp_formula.tres" id="2_80cx4"]
+[ext_resource type="Resource" uid="uid://bkqy2v2f7sxuv" path="res://characters/player_characters/stats/exponential_formula.tres" id="2_80cx4"]
 [ext_resource type="PackedScene" uid="uid://4q4t3oj7cg4i" path="res://camera/camera.tscn" id="2_hliwg"]
 [ext_resource type="Script" uid="uid://duudb1m1f6mx2" path="res://characters/player_characters/management/PcManager.cs" id="3_av0ep"]
 [ext_resource type="Script" uid="uid://dfydmocx5fr4" path="res://UI/UiManager.cs" id="4_lc2xo"]

@@ -210,7 +210,9 @@
 				"de0485c3-bef0-4d22-a8f1-180b2af2f535",
 				"3d5e2a3c-cd27-44d6-8159-3cc6b23231ba",
 				"31c4c768-0883-4d5e-9bbd-9693e39d6574",
-				"74c7e6fc-81ad-4dda-8590-24352ded853d"
+				"74c7e6fc-81ad-4dda-8590-24352ded853d",
+				"6997505c-aaaf-4c4f-b205-3d8db6d51211",
+				"64aabd25-6504-4a3d-9d13-4ecbf0a3c1f6"
 			]
 		},
 		{
@@ -219,7 +221,7 @@
 			"tasks": [
 				"8c8729bd-b42c-4305-b2e8-dca50b070672",
 				"c954b6f0-cf7e-454e-a140-bc1f72ef1747",
-				"6997505c-aaaf-4c4f-b205-3d8db6d51211"
+				"0ec156f8-ad6f-43de-b00e-e7cbf161ad0c"
 			]
 		},
 		{
@@ -1557,7 +1559,21 @@
 		{
 			"uuid": "6997505c-aaaf-4c4f-b205-3d8db6d51211",
 			"title": "Mission summary menu displays all pcs even when some didn't go",
-			"description": "Probably something to do with grabbing them from TeamData in Game.SetupLevel().",
+			"description": "FIXED by initializing menu after instantiating scavenging team pcs (so the pc list from TeamData is correct)\nProbably something to do with grabbing them from TeamData in Game.SetupLevel().",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "0ec156f8-ad6f-43de-b00e-e7cbf161ad0c",
+			"title": "Sometimes enemies dont attack right",
+			"description": "Happened when first starting a scavenging level",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "64aabd25-6504-4a3d-9d13-4ecbf0a3c1f6",
+			"title": "Exp progress bar not leveling up correctly",
+			"description": "FIXED by adding 1 to exp in ExponentialFormula.LevelFromExperience(). Still not sure why.\nIf you get the exact amount of exp needed to level up, it just stays full and doesn't do the level up switch over.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

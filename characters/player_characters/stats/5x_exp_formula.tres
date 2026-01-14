@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_ufobo")
-Multiplier = 5.0
+Multiplier = 25.0
 metadata/_custom_type_script = "uid://bk6m2t3bqrbq7"

@@ -41,6 +41,7 @@ namespace Lastdew
         public override void _Ready()
 		{
 			base._Ready();
+			//Formula.PrintLevels();
 
 			Camera = GetNode<Camera>("%CameraRig");
 			PcManager = GetNode<PcManager>("%PcManager");
@@ -179,13 +180,6 @@ namespace Lastdew
 			if (CurrentLevel is HomeBase oldHomeBase)
 			{
 				Ui.BuildMenu.OnBuild -= oldHomeBase.AddBuilding;
-
-				if (MissionData != null)
-				{
-					PcManager.OnLooted -= MissionData.AddItems;
-				}
-				MissionData = new MissionData(TeamData.Pcs);
-				PcManager.OnLooted += MissionData.AddItems;
 			}
 
 			bool firstTime = true;
@@ -233,10 +227,25 @@ namespace Lastdew
 			Fader.FadeIn();
 			
 			// TODO: Maybe pause game too?
-			if (CurrentLevel is HomeBase && !firstTime)
+			if (CurrentLevel is HomeBase)
 			{
-				Ui.MissionSummaryMenu.Open();
-				Ui.MissionSummaryMenu.Setup(pcs, MissionData);
+				Ui.ChangeState(new GameStateHome());
+				if (!firstTime)
+				{
+					Ui.MissionSummaryMenu.Open();
+					Ui.MissionSummaryMenu.Setup(pcs, MissionData);
+				}
+			}
+			else
+			{
+				if (MissionData != null)
+				{
+					PcManager.OnLooted -= MissionData.AddItems;
+				}
+				// TeamData.Pcs has all the pcs at this point. Need to do this after instantiating
+				// the scavenging team.
+				MissionData = new MissionData(TeamData.Pcs);
+				PcManager.OnLooted += MissionData.AddItems;
 			}
 		}
 
@@ -248,7 +257,8 @@ namespace Lastdew
 		
         private async Task ReturnHome()
         {
-	        if (CurrentLevel.EntranceExit.PcCount < TeamData.Pcs.Count)
+	        bool allPcsInExitZone = CurrentLevel.EntranceExit.PcCount >= TeamData.Pcs.Count;
+	        if (!allPcsInExitZone)
 	        {
 		        return;
 	        }
@@ -261,7 +271,6 @@ namespace Lastdew
 			
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
 			await SetupLevel(homeBaseScene, pcSaveDatas, TeamData.Inventory.Buildings);
-			Ui.ChangeState(new GameStateHome());
         }
 
         private void PlaceBuilding(BuildingData data)

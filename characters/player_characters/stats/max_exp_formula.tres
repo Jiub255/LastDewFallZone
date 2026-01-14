@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaxExpFormula" load_steps=2 format=3 uid="uid://cblnrbk7u0jsl"]
+
+[ext_resource type="Script" uid="uid://cotegohk0ef1o" path="res://characters/player_characters/stats/MaxExpFormula.cs" id="1_t1bb0"]
+
+[resource]
+script = ExtResource("1_t1bb0")
+MaxLevel = 20
+ExperienceForFirstLevel = 10
+ExperienceForLastLevel = 69420
+metadata/_custom_type_script = "uid://cotegohk0ef1o"

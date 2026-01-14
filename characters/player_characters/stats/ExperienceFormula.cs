@@ -1,25 +1,21 @@
-using Godot;
 using System;
+using Godot;
 
 namespace Lastdew
 {
-	[GlobalClass]
-	public partial class ExperienceFormula : Resource
+	public abstract partial class ExperienceFormula : Resource
 	{
-		[Export] private float Multiplier { get; set; } = 5f;
-		
-		// Multiplier * (level - 1) ^ 2 = exp  =>  level = sqrt(exp / Multiplier) + 1
-		// Shifted it up a level so 0 exp -> lvl 1.
-		public int LevelFromExperience(int exp)
-		{
-			return (int)Math.Floor(MathF.Sqrt(exp / Multiplier)) + 1;
-		}
+		public abstract int LevelFromExperience(long exp);
+		public abstract (long startLevelExp, long nextLevelExp) ExperienceRangeFromLevel(int level);
 
-		public (int startLevelExp, int nextLevelExp) ExperienceRangeFromLevel(int level)
+		public void PrintLevels()
 		{
-			int startLevelExp = Mathf.FloorToInt(Multiplier * (level - 1) * (level - 1));
-			int nextLevelExp = Mathf.FloorToInt(Multiplier * level * level);
-			return (startLevelExp, nextLevelExp);
+			for (int level = 1; level <= 100; level++)
+			{
+				long xpDiff = ExperienceRangeFromLevel(level).startLevelExp - 
+				             Math.Max(0, ExperienceRangeFromLevel(level - 1).startLevelExp);
+				GD.Print($"Level {level}: {xpDiff} exp, {ExperienceRangeFromLevel(level).startLevelExp} total");
+			}
 		}
 	}
 }

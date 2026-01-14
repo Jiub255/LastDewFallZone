@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjq6exhm7nyil"]
+[gd_scene load_steps=5 format=3 uid="uid://bjq6exhm7nyil"]
 
 [ext_resource type="Texture2D" uid="uid://b2rhn4yqwwwoe" path="res://characters/player_characters/management/pc_data/jaime.png" id="1_n3v33"]
 [ext_resource type="Script" uid="uid://b31y7v8iocxr8" path="res://UI/menus/mission_summary/PcInfoDisplay.cs" id="1_trehx"]
-[ext_resource type="Script" uid="uid://dtgvojnhw7stv" path="res://UI/menus/mission_summary/AnimatedProgressBar.cs" id="2_gbn8a"]
+[ext_resource type="Script" uid="uid://dtgvojnhw7stv" path="res://UI/menus/mission_summary/ExperienceProgressBar.cs" id="3_trehx"]
+[ext_resource type="Script" uid="uid://bkyigf7stwet0" path="res://UI/menus/mission_summary/InjuryProgressBar.cs" id="4_dky1h"]
 
 [node name="PcInfoDisplay" type="PanelContainer"]
 self_modulate = Color(0.437051, 0.342524, 0.309113, 1)
@@ -44,7 +45,8 @@ horizontal_alignment = 1
 [node name="ExpGained" type="VBoxContainer" parent="PcHBox"]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("2_gbn8a")
+script = ExtResource("3_trehx")
+FillAnimationDuration = 3.0
 
 [node name="ExpBar" type="ProgressBar" parent="PcHBox/ExpGained"]
 unique_name_in_owner = true
@@ -52,6 +54,7 @@ modulate = Color(1.15514e-06, 0.548617, 0.673368, 1)
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 value = 30.0
+rounded = true
 allow_greater = true
 show_percentage = false
 
@@ -62,16 +65,20 @@ text = "300/1000 XP"
 horizontal_alignment = 1
 
 [node name="Injury" type="VBoxContainer" parent="PcHBox"]
+unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("4_dky1h")
 
-[node name="ProgressBar" type="ProgressBar" parent="PcHBox/Injury"]
+[node name="InjuryBar" type="ProgressBar" parent="PcHBox/Injury"]
+unique_name_in_owner = true
 modulate = Color(0.967688, 0, 0.0712306, 1)
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 value = 20.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="PcHBox/Injury"]
+[node name="InjuryLabel" type="Label" parent="PcHBox/Injury"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "20/100 Injury"
 horizontal_alignment = 1

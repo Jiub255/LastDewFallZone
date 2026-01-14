@@ -18,8 +18,8 @@ namespace Lastdew
 			foreach (PlayerCharacter pc in pcs)
 			{
 				InitialPcStats[pc.Data.Name] = (
-					pc.StatManager.Experience.Experience, 
-					pc.StatManager.Health.Injury);
+					beginningExp: pc.StatManager.Experience.Experience, 
+					beginningInjury: pc.StatManager.Health.Injury);
 			}
 		}
 		

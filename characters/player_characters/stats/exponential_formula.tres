@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ExponentialFormula" load_steps=2 format=3 uid="uid://bkqy2v2f7sxuv"]
+
+[ext_resource type="Script" uid="uid://bxl7muijsoitw" path="res://characters/player_characters/stats/ExponentialFormula.cs" id="1_fpx4i"]
+
+[resource]
+script = ExtResource("1_fpx4i")
+MaxLevel = 30
+XpForLastLevel = 10000
+K = 0.2
+metadata/_custom_type_script = "uid://bxl7muijsoitw"

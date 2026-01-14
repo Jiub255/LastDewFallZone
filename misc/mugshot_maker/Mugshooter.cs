@@ -20,7 +20,7 @@ namespace Lastdew
 			{
 				PlayerCharacter pc = (PlayerCharacter)PcScene.Instantiate();
 				this.AddChildDeferred(pc);
-				pc.Initialize(new InventoryManager(), new PcSaveData(pcData.GetUid()), new ExperienceFormula());
+				pc.Initialize(new InventoryManager(), new PcSaveData(pcData.GetUid()), new MultiplierFormula());
 				await GetMugshotIcon(pc);
 			}
 		}

@@ -46,7 +46,6 @@
 			"title": "NEXT",
 			"tasks": [
 				"66e4ae30-0330-4cea-babb-74aab3314288",
-				"497687f1-03dd-4997-9005-1a2908f5ef8a",
 				"2e5546f6-1483-4eec-8913-ba0d39c923e9",
 				"214fa122-5f85-4d1c-8dec-27c303c9b928",
 				"e8b9c0fd-ef0b-43b3-9515-a357d21c0bc4",
@@ -55,7 +54,7 @@
 				"155a9a28-65c0-4ef7-b229-597a8563a649",
 				"f19453aa-2ba3-43c4-8668-eab495f4e879",
 				"af2b11b7-ebaf-4b18-a74f-7516e34bf776",
-				"8d494a48-e1a8-46f4-8715-36701104ba7a"
+				"fc7c53e4-8737-4fa2-8541-89b6a8a8802f"
 			]
 		},
 		{
@@ -65,8 +64,7 @@
 				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"e85eef6f-6e91-456c-a8e1-002988609629",
-				"3c8dbb73-d01e-48b3-86ee-9885e1576fb6",
-				"a84c2a64-3e33-4ee4-b578-8d541004ce02"
+				"3c8dbb73-d01e-48b3-86ee-9885e1576fb6"
 			]
 		},
 		{
@@ -164,7 +162,10 @@
 				"58375c30-f072-4b4e-9040-947f76b5ff92",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
 				"0104329f-6dc1-4edb-b529-ae4feb86f5c4",
-				"b7eed857-1101-44fe-a5ac-1715d7c459d4"
+				"b7eed857-1101-44fe-a5ac-1715d7c459d4",
+				"a84c2a64-3e33-4ee4-b578-8d541004ce02",
+				"8d494a48-e1a8-46f4-8715-36701104ba7a",
+				"497687f1-03dd-4997-9005-1a2908f5ef8a"
 			]
 		},
 		{
@@ -1210,7 +1211,7 @@
 		{
 			"uuid": "0e82596b-3f97-42e0-b018-06d7658cd4d3",
 			"title": "Medical system",
-			"description": "How to heal PCs? \nUse medical items like bandages and medicine to just heal some amount of injury in general?\nOr have like splints for broken bones, bandages for cuts, etc?\nAlso how will medical skill play into it? Healing rate depends on highest medical skill of your pcs?\nWill healing take time or be instant?\n\nJust have it so medical items just heal x injury in general, act instantly, and their strength is affected by your highest medical skill and any medical tools/buildings you have.\nNeed to have it display the correct numbers in inventory too.",
+			"description": "How to heal PCs? \nUse medical items like bandages and medicine to just heal some amount of injury in general?\nOr have like splints for broken bones, bandages for cuts, etc?\nAlso how will medical skill play into it? Healing rate depends on highest medical skill of your pcs?\nWill healing take time or be instant?\n\nJust have it so medical items just heal x injury in general, act instantly, and their strength is affected by your highest medical skill and any medical tools/buildings you have.\n\nNeed to have it display the correct numbers in inventory too.\nBut first need to decide how character menu/inventory UI is gonna look. Essentially changing the description of the item (or effect?)",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1427,7 +1428,7 @@
 		{
 			"uuid": "497687f1-03dd-4997-9005-1a2908f5ef8a",
 			"title": "Ammo",
-			"description": "Just have a bullets int in InventoryManager and spend one each time you shoot?",
+			"description": "Just have a bullets int in InventoryManager and spend one each time you shoot?\n\nNeed to fix what happens when you run out of ammo during combat.\nWant to basically temporarily unequip the gun, then move towards the same enemy but in melee mode.\nChange attack power, range, animation, and make the gun model invisible.\nAll temporary until more ammo found? Or just end of scavenging run/base invasion?\nNo, just have the gun still equipped, but just fight in melee mode unless there's ammo.\n\nMaybe do out of ammo/not out anymore events in InventoryManager? Then have all the pcs go into/out of \"melee mode'. \nBut have to only change range/damage/animation/weapon visible while trying to attack with a gun. If you switch to another weapon, melee mode doesn't affect anything.\n\nHave OutOfAmmo and NotOutAnymore events in Inventory.\nOn OutOfAmmo, pcs call TemporarilyUnequipGun(), which stores the old gun in memory then unequips it (but without returning it to inventory).\nOn NotOutAnymore, pcs just reequip their old gun if there was one. ",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1490,7 +1491,7 @@
 		{
 			"uuid": "c954b6f0-cf7e-454e-a140-bc1f72ef1747",
 			"title": "SelectedItemPanel.UseOrEquipItem() is throwing an error sometimes",
-			"description": "Might be from having test usable items with no effects",
+			"description": "Might be from having test usable items with no effects.\nNo. Happens right after using the last item in inventory. ",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -1583,6 +1584,13 @@
 			"title": "  ERROR: Script class can only be set together with base class name.",
 			"description": "FIXED by getting rid of any '= []' for any exported Godot.Collections dicts or arrays. \nFor some reason making a new dict/array while declaring it caused that error.\nOnly difference is that if one of these arrays/dicts are left empty in the inspector, they will return null instead of an empty array/dict. No big deal.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "fc7c53e4-8737-4fa2-8541-89b6a8a8802f",
+			"title": "Improve Building editor",
+			"description": "Delete/scrap buildings (get Building.ScrapResults back in inventory for scrapping building)\nMove buildings. No cost or wait time.\nClean up/add to Build menu UI.",
+			"category": "2b7f1373-2444-4b18-bd4d-ff23e96b0051",
 			"steps": []
 		}
 	],

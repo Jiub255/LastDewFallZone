@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://feolvuufjcb7"]
+
+[ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_6ch60"]
+[ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://UI/menus/hud/icon_water.png" id="1_e63rn"]
+
+[resource]
+script = ExtResource("1_6ch60")
+BuildingType = 2
+SceneUid = "uid://b43qgn317wr1k"
+Effects = Dictionary[int, int]({
+1: 1
+})
+Name = "Water Collector"
+Description = "Collects water"
+Icon = ExtResource("1_e63rn")
+RecipeCosts = Dictionary[int, int]({
+5170883165870291646: 1
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})
+metadata/_custom_type_script = "uid://dvt86qfllpnlr"

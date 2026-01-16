@@ -32,7 +32,7 @@ namespace Lastdew
         private int NumberOfPcs { get; set; } = 1;
         private List<PcSaveData> DefaultPcList { get; } = [];
         [Export]
-        private float DayLengthInMinutes { get; set; } = 20f;
+        private float DayLengthInMinutes { get; set; } = 24f;
         [Export]
         private float DayStartHour { get; set; } = 12f;
 
@@ -153,7 +153,7 @@ namespace Lastdew
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
 			TeamData.Inventory.Buildings = new Buildings(SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas));
 			Ui.Initialize(TeamData, Camera, TimeManager, Formula);
-			// LoadInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
+			// FillInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
 			// can initialize first.
 			await SetupLevel(homeBaseScene, saveData.PcSaveDatas, TeamData.Inventory.Buildings);
 			FillInventory(saveData.Inventory);
@@ -212,11 +212,8 @@ namespace Lastdew
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			await PcManager.SpawnPcs(
-				TeamData.Inventory,
-				pcSaveDatas,
-				CurrentLevel.EntranceExit,
-				Formula);
+			await PcManager.SpawnPcs(pcSaveDatas, CurrentLevel.EntranceExit, Formula);
+			
 			// TODO: Center camera better. Maybe center it on the front of the EntranceExit at a specific angle.
 			Camera.CallDeferred(Camera.MethodName.CenterOnPc, TeamData.Pcs[0]);
 			Ui.Setup();
@@ -293,11 +290,11 @@ namespace Lastdew
         private void AdjustFoodAndWater()
         {
 	        int numberOfPcs = TeamData.Pcs.Count;
-	        TeamData.Inventory.Food -= numberOfPcs;
-	        TeamData.Inventory.Water -= numberOfPcs;
-
-	        TeamData.Inventory.Food += TeamData.Inventory.Buildings.FoodProductionPerDay;
-	        TeamData.Inventory.Water += TeamData.Inventory.Buildings.WaterProductionPerDay;
+	        int foodGained = TeamData.Inventory.Buildings.FoodProductionPerDay - numberOfPcs;
+	        int waterGained = TeamData.Inventory.Buildings.WaterProductionPerDay - numberOfPcs;
+	        
+	        TeamData.Inventory.Food += foodGained;
+	        TeamData.Inventory.Water += waterGained;
         }
 	}
 }

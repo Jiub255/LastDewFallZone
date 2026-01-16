@@ -11,6 +11,7 @@ namespace Lastdew
 		public event Action OnEquipmentChanged;
 		public event Action<Texture2D, string> OnLooted;
 		public event Action OnDeath;
+		public event Action OnSpendAmmo; 
 		
 		private const float INVULNERABILITY_DURATION = 1f;
 		private const float SIGHT_DISTANCE = 20f;
@@ -235,9 +236,16 @@ namespace Lastdew
 					GD.Load<Texture2D>(Uids.WATER_ICON),
 					$"{container.Water.ToString()} Water");
 			}
+			if (container.Ammo > 0)
+			{
+				OnLooted?.Invoke(
+					GD.Load<Texture2D>(Uids.AMMO_ICON),
+					$"{container.Ammo.ToString()} Ammo");
+			}
 			
 			Inventory.Food += container.Food;
 			Inventory.Water += container.Water;
+			Inventory.Ammo += container.Ammo;
 			
 			StatManager.Experience.GainExperience(container.Experience);
 			
@@ -253,6 +261,7 @@ namespace Lastdew
 			// TODO: Let PcManager (or TeamData) know Pc is dead so it can deselect it if it's selected.
 		}
 		
+		// TODO: Why not just use the built-in _ExitTree() here?
 		public void ExitTree()
 		{
 			StatManager.Experience.OnExperienceGained -= ShowPopup;
@@ -264,6 +273,32 @@ namespace Lastdew
         public void SetSelectedIndicator(bool on)
         {
 	        SelectedIndicator.Visible = on;
+        }
+
+        public void SpendAmmo()
+        {
+	        OnSpendAmmo?.Invoke();
+        }
+
+        public void TemporarilyUnequipGun()
+        {
+	        if (Equipment.Weapon.WeaponType != WeaponType.GUN)
+	        {
+		        return;
+	        }
+	        
+	        Equipment.TemporarilyUnequipGun();
+	        StatManager.CalculateStatModifiers(Equipment.Bonuses);
+	        WeaponSlot.Hide();
+	        // TODO: Change to movement state?
+	        StateMachine.ChangeState(PcStateNames.MOVEMENT);
+        }
+
+        public void ReequipGun()
+        {
+	        Equipment.ReequipGun();
+	        StatManager.CalculateStatModifiers(Equipment.Bonuses);
+	        WeaponSlot.Show();
         }
 		
 		// Called from animation method track

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://jlnwj0thfhrf"]
+[gd_scene load_steps=14 format=3 uid="uid://jlnwj0thfhrf"]
 
 [ext_resource type="Script" uid="uid://dunm418v5lhid" path="res://UI/menus/hud/Hud.cs" id="1_asb0d"]
 [ext_resource type="Texture2D" uid="uid://clisgnymen51" path="res://UI/menus/hud/build.png" id="2_4dvhw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c82qip3rv70nl" path="res://UI/menus/hud/return_home.png" id="8_bmggi"]
 [ext_resource type="Texture2D" uid="uid://lgytv07nml1y" path="res://UI/menus/hud/icon_food.png" id="8_qhrhg"]
 [ext_resource type="Texture2D" uid="uid://bxqetgnj57uhx" path="res://UI/menus/hud/icon_water.png" id="9_bmggi"]
+[ext_resource type="Texture2D" uid="uid://bm5h88tmbapy1" path="res://UI/menus/hud/icon_ammo.png" id="9_vqj2q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bmggi"]
 
@@ -154,6 +155,26 @@ size_flags_vertical = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GeneralInfo"]
 layout_mode = 2
 theme_override_constants/separation = 10
+
+[node name="Ammo" type="HBoxContainer" parent="MarginContainer/GeneralInfo/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/GeneralInfo/HBoxContainer/Ammo"]
+layout_mode = 2
+texture = ExtResource("9_vqj2q")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="AmmoAmount" type="Label" parent="MarginContainer/GeneralInfo/HBoxContainer/Ammo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"LabelMedium"
+text = "345"
+
+[node name="ColorRect3" type="ColorRect" parent="MarginContainer/GeneralInfo/HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+color = Color(0.572988, 0.572988, 0.572988, 1)
 
 [node name="Food" type="HBoxContainer" parent="MarginContainer/GeneralInfo/HBoxContainer"]
 layout_mode = 2

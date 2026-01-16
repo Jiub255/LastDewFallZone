@@ -49,6 +49,7 @@ namespace Lastdew
 					playback.Travel(MELEE_ANIM_NAME);
 					break;
 				case WeaponType.GUN:
+					Pc.SpendAmmo();
 					playback.Travel(SHOOT_ANIM_NAME);
 					break;
 				default:
@@ -80,7 +81,6 @@ namespace Lastdew
 			{
 				Pc.StatManager.Experience.GainExperience(enemy.Data.Experience);
 			}
-			//this.PrintDebug("Enemy.GetHit() called.");
 		}
 		
 		private void OnAnimationFinished(string animationName)

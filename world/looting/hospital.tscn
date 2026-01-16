@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b4o4x2e1uk6tt" path="res://game_objects/furniture/table_hospital/SM_Table_01.prefab.scn" id="7_4o0y5"]
 [ext_resource type="PackedScene" uid="uid://cywv1idi1np8t" path="res://game_objects/furniture/chair/SM_Chair_02_A.prefab.scn" id="8_srhq0"]
 [ext_resource type="PackedScene" uid="uid://chmguvnf3k1y0" path="res://game_objects/furniture/counter_with_sink/SM_Table_04.prefab.scn" id="10_h4r8x"]
-[ext_resource type="PackedScene" uid="uid://bgk2v0gvlm4xe" path="res://game_objects/furniture/bed_hospital/SM_Couch_02.prefab.scn" id="11_jg8rl"]
+[ext_resource type="PackedScene" uid="uid://bgk2v0gvlm4xe" path="res://game_objects/buildable/bed_hospital/SM_Couch_02.prefab.scn" id="11_jg8rl"]
 [ext_resource type="PackedScene" uid="uid://ckii4hghld6u4" path="res://game_objects/loot_containers/ambry_large/SM_Ambry_Large.prefab.scn" id="12_38c1e"]
 [ext_resource type="PackedScene" uid="uid://coxrqgr4ss1os" path="res://game_objects/loot_containers/cabinet/SM_Cabinet_A.prefab.scn" id="13_jg8rl"]
 [ext_resource type="PackedScene" uid="uid://cc3ola34cng3y" path="res://game_objects/loot_containers/bin_plastic/SM_Box_03.prefab.scn" id="13_y2lor"]

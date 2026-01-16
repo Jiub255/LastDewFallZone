@@ -6,6 +6,8 @@ namespace Lastdew
     {
 		public event Action<PcStateNames> OnChangeState;
 
+		private const float UNARMED_ATTACK_RANGE = 1f;
+		
         protected PlayerCharacter Pc { get; } = pc;
         protected static string BlendAmountPath => "parameters/movement_blend_tree/idle_move/blend_amount";
         
@@ -28,7 +30,7 @@ namespace Lastdew
 
 		protected float AttackRadius()
 		{
-			return Pc.Equipment.Weapon?.Range ?? 1f;
+			return Pc.Equipment.Weapon?.Range ?? UNARMED_ATTACK_RANGE;
 		}
 	}
 }

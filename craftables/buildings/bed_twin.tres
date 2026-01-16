@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://dsv2wpbp02jyj"]
+
+[ext_resource type="Texture2D" uid="uid://b74ul46fx48vy" path="res://craftables/items/crafting_materials/icon_cloth.png" id="1_4ym38"]
+[ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_wio53"]
+
+[resource]
+script = ExtResource("1_wio53")
+BuildingType = 4
+SceneUid = "uid://cwjdsxwmjj1ln"
+Effects = Dictionary[int, int]({})
+Name = "Bed"
+Description = "Twin bed"
+Icon = ExtResource("1_4ym38")
+RecipeCosts = Dictionary[int, int]({
+5170883165870291646: 1
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})
+metadata/_custom_type_script = "uid://dvt86qfllpnlr"

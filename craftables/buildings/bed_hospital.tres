@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://dipub3rhwv7qa"]
+
+[ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_bw0nk"]
+[ext_resource type="Texture2D" uid="uid://lgytv07nml1y" path="res://UI/menus/hud/icon_food.png" id="1_s1kie"]
+
+[resource]
+script = ExtResource("1_bw0nk")
+BuildingType = 3
+SceneUid = "uid://bgk2v0gvlm4xe"
+Effects = Dictionary[int, int]({
+2: 1
+})
+Name = "Hospital Bed"
+Description = "Place to rest while you recover"
+Icon = ExtResource("1_s1kie")
+RecipeCosts = Dictionary[int, int]({
+231828703336004085: 1
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})
+metadata/_custom_type_script = "uid://dvt86qfllpnlr"

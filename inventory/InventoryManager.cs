@@ -10,9 +10,13 @@ namespace Lastdew
 		public event Action OnInventoryChanged;
 		public event Action OnFoodChanged;
 		public event Action OnWaterChanged;
+		public event Action OnAmmoChanged;
+		public event Action OnOutOfAmmo; 
+		public event Action OnNotOutOfAmmoAnymore; 
 		
 		private int _food;
 		private int _water;
+		private int _ammo;
 
 		public InventoryController<CraftingMaterial> CraftingMaterials { get; } = new();
 		public InventoryController<Equipment> Equipment { get; } = new();
@@ -27,6 +31,7 @@ namespace Lastdew
 		        _food = value;
 				if (_food < 0)
 				{
+					// TODO: Set some sort of morale decrease here?
 					_food = 0;
 				}
 				OnFoodChanged?.Invoke();
@@ -39,11 +44,43 @@ namespace Lastdew
 	        set
 	        {
 		        _water = value;
-				if (_water < 0)
-				{
-					_water = 0;
-				}
-				OnWaterChanged?.Invoke();
+		        if (_water < 0)
+		        {
+			        // TODO: Set some sort of morale decrease here?
+			        _water = 0;
+		        }
+		        OnWaterChanged?.Invoke();
+	        }
+        }
+
+        public int Ammo
+        {
+	        get => _ammo;
+	        set
+	        {
+		        if (_ammo == value)
+		        {
+			        return;
+		        }
+		        
+		        if (_ammo <= 0 && value > 0)
+		        {
+			        OnNotOutOfAmmoAnymore?.Invoke();
+		        }
+
+		        if (_ammo > 0 && value <= 0)
+		        {
+			        OnOutOfAmmo?.Invoke();
+		        }
+		        
+		        _ammo = value;
+		        
+		        if (_ammo < 0)
+		        {
+			        GD.PushError("Ammo should never be less than 0");
+			        _ammo = 0;
+		        }
+		        OnAmmoChanged?.Invoke();
 	        }
         }
 
@@ -139,12 +176,10 @@ namespace Lastdew
 		public Dictionary<long, int> GatherSaveData()
 		{
 			Dictionary<long, int> inventory = new();
-			foreach (KeyValuePair<Item, int> item in this)
+			foreach ((Item item, int amount) in this)
 			{
-				// TODO: This might not work on export. Might have to redo Craftables and PcDatas 
-				// to not use UIDs. Not sure.
-				long uid = ResourceLoader.GetResourceUid(item.Key.ResourcePath);
-				inventory[uid] = item.Value;
+				long uid = ResourceLoader.GetResourceUid(item.ResourcePath);
+				inventory[uid] = amount;
 			}
 			return inventory;
 		}
@@ -170,22 +205,22 @@ namespace Lastdew
 
 		public IEnumerator<KeyValuePair<Item, int>> GetEnumerator()
 		{
-			foreach (KeyValuePair<CraftingMaterial, int> kvp in CraftingMaterials)
+			foreach ((CraftingMaterial material, int amount) in CraftingMaterials)
 			{
-				Item item = kvp.Key;
-				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				Item item = material;
+				KeyValuePair<Item, int> itemKvp = new(item, amount);
 				yield return itemKvp;
 			}
-			foreach (KeyValuePair<Equipment, int> kvp in Equipment)
+			foreach ((Equipment equipment, int amount) in Equipment)
 			{
-				Item item = kvp.Key;
-				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				Item item = equipment;
+				KeyValuePair<Item, int> itemKvp = new(item, amount);
 				yield return itemKvp;
 			}
-			foreach (KeyValuePair<UsableItem, int> kvp in UsableItems)
+			foreach ((UsableItem usableItem, int amount) in UsableItems)
 			{
-				Item item = kvp.Key;
-				KeyValuePair<Item, int> itemKvp = new(item, kvp.Value);
+				Item item = usableItem;
+				KeyValuePair<Item, int> itemKvp = new(item, amount);
 				yield return itemKvp;
 			}
 		}

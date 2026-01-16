@@ -32,11 +32,16 @@ namespace Lastdew
 		private int MinimumWater { get; set; }
 		[Export]
 		private int MaximumWater { get; set; }
+		[Export]
+		private int MinimumAmmo { get; set; }
+		[Export]
+		private int MaximumAmmo { get; set; }
 
 		
 		public Godot.Collections.Array<Item> Loot { get; } = [];
 		public int Food { get; private set; }
 		public int Water { get; private set; }
+		public int Ammo { get; private set; }
 		public bool Empty { get; set; }
 		public bool BeingLooted { get; set; }
 		public Vector3 LootingPosition { get; private set; }
@@ -64,6 +69,7 @@ namespace Lastdew
 			
 			Food = rng.Next(MinimumFood, MaximumFood + 1);
 			Water = rng.Next(MinimumWater, MaximumWater + 1);
+			Ammo = rng.Next(MinimumAmmo, MaximumAmmo + 1);
 			
 			// Not really necessary, just saving memory (?)
 			_commons.Clear();

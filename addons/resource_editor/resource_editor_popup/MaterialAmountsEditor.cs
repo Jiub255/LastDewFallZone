@@ -1,6 +1,5 @@
 #if TOOLS
 using Godot;
-using Godot.Collections;
 
 namespace Lastdew
 {
@@ -10,13 +9,7 @@ namespace Lastdew
         private VBoxContainer Parent { get; set; }
         private Button Add { get; set; }
         private PackedScene MaterialAmountScene { get; } = GD.Load<PackedScene>(Uids.MATERIAL_AMOUNT_EDITOR);
-        protected Dictionary<long, int> Materials
-        {
-            get
-            {
-                return GatherMaterials();
-            }
-        }
+        protected Godot.Collections.Dictionary<long, int> Materials => GatherMaterials();
 
         public override void _Ready()
         {
@@ -35,18 +28,22 @@ namespace Lastdew
             Add.Pressed -= NewMaterialAmount;
         }
         
-        public void Setup(Dictionary<long, int> materialAmounts)
+        public void Setup(Godot.Collections.Dictionary<long, int> materialAmounts)
         {
             ClearMaterialAmounts();
-            foreach (var kvp in materialAmounts)
+            if (materialAmounts == null)
             {
-                NewMaterialAmount(kvp.Key, kvp.Value);
+                return;
+            }
+            foreach ((long material, int amount) in materialAmounts)
+            {
+                NewMaterialAmount(material, amount);
             }
         }
         
-        private Dictionary<long, int> GatherMaterials()
+        private Godot.Collections.Dictionary<long, int> GatherMaterials()
         {
-            Dictionary<long, int> materials;
+            Godot.Collections.Dictionary<long, int> materials;
             materials = [];
             foreach (Node node in Parent.GetChildren())
             {

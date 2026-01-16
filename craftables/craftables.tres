@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Craftables" load_steps=23 format=3 uid="uid://71lhgtyj3vnx"]
+[gd_resource type="Resource" script_class="Craftables" load_steps=26 format=3 uid="uid://71lhgtyj3vnx"]
 
 [ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_f1bwi"]
 [ext_resource type="Script" uid="uid://cdksnkutkwfx2" path="res://craftables/Craftables.cs" id="1_u67xb"]
@@ -8,9 +8,12 @@
 [ext_resource type="Resource" uid="uid://dkkgjyi55etp" path="res://craftables/items/crafting_materials/cloth.tres" id="4_3ipo4"]
 [ext_resource type="Script" uid="uid://d2k7fseog6yq2" path="res://craftables/items/usable_items/UsableItem.cs" id="4_eg58c"]
 [ext_resource type="Resource" uid="uid://ctk85wdoln0g6" path="res://craftables/items/equipment/armor.tres" id="4_inbtb"]
+[ext_resource type="Resource" uid="uid://dipub3rhwv7qa" path="res://craftables/buildings/bed_hospital.tres" id="4_vdwjp"]
 [ext_resource type="Resource" uid="uid://7jo3uy4gbavf" path="res://craftables/items/crafting_materials/wood.tres" id="5_3ya1e"]
 [ext_resource type="Resource" uid="uid://ca08aml6vt64h" path="res://craftables/items/crafting_materials/wool.tres" id="5_f1bwi"]
+[ext_resource type="Resource" uid="uid://feolvuufjcb7" path="res://craftables/buildings/water_collector.tres" id="5_p78jg"]
 [ext_resource type="Resource" uid="uid://cfw2xp7h3qpko" path="res://craftables/items/crafting_materials/metal.tres" id="6_01mmw"]
+[ext_resource type="Resource" uid="uid://dsv2wpbp02jyj" path="res://craftables/buildings/bed_twin.tres" id="6_mm2ex"]
 [ext_resource type="Resource" uid="uid://dy00grwgvhfe7" path="res://craftables/items/crafting_materials/string.tres" id="7_nstv5"]
 [ext_resource type="Resource" uid="uid://2m2j5pdr2b84" path="res://craftables/items/crafting_materials/sdfg.tres" id="9_nstv5"]
 [ext_resource type="Script" uid="uid://qdbtt4hu4417" path="res://craftables/items/crafting_materials/CraftingMaterial.cs" id="9_rqomc"]
@@ -26,7 +29,10 @@
 [resource]
 script = ExtResource("1_u67xb")
 Buildings = Dictionary[int, ExtResource("1_f1bwi")]({
+360072545640272994: ExtResource("5_p78jg"),
 2503720807621627471: ExtResource("2_inbtb"),
+7752956089407482440: ExtResource("4_vdwjp"),
+8467692605780812389: ExtResource("6_mm2ex"),
 8802685217392130823: ExtResource("2_i2fbg")
 })
 CraftingMaterials = Dictionary[int, ExtResource("9_rqomc")]({

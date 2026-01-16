@@ -6,13 +6,10 @@ namespace Lastdew
 	{
 		private const float RADIUS_INCREASE = 1f;
 		
-		private bool _done;
 		private bool _overlapping;
 		
-		private MeshInstance3D MeshInstance { get; set; }
-		private Color OkColor { get; set; } = Colors.Green;
-		private Color NoColor { get; set; } = Colors.Red;
-		private BoxShape3D BoxShape { get; set; }
+		[Export]
+		private bool DontProcess { get; set; }
 		
 		public bool Overlapping
 		{
@@ -28,17 +25,19 @@ namespace Lastdew
 				_overlapping = value;
 			}
 		}
+		private MeshInstance3D MeshInstance { get; set; }
+		private Color OkColor { get; set; } = Colors.Green;
+		private Color NoColor { get; set; } = Colors.Red;
+		private BoxShape3D BoxShape { get; set; }
 
 		public override void _Ready()
 		{
-			if (!HasNode("%MeshInstance3D"))
+			if (DontProcess)
 			{
-				_done = true;
 				return;
 			}
 			
 			ProcessMode = ProcessModeEnum.Always;
-			MeshInstance = GetNode<MeshInstance3D>("%MeshInstance3D");
 			
 			Setup();
 			Overlapping = IsOverlapping();
@@ -46,7 +45,7 @@ namespace Lastdew
 
 		public override void _PhysicsProcess(double delta)
 		{
-			if (_done)
+			if (DontProcess)
 			{
 				return;
 			}
@@ -59,7 +58,7 @@ namespace Lastdew
 		{
 			MeshInstance.QueueFree();
 			ProcessMode = ProcessModeEnum.Inherit;
-			_done = true;
+			DontProcess = true;
 		}
 
 		private void Setup()
@@ -89,11 +88,15 @@ namespace Lastdew
 
 		private void SetupIndicatorMesh()
 		{
-			BoxMesh boxMesh = (BoxMesh)MeshInstance.Mesh;
+			MeshInstance = new MeshInstance3D();
+			this.AddChildDeferred(MeshInstance);
+			BoxMesh boxMesh = new();
 			boxMesh.Size = new Vector3(
 				BoxShape.Size.X,
 				0.01f,
 				BoxShape.Size.Z);
+			boxMesh.Material = new StandardMaterial3D();
+			MeshInstance.Mesh = boxMesh;
 		}
 
 		private void SetColor(bool ok)

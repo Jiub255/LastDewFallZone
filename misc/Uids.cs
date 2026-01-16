@@ -19,6 +19,7 @@ namespace Lastdew
 		public const string BUILDING_BUTTON = "uid://exarpec3215x";
 		public const string FOOD_ICON = "uid://lgytv07nml1y";
 		public const string WATER_ICON = "uid://bxqetgnj57uhx";
+		public const string AMMO_ICON = "uid://bm5h88tmbapy1";
 		public const string LOOT_DISPLAY = "uid://cjiwxo8i4io1"; // for Mission Summary Menu
 		public const string PC_INFO_DISPLAY = "uid://bjq6exhm7nyil";
 		

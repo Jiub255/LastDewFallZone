@@ -7,14 +7,14 @@ namespace Lastdew
 {
 	public class Buildings : IEnumerable<BuildingData>
 	{
-		private readonly List<BuildingData> _buildings = [];
+		private readonly List<BuildingData> _buildingDatas = [];
 
 		public int FoodProductionPerDay => Effects.GetValueOrDefault(BuildingEffect.FOOD_PRODUCTION, 0);
 		public int WaterProductionPerDay => Effects.GetValueOrDefault(BuildingEffect.WATER_PRODUCTION, 0);
 		public int MedicalSkillIncrease => Effects.GetValueOrDefault(BuildingEffect.MEDICAL_INCREASE, 0);
 		public int MoraleIncrease => Effects.GetValueOrDefault(BuildingEffect.MORALE_INCREASE, 0);
 
-		private ReadOnlyCollection<BuildingData> BuildingDatas => _buildings.AsReadOnly();
+		private ReadOnlyCollection<BuildingData> BuildingDatas => _buildingDatas.AsReadOnly();
 		private Dictionary<BuildingEffect, int> Effects { get; } = [];
 
 		public Buildings() {}
@@ -39,14 +39,12 @@ namespace Lastdew
 				}
 			}
 			
-			_buildings.Add(data);
+			_buildingDatas.Add(data);
 		}
 
 		public void RemoveBuilding(BuildingData data)
 		{
 			Building building = Databases.Craftables.Buildings[data.BuildingUid];
-			// TODO: Get effect from building somehow here? And keep it stored in here for reference?
-			// Could have a BuildingEffect class similar to UsableItem?
 			foreach ((BuildingEffect type, int strength) in building.Effects)
 			{
 				if (Effects.ContainsKey(type))
@@ -63,7 +61,7 @@ namespace Lastdew
 				}
 			}
 			
-			_buildings.Remove(data);
+			_buildingDatas.Remove(data);
 		}
 		
 		public IEnumerator<BuildingData> GetEnumerator()

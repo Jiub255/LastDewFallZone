@@ -10,6 +10,9 @@ namespace Lastdew
 		public Weapon Weapon { get; private set; }
 		public Equipment Body { get; private set; }
 		public Equipment Feet { get; private set; }
+		
+		private Weapon OutOfAmmoGun { get; set; }
+		
 		// TODO: Add and remove bonuses from this dictionary as you equip and unequip, instead of calculating
 		// from scratch every get. Might not be necessary, and could be a little less easy/safe though.
 		public Dictionary<StatType, int> Bonuses
@@ -118,6 +121,17 @@ namespace Lastdew
 					break;
 			}
 			return previous;
+		}
+
+		public void TemporarilyUnequipGun()
+		{
+			OutOfAmmoGun = Weapon;
+			Weapon = null;
+		}
+
+		public void ReequipGun()
+		{
+			Weapon = OutOfAmmoGun;
 		}
 
 		public IEnumerator<Equipment> GetEnumerator()

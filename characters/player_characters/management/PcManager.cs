@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 
@@ -117,7 +118,6 @@ namespace Lastdew
 		}
 		
 		public async Task SpawnPcs(
-			InventoryManager inventoryManager,
 			List<PcSaveData> pcSaveDatas,
 			EntranceExit entranceExit,
 			ExperienceFormula formula)
@@ -133,8 +133,8 @@ namespace Lastdew
 				i++;
 				// Wait a frame so that pc.Initialize() isn't called before pc.Ready()
 				await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-				pc.Initialize(inventoryManager, pcSaveData, formula);
-				pc.OnLooted += InvokeOnLooted;
+				pc.Initialize(TeamData.Inventory, pcSaveData, formula);
+				SubscribePcEvents(pc);
 				TeamData.AddPc(pc);
 			}
 
@@ -142,15 +142,12 @@ namespace Lastdew
 			TeamData.MenuSelectedIndex = 0;
 		}
 
-		public void ClearPcs()
+		private void ClearPcs()
 		{
-			foreach (Node node in GetChildren())
+			foreach (PlayerCharacter pc in GetChildren().OfType<PlayerCharacter>())
 			{
-				if (node is PlayerCharacter pc)
-				{
-					pc.OnLooted -= InvokeOnLooted;
-					pc.QueueFree();
-				}
+				UnsubscribePcEvents(pc);
+				pc.QueueFree();
 			}
 			TeamData.ClearPcs();
 		}
@@ -168,6 +165,27 @@ namespace Lastdew
 		private void InvokeOnLooted(Texture2D icon, string name)
 		{
 			OnLooted?.Invoke(icon, name);
+		}
+
+		private void SpendAmmo()
+		{
+			TeamData.Inventory.Ammo--;
+		}
+
+		private void SubscribePcEvents(PlayerCharacter pc)
+		{
+			pc.OnLooted += InvokeOnLooted;
+			pc.OnSpendAmmo += SpendAmmo;
+			TeamData.Inventory.OnOutOfAmmo += pc.TemporarilyUnequipGun;
+			TeamData.Inventory.OnNotOutOfAmmoAnymore += pc.ReequipGun;
+		}
+
+		private void UnsubscribePcEvents(PlayerCharacter pc)
+		{
+			pc.OnLooted -= InvokeOnLooted;
+			pc.OnSpendAmmo -= SpendAmmo;
+			TeamData.Inventory.OnOutOfAmmo -= pc.TemporarilyUnequipGun;
+			TeamData.Inventory.OnNotOutOfAmmoAnymore -= pc.ReequipGun;
 		}
 	}
 }

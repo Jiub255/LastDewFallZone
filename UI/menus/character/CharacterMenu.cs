@@ -98,17 +98,31 @@ namespace Lastdew
 	
 		private void SetupButtons()
 		{
-			foreach (KeyValuePair<UsableItem, int> item in TeamData.Inventory.UsableItems)
+			foreach ((UsableItem usableItem, int amount) in TeamData.Inventory.UsableItems)
 			{
-				SetupButton(item.Key, item.Value);
+				SetupButton(usableItem, amount);
 			}
 
-			foreach (KeyValuePair<Equipment, int> equipment in TeamData.Inventory.Equipment)
+			foreach ((Equipment equipment, int amount) in TeamData.Inventory.Equipment)
 			{
-				SetupButton(equipment.Key, equipment.Value);
+				SetupButton(equipment, amount);
 			}
 		}
 
+		// TODO: WRONG PLACE, DO THIS IN ITEMBUTTON? Need to figure out how inv UI is gonna look first.
+		// Where is the description? That's where to apply bonuses. Plus it'll only apply to usable items
+		// with certain effects, like heal injury or painkillers. Maybe make them all share a base class or
+		// interface to deal with this more cleanly. IMedicalBonus or whatever.
+		// Will this apply to Equipment eventually too? Not sure yet.
+		// TODO: Get medical skill/building info here before displaying the amount numbers.
+		// private void SetupItemButton(UsableItem usableItem, int baseAmount)
+		// {
+		// 	// TODO: Calculate bonuses only for medical items?
+		// 	int amountWithBonuses = baseAmount;
+		// 	
+		// 	SetupButton(usableItem, amountWithBonuses);
+		// }
+		
 		// TODO: Add a color parameter here to tint similar types of items the same color?
 		// Or could go by rarity?
 		private void SetupButton(Item item, int amount)

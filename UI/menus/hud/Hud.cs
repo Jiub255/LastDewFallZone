@@ -23,6 +23,7 @@ namespace Lastdew
 		private VBoxContainer LootedItemsParent { get; set; }
 		private Label Food { get; set; }
 		private Label Water { get; set; }
+		private Label Ammo { get; set; }
 		private List<PcButton> PcButtons { get; } = [];
 		private Queue<LootedItem> LootedItems { get; } = new();
 		private static float TimeBetweenItemShowings => 0.2f;
@@ -72,6 +73,7 @@ namespace Lastdew
 			
 			TeamData.Inventory.OnFoodChanged -= SetFood;
 			TeamData.Inventory.OnWaterChanged -= SetWater;
+			TeamData.Inventory.OnAmmoChanged -= SetAmmo;
 			ReturnHome.Pressed -= ReturnToBase;
 		}
 
@@ -93,12 +95,15 @@ namespace Lastdew
 			Clock clock = GetNode<Clock>("%Clock");
 			Food = GetNode<Label>("%FoodAmount");
 			Water = GetNode<Label>("%WaterAmount");
+			Ammo = GetNode<Label>("%AmmoAmount");
 			
 			clock.Initialize(timeManager);
 			SetFood();
 			SetWater();
+			SetAmmo();
 			TeamData.Inventory.OnFoodChanged += SetFood;
 			TeamData.Inventory.OnWaterChanged += SetWater;
+			TeamData.Inventory.OnAmmoChanged += SetAmmo;
 		}
 
 		public void Setup()
@@ -150,14 +155,17 @@ namespace Lastdew
 
         private void SetFood()
         {
-	      //  Food ??= GetNode<Label>("%FoodAmount");
 	        Food.Text = TeamData?.Inventory?.Food.ToString() ?? "0";
         }
 
         private void SetWater()
         {
-	       // Water ??= GetNode<Label>("%WaterAmount");
 	        Water.Text = TeamData?.Inventory?.Water.ToString() ?? "0";
+        }
+
+        private void SetAmmo()
+        {
+	        Ammo.Text = TeamData?.Inventory?.Ammo.ToString() ?? "0";
         }
 
         private void ReturnToBase()

@@ -43,20 +43,24 @@ namespace Lastdew
 
 		public bool HasEnoughMaterialsToBuild(InventoryManager items)
 		{
-			return RecipeCosts
-				.All((kvp) => items[Databases.Craftables.CraftingMaterials[kvp.Key]] >= kvp.Value);
+			return RecipeCosts == null || RecipeCosts
+				.All(kvp => items[Databases.Craftables.CraftingMaterials[kvp.Key]] >= kvp.Value);
 		}
 
 		public bool HasRequiredBuildings(Buildings buildings)
 		{
-			return RequiredBuildings.
+			return RequiredBuildings == null || RequiredBuildings.
 				All(buildings
-					.Select((data) => data.BuildingUid)
+					.Select(data => data.BuildingUid)
 					.Contains);
 		}
 
 		public bool HasStatsToCraft(Dictionary<StatType, int> maxStats)
 		{
+			if (StatsNeededToCraft == null)
+			{
+				return true;
+			}
 			foreach ((StatType type, int value) in StatsNeededToCraft)
 			{
 				if (maxStats[type] < value)
@@ -69,6 +73,11 @@ namespace Lastdew
 
 		public void Purchase(InventoryManager inventory)
 		{
+			if (RecipeCosts == null)
+			{
+				GD.PushError("Shouldn't be trying to purchase something with null recipe costs.");
+				return;
+			}
 			foreach ((long uid, int amount) in RecipeCosts)
 			{
 				CraftingMaterial material = Databases.Craftables.CraftingMaterials[uid];

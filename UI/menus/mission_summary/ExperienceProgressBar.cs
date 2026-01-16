@@ -24,7 +24,7 @@ namespace Lastdew
 		    AmountLabel = GetNode<Label>("%ExpLabel");
 	    }
 
-	    public void Initialize(ExperienceFormula formula, int beginningExp, int finalExp)
+	    private void Initialize(ExperienceFormula formula, int beginningExp, int finalExp)
 	    {
 		    Formula = formula;
 		    
@@ -64,11 +64,10 @@ namespace Lastdew
 	    private void AddExp(int exp)
 	    {
 		    ProgressBar.Value += exp;
+		    
 		    int level = Formula.LevelFromExperience((long)ProgressBar.Value);
-		    GD.Print($"Level: {level}");
 		    (long startLvlExp, long nextLvlExp) endpoints = Formula.ExperienceRangeFromLevel(level);
-		    GD.Print($"Value: {ProgressBar.Value}, Max: {ProgressBar.MaxValue}" +
-		             $", Level? {ProgressBar.Value >= ProgressBar.MaxValue}");
+		    
 		    if (ProgressBar.Value >= ProgressBar.MaxValue)
 		    {
 			    ProgressBar.MinValue = endpoints.startLvlExp;
@@ -76,6 +75,7 @@ namespace Lastdew
 			    
 			    OnLevelUp?.Invoke(level);
 		    }
+		    
 		    AmountLabel.Text = $"{(int)ProgressBar.Value}/{endpoints.nextLvlExp} XP";
 	    }
 	}

@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using System;
 
 namespace Lastdew
 {	
@@ -11,7 +10,7 @@ namespace Lastdew
 		public bool Reusable { get; private set; }
 
 		[Export]
-		public Array<Effect> Effects { get; private set; } = [];
+		public Array<Effect> Effects { get; private set; }
 
 		public override void OnClickItem(TeamData teamData)
 		{

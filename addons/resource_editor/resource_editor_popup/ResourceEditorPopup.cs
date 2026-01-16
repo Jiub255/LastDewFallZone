@@ -236,7 +236,10 @@ namespace Lastdew
             }
         }
 
-        private bool TrySaveCraftable<[MustBeVariant] T>(string craftablePath, Godot.Collections.Dictionary<long, T> database) where T : Craftable
+        private bool TrySaveCraftable<[MustBeVariant] T>(
+            string craftablePath,
+            Godot.Collections.Dictionary<long, T> database)
+            where T : Craftable
         {
             if (ResourceLoader.Exists(craftablePath))
             {

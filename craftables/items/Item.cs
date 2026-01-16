@@ -10,7 +10,7 @@ namespace Lastdew
 		public Rarity Rarity { get; private set; } = Rarity.COMMON;
 
 		[Export]
-		public Array<ItemTags> Tags { get; private set; } = [];
+		public Array<ItemTags> Tags { get; private set; }
 
 		/// <summary>
 		/// For when you click on the item in the inventory menu.

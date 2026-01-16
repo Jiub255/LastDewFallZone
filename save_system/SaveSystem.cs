@@ -1,6 +1,5 @@
 using Godot;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 
 namespace Lastdew
@@ -8,7 +7,9 @@ namespace Lastdew
 	public static class SaveSystem
 	{
 		private const string SAVE_PATH = "user://savegame.save";
-		
+
+		private static JsonSerializerOptions Options => new() { IncludeFields = true };
+
 		public static void Save(TeamData teamData)
 		{
 			SaveData saveData = GatherSaveData(teamData);
@@ -16,7 +17,7 @@ namespace Lastdew
 			GD.Print("Saving");
 			saveData.PrintData();
 			
-			string jsonString = JsonSerializer.Serialize(saveData, new JsonSerializerOptions() { IncludeFields = true });
+			string jsonString = JsonSerializer.Serialize(saveData, Options);
 
 			using FileAccess saveFile = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);
 			saveFile.StoreLine(jsonString);
@@ -70,7 +71,7 @@ namespace Lastdew
 		}
 
 		private static List<BuildingSaveData> ConvertFromBuildingDatas(
-			List<BuildingData> buildingDatas)
+			Buildings buildingDatas)
 		{
 			List<BuildingSaveData> result = [];
 			foreach (BuildingData data in buildingDatas)

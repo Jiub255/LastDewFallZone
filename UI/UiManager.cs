@@ -114,7 +114,6 @@ namespace Lastdew
 			if (CurrentState != null)
 			{
 				UnsubscribeState(CurrentState);
-				GD.Print($"Changing game state from {CurrentState.GetType().Name} to {gameState.GetType().Name}");
 			}
 			CurrentState = gameState;
 			SubscribeState(gameState);

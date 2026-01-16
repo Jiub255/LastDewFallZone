@@ -39,17 +39,15 @@ namespace Lastdew
 			
 			await ToSignal(Game.Fader, Fader.SignalName.OnFadeOut);
 			
-			Game?.QueueFree();
+			Game.QueueFree();
 			
-			await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
 			await GetTree().ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 			
 			MakeNewGame();
 			
-			await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
 			await GetTree().ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 			
-			Game?.Fader.FadeIn();
+			Game.Fader.FadeIn();
 		}
 	}
 }

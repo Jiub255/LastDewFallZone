@@ -24,9 +24,9 @@ namespace Lastdew
 			}
 		}
 
-		[Export] public Godot.Collections.Dictionary<StatType, int> EquipmentBonuses { get; private set; } = [];
+		[Export] public Godot.Collections.Dictionary<StatType, int> EquipmentBonuses { get; private set; }
 
-		[Export] public Godot.Collections.Dictionary<StatType, int> StatsNeededToEquip { get; private set; } = [];
+		[Export] public Godot.Collections.Dictionary<StatType, int> StatsNeededToEquip { get; private set; }
 
 		// TODO: Add this to the resource editor as a long UID.
 		[Export] public string SceneUid { get; private set; }

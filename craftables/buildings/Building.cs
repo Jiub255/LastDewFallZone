@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 namespace Lastdew
 {	
@@ -13,5 +12,7 @@ namespace Lastdew
 		// in its setter? Like LocationData resource.
 		[Export]
 		public string SceneUid { get; private set; }
+
+		[Export] public Godot.Collections.Dictionary<BuildingEffect, int> Effects { get; private set; }
 	}
 }

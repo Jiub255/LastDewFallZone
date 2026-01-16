@@ -18,11 +18,6 @@ namespace Lastdew
 			set => _morale = Math.Clamp(value, MIN_MORALE, MAX_MORALE);
 		}
 		
-		/// <summary>
-		/// Have to wait until after PCs are spawned (in PcManager) to instantiate this,
-		/// since TeamData.Pcs will be empty until then.
-		/// Actually just have a separate Setup() method for dealing with that.
-		/// </summary>
 		public MoraleManager(TeamData teamData)
 		{
 			_teamData = teamData;

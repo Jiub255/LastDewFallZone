@@ -5,8 +5,11 @@
 
 [resource]
 script = ExtResource("1_uwfxh")
-BuildingType = 0
+BuildingType = 2
 SceneUid = "uid://dpvyox8j34ruc"
+Effects = {
+0: 1
+}
 Name = "Test Building"
 Description = ";alksjdv asdv lsidvinl"
 Icon = ExtResource("1_cwc26")

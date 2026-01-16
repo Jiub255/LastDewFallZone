@@ -7,6 +7,7 @@
 script = ExtResource("2_b73mb")
 BuildingType = 0
 SceneUid = "uid://tjtuuycd33bp"
+Effects = {}
 Name = "Workbench"
 Description = "Craft basic stuff"
 Icon = ExtResource("1_khuwj")

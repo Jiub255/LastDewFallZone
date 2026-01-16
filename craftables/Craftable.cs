@@ -23,22 +23,22 @@ namespace Lastdew
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Godot.Collections.Dictionary<long, int> RecipeCosts { get; private set; } = [];
+		public Godot.Collections.Dictionary<long, int> RecipeCosts { get; private set; }
 
 		/// <summary>
 		/// Stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Godot.Collections.Array<long> RequiredBuildings { get; private set; } = [];
+		public Godot.Collections.Array<long> RequiredBuildings { get; private set; }
 
 		/// <summary>
 		/// Key stored as resource UID. Use Craftables resource to get the actual resource.
 		/// </summary>
 		[Export]
-		public Godot.Collections.Dictionary<long, int> ScrapResults { get; private set; } = [];
+		public Godot.Collections.Dictionary<long, int> ScrapResults { get; private set; }
 
 		[Export]
-		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; } = [];
+		public Godot.Collections.Dictionary<StatType, int> StatsNeededToCraft { get; private set; }
 
 
 		public bool HasEnoughMaterialsToBuild(InventoryManager items)
@@ -47,7 +47,7 @@ namespace Lastdew
 				.All((kvp) => items[Databases.Craftables.CraftingMaterials[kvp.Key]] >= kvp.Value);
 		}
 
-		public bool HasRequiredBuildings(List<BuildingData> buildings)
+		public bool HasRequiredBuildings(Buildings buildings)
 		{
 			return RequiredBuildings.
 				All(buildings

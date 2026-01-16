@@ -98,7 +98,7 @@ namespace Lastdew
 			
 			PcManager.OnLooted += Ui.Hud.AddToQueue;
 			
-			TimeManager.OnNewDay += LoseFoodAndWater;
+			TimeManager.OnNewDay += AdjustFoodAndWater;
 			
 			Ui.Hud.OnCenterOnPc += Camera.CenterOnPc;
 			Ui.Hud.OnReturnHome += ReturnHome;
@@ -116,7 +116,7 @@ namespace Lastdew
 			
 			PcManager.OnLooted -= Ui.Hud.AddToQueue;
 			
-			TimeManager.OnNewDay -= LoseFoodAndWater;
+			TimeManager.OnNewDay -= AdjustFoodAndWater;
 			
 			Ui.Hud.OnCenterOnPc -= Camera.CenterOnPc;
 			Ui.Hud.OnReturnHome -= ReturnHome;
@@ -151,7 +151,7 @@ namespace Lastdew
 		{
 			SaveData saveData = SaveSystem.Load();
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			TeamData.Inventory.Buildings = SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas);
+			TeamData.Inventory.Buildings = new Buildings(SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas));
 			Ui.Initialize(TeamData, Camera, TimeManager, Formula);
 			// LoadInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
 			// can initialize first.
@@ -172,7 +172,7 @@ namespace Lastdew
         private async Task SetupLevel(
 	        PackedScene levelScene,
 	        List<PcSaveData> pcSaveDatas,
-	        List<BuildingData> buildingSaveDatas)
+	        Buildings buildingSaveDatas)
 		{
 			Fader.FadeOut();
 			await ToSignal(Fader, Fader.SignalName.OnFadeOut);
@@ -275,7 +275,7 @@ namespace Lastdew
 
         private void PlaceBuilding(BuildingData data)
         {
-	        TeamData.Inventory.Buildings.Add(data);
+	        TeamData.Inventory.Buildings.AddBuilding(data);
 
 	        if (CurrentLevel is HomeBase homeBase)
 	        {
@@ -290,11 +290,14 @@ namespace Lastdew
 	        building.Purchase(TeamData.Inventory);
         }
 
-        private void LoseFoodAndWater()
+        private void AdjustFoodAndWater()
         {
 	        int numberOfPcs = TeamData.Pcs.Count;
 	        TeamData.Inventory.Food -= numberOfPcs;
 	        TeamData.Inventory.Water -= numberOfPcs;
+
+	        TeamData.Inventory.Food += TeamData.Inventory.Buildings.FoodProductionPerDay;
+	        TeamData.Inventory.Water += TeamData.Inventory.Buildings.WaterProductionPerDay;
         }
 	}
 }

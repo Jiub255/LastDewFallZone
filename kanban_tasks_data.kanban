@@ -62,11 +62,11 @@
 			"uuid": "07e4bee6-492d-441d-a2c0-7a8198384f07",
 			"title": "DOING",
 			"tasks": [
-				"b7eed857-1101-44fe-a5ac-1715d7c459d4",
 				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"e85eef6f-6e91-456c-a8e1-002988609629",
-				"3c8dbb73-d01e-48b3-86ee-9885e1576fb6"
+				"3c8dbb73-d01e-48b3-86ee-9885e1576fb6",
+				"a84c2a64-3e33-4ee4-b578-8d541004ce02"
 			]
 		},
 		{
@@ -163,7 +163,8 @@
 				"b0fce1aa-855b-4ccc-86cd-10ce2eedef28",
 				"58375c30-f072-4b4e-9040-947f76b5ff92",
 				"b160ad9c-efa6-432a-b68c-ea5625b16268",
-				"0104329f-6dc1-4edb-b529-ae4feb86f5c4"
+				"0104329f-6dc1-4edb-b529-ae4feb86f5c4",
+				"b7eed857-1101-44fe-a5ac-1715d7c459d4"
 			]
 		},
 		{
@@ -212,7 +213,8 @@
 				"31c4c768-0883-4d5e-9bbd-9693e39d6574",
 				"74c7e6fc-81ad-4dda-8590-24352ded853d",
 				"6997505c-aaaf-4c4f-b205-3d8db6d51211",
-				"64aabd25-6504-4a3d-9d13-4ecbf0a3c1f6"
+				"64aabd25-6504-4a3d-9d13-4ecbf0a3c1f6",
+				"d916645b-5369-4a1f-882e-59084bab4810"
 			]
 		},
 		{
@@ -230,7 +232,6 @@
 			"tasks": [
 				"6f09b36d-bbe7-4f37-80db-7f9d1bb83890",
 				"684d0e69-4a6f-4978-8b41-63031ec66b19",
-				"5c609200-5adc-42bd-b483-0f7aa6ad75f6",
 				"0c187bf9-e0d2-4a0b-ac3c-79f7807a74be",
 				"228e8416-52d5-45df-b6cd-4f75e4f02bc9",
 				"82a279e5-4dd7-4301-9c49-4aa3a962b0a7",
@@ -412,7 +413,7 @@
 		{
 			"uuid": "d1adddcc-8d19-4763-94e7-4180fac8440c",
 			"title": "Morale",
-			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\nMaybe? Have it easier to increase when low, and harder when high. Like, finding a single book would be a huge morale boost if it's all you have, but not too big a deal if you already have a library. \n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\t\tQOL items: Books, Plants/decorations, games, musical instruments\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\nAffects:\n\tAll stats of all pcs, negatively or positively\n\tOdds of new survivors joining your base\n\nSo needs access to TeamData, which has Inventory, Pcs, and Buildings. \nCould put it in Game, or maybe just straight into TeamData.\n",
+			"description": "How exactly to set it up?\nHave individual morales, or just a team one? Probably just a team one. \nGoes from -100 to 100.\nMaybe? Have it easier to increase when low, and harder when high. Like, finding a single book would be a huge morale boost if it's all you have, but not too big a deal if you already have a library. \n\nAffected by:\n\tQuality of life at base\n\t\tFood/Water\n\t\tDefense\n\t\tQOL buildings: Basketball hoop, Game room, hot tub, etc.\n\t\tQOL items: Books, Plants/decorations, games, musical instruments\n\tRecent deaths/injuries\n\tLeader's charisma stat? Or something like that?\n\tNumber of Pcs, need more beds, food, etc. for more people.\n\nAffects:\n\tAll stats of all pcs, negatively or positively\n\tOdds of new survivors joining your base\n\nSo needs access to TeamData, which has Inventory, Pcs, and Buildings. \nCould put it in Game, or maybe just straight into TeamData.\n",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1025,13 +1026,6 @@
 			"steps": []
 		},
 		{
-			"uuid": "5c609200-5adc-42bd-b483-0f7aa6ad75f6",
-			"title": "Draw out different menus/ui on paper to design them",
-			"description": "",
-			"category": "1e854966-40de-4eee-9a67-2517f965b229",
-			"steps": []
-		},
-		{
 			"uuid": "b056b5fd-666b-4ba5-b6a6-3020d4c0530e",
 			"title": "Clicking Pcs HUD counts as a click in the world",
 			"description": "FIXED by putting GetViewport().SetInputAsHandled() in PcButton, using _UnhandledInput for game world events, and making sure every control node has mouse filter to ignore or pass unless it need to be stop.\nUiManager node was the one with mouse filter stop, so nothing was getting past it. ",
@@ -1216,7 +1210,7 @@
 		{
 			"uuid": "0e82596b-3f97-42e0-b018-06d7658cd4d3",
 			"title": "Medical system",
-			"description": "How to heal PCs? \nUse medical items like bandages and medicine to just heal some amount of injury in general?\nOr have like splints for broken bones, bandages for cuts, etc?\nAlso how will medical skill play into it? Healing rate depends on highest medical skill of your pcs?\nWill healing take time or be instant?\n\nJust have it so medical items just heal x injury in general, act instantly, and their strength is affected by your highest medical skill and any medical tools/buildings you have.",
+			"description": "How to heal PCs? \nUse medical items like bandages and medicine to just heal some amount of injury in general?\nOr have like splints for broken bones, bandages for cuts, etc?\nAlso how will medical skill play into it? Healing rate depends on highest medical skill of your pcs?\nWill healing take time or be instant?\n\nJust have it so medical items just heal x injury in general, act instantly, and their strength is affected by your highest medical skill and any medical tools/buildings you have.\nNeed to have it display the correct numbers in inventory too.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
@@ -1574,6 +1568,20 @@
 			"uuid": "64aabd25-6504-4a3d-9d13-4ecbf0a3c1f6",
 			"title": "Exp progress bar not leveling up correctly",
 			"description": "FIXED by adding 1 to exp in ExponentialFormula.LevelFromExperience(). Still not sure why.\nIf you get the exact amount of exp needed to level up, it just stays full and doesn't do the level up switch over.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "a84c2a64-3e33-4ee4-b578-8d541004ce02",
+			"title": "Make Buildings class",
+			"description": "Like a buildings inventory. Give it properties for food/water production per day, based on whatever production buildings you have. ",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "d916645b-5369-4a1f-882e-59084bab4810",
+			"title": "  ERROR: Script class can only be set together with base class name.",
+			"description": "FIXED by getting rid of any '= []' for any exported Godot.Collections dicts or arrays. \nFor some reason making a new dict/array while declaring it caused that error.\nOnly difference is that if one of these arrays/dicts are left empty in the inspector, they will return null instead of an empty array/dict. No big deal.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		}

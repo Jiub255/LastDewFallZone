@@ -21,7 +21,7 @@ namespace Lastdew
 		    AmountLabel = GetNode<Label>("%InjuryLabel");
 	    }
 
-	    public void Initialize(int beginningInjury, int finalInjury)
+	    private void Initialize(int beginningInjury, int finalInjury)
 	    {
 		    ProgressBar.Value = beginningInjury;
 

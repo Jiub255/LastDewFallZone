@@ -12,7 +12,7 @@ namespace Lastdew
 		private Node3D Buildings { get; set; }
 		private DirectionalLight3D Light { get; set; }
 
-		public void Setup(List<BuildingData> buildingDatas)
+		public void Setup(Buildings buildingDatas)
 		{
 			Buildings = GetNode<Node3D>("%Buildings");
 			NavMesh = GetNode<NavigationRegion3D>("%NavigationRegion3D");
@@ -32,7 +32,7 @@ namespace Lastdew
 			Light.Rotation = new Vector3(x, 0f, 0f);
 		}
 		
-		private void PlaceBuildings(List<BuildingData> buildingDatas)
+		private void PlaceBuildings(Buildings buildingDatas)
 		{
 			foreach (BuildingData data in buildingDatas)
 			{

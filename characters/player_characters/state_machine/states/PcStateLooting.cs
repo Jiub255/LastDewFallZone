@@ -58,6 +58,12 @@ namespace Lastdew
 			if (Timer < 0)
 			{
 				Pc.CollectLoot(LootContainer);
+				
+				// TODO: Deal with the MovementTarget queue here. If there's more loot containers in the queue, 
+				// then make the next one your target and go to movement class. Otherwise go to idle state.
+				// Actually make the closest one your target. Maybe don't even use a queue, just a list or whatever.
+				// Make a custom class for it? TargetQueue? Also it has to be the closest by nav path, not plain
+				// distance. Use Navigation server?
 				ChangeState(PcStateNames.IDLE);
 			}
 		}

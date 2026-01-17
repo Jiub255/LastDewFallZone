@@ -5,8 +5,8 @@ namespace Lastdew
 {
 	public class PcStateMachine
 	{
-		private PcState CurrentState { get; set; }
-		private Dictionary<PcStateNames, PcState> StatesByEnum { get; } = new();
+		public PcState CurrentState { get; private set; }
+		private Dictionary<PcStateNames, PcState> StatesByEnum { get; } = [];
 	
 		public PcStateMachine(PlayerCharacter pc)
 		{

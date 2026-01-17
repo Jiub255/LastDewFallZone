@@ -68,10 +68,7 @@ namespace Lastdew
 			WeaponSlot = GetNode<Node3D>("%WeaponSlot");
 		}
 		
-		public void Initialize(
-			InventoryManager inventoryManager,
-			PcSaveData saveData,
-			ExperienceFormula formula)
+		public void Initialize(InventoryManager inventoryManager, PcSaveData saveData, ExperienceFormula formula)
 		{
 			StateMachine = new PcStateMachine(this);
 			StatManager = new PcStatManager(saveData, formula);
@@ -114,6 +111,9 @@ namespace Lastdew
 		
 		public void MoveTo(MovementTarget movementTarget)
 		{
+			// TODO: Change MovementTarget to Queue<MovementTarget>, and only add to queue if all other targets in
+			// it are loot containers. Otherwise delete the queue and add just this MovementTarget.
+			// Then, in loot state class, make it so you loot the containers in order if there's a queue.
 			MovementTarget = movementTarget;
 			StateMachine.ChangeState(PcStateNames.MOVEMENT);
 		}
@@ -170,9 +170,6 @@ namespace Lastdew
 			{
 				Inventory.AddItem(oldEquipment);
 			}
-			// TODO: Send equipment changed signal here for UI to catch?
-			// OR, just structure things differently? Like have a database with id and
-			// equipment columns and just have the ui hold on to that data?
 			OnEquipmentChanged?.Invoke();
 		}
 		
@@ -288,20 +285,27 @@ namespace Lastdew
 	        }
 	        
 	        Equipment.TemporarilyUnequipGun();
-	        StatManager.CalculateStatModifiers(Equipment.Bonuses);
 	        WeaponSlot.Hide();
-	        // TODO: Change to movement state?
-	        StateMachine.ChangeState(PcStateNames.MOVEMENT);
+	        RefreshCombat();
         }
 
         public void ReequipGun()
         {
 	        Equipment.ReequipGun();
-	        StatManager.CalculateStatModifiers(Equipment.Bonuses);
 	        WeaponSlot.Show();
+	        RefreshCombat();
         }
-		
-		// Called from animation method track
+
+        private void RefreshCombat()
+        {
+	        StatManager.CalculateStatModifiers(Equipment.Bonuses);
+	        if (StateMachine.CurrentState.GetType() == typeof(PcStateCombat))
+	        {
+		        StateMachine.ChangeState(PcStateNames.MOVEMENT);
+	        }
+        }
+
+        // Called from animation method track
 		private void HitEnemy()
 		{
 			AudioStream attackSound = Equipment.Weapon?.AttackSound ?? Punch1;

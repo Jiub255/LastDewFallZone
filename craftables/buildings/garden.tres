@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://ctua5gv45repy"]
+
+[ext_resource type="Script" uid="uid://dvt86qfllpnlr" path="res://craftables/buildings/Building.cs" id="1_r2pbm"]
+[ext_resource type="Texture2D" uid="uid://lgytv07nml1y" path="res://UI/menus/hud/icon_food.png" id="1_ysu53"]
+
+[resource]
+script = ExtResource("1_r2pbm")
+BuildingType = 2
+SceneUid = "uid://t245tsyuwgmp"
+Effects = Dictionary[int, int]({
+0: 1
+})
+Name = "Garden"
+Description = "Grows food"
+Icon = ExtResource("1_ysu53")
+RecipeCosts = Dictionary[int, int]({
+2265523525199636055: 1
+})
+RequiredBuildings = Array[int]([])
+ScrapResults = Dictionary[int, int]({})
+StatsNeededToCraft = Dictionary[int, int]({})
+metadata/_custom_type_script = "uid://dvt86qfllpnlr"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bk3eacsidu6o1" path="res://UI/menus/map/LocationData.cs" id="1_wb78i"]
 [ext_resource type="Texture2D" uid="uid://bg33n32q78vqt" path="res://craftables/buildings/icon_building_blank.png" id="1_xspkp"]
-[ext_resource type="PackedScene" uid="uid://hauatfgsn0tb" path="res://world/looting/hospital.tscn" id="2_02wsx"]
+[ext_resource type="PackedScene" uid="uid://hauatfgsn0tb" path="res://scavenging/levels/hospital.tscn" id="2_02wsx"]
 
 [resource]
 script = ExtResource("1_wb78i")

@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b8phmlcc56yeu" path="res://UI/menus/character/character_menu.tscn" id="9_rvswv"]
 [ext_resource type="PackedScene" uid="uid://dh8qmjetlrm2d" path="res://UI/menus/crafting/crafting_menu.tscn" id="10_boyg6"]
 [ext_resource type="PackedScene" uid="uid://bbe31fnfx7jxl" path="res://UI/menus/map/map_menu.tscn" id="11_e36ub"]
-[ext_resource type="Environment" uid="uid://demmrxsekmoyp" path="res://world/environment.tres" id="11_hliwg"]
+[ext_resource type="Environment" uid="uid://demmrxsekmoyp" path="res://world/environment/environment.tres" id="11_hliwg"]
 [ext_resource type="PackedScene" uid="uid://bfsk62j0vmhd1" path="res://UI/menus/options/options_menu.tscn" id="12_215e1"]
 [ext_resource type="PackedScene" uid="uid://doo22672cqp8i" path="res://UI/menus/mission_summary/mission_summary_menu.tscn" id="13_7sc4i"]
 [ext_resource type="PackedScene" uid="uid://dgnkps730uihc" path="res://UI/fader/fader.tscn" id="13_lc2xo"]
@@ -20,9 +20,9 @@
 [node name="Game" type="Node"]
 process_mode = 1
 script = ExtResource("1_e8jue")
-Formula = ExtResource("2_80cx4")
+ExperienceFormula = ExtResource("2_80cx4")
 NumberOfPcs = 4
-DayStartHour = 5.5
+DayStartHour = 8.0
 
 [node name="CameraRig" parent="." instance=ExtResource("2_hliwg")]
 unique_name_in_owner = true

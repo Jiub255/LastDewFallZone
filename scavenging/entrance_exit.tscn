@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8ugu5owvanuy"]
 
-[ext_resource type="Script" uid="uid://db8ncscrlurnm" path="res://world/looting/EntranceExit.cs" id="1_o4vp1"]
+[ext_resource type="Script" uid="uid://db8ncscrlurnm" path="res://scavenging/EntranceExit.cs" id="1_o4vp1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rci6k"]
 size = Vector3(5.5, 2, 3.5)

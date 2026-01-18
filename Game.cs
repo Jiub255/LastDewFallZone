@@ -9,7 +9,7 @@ namespace Lastdew
     public partial class Game : Node
     {
 	    [Export]
-	    private ExperienceFormula Formula { get; set; }
+	    private ExperienceFormula ExperienceFormula { get; set; }
 	    
         public UiManager Ui { get; private set; }
         public Fader Fader { get; private set; }
@@ -41,7 +41,7 @@ namespace Lastdew
         public override void _Ready()
 		{
 			base._Ready();
-			//Formula.PrintLevels();
+			//ExperienceFormula.PrintLevels();
 
 			Camera = GetNode<Camera>("%CameraRig");
 			PcManager = GetNode<PcManager>("%PcManager");
@@ -129,7 +129,7 @@ namespace Lastdew
 		private async Task StartNewGame()
 		{
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
-			Ui.Initialize(TeamData, Camera, TimeManager, Formula);
+			Ui.Initialize(TeamData, Camera, TimeManager, ExperienceFormula);
 			await SetupLevel(homeBaseScene, DefaultPcList, TeamData.Inventory.Buildings);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -137,7 +137,7 @@ namespace Lastdew
 		private async Task StartCombatTest()
 		{
 			PackedScene combatTestScene = GD.Load<PackedScene>("uid://dr032kqvigccx");
-			Ui.Initialize(TeamData, Camera, TimeManager, Formula);
+			Ui.Initialize(TeamData, Camera, TimeManager, ExperienceFormula);
 			await SetupLevel(combatTestScene, DefaultPcList, []);
 			Ui.ChangeState(new GameStateHome());
 		}
@@ -152,7 +152,7 @@ namespace Lastdew
 			SaveData saveData = SaveSystem.Load();
 			PackedScene homeBaseScene = GD.Load<PackedScene>(Uids.HOME_BASE);
 			TeamData.Inventory.Buildings = new Buildings(SaveSystem.ConvertToBuildingDatas(saveData.BuildingDatas));
-			Ui.Initialize(TeamData, Camera, TimeManager, Formula);
+			Ui.Initialize(TeamData, Camera, TimeManager, ExperienceFormula);
 			// FillInventory() needs to be called after SetupLevel() so the inventory UI (CharacterMenu)
 			// can initialize first.
 			await SetupLevel(homeBaseScene, saveData.PcSaveDatas, TeamData.Inventory.Buildings);
@@ -212,7 +212,7 @@ namespace Lastdew
 			
 			// UI.Setup() has to be called after PcManager.SpawnPcs(),
 			// so TeamData will have the PlayerCharacter instance references (for HUD to use).
-			await PcManager.SpawnPcs(pcSaveDatas, CurrentLevel.EntranceExit, Formula);
+			await PcManager.SpawnPcs(pcSaveDatas, CurrentLevel.EntranceExit, ExperienceFormula);
 			
 			// TODO: Center camera better. Maybe center it on the front of the EntranceExit at a specific angle.
 			Camera.CallDeferred(Camera.MethodName.CenterOnPc, TeamData.Pcs[0]);

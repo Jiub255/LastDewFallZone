@@ -48,23 +48,28 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/namespacer/plugin.cfg", "res://addons/resource_database_filler/plugin.cfg", "res://addons/resource_editor/plugin.cfg", "res://addons/terrain_3d/plugin.cfg", "res://addons/unidot_importer/plugin.cfg", "res://addons/vrm/plugin.cfg")
+enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/namespacer/plugin.cfg", "res://addons/resource_database_filler/plugin.cfg", "res://addons/resource_editor/plugin.cfg", "res://addons/uidsfiller/plugin.cfg", "res://addons/unidot_importer/plugin.cfg", "res://addons/vrm/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
-"res://UI/": "purple",
-"res://addons/": "teal",
-"res://audio/": "blue",
-"res://camera/": "purple",
-"res://characters/": "red",
-"res://craftables/": "orange",
-"res://game_objects/": "yellow",
-"res://inventory/": "green",
-"res://misc/": "teal",
-"res://save_system/": "blue",
-"res://unused_assets/": "red",
-"res://world/": "orange"
+"res://UI/": "orange",
+"res://addons/": "blue",
+"res://addons/namespacer/": "green",
+"res://addons/resource_database_filler/": "green",
+"res://addons/resource_editor/": "green",
+"res://addons/uidsfiller/": "green",
+"res://audio/": "purple",
+"res://camera/": "red",
+"res://characters/": "orange",
+"res://craftables/": "yellow",
+"res://game_objects/": "green",
+"res://inventory/": "teal",
+"res://misc/": "blue",
+"res://save_system/": "purple",
+"res://scavenging/": "red",
+"res://unused_assets/": "yellow",
+"res://world/": "green"
 }
 
 [filesystem]

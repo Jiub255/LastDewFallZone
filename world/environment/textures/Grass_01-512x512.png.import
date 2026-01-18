@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p45ebi7ru1fk"
-path.bptc="res://.godot/imported/kloofendal_48d_partly_cloudy_puresky_4k.exr-e853754faf0c7726797dbe223eff135f.bptc.ctex"
+uid="uid://bg0a8fhxu5r24"
+path.s3tc="res://.godot/imported/Grass_01-512x512.png-c8b6bf5ebbe3d75f3b0284898f95844e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://world/kloofendal_48d_partly_cloudy_puresky_4k.exr"
-dest_files=["res://.godot/imported/kloofendal_48d_partly_cloudy_puresky_4k.exr-e853754faf0c7726797dbe223eff135f.bptc.ctex"]
+source_file="res://world/environment/textures/Grass_01-512x512.png"
+dest_files=["res://.godot/imported/Grass_01-512x512.png-c8b6bf5ebbe3d75f3b0284898f95844e.s3tc.ctex"]
 
 [params]
 

@@ -11,29 +11,16 @@ namespace Lastdew
 		public event Action OnEquipmentChanged;
 		public event Action<Texture2D, string> OnLooted;
 		public event Action OnDeath;
-		public event Action OnSpendAmmo; 
-		
+		public event Action OnSpendAmmo;
+
 		private const float INVULNERABILITY_DURATION = 1f;
 		private const float SIGHT_DISTANCE = 20f;
-		
-		private MovementTarget _movementTarget;
 
-		public MovementTarget MovementTarget
-		{
-			get => _movementTarget;
-			set
-			{
-				if (_movementTarget.Target is Enemy oldEnemy)
-				{
-					oldEnemy.OnDeath -= TryFindNearestEnemy;
-				}
-				_movementTarget = value;
-				if (_movementTarget.Target is Enemy newEnemy)
-				{
-					newEnemy.OnDeath += TryFindNearestEnemy;
-				}
-			}
-		}
+		public MovementTargets MovementTargets { get; } = [];
+
+		public MovementTarget MovementTarget => MovementTargets[0];
+		
+		
 		[Export]
 		public PcData Data { get; private set; }
 		public PcStatManager StatManager { get; private set; }
@@ -111,11 +98,11 @@ namespace Lastdew
 		
 		public void MoveTo(MovementTarget movementTarget)
 		{
-			// TODO: Change MovementTarget to Queue<MovementTarget>, and only add to queue if all other targets in
-			// it are loot containers. Otherwise delete the queue and add just this MovementTarget.
-			// Then, in loot state class, make it so you loot the containers in order if there's a queue.
-			MovementTarget = movementTarget;
-			StateMachine.ChangeState(PcStateNames.MOVEMENT);
+			bool shouldChangeState = AddTarget(movementTarget);
+			if (shouldChangeState)
+			{
+				StateMachine.ChangeState(PcStateNames.MOVEMENT);
+			}
 		}
 
 		// TODO: Make actual defense formula.
@@ -123,7 +110,7 @@ namespace Lastdew
 		{
 			if (MovementTarget.Target is not Enemy)
 			{
-				MovementTarget = new MovementTarget(attackingEnemy.Position, attackingEnemy);
+				AddTarget(new MovementTarget(attackingEnemy.Position, attackingEnemy));
 			}
 			
 			if (Invulnerable)
@@ -252,7 +239,7 @@ namespace Lastdew
 		public void DisablePc()
 		{
 			Incapacitated = true;
-			MovementTarget = new MovementTarget();
+			AddTarget(new MovementTarget());
 			CollisionLayer = 0;
 			//NavigationAgent.AvoidanceEnabled = false;
 			// TODO: Let PcManager (or TeamData) know Pc is dead so it can deselect it if it's selected.
@@ -311,6 +298,21 @@ namespace Lastdew
 			AudioStream attackSound = Equipment.Weapon?.AttackSound ?? Punch1;
 			AudioPlayback.PlayStream(attackSound);
 			StateMachine.HitEnemy();
+		}
+		
+		private bool AddTarget(MovementTarget target)
+		{
+			if (target.Target is Enemy oldEnemy)
+			{
+				oldEnemy.OnDeath -= TryFindNearestEnemy;
+			}
+			bool shouldChangeState = !MovementTargets.Add(target, this);
+			if (target.Target is Enemy newEnemy)
+			{
+				newEnemy.OnDeath += TryFindNearestEnemy;
+			}
+
+			return shouldChangeState;
 		}
 
 		private void SharedProcess(double delta)
@@ -371,12 +373,12 @@ namespace Lastdew
 	        
 	        if (nearest != null)
 	        {
-		        MovementTarget = new MovementTarget(nearest.GlobalPosition, nearest);
+		        AddTarget(new MovementTarget(nearest.GlobalPosition, nearest));
 		        StateMachine.ChangeState(PcStateNames.MOVEMENT);
 	        }
 	        else
 	        {
-		        MovementTarget = new MovementTarget();
+		        AddTarget(new MovementTarget());
 		        StateMachine.ChangeState(PcStateNames.IDLE);
 	        }
         }

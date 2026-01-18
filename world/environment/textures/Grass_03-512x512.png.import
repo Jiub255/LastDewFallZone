@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2tcoxdfao1u"
-path.s3tc="res://.godot/imported/packed_normal_roughness.png-ed27cb995325539256c784d290f655e7.s3tc.ctex"
+uid="uid://cxhi6dl42x3ve"
+path.s3tc="res://.godot/imported/Grass_03-512x512.png-1da6b7933c29b0738d9c20c95282506e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://world/terrain/packed_normal_roughness.png"
-dest_files=["res://.godot/imported/packed_normal_roughness.png-ed27cb995325539256c784d290f655e7.s3tc.ctex"]
+source_file="res://world/environment/textures/Grass_03-512x512.png"
+dest_files=["res://.godot/imported/Grass_03-512x512.png-1da6b7933c29b0738d9c20c95282506e.s3tc.ctex"]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
@@ -32,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

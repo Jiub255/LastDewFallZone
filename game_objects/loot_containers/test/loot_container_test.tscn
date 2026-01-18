@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://x2gtjq08dbsc"]
 
-[ext_resource type="Script" uid="uid://ixr4jog3lxc7" path="res://world/looting/LootContainer.cs" id="1_b5trt"]
+[ext_resource type="Script" uid="uid://ixr4jog3lxc7" path="res://scavenging/LootContainer.cs" id="1_1r25p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qb4yi"]
 
@@ -12,7 +12,7 @@ albedo_color = Color(0.359416, 0.220464, 0.150835, 1)
 [node name="LootContainerTest" type="StaticBody3D"]
 collision_layer = 8
 collision_mask = 6
-script = ExtResource("1_b5trt")
+script = ExtResource("1_1r25p")
 Tags = Array[int]([0])
 Experience = 6
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b285se1kywdqb"]
+[gd_scene load_steps=7 format=3 uid="uid://b285se1kywdqb"]
 
-[ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://world/looting/ScavengingLevel.cs" id="1_rnqc8"]
+[ext_resource type="Script" uid="uid://bl0r50fwbrli1" path="res://scavenging/ScavengingLevel.cs" id="1_rnqc8"]
 [ext_resource type="Script" uid="uid://cjv0npnbi244v" path="res://characters/enemies/EnemySpawner.cs" id="2_cvlbe"]
+[ext_resource type="PackedScene" uid="uid://b8ugu5owvanuy" path="res://scavenging/entrance_exit.tscn" id="3_q1w1i"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o3abj"]
 vertices = PackedVector3Array(-24.5, 0.5, -24.5, -24.5, 0.5, 24.5, 24.5, 0.5, 24.5, 24.5, 0.5, -24.5)
@@ -19,9 +20,6 @@ script = ExtResource("1_rnqc8")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.897162, -0.274785, 0.345822, -0.436021, -0.425799, 0.792831, -0.0706071, -0.862084, -0.501822, 0, 0, 0)
-
-[node name="SpawnLocation" type="Node3D" parent="."]
-unique_name_in_owner = true
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -45,3 +43,6 @@ shape = SubResource("BoxShape3D_aqcaw")
 mesh = SubResource("BoxMesh_tpwwi")
 
 [node name="LootContainers" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="EntranceExit" parent="." instance=ExtResource("3_q1w1i")]
+unique_name_in_owner = true

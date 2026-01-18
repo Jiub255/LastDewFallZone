@@ -55,7 +55,9 @@
 				"af2b11b7-ebaf-4b18-a74f-7516e34bf776",
 				"3c8dbb73-d01e-48b3-86ee-9885e1576fb6",
 				"fc7c53e4-8737-4fa2-8541-89b6a8a8802f",
-				"3331a8a9-a040-4896-85ab-eb1abe7f1e37"
+				"3331a8a9-a040-4896-85ab-eb1abe7f1e37",
+				"dfae403a-bd96-4cda-b987-08b69d31ee9b",
+				"1f895c4f-6365-4841-9dfd-ecb29de6b5e9"
 			]
 		},
 		{
@@ -63,12 +65,12 @@
 			"title": "DOING",
 			"tasks": [
 				"ba7e89e8-e894-4d68-ba42-5728666fb1e3",
+				"6a298785-c13f-414f-b3d2-659bbc1d23d7",
 				"decd001d-cb94-446e-8c0d-e31130a14c8b",
 				"0e82596b-3f97-42e0-b018-06d7658cd4d3",
 				"d1adddcc-8d19-4763-94e7-4180fac8440c",
 				"e85eef6f-6e91-456c-a8e1-002988609629",
-				"76514cac-a87c-4b64-afb2-aa8cca84d0a2",
-				"6a298785-c13f-414f-b3d2-659bbc1d23d7"
+				"76514cac-a87c-4b64-afb2-aa8cca84d0a2"
 			]
 		},
 		{
@@ -229,7 +231,9 @@
 			"tasks": [
 				"8c8729bd-b42c-4305-b2e8-dca50b070672",
 				"c954b6f0-cf7e-454e-a140-bc1f72ef1747",
-				"0ec156f8-ad6f-43de-b00e-e7cbf161ad0c"
+				"0ec156f8-ad6f-43de-b00e-e7cbf161ad0c",
+				"391d5702-6a98-479f-a555-74e731a907e7",
+				"84a7867e-b7b7-498c-bead-2a30d47ccdbe"
 			]
 		},
 		{
@@ -719,7 +723,7 @@
 		{
 			"uuid": "aab8ef9e-9ad4-478f-90fc-f61ab483b97d",
 			"title": "Classes/jobs?",
-			"description": "Have classes like LSDZ?\nCould have a big list of jobs for random pcs to have, with starting stats/rankings.\nCould also have certain special abilities or bonuses for certain jobs.\n\tEngineer joins team and you get new recipes\n\tMedic/doctor joins and you can use medical buildings/equipment and heal much better/faster\n\tChef joins and you get a morale bonus from your food stash\n\tEx-military joins and they have ridiculous str/con stats and some great starting equipment\n\tFarmer joins and your food production buildings/fields get a production boost\n\tTeacher joins and your team gains exp a little faster\n\tCarpenter joins and your team's building costs go down a little bit\n\tMusician joins, has low stats, but gives a constant morale boost\n\tEtc.. could go nuts with this.\n\tThe job bonus could increase with level too.\nJobs seem funner than just having a few classes like LSDZ. ",
+			"description": "Have classes like LSDZ?\nCould have a big list of jobs for random pcs to have, with starting stats/rankings.\nCould also have certain special abilities or bonuses for certain jobs.\n\tEngineer joins team and you get new (crafting) recipes\n\tMedic/doctor joins and you can use medical buildings/equipment and heal much better/faster\n\tChef joins and you get a morale bonus from your food stash\n\tEx-military joins and they have ridiculous str/con stats and some great starting equipment\n\tFarmer joins and your food production buildings/fields get a production boost\n\tTeacher joins and your team gains exp a little faster\n\tCarpenter joins and your team's building costs go down a little bit\n\tMusician joins, has low stats, but gives a constant morale boost\n\tEtc.. could go nuts with this.\n\tThe job bonus could increase with level too.\nJobs seem funner than just having a few classes like LSDZ. ",
 			"category": "ffa1031d-0c3e-4764-b96a-fe03d5174c40",
 			"steps": []
 		},
@@ -1622,14 +1626,42 @@
 		{
 			"uuid": "ba7e89e8-e894-4d68-ba42-5728666fb1e3",
 			"title": "Add a loot container queue",
-			"description": "So you can click multiple containers and you'll loot them in order.\nClicking ground or an enemy deletes the queue.",
+			"description": "So you can click multiple containers and you'll loot them in order.\nClicking ground or an enemy deletes the queue.\nInstead of a queue, use a list, and whenever you're done looting and there's more loot containers on the list, go to the closest one (by navigation path, not pure distance)\nUse Navigation Server to find the closest? Yes.\nJust use a List<MovementTarget>, and whenever you finish looting one, sort the list by ascending distance and go to the first? Clear the list for movement/enemy targets and just use the one MovementTarget.\nThat way you'll always have MovementTargets[0] as your current target.\n\nAlso, make little hud icons for each loot container in the queue. Kinda like the sims where you could have a command queue, then click on one to cancel it.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		},
 		{
 			"uuid": "6a298785-c13f-414f-b3d2-659bbc1d23d7",
 			"title": "Slow down movement and combat",
-			"description": "It's too fast as is, would get too hard with a bunch of enemies and pcs.\nDo it more lsdz speed. Slow like zombie",
+			"description": "It's too fast as is, would get too hard with a bunch of enemies and pcs.\nDo it more lsdz speed. Slow like zombie\nJust change movement speed for pcs and enemies, and maybe attack speed/time between attacks? And loot container times.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "391d5702-6a98-479f-a555-74e731a907e7",
+			"title": "Can't return to base if a pc dies outside of exit zone",
+			"description": "",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "84a7867e-b7b7-498c-bead-2a30d47ccdbe",
+			"title": "Pcs keep attacking dead enemies and getting exp",
+			"description": "Probably from the ondeath event not connecting from enemies when you first target them. MovementTarget stuff.",
+			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
+			"steps": []
+		},
+		{
+			"uuid": "dfae403a-bd96-4cda-b987-08b69d31ee9b",
+			"title": "Implement speed stat?",
+			"description": "For movement (and time between attacks?)\nSeparate from scavenging speed? Or both scavenging and speed affect scavenging speed?\n\nStill need to nail down how stats/skills are gonna be set up.\nAlso, unrelated, have scavenging skill affect your chances of finding rare loot.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "1f895c4f-6365-4841-9dfd-ecb29de6b5e9",
+			"title": "Have scavenging skill affect looting speed/quality of items found",
+			"description": "",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

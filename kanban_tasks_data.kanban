@@ -57,7 +57,8 @@
 				"fc7c53e4-8737-4fa2-8541-89b6a8a8802f",
 				"3331a8a9-a040-4896-85ab-eb1abe7f1e37",
 				"dfae403a-bd96-4cda-b987-08b69d31ee9b",
-				"1f895c4f-6365-4841-9dfd-ecb29de6b5e9"
+				"1f895c4f-6365-4841-9dfd-ecb29de6b5e9",
+				"e0cd2b59-8309-47da-87cf-c164b090b7aa"
 			]
 		},
 		{
@@ -172,7 +173,8 @@
 				"a84c2a64-3e33-4ee4-b578-8d541004ce02",
 				"8d494a48-e1a8-46f4-8715-36701104ba7a",
 				"497687f1-03dd-4997-9005-1a2908f5ef8a",
-				"f19453aa-2ba3-43c4-8668-eab495f4e879"
+				"f19453aa-2ba3-43c4-8668-eab495f4e879",
+				"0f957615-7a22-475a-8483-399dd2d215be"
 			]
 		},
 		{
@@ -222,7 +224,9 @@
 				"74c7e6fc-81ad-4dda-8590-24352ded853d",
 				"6997505c-aaaf-4c4f-b205-3d8db6d51211",
 				"64aabd25-6504-4a3d-9d13-4ecbf0a3c1f6",
-				"d916645b-5369-4a1f-882e-59084bab4810"
+				"d916645b-5369-4a1f-882e-59084bab4810",
+				"84a7867e-b7b7-498c-bead-2a30d47ccdbe",
+				"391d5702-6a98-479f-a555-74e731a907e7"
 			]
 		},
 		{
@@ -231,9 +235,7 @@
 			"tasks": [
 				"8c8729bd-b42c-4305-b2e8-dca50b070672",
 				"c954b6f0-cf7e-454e-a140-bc1f72ef1747",
-				"0ec156f8-ad6f-43de-b00e-e7cbf161ad0c",
-				"391d5702-6a98-479f-a555-74e731a907e7",
-				"84a7867e-b7b7-498c-bead-2a30d47ccdbe"
+				"0ec156f8-ad6f-43de-b00e-e7cbf161ad0c"
 			]
 		},
 		{
@@ -1640,14 +1642,14 @@
 		{
 			"uuid": "391d5702-6a98-479f-a555-74e731a907e7",
 			"title": "Can't return to base if a pc dies outside of exit zone",
-			"description": "",
+			"description": "FIXED by increasing the \"pc in exit zone\" count after each pc death. Kinda hacky but mathematically works.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
 		{
 			"uuid": "84a7867e-b7b7-498c-bead-2a30d47ccdbe",
 			"title": "Pcs keep attacking dead enemies and getting exp",
-			"description": "Probably from the ondeath event not connecting from enemies when you first target them. MovementTarget stuff.",
+			"description": "FIXED by reconnecting enemy's on death event in PlayerCharacter.AddTarget().\nProbably from the ondeath event not connecting from enemies when you first target them. MovementTarget stuff.",
 			"category": "9375898b-fcb5-4fd1-a886-278edfed8251",
 			"steps": []
 		},
@@ -1662,6 +1664,20 @@
 			"uuid": "1f895c4f-6365-4841-9dfd-ecb29de6b5e9",
 			"title": "Have scavenging skill affect looting speed/quality of items found",
 			"description": "",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "e0cd2b59-8309-47da-87cf-c164b090b7aa",
+			"title": "Put mouse-clickable exit buttons on all the menus",
+			"description": "And in general clean up the controls for the ui.\nHave arrow/wasd/tab/enter work as they should.",
+			"category": "1e854966-40de-4eee-9a67-2517f965b229",
+			"steps": []
+		},
+		{
+			"uuid": "0f957615-7a22-475a-8483-399dd2d215be",
+			"title": "Get controller controls working",
+			"description": "Actually don't. This kind of game would suck with a controller. Especially controlling pcs during combat. And all the menus. Sticking with keyboard/mouse.",
 			"category": "1e854966-40de-4eee-9a67-2517f965b229",
 			"steps": []
 		}

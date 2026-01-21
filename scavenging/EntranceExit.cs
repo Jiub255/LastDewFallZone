@@ -46,6 +46,11 @@ namespace Lastdew
 			PcDetector.BodyExited -= DecrementPcCount;
 		}
 
+		public void IncrementPcCount()
+		{
+			PcCount++;
+		}
+		
 		private void IncrementPcCount(Node3D body)
 		{
 			if (body is PlayerCharacter)

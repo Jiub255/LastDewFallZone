@@ -214,7 +214,7 @@ namespace Lastdew
 					GD.Load<Texture2D>(Uids.FOOD_ICON),
 					$"{container.Food.ToString()} Food");
 			}
-			if (container.Food > 0)
+			if (container.Water > 0)
 			{
 				OnLooted?.Invoke(
 					GD.Load<Texture2D>(Uids.WATER_ICON),

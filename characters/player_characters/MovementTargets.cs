@@ -5,7 +5,7 @@ using Godot;
 namespace Lastdew
 {
 	public class MovementTargets : List<MovementTarget>
-	{
+	{ 
 		/// <returns>true if movementTarget.Target is a LootContainer, and the MovementTargets list
 		/// already contains other loot container MovementTargets.</returns>
 		public bool Add(MovementTarget movementTarget, PlayerCharacter pc)
@@ -26,7 +26,7 @@ namespace Lastdew
 				}
 				
 				base.Add(movementTarget);
-				SortByDistance(pc);	
+				SortByDistance(pc);
 			}
 			else
 			{

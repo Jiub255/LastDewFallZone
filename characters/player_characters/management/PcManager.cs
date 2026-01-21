@@ -18,6 +18,7 @@ namespace Lastdew
 		private Viewport Viewport { get; set; }
 		private bool DeselectHeld { get; set; }
 		private Vector2 StartingMousePosition { get; set; }
+		private EntranceExit EntranceExit { get; set; }
 
 		public void Initialize(TeamData teamData)
 		{
@@ -123,6 +124,9 @@ namespace Lastdew
 			ExperienceFormula formula)
 		{
 			ClearPcs();
+			// Have to assign EntranceExit after ClearPcs(), so the events from the old EntranceExit get properly
+			// unsubscribed.
+			EntranceExit = entranceExit;
 			int i = 0;
 			foreach (PcSaveData pcSaveData in pcSaveDatas)
 			{
@@ -176,6 +180,7 @@ namespace Lastdew
 		{
 			pc.OnLooted += InvokeOnLooted;
 			pc.OnSpendAmmo += SpendAmmo;
+			pc.OnDeath += EntranceExit.IncrementPcCount;
 			TeamData.Inventory.OnOutOfAmmo += pc.TemporarilyUnequipGun;
 			TeamData.Inventory.OnNotOutOfAmmoAnymore += pc.ReequipGun;
 		}
@@ -184,6 +189,7 @@ namespace Lastdew
 		{
 			pc.OnLooted -= InvokeOnLooted;
 			pc.OnSpendAmmo -= SpendAmmo;
+			pc.OnDeath -= EntranceExit.IncrementPcCount;
 			TeamData.Inventory.OnOutOfAmmo -= pc.TemporarilyUnequipGun;
 			TeamData.Inventory.OnNotOutOfAmmoAnymore -= pc.ReequipGun;
 		}
